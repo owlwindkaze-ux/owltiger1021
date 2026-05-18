@@ -181,7 +181,7 @@ export default function AdminDashboard() {
                     const s = STATUS_LABEL[r.status] || STATUS_LABEL.pending
                     return (
                       <tr key={r.id}>
-                        <td style={{ ...tdStyle, fontWeight: 600 }}>{r.user_id}</td>
+                        <td style={{ ...tdStyle, fontWeight: 600 }}>{r.user?.full_name ?? `ユーザー ${r.user_id}`}</td>
                         <td style={tdStyle}>{r.start_date}</td>
                         <td style={tdStyle}>{r.end_date}</td>
                         <td style={{ ...tdStyle, maxWidth: '200px' }}>{r.reason}</td>
