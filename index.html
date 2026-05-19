@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JLPT N3 漢字学習</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #dbeafe;
+      --accent: #d97706;
+      --accent-light: #fef3c7;
+      --success: #059669;
+      --success-light: #d1fae5;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: var(--shadow-lg);
+    }
+
+    header h1 { font-size: 1.4rem; font-weight: 700; }
+    header p { font-size: 0.85rem; opacity: 0.85; }
+
+    .badge {
+      background: rgba(255,255,255,0.25);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .tab-btn {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      font-weight: 600;
+    }
+
+    .tab-btn:hover:not(.active) { color: var(--text); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Search & Filters */
+    .toolbar {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+      padding: 0.55rem 1rem 0.55rem 2.5rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      background: var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") no-repeat 0.75rem center;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-box:focus { border-color: var(--primary); }
+
+    .sort-select {
+      padding: 0.55rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      background: var(--card);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .count-badge {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* Kanji Grid (list view) */
+    .kanji-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    .kanji-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: var(--shadow);
+    }
+
+    .kanji-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .kanji-char {
+      font-size: 3.5rem;
+      line-height: 1;
+      color: var(--text);
+      font-weight: 400;
+      min-width: 4rem;
+      text-align: center;
+    }
+
+    .card-info { flex: 1; }
+
+    .readings {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .reading-tag {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .on-tag { background: var(--primary-light); color: var(--primary); }
+    .kun-tag { background: var(--accent-light); color: var(--accent); }
+
+    .meanings-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .stroke-count {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .stroke-count strong { color: var(--text); }
+
+    /* Detail Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--card);
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      animation: modal-in 0.2s ease;
+    }
+
+    @keyframes modal-in {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .modal-kanji {
+      font-size: 5rem;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .modal-title { flex: 1; }
+    .modal-title h2 { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      padding: 0.25rem;
+      line-height: 1;
+    }
+
+    .close-btn:hover { color: var(--text); }
+
+    .modal-body { padding: 1.5rem; }
+
+    .detail-section { margin-bottom: 1.25rem; }
+    .detail-section:last-child { margin-bottom: 0; }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .reading-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .reading-type {
+      font-size: 0.7rem;
+      font-weight: 700;
+      width: 2rem;
+      color: var(--text-muted);
+    }
+
+    .reading-values {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .example-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .example-list li {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .stroke-order-box {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    .stroke-step {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 999px;
+      padding: 0.1rem 0.45rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-right: 0.25rem;
+    }
+
+    /* Flashcard */
+    .flashcard-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 8px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 999px;
+      transition: width 0.3s;
+    }
+
+    .progress-text { font-size: 0.85rem; color: var(--text-muted); white-space: nowrap; }
+
+    .flashcard {
+      width: 100%;
+      max-width: 480px;
+      min-height: 320px;
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.1s;
+      user-select: none;
+      position: relative;
+    }
+
+    .flashcard:active { transform: scale(0.98); }
+
+    .card-hint {
+      position: absolute;
+      bottom: 1rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .fc-kanji {
+      font-size: 7rem;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .fc-back { text-align: center; }
+
+    .fc-readings {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .fc-meanings {
+      font-size: 1rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .fc-strokes {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .fc-controls {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .fc-btn {
+      padding: 0.65rem 1.5rem;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--card);
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-weight: 500;
+    }
+
+    .fc-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .fc-btn.primary { background: var(--primary); color: white; border-color: var(--primary); }
+    .fc-btn.primary:hover { background: #1d4ed8; }
+    .fc-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .fc-options {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .fc-options select, .fc-options button {
+      padding: 0.5rem 0.9rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.88rem;
+      background: var(--card);
+      cursor: pointer;
+    }
+
+    .score-display {
+      display: flex;
+      gap: 1.25rem;
+    }
+
+    .score-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.88rem;
+    }
+
+    .score-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-known { background: var(--success); }
+    .dot-unknown { background: #ef4444; }
+
+    /* Stroke Guide panel */
+    .stroke-guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .stroke-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+    }
+
+    .stroke-card-head {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .sc-char {
+      font-size: 2.75rem;
+      line-height: 1;
+    }
+
+    .sc-meta { flex: 1; }
+    .sc-meta .sc-name { font-size: 0.85rem; color: var(--text-muted); }
+    .sc-meta .sc-count { font-weight: 700; font-size: 1rem; }
+
+    .stroke-steps-list {
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: var(--text);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .kanji-grid { grid-template-columns: 1fr; }
+      .stroke-guide-grid { grid-template-columns: 1fr; }
+      .fc-kanji { font-size: 5rem; }
+      .modal-kanji { font-size: 4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>JLPT N3 漢字学習</h1>
+      <p>読み・意味・書き順を学ぼう</p>
+    </div>
+    <span class="badge" id="total-badge">読み込み中...</span>
+  </header>
+
+  <div class="container">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('list')">一覧</button>
+      <button class="tab-btn" onclick="switchTab('flashcard')">フラッシュカード</button>
+      <button class="tab-btn" onclick="switchTab('stroke')">書き順ガイド</button>
+    </div>
+
+    <!-- LIST TAB -->
+    <div id="tab-list" class="tab-panel active">
+      <div class="toolbar">
+        <input type="text" class="search-box" id="search-input" placeholder="漢字・読み・意味で検索..." oninput="filterKanji()">
+        <select class="sort-select" id="sort-select" onchange="filterKanji()">
+          <option value="default">順序: デフォルト</option>
+          <option value="strokes-asc">画数: 少ない順</option>
+          <option value="strokes-desc">画数: 多い順</option>
+          <option value="alpha">50音順</option>
+        </select>
+        <span class="count-badge" id="count-display"></span>
+      </div>
+      <div class="kanji-grid" id="kanji-grid"></div>
+    </div>
+
+    <!-- FLASHCARD TAB -->
+    <div id="tab-flashcard" class="tab-panel">
+      <div class="flashcard-container">
+        <div class="fc-options">
+          <select id="fc-mode">
+            <option value="kanji-to-reading">漢字 → 読み</option>
+            <option value="reading-to-kanji">読み → 漢字</option>
+            <option value="kanji-to-meaning">漢字 → 意味</option>
+          </select>
+          <button onclick="shuffleCards()">シャッフル</button>
+          <button onclick="resetFlashcards()">リセット</button>
+        </div>
+
+        <div class="progress-bar-wrap">
+          <div class="progress-bar"><div class="progress-fill" id="fc-progress"></div></div>
+          <span class="progress-text" id="fc-counter">0 / 0</span>
+        </div>
+
+        <div class="score-display">
+          <div class="score-item"><span class="score-dot dot-known"></span><span id="score-known">知っている: 0</span></div>
+          <div class="score-item"><span class="score-dot dot-unknown"></span><span id="score-unknown">要復習: 0</span></div>
+        </div>
+
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+          <div id="fc-front">
+            <div class="fc-kanji" id="fc-kanji-char">？</div>
+            <div style="font-size:0.85rem;color:var(--text-muted);">タップして答えを表示</div>
+          </div>
+          <div id="fc-back" class="fc-back" style="display:none;">
+            <div class="fc-readings" id="fc-readings-display"></div>
+            <div class="fc-meanings" id="fc-meanings-display"></div>
+            <div class="fc-strokes" id="fc-strokes-display"></div>
+          </div>
+          <span class="card-hint" id="fc-card-hint">クリックで裏返す</span>
+        </div>
+
+        <div class="fc-controls" id="fc-answer-btns" style="display:none;">
+          <button class="fc-btn" onclick="markCard(false)">要復習</button>
+          <button class="fc-btn primary" onclick="markCard(true)">知っている</button>
+        </div>
+        <div class="fc-controls" id="fc-next-btn">
+          <button class="fc-btn" id="fc-prev" onclick="prevCard()" disabled>← 前へ</button>
+          <button class="fc-btn primary" onclick="flipCard()">裏返す</button>
+          <button class="fc-btn" id="fc-next" onclick="nextCard()">次へ →</button>
+        </div>
+
+        <div id="fc-complete" style="display:none; text-align:center; padding:2rem;">
+          <div style="font-size:2rem; margin-bottom:0.5rem;">🎉</div>
+          <h3 style="margin-bottom:0.5rem;">完了！</h3>
+          <p id="fc-result-text" style="color:var(--text-muted); margin-bottom:1rem;"></p>
+          <button class="fc-btn primary" onclick="resetFlashcards()">もう一度</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STROKE ORDER TAB -->
+    <div id="tab-stroke" class="tab-panel">
+      <div class="toolbar">
+        <input type="text" class="search-box" id="stroke-search" placeholder="漢字・画数で検索..." oninput="filterStroke()">
+        <select class="sort-select" id="stroke-sort" onchange="filterStroke()">
+          <option value="default">デフォルト順</option>
+          <option value="strokes-asc">画数: 少ない順</option>
+          <option value="strokes-desc">画数: 多い順</option>
+        </select>
+        <span class="count-badge" id="stroke-count"></span>
+      </div>
+      <div class="stroke-guide-grid" id="stroke-grid"></div>
+    </div>
+  </div>
+
+  <!-- DETAIL MODAL -->
+  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-kanji" id="modal-char"></div>
+        <div class="modal-title">
+          <h2 id="modal-stroke-count"></h2>
+          <div class="readings" id="modal-readings"></div>
+        </div>
+        <button class="close-btn" onclick="closeModalDirect()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="detail-section">
+          <div class="section-label">意味</div>
+          <div id="modal-meanings"></div>
+        </div>
+        <div class="detail-section">
+          <div class="section-label">用例</div>
+          <ul class="example-list" id="modal-examples"></ul>
+        </div>
+        <div class="detail-section">
+          <div class="section-label">書き順</div>
+          <div class="stroke-order-box" id="modal-stroke-order"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let kanjiData = [];
+    let filteredData = [];
+    let fcDeck = [];
+    let fcIndex = 0;
+    let fcFlipped = false;
+    let fcKnown = 0;
+    let fcUnknown = 0;
+
+    async function loadData() {
+      try {
+        const res = await fetch('kanji-n3.json');
+        const json = await res.json();
+        kanjiData = json.kanji;
+        document.getElementById('total-badge').textContent = `全${kanjiData.length}字`;
+        renderList(kanjiData);
+        renderStroke(kanjiData);
+        initFlashcards();
+      } catch (e) {
+        console.error('データ読み込みエラー:', e);
+        document.getElementById('kanji-grid').innerHTML = '<p style="color:red;">データの読み込みに失敗しました。</p>';
+      }
+    }
+
+    /* ── LIST VIEW ── */
+    function renderList(data) {
+      filteredData = data;
+      document.getElementById('count-display').textContent = `${data.length}件`;
+      const grid = document.getElementById('kanji-grid');
+      grid.innerHTML = data.map(k => `
+        <div class="kanji-card" onclick="openModal('${k.character}')">
+          <div class="card-top">
+            <div class="kanji-char">${k.character}</div>
+            <div class="card-info">
+              <div class="readings">
+                ${k.on.map(r => `<span class="reading-tag on-tag">${r}</span>`).join('')}
+                ${k.kun.slice(0,2).map(r => `<span class="reading-tag kun-tag">${r}</span>`).join('')}
+              </div>
+              <div class="meanings-text">${k.meanings.slice(0,3).join(' / ')}</div>
+            </div>
+          </div>
+          <div class="stroke-count">画数: <strong>${k.strokes}画</strong></div>
+        </div>
+      `).join('');
+    }
+
+    function filterKanji() {
+      const q = document.getElementById('search-input').value.toLowerCase();
+      const sort = document.getElementById('sort-select').value;
+      let data = kanjiData.filter(k => {
+        if (!q) return true;
+        return k.character.includes(q) ||
+          k.on.some(r => r.toLowerCase().includes(q)) ||
+          k.kun.some(r => r.toLowerCase().includes(q)) ||
+          k.meanings.some(m => m.toLowerCase().includes(q));
+      });
+      data = sortKanji(data, sort);
+      renderList(data);
+    }
+
+    function sortKanji(data, sort) {
+      if (sort === 'strokes-asc') return [...data].sort((a,b) => a.strokes - b.strokes);
+      if (sort === 'strokes-desc') return [...data].sort((a,b) => b.strokes - a.strokes);
+      if (sort === 'alpha') return [...data].sort((a,b) => a.character.localeCompare(b.character, 'ja'));
+      return data;
+    }
+
+    /* ── MODAL ── */
+    function openModal(char) {
+      const k = kanjiData.find(x => x.character === char);
+      if (!k) return;
+      document.getElementById('modal-char').textContent = k.character;
+      document.getElementById('modal-stroke-count').textContent = `${k.strokes}画`;
+      document.getElementById('modal-readings').innerHTML =
+        k.on.map(r => `<span class="reading-tag on-tag">音: ${r}</span>`).join('') +
+        k.kun.map(r => `<span class="reading-tag kun-tag">訓: ${r}</span>`).join('');
+      document.getElementById('modal-meanings').innerHTML =
+        `<p style="font-size:1rem;line-height:1.8;">${k.meanings.join(' ／ ')}</p>`;
+      document.getElementById('modal-examples').innerHTML =
+        k.example_words.map(w => `<li>${w}</li>`).join('');
+      document.getElementById('modal-stroke-order').innerHTML = formatStrokeOrder(k.stroke_order);
+      document.getElementById('modal').classList.add('open');
+    }
+
+    function formatStrokeOrder(text) {
+      return text.split(' ').map(step => {
+        const m = step.match(/^(\d+)\.(.*)/);
+        if (m) return `<span class="stroke-step">${m[1]}</span>${m[2]} `;
+        return step + ' ';
+      }).join('');
+    }
+
+    function closeModal(e) {
+      if (e.target === document.getElementById('modal')) closeModalDirect();
+    }
+
+    function closeModalDirect() {
+      document.getElementById('modal').classList.remove('open');
+    }
+
+    /* ── FLASHCARDS ── */
+    function initFlashcards() {
+      fcDeck = [...kanjiData];
+      fcIndex = 0;
+      fcKnown = 0;
+      fcUnknown = 0;
+      fcFlipped = false;
+      updateScoreDisplay();
+      showCard();
+    }
+
+    function shuffleCards() {
+      for (let i = fcDeck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [fcDeck[i], fcDeck[j]] = [fcDeck[j], fcDeck[i]];
+      }
+      fcIndex = 0;
+      fcKnown = 0;
+      fcUnknown = 0;
+      fcFlipped = false;
+      updateScoreDisplay();
+      showCard();
+    }
+
+    function resetFlashcards() {
+      initFlashcards();
+      document.getElementById('fc-complete').style.display = 'none';
+      document.getElementById('flashcard').style.display = 'flex';
+      document.getElementById('fc-next-btn').style.display = 'flex';
+      document.getElementById('fc-answer-btns').style.display = 'none';
+    }
+
+    function showCard() {
+      if (fcIndex >= fcDeck.length) {
+        showComplete();
+        return;
+      }
+      const k = fcDeck[fcIndex];
+      const mode = document.getElementById('fc-mode').value;
+      fcFlipped = false;
+
+      document.getElementById('fc-front').style.display = 'flex';
+      document.getElementById('fc-front').style.flexDirection = 'column';
+      document.getElementById('fc-front').style.alignItems = 'center';
+      document.getElementById('fc-back').style.display = 'none';
+      document.getElementById('fc-answer-btns').style.display = 'none';
+      document.getElementById('fc-next-btn').style.display = 'flex';
+      document.getElementById('fc-card-hint').textContent = 'クリックで裏返す';
+
+      if (mode === 'reading-to-kanji') {
+        document.getElementById('fc-kanji-char').style.fontSize = '2rem';
+        document.getElementById('fc-kanji-char').textContent =
+          k.on.concat(k.kun).slice(0,3).join(' / ') || '読みなし';
+      } else {
+        document.getElementById('fc-kanji-char').style.fontSize = '7rem';
+        document.getElementById('fc-kanji-char').textContent = k.character;
+      }
+
+      const prev = document.getElementById('fc-prev');
+      const next = document.getElementById('fc-next');
+      prev.disabled = fcIndex === 0;
+      next.disabled = fcIndex >= fcDeck.length - 1;
+
+      updateProgress();
+    }
+
+    function flipCard() {
+      if (fcIndex >= fcDeck.length) return;
+      const k = fcDeck[fcIndex];
+      const mode = document.getElementById('fc-mode').value;
+      fcFlipped = !fcFlipped;
+
+      if (fcFlipped) {
+        document.getElementById('fc-front').style.display = 'none';
+        document.getElementById('fc-back').style.display = 'block';
+        document.getElementById('fc-answer-btns').style.display = 'flex';
+        document.getElementById('fc-next-btn').style.display = 'none';
+        document.getElementById('fc-card-hint').textContent = '知っていましたか？';
+
+        if (mode === 'kanji-to-meaning') {
+          document.getElementById('fc-readings-display').innerHTML =
+            `<div style="font-size:1.1rem; color:var(--text);">${k.meanings.slice(0,3).join(' / ')}</div>`;
+          document.getElementById('fc-meanings-display').textContent =
+            k.on.concat(k.kun).slice(0,3).join(' / ');
+        } else if (mode === 'reading-to-kanji') {
+          document.getElementById('fc-readings-display').innerHTML =
+            `<div style="font-size:5rem; line-height:1; color:var(--text);">${k.character}</div>`;
+          document.getElementById('fc-meanings-display').textContent =
+            k.meanings.slice(0,2).join(' / ');
+        } else {
+          document.getElementById('fc-readings-display').innerHTML =
+            k.on.map(r => `<span class="reading-tag on-tag">${r}</span>`).join('') +
+            k.kun.slice(0,2).map(r => `<span class="reading-tag kun-tag">${r}</span>`).join('');
+          document.getElementById('fc-meanings-display').textContent =
+            k.meanings.slice(0,3).join(' / ');
+        }
+        document.getElementById('fc-strokes-display').textContent = `${k.strokes}画`;
+      } else {
+        document.getElementById('fc-front').style.display = 'flex';
+        document.getElementById('fc-back').style.display = 'none';
+        document.getElementById('fc-answer-btns').style.display = 'none';
+        document.getElementById('fc-next-btn').style.display = 'flex';
+      }
+    }
+
+    function markCard(known) {
+      if (known) fcKnown++; else fcUnknown++;
+      updateScoreDisplay();
+      fcIndex++;
+      fcFlipped = false;
+      showCard();
+    }
+
+    function nextCard() {
+      if (fcIndex < fcDeck.length - 1) { fcIndex++; showCard(); }
+    }
+
+    function prevCard() {
+      if (fcIndex > 0) { fcIndex--; showCard(); }
+    }
+
+    function updateProgress() {
+      const pct = fcDeck.length ? (fcIndex / fcDeck.length) * 100 : 0;
+      document.getElementById('fc-progress').style.width = pct + '%';
+      document.getElementById('fc-counter').textContent = `${fcIndex + 1} / ${fcDeck.length}`;
+    }
+
+    function updateScoreDisplay() {
+      document.getElementById('score-known').textContent = `知っている: ${fcKnown}`;
+      document.getElementById('score-unknown').textContent = `要復習: ${fcUnknown}`;
+    }
+
+    function showComplete() {
+      document.getElementById('fc-complete').style.display = 'block';
+      document.getElementById('flashcard').style.display = 'none';
+      document.getElementById('fc-next-btn').style.display = 'none';
+      document.getElementById('fc-answer-btns').style.display = 'none';
+      const total = fcKnown + fcUnknown;
+      const pct = total ? Math.round(fcKnown / total * 100) : 0;
+      document.getElementById('fc-result-text').textContent =
+        `${total}枚中 ${fcKnown}枚（${pct}%）知っていました！`;
+    }
+
+    /* ── STROKE GUIDE ── */
+    function renderStroke(data) {
+      document.getElementById('stroke-count').textContent = `${data.length}件`;
+      const grid = document.getElementById('stroke-grid');
+      grid.innerHTML = data.map(k => `
+        <div class="stroke-card">
+          <div class="stroke-card-head">
+            <div class="sc-char">${k.character}</div>
+            <div class="sc-meta">
+              <div class="sc-count">${k.strokes}画</div>
+              <div class="sc-name">${k.on.slice(0,2).join('・') || k.kun[0] || ''}</div>
+            </div>
+          </div>
+          <div class="stroke-steps-list">${formatStrokeOrder(k.stroke_order)}</div>
+        </div>
+      `).join('');
+    }
+
+    function filterStroke() {
+      const q = document.getElementById('stroke-search').value.toLowerCase();
+      const sort = document.getElementById('stroke-sort').value;
+      let data = kanjiData.filter(k => {
+        if (!q) return true;
+        return k.character.includes(q) ||
+          String(k.strokes).includes(q) ||
+          k.on.some(r => r.toLowerCase().includes(q));
+      });
+      if (sort === 'strokes-asc') data = [...data].sort((a,b) => a.strokes - b.strokes);
+      if (sort === 'strokes-desc') data = [...data].sort((a,b) => b.strokes - a.strokes);
+      renderStroke(data);
+    }
+
+    /* ── TABS ── */
+    function switchTab(name) {
+      document.querySelectorAll('.tab-btn').forEach((b,i) => {
+        b.classList.toggle('active', ['list','flashcard','stroke'][i] === name);
+      });
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + name).classList.add('active');
+    }
+
+    /* keyboard shortcut */
+    document.addEventListener('keydown', e => {
+      if (document.getElementById('modal').classList.contains('open')) {
+        if (e.key === 'Escape') closeModalDirect();
+        return;
+      }
+      const fc = document.getElementById('tab-flashcard');
+      if (!fc.classList.contains('active')) return;
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipCard(); }
+      if (e.key === 'ArrowRight' || e.key === 'k') nextCard();
+      if (e.key === 'ArrowLeft' || e.key === 'j') prevCard();
+      if (e.key === '1') markCard(false);
+      if (e.key === '2') markCard(true);
+    });
+
+    loadData();
+  </script>
+</body>
+</html>
