@@ -1,6 +1,6 @@
 # JLPT 漢字学習ツール 仕様書
 
-**作成日：2026年7月27日**
+**作成日：2026年7月27日**　**最終更新：2026年7月27日（合言葉機能の追加を反映）**
 **対象システム：** Kanji JLPT N5–N3（技能実習生向け 漢字学習ウェブアプリ）
 **公開URL：** https://owlwindkaze-ux.github.io/owltiger1021/
 **リポジトリ：** https://github.com/owlwindkaze-ux/owltiger1021
@@ -199,11 +199,11 @@ python3 -c "import hashlib;print(hashlib.sha256('新しい合言葉'.encode()).h
 
 | ファイル | サイズ | 役割 | 状態 |
 |---|---|---|---|
-| `index.html` | 約37 KB | アプリ本体（HTML＋CSS＋JavaScript 単一ファイル） | 最新 |
+| `index.html` | 約39 KB | アプリ本体（HTML＋CSS＋JavaScript 単一ファイル） | 最新 |
 | `kanji-data.json` | 約458 KB | 漢字612字のデータ | 最新 |
 | `kanji-strokes.json` | 約460 KB | 書き順データ612字ぶん | 最新 |
 | `README.md` | 約6 KB | 概要・使い方・出典 | 最新 |
-| `SPEC.md` | 本書 | 仕様書 | 最新 |
+| `SPEC.md` | 約21 KB | 仕様書 | 最新 |
 | `meeting-transcript.txt` | 約6 KB | 別プロジェクトの資料（本アプリとは無関係） | 既存のまま |
 | `output/` | — | 別プロジェクトの出力（本アプリとは無関係） | 既存のまま |
 | `.claude/skills/` | — | 別プロジェクトの設定（本アプリとは無関係） | 既存のまま |
@@ -217,8 +217,9 @@ python3 -c "import hashlib;print(hashlib.sha256('新しい合言葉'.encode()).h
 | リポジトリ公開設定 | Public（GitHub Pages有効化のため） |
 | 開発ブランチ | `claude/japanese-n3-kanji-AaKYe` |
 | GitHub Pages 公開元 | 同ブランチの `/`（ルート） |
-| 最新コミット | `8985666` 最終QAの指摘を反映 |
-| 未コミットの変更 | なし（本書の追加を除く） |
+| 最新コミット | `a5c68a2` 合言葉（パスワード）による閲覧制限を追加 |
+| 未コミットの変更 | なし |
+| 閲覧制限 | 合言葉 `owltiger2026`（2.8参照） |
 
 ### 4.3 品質検証の記録
 
