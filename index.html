@@ -1,951 +1,649 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JLPT N3 漢字学習</title>
-  <style>
-    :root {
-      --primary: #2563eb;
-      --primary-light: #dbeafe;
-      --accent: #d97706;
-      --accent-light: #fef3c7;
-      --success: #059669;
-      --success-light: #d1fae5;
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
-      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    header {
-      background: var(--primary);
-      color: white;
-      padding: 1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      box-shadow: var(--shadow-lg);
-    }
-
-    header h1 { font-size: 1.4rem; font-weight: 700; }
-    header p { font-size: 0.85rem; opacity: 0.85; }
-
-    .badge {
-      background: rgba(255,255,255,0.25);
-      padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-
-    .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
-
-    /* Tabs */
-    .tabs {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-      border-bottom: 2px solid var(--border);
-    }
-
-    .tab-btn {
-      padding: 0.6rem 1.2rem;
-      border: none;
-      background: none;
-      cursor: pointer;
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      border-bottom: 3px solid transparent;
-      margin-bottom: -2px;
-      transition: all 0.2s;
-    }
-
-    .tab-btn.active {
-      color: var(--primary);
-      border-bottom-color: var(--primary);
-      font-weight: 600;
-    }
-
-    .tab-btn:hover:not(.active) { color: var(--text); }
-
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
-
-    /* Search & Filters */
-    .toolbar {
-      display: flex;
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .search-box {
-      flex: 1;
-      min-width: 200px;
-      padding: 0.55rem 1rem 0.55rem 2.5rem;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.95rem;
-      background: var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") no-repeat 0.75rem center;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .search-box:focus { border-color: var(--primary); }
-
-    .sort-select {
-      padding: 0.55rem 1rem;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.9rem;
-      background: var(--card);
-      cursor: pointer;
-      outline: none;
-    }
-
-    .count-badge {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    /* Kanji Grid (list view) */
-    .kanji-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1rem;
-    }
-
-    .kanji-card {
-      background: var(--card);
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      padding: 1.25rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: var(--shadow);
-    }
-
-    .kanji-card:hover {
-      border-color: var(--primary);
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-2px);
-    }
-
-    .card-top {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .kanji-char {
-      font-size: 3.5rem;
-      line-height: 1;
-      color: var(--text);
-      font-weight: 400;
-      min-width: 4rem;
-      text-align: center;
-    }
-
-    .card-info { flex: 1; }
-
-    .readings {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .reading-tag {
-      font-size: 0.75rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      font-weight: 500;
-    }
-
-    .on-tag { background: var(--primary-light); color: var(--primary); }
-    .kun-tag { background: var(--accent-light); color: var(--accent); }
-
-    .meanings-text {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .stroke-count {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 0.5rem;
-    }
-
-    .stroke-count strong { color: var(--text); }
-
-    /* Detail Modal */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 100;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem;
-    }
-
-    .modal-overlay.open { display: flex; }
-
-    .modal {
-      background: var(--card);
-      border-radius: 16px;
-      max-width: 600px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      box-shadow: var(--shadow-lg);
-      animation: modal-in 0.2s ease;
-    }
-
-    @keyframes modal-in {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .modal-header {
-      padding: 1.5rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-    }
-
-    .modal-kanji {
-      font-size: 5rem;
-      line-height: 1;
-      color: var(--text);
-    }
-
-    .modal-title { flex: 1; }
-    .modal-title h2 { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 0.3rem; }
-
-    .close-btn {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--text-muted);
-      padding: 0.25rem;
-      line-height: 1;
-    }
-
-    .close-btn:hover { color: var(--text); }
-
-    .modal-body { padding: 1.5rem; }
-
-    .detail-section { margin-bottom: 1.25rem; }
-    .detail-section:last-child { margin-bottom: 0; }
-
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-    }
-
-    .reading-row {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .reading-type {
-      font-size: 0.7rem;
-      font-weight: 700;
-      width: 2rem;
-      color: var(--text-muted);
-    }
-
-    .reading-values {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-    }
-
-    .example-list {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .example-list li {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0.3rem 0.75rem;
-      font-size: 0.9rem;
-    }
-
-    .stroke-order-box {
-      background: var(--bg);
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem;
-      font-size: 0.9rem;
-      line-height: 1.8;
-      color: var(--text);
-    }
-
-    .stroke-step {
-      display: inline-block;
-      background: var(--primary-light);
-      color: var(--primary);
-      border-radius: 999px;
-      padding: 0.1rem 0.45rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      margin-right: 0.25rem;
-    }
-
-    /* Flashcard */
-    .flashcard-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .progress-bar-wrap {
-      width: 100%;
-      max-width: 480px;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .progress-bar {
-      flex: 1;
-      height: 8px;
-      background: var(--border);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: var(--primary);
-      border-radius: 999px;
-      transition: width 0.3s;
-    }
-
-    .progress-text { font-size: 0.85rem; color: var(--text-muted); white-space: nowrap; }
-
-    .flashcard {
-      width: 100%;
-      max-width: 480px;
-      min-height: 320px;
-      background: var(--card);
-      border: 2px solid var(--border);
-      border-radius: 20px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      box-shadow: var(--shadow-lg);
-      transition: transform 0.1s;
-      user-select: none;
-      position: relative;
-    }
-
-    .flashcard:active { transform: scale(0.98); }
-
-    .card-hint {
-      position: absolute;
-      bottom: 1rem;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .fc-kanji {
-      font-size: 7rem;
-      line-height: 1;
-      margin-bottom: 1rem;
-    }
-
-    .fc-back { text-align: center; }
-
-    .fc-readings {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      justify-content: center;
-      margin-bottom: 0.75rem;
-    }
-
-    .fc-meanings {
-      font-size: 1rem;
-      color: var(--text-muted);
-      text-align: center;
-      margin-bottom: 0.5rem;
-    }
-
-    .fc-strokes {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .fc-controls {
-      display: flex;
-      gap: 0.75rem;
-    }
-
-    .fc-btn {
-      padding: 0.65rem 1.5rem;
-      border-radius: 10px;
-      border: 1.5px solid var(--border);
-      background: var(--card);
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: all 0.15s;
-      font-weight: 500;
-    }
-
-    .fc-btn:hover { border-color: var(--primary); color: var(--primary); }
-    .fc-btn.primary { background: var(--primary); color: white; border-color: var(--primary); }
-    .fc-btn.primary:hover { background: #1d4ed8; }
-    .fc-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
-    .fc-options {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .fc-options select, .fc-options button {
-      padding: 0.5rem 0.9rem;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.88rem;
-      background: var(--card);
-      cursor: pointer;
-    }
-
-    .score-display {
-      display: flex;
-      gap: 1.25rem;
-    }
-
-    .score-item {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.88rem;
-    }
-
-    .score-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    .dot-known { background: var(--success); }
-    .dot-unknown { background: #ef4444; }
-
-    /* Stroke Guide panel */
-    .stroke-guide-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1rem;
-    }
-
-    .stroke-card {
-      background: var(--card);
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      padding: 1.25rem;
-      box-shadow: var(--shadow);
-    }
-
-    .stroke-card-head {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .sc-char {
-      font-size: 2.75rem;
-      line-height: 1;
-    }
-
-    .sc-meta { flex: 1; }
-    .sc-meta .sc-name { font-size: 0.85rem; color: var(--text-muted); }
-    .sc-meta .sc-count { font-weight: 700; font-size: 1rem; }
-
-    .stroke-steps-list {
-      font-size: 0.82rem;
-      line-height: 1.9;
-      color: var(--text);
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      .kanji-grid { grid-template-columns: 1fr; }
-      .stroke-guide-grid { grid-template-columns: 1fr; }
-      .fc-kanji { font-size: 5rem; }
-      .modal-kanji { font-size: 4rem; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Belajar 612 kanji JLPT N5–N3: cara baca, arti (Bahasa Indonesia), contoh kata, dan animasi urutan coretan. JLPT N5〜N3の漢字612字を、読み・意味・用例・書き順アニメーションで学べる無料ツール。">
+<title>Kanji JLPT N3 ｜ JLPT N3 漢字学習</title>
+<style>
+:root{
+  --blue:#2563eb; --blue-d:#1d4ed8; --blue-l:#eff6ff;
+  --amber:#b45309; --amber-l:#fffbeb;
+  --green:#059669; --green-l:#ecfdf5;
+  --red:#dc2626;
+  --bg:#f1f5f9; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
+  --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
+  --sh-l:0 10px 25px -5px rgba(15,23,42,.15);
+  --kfont:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,"Noto Sans JP",system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.6;padding-bottom:env(safe-area-inset-bottom)}
+button,select,input{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer}
+.sub{font-size:.72rem;opacity:.75;font-weight:400}
+
+header{background:linear-gradient(135deg,#1e40af,#2563eb);color:#fff;padding:.85rem 1rem;box-shadow:var(--sh-l)}
+.hd{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.hd h1{font-size:1.1rem;font-weight:800;letter-spacing:.01em}
+.hd .stat{margin-left:auto;font-size:.75rem;background:rgba(255,255,255,.18);padding:.25rem .7rem;border-radius:999px}
+.langbtn{border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.12);color:#fff;
+  border-radius:999px;padding:.3rem .8rem;font-size:.78rem;font-weight:700}
+
+nav.tabs{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40}
+.tabs-in{max-width:1200px;margin:0 auto;display:flex;gap:.2rem;padding:0 .4rem;overflow-x:auto}
+.tab{padding:.6rem .85rem;border:0;background:none;color:var(--muted);font-size:.9rem;font-weight:700;
+  border-bottom:3px solid transparent;white-space:nowrap;line-height:1.25;text-align:center}
+.tab.on{color:var(--blue);border-bottom-color:var(--blue)}
+.tab .sub{display:block;font-size:.65rem;font-weight:600}
+
+.wrap{max-width:1200px;margin:0 auto;padding:1rem}
+.panel{display:none}.panel.on{display:block}
+
+.toolbar{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-bottom:.9rem}
+.search{flex:1 1 210px;min-width:0;padding:.6rem .9rem .6rem 2.3rem;border:1.5px solid var(--line);border-radius:10px;background:#fff
+ url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M11.74 10.34a6.5 6.5 0 1 0-1.4 1.4l3.85 3.85a1 1 0 0 0 1.42-1.42l-3.86-3.83zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") no-repeat .7rem center;outline:none}
+.search:focus{border-color:var(--blue)}
+select.sel{padding:.55rem .6rem;border:1.5px solid var(--line);border-radius:10px;background:#fff;outline:none;font-size:.85rem}
+.chips{display:flex;gap:.3rem}
+.chip{padding:.45rem .75rem;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-size:.82rem;font-weight:700;color:var(--muted)}
+.chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.hint{font-size:.8rem;color:var(--muted);white-space:nowrap}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.7rem}
+.kcard{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:.8rem;display:flex;gap:.75rem;
+  text-align:left;box-shadow:var(--sh);transition:.15s;position:relative;overflow:hidden;width:100%}
+.kcard:hover{border-color:var(--blue);box-shadow:var(--sh-l);transform:translateY(-2px)}
+.kcard .ch{font-family:var(--kfont);font-size:3rem;line-height:1.05;min-width:3rem;text-align:center}
+.kcard .body{flex:1;min-width:0}
+.tags{display:flex;flex-wrap:wrap;gap:.22rem;margin-bottom:.28rem}
+.t{font-size:.69rem;padding:.08rem .42rem;border-radius:5px;font-weight:700}
+.t.on-{background:var(--blue-l);color:var(--blue)}
+.t.kun{background:var(--amber-l);color:var(--amber)}
+.t.lv{background:#f1f5f9;color:var(--muted)}
+.mean{font-size:.82rem;color:var(--muted);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.st{font-size:.72rem;color:var(--muted);margin-top:.3rem}
+.mark{position:absolute;top:.45rem;right:.45rem;width:9px;height:9px;border-radius:50%}
+.mark.known{background:var(--green)}.mark.review{background:var(--red)}
+
+.kvg{background:#fff;border:1px solid var(--line);border-radius:10px;display:block;cursor:pointer}
+svg path{fill:none}
+.grid-l{stroke:#e2e8f0;fill:none;stroke-width:.6;stroke-dasharray:4 4}
+.bg-s{stroke:#e5e9ef;fill:none;stroke-width:4.2;stroke-linecap:round;stroke-linejoin:round}
+.fg-s{stroke:var(--ink);fill:none;stroke-width:4.2;stroke-linecap:round;stroke-linejoin:round}
+.hi-s{stroke:var(--red);fill:none;stroke-width:4.8;stroke-linecap:round;stroke-linejoin:round}
+svg text{font-size:7px;fill:var(--red);font-family:system-ui,sans-serif;font-weight:700}
+
+.ov{display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:100;padding:.75rem;overflow-y:auto}
+.ov.on{display:flex;align-items:flex-start;justify-content:center}
+.modal{background:var(--card);border-radius:16px;max-width:620px;width:100%;margin:auto;box-shadow:var(--sh-l);animation:pop .18s ease}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.98)}}
+.m-head{display:flex;gap:.9rem;padding:.9rem 1rem;border-bottom:1px solid var(--line);align-items:flex-start}
+.m-ch{font-family:var(--kfont);font-size:3.8rem;line-height:1}
+.m-head .info{flex:1;min-width:0}
+.x{border:0;background:none;font-size:1.6rem;line-height:1;color:var(--muted);padding:0 .3rem}
+.m-body{padding:1rem}
+.sec{margin-bottom:1rem}.sec:last-child{margin-bottom:0}
+.lb{font-size:.7rem;font-weight:800;letter-spacing:.06em;color:var(--muted);margin-bottom:.4rem}
+.rd-row{display:flex;gap:.5rem;align-items:baseline;margin-bottom:.28rem;flex-wrap:wrap}
+.rd-k{font-size:.7rem;font-weight:800;color:var(--muted);min-width:4.4rem}
+.ex{list-style:none;display:grid;gap:.4rem}
+.ex li{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:.45rem .65rem}
+.ex .w{font-size:1.05rem;font-weight:700}
+.ex .r{font-size:.78rem;color:var(--blue);margin-left:.35rem}
+.ex .m{font-size:.8rem;color:var(--muted)}
+.ex .en{font-size:.72rem;color:#94a3b8}
+.ex .jl{font-size:.64rem;background:var(--green-l);color:var(--green);border-radius:4px;padding:.03rem .32rem;font-weight:800;margin-left:.35rem}
+.btn{padding:.5rem .9rem;border:1.5px solid var(--line);border-radius:10px;background:#fff;font-weight:700;font-size:.85rem;line-height:1.3}
+.btn:hover{border-color:var(--blue);color:var(--blue)}
+.btn.pri{background:var(--blue);border-color:var(--blue);color:#fff}.btn.pri:hover{background:var(--blue-d);color:#fff}
+.btn.ok{background:var(--green);border-color:var(--green);color:#fff}
+.btn.ng{background:#fff;border-color:var(--red);color:var(--red)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+
+.fc-wrap{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:.8rem;align-items:center}
+.fc{width:100%;background:var(--card);border:2px solid var(--line);border-radius:18px;min-height:290px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;padding:1.4rem 1.1rem;
+  box-shadow:var(--sh-l);user-select:none;position:relative;cursor:pointer}
+.fc .q{font-family:var(--kfont);font-size:5.6rem;line-height:1}
+.fc .q.small{font-family:inherit;font-size:1.7rem;font-weight:700;text-align:center}
+.fc .tip{position:absolute;bottom:.6rem;font-size:.72rem;color:var(--muted)}
+.fc-meta{display:flex;gap:1rem;font-size:.8rem;color:var(--muted);flex-wrap:wrap;justify-content:center}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:.25rem}
+.dot.g{background:var(--green)}.dot.r{background:var(--red)}
+.bar{height:7px;background:var(--line);border-radius:999px;overflow:hidden;width:100%}
+.bar>i{display:block;height:100%;background:var(--green);border-radius:999px;transition:width .3s}
+
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:.7rem}
+.scard{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:.75rem;box-shadow:var(--sh);text-align:center}
+.scard .cap{display:flex;justify-content:space-between;align-items:baseline;font-size:.76rem;color:var(--muted)}
+.scard .cap b{font-size:.95rem;color:var(--ink)}
+.seq{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;margin-top:.45rem}
+.seq svg{width:34px;height:34px;border:1px solid var(--line);border-radius:6px;background:#fff}
+.prog-wrap{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
+.prog{flex:1 1 165px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.7rem .8rem;box-shadow:var(--sh)}
+.prog .lv{font-size:.75rem;color:var(--muted);font-weight:800;display:flex;justify-content:space-between}
+
+footer{max-width:1200px;margin:2rem auto 0;padding:1rem;font-size:.72rem;color:var(--muted);border-top:1px solid var(--line);line-height:1.75}
+footer a{color:var(--blue)}
+.loading{text-align:center;padding:3rem 1rem;color:var(--muted)}
+
+@media(max-width:600px){
+  .wrap{padding:.7rem}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:.55rem}
+  .kcard{flex-direction:column;gap:.35rem;padding:.65rem}
+  .kcard .ch{font-size:2.5rem;min-width:0}
+  .m-ch{font-size:3rem}
+  .fc .q{font-size:4.4rem}
+  .sgrid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}
+  .rd-k{min-width:3.6rem}
+}
+</style>
 </head>
 <body>
-  <header>
-    <div>
-      <h1>JLPT N3 漢字学習</h1>
-      <p>読み・意味・書き順を学ぼう</p>
-    </div>
-    <span class="badge" id="total-badge">読み込み中...</span>
-  </header>
 
-  <div class="container">
-    <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('list')">一覧</button>
-      <button class="tab-btn" onclick="switchTab('flashcard')">フラッシュカード</button>
-      <button class="tab-btn" onclick="switchTab('stroke')">書き順ガイド</button>
-    </div>
+<header><div class="hd">
+  <div>
+    <h1>Kanji JLPT N5–N3</h1>
+    <div class="sub">Cara baca・Arti・Contoh kata・Urutan coretan ／ 読み・意味・用例・書き順</div>
+  </div>
+  <button class="langbtn" id="langBtn">🌐 ID</button>
+  <div class="stat" id="hdStat">…</div>
+</div></header>
 
-    <!-- LIST TAB -->
-    <div id="tab-list" class="tab-panel active">
-      <div class="toolbar">
-        <input type="text" class="search-box" id="search-input" placeholder="漢字・読み・意味で検索..." oninput="filterKanji()">
-        <select class="sort-select" id="sort-select" onchange="filterKanji()">
-          <option value="default">順序: デフォルト</option>
-          <option value="strokes-asc">画数: 少ない順</option>
-          <option value="strokes-desc">画数: 多い順</option>
-          <option value="alpha">50音順</option>
+<nav class="tabs"><div class="tabs-in">
+  <button class="tab on" data-tab="list">Daftar<span class="sub">一覧</span></button>
+  <button class="tab" data-tab="card">Kartu<span class="sub">フラッシュカード</span></button>
+  <button class="tab" data-tab="stroke">Urutan Coretan<span class="sub">書き順</span></button>
+  <button class="tab" data-tab="stats">Progres<span class="sub">学習状況</span></button>
+</div></nav>
+
+<div class="wrap">
+
+  <!-- ===== Daftar / 一覧 ===== -->
+  <section class="panel on" id="p-list">
+    <div class="toolbar">
+      <input class="search" id="q" placeholder="Cari kanji / cara baca / arti … 検索">
+      <div class="chips" id="lvChips">
+        <button class="chip on" data-lv="all">Semua</button>
+        <button class="chip" data-lv="N5">N5</button>
+        <button class="chip" data-lv="N4">N4</button>
+        <button class="chip" data-lv="N3">N3</button>
+      </div>
+      <select class="sel" id="sort">
+        <option value="level">Urut: level (mudah dulu) ／ レベル順</option>
+        <option value="freq">Urut: paling sering dipakai ／ 頻度順</option>
+        <option value="stroke-asc">Urut: coretan sedikit ／ 画数が少ない順</option>
+        <option value="stroke-desc">Urut: coretan banyak ／ 画数が多い順</option>
+      </select>
+      <select class="sel" id="mark">
+        <option value="all">Tampilkan semua ／ すべて</option>
+        <option value="unseen">Belum dipelajari ／ 未学習</option>
+        <option value="review">Perlu diulang ／ 要復習</option>
+        <option value="known">Sudah hafal ／ 覚えた</option>
+      </select>
+      <span class="hint" id="cnt"></span>
+    </div>
+    <div class="grid" id="grid"><div class="loading">Memuat data… 読み込み中…</div></div>
+  </section>
+
+  <!-- ===== Kartu / フラッシュカード ===== -->
+  <section class="panel" id="p-card">
+    <div class="fc-wrap">
+      <div class="toolbar" style="justify-content:center;margin:0">
+        <select class="sel" id="fcMode">
+          <option value="k2r">Kanji → Cara baca ／ 漢字→読み</option>
+          <option value="k2m">Kanji → Arti ／ 漢字→意味</option>
+          <option value="r2k">Cara baca → Kanji ／ 読み→漢字</option>
+          <option value="m2k">Arti → Kanji ／ 意味→漢字</option>
         </select>
-        <span class="count-badge" id="count-display"></span>
-      </div>
-      <div class="kanji-grid" id="kanji-grid"></div>
-    </div>
-
-    <!-- FLASHCARD TAB -->
-    <div id="tab-flashcard" class="tab-panel">
-      <div class="flashcard-container">
-        <div class="fc-options">
-          <select id="fc-mode">
-            <option value="kanji-to-reading">漢字 → 読み</option>
-            <option value="reading-to-kanji">読み → 漢字</option>
-            <option value="kanji-to-meaning">漢字 → 意味</option>
-          </select>
-          <button onclick="shuffleCards()">シャッフル</button>
-          <button onclick="resetFlashcards()">リセット</button>
-        </div>
-
-        <div class="progress-bar-wrap">
-          <div class="progress-bar"><div class="progress-fill" id="fc-progress"></div></div>
-          <span class="progress-text" id="fc-counter">0 / 0</span>
-        </div>
-
-        <div class="score-display">
-          <div class="score-item"><span class="score-dot dot-known"></span><span id="score-known">知っている: 0</span></div>
-          <div class="score-item"><span class="score-dot dot-unknown"></span><span id="score-unknown">要復習: 0</span></div>
-        </div>
-
-        <div class="flashcard" id="flashcard" onclick="flipCard()">
-          <div id="fc-front">
-            <div class="fc-kanji" id="fc-kanji-char">？</div>
-            <div style="font-size:0.85rem;color:var(--text-muted);">タップして答えを表示</div>
-          </div>
-          <div id="fc-back" class="fc-back" style="display:none;">
-            <div class="fc-readings" id="fc-readings-display"></div>
-            <div class="fc-meanings" id="fc-meanings-display"></div>
-            <div class="fc-strokes" id="fc-strokes-display"></div>
-          </div>
-          <span class="card-hint" id="fc-card-hint">クリックで裏返す</span>
-        </div>
-
-        <div class="fc-controls" id="fc-answer-btns" style="display:none;">
-          <button class="fc-btn" onclick="markCard(false)">要復習</button>
-          <button class="fc-btn primary" onclick="markCard(true)">知っている</button>
-        </div>
-        <div class="fc-controls" id="fc-next-btn">
-          <button class="fc-btn" id="fc-prev" onclick="prevCard()" disabled>← 前へ</button>
-          <button class="fc-btn primary" onclick="flipCard()">裏返す</button>
-          <button class="fc-btn" id="fc-next" onclick="nextCard()">次へ →</button>
-        </div>
-
-        <div id="fc-complete" style="display:none; text-align:center; padding:2rem;">
-          <div style="font-size:2rem; margin-bottom:0.5rem;">🎉</div>
-          <h3 style="margin-bottom:0.5rem;">完了！</h3>
-          <p id="fc-result-text" style="color:var(--text-muted); margin-bottom:1rem;"></p>
-          <button class="fc-btn primary" onclick="resetFlashcards()">もう一度</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- STROKE ORDER TAB -->
-    <div id="tab-stroke" class="tab-panel">
-      <div class="toolbar">
-        <input type="text" class="search-box" id="stroke-search" placeholder="漢字・画数で検索..." oninput="filterStroke()">
-        <select class="sort-select" id="stroke-sort" onchange="filterStroke()">
-          <option value="default">デフォルト順</option>
-          <option value="strokes-asc">画数: 少ない順</option>
-          <option value="strokes-desc">画数: 多い順</option>
+        <select class="sel" id="fcLv">
+          <option value="all">Semua level</option><option value="N5">N5</option>
+          <option value="N4">N4</option><option value="N3">N3</option>
         </select>
-        <span class="count-badge" id="stroke-count"></span>
+        <select class="sel" id="fcPick">
+          <option value="all">Semua kanji ／ 全部</option>
+          <option value="unseen">Belum dipelajari ／ 未学習</option>
+          <option value="review">Perlu diulang ／ 要復習</option>
+        </select>
+        <button class="btn pri" id="fcStart">Mulai ／ 開始</button>
       </div>
-      <div class="stroke-guide-grid" id="stroke-grid"></div>
+
+      <div class="fc-meta">
+        <span id="fcCount">0 / 0</span>
+        <span><i class="dot g"></i><span id="fcOk">Hafal 0</span></span>
+        <span><i class="dot r"></i><span id="fcNg">Ulang 0</span></span>
+      </div>
+      <div class="bar"><i id="fcBar" style="width:0"></i></div>
+
+      <div class="fc" id="fcCard">
+        <div class="q" id="fcQ">—</div>
+        <div id="fcA" style="display:none;text-align:center"></div>
+        <div class="tip" id="fcTip">Ketuk kartu untuk melihat jawaban ／ タップで答え</div>
+      </div>
+
+      <div class="row" id="fcNav">
+        <button class="btn" id="fcPrev">←</button>
+        <button class="btn pri" id="fcFlip">Lihat jawaban ／ 答えを見る</button>
+        <button class="btn" id="fcNext">→</button>
+      </div>
+      <div class="row" id="fcJudge" style="display:none">
+        <button class="btn ng" id="fcBad">Belum hafal ／ まだ（1）</button>
+        <button class="btn ok" id="fcGood">Hafal ／ 覚えた（2）</button>
+      </div>
+      <div id="fcDone" style="display:none;text-align:center;padding:1rem">
+        <div style="font-size:2rem">🎉</div>
+        <h3>Selesai! ／ おつかれさま！</h3>
+        <p style="color:var(--muted)" id="fcResult"></p>
+        <div class="row" style="margin-top:.8rem">
+          <button class="btn pri" id="fcAgain">Ulangi ／ もう一度</button>
+          <button class="btn" id="fcRedo">Ulang yang salah ／ 要復習だけ</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Urutan coretan / 書き順 ===== -->
+  <section class="panel" id="p-stroke">
+    <div class="toolbar">
+      <input class="search" id="sq" placeholder="Cari kanji / jumlah coretan … 検索">
+      <div class="chips" id="sLvChips">
+        <button class="chip on" data-lv="all">Semua</button>
+        <button class="chip" data-lv="N5">N5</button>
+        <button class="chip" data-lv="N4">N4</button>
+        <button class="chip" data-lv="N3">N3</button>
+      </div>
+      <select class="sel" id="sSort">
+        <option value="level">Urut: level ／ レベル順</option>
+        <option value="stroke-asc">Coretan sedikit ／ 画数少ない順</option>
+        <option value="stroke-desc">Coretan banyak ／ 画数多い順</option>
+      </select>
+      <span class="hint" id="sCnt"></span>
+    </div>
+    <p class="hint" style="margin-bottom:.7rem">▶ Ketuk gambar kanji untuk melihat animasi coretan satu per satu ／ 文字をタップすると1画ずつ書きます</p>
+    <div class="sgrid" id="sgrid"><div class="loading">Memuat… 読み込み中…</div></div>
+    <div style="text-align:center;margin:1rem 0"><button class="btn" id="sMore">Tampilkan lagi ／ もっと表示</button></div>
+  </section>
+
+  <!-- ===== Progres / 学習状況 ===== -->
+  <section class="panel" id="p-stats">
+    <div class="prog-wrap" id="progWrap"></div>
+    <div class="sec">
+      <div class="lb">PERLU DIULANG ／ 要復習</div>
+      <div class="grid" id="reviewGrid"></div>
+    </div>
+    <div class="row" style="margin-top:1.5rem">
+      <button class="btn" id="expBtn">Simpan catatan belajar ／ 学習記録を書き出す</button>
+      <button class="btn ng" id="resetBtn">Hapus semua catatan ／ 記録を消す</button>
+    </div>
+  </section>
+
+  <footer>
+    <b>Sumber data / データ出典（オープンライセンス）</b><br>
+    Cara baca・arti・jumlah coretan・level JLPT：<a href="https://github.com/davidluzgouveia/kanji-data" target="_blank" rel="noopener">kanji-data</a>（KANJIDIC2 / EDRDG, CC BY-SA 4.0）／
+    contoh kata・radikal：<a href="https://github.com/kanjialive/kanji-data-media" target="_blank" rel="noopener">Kanji alive</a>（University of Chicago, CC BY 4.0）／
+    urutan coretan：<a href="http://kanjivg.tagaini.net" target="_blank" rel="noopener">KanjiVG</a>（Ulrich Apel, CC BY-SA 3.0）／
+    level kosakata：<a href="https://github.com/jamsinclair/open-anki-jlpt-decks" target="_blank" rel="noopener">open-anki-jlpt-decks</a>（tanos.co.uk, CC BY 4.0）<br>
+    ※ JLPTは2010年以降、公式の漢字リストを公表していません。本ツールのレベル区分は上記データセットの分類（N5 79字・N4 166字・N3 367字＝累計612字）に基づきます。<br>
+    ※ Terjemahan Bahasa Indonesia dibuat dengan bantuan AI dari arti bahasa Inggris ／ インドネシア語訳は英語原文からAIで作成しています。<br>
+    ※ Catatan belajar hanya tersimpan di perangkat Anda ／ 学習記録は端末内にのみ保存されます。
+  </footer>
+</div>
+
+<!-- ===== Modal ===== -->
+<div class="ov" id="ov"><div class="modal">
+  <div class="m-head">
+    <div class="m-ch" id="mCh"></div>
+    <div class="info">
+      <div class="tags" id="mTags"></div>
+      <div id="mMean" style="font-size:.9rem;color:var(--muted)"></div>
+      <div id="mMeanEn" style="font-size:.75rem;color:#94a3b8"></div>
+    </div>
+    <button class="x" id="mX">×</button>
+  </div>
+  <div class="m-body">
+    <div class="sec">
+      <div class="lb">URUTAN CORETAN ／ 書き順（1画ずつ）</div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-start;justify-content:center">
+        <div style="text-align:center">
+          <svg class="kvg" id="mSvg" width="180" height="180" viewBox="0 0 109 109"></svg>
+          <div class="row" style="margin-top:.5rem">
+            <button class="btn" id="mPlay">▶ Putar ulang ／ 再生</button>
+          </div>
+        </div>
+        <div style="flex:1;min-width:180px"><div class="seq" id="mSeq"></div></div>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="lb">CARA BACA ／ 読み方</div>
+      <div class="rd-row"><span class="rd-k">On/音読み</span><span id="mOn"></span></div>
+      <div class="rd-row"><span class="rd-k">Kun/訓読み</span><span id="mKun"></span></div>
+    </div>
+    <div class="sec">
+      <div class="lb">CONTOH KATA ／ 用例</div>
+      <ul class="ex" id="mEx"></ul>
+    </div>
+    <div class="sec">
+      <div class="lb">RADIKAL ／ 部首</div>
+      <div id="mMisc" style="font-size:.85rem;color:var(--muted)"></div>
+    </div>
+    <div class="row">
+      <button class="btn ng" id="mNg">Perlu diulang ／ 要復習</button>
+      <button class="btn ok" id="mOk">Sudah hafal ／ 覚えた</button>
     </div>
   </div>
+</div></div>
 
-  <!-- DETAIL MODAL -->
-  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
-    <div class="modal">
-      <div class="modal-header">
-        <div class="modal-kanji" id="modal-char"></div>
-        <div class="modal-title">
-          <h2 id="modal-stroke-count"></h2>
-          <div class="readings" id="modal-readings"></div>
-        </div>
-        <button class="close-btn" onclick="closeModalDirect()">×</button>
-      </div>
-      <div class="modal-body">
-        <div class="detail-section">
-          <div class="section-label">意味</div>
-          <div id="modal-meanings"></div>
-        </div>
-        <div class="detail-section">
-          <div class="section-label">用例</div>
-          <ul class="example-list" id="modal-examples"></ul>
-        </div>
-        <div class="detail-section">
-          <div class="section-label">書き順</div>
-          <div class="stroke-order-box" id="modal-stroke-order"></div>
-        </div>
-      </div>
-    </div>
-  </div>
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
 
-  <script>
-    let kanjiData = [];
-    let filteredData = [];
-    let fcDeck = [];
-    let fcIndex = 0;
-    let fcFlipped = false;
-    let fcKnown = 0;
-    let fcUnknown = 0;
+let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
+let LANG = localStorage.getItem(LANGKEY) || 'id';
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(STORE) || '{}'); } catch (e) {}
+const save = () => { try { localStorage.setItem(STORE, JSON.stringify(progress)); } catch (e) {} };
+const setMark = (ch, v) => { v ? progress[ch] = v : delete progress[ch]; save(); refreshStats(); };
 
-    async function loadData() {
-      try {
-        const res = await fetch('kanji-n3.json');
-        const json = await res.json();
-        kanjiData = json.kanji;
-        document.getElementById('total-badge').textContent = `全${kanjiData.length}字`;
-        renderList(kanjiData);
-        renderStroke(kanjiData);
-        initFlashcards();
-      } catch (e) {
-        console.error('データ読み込みエラー:', e);
-        document.getElementById('kanji-grid').innerHTML = '<p style="color:red;">データの読み込みに失敗しました。</p>';
-      }
-    }
+/* arti: Indonesia kalau ada, kalau tidak Inggris */
+const meanOf = k => (LANG === 'id' && k.meanings_id && k.meanings_id.length ? k.meanings_id : k.meanings);
+const exMean = e => (LANG === 'id' && e.meaning_id) ? e.meaning_id : e.meaning;
 
-    /* ── LIST VIEW ── */
-    function renderList(data) {
-      filteredData = data;
-      document.getElementById('count-display').textContent = `${data.length}件`;
-      const grid = document.getElementById('kanji-grid');
-      grid.innerHTML = data.map(k => `
-        <div class="kanji-card" onclick="openModal('${k.character}')">
-          <div class="card-top">
-            <div class="kanji-char">${k.character}</div>
-            <div class="card-info">
-              <div class="readings">
-                ${k.on.map(r => `<span class="reading-tag on-tag">${r}</span>`).join('')}
-                ${k.kun.slice(0,2).map(r => `<span class="reading-tag kun-tag">${r}</span>`).join('')}
-              </div>
-              <div class="meanings-text">${k.meanings.slice(0,3).join(' / ')}</div>
-            </div>
-          </div>
-          <div class="stroke-count">画数: <strong>${k.strokes}画</strong></div>
-        </div>
-      `).join('');
-    }
+async function boot() {
+  const json = await (await fetch('kanji-data.json')).json();
+  DATA = json.kanji; DATA.forEach(k => BYCH[k.character] = k);
+  $('#hdStat').textContent = `${DATA.length} kanji（N5 ${cnt('N5')}・N4 ${cnt('N4')}・N3 ${cnt('N3')}）`;
+  $('#langBtn').textContent = LANG === 'id' ? '🌐 ID' : '🌐 EN';
+  renderList(); refreshStats();
+}
+const cnt = lv => DATA.filter(k => k.level === lv).length;
+const loadStrokes = () => strokePromise || (strokePromise =
+  fetch('kanji-strokes.json').then(r => r.json()).then(j => (STROKES = j.strokes)));
 
-    function filterKanji() {
-      const q = document.getElementById('search-input').value.toLowerCase();
-      const sort = document.getElementById('sort-select').value;
-      let data = kanjiData.filter(k => {
-        if (!q) return true;
-        return k.character.includes(q) ||
-          k.on.some(r => r.toLowerCase().includes(q)) ||
-          k.kun.some(r => r.toLowerCase().includes(q)) ||
-          k.meanings.some(m => m.toLowerCase().includes(q));
-      });
-      data = sortKanji(data, sort);
-      renderList(data);
-    }
+/* ---------- filter / sort ---------- */
+function filterKanji(q, lv, mk) {
+  q = (q || '').trim().toLowerCase();
+  return DATA.filter(k => {
+    if (lv !== 'all' && k.level !== lv) return false;
+    if (mk === 'known' && progress[k.character] !== 'known') return false;
+    if (mk === 'review' && progress[k.character] !== 'review') return false;
+    if (mk === 'unseen' && progress[k.character]) return false;
+    if (!q) return true;
+    if (k.character.includes(q) || String(k.strokes) === q) return true;
+    if (k.on.some(r => r.includes(q)) || k.kun.some(r => r.includes(q))) return true;
+    if (k.meanings.concat(k.meanings_id || []).some(m => m.toLowerCase().includes(q))) return true;
+    return k.examples.some(e => e.word.includes(q) || e.reading.includes(q) ||
+      e.meaning.toLowerCase().includes(q) || (e.meaning_id || '').toLowerCase().includes(q));
+  });
+}
+function sortKanji(arr, mode) {
+  const a = [...arr], o = { N5: 0, N4: 1, N3: 2 }, f = x => x.freq || 9999;
+  if (mode === 'stroke-asc') a.sort((x, y) => x.strokes - y.strokes || f(x) - f(y));
+  else if (mode === 'stroke-desc') a.sort((x, y) => y.strokes - x.strokes || f(x) - f(y));
+  else if (mode === 'freq') a.sort((x, y) => f(x) - f(y));
+  else a.sort((x, y) => o[x.level] - o[y.level] || f(x) - f(y));
+  return a;
+}
 
-    function sortKanji(data, sort) {
-      if (sort === 'strokes-asc') return [...data].sort((a,b) => a.strokes - b.strokes);
-      if (sort === 'strokes-desc') return [...data].sort((a,b) => b.strokes - a.strokes);
-      if (sort === 'alpha') return [...data].sort((a,b) => a.character.localeCompare(b.character, 'ja'));
-      return data;
-    }
+/* ---------- list ---------- */
+let listLimit = 120, curLv = 'all';
+function renderList() {
+  const arr = sortKanji(filterKanji($('#q').value, curLv, $('#mark').value), $('#sort').value);
+  $('#cnt').textContent = `${arr.length} kanji`;
+  const show = arr.slice(0, listLimit);
+  $('#grid').innerHTML = show.map(cardHTML).join('') + (arr.length > show.length ?
+    `<button class="btn" id="moreBtn" style="grid-column:1/-1">Tampilkan lagi ／ もっと表示（+${Math.min(120, arr.length - show.length)}）</button>` : '');
+  if ($('#moreBtn')) $('#moreBtn').onclick = () => { listLimit += 120; renderList(); };
+}
+const cardHTML = k => `<button class="kcard" data-ch="${k.character}">
+  ${progress[k.character] ? `<span class="mark ${progress[k.character]}"></span>` : ''}
+  <div class="ch">${k.character}</div>
+  <div class="body">
+    <div class="tags"><span class="t lv">${k.level}</span>
+      ${k.on.slice(0, 2).map(r => `<span class="t on-">${r}</span>`).join('')}
+      ${k.kun.slice(0, 2).map(r => `<span class="t kun">${r}</span>`).join('')}</div>
+    <div class="mean">${meanOf(k).slice(0, 3).join(', ')}</div>
+    <div class="st">${k.strokes} coretan／画</div>
+  </div></button>`;
 
-    /* ── MODAL ── */
-    function openModal(char) {
-      const k = kanjiData.find(x => x.character === char);
-      if (!k) return;
-      document.getElementById('modal-char').textContent = k.character;
-      document.getElementById('modal-stroke-count').textContent = `${k.strokes}画`;
-      document.getElementById('modal-readings').innerHTML =
-        k.on.map(r => `<span class="reading-tag on-tag">音: ${r}</span>`).join('') +
-        k.kun.map(r => `<span class="reading-tag kun-tag">訓: ${r}</span>`).join('');
-      document.getElementById('modal-meanings').innerHTML =
-        `<p style="font-size:1rem;line-height:1.8;">${k.meanings.join(' ／ ')}</p>`;
-      document.getElementById('modal-examples').innerHTML =
-        k.example_words.map(w => `<li>${w}</li>`).join('');
-      document.getElementById('modal-stroke-order').innerHTML = formatStrokeOrder(k.stroke_order);
-      document.getElementById('modal').classList.add('open');
-    }
+/* ---------- stroke rendering ---------- */
+const GRID = `<path class="grid-l" d="M54.5 0v109M0 54.5h109"/>`;
+const svgUpTo = (p, n) => GRID + p.map(d => `<path class="bg-s" d="${d}"/>`).join('') +
+  p.slice(0, n).map((d, i) => `<path class="${i === n - 1 ? 'hi-s' : 'fg-s'}" d="${d}"/>`).join('');
+const svgFull = p => GRID + p.map(d => `<path class="fg-s" d="${d}"/>`).join('');
+function addNumbers(svgEl, paths) {
+  const ns = 'http://www.w3.org/2000/svg';
+  paths.forEach((d, i) => {
+    const tmp = document.createElementNS(ns, 'path'); tmp.setAttribute('d', d); svgEl.appendChild(tmp);
+    let pt; try { pt = tmp.getPointAtLength(0); } catch (e) { pt = { x: 6, y: 9 }; }
+    tmp.remove();
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', Math.max(3, Math.min(105, pt.x - 1)));
+    t.setAttribute('y', Math.max(7, Math.min(107, pt.y - 1.5)));
+    t.textContent = i + 1; svgEl.appendChild(t);
+  });
+}
+let animToken = 0;
+async function animate(svgEl, paths, speed) {
+  const my = ++animToken;
+  svgEl.innerHTML = GRID + paths.map(d => `<path class="bg-s" d="${d}"/>`).join('');
+  const ns = 'http://www.w3.org/2000/svg';
+  for (let i = 0; i < paths.length; i++) {
+    if (my !== animToken) return;
+    const p = document.createElementNS(ns, 'path');
+    p.setAttribute('d', paths[i]); p.setAttribute('class', 'hi-s'); svgEl.appendChild(p);
+    const len = p.getTotalLength(), ms = Math.max(240, Math.min(750, len * 20)) * (speed || 1);
+    p.style.strokeDasharray = len; p.style.strokeDashoffset = len;
+    p.style.transition = `stroke-dashoffset ${ms}ms linear`;
+    await new Promise(r => requestAnimationFrame(() => {
+      p.style.strokeDashoffset = 0;
+      setTimeout(() => { p.setAttribute('class', 'fg-s'); r(); }, ms + 110);
+    }));
+  }
+  if (my === animToken) { svgEl.innerHTML = svgFull(paths); addNumbers(svgEl, paths); }
+}
 
-    function formatStrokeOrder(text) {
-      return text.split(' ').map(step => {
-        const m = step.match(/^(\d+)\.(.*)/);
-        if (m) return `<span class="stroke-step">${m[1]}</span>${m[2]} `;
-        return step + ' ';
-      }).join('');
-    }
+/* ---------- modal ---------- */
+let modalCh = null;
+async function openModal(ch) {
+  const k = BYCH[ch]; if (!k) return;
+  modalCh = ch;
+  $('#mCh').textContent = ch;
+  $('#mTags').innerHTML = `<span class="t lv">${k.level}</span><span class="t lv">${k.strokes} coretan/画</span>` +
+    (k.grade ? `<span class="t lv">SD kelas ${k.grade}／小${k.grade}</span>` : '') +
+    (k.freq ? `<span class="t lv">#${k.freq}</span>` : '');
+  $('#mMean').textContent = meanOf(k).join(', ');
+  $('#mMeanEn').textContent = (LANG === 'id' && k.meanings_id) ? 'EN: ' + k.meanings.join(', ') : '';
+  $('#mOn').innerHTML = k.on.length ? k.on.map(r => `<span class="t on-">${r}</span>`).join(' ') : '—';
+  $('#mKun').innerHTML = k.kun.length ? k.kun.map(r => `<span class="t kun">${r}</span>`).join(' ') : '—';
+  $('#mEx').innerHTML = k.examples.map(e => `<li>
+      <div><span class="w">${e.word}</span><span class="r">${e.reading}</span>${e.jlpt ? `<span class="jl">${e.jlpt}</span>` : ''}</div>
+      <div class="m">${exMean(e)}</div>
+      ${(LANG === 'id' && e.meaning_id) ? `<div class="en">EN: ${e.meaning}</div>` : ''}</li>`).join('');
+  const r = k.radical || {};
+  $('#mMisc').textContent = [r.character && `${r.character}${r.name ? '（' + r.name + '）' : ''}`,
+    r.meaning && (LANG === 'id' ? `arti radikal: ${r.meaning}` : `meaning: ${r.meaning}`)].filter(Boolean).join(' ／ ') || '—';
+  $('#ov').classList.add('on'); document.body.style.overflow = 'hidden';
 
-    function closeModal(e) {
-      if (e.target === document.getElementById('modal')) closeModalDirect();
-    }
+  const S = await loadStrokes(), paths = S[ch] || [];
+  $('#mSeq').innerHTML = paths.map((_, i) => `<svg viewBox="0 0 109 109">${svgUpTo(paths, i + 1)}</svg>`).join('');
+  animate($('#mSvg'), paths);          // ← 開いたら自動で1画ずつ書く
+}
+const closeModal = () => { animToken++; $('#ov').classList.remove('on'); document.body.style.overflow = ''; };
 
-    function closeModalDirect() {
-      document.getElementById('modal').classList.remove('open');
-    }
+/* ---------- stroke guide ---------- */
+let sLimit = 60, curSLv = 'all';
+async function renderStroke() {
+  const S = await loadStrokes();
+  const arr = sortKanji(filterKanji($('#sq').value, curSLv, 'all'), $('#sSort').value);
+  $('#sCnt').textContent = `${arr.length} kanji`;
+  const show = arr.slice(0, sLimit);
+  $('#sgrid').innerHTML = show.map(k => {
+    const p = S[k.character] || [];
+    return `<div class="scard" data-ch="${k.character}">
+      <div class="cap"><b>${k.character}</b><span>${k.level}・${k.strokes}画</span></div>
+      <svg class="kvg sv-main" data-ch="${k.character}" width="100%" viewBox="0 0 109 109" style="max-width:145px;margin:.3rem auto">${svgFull(p)}</svg>
+      <div class="cap" style="justify-content:center">${k.on.slice(0, 1).concat(k.kun.slice(0, 1)).join('・') || '&nbsp;'}</div>
+      <div class="seq">${p.map((_, i) => `<svg viewBox="0 0 109 109">${svgUpTo(p, i + 1)}</svg>`).join('')}</div>
+    </div>`;
+  }).join('');
+  $$('#sgrid .sv-main').forEach(svg => addNumbers(svg, S[svg.dataset.ch] || []));
+  $('#sMore').style.display = arr.length > show.length ? '' : 'none';
+  $('#sMore').textContent = `Tampilkan lagi ／ もっと表示（+${Math.min(60, arr.length - show.length)}）`;
+}
 
-    /* ── FLASHCARDS ── */
-    function initFlashcards() {
-      fcDeck = [...kanjiData];
-      fcIndex = 0;
-      fcKnown = 0;
-      fcUnknown = 0;
-      fcFlipped = false;
-      updateScoreDisplay();
-      showCard();
-    }
+/* ---------- flashcards ---------- */
+let deck = [], di = 0, flipped = false, okN = 0, ngN = 0, wrong = [];
+function buildDeck() {
+  let arr = DATA.filter(k => {
+    if ($('#fcLv').value !== 'all' && k.level !== $('#fcLv').value) return false;
+    if ($('#fcPick').value === 'unseen' && progress[k.character]) return false;
+    if ($('#fcPick').value === 'review' && progress[k.character] !== 'review') return false;
+    return true;
+  });
+  for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; }
+  deck = arr; di = 0; okN = ngN = 0; wrong = []; flipped = false;
+  $('#fcOk').textContent = 'Hafal 0'; $('#fcNg').textContent = 'Ulang 0';
+  $('#fcDone').style.display = 'none'; $('#fcCard').style.display = ''; showCard();
+}
+function showCard() {
+  if (!deck.length) { $('#fcQ').textContent = '—'; $('#fcCount').textContent = '0 / 0'; return; }
+  if (di >= deck.length) return finish();
+  const k = deck[di], mode = $('#fcMode').value; flipped = false;
+  $('#fcA').style.display = 'none'; $('#fcQ').style.display = '';
+  $('#fcJudge').style.display = 'none'; $('#fcNav').style.display = 'flex';
+  $('#fcTip').textContent = 'Ketuk kartu untuk jawaban ／ タップで答え';
+  const q = $('#fcQ');
+  if (mode === 'r2k') { q.className = 'q small'; q.textContent = k.on.concat(k.kun).slice(0, 4).join('  /  ') || '—'; }
+  else if (mode === 'm2k') { q.className = 'q small'; q.textContent = meanOf(k).slice(0, 3).join(', '); }
+  else { q.className = 'q'; q.textContent = k.character; }
+  $('#fcCount').textContent = `${di + 1} / ${deck.length}`;
+  $('#fcBar').style.width = (di / deck.length * 100) + '%';
+  $('#fcPrev').disabled = di === 0; $('#fcNext').disabled = di >= deck.length - 1;
+}
+function flip() {
+  if (!deck.length || di >= deck.length) return;
+  const k = deck[di], mode = $('#fcMode').value;
+  flipped = !flipped; if (!flipped) return showCard();
+  const ex = k.examples.slice(0, 2).map(e =>
+    `<div style="font-size:.83rem;color:var(--muted)">${e.word}（${e.reading}）— ${exMean(e)}</div>`).join('');
+  let html;
+  if (mode === 'k2r') html = `<div style="margin-bottom:.35rem">${k.on.map(r => `<span class="t on-">${r}</span>`).join(' ')} ${k.kun.map(r => `<span class="t kun">${r}</span>`).join(' ')}</div>
+    <div style="color:var(--muted);font-size:.9rem">${meanOf(k).slice(0, 3).join(', ')}</div>${ex}`;
+  else if (mode === 'k2m') html = `<div style="font-size:1.1rem;margin-bottom:.25rem">${meanOf(k).slice(0, 4).join(', ')}</div>
+    <div style="font-size:.85rem;color:var(--muted)">${k.on.concat(k.kun).slice(0, 4).join(' / ')}</div>${ex}`;
+  else html = `<div style="font-family:var(--kfont);font-size:4.3rem;line-height:1">${k.character}</div>
+    <div style="color:var(--muted);font-size:.88rem">${k.on.concat(k.kun).slice(0, 3).join(' / ')}</div>${ex}`;
+  $('#fcQ').style.display = 'none';
+  $('#fcA').innerHTML = html + `<div style="font-size:.72rem;color:var(--muted);margin-top:.35rem">${k.level}・${k.strokes}画</div>`;
+  $('#fcA').style.display = ''; $('#fcJudge').style.display = 'flex'; $('#fcNav').style.display = 'none';
+  $('#fcTip').textContent = 'Sudah hafal? ／ 覚えていましたか？';
+}
+function judge(ok) {
+  if (di >= deck.length) return;
+  const ch = deck[di].character;
+  ok ? (okN++, setMark(ch, 'known')) : (ngN++, wrong.push(deck[di]), setMark(ch, 'review'));
+  $('#fcOk').textContent = `Hafal ${okN}`; $('#fcNg').textContent = `Ulang ${ngN}`;
+  di++; showCard();
+}
+function finish() {
+  $('#fcCard').style.display = 'none'; $('#fcNav').style.display = 'none'; $('#fcJudge').style.display = 'none';
+  $('#fcDone').style.display = ''; $('#fcBar').style.width = '100%';
+  const t = okN + ngN;
+  $('#fcResult').textContent = t ? `${okN}/${t}（${Math.round(okN / t * 100)}%）hafal ／ 覚えました` : '';
+  $('#fcRedo').style.display = wrong.length ? '' : 'none';
+}
 
-    function shuffleCards() {
-      for (let i = fcDeck.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [fcDeck[i], fcDeck[j]] = [fcDeck[j], fcDeck[i]];
-      }
-      fcIndex = 0;
-      fcKnown = 0;
-      fcUnknown = 0;
-      fcFlipped = false;
-      updateScoreDisplay();
-      showCard();
-    }
+/* ---------- stats ---------- */
+function refreshStats() {
+  if (!DATA.length) return;
+  $('#progWrap').innerHTML = ['N5', 'N4', 'N3'].map(lv => {
+    const all = DATA.filter(k => k.level === lv);
+    const kn = all.filter(k => progress[k.character] === 'known').length;
+    const rv = all.filter(k => progress[k.character] === 'review').length;
+    return `<div class="prog"><div class="lv"><span>${lv}</span><span>${kn}/${all.length}</span></div>
+      <div class="bar" style="margin-top:.4rem"><i style="width:${kn / all.length * 100}%"></i></div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:.3rem">Hafal ${kn}・Ulang ${rv}</div></div>`;
+  }).join('');
+  const rev = DATA.filter(k => progress[k.character] === 'review');
+  $('#reviewGrid').innerHTML = rev.length ? rev.map(cardHTML).join('')
+    : '<p style="color:var(--muted);font-size:.85rem">— </p>';
+}
 
-    function resetFlashcards() {
-      initFlashcards();
-      document.getElementById('fc-complete').style.display = 'none';
-      document.getElementById('flashcard').style.display = 'flex';
-      document.getElementById('fc-next-btn').style.display = 'flex';
-      document.getElementById('fc-answer-btns').style.display = 'none';
-    }
+/* ---------- events ---------- */
+$$('.tab').forEach(t => t.onclick = () => {
+  $$('.tab').forEach(x => x.classList.toggle('on', x === t));
+  $$('.panel').forEach(p => p.classList.remove('on'));
+  $('#p-' + t.dataset.tab).classList.add('on');
+  if (t.dataset.tab === 'stroke') renderStroke();
+  if (t.dataset.tab === 'stats') refreshStats();
+  window.scrollTo({ top: 0 });
+});
+$('#langBtn').onclick = () => {
+  LANG = LANG === 'id' ? 'en' : 'id'; localStorage.setItem(LANGKEY, LANG);
+  $('#langBtn').textContent = LANG === 'id' ? '🌐 ID' : '🌐 EN';
+  renderList(); refreshStats(); if ($('#ov').classList.contains('on')) openModal(modalCh);
+};
+$('#q').oninput = () => { listLimit = 120; renderList(); };
+$('#sort').onchange = renderList;
+$('#mark').onchange = () => { listLimit = 120; renderList(); };
+$$('#lvChips .chip').forEach(c => c.onclick = () => {
+  $$('#lvChips .chip').forEach(x => x.classList.toggle('on', x === c));
+  curLv = c.dataset.lv; listLimit = 120; renderList();
+});
+$$('#sLvChips .chip').forEach(c => c.onclick = () => {
+  $$('#sLvChips .chip').forEach(x => x.classList.toggle('on', x === c));
+  curSLv = c.dataset.lv; sLimit = 60; renderStroke();
+});
+$('#sq').oninput = () => { sLimit = 60; renderStroke(); };
+$('#sSort').onchange = () => renderStroke();
+$('#sMore').onclick = () => { sLimit += 60; renderStroke(); };
 
-    function showCard() {
-      if (fcIndex >= fcDeck.length) {
-        showComplete();
-        return;
-      }
-      const k = fcDeck[fcIndex];
-      const mode = document.getElementById('fc-mode').value;
-      fcFlipped = false;
+document.addEventListener('click', e => {
+  const sv = e.target.closest('.sv-main');
+  if (sv) { e.stopPropagation(); return animate(sv, (STROKES || {})[sv.dataset.ch] || []); }
+  const card = e.target.closest('.kcard'); if (card) return openModal(card.dataset.ch);
+  const sc = e.target.closest('.scard'); if (sc) return openModal(sc.dataset.ch);
+});
+$('#mX').onclick = closeModal;
+$('#ov').onclick = e => { if (e.target === $('#ov')) closeModal(); };
+const replay = () => animate($('#mSvg'), (STROKES || {})[modalCh] || []);
+$('#mPlay').onclick = replay;
+$('#mSvg').onclick = replay;
+$('#mCh').onclick = replay;
+$('#mOk').onclick = () => { setMark(modalCh, 'known'); renderList(); closeModal(); };
+$('#mNg').onclick = () => { setMark(modalCh, 'review'); renderList(); closeModal(); };
 
-      document.getElementById('fc-front').style.display = 'flex';
-      document.getElementById('fc-front').style.flexDirection = 'column';
-      document.getElementById('fc-front').style.alignItems = 'center';
-      document.getElementById('fc-back').style.display = 'none';
-      document.getElementById('fc-answer-btns').style.display = 'none';
-      document.getElementById('fc-next-btn').style.display = 'flex';
-      document.getElementById('fc-card-hint').textContent = 'クリックで裏返す';
+$('#fcStart').onclick = buildDeck;
+$('#fcMode').onchange = showCard;
+$('#fcCard').onclick = flip; $('#fcFlip').onclick = flip;
+$('#fcPrev').onclick = () => { if (di > 0) { di--; showCard(); } };
+$('#fcNext').onclick = () => { if (di < deck.length - 1) { di++; showCard(); } };
+$('#fcGood').onclick = () => judge(true);
+$('#fcBad').onclick = () => judge(false);
+$('#fcAgain').onclick = buildDeck;
+$('#fcRedo').onclick = () => { deck = wrong; di = 0; okN = ngN = 0; wrong = []; $('#fcDone').style.display = 'none'; $('#fcCard').style.display = ''; showCard(); };
 
-      if (mode === 'reading-to-kanji') {
-        document.getElementById('fc-kanji-char').style.fontSize = '2rem';
-        document.getElementById('fc-kanji-char').textContent =
-          k.on.concat(k.kun).slice(0,3).join(' / ') || '読みなし';
-      } else {
-        document.getElementById('fc-kanji-char').style.fontSize = '7rem';
-        document.getElementById('fc-kanji-char').textContent = k.character;
-      }
+$('#resetBtn').onclick = () => { if (confirm('Hapus semua catatan belajar? ／ 学習記録をすべて消しますか？')) { progress = {}; save(); refreshStats(); renderList(); } };
+$('#expBtn').onclick = () => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(progress, null, 1)], { type: 'application/json' }));
+  a.download = 'kanji-progress.json'; a.click(); URL.revokeObjectURL(a.href);
+};
+document.addEventListener('keydown', e => {
+  if ($('#ov').classList.contains('on')) { if (e.key === 'Escape') closeModal(); return; }
+  if (!$('#p-card').classList.contains('on')) return;
+  if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flip(); }
+  else if (e.key === 'ArrowRight') $('#fcNext').click();
+  else if (e.key === 'ArrowLeft') $('#fcPrev').click();
+  else if (e.key === '1' && flipped) judge(false);
+  else if (e.key === '2' && flipped) judge(true);
+});
 
-      const prev = document.getElementById('fc-prev');
-      const next = document.getElementById('fc-next');
-      prev.disabled = fcIndex === 0;
-      next.disabled = fcIndex >= fcDeck.length - 1;
-
-      updateProgress();
-    }
-
-    function flipCard() {
-      if (fcIndex >= fcDeck.length) return;
-      const k = fcDeck[fcIndex];
-      const mode = document.getElementById('fc-mode').value;
-      fcFlipped = !fcFlipped;
-
-      if (fcFlipped) {
-        document.getElementById('fc-front').style.display = 'none';
-        document.getElementById('fc-back').style.display = 'block';
-        document.getElementById('fc-answer-btns').style.display = 'flex';
-        document.getElementById('fc-next-btn').style.display = 'none';
-        document.getElementById('fc-card-hint').textContent = '知っていましたか？';
-
-        if (mode === 'kanji-to-meaning') {
-          document.getElementById('fc-readings-display').innerHTML =
-            `<div style="font-size:1.1rem; color:var(--text);">${k.meanings.slice(0,3).join(' / ')}</div>`;
-          document.getElementById('fc-meanings-display').textContent =
-            k.on.concat(k.kun).slice(0,3).join(' / ');
-        } else if (mode === 'reading-to-kanji') {
-          document.getElementById('fc-readings-display').innerHTML =
-            `<div style="font-size:5rem; line-height:1; color:var(--text);">${k.character}</div>`;
-          document.getElementById('fc-meanings-display').textContent =
-            k.meanings.slice(0,2).join(' / ');
-        } else {
-          document.getElementById('fc-readings-display').innerHTML =
-            k.on.map(r => `<span class="reading-tag on-tag">${r}</span>`).join('') +
-            k.kun.slice(0,2).map(r => `<span class="reading-tag kun-tag">${r}</span>`).join('');
-          document.getElementById('fc-meanings-display').textContent =
-            k.meanings.slice(0,3).join(' / ');
-        }
-        document.getElementById('fc-strokes-display').textContent = `${k.strokes}画`;
-      } else {
-        document.getElementById('fc-front').style.display = 'flex';
-        document.getElementById('fc-back').style.display = 'none';
-        document.getElementById('fc-answer-btns').style.display = 'none';
-        document.getElementById('fc-next-btn').style.display = 'flex';
-      }
-    }
-
-    function markCard(known) {
-      if (known) fcKnown++; else fcUnknown++;
-      updateScoreDisplay();
-      fcIndex++;
-      fcFlipped = false;
-      showCard();
-    }
-
-    function nextCard() {
-      if (fcIndex < fcDeck.length - 1) { fcIndex++; showCard(); }
-    }
-
-    function prevCard() {
-      if (fcIndex > 0) { fcIndex--; showCard(); }
-    }
-
-    function updateProgress() {
-      const pct = fcDeck.length ? (fcIndex / fcDeck.length) * 100 : 0;
-      document.getElementById('fc-progress').style.width = pct + '%';
-      document.getElementById('fc-counter').textContent = `${fcIndex + 1} / ${fcDeck.length}`;
-    }
-
-    function updateScoreDisplay() {
-      document.getElementById('score-known').textContent = `知っている: ${fcKnown}`;
-      document.getElementById('score-unknown').textContent = `要復習: ${fcUnknown}`;
-    }
-
-    function showComplete() {
-      document.getElementById('fc-complete').style.display = 'block';
-      document.getElementById('flashcard').style.display = 'none';
-      document.getElementById('fc-next-btn').style.display = 'none';
-      document.getElementById('fc-answer-btns').style.display = 'none';
-      const total = fcKnown + fcUnknown;
-      const pct = total ? Math.round(fcKnown / total * 100) : 0;
-      document.getElementById('fc-result-text').textContent =
-        `${total}枚中 ${fcKnown}枚（${pct}%）知っていました！`;
-    }
-
-    /* ── STROKE GUIDE ── */
-    function renderStroke(data) {
-      document.getElementById('stroke-count').textContent = `${data.length}件`;
-      const grid = document.getElementById('stroke-grid');
-      grid.innerHTML = data.map(k => `
-        <div class="stroke-card">
-          <div class="stroke-card-head">
-            <div class="sc-char">${k.character}</div>
-            <div class="sc-meta">
-              <div class="sc-count">${k.strokes}画</div>
-              <div class="sc-name">${k.on.slice(0,2).join('・') || k.kun[0] || ''}</div>
-            </div>
-          </div>
-          <div class="stroke-steps-list">${formatStrokeOrder(k.stroke_order)}</div>
-        </div>
-      `).join('');
-    }
-
-    function filterStroke() {
-      const q = document.getElementById('stroke-search').value.toLowerCase();
-      const sort = document.getElementById('stroke-sort').value;
-      let data = kanjiData.filter(k => {
-        if (!q) return true;
-        return k.character.includes(q) ||
-          String(k.strokes).includes(q) ||
-          k.on.some(r => r.toLowerCase().includes(q));
-      });
-      if (sort === 'strokes-asc') data = [...data].sort((a,b) => a.strokes - b.strokes);
-      if (sort === 'strokes-desc') data = [...data].sort((a,b) => b.strokes - a.strokes);
-      renderStroke(data);
-    }
-
-    /* ── TABS ── */
-    function switchTab(name) {
-      document.querySelectorAll('.tab-btn').forEach((b,i) => {
-        b.classList.toggle('active', ['list','flashcard','stroke'][i] === name);
-      });
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      document.getElementById('tab-' + name).classList.add('active');
-    }
-
-    /* keyboard shortcut */
-    document.addEventListener('keydown', e => {
-      if (document.getElementById('modal').classList.contains('open')) {
-        if (e.key === 'Escape') closeModalDirect();
-        return;
-      }
-      const fc = document.getElementById('tab-flashcard');
-      if (!fc.classList.contains('active')) return;
-      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipCard(); }
-      if (e.key === 'ArrowRight' || e.key === 'k') nextCard();
-      if (e.key === 'ArrowLeft' || e.key === 'j') prevCard();
-      if (e.key === '1') markCard(false);
-      if (e.key === '2') markCard(true);
-    });
-
-    loadData();
-  </script>
+boot().catch(err => { $('#grid').innerHTML = `<p style="color:var(--red)">Gagal memuat data ／ 読み込み失敗：${err}</p>`; });
+</script>
 </body>
 </html>
