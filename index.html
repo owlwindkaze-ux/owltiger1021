@@ -125,6 +125,18 @@ svg text{font-size:7px;fill:var(--red);font-family:system-ui,sans-serif;font-wei
 .prog{flex:1 1 165px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.7rem .8rem;box-shadow:var(--sh)}
 .prog .lv{font-size:.75rem;color:var(--muted);font-weight:800;display:flex;justify-content:space-between}
 
+/* ---- 合言葉ゲート ---- */
+#gate{position:fixed;inset:0;z-index:200;background:linear-gradient(135deg,#1e40af,#2563eb);
+  display:flex;align-items:center;justify-content:center;padding:1.5rem}
+#gate .box{background:#fff;border-radius:18px;padding:1.8rem 1.5rem;max-width:390px;width:100%;
+  box-shadow:0 20px 40px -10px rgba(0,0,0,.35);text-align:center}
+#gate h2{font-size:1.15rem;margin-bottom:.2rem}
+#gate p{font-size:.8rem;color:var(--muted);margin-bottom:1.1rem}
+#gate input{width:100%;padding:.7rem .9rem;border:1.5px solid var(--line);border-radius:10px;
+  font-size:1.05rem;text-align:center;outline:none;margin-bottom:.7rem}
+#gate input:focus{border-color:var(--blue)}
+#gate .err{color:var(--red);font-size:.8rem;min-height:1.2rem;margin-top:.5rem}
+#app{display:none}
 footer{max-width:1200px;margin:2rem auto 0;padding:1rem;font-size:.72rem;color:var(--muted);border-top:1px solid var(--line);line-height:1.75}
 footer a{color:var(--blue)}
 .loading{text-align:center;padding:3rem 1rem;color:var(--muted)}
@@ -143,6 +155,20 @@ footer a{color:var(--blue)}
 </head>
 <body>
 
+<!-- ===== 合言葉ゲート ／ Kata sandi ===== -->
+<div id="gate">
+  <div class="box">
+    <div style="font-size:2.2rem;font-family:'Yu Mincho','Hiragino Mincho ProN',serif">漢字</div>
+    <h2>Kanji JLPT N5–N3</h2>
+    <p>Masukkan kata sandi ／ 合言葉を入力してください</p>
+    <input id="gatePw" type="password" inputmode="text" autocomplete="current-password" placeholder="••••••••">
+    <button class="btn pri" id="gateBtn" style="width:100%">Masuk ／ 入る</button>
+    <div class="err" id="gateErr"></div>
+    <p style="margin:.6rem 0 0;font-size:.72rem">Tanyakan kata sandi kepada perusahaan Anda<br>合言葉は会社の担当者にお聞きください</p>
+  </div>
+</div>
+
+<div id="app">
 <header><div class="hd">
   <div>
     <h1>Kanji JLPT N5–N3</h1>
@@ -334,9 +360,46 @@ footer a{color:var(--blue)}
     </div>
   </div>
 </div></div>
+</div><!-- /#app -->
 
 <script>
 "use strict";
+
+/* =========================================================
+   合言葉（パスワード）設定
+   ---------------------------------------------------------
+   下の PASS_SHA256 は合言葉の SHA-256 ハッシュです。
+   合言葉を変更するときは、新しい合言葉のハッシュを作って置き換えます。
+
+     python3 -c "import hashlib;print(hashlib.sha256('新しい合言葉'.encode()).hexdigest())"
+
+   ※ これは「部外者よけの目隠し」です。ページのソースやJSONファイルを
+     直接開ける人には見えてしまいます（完全な保護ではありません）。
+   ========================================================= */
+const PASS_SHA256 = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
+const GATEKEY = 'jlpt-kanji-gate-v1';
+
+async function sha256(text) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+function unlock() {
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  if (!window.__booted) { window.__booted = true; boot().catch(showLoadError); }
+}
+async function tryUnlock() {
+  const pw = document.getElementById('gatePw').value.trim();
+  const err = document.getElementById('gateErr');
+  if (!pw) { err.textContent = 'Kata sandi kosong ／ 未入力です'; return; }
+  const h = await sha256(pw);
+  if (h === PASS_SHA256) { localStorage.setItem(GATEKEY, h); unlock(); }
+  else { err.textContent = 'Kata sandi salah ／ 合言葉が違います'; document.getElementById('gatePw').select(); }
+}
+document.getElementById('gateBtn').onclick = tryUnlock;
+document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock();   // 一度入れた端末は次回から省略
+else document.getElementById('gatePw').focus();
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
@@ -643,7 +706,10 @@ document.addEventListener('keydown', e => {
   else if (e.key === '2' && flipped) judge(true);
 });
 
-boot().catch(err => { $('#grid').innerHTML = `<p style="color:var(--red)">Gagal memuat data ／ 読み込み失敗：${err}</p>`; });
+function showLoadError(err) {
+  $('#grid').innerHTML = `<p style="color:var(--red)">Gagal memuat data ／ 読み込み失敗：${err}</p>`;
+}
+/* データの読み込みは合言葉を入れたあと（unlock 内）で行います */
 </script>
 </body>
 </html>
