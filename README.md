@@ -61,6 +61,8 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 | `index.html` | アプリ本体（HTML/CSS/JS 単一ファイル、外部ライブラリなし） |
 | `kanji-data.json` | 漢字612字のデータ（読み・意味・用例・部首など） |
 | `kanji-strokes.json` | 書き順データ（KanjiVG のパス、612字ぶん） |
+| `MANUAL.md` | 使用説明書 |
+| `SPEC.md` | 仕様書 |
 
 ### ローカルで動かす場合
 ```bash
@@ -91,7 +93,7 @@ python -m http.server 8000     # → ブラウザで http://localhost:8000
 
 - 画数は **KANJIDIC2・Kanji alive・KanjiVG の3つの独立したデータで完全一致**を確認済み（612字すべて、不一致0件）
 - 全612字に読み・意味・用例（平均3.98語）・筆順データが揃っていることを自動検証済み
-- ブラウザ実機テスト（Chromium）24項目に合格：表示・検索・絞り込み・アニメーション・記録保存・スマホ表示
+- ブラウザ実機テスト（Chromium）**30項目に合格**：合言葉・表示・検索・絞り込み・アニメーション・言語切替・記録保存・スマホ表示
 - インドネシア語訳は、漢字・読み・用例の**日本語の文脈ごと**に作成（英語だけを見て訳すと「権利→kanan（右）」のような同形異義語の誤訳が起きるため）
 - 独立した第三者レビューで **175字・866文字列を抽出検査 → 正確度 約99.3%、重大な誤り0件**。指摘された箇所は修正済み
 - 誤訳を見つけた場合は `kanji-data.json` の該当箇所（`meanings_id` / `meaning_id`）を修正してください

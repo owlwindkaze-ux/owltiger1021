@@ -218,7 +218,7 @@ python3 -c "import hashlib;print(hashlib.sha256('新しい合言葉'.encode()).h
 | リポジトリ公開設定 | Public（GitHub Pages有効化のため） |
 | 開発ブランチ | `claude/japanese-n3-kanji-AaKYe` |
 | GitHub Pages 公開元 | 同ブランチの `/`（ルート） |
-| 最新コミット | `a5c68a2` 合言葉（パスワード）による閲覧制限を追加 |
+| 最新コミット | `a48466b` 使用説明書 MANUAL.md を追加 |
 | 未コミットの変更 | なし |
 | 閲覧制限 | 合言葉 `owltiger2026`（2.8参照） |
 
