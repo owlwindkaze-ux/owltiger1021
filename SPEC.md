@@ -203,7 +203,8 @@ python3 -c "import hashlib;print(hashlib.sha256('新しい合言葉'.encode()).h
 | `kanji-data.json` | 約458 KB | 漢字612字のデータ | 最新 |
 | `kanji-strokes.json` | 約460 KB | 書き順データ612字ぶん | 最新 |
 | `README.md` | 約6 KB | 概要・使い方・出典 | 最新 |
-| `SPEC.md` | 約21 KB | 仕様書 | 最新 |
+| `SPEC.md` | 約21 KB | 仕様書（本書） | 最新 |
+| `MANUAL.md` | 約14 KB | 使用説明書（配布用・運用手順・FAQ） | 最新 |
 | `meeting-transcript.txt` | 約6 KB | 別プロジェクトの資料（本アプリとは無関係） | 既存のまま |
 | `output/` | — | 別プロジェクトの出力（本アプリとは無関係） | 既存のまま |
 | `.claude/skills/` | — | 別プロジェクトの設定（本アプリとは無関係） | 既存のまま |

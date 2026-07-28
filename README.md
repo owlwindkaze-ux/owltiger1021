@@ -4,6 +4,13 @@
 Alat belajar gratis untuk **612 kanji JLPT N5–N3**: cara baca, arti dalam **Bahasa Indonesia**, contoh kata, dan **animasi urutan coretan**.
 
 **▶ 公開URL / Link:** https://owlwindkaze-ux.github.io/owltiger1021/
+**▶ 合言葉 / Kata sandi:** `owltiger2026`
+
+| 文書 | 内容 |
+|---|---|
+| [MANUAL.md](MANUAL.md) | **使用説明書**（実習生向けの使い方・管理者向けの運用手順・トラブル対処・FAQ） |
+| [SPEC.md](SPEC.md) | **仕様書**（機能仕様・データ仕様・N2追加手順） |
+| 本書 | 概要・データ出典・ライセンス |
 
 ---
 
