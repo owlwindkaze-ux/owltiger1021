@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Belajar 612 kanji JLPT N5–N3: cara baca, arti (Bahasa Indonesia), contoh kata, dan animasi urutan coretan. JLPT N5〜N3の漢字612字を、読み・意味・用例・書き順アニメーションで学べる無料ツール。">
-<title>Kanji JLPT N3 ｜ JLPT N3 漢字学習</title>
+<meta name="description" content="Untuk pemagang kaigo di Jepang: 612 kanji JLPT N5–N3 dan 3.200+ kosakata termasuk istilah perawatan lansia, dengan arti Bahasa Indonesia dan animasi urutan coretan. 介護の技能実習生向け：JLPT漢字612字と介護・医療の言葉を、インドネシア語訳と書き順アニメーションで学べます。">
+<title>Kanji &amp; Kosakata Kaigo ｜ 介護の漢字・言葉</title>
 <style>
 :root{
   --blue:#2563eb; --blue-d:#1d4ed8; --blue-l:#eff6ff;
@@ -158,8 +158,8 @@ footer a{color:var(--blue)}
 <!-- ===== 合言葉ゲート ／ Kata sandi ===== -->
 <div id="gate">
   <div class="box">
-    <div style="font-size:2.2rem;font-family:'Yu Mincho','Hiragino Mincho ProN',serif">漢字</div>
-    <h2>Kanji JLPT N5–N3</h2>
+    <div style="font-size:2.2rem;font-family:'Yu Mincho','Hiragino Mincho ProN',serif">介護</div>
+    <h2>Kanji &amp; Kosakata Kaigo</h2>
     <p>Masukkan kata sandi ／ 合言葉を入力してください</p>
     <input id="gatePw" type="password" inputmode="text" autocomplete="current-password" placeholder="••••••••">
     <button class="btn pri" id="gateBtn" style="width:100%">Masuk ／ 入る</button>
@@ -171,8 +171,8 @@ footer a{color:var(--blue)}
 <div id="app">
 <header><div class="hd">
   <div>
-    <h1>Kanji JLPT N5–N3</h1>
-    <div class="sub">Cara baca・Arti・Contoh kata・Urutan coretan ／ 読み・意味・用例・書き順</div>
+    <h1>Kanji &amp; Kosakata Kaigo</h1>
+    <div class="sub">Kanji・Kosakata kaigo・Urutan coretan ／ 漢字・介護の言葉・書き順</div>
   </div>
   <button class="langbtn" id="langBtn">🌐 ID</button>
   <div class="stat" id="hdStat">…</div>
@@ -197,6 +197,7 @@ footer a{color:var(--blue)}
         <button class="chip" data-lv="N5">N5</button>
         <button class="chip" data-lv="N4">N4</button>
         <button class="chip" data-lv="N3">N3</button>
+        <button class="chip" data-lv="介護">介護 / Kaigo</button>
       </div>
       <select class="sel" id="sort">
         <option value="level">Urut: level (mudah dulu) ／ レベル順</option>
@@ -224,20 +225,53 @@ footer a{color:var(--blue)}
         <button class="chip" data-lv="N5">N5</button>
         <button class="chip" data-lv="N4">N4</button>
         <button class="chip" data-lv="N3">N3</button>
+        <button class="chip" data-lv="介護">介護 / Kaigo</button>
+        <button class="chip" data-lv="施設">施設独自 / Fasilitas</button>
         <button class="chip" data-lv="現場">現場 / Kerja</button>
       </div>
       <select class="sel" id="vCat">
         <option value="all">Semua bidang ／ 分野すべて</option>
+        <option value="介護">介護（ケア） ／ Perawatan lansia</option>
+        <option value="声かけ">声かけ ／ Kalimat untuk lansia</option>
+        <option value="医療">医療・症状 ／ Medis &amp; gejala</option>
+        <option value="認知症">認知症 ／ Demensia</option>
+        <option value="リハビリ">リハビリ ／ Rehabilitasi</option>
+        <option value="身体">身体・部位 ／ Bagian tubuh</option>
+        <option value="施設">施設・職種 ／ Fasilitas &amp; staf</option>
+        <option value="記録">記録・勤務 ／ Catatan &amp; shift</option>
         <option value="安全">安全 ／ Keselamatan</option>
-        <option value="作業">作業 ／ Pekerjaan</option>
-        <option value="設備">設備・工具 ／ Mesin &amp; alat</option>
-        <option value="品質">品質・管理 ／ Kualitas</option>
-        <option value="健康">健康・けが ／ Kesehatan</option>
+        <option value="健康">健康 ／ Kesehatan</option>
         <option value="生活">生活・手続き ／ Kehidupan</option>
+        <option value="作業">作業一般 ／ Pekerjaan umum</option>
+        <option value="製造">製造・工場 ／ Pabrik</option>
+        <option value="品質">品質・管理 ／ Kualitas</option>
       </select>
       <span class="hint" id="vCnt"></span>
     </div>
     <p class="hint" style="margin-bottom:.7rem">Ketuk kata untuk melihat kanji penyusunnya ／ 熟語をタップすると、使われている漢字の書き順を確認できます</p>
+
+    <details style="margin-bottom:.9rem;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:.7rem .9rem">
+      <summary style="cursor:pointer;font-weight:700;font-size:.9rem">＋ 施設の言葉を追加する ／ Tambah kosakata</summary>
+      <p class="hint" style="white-space:normal;margin:.5rem 0">
+        施設で使う言葉をこの端末に追加できます。全員に配るときは「CSVを書き出す」で保存し、
+        <code>vocab-extra.csv</code> に貼り付けてGitHubへアップロードしてください（使用説明書 2-8）。</p>
+      <div class="toolbar" style="margin:.4rem 0 0">
+        <input class="search" id="nwWord" placeholder="言葉（例：入浴チェック表）" style="background-image:none;padding-left:.9rem;flex:1 1 160px">
+        <input class="search" id="nwRead" placeholder="ふりがな（例：にゅうよくちぇっくひょう）" style="background-image:none;padding-left:.9rem;flex:1 1 160px">
+        <input class="search" id="nwMean" placeholder="意味（インドネシア語）" style="background-image:none;padding-left:.9rem;flex:1 1 160px">
+        <select class="sel" id="nwCat">
+          <option value="介護">介護（ケア）</option><option value="声かけ">声かけ</option>
+          <option value="医療">医療・症状</option><option value="認知症">認知症</option>
+          <option value="リハビリ">リハビリ</option><option value="身体">身体・部位</option>
+          <option value="施設">施設・職種</option><option value="記録">記録・勤務</option>
+          <option value="安全">安全</option><option value="生活">生活・手続き</option>
+        </select>
+        <button class="btn pri" id="nwAdd">追加 ／ Tambah</button>
+        <button class="btn" id="nwExport">CSVを書き出す</button>
+        <span class="hint" id="nwCount"></span>
+      </div>
+    </details>
+
     <div class="grid" id="vgrid"><div class="loading">Memuat… 読み込み中…</div></div>
   </section>
 
@@ -258,7 +292,7 @@ footer a{color:var(--blue)}
         <select class="sel" id="fcLv">
           <option value="all">Semua level</option><option value="N5">N5</option>
           <option value="N4">N4</option><option value="N3">N3</option>
-          <option value="現場">現場 / Kerja</option>
+          <option value="介護">介護 / Kaigo</option><option value="現場">現場 / Kerja</option>
         </select>
         <select class="sel" id="fcPick">
           <option value="all">Semua kanji ／ 全部</option>
@@ -311,6 +345,7 @@ footer a{color:var(--blue)}
         <button class="chip" data-lv="N5">N5</button>
         <button class="chip" data-lv="N4">N4</button>
         <button class="chip" data-lv="N3">N3</button>
+        <button class="chip" data-lv="介護">介護 / Kaigo</button>
       </div>
       <select class="sel" id="sSort">
         <option value="level">Urut: level ／ レベル順</option>
@@ -492,18 +527,82 @@ async function boot() {
     if ($('#p-vocab').classList.contains('on')) renderVocab();
     refreshStats();
   }).catch(() => {});
-  $('#hdStat').textContent = `${DATA.length} kanji（N5 ${cnt('N5')}・N4 ${cnt('N4')}・N3 ${cnt('N3')}）`;
+  $('#hdStat').textContent = `${DATA.length} kanji（N5 ${cnt('N5')}・N4 ${cnt('N4')}・N3 ${cnt('N3')}・介護 ${cnt('介護')}）`;
 }
 let vocabPromise = null;
 function loadVocab() {
-  return vocabPromise || (vocabPromise = fetch('vocab.json').then(r => r.json()).then(j => {
+  return vocabPromise || (vocabPromise = fetch('vocab.json').then(r => r.json()).then(async j => {
     VOCAB = j.words;
-    VOCAB.forEach(w => {
-      VBYW[w.word] = w;
-      (w.kanji || []).forEach(c => (WORDS_OF[c] = WORDS_OF[c] || []).push(w));
-    });
+    await mergeExtraCsv();                       // 施設独自の語（vocab-extra.csv）
+    mergeMyWords();                              // この端末で追加した語
+    reindexVocab();
     return VOCAB;
   }));
+}
+function reindexVocab() {
+  VBYW = {}; WORDS_OF = {};
+  VOCAB.forEach(w => {
+    VBYW[w.word] = w;
+    (w.kanji || []).forEach(c => (WORDS_OF[c] = WORDS_OF[c] || []).push(w));
+  });
+}
+const KANJI_RE = /[一-鿿]/;
+function splitCsvLine(line) {                    // 簡易CSV（"..." のカンマに対応）
+  const out = []; let cur = '', q = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (q) { if (c === '"') { if (line[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += c; }
+    else if (c === '"') q = true;
+    else if (c === ',') { out.push(cur); cur = ''; }
+    else cur += c;
+  }
+  out.push(cur); return out.map(s => s.trim());
+}
+/** vocab-extra.csv を読み込み、既存語は上書き、新規語は追加。削除欄に○があれば非表示 */
+async function mergeExtraCsv() {
+  let text;
+  try {
+    const res = await fetch('vocab-extra.csv', { cache: 'no-cache' });
+    if (!res.ok) return; text = await res.text();
+  } catch (e) { return; }
+  const lines = text.replace(/^﻿/, '').split(/\r?\n/).filter(l => l.trim());
+  if (!lines.length) return;
+  const byWord = {}; VOCAB.forEach(w => byWord[w.word] = w);
+  const del = new Set();
+  lines.slice(1).forEach(line => {
+    const [word, reading, mid, cat, men, rm] = splitCsvLine(line);
+    if (!word) return;
+    if ((rm || '').match(/[○◯x×削除]/i)) { del.add(word); return; }
+    const rec = byWord[word];
+    if (rec) {                                   // 既存語を上書き
+      if (reading) rec.reading = reading;
+      if (mid) rec.meaning_id = mid;
+      if (men) rec.meaning = men;
+      if (cat) rec.category = cat;
+      rec.custom = true;
+    } else {                                     // 新規追加
+      const w = { word, reading: reading || '', meaning: men || mid || '', meaning_id: mid || '',
+                  level: '施設', category: cat || '介護', custom: true,
+                  kanji: [...word].filter(c => KANJI_RE.test(c)) };
+      VOCAB.push(w); byWord[word] = w;
+    }
+  });
+  if (del.size) VOCAB = VOCAB.filter(w => !del.has(w.word));
+}
+/** この端末で追加した語（localStorage） */
+const MYKEY = 'jlpt-kanji-mywords-v1';
+let myWords = [];
+try { myWords = JSON.parse(localStorage.getItem(MYKEY) || '[]'); } catch (e) { myWords = []; }
+const saveMyWords = () => { try { localStorage.setItem(MYKEY, JSON.stringify(myWords)); } catch (e) {} };
+function mergeMyWords() {
+  const byWord = {}; VOCAB.forEach(w => byWord[w.word] = w);
+  myWords.forEach(m => {
+    const rec = byWord[m.word];
+    if (rec) { Object.assign(rec, { reading: m.reading || rec.reading, meaning_id: m.meaning_id || rec.meaning_id,
+      category: m.category || rec.category, mine: true }); }
+    else VOCAB.push({ ...m, level: '追加', mine: true, meaning: m.meaning || m.meaning_id || '',
+      kanji: [...m.word].filter(c => KANJI_RE.test(c)) });
+  });
 }
 const vMean = w => (LANG === 'id' && w.meaning_id) ? w.meaning_id : w.meaning;
 const cnt = lv => DATA.filter(k => k.level === lv).length;
@@ -527,7 +626,7 @@ function filterKanji(q, lv, mk) {
   });
 }
 function sortKanji(arr, mode) {
-  const a = [...arr], o = { N5: 0, N4: 1, N3: 2 }, f = x => x.freq || 9999;
+  const a = [...arr], o = { N5: 0, N4: 1, N3: 2, '介護': 3 }, f = x => x.freq || 9999;
   if (mode === 'stroke-asc') a.sort((x, y) => x.strokes - y.strokes || f(x) - f(y));
   else if (mode === 'stroke-desc') a.sort((x, y) => y.strokes - x.strokes || f(x) - f(y));
   else if (mode === 'freq') a.sort((x, y) => f(x) - f(y));
@@ -558,7 +657,7 @@ const cardHTML = k => `<button class="kcard" data-ch="${k.character}">
 
 /* ---------- 熟語タブ ---------- */
 let vLimit = 120, vLv = 'all';
-const LVORD = { N5: 0, N4: 1, N3: 2, '現場': 3 };
+const LVORD = { N5: 0, N4: 1, N3: 2, '介護': 3, '現場': 4, '施設': 5, '追加': 6 };
 function filterVocab() {
   const q = ($('#vq').value || '').trim().toLowerCase(), cat = $('#vCat').value;
   return VOCAB.filter(w => {
@@ -792,9 +891,9 @@ function refreshStats() {
   };
   $('#progWrap').innerHTML =
     '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted)">KANJI ／ 漢字</div>' +
-    ['N5', 'N4', 'N3'].map(lv => bar(lv, DATA.filter(k => k.level === lv), progress, x => x.character)).join('') +
+    ['N5', 'N4', 'N3', '介護'].map(lv => bar(lv, DATA.filter(k => k.level === lv), progress, x => x.character)).join('') +
     (VOCAB.length ? '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted);margin-top:.5rem">KOSAKATA ／ 熟語</div>' +
-      ['N5', 'N4', 'N3', '現場'].map(lv => bar(lv, VOCAB.filter(w => w.level === lv), vprogress, x => x.word)).join('') : '');
+      ['N5', 'N4', 'N3', '介護', '現場', '施設', '追加'].filter(lv => VOCAB.some(w => w.level === lv)).map(lv => bar(lv, VOCAB.filter(w => w.level === lv), vprogress, x => x.word)).join('') : '');
   const rev = DATA.filter(k => progress[k.character] === 'review');
   $('#reviewGrid').innerHTML = rev.length ? rev.map(cardHTML).join('')
     : '<p style="color:var(--muted);font-size:.85rem">— </p>';
@@ -829,6 +928,34 @@ $$('#sLvChips .chip').forEach(c => c.onclick = () => {
 $('#sq').oninput = () => { sLimit = 60; renderStroke(); };
 $('#sSort').onchange = () => renderStroke();
 $('#sMore').onclick = () => { sLimit += 60; renderStroke(); };
+
+/* --- 施設の言葉を追加（この端末に保存） --- */
+function refreshMyCount() {
+  $('#nwCount').textContent = myWords.length ? `この端末に${myWords.length}語` : '';
+}
+$('#nwAdd').onclick = () => {
+  const word = $('#nwWord').value.trim(), reading = $('#nwRead').value.trim(),
+        mid = $('#nwMean').value.trim(), cat = $('#nwCat').value;
+  if (!word) { $('#nwWord').focus(); return; }
+  myWords = myWords.filter(m => m.word !== word);
+  myWords.push({ word, reading, meaning_id: mid, meaning: mid, category: cat });
+  saveMyWords();
+  VOCAB = VOCAB.filter(w => w.word !== word);
+  VOCAB.push({ word, reading, meaning_id: mid, meaning: mid, category: cat, level: '追加', mine: true,
+               kanji: [...word].filter(c => KANJI_RE.test(c)) });
+  reindexVocab();
+  $('#nwWord').value = $('#nwRead').value = $('#nwMean').value = '';
+  refreshMyCount(); vLimit = 120; renderVocab(); refreshStats();
+};
+$('#nwExport').onclick = () => {
+  const esc = s => /[",]/.test(s || '') ? `"${String(s).replace(/"/g, '""')}"` : (s || '');
+  const csv = '﻿熟語,ふりがな,意味（インドネシア語）,分野,意味（英語）,削除\n' +
+    myWords.map(m => [m.word, m.reading, m.meaning_id, m.category, '', ''].map(esc).join(',')).join('\n') + '\n';
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+  a.download = 'vocab-extra.csv'; a.click(); URL.revokeObjectURL(a.href);
+};
+refreshMyCount();
 
 $('#vq').oninput = () => { vLimit = 120; renderVocab(); };
 $('#vCat').onchange = () => { vLimit = 120; renderVocab(); };
