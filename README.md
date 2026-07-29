@@ -21,7 +21,8 @@ Cukup buka link di atas. Tanpa instalasi, bisa di HP maupun komputer.
 
 | タブ | Tab | できること |
 |---|---|---|
-| 一覧 | Daftar | 612字をカード表示。検索（漢字・読み・意味・用例）、レベル/画数/頻度で並べ替え。カードをタップで詳細 |
+| 漢字一覧 | Kanji | 612字をカード表示。検索（漢字・読み・意味・用例）、レベル/画数/頻度で並べ替え。カードをタップで詳細 |
+| 熟語 | Kosakata | 3,053語（JLPT語彙＋安全・作業・生活の現場用語125語）。タップで構成漢字の書き順へ |
 | フラッシュカード | Kartu | 「漢字→読み」「漢字→意味」「読み→漢字」「意味→漢字」の4モード。覚えた／要復習で仕分け |
 | 書き順 | Urutan Coretan | 1画ずつの連続図（新しい画は赤）。文字をタップすると1画ずつアニメーションで書きます |
 | 学習状況 | Progres | レベル別の到達率、要復習リスト、記録の書き出し |
@@ -61,6 +62,7 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 | `index.html` | アプリ本体（HTML/CSS/JS 単一ファイル、外部ライブラリなし） |
 | `kanji-data.json` | 漢字612字のデータ（読み・意味・用例・部首など） |
 | `kanji-strokes.json` | 書き順データ（KanjiVG のパス、612字ぶん） |
+| `vocab.json` | 熟語3,053語（JLPT N5–N3 語彙＋現場用語125語） |
 | `MANUAL.md` | 使用説明書 |
 | `SPEC.md` | 仕様書 |
 

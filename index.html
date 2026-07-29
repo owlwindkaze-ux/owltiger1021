@@ -179,7 +179,8 @@ footer a{color:var(--blue)}
 </div></header>
 
 <nav class="tabs"><div class="tabs-in">
-  <button class="tab on" data-tab="list">Daftar<span class="sub">一覧</span></button>
+  <button class="tab on" data-tab="list">Kanji<span class="sub">漢字一覧</span></button>
+  <button class="tab" data-tab="vocab">Kosakata<span class="sub">熟語</span></button>
   <button class="tab" data-tab="card">Kartu<span class="sub">フラッシュカード</span></button>
   <button class="tab" data-tab="stroke">Urutan Coretan<span class="sub">書き順</span></button>
   <button class="tab" data-tab="stats">Progres<span class="sub">学習状況</span></button>
@@ -214,19 +215,50 @@ footer a{color:var(--blue)}
     <div class="grid" id="grid"><div class="loading">Memuat data… 読み込み中…</div></div>
   </section>
 
+  <!-- ===== Kosakata / 熟語 ===== -->
+  <section class="panel" id="p-vocab">
+    <div class="toolbar">
+      <input class="search" id="vq" placeholder="Cari kosakata / cara baca / arti … 熟語・読み・意味で検索">
+      <div class="chips" id="vLvChips">
+        <button class="chip on" data-lv="all">Semua</button>
+        <button class="chip" data-lv="N5">N5</button>
+        <button class="chip" data-lv="N4">N4</button>
+        <button class="chip" data-lv="N3">N3</button>
+        <button class="chip" data-lv="現場">現場 / Kerja</button>
+      </div>
+      <select class="sel" id="vCat">
+        <option value="all">Semua bidang ／ 分野すべて</option>
+        <option value="安全">安全 ／ Keselamatan</option>
+        <option value="作業">作業 ／ Pekerjaan</option>
+        <option value="設備">設備・工具 ／ Mesin &amp; alat</option>
+        <option value="品質">品質・管理 ／ Kualitas</option>
+        <option value="健康">健康・けが ／ Kesehatan</option>
+        <option value="生活">生活・手続き ／ Kehidupan</option>
+      </select>
+      <span class="hint" id="vCnt"></span>
+    </div>
+    <p class="hint" style="margin-bottom:.7rem">Ketuk kata untuk melihat kanji penyusunnya ／ 熟語をタップすると、使われている漢字の書き順を確認できます</p>
+    <div class="grid" id="vgrid"><div class="loading">Memuat… 読み込み中…</div></div>
+  </section>
+
   <!-- ===== Kartu / フラッシュカード ===== -->
   <section class="panel" id="p-card">
     <div class="fc-wrap">
       <div class="toolbar" style="justify-content:center;margin:0">
+        <select class="sel" id="fcType">
+          <option value="kanji">Kanji ／ 漢字</option>
+          <option value="vocab">Kosakata ／ 熟語</option>
+        </select>
         <select class="sel" id="fcMode">
-          <option value="k2r">Kanji → Cara baca ／ 漢字→読み</option>
-          <option value="k2m">Kanji → Arti ／ 漢字→意味</option>
-          <option value="r2k">Cara baca → Kanji ／ 読み→漢字</option>
-          <option value="m2k">Arti → Kanji ／ 意味→漢字</option>
+          <option value="k2r">問題 → Cara baca ／ 読み</option>
+          <option value="k2m">問題 → Arti ／ 意味</option>
+          <option value="r2k">Cara baca → 問題 ／ 読み→漢字・熟語</option>
+          <option value="m2k">Arti → 問題 ／ 意味→漢字・熟語</option>
         </select>
         <select class="sel" id="fcLv">
           <option value="all">Semua level</option><option value="N5">N5</option>
           <option value="N4">N4</option><option value="N3">N3</option>
+          <option value="現場">現場 / Kerja</option>
         </select>
         <select class="sel" id="fcPick">
           <option value="all">Semua kanji ／ 全部</option>
@@ -317,6 +349,33 @@ footer a{color:var(--blue)}
   </footer>
 </div>
 
+<!-- ===== 熟語モーダル ===== -->
+<div class="ov" id="vov"><div class="modal">
+  <div class="m-head">
+    <div style="flex:1;min-width:0">
+      <div class="tags" id="vmTags"></div>
+      <div id="vmWord" style="font-size:2rem;font-weight:700;line-height:1.25"></div>
+      <div id="vmRead" style="font-size:1rem;color:var(--blue)"></div>
+    </div>
+    <button class="x" id="vmX">×</button>
+  </div>
+  <div class="m-body">
+    <div class="sec">
+      <div class="lb">ARTI ／ 意味</div>
+      <div id="vmMean" style="font-size:1.05rem"></div>
+      <div id="vmMeanEn" style="font-size:.78rem;color:#94a3b8;margin-top:.2rem"></div>
+    </div>
+    <div class="sec">
+      <div class="lb">KANJI PENYUSUN ／ 使われている漢字（タップで書き順）</div>
+      <div class="grid" id="vmKanji" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))"></div>
+    </div>
+    <div class="row">
+      <button class="btn ng" id="vmNg">Perlu diulang ／ 要復習</button>
+      <button class="btn ok" id="vmOk">Sudah hafal ／ 覚えた</button>
+    </div>
+  </div>
+</div></div>
+
 <!-- ===== Modal ===== -->
 <div class="ov" id="ov"><div class="modal">
   <div class="m-head">
@@ -349,6 +408,10 @@ footer a{color:var(--blue)}
     <div class="sec">
       <div class="lb">CONTOH KATA ／ 用例</div>
       <ul class="ex" id="mEx"></ul>
+    </div>
+    <div class="sec" id="mWordsSec">
+      <div class="lb">KOSAKATA DENGAN KANJI INI ／ この字を使う熟語</div>
+      <ul class="ex" id="mWords"></ul>
     </div>
     <div class="sec">
       <div class="lb">RADIKAL ／ 部首</div>
@@ -405,11 +468,15 @@ const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
+let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
 let LANG = localStorage.getItem(LANGKEY) || 'id';
-let progress = {};
+let progress = {}, vprogress = {};
 try { progress = JSON.parse(localStorage.getItem(STORE) || '{}'); } catch (e) {}
-const save = () => { try { localStorage.setItem(STORE, JSON.stringify(progress)); } catch (e) {} };
+try { vprogress = JSON.parse(localStorage.getItem(STORE + '-vocab') || '{}'); } catch (e) {}
+const save = () => { try { localStorage.setItem(STORE, JSON.stringify(progress));
+  localStorage.setItem(STORE + '-vocab', JSON.stringify(vprogress)); } catch (e) {} };
 const setMark = (ch, v) => { v ? progress[ch] = v : delete progress[ch]; save(); refreshStats(); };
+const setVMark = (w, v) => { v ? vprogress[w] = v : delete vprogress[w]; save(); refreshStats(); };
 
 /* arti: Indonesia kalau ada, kalau tidak Inggris */
 const meanOf = k => (LANG === 'id' && k.meanings_id && k.meanings_id.length ? k.meanings_id : k.meanings);
@@ -418,10 +485,27 @@ const exMean = e => (LANG === 'id' && e.meaning_id) ? e.meaning_id : e.meaning;
 async function boot() {
   const json = await (await fetch('kanji-data.json')).json();
   DATA = json.kanji; DATA.forEach(k => BYCH[k.character] = k);
-  $('#hdStat').textContent = `${DATA.length} kanji（N5 ${cnt('N5')}・N4 ${cnt('N4')}・N3 ${cnt('N3')}）`;
   $('#langBtn').textContent = LANG === 'id' ? '🌐 ID' : '🌐 EN';
   renderList(); refreshStats();
+  loadVocab().then(() => {                       // 熟語は後から読み込み（表示を待たせない）
+    $('#hdStat').textContent = `${DATA.length} kanji ・ ${VOCAB.length} kosakata`;
+    if ($('#p-vocab').classList.contains('on')) renderVocab();
+    refreshStats();
+  }).catch(() => {});
+  $('#hdStat').textContent = `${DATA.length} kanji（N5 ${cnt('N5')}・N4 ${cnt('N4')}・N3 ${cnt('N3')}）`;
 }
+let vocabPromise = null;
+function loadVocab() {
+  return vocabPromise || (vocabPromise = fetch('vocab.json').then(r => r.json()).then(j => {
+    VOCAB = j.words;
+    VOCAB.forEach(w => {
+      VBYW[w.word] = w;
+      (w.kanji || []).forEach(c => (WORDS_OF[c] = WORDS_OF[c] || []).push(w));
+    });
+    return VOCAB;
+  }));
+}
+const vMean = w => (LANG === 'id' && w.meaning_id) ? w.meaning_id : w.meaning;
 const cnt = lv => DATA.filter(k => k.level === lv).length;
 const loadStrokes = () => strokePromise || (strokePromise =
   fetch('kanji-strokes.json').then(r => r.json()).then(j => (STROKES = j.strokes)));
@@ -471,6 +555,52 @@ const cardHTML = k => `<button class="kcard" data-ch="${k.character}">
     <div class="mean">${meanOf(k).slice(0, 3).join(', ')}</div>
     <div class="st">${k.strokes} coretan／画</div>
   </div></button>`;
+
+/* ---------- 熟語タブ ---------- */
+let vLimit = 120, vLv = 'all';
+const LVORD = { N5: 0, N4: 1, N3: 2, '現場': 3 };
+function filterVocab() {
+  const q = ($('#vq').value || '').trim().toLowerCase(), cat = $('#vCat').value;
+  return VOCAB.filter(w => {
+    if (vLv !== 'all' && w.level !== vLv) return false;
+    if (cat !== 'all' && w.category !== cat) return false;
+    if (!q) return true;
+    return w.word.includes(q) || w.reading.includes(q) ||
+      w.meaning.toLowerCase().includes(q) || (w.meaning_id || '').toLowerCase().includes(q);
+  }).sort((a, b) => LVORD[a.level] - LVORD[b.level] || a.reading.localeCompare(b.reading, 'ja'));
+}
+function renderVocab() {
+  if (!VOCAB.length) { $('#vgrid').innerHTML = '<div class="loading">Memuat… 読み込み中…</div>'; return; }
+  const arr = filterVocab();
+  $('#vCnt').textContent = `${arr.length} kosakata`;
+  const show = arr.slice(0, vLimit);
+  $('#vgrid').innerHTML = show.map(vCardHTML).join('') + (arr.length > show.length ?
+    `<button class="btn" id="vMoreBtn" style="grid-column:1/-1">Tampilkan lagi ／ もっと表示（+${Math.min(120, arr.length - show.length)}）</button>` : '')
+    || '<p class="hint">—</p>';
+  if ($('#vMoreBtn')) $('#vMoreBtn').onclick = () => { vLimit += 120; renderVocab(); };
+}
+const vCardHTML = w => `<button class="kcard" data-word="${w.word}" style="flex-direction:column;align-items:flex-start;gap:.2rem">
+  ${vprogress[w.word] ? `<span class="mark ${vprogress[w.word]}"></span>` : ''}
+  <div class="tags"><span class="t lv">${w.level}</span>${w.category ? `<span class="t kun">${w.category}</span>` : ''}</div>
+  <div style="font-size:1.25rem;font-weight:700;line-height:1.3">${w.word}</div>
+  <div style="font-size:.8rem;color:var(--blue)">${w.reading}</div>
+  <div class="mean">${vMean(w)}</div></button>`;
+
+let vModalWord = null;
+function openVocab(word) {
+  const w = VBYW[word]; if (!w) return;
+  vModalWord = word;
+  $('#vmTags').innerHTML = `<span class="t lv">${w.level}</span>` + (w.category ? `<span class="t kun">${w.category}</span>` : '');
+  $('#vmWord').textContent = w.word;
+  $('#vmRead').textContent = w.reading;
+  $('#vmMean').textContent = vMean(w);
+  $('#vmMeanEn').textContent = (LANG === 'id' && w.meaning_id) ? 'EN: ' + w.meaning : '';
+  const cards = (w.kanji || []).map(c => BYCH[c] ? cardHTML(BYCH[c])
+    : `<div class="kcard" style="opacity:.55"><div class="ch">${c}</div><div class="body"><div class="mean">（未収録 / belum ada）</div></div></div>`);
+  $('#vmKanji').innerHTML = cards.join('') || '<p class="hint">—</p>';
+  $('#vov').classList.add('on'); document.body.style.overflow = 'hidden';
+}
+const closeVocabModal = () => { $('#vov').classList.remove('on'); document.body.style.overflow = ''; };
 
 /* ---------- stroke rendering ---------- */
 const GRID = `<path class="grid-l" d="M54.5 0v109M0 54.5h109"/>`;
@@ -526,6 +656,11 @@ async function openModal(ch) {
       <div><span class="w">${e.word}</span><span class="r">${e.reading}</span>${e.jlpt ? `<span class="jl">${e.jlpt}</span>` : ''}</div>
       <div class="m">${exMean(e)}</div>
       ${(LANG === 'id' && e.meaning_id) ? `<div class="en">EN: ${e.meaning}</div>` : ''}</li>`).join('');
+  const rel = (WORDS_OF[ch] || []).slice().sort((a, b) => LVORD[a.level] - LVORD[b.level]).slice(0, 12);
+  $('#mWordsSec').style.display = rel.length ? '' : 'none';
+  $('#mWords').innerHTML = rel.map(w => `<li data-word="${w.word}" style="cursor:pointer">
+      <div><span class="w">${w.word}</span><span class="r">${w.reading}</span><span class="jl">${w.level}</span></div>
+      <div class="m">${vMean(w)}</div></li>`).join('');
   const r = k.radical || {};
   $('#mMisc').textContent = [r.character && `${r.character}${r.name ? '（' + r.name + '）' : ''}`,
     r.meaning && (LANG === 'id' ? `arti radikal: ${r.meaning}` : `meaning: ${r.meaning}`)].filter(Boolean).join(' ／ ') || '—';
@@ -560,11 +695,16 @@ async function renderStroke() {
 
 /* ---------- flashcards ---------- */
 let deck = [], di = 0, flipped = false, okN = 0, ngN = 0, wrong = [];
+const fcIsVocab = () => $('#fcType').value === 'vocab';
+const cardKey = x => fcIsVocab() ? x.word : x.character;
+const cardProg = () => fcIsVocab() ? vprogress : progress;
 function buildDeck() {
-  let arr = DATA.filter(k => {
-    if ($('#fcLv').value !== 'all' && k.level !== $('#fcLv').value) return false;
-    if ($('#fcPick').value === 'unseen' && progress[k.character]) return false;
-    if ($('#fcPick').value === 'review' && progress[k.character] !== 'review') return false;
+  const lv = $('#fcLv').value, pick = $('#fcPick').value, P = cardProg();
+  let arr = (fcIsVocab() ? VOCAB : DATA).filter(x => {
+    const key = fcIsVocab() ? x.word : x.character;
+    if (lv !== 'all' && x.level !== lv) return false;
+    if (pick === 'unseen' && P[key]) return false;
+    if (pick === 'review' && P[key] !== 'review') return false;
     return true;
   });
   for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; }
@@ -575,14 +715,15 @@ function buildDeck() {
 function showCard() {
   if (!deck.length) { $('#fcQ').textContent = '—'; $('#fcCount').textContent = '0 / 0'; return; }
   if (di >= deck.length) return finish();
-  const k = deck[di], mode = $('#fcMode').value; flipped = false;
+  const k = deck[di], mode = $('#fcMode').value, voc = fcIsVocab(); flipped = false;
   $('#fcA').style.display = 'none'; $('#fcQ').style.display = '';
   $('#fcJudge').style.display = 'none'; $('#fcNav').style.display = 'flex';
   $('#fcTip').textContent = 'Ketuk kartu untuk jawaban ／ タップで答え';
   const q = $('#fcQ');
-  if (mode === 'r2k') { q.className = 'q small'; q.textContent = k.on.concat(k.kun).slice(0, 4).join('  /  ') || '—'; }
-  else if (mode === 'm2k') { q.className = 'q small'; q.textContent = meanOf(k).slice(0, 3).join(', '); }
-  else { q.className = 'q'; q.textContent = k.character; }
+  if (mode === 'r2k') { q.className = 'q small'; q.textContent = voc ? k.reading : (k.on.concat(k.kun).slice(0, 4).join('  /  ') || '—'); }
+  else if (mode === 'm2k') { q.className = 'q small'; q.textContent = voc ? vMean(k) : meanOf(k).slice(0, 3).join(', '); }
+  else if (voc) { q.className = 'q small'; q.style.fontSize = '2.6rem'; q.textContent = k.word; }
+  else { q.className = 'q'; q.style.fontSize = ''; q.textContent = k.character; }
   $('#fcCount').textContent = `${di + 1} / ${deck.length}`;
   $('#fcBar').style.width = (di / deck.length * 100) + '%';
   $('#fcPrev').disabled = di === 0; $('#fcNext').disabled = di >= deck.length - 1;
@@ -591,6 +732,25 @@ function flip() {
   if (!deck.length || di >= deck.length) return;
   const k = deck[di], mode = $('#fcMode').value;
   flipped = !flipped; if (!flipped) return showCard();
+  if (fcIsVocab()) {                                   // 熟語カードの裏面
+    const kj = (k.kanji || []).map(c => `<span class="t lv" style="font-size:1rem">${c}</span>`).join(' ');
+    let h;
+    if (mode === 'm2k' || mode === 'r2k')
+      h = `<div style="font-size:2.4rem;font-weight:700;line-height:1.25">${k.word}</div>
+           <div style="color:var(--blue)">${k.reading}</div>
+           <div style="color:var(--muted);font-size:.9rem">${vMean(k)}</div>`;
+    else if (mode === 'k2m')
+      h = `<div style="font-size:1.15rem">${vMean(k)}</div><div style="color:var(--blue)">${k.reading}</div>`;
+    else
+      h = `<div style="font-size:1.6rem;color:var(--blue)">${k.reading}</div>
+           <div style="color:var(--muted);font-size:.95rem">${vMean(k)}</div>`;
+    $('#fcQ').style.display = 'none';
+    $('#fcA').innerHTML = h + `<div style="margin-top:.5rem">${kj}</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:.3rem">${k.level}${k.category ? '・' + k.category : ''}</div>`;
+    $('#fcA').style.display = ''; $('#fcJudge').style.display = 'flex'; $('#fcNav').style.display = 'none';
+    $('#fcTip').textContent = 'Sudah hafal? ／ 覚えていましたか？';
+    return;
+  }
   const ex = k.examples.slice(0, 2).map(e =>
     `<div style="font-size:.83rem;color:var(--muted)">${e.word}（${e.reading}）— ${exMean(e)}</div>`).join('');
   let html;
@@ -607,8 +767,8 @@ function flip() {
 }
 function judge(ok) {
   if (di >= deck.length) return;
-  const ch = deck[di].character;
-  ok ? (okN++, setMark(ch, 'known')) : (ngN++, wrong.push(deck[di]), setMark(ch, 'review'));
+  const key = cardKey(deck[di]), mark = fcIsVocab() ? setVMark : setMark;
+  ok ? (okN++, mark(key, 'known')) : (ngN++, wrong.push(deck[di]), mark(key, 'review'));
   $('#fcOk').textContent = `Hafal ${okN}`; $('#fcNg').textContent = `Ulang ${ngN}`;
   di++; showCard();
 }
@@ -623,14 +783,18 @@ function finish() {
 /* ---------- stats ---------- */
 function refreshStats() {
   if (!DATA.length) return;
-  $('#progWrap').innerHTML = ['N5', 'N4', 'N3'].map(lv => {
-    const all = DATA.filter(k => k.level === lv);
-    const kn = all.filter(k => progress[k.character] === 'known').length;
-    const rv = all.filter(k => progress[k.character] === 'review').length;
-    return `<div class="prog"><div class="lv"><span>${lv}</span><span>${kn}/${all.length}</span></div>
-      <div class="bar" style="margin-top:.4rem"><i style="width:${kn / all.length * 100}%"></i></div>
+  const bar = (label, all, P, key) => {
+    const kn = all.filter(x => P[key(x)] === 'known').length;
+    const rv = all.filter(x => P[key(x)] === 'review').length;
+    return `<div class="prog"><div class="lv"><span>${label}</span><span>${kn}/${all.length}</span></div>
+      <div class="bar" style="margin-top:.4rem"><i style="width:${all.length ? kn / all.length * 100 : 0}%"></i></div>
       <div style="font-size:.72rem;color:var(--muted);margin-top:.3rem">Hafal ${kn}・Ulang ${rv}</div></div>`;
-  }).join('');
+  };
+  $('#progWrap').innerHTML =
+    '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted)">KANJI ／ 漢字</div>' +
+    ['N5', 'N4', 'N3'].map(lv => bar(lv, DATA.filter(k => k.level === lv), progress, x => x.character)).join('') +
+    (VOCAB.length ? '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted);margin-top:.5rem">KOSAKATA ／ 熟語</div>' +
+      ['N5', 'N4', 'N3', '現場'].map(lv => bar(lv, VOCAB.filter(w => w.level === lv), vprogress, x => x.word)).join('') : '');
   const rev = DATA.filter(k => progress[k.character] === 'review');
   $('#reviewGrid').innerHTML = rev.length ? rev.map(cardHTML).join('')
     : '<p style="color:var(--muted);font-size:.85rem">— </p>';
@@ -642,6 +806,7 @@ $$('.tab').forEach(t => t.onclick = () => {
   $$('.panel').forEach(p => p.classList.remove('on'));
   $('#p-' + t.dataset.tab).classList.add('on');
   if (t.dataset.tab === 'stroke') renderStroke();
+  if (t.dataset.tab === 'vocab') loadVocab().then(renderVocab);
   if (t.dataset.tab === 'stats') refreshStats();
   window.scrollTo({ top: 0 });
 });
@@ -665,7 +830,30 @@ $('#sq').oninput = () => { sLimit = 60; renderStroke(); };
 $('#sSort').onchange = () => renderStroke();
 $('#sMore').onclick = () => { sLimit += 60; renderStroke(); };
 
+$('#vq').oninput = () => { vLimit = 120; renderVocab(); };
+$('#vCat').onchange = () => { vLimit = 120; renderVocab(); };
+$$('#vLvChips .chip').forEach(c => c.onclick = () => {
+  $$('#vLvChips .chip').forEach(x => x.classList.toggle('on', x === c));
+  vLv = c.dataset.lv; vLimit = 120; renderVocab();
+});
+$('#vmX').onclick = closeVocabModal;
+$('#vov').onclick = e => { if (e.target === $('#vov')) closeVocabModal(); };
+$('#vmOk').onclick = () => { setVMark(vModalWord, 'known'); renderVocab(); closeVocabModal(); };
+$('#vmNg').onclick = () => { setVMark(vModalWord, 'review'); renderVocab(); closeVocabModal(); };
+$('#fcType').onchange = () => {
+  const voc = fcIsVocab();
+  $$('#fcMode option')[0].textContent = voc ? '熟語 → Cara baca ／ 読み' : '漢字 → Cara baca ／ 読み';
+  $$('#fcMode option')[1].textContent = voc ? '熟語 → Arti ／ 意味' : '漢字 → Arti ／ 意味';
+  $$('#fcMode option')[2].textContent = voc ? 'Cara baca → 熟語 ／ 読み→熟語' : 'Cara baca → 漢字 ／ 読み→漢字';
+  $$('#fcMode option')[3].textContent = voc ? 'Arti → 熟語 ／ 意味→熟語' : 'Arti → 漢字 ／ 意味→漢字';
+  if (voc) loadVocab().then(buildDeck); else buildDeck();
+};
+
 document.addEventListener('click', e => {
+  const wl = e.target.closest('#mWords li');
+  if (wl) { closeModal(); return openVocab(wl.dataset.word); }
+  const vc = e.target.closest('[data-word]');
+  if (vc) return openVocab(vc.dataset.word);
   const sv = e.target.closest('.sv-main');
   if (sv) { e.stopPropagation(); return animate(sv, (STROKES || {})[sv.dataset.ch] || []); }
   const card = e.target.closest('.kcard'); if (card) return openModal(card.dataset.ch);
