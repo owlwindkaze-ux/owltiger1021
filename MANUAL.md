@@ -1,6 +1,6 @@
 # JLPT 漢字学習ツール 使用説明書
 
-**アプリ名：** Kanji JLPT N5–N3（漢字学習ツール）
+**アプリ名：** Kanji & Kosakata Kaigo（介護の漢字・言葉 学習ツール）
 **URL：** https://owlwindkaze-ux.github.io/owltiger1021/
 **合言葉：** `owltiger2026`
 **最終更新：** 2026年7月27日
@@ -50,8 +50,9 @@ https://owlwindkaze-ux.github.io/owltiger1021/
 
 | タブ | 表示 | 何ができるか |
 |---|---|---|
-| **一覧** | Daftar | 漢字を探す・調べる。文字をタップすると詳しい説明 |
-| **カード** | Kartu | 暗記の練習（毎日ここを使うのがおすすめ） |
+| **漢字一覧** | Kanji | 漢字744字を探す・調べる。文字をタップすると詳しい説明 |
+| **熟語** | Kosakata | 言葉3,250語。**介護の言葉・声かけ表現**は分野で絞り込める |
+| **カード** | Kartu | 暗記の練習（漢字／熟語を選べる。毎日ここを使うのがおすすめ） |
 | **書き順** | Urutan Coretan | 書き方を見る。文字をタップすると1画ずつ書いてくれる |
 | **学習状況** | Progres | 自分がどれだけ覚えたかを確認 |
 
@@ -115,7 +116,17 @@ https://owlwindkaze-ux.github.io/owltiger1021/
 | **週1回** | 書き順タブを見ながら、ノートに5〜10字書く | 20分 |
 | **月1回** | 学習状況タブで到達率を確認 | 1分 |
 
-**進め方の目安：** N5（79字）→ N4（166字）→ N3（367字）の順。1日10字で約2か月でN5・N4が終わります。
+**進め方の目安：** N5（79字）→ N4（166字）→ N3（367字）→ 介護漢字（132字）の順。1日10字で約2か月でN5・N4が終わります。
+
+### 介護の仕事にすぐ役立つ使い方
+
+| やりたいこと | 手順 |
+|---|---|
+| 現場の言葉を覚える | 熟語タブ →「介護 / Kaigo」→ 分野「介護（ケア）」 |
+| 利用者への声かけを覚える | 熟語タブ → 分野「**声かけ**」（26の言い方） |
+| 記録・申し送りの言葉 | 熟語タブ → 分野「記録・勤務」 |
+| 体の部位・症状 | 分野「身体・部位」「医療・症状」 |
+| 誤嚥・褥瘡などの漢字を書く | 漢字一覧 →「介護 / Kaigo」→ 文字をタップ |
 
 ---
 
@@ -143,7 +154,8 @@ https://owlwindkaze-ux.github.io/owltiger1021/
 
 合言葉 / Kata sandi： owltiger2026
 
-・N5〜N3の漢字612字（Kanji N5–N3, 612 huruf）
+・漢字744字（Kanji N5–N3 + kanji kaigo, 744 huruf）
+・言葉3,250語＋介護の専門用語・声かけ（Kosakata kaigo & kalimat untuk lansia）
 ・意味はインドネシア語（Arti dalam Bahasa Indonesia）
 ・書き順は1画ずつ動きます（Animasi urutan coretan）
 ・無料・登録不要（Gratis, tanpa pendaftaran）
@@ -303,7 +315,7 @@ git push origin claude/japanese-n3-kanji-AaKYe
 python -c "import json;d=json.load(open('kanji-data.json',encoding='utf-8'));print('OK',len(d['kanji']),'字')"
 ```
 
-`OK 612 字` のように表示されれば正常です。エラーが出た場合は、カンマや括弧の付け忘れを確認してください。
+`OK 744 字` のように表示されれば正常です。エラーが出た場合は、カンマや括弧の付け忘れを確認してください。
 
 ---
 
@@ -313,9 +325,9 @@ python -c "import json;d=json.load(open('kanji-data.json',encoding='utf-8'));pri
 
 | 変えたいもの | 検索する語 |
 |---|---|
-| 画面上部のタイトル | `Kanji JLPT N5–N3` |
+| 画面上部のタイトル | `Kanji & Kosakata Kaigo` |
 | 合言葉画面の案内文 | `合言葉は会社の担当者にお聞きください` |
-| タブの名前 | `Daftar` `Kartu` `Urutan Coretan` `Progres` |
+| タブの名前 | `Kanji` `Kosakata` `Kartu` `Urutan Coretan` `Progres` |
 | フッターの注意書き | `Catatan belajar` |
 
 編集後は 2-3 の手順で公開します。
@@ -371,6 +383,9 @@ A. 日本語能力試験は2010年以降、公式の漢字リストを公表し�
 
 **Q. 意味の訳が間違っている気がします。**
 A. `kanji-data.json` の該当箇所（`meanings_id` または `meaning_id`）を修正できます（2-5）。第三者レビューで正確度99.3%を確認していますが、誤りが残っている可能性はあります。
+
+**Q. 介護以外の分野（建設・農業・製造）にも使えますか？**
+A. 使えます。工場・建設向けの用語125語も入っています（熟語タブ →「現場 / Kerja」）。分野を足したい場合は `vocab-extra.csv` に追記してください（2-8）。
 
 **Q. ベトナム語版も作れますか？**
 A. 作れます。データ構造に `meanings_vi` のような項目を追加する方式で対応可能です。
