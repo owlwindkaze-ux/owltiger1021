@@ -70,7 +70,7 @@ https://owlwindkaze-ux.github.io/owltiger1021/
 | 小さな図が並ぶ | 1画目・2画目…の順番（新しい画が赤色） |
 | On/音読み（青） | 音読み |
 | Kun/訓読み（橙） | 訓読み |
-| Contoh kata/用例 | よく使う言葉・ふりがな・意味・その言葉のJLPTレベル |
+| Kata yang memakai kanji ini／この字を使う言葉 | その漢字を使う言葉を一覧（ふりがな・意味・レベル付き）。タップするとその言葉の詳細へ |
 | Radikal/部首 | 部首とその意味 |
 | 下のボタン | 「Sudah hafal（覚えた）」「Perlu diulang（要復習）」で記録 |
 

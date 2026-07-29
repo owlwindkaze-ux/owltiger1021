@@ -440,12 +440,8 @@ footer a{color:var(--blue)}
       <div class="rd-row"><span class="rd-k">On/音読み</span><span id="mOn"></span></div>
       <div class="rd-row"><span class="rd-k">Kun/訓読み</span><span id="mKun"></span></div>
     </div>
-    <div class="sec">
-      <div class="lb">CONTOH KATA ／ 用例</div>
-      <ul class="ex" id="mEx"></ul>
-    </div>
     <div class="sec" id="mWordsSec">
-      <div class="lb">KOSAKATA DENGAN KANJI INI ／ この字を使う熟語</div>
+      <div class="lb">KATA YANG MEMAKAI KANJI INI ／ この字を使う言葉（タップで詳しく）</div>
       <ul class="ex" id="mWords"></ul>
     </div>
     <div class="sec">
@@ -751,15 +747,23 @@ async function openModal(ch) {
   $('#mMeanEn').textContent = (LANG === 'id' && k.meanings_id) ? 'EN: ' + k.meanings.join(', ') : '';
   $('#mOn').innerHTML = k.on.length ? k.on.map(r => `<span class="t on-">${r}</span>`).join(' ') : '—';
   $('#mKun').innerHTML = k.kun.length ? k.kun.map(r => `<span class="t kun">${r}</span>`).join(' ') : '—';
-  $('#mEx').innerHTML = k.examples.map(e => `<li>
-      <div><span class="w">${e.word}</span><span class="r">${e.reading}</span>${e.jlpt ? `<span class="jl">${e.jlpt}</span>` : ''}</div>
-      <div class="m">${exMean(e)}</div>
-      ${(LANG === 'id' && e.meaning_id) ? `<div class="en">EN: ${e.meaning}</div>` : ''}</li>`).join('');
-  const rel = (WORDS_OF[ch] || []).slice().sort((a, b) => LVORD[a.level] - LVORD[b.level]).slice(0, 12);
+  /* 用例（辞書の例）と熟語データを1つにまとめて重複を除く */
+  const seenW = new Set(), merged = [];
+  (WORDS_OF[ch] || []).forEach(w => { if (!seenW.has(w.word)) { seenW.add(w.word); merged.push({ ...w, tap: true }); } });
+  (k.examples || []).forEach(e => {
+    if (seenW.has(e.word)) return;
+    seenW.add(e.word);
+    merged.push({ word: e.word, reading: e.reading, meaning: e.meaning, meaning_id: e.meaning_id,
+                  level: e.jlpt || '', tap: false });
+  });
+  merged.sort((a, b) => (LVORD[a.level] ?? 9) - (LVORD[b.level] ?? 9) || a.word.length - b.word.length);
+  const rel = merged.slice(0, 14);
   $('#mWordsSec').style.display = rel.length ? '' : 'none';
-  $('#mWords').innerHTML = rel.map(w => `<li data-word="${w.word}" style="cursor:pointer">
-      <div><span class="w">${w.word}</span><span class="r">${w.reading}</span><span class="jl">${w.level}</span></div>
-      <div class="m">${vMean(w)}</div></li>`).join('');
+  $('#mWords').innerHTML = rel.map(w => `<li ${w.tap ? `data-word="${w.word}" style="cursor:pointer"` : ''}>
+      <div><span class="w">${w.word}</span><span class="r">${w.reading}</span>${w.level ? `<span class="jl">${w.level}</span>` : ''}</div>
+      <div class="m">${(LANG === 'id' && w.meaning_id) ? w.meaning_id : w.meaning}</div>
+      ${(LANG === 'id' && w.meaning_id && w.meaning && w.meaning_id !== w.meaning) ? `<div class="en">EN: ${w.meaning}</div>` : ''}</li>`).join('')
+    + (merged.length > rel.length ? `<li style="text-align:center;color:var(--muted);font-size:.78rem">…ほか${merged.length - rel.length}語</li>` : '');
   const r = k.radical || {};
   $('#mMisc').textContent = [r.character && `${r.character}${r.name ? '（' + r.name + '）' : ''}`,
     r.meaning && (LANG === 'id' ? `arti radikal: ${r.meaning}` : `meaning: ${r.meaning}`)].filter(Boolean).join(' ／ ') || '—';
