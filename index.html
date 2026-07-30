@@ -246,6 +246,7 @@ footer a{color:var(--blue)}
         <option value="製造">製造・工場 ／ Pabrik</option>
         <option value="品質">品質・管理 ／ Kualitas</option>
       </select>
+      <select class="sel" id="vSub"><option value="all">小分類すべて ／ Semua sub-bidang</option></select>
       <span class="hint" id="vCnt"></span>
     </div>
     <p class="hint" style="margin-bottom:.7rem">Ketuk kata untuk melihat kanji penyusunnya ／ 熟語をタップすると、使われている漢字の書き順を確認できます</p>
@@ -266,6 +267,7 @@ footer a{color:var(--blue)}
           <option value="施設">施設・職種</option><option value="記録">記録・勤務</option>
           <option value="安全">安全</option><option value="生活">生活・手続き</option>
         </select>
+        <input class="search" id="nwSub" placeholder="小分類（任意：例 食事・嚥下）" style="background-image:none;padding-left:.9rem;flex:1 1 140px">
         <button class="btn pri" id="nwAdd">追加 ／ Tambah</button>
         <button class="btn" id="nwExport">CSVを書き出す</button>
         <span class="hint" id="nwCount"></span>
@@ -566,7 +568,7 @@ async function mergeExtraCsv() {
   const byWord = {}; VOCAB.forEach(w => byWord[w.word] = w);
   const del = new Set();
   lines.slice(1).forEach(line => {
-    const [word, reading, mid, cat, men, rm] = splitCsvLine(line);
+    const [word, reading, mid, cat, sub, men, rm] = splitCsvLine(line);
     if (!word) return;
     if ((rm || '').match(/[○◯x×削除]/i)) { del.add(word); return; }
     const rec = byWord[word];
@@ -575,10 +577,11 @@ async function mergeExtraCsv() {
       if (mid) rec.meaning_id = mid;
       if (men) rec.meaning = men;
       if (cat) rec.category = cat;
+      if (sub) rec.sub = sub;
       rec.custom = true;
     } else {                                     // 新規追加
       const w = { word, reading: reading || '', meaning: men || mid || '', meaning_id: mid || '',
-                  level: '施設', category: cat || '介護', custom: true,
+                  level: '施設', category: cat || '介護', sub: sub || '', custom: true,
                   kanji: [...word].filter(c => KANJI_RE.test(c)) };
       VOCAB.push(w); byWord[word] = w;
     }
@@ -595,7 +598,7 @@ function mergeMyWords() {
   myWords.forEach(m => {
     const rec = byWord[m.word];
     if (rec) { Object.assign(rec, { reading: m.reading || rec.reading, meaning_id: m.meaning_id || rec.meaning_id,
-      category: m.category || rec.category, mine: true }); }
+      category: m.category || rec.category, sub: m.sub || rec.sub, mine: true }); }
     else VOCAB.push({ ...m, level: '追加', mine: true, meaning: m.meaning || m.meaning_id || '',
       kanji: [...m.word].filter(c => KANJI_RE.test(c)) });
   });
@@ -655,17 +658,35 @@ const cardHTML = k => `<button class="kcard" data-ch="${k.character}">
 let vLimit = 120, vLv = 'all';
 const LVORD = { N5: 0, N4: 1, N3: 2, '介護': 3, '現場': 4, '施設': 5, '追加': 6 };
 function filterVocab() {
-  const q = ($('#vq').value || '').trim().toLowerCase(), cat = $('#vCat').value;
+  const q = ($('#vq').value || '').trim().toLowerCase(), cat = $('#vCat').value, sub = $('#vSub').value;
   return VOCAB.filter(w => {
     if (vLv !== 'all' && w.level !== vLv) return false;
     if (cat !== 'all' && w.category !== cat) return false;
+    if (sub !== 'all' && w.sub !== sub) return false;
     if (!q) return true;
     return w.word.includes(q) || w.reading.includes(q) ||
       w.meaning.toLowerCase().includes(q) || (w.meaning_id || '').toLowerCase().includes(q);
   }).sort((a, b) => LVORD[a.level] - LVORD[b.level] || a.reading.localeCompare(b.reading, 'ja'));
 }
+function refreshSubOptions() {
+  const cat = $('#vCat').value, cur = $('#vSub').value;
+  const counts = {};
+  VOCAB.forEach(w => {
+    if (!w.sub) return;
+    if (vLv !== 'all' && w.level !== vLv) return;
+    if (cat !== 'all' && w.category !== cat) return;
+    counts[w.sub] = (counts[w.sub] || 0) + 1;
+  });
+  const subs = Object.keys(counts);
+  const sel = $('#vSub');
+  sel.style.display = subs.length > 1 ? '' : 'none';
+  sel.innerHTML = '<option value="all">小分類すべて ／ Semua sub-bidang</option>' +
+    subs.map(x => `<option value="${x}">${x}（${counts[x]}）</option>`).join('');
+  sel.value = subs.includes(cur) ? cur : 'all';
+}
 function renderVocab() {
   if (!VOCAB.length) { $('#vgrid').innerHTML = '<div class="loading">Memuat… 読み込み中…</div>'; return; }
+  refreshSubOptions();
   const arr = filterVocab();
   $('#vCnt').textContent = `${arr.length} kosakata`;
   const show = arr.slice(0, vLimit);
@@ -676,7 +697,7 @@ function renderVocab() {
 }
 const vCardHTML = w => `<button class="kcard" data-word="${w.word}" style="flex-direction:column;align-items:flex-start;gap:.2rem">
   ${vprogress[w.word] ? `<span class="mark ${vprogress[w.word]}"></span>` : ''}
-  <div class="tags"><span class="t lv">${w.level}</span>${w.category ? `<span class="t kun">${w.category}</span>` : ''}</div>
+  <div class="tags"><span class="t lv">${w.level}</span>${w.category ? `<span class="t kun">${w.category}</span>` : ''}${w.sub ? `<span class="t on-">${w.sub}</span>` : ''}</div>
   <div style="font-size:1.25rem;font-weight:700;line-height:1.3">${w.word}</div>
   <div style="font-size:.8rem;color:var(--blue)">${w.reading}</div>
   <div class="mean">${vMean(w)}</div></button>`;
@@ -685,7 +706,8 @@ let vModalWord = null;
 function openVocab(word) {
   const w = VBYW[word]; if (!w) return;
   vModalWord = word;
-  $('#vmTags').innerHTML = `<span class="t lv">${w.level}</span>` + (w.category ? `<span class="t kun">${w.category}</span>` : '');
+  $('#vmTags').innerHTML = `<span class="t lv">${w.level}</span>` + (w.category ? `<span class="t kun">${w.category}</span>` : '')
+    + (w.sub ? `<span class="t on-">${w.sub}</span>` : '');
   $('#vmWord').textContent = w.word;
   $('#vmRead').textContent = w.reading;
   $('#vmMean').textContent = vMean(w);
@@ -939,22 +961,22 @@ function refreshMyCount() {
 }
 $('#nwAdd').onclick = () => {
   const word = $('#nwWord').value.trim(), reading = $('#nwRead').value.trim(),
-        mid = $('#nwMean').value.trim(), cat = $('#nwCat').value;
+        mid = $('#nwMean').value.trim(), cat = $('#nwCat').value, sub = $('#nwSub').value.trim();
   if (!word) { $('#nwWord').focus(); return; }
   myWords = myWords.filter(m => m.word !== word);
-  myWords.push({ word, reading, meaning_id: mid, meaning: mid, category: cat });
+  myWords.push({ word, reading, meaning_id: mid, meaning: mid, category: cat, sub });
   saveMyWords();
   VOCAB = VOCAB.filter(w => w.word !== word);
-  VOCAB.push({ word, reading, meaning_id: mid, meaning: mid, category: cat, level: '追加', mine: true,
+  VOCAB.push({ word, reading, meaning_id: mid, meaning: mid, category: cat, sub, level: '追加', mine: true,
                kanji: [...word].filter(c => KANJI_RE.test(c)) });
   reindexVocab();
-  $('#nwWord').value = $('#nwRead').value = $('#nwMean').value = '';
+  $('#nwWord').value = $('#nwRead').value = $('#nwMean').value = $('#nwSub').value = '';
   refreshMyCount(); vLimit = 120; renderVocab(); refreshStats();
 };
 $('#nwExport').onclick = () => {
   const esc = s => /[",]/.test(s || '') ? `"${String(s).replace(/"/g, '""')}"` : (s || '');
-  const csv = '﻿熟語,ふりがな,意味（インドネシア語）,分野,意味（英語）,削除\n' +
-    myWords.map(m => [m.word, m.reading, m.meaning_id, m.category, '', ''].map(esc).join(',')).join('\n') + '\n';
+  const csv = '﻿熟語,ふりがな,意味（インドネシア語）,分野,小分類,意味（英語）,削除\n' +
+    myWords.map(m => [m.word, m.reading, m.meaning_id, m.category, m.sub || '', '', ''].map(esc).join(',')).join('\n') + '\n';
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
   a.download = 'vocab-extra.csv'; a.click(); URL.revokeObjectURL(a.href);
@@ -962,7 +984,8 @@ $('#nwExport').onclick = () => {
 refreshMyCount();
 
 $('#vq').oninput = () => { vLimit = 120; renderVocab(); };
-$('#vCat').onchange = () => { vLimit = 120; renderVocab(); };
+$('#vCat').onchange = () => { $('#vSub').value = 'all'; vLimit = 120; renderVocab(); };
+$('#vSub').onchange = () => { vLimit = 120; renderVocab(); };
 $$('#vLvChips .chip').forEach(c => c.onclick = () => {
   $$('#vLvChips .chip').forEach(x => x.classList.toggle('on', x === c));
   vLv = c.dataset.lv; vLimit = 120; renderVocab();
