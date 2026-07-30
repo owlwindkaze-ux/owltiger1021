@@ -375,6 +375,11 @@ footer a{color:var(--blue)}
   </section>
 
   <footer>
+    <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:.6rem">
+      <span class="t lv">Versi ／ 版：<span id="verLabel"></span></span>
+      <button class="btn" id="reloadBtn" style="padding:.3rem .7rem;font-size:.78rem">🔄 Perbarui ／ 最新に更新</button>
+      <span class="hint" id="reloadHint" style="white-space:normal">Kalau ada kata baru tapi belum muncul, tekan tombol ini ／ 新しい言葉が出ないときはこれを押してください</span>
+    </div>
     <b>Sumber data / データ出典（オープンライセンス）</b><br>
     Cara baca・arti・jumlah coretan・level JLPT：<a href="https://github.com/davidluzgouveia/kanji-data" target="_blank" rel="noopener">kanji-data</a>（KANJIDIC2 / EDRDG, CC BY-SA 4.0）／
     contoh kata・radikal：<a href="https://github.com/kanjialive/kanji-data-media" target="_blank" rel="noopener">Kanji alive</a>（University of Chicago, CC BY 4.0）／
@@ -499,6 +504,7 @@ else document.getElementById('gatePw').focus();
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
+const VERSION = '2026-07-30';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -516,7 +522,7 @@ const meanOf = k => (LANG === 'id' && k.meanings_id && k.meanings_id.length ? k.
 const exMean = e => (LANG === 'id' && e.meaning_id) ? e.meaning_id : e.meaning;
 
 async function boot() {
-  const json = await (await fetch('kanji-data.json')).json();
+  const json = await (await fetch('kanji-data.json', { cache: 'no-cache' })).json();
   DATA = json.kanji; DATA.forEach(k => BYCH[k.character] = k);
   $('#langBtn').textContent = LANG === 'id' ? '🌐 ID' : '🌐 EN';
   renderList(); refreshStats();
@@ -529,7 +535,7 @@ async function boot() {
 }
 let vocabPromise = null;
 function loadVocab() {
-  return vocabPromise || (vocabPromise = fetch('vocab.json').then(r => r.json()).then(async j => {
+  return vocabPromise || (vocabPromise = fetch('vocab.json', { cache: 'no-cache' }).then(r => r.json()).then(async j => {
     VOCAB = j.words;
     await mergeExtraCsv();                       // 施設独自の語（vocab-extra.csv）
     mergeMyWords();                              // この端末で追加した語
@@ -606,7 +612,7 @@ function mergeMyWords() {
 const vMean = w => (LANG === 'id' && w.meaning_id) ? w.meaning_id : w.meaning;
 const cnt = lv => DATA.filter(k => k.level === lv).length;
 const loadStrokes = () => strokePromise || (strokePromise =
-  fetch('kanji-strokes.json').then(r => r.json()).then(j => (STROKES = j.strokes)));
+  fetch('kanji-strokes.json', { cache: 'no-cache' }).then(r => r.json()).then(j => (STROKES = j.strokes)));
 
 /* ---------- filter / sort ---------- */
 function filterKanji(q, lv, mk) {
@@ -1047,6 +1053,12 @@ document.addEventListener('keydown', e => {
   else if (e.key === '1' && flipped) judge(false);
   else if (e.key === '2' && flipped) judge(true);
 });
+
+$('#verLabel').textContent = VERSION;
+$('#reloadBtn').onclick = async () => {
+  try { if (window.caches) for (const k of await caches.keys()) await caches.delete(k); } catch (e) {}
+  location.reload();
+};
 
 function showLoadError(err) {
   $('#grid').innerHTML = `<p style="color:var(--red)">Gagal memuat data ／ 読み込み失敗：${err}</p>`;
