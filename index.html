@@ -421,6 +421,7 @@ footer a{color:var(--blue)}
       <div id="vmWord" style="font-size:2rem;font-weight:700;line-height:1.25"></div>
       <div id="vmRead" style="font-size:1rem;color:var(--blue)"></div>
     </div>
+    <button class="btn" id="vmBack" style="display:none;padding:.3rem .6rem;font-size:.78rem;margin-right:.3rem;white-space:nowrap">← 戻る</button>
     <button class="x" id="vmX">×</button>
   </div>
   <div class="m-body">
@@ -453,6 +454,7 @@ footer a{color:var(--blue)}
       <div id="mMeanEn" style="font-size:.75rem;color:#94a3b8"></div>
       <div style="margin-top:.3rem"><span id="mState" class="state none"></span></div>
     </div>
+    <button class="btn" id="mBack" style="display:none;padding:.3rem .6rem;font-size:.78rem;margin-right:.3rem;white-space:nowrap">← 戻る</button>
     <button class="x" id="mX">×</button>
   </div>
   <div class="m-body">
@@ -530,7 +532,7 @@ else document.getElementById('gatePw').focus();
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-07-30c';   // 更新日（版）
+const VERSION = '2026-07-30d';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -759,7 +761,25 @@ function openVocab(word) {
   paintState($('#vmState'), vprogress[word], $('#vmOk'), $('#vmNg'));
   $('#vov').classList.add('on'); document.body.style.overflow = 'hidden';
 }
-const closeVocabModal = () => { $('#vov').classList.remove('on'); document.body.style.overflow = ''; };
+const closeVocabModal = (clearNav = true) => {
+  $('#vov').classList.remove('on');
+  if (clearNav) { navStack = []; document.body.style.overflow = ''; }
+  updateBackBtns();
+};
+/* どの画面から来たかを覚えて「戻る」で帰れるようにする */
+let navStack = [];
+function updateBackBtns() {
+  const show = navStack.length ? '' : 'none';
+  if ($('#mBack')) $('#mBack').style.display = show;
+  if ($('#vmBack')) $('#vmBack').style.display = show;
+}
+function goBack() {
+  const from = navStack.pop();
+  updateBackBtns();
+  if (!from) return;
+  if (from.type === 'kanji') { closeVocabModal(false); openModal(from.key, true); }
+  else { closeModal(false); openVocab(from.key, true); }
+}
 
 /* ---------- stroke rendering ---------- */
 const GRID = `<path class="grid-l" d="M54.5 0v109M0 54.5h109"/>`;
@@ -800,8 +820,9 @@ async function animate(svgEl, paths, speed) {
 
 /* ---------- modal ---------- */
 let modalCh = null;
-async function openModal(ch) {
+async function openModal(ch, isBack) {
   const k = BYCH[ch]; if (!k) return;
+  updateBackBtns();
   modalCh = ch;
   $('#mCh').textContent = ch;
   $('#mTags').innerHTML = `<span class="t lv">${k.level}</span><span class="t lv">${k.strokes} coretan/画</span>` +
@@ -841,7 +862,11 @@ async function openModal(ch) {
   $('#mSeq').innerHTML = paths.map((_, i) => `<svg viewBox="0 0 109 109">${svgUpTo(paths, i + 1)}</svg>`).join('');
   animate($('#mSvg'), paths);          // ← 開いたら自動で1画ずつ書く
 }
-const closeModal = () => { animToken++; $('#ov').classList.remove('on'); document.body.style.overflow = ''; };
+const closeModal = (clearNav = true) => {
+  animToken++; $('#ov').classList.remove('on');
+  if (clearNav) { navStack = []; document.body.style.overflow = ''; }
+  updateBackBtns();
+};
 
 /* ---------- stroke guide ---------- */
 let sLimit = 60, curSLv = 'all';
@@ -1036,8 +1061,10 @@ $$('#vLvChips .chip').forEach(c => c.onclick = () => {
   $$('#vLvChips .chip').forEach(x => x.classList.toggle('on', x === c));
   vLv = c.dataset.lv; vLimit = 120; renderVocab();
 });
-$('#vmX').onclick = closeVocabModal;
-$('#vov').onclick = e => { if (e.target === $('#vov')) closeVocabModal(); };
+$('#vmX').onclick = () => closeVocabModal();
+$('#vmBack').onclick = goBack;
+$('#mBack').onclick = goBack;
+$('#vov').onclick = e => { if (e.target === $('#vov')) { navStack.length ? goBack() : closeVocabModal(); } };
 const toggleV = st => {
   const cur = vprogress[vModalWord];
   setVMark(vModalWord, cur === st ? null : st);
@@ -1056,17 +1083,21 @@ $('#fcType').onchange = () => {
 };
 
 document.addEventListener('click', e => {
-  const wl = e.target.closest('#mWords li');
-  if (wl) { closeModal(); return openVocab(wl.dataset.word); }
+  const wl = e.target.closest('#mWords li[data-word]');
+  if (wl) { navStack.push({ type: 'kanji', key: modalCh }); closeModal(false); return openVocab(wl.dataset.word); }
   const vc = e.target.closest('[data-word]');
   if (vc) return openVocab(vc.dataset.word);
   const sv = e.target.closest('.sv-main');
   if (sv) { e.stopPropagation(); return animate(sv, (STROKES || {})[sv.dataset.ch] || []); }
-  const card = e.target.closest('.kcard'); if (card) return openModal(card.dataset.ch);
+  const card = e.target.closest('.kcard');
+  if (card) {
+    if (card.closest('#vmKanji')) { navStack.push({ type: 'vocab', key: vModalWord }); closeVocabModal(false); }
+    return openModal(card.dataset.ch);
+  }
   const sc = e.target.closest('.scard'); if (sc) return openModal(sc.dataset.ch);
 });
-$('#mX').onclick = closeModal;
-$('#ov').onclick = e => { if (e.target === $('#ov')) closeModal(); };
+$('#mX').onclick = () => closeModal();
+$('#ov').onclick = e => { if (e.target === $('#ov')) { navStack.length ? goBack() : closeModal(); } };
 const replay = () => animate($('#mSvg'), (STROKES || {})[modalCh] || []);
 $('#mPlay').onclick = replay;
 $('#mSvg').onclick = replay;
@@ -1097,7 +1128,14 @@ $('#expBtn').onclick = () => {
   a.download = 'kanji-progress.json'; a.click(); URL.revokeObjectURL(a.href);
 };
 document.addEventListener('keydown', e => {
-  if ($('#ov').classList.contains('on')) { if (e.key === 'Escape') closeModal(); return; }
+  if ($('#vov').classList.contains('on')) {
+    if (e.key === 'Escape') { navStack.length ? goBack() : closeVocabModal(); }
+    return;
+  }
+  if ($('#ov').classList.contains('on')) {
+    if (e.key === 'Escape') { navStack.length ? goBack() : closeModal(); }
+    return;
+  }
   if (!$('#p-card').classList.contains('on')) return;
   if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flip(); }
   else if (e.key === 'ArrowRight') $('#fcNext').click();
