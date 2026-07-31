@@ -75,6 +75,16 @@ select.sel{padding:.55rem .6rem;border:1.5px solid var(--line);border-radius:10p
 .state.review{background:#fee2e2;color:var(--red)}
 .state.none{background:#f1f5f9;color:var(--muted)}
 .btn.active{box-shadow:0 0 0 3px rgba(37,99,235,.25)}
+/* 一覧行の学習状態（文字色で表す） */
+.ex li.w-known{background:#f0fdf7;border-color:#a7f3d0;border-left:4px solid var(--green)}
+.ex li.w-known .w{color:var(--green)}
+.ex li.w-review{background:#fff7f7;border-color:#fecaca;border-left:4px solid var(--red)}
+.ex li.w-review .w{color:var(--red)}
+.wm{font-size:.75rem;font-weight:800;margin-left:.35rem}
+.wm.known{color:var(--green)}.wm.review{color:var(--red)}
+/* カード見出しの文字も状態色に */
+.kcard.is-known .ch,.kcard.is-known .vw{color:var(--green)}
+.kcard.is-review .ch,.kcard.is-review .vw{color:var(--red)}
 
 .kvg{background:#fff;border:1px solid var(--line);border-radius:10px;display:block;cursor:pointer}
 svg path{fill:none}
@@ -259,7 +269,9 @@ footer a{color:var(--blue)}
       <select class="sel" id="vSub"><option value="all">小分類すべて ／ Semua sub-bidang</option></select>
       <span class="hint" id="vCnt"></span>
     </div>
-    <p class="hint" style="margin-bottom:.7rem">Ketuk kata untuk melihat kanji penyusunnya ／ 熟語をタップすると、使われている漢字の書き順を確認できます</p>
+    <p class="hint" style="margin-bottom:.7rem">Ketuk kata untuk melihat kanji penyusunnya ／ 熟語をタップすると、使われている漢字の書き順を確認できます<br>
+      <span style="color:var(--green);font-weight:800">■ hijau = sudah hafal ／ 緑＝覚えた</span>　
+      <span style="color:var(--red);font-weight:800">■ merah = perlu diulang ／ 赤＝要復習</span></p>
 
     <details style="margin-bottom:.9rem;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:.7rem .9rem">
       <summary style="cursor:pointer;font-weight:700;font-size:.9rem">＋ 施設の言葉を追加する ／ Tambah kosakata</summary>
@@ -518,7 +530,7 @@ else document.getElementById('gatePw').focus();
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-07-30b';   // 更新日（版）
+const VERSION = '2026-07-30c';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -719,7 +731,7 @@ function renderVocab() {
 const vCardHTML = w => `<button class="kcard ${vprogress[w.word] ? 'is-' + vprogress[w.word] : ''}" data-word="${w.word}" style="flex-direction:column;align-items:flex-start;gap:.2rem">
   ${vprogress[w.word] ? `<span class="mark ${vprogress[w.word]}">${MARKLABEL[vprogress[w.word]]}</span>` : ''}
   <div class="tags"><span class="t lv">${w.level}</span>${w.category ? `<span class="t kun">${w.category}</span>` : ''}${w.sub ? `<span class="t on-">${w.sub}</span>` : ''}</div>
-  <div style="font-size:1.25rem;font-weight:700;line-height:1.3">${w.word}</div>
+  <div class="vw" style="font-size:1.25rem;font-weight:700;line-height:1.3">${w.word}</div>
   <div style="font-size:.8rem;color:var(--blue)">${w.reading}</div>
   <div class="mean">${vMean(w)}</div></button>`;
 
@@ -811,10 +823,13 @@ async function openModal(ch) {
   merged.sort((a, b) => (LVORD[a.level] ?? 9) - (LVORD[b.level] ?? 9) || a.word.length - b.word.length);
   const rel = merged.slice(0, 14);
   $('#mWordsSec').style.display = rel.length ? '' : 'none';
-  $('#mWords').innerHTML = rel.map(w => `<li ${w.tap ? `data-word="${w.word}" style="cursor:pointer"` : ''}>
-      <div><span class="w">${w.word}</span><span class="r">${w.reading}</span>${w.level ? `<span class="jl">${w.level}</span>` : ''}</div>
+  $('#mWords').innerHTML = rel.map(w => {
+    const st = vprogress[w.word] || '';
+    return `<li class="${st ? 'w-' + st : ''}" ${w.tap ? `data-word="${w.word}" style="cursor:pointer"` : ''}>
+      <div><span class="w">${w.word}</span><span class="r">${w.reading}</span>${w.level ? `<span class="jl">${w.level}</span>` : ''}${st ? `<span class="wm ${st}">${st === 'known' ? '✓' : '↻'}</span>` : ''}</div>
       <div class="m">${(LANG === 'id' && w.meaning_id) ? w.meaning_id : w.meaning}</div>
-      ${(LANG === 'id' && w.meaning_id && w.meaning && w.meaning_id !== w.meaning) ? `<div class="en">EN: ${w.meaning}</div>` : ''}</li>`).join('')
+      ${(LANG === 'id' && w.meaning_id && w.meaning && w.meaning_id !== w.meaning) ? `<div class="en">EN: ${w.meaning}</div>` : ''}</li>`;
+  }).join('')
     + (merged.length > rel.length ? `<li style="text-align:center;color:var(--muted);font-size:.78rem">…ほか${merged.length - rel.length}語</li>` : '');
   const r = k.radical || {};
   $('#mMisc').textContent = [r.character && `${r.character}${r.name ? '（' + r.name + '）' : ''}`,
