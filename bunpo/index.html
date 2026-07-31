@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="Untuk pemagang kaigo di Jepang: pola kalimat (tata bahasa) JLPT N5–N3 dengan arti Bahasa Indonesia, contoh kalimat dari lokasi kerja perawatan lansia, dan latihan soal. 介護の技能実習生向け：JLPT N5〜N3の文型を、インドネシア語訳・介護現場の例文・練習問題で学べます。">
+<title>Pola Kalimat Kaigo ｜ 介護の文型</title>
+<style>
+:root{
+  --blue:#2563eb; --blue-d:#1d4ed8; --blue-l:#eff6ff;
+  --amber:#b45309; --amber-l:#fffbeb;
+  --green:#059669; --green-l:#ecfdf5;
+  --red:#dc2626; --red-l:#fef2f2;
+  --purple:#7c3aed; --purple-l:#f5f3ff;
+  --bg:#f1f5f9; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
+  --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
+  --sh-l:0 10px 25px -5px rgba(15,23,42,.15);
+  --kfont:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,"Noto Sans JP",system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.6;padding-bottom:env(safe-area-inset-bottom)}
+button,select,input{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer}
+.sub{font-size:.72rem;opacity:.75;font-weight:400}
+
+header{background:linear-gradient(135deg,#166534,#059669);color:#fff;padding:.85rem 1rem;box-shadow:var(--sh-l)}
+.hd{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.hd h1{font-size:1.1rem;font-weight:800;letter-spacing:.01em}
+.hd .stat{margin-left:auto;font-size:.75rem;background:rgba(255,255,255,.18);padding:.25rem .7rem;border-radius:999px}
+.langbtn{border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.12);color:#fff;
+  border-radius:999px;padding:.3rem .8rem;font-size:.78rem;font-weight:700}
+
+nav.tabs{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40}
+.tabs-in{max-width:1200px;margin:0 auto;display:flex;gap:.2rem;padding:0 .4rem;overflow-x:auto}
+.tab{padding:.6rem .85rem;border:0;background:none;color:var(--muted);font-size:.9rem;font-weight:700;
+  border-bottom:3px solid transparent;white-space:nowrap;line-height:1.25;text-align:center}
+.tab.on{color:var(--green);border-bottom-color:var(--green)}
+.tab .sub{display:block;font-size:.65rem;font-weight:600}
+
+.wrap{max-width:1200px;margin:0 auto;padding:1rem}
+.panel{display:none}.panel.on{display:block}
+
+.toolbar{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-bottom:.9rem}
+.search{flex:1 1 210px;min-width:0;padding:.6rem .9rem .6rem 2.3rem;border:1.5px solid var(--line);border-radius:10px;background:#fff
+ url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M11.74 10.34a6.5 6.5 0 1 0-1.4 1.4l3.85 3.85a1 1 0 0 0 1.42-1.42l-3.86-3.83zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") no-repeat .7rem center;outline:none}
+.search:focus{border-color:var(--green)}
+select.sel{padding:.55rem .6rem;border:1.5px solid var(--line);border-radius:10px;background:#fff;outline:none;font-size:.85rem}
+.chips{display:flex;gap:.3rem;flex-wrap:wrap}
+.chip{padding:.45rem .75rem;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-size:.82rem;font-weight:700;color:var(--muted)}
+.chip.on{background:var(--green);border-color:var(--green);color:#fff}
+.hint{font-size:.8rem;color:var(--muted)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.7rem}
+.gcard{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:.85rem;
+  text-align:left;box-shadow:var(--sh);transition:.15s;position:relative;overflow:hidden;width:100%}
+.gcard:hover{border-color:var(--green);box-shadow:var(--sh-l);transform:translateY(-2px)}
+.gcard .pt{font-size:1.35rem;font-weight:800;line-height:1.3;padding-right:3.4rem}
+.gcard .fm{font-size:.76rem;color:var(--blue);margin-top:.15rem}
+.gcard .mn{font-size:.88rem;color:var(--muted);margin-top:.3rem}
+.tags{display:flex;flex-wrap:wrap;gap:.22rem;margin-top:.45rem}
+.t{font-size:.69rem;padding:.08rem .42rem;border-radius:5px;font-weight:700}
+.t.lv{background:var(--blue-l);color:var(--blue)}
+.t.cat{background:#f1f5f9;color:var(--muted)}
+.mark{position:absolute;top:.5rem;right:.5rem;font-size:.66rem;font-weight:800;border-radius:999px;
+  padding:.1rem .45rem;line-height:1.5}
+.mark.known{background:var(--green);color:#fff}
+.mark.review{background:var(--red);color:#fff}
+.gcard.is-known{border-color:#6ee7b7;background:#f6fffb}
+.gcard.is-review{border-color:#fca5a5;background:#fffafa}
+.state{display:inline-flex;align-items:center;gap:.3rem;font-size:.78rem;font-weight:800;border-radius:999px;padding:.2rem .6rem}
+.state.known{background:var(--green-l);color:var(--green)}
+.state.review{background:#fee2e2;color:var(--red)}
+.state.none{background:#f1f5f9;color:var(--muted)}
+
+.ov{display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:100;padding:.75rem;overflow-y:auto}
+.ov.on{display:flex;align-items:flex-start;justify-content:center}
+.modal{background:var(--card);border-radius:16px;max-width:620px;width:100%;margin:auto;box-shadow:var(--sh-l);animation:pop .18s ease}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.98)}}
+.m-head{display:flex;gap:.9rem;padding:.9rem 1rem;border-bottom:1px solid var(--line);align-items:flex-start}
+.m-head .info{flex:1;min-width:0}
+.m-pt{font-size:1.6rem;font-weight:800;line-height:1.25}
+.x{border:0;background:none;font-size:1.6rem;line-height:1;color:var(--muted);padding:0 .3rem}
+.m-body{padding:1rem}
+.sec{margin-bottom:1rem}.sec:last-child{margin-bottom:0}
+.lb{font-size:.7rem;font-weight:800;letter-spacing:.06em;color:var(--muted);margin-bottom:.4rem}
+.box{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.6rem .75rem;font-size:.9rem}
+.box.note{background:var(--amber-l);border-color:#fde68a}
+.box.note .ja{margin-top:.45rem;padding-top:.45rem;border-top:1px dashed #fcd34d;font-size:.85rem;color:#78350f}
+.box.note .ja::before{content:"日本語：";font-weight:800;font-size:.7rem;letter-spacing:.04em}
+.ex{list-style:none;display:grid;gap:.5rem}
+.ex li{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.55rem .7rem;border-left:4px solid var(--green)}
+.ex .sc{font-size:.66rem;font-weight:800;background:var(--green-l);color:var(--green);border-radius:4px;padding:.05rem .4rem;display:inline-block;margin-bottom:.25rem}
+.ex .ja{font-size:1.02rem;font-weight:700;line-height:1.5}
+.ex .rd{font-size:.74rem;color:var(--blue);margin-top:.1rem}
+.ex .tr{font-size:.84rem;color:var(--muted);margin-top:.2rem}
+
+.btn{padding:.5rem .9rem;border:1.5px solid var(--line);border-radius:10px;background:#fff;font-weight:700;font-size:.85rem;line-height:1.3}
+.btn:hover{border-color:var(--green);color:var(--green)}
+.btn.pri{background:var(--green);border-color:var(--green);color:#fff}.btn.pri:hover{background:#047857;color:#fff}
+.btn.ok{background:var(--green);border-color:var(--green);color:#fff}
+.btn.ng{background:#fff;border-color:var(--red);color:var(--red)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+
+/* ---- 練習 ---- */
+.q-wrap{max-width:620px;margin:0 auto;display:flex;flex-direction:column;gap:.8rem}
+.setup{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:1rem;box-shadow:var(--sh);
+  display:flex;flex-direction:column;gap:.85rem}
+.setup .fld{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.setup .fld>span{font-size:.8rem;font-weight:800;color:var(--muted);min-width:6.5rem}
+.qcard{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:1.2rem 1rem;box-shadow:var(--sh-l)}
+.qtype{font-size:.68rem;font-weight:800;color:var(--green);background:var(--green-l);border-radius:5px;
+  padding:.1rem .45rem;display:inline-block;margin-bottom:.6rem}
+/* 出題形式ごとの色：穴埋め＝青／意味＝橙／並べ替え＝紫 */
+.qtype.choice{color:var(--blue);background:var(--blue-l)}
+.qtype.match{color:var(--amber);background:var(--amber-l)}
+.qtype.order{color:var(--purple);background:var(--purple-l)}
+#qTypes .chip[data-t="choice"]{color:var(--blue);border-color:#bfdbfe}
+#qTypes .chip[data-t="match"]{color:var(--amber);border-color:#fde68a}
+#qTypes .chip[data-t="order"]{color:var(--purple);border-color:#ddd6fe}
+#qTypes .chip[data-t="choice"].on{background:var(--blue);border-color:var(--blue);color:#fff}
+#qTypes .chip[data-t="match"].on{background:var(--amber);border-color:var(--amber);color:#fff}
+#qTypes .chip[data-t="order"].on{background:var(--purple);border-color:var(--purple);color:#fff}
+.qtext{font-size:1.2rem;font-weight:700;line-height:1.75;margin-bottom:1rem}
+.qtext .bl{color:var(--red);font-weight:800}
+.opts{display:grid;gap:.5rem}
+.opt{text-align:left;padding:.7rem .9rem;border:1.5px solid var(--line);border-radius:11px;background:#fff;
+  font-size:1rem;font-weight:700;display:flex;gap:.6rem;align-items:center}
+.opt .n{font-size:.72rem;font-weight:800;color:var(--muted);border:1.5px solid var(--line);border-radius:6px;
+  min-width:1.4rem;height:1.4rem;display:flex;align-items:center;justify-content:center;flex:none}
+.opt:hover:not(:disabled){border-color:var(--green)}
+.opt.right{background:var(--green-l);border-color:var(--green);color:var(--green)}
+.opt.wrong{background:var(--red-l);border-color:var(--red);color:var(--red)}
+.opt:disabled{cursor:default}
+.judge{margin-top:.9rem;padding:.7rem .85rem;border-radius:11px;font-size:.9rem;line-height:1.6}
+.judge.right{background:var(--green-l);border:1px solid #6ee7b7}
+.judge.wrong{background:var(--red-l);border:1px solid #fca5a5}
+.judge b{display:block;font-size:.95rem;margin-bottom:.15rem}
+.slot{min-height:3.4rem;border:2px dashed var(--line);border-radius:12px;padding:.5rem;display:flex;flex-wrap:wrap;gap:.4rem;
+  align-items:flex-start;background:var(--bg);margin-bottom:.7rem}
+.pool{display:flex;flex-wrap:wrap;gap:.4rem;min-height:2.4rem}
+.tok{padding:.45rem .75rem;border:1.5px solid var(--line);border-radius:9px;background:#fff;font-size:1rem;font-weight:700}
+.tok:hover{border-color:var(--green)}
+.slot .tok{background:var(--purple-l);border-color:#ddd6fe}
+.qbar{display:flex;gap:.7rem;align-items:center;font-size:.8rem;color:var(--muted);flex-wrap:wrap}
+.bar{height:7px;background:var(--line);border-radius:999px;overflow:hidden;flex:1;min-width:110px}
+.bar>i{display:block;height:100%;background:var(--green);border-radius:999px;transition:width .3s}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:.25rem}
+.dot.g{background:var(--green)}.dot.r{background:var(--red)}
+.result{text-align:center;padding:1.5rem 1rem}
+.result .big{font-size:2.6rem;font-weight:800;color:var(--green)}
+
+.prog-wrap{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
+.prog{flex:1 1 165px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.7rem .8rem;box-shadow:var(--sh)}
+.prog .lv{font-size:.75rem;color:var(--muted);font-weight:800;display:flex;justify-content:space-between}
+
+/* ---- 合言葉ゲート ---- */
+#gate{position:fixed;inset:0;z-index:200;background:linear-gradient(135deg,#166534,#059669);
+  display:flex;align-items:center;justify-content:center;padding:1.5rem}
+#gate .gbox{background:#fff;border-radius:18px;padding:1.8rem 1.5rem;max-width:390px;width:100%;
+  box-shadow:0 20px 40px -10px rgba(0,0,0,.35);text-align:center}
+#gate h2{font-size:1.15rem;margin-bottom:.2rem}
+#gate p{font-size:.8rem;color:var(--muted);margin-bottom:1.1rem}
+#gate input{width:100%;padding:.7rem .9rem;border:1.5px solid var(--line);border-radius:10px;
+  font-size:1.05rem;text-align:center;outline:none;margin-bottom:.7rem}
+#gate input:focus{border-color:var(--green)}
+#gate .err{color:var(--red);font-size:.8rem;min-height:1.2rem;margin-top:.5rem}
+#app{display:none}
+#updBar{background:#fef3c7;border-bottom:1px solid #fbbf24;color:#78350f;font-size:.8rem;
+  padding:.5rem 1rem;text-align:center;font-weight:700}
+footer{max-width:1200px;margin:2rem auto 0;padding:1rem;font-size:.72rem;color:var(--muted);border-top:1px solid var(--line);line-height:1.75}
+footer a{color:var(--green)}
+.loading{text-align:center;padding:3rem 1rem;color:var(--muted)}
+
+@media(max-width:600px){
+  .wrap{padding:.7rem}
+  .grid{grid-template-columns:1fr;gap:.55rem}
+  .m-pt{font-size:1.35rem}
+  .qtext{font-size:1.08rem}
+  .setup .fld>span{min-width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 合言葉ゲート ／ Kata sandi ===== -->
+<div id="gate">
+  <div class="gbox">
+    <div style="font-size:2.2rem;font-family:'Yu Mincho','Hiragino Mincho ProN',serif">文型</div>
+    <h2>Pola Kalimat Kaigo</h2>
+    <p>Masukkan kata sandi ／ 合言葉を入力してください</p>
+    <input id="gatePw" type="password" inputmode="text" autocomplete="current-password" placeholder="••••••••">
+    <button class="btn pri" id="gateBtn" style="width:100%">Masuk ／ 入る</button>
+    <div class="err" id="gateErr"></div>
+    <p style="margin:.6rem 0 0;font-size:.72rem">Tanyakan kata sandi kepada perusahaan Anda<br>合言葉は会社の担当者にお聞きください</p>
+  </div>
+</div>
+
+<div id="app">
+<div id="updBar" style="display:none">
+  ⚠ Versi lama tersimpan di browser. Tekan Ctrl+Shift+R ／ 古い版が残っています。Ctrl+Shift+R で読み込み直してください。
+</div>
+<header><div class="hd">
+  <div>
+    <h1>Pola Kalimat Kaigo</h1>
+    <div class="sub">Tata bahasa JLPT N5–N3 untuk lokasi kerja ／ 介護の現場で使うJLPT文型</div>
+  </div>
+  <button class="langbtn" id="langBtn">🌐 ID</button>
+  <div class="stat" id="hdStat">…</div>
+</div></header>
+
+<nav class="tabs"><div class="tabs-in">
+  <button class="tab on" data-p="p-list">Daftar Pola<span class="sub">①文型一覧</span></button>
+  <button class="tab" data-p="p-quiz">Latihan<span class="sub">②練習問題</span></button>
+  <button class="tab" data-p="p-stat">Progres<span class="sub">③学習状況</span></button>
+</div></nav>
+
+<div class="wrap">
+
+<!-- ===== ① 文型一覧 ===== -->
+<section class="panel on" id="p-list">
+  <div class="toolbar">
+    <input class="search" id="q" placeholder="Cari pola / arti / contoh ／ 文型・意味・例文で検索">
+    <div class="chips" id="lvChips"><button class="chip on" data-lv="all">Semua ／ すべて</button></div>
+    <select class="sel" id="catSel"><option value="all">Semua kategori ／ すべての分類</option></select>
+    <select class="sel" id="stSel">
+      <option value="all">Semua status ／ すべて</option>
+      <option value="new">Belum ／ 未学習</option>
+      <option value="review">Perlu ulang ／ 要復習</option>
+      <option value="known">Sudah hafal ／ 覚えた</option>
+    </select>
+    <span class="hint" id="listCnt"></span>
+  </div>
+  <div class="grid" id="grid"><p class="loading">Memuat… ／ 読み込み中…</p></div>
+</section>
+
+<!-- ===== ② 練習問題 ===== -->
+<section class="panel" id="p-quiz">
+  <div class="q-wrap">
+    <div class="setup" id="qSetup">
+      <div class="fld"><span>Level ／ レベル</span>
+        <select class="sel" id="qLv"><option value="all">Semua ／ すべて</option></select>
+        <select class="sel" id="qSt">
+          <option value="all">Semua pola ／ 全部</option>
+          <option value="new">Belum ／ 未学習</option>
+          <option value="review">Perlu ulang ／ 要復習</option>
+        </select>
+      </div>
+      <div class="fld"><span>Jenis soal ／ 形式</span>
+        <div class="chips" id="qTypes">
+          <button class="chip on" data-t="choice">Isian ／ 穴埋め</button>
+          <button class="chip on" data-t="match">Arti ／ 意味</button>
+          <button class="chip on" data-t="order">Susun ／ 並べ替え</button>
+        </div>
+      </div>
+      <div class="fld"><span>Jumlah ／ 問題数</span>
+        <select class="sel" id="qN"><option value="10">10</option><option value="20" selected>20</option><option value="0">Semua ／ 全部</option></select>
+        <button class="btn pri" id="qStart">Mulai ／ 開始</button>
+      </div>
+      <p class="hint" id="qMsg"></p>
+    </div>
+
+    <div id="qArea" style="display:none">
+      <div class="qbar">
+        <span id="qPos">1 / 20</span>
+        <div class="bar"><i id="qBar" style="width:0%"></i></div>
+        <span><span class="dot g"></span><span id="qOk">0</span></span>
+        <span><span class="dot r"></span><span id="qNg">0</span></span>
+        <button class="btn" id="qQuit" style="padding:.25rem .6rem;font-size:.75rem">Berhenti ／ やめる</button>
+      </div>
+      <div class="qcard" id="qCard"></div>
+      <div class="row" style="margin-top:.2rem">
+        <button class="btn pri" id="qNext" style="display:none">Berikutnya ／ 次へ ▶</button>
+        <button class="btn pri" id="qCheck" style="display:none">Periksa ／ 確認</button>
+      </div>
+    </div>
+
+    <div class="qcard result" id="qResult" style="display:none">
+      <div class="big" id="rPct">—</div>
+      <p id="rTxt" style="color:var(--muted);margin-bottom:1rem"></p>
+      <div class="row">
+        <button class="btn pri" id="rAgain">Ulangi ／ もう一度</button>
+        <button class="btn ng" id="rWrong">Yang salah saja ／ 間違いだけ</button>
+        <button class="btn" id="rBack">Selesai ／ 終わる</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ③ 学習状況 ===== -->
+<section class="panel" id="p-stat">
+  <div class="prog-wrap" id="progWrap"></div>
+  <div class="sec">
+    <div class="lb">PERLU DIULANG ／ 要復習の文型</div>
+    <div class="grid" id="reviewGrid"></div>
+  </div>
+  <div class="row" style="justify-content:flex-start;margin-top:1rem">
+    <button class="btn" id="expBtn">⬇ Simpan catatan ／ 記録を書き出す</button>
+    <button class="btn ng" id="resetBtn">🗑 Hapus catatan ／ 記録を消す</button>
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<!-- ===== 詳細モーダル ===== -->
+<div class="ov" id="ov">
+  <div class="modal">
+    <div class="m-head">
+      <div class="info">
+        <div class="m-pt" id="mPt"></div>
+        <div class="tags" id="mTags"></div>
+      </div>
+      <button class="x" id="mClose">&times;</button>
+    </div>
+    <div class="m-body" id="mBody"></div>
+    <div class="m-head" style="border-top:1px solid var(--line);border-bottom:0;justify-content:space-between;align-items:center">
+      <span class="state none" id="mState">Belum ／ 未学習</span>
+      <div style="display:flex;gap:.5rem">
+        <button class="btn ng" id="mNg">△ Perlu ulang ／ 要復習</button>
+        <button class="btn ok" id="mOk">✓ Hafal ／ 覚えた</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p><b>Pola Kalimat Kaigo ／ 介護の文型</b> — versi <span id="verLabel"></span>
+     ・<button class="btn" id="reloadBtn" style="padding:.15rem .5rem;font-size:.7rem">🔄 Perbarui ／ 最新に更新</button></p>
+  <p>Catatan belajar disimpan di perangkat ini saja ／ 学習記録はこの端末の中だけに保存されます。</p>
+  <p>Contoh kalimat dan soal ditulis khusus untuk lokasi kerja kaigo ／ 例文・練習問題は介護の現場向けに書き下ろしたものです。</p>
+  <p><a href="../">→ Kanji &amp; Kosakata Kaigo ／ 漢字・言葉のアプリへ</a></p>
+</footer>
+</div><!-- /app -->
+
+<script>
+"use strict";
+
+/* =========================================================
+   合言葉（パスワード）設定
+   ---------------------------------------------------------
+   PASS_SHA256 は合言葉の SHA-256 ハッシュです（漢字アプリと同じ合言葉）。
+   変更するときは新しい合言葉のハッシュを作って置き換えます。
+
+     python3 -c "import hashlib;print(hashlib.sha256('新しい合言葉'.encode()).hexdigest())"
+
+   ※ 漢字アプリと同じ GATEKEY を使っているため、どちらかで一度入力すれば
+     同じ端末では両方とも次回から省略されます。
+   ※ これは「部外者よけの目隠し」です。完全な保護ではありません。
+   ========================================================= */
+const PASS_SHA256 = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
+const GATEKEY = 'jlpt-kanji-gate-v1';
+
+async function sha256(text) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+function unlock() {
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  if (!window.__booted) { window.__booted = true; boot().catch(showLoadError); }
+}
+async function tryUnlock() {
+  const pw = document.getElementById('gatePw').value.trim();
+  const err = document.getElementById('gateErr');
+  if (!pw) { err.textContent = 'Kata sandi kosong ／ 未入力です'; return; }
+  const h = await sha256(pw);
+  if (h === PASS_SHA256) { localStorage.setItem(GATEKEY, h); unlock(); }
+  else { err.textContent = 'Kata sandi salah ／ 合言葉が違います'; document.getElementById('gatePw').select(); }
+}
+document.getElementById('gateBtn').onclick = tryUnlock;
+document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock();
+else document.getElementById('gatePw').focus();
+
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const STORE = 'jlpt-grammar-progress-v1', LANGKEY = 'jlpt-kanji-lang';
+/* 版（更新日）。grammar.json の "app_version" と必ず同じ値にすること。
+   ずれていると、アプリが「古いHTMLを表示している」と判断して自動で読み込み直します。 */
+const VERSION = '2026-07-31c';
+
+let DATA = [], BYID = {}, LEVELS = [], CATS = [];
+let LANG = localStorage.getItem(LANGKEY) || 'id';
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(STORE) || '{}'); } catch (e) {}
+const save = () => { try { localStorage.setItem(STORE, JSON.stringify(progress)); } catch (e) {} };
+const setMark = (id, v) => { v ? progress[id] = v : delete progress[id]; save(); refreshStats(); };
+
+/* arti: Indonesia kalau ada, kalau tidak Inggris */
+const tx = (o, key) => (LANG === 'id' ? (o[key + '_id'] || o[key + '_en'] || '') : (o[key + '_en'] || o[key + '_id'] || ''));
+const exTx = e => (LANG === 'id' ? (e.id || e.en || '') : (e.en || e.id || ''));
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+/* 古いHTMLがブラウザに残っていたら、自動で最新版を取り直す。
+   データ（grammar.json）は常に最新を読むので、その中の app_version と
+   このHTMLの VERSION を突き合わせれば、HTMLが古いことを検知できる。 */
+function checkAppVersion(dataVer) {
+  if (!dataVer || dataVer === VERSION) return false;
+  const KEY = 'bunpo-reloaded-for';
+  if (sessionStorage.getItem(KEY) === dataVer) {   // 一度試して直らなければ諦めて案内を出す（無限ループ防止）
+    $('#updBar').style.display = '';
+    return false;
+  }
+  sessionStorage.setItem(KEY, dataVer);
+  location.replace(location.pathname + '?v=' + encodeURIComponent(dataVer));
+  return true;
+}
+
+async function boot() {
+  /* grammar.json は目次。実データはレベルごとのファイル（grammar-n5.json など）に分けてある。
+     目次に "grammar" が直接入っている旧形式のデータもそのまま読める。 */
+  const json = await (await fetch('grammar.json', { cache: 'no-cache' })).json();
+  if (checkAppVersion(json.app_version)) return;   // 読み込み直すので、ここで中断
+  let items = json.grammar || [];
+  if (json.files && json.files.length) {
+    /* 作成中のレベルのファイルがまだ無くても、他のレベルは表示できるようにする */
+    const parts = await Promise.all(json.files.map(f =>
+      fetch(f, { cache: 'no-cache' }).then(r => r.ok ? r.json() : { grammar: [] })
+        .catch(() => ({ grammar: [] }))));
+    parts.forEach(p => { items = items.concat(p.grammar || []); });
+  }
+  DATA = items;
+  DATA.forEach(g => BYID[g.id] = g);
+  LEVELS = [...new Set(DATA.map(g => g.level))].sort((a, b) => b.localeCompare(a));  // N5, N4, N3…
+  CATS = [...new Set(DATA.map(g => g.category))];
+
+  LEVELS.forEach(lv => {
+    $('#lvChips').insertAdjacentHTML('beforeend', `<button class="chip" data-lv="${lv}">${lv}</button>`);
+    $('#qLv').insertAdjacentHTML('beforeend', `<option value="${lv}">${lv}</option>`);
+  });
+  CATS.forEach(c => $('#catSel').insertAdjacentHTML('beforeend', `<option value="${esc(c)}">${esc(c)}</option>`));
+  $$('#lvChips .chip').forEach(b => b.onclick = () => {
+    $$('#lvChips .chip').forEach(x => x.classList.remove('on')); b.classList.add('on'); renderList();
+  });
+  renderList(); refreshStats();
+}
+
+/* ========== ① 一覧 ========== */
+const curLv = () => $('#lvChips .chip.on').dataset.lv;
+
+function filtered() {
+  const q = $('#q').value.trim().toLowerCase(), lv = curLv(), cat = $('#catSel').value, st = $('#stSel').value;
+  return DATA.filter(g => {
+    if (lv !== 'all' && g.level !== lv) return false;
+    if (cat !== 'all' && g.category !== cat) return false;
+    const p = progress[g.id];
+    if (st === 'new' && p) return false;
+    if (st === 'known' && p !== 'known') return false;
+    if (st === 'review' && p !== 'review') return false;
+    if (!q) return true;
+    const hay = [g.pattern, g.form, g.meaning_id, g.meaning_en, g.category,
+      ...g.examples.map(e => e.ja + e.reading + e.id + (e.en || '') + (e.scene || ''))].join(' ').toLowerCase();
+    return hay.includes(q);
+  });
+}
+function cardHTML(g) {
+  const p = progress[g.id];
+  return `<button class="gcard ${p ? 'is-' + p : ''}" data-id="${g.id}">
+    ${p ? `<span class="mark ${p}">${p === 'known' ? '✓ hafal' : '△ ulang'}</span>` : ''}
+    <div class="pt">${esc(g.pattern)}</div>
+    <div class="fm">${esc(g.form)}</div>
+    <div class="mn">${esc(tx(g, 'meaning'))}</div>
+    <div class="tags"><span class="t lv">${g.level}</span><span class="t cat">${esc(g.category)}</span></div>
+  </button>`;
+}
+function renderList() {
+  const list = filtered();
+  $('#listCnt').textContent = `${list.length} pola ／ ${list.length}項目`;
+  $('#grid').innerHTML = list.length ? list.map(cardHTML).join('')
+    : '<p class="loading">Tidak ada hasil ／ 該当なし</p>';
+  $$('#grid .gcard').forEach(b => b.onclick = () => openModal(b.dataset.id));
+}
+$('#q').addEventListener('input', renderList);
+$('#catSel').onchange = renderList;
+$('#stSel').onchange = renderList;
+
+/* ========== 詳細モーダル ========== */
+let modalId = null;
+function paintState() {
+  const p = progress[modalId], el = $('#mState');
+  el.className = 'state ' + (p || 'none');
+  el.textContent = p === 'known' ? '✓ Sudah hafal ／ 覚えた' : p === 'review' ? '△ Perlu diulang ／ 要復習' : 'Belum ／ 未学習';
+  $('#mOk').classList.toggle('active', p === 'known');
+  $('#mNg').classList.toggle('active', p === 'review');
+}
+function openModal(id) {
+  const g = BYID[id]; if (!g) return;
+  modalId = id;
+  $('#mPt').textContent = g.pattern;
+  $('#mTags').innerHTML = `<span class="t lv">${g.level}</span><span class="t cat">${esc(g.category)}</span>`;
+  const note = tx(g, 'note');
+  $('#mBody').innerHTML = `
+    <div class="sec"><div class="lb">BENTUK ／ 形</div><div class="box">${esc(g.form)}</div></div>
+    <div class="sec"><div class="lb">ARTI ／ 意味</div><div class="box"><b>${esc(tx(g, 'meaning'))}</b></div></div>
+    ${(note || g.note_ja) ? `<div class="sec"><div class="lb">CATATAN ／ ポイント</div><div class="box note">${esc(note)}${
+      g.note_ja ? `<div class="ja">${esc(g.note_ja)}</div>` : ''}</div></div>` : ''}
+    <div class="sec"><div class="lb">CONTOH DI TEMPAT KERJA ／ 介護現場の例文</div>
+      <ul class="ex">${g.examples.map(e => `<li>
+        ${e.scene ? `<span class="sc">${esc(e.scene)}</span>` : ''}
+        <div class="ja">${esc(e.ja)}</div>
+        <div class="rd">${esc(e.reading)}</div>
+        <div class="tr">${esc(exTx(e))}</div></li>`).join('')}</ul></div>`;
+  paintState();
+  $('#ov').classList.add('on');
+}
+const closeModal = () => { $('#ov').classList.remove('on'); renderList(); };
+$('#mClose').onclick = closeModal;
+$('#ov').onclick = e => { if (e.target === $('#ov')) closeModal(); };
+const toggleMark = st => { setMark(modalId, progress[modalId] === st ? null : st); paintState(); };
+$('#mOk').onclick = () => toggleMark('known');
+$('#mNg').onclick = () => toggleMark('review');
+
+/* ========== ② 練習問題 ========== */
+let quiz = [], qi = 0, okN = 0, ngN = 0, wrongQs = [], answered = false, slot = [], pool = [];
+
+$$('#qTypes .chip').forEach(b => b.onclick = () => {
+  b.classList.toggle('on');
+  if (!$$('#qTypes .chip.on').length) b.classList.add('on');   // 最低1つは残す
+});
+
+function buildQuestions() {
+  const lv = $('#qLv').value, st = $('#qSt').value;
+  const types = $$('#qTypes .chip.on').map(b => b.dataset.t);
+  let pooled = DATA.filter(g => {
+    if (lv !== 'all' && g.level !== lv) return false;
+    const p = progress[g.id];
+    if (st === 'new' && p) return false;
+    if (st === 'review' && p !== 'review') return false;
+    return true;
+  });
+  const qs = [];
+  pooled.forEach(g => {
+    (g.quiz || []).forEach(q => {
+      if (q.type === 'choice' && types.includes('choice')) qs.push({ ...q, gid: g.id });
+      if (q.type === 'order' && types.includes('order')) qs.push({ ...q, gid: g.id });
+    });
+    if (types.includes('match') && pooled.length >= 4) qs.push({ type: 'match', gid: g.id });
+  });
+  return shuffle(qs);
+}
+function startQuiz(list) {
+  quiz = list; qi = 0; okN = ngN = 0; wrongQs = [];
+  $('#qSetup').style.display = 'none'; $('#qResult').style.display = 'none'; $('#qArea').style.display = '';
+  showQ();
+}
+$('#qStart').onclick = () => {
+  let qs = buildQuestions();
+  if (!qs.length) { $('#qMsg').textContent = 'Tidak ada soal untuk pilihan ini ／ この条件では問題がありません'; return; }
+  $('#qMsg').textContent = '';
+  const n = +$('#qN').value;
+  if (n > 0) qs = qs.slice(0, n);
+  startQuiz(qs);
+};
+$('#qQuit').onclick = () => finish(true);
+$('#rAgain').onclick = () => { $('#qResult').style.display = 'none'; $('#qSetup').style.display = ''; };
+$('#rBack').onclick = () => { $('#qResult').style.display = 'none'; $('#qSetup').style.display = ''; };
+$('#rWrong').onclick = () => { if (wrongQs.length) startQuiz(shuffle(wrongQs.slice())); };
+
+function updBar() {
+  $('#qPos').textContent = `${Math.min(qi + 1, quiz.length)} / ${quiz.length}`;
+  $('#qBar').style.width = (qi / quiz.length * 100) + '%';
+  $('#qOk').textContent = okN; $('#qNg').textContent = ngN;
+}
+function showQ() {
+  if (qi >= quiz.length) return finish(false);
+  answered = false; slot = []; pool = [];
+  updBar();
+  $('#qNext').style.display = 'none'; $('#qCheck').style.display = 'none';
+  const q = quiz[qi], g = BYID[q.gid];
+  if (q.type === 'choice') renderChoice(q, g);
+  else if (q.type === 'match') renderMatch(q, g);
+  else renderOrder(q, g);
+}
+function optsHTML(choices) {
+  return `<div class="opts">${choices.map((c, i) =>
+    `<button class="opt" data-i="${i}"><span class="n">${i + 1}</span><span>${esc(c)}</span></button>`).join('')}</div>`;
+}
+function bindOpts(correct, explain) {
+  $$('#qCard .opt').forEach(b => b.onclick = () => {
+    if (answered) return;
+    answered = true;
+    const picked = +b.dataset.i, right = picked === correct;
+    $$('#qCard .opt').forEach((x, i) => {
+      x.disabled = true;
+      if (i === correct) x.classList.add('right');
+      else if (i === picked) x.classList.add('wrong');
+    });
+    settle(right, explain);
+  });
+}
+function renderChoice(q, g) {
+  const order = shuffle(q.choices.map((c, i) => ({ c, i })));
+  const correct = order.findIndex(o => o.i === q.answer);
+  $('#qCard').innerHTML = `<span class="qtype choice">Isian ／ 穴埋め</span>
+    <div class="qtext">${esc(q.q).replace(/＿＿＿/g, '<span class="bl">＿＿＿</span>')}</div>
+    ${optsHTML(order.map(o => o.c))}<div id="jd"></div>`;
+  bindOpts(correct, `${g.pattern}　${tx(g, 'meaning')}<br>${esc(tx(q, 'explain'))}`);
+}
+function renderMatch(q, g) {
+  const others = shuffle(DATA.filter(x => x.id !== g.id && tx(x, 'meaning') !== tx(g, 'meaning'))).slice(0, 3);
+  const order = shuffle([g, ...others]);
+  const correct = order.findIndex(x => x.id === g.id);
+  $('#qCard').innerHTML = `<span class="qtype match">Arti ／ 意味</span>
+    <div class="qtext">${esc(g.pattern)}<br><span style="font-size:.8rem;color:var(--muted);font-weight:600">${esc(g.form)}</span></div>
+    ${optsHTML(order.map(x => tx(x, 'meaning')))}<div id="jd"></div>`;
+  bindOpts(correct, `${esc(g.pattern)} = ${esc(tx(g, 'meaning'))}<br>${esc(g.examples[0].ja)}`);
+}
+function renderOrder(q, g) {
+  pool = shuffle(q.segments.slice().map((s, i) => ({ s, i })));
+  slot = [];
+  $('#qCard').innerHTML = `<span class="qtype order">Susun kalimat ／ 並べ替え</span>
+    <div class="qtext" style="font-size:.95rem;font-weight:600;color:var(--muted)">${esc(tx(q, 'hint'))}</div>
+    <div class="slot" id="slot"></div><div class="pool" id="pool"></div><div id="jd"></div>`;
+  $('#qCheck').style.display = '';
+  paintOrder();
+}
+function paintOrder() {
+  $('#slot').innerHTML = slot.map((t, n) => `<button class="tok" data-w="s" data-n="${n}">${esc(t.s)}</button>`).join('');
+  $('#pool').innerHTML = pool.map((t, n) => `<button class="tok" data-w="p" data-n="${n}">${esc(t.s)}</button>`).join('');
+  $('#qCheck').disabled = pool.length > 0;
+  $$('#qCard .tok').forEach(b => b.onclick = () => {
+    if (answered) return;
+    const n = +b.dataset.n;
+    if (b.dataset.w === 'p') slot.push(pool.splice(n, 1)[0]);
+    else pool.push(slot.splice(n, 1)[0]);
+    paintOrder();
+  });
+}
+$('#qCheck').onclick = () => {
+  if (answered) return;
+  answered = true;
+  const q = quiz[qi], g = BYID[q.gid];
+  const right = slot.map(t => t.i).every((v, n) => v === n);
+  $$('#qCard .tok').forEach(b => b.disabled = true);
+  $('#qCheck').style.display = 'none';
+  settle(right, `${esc(q.segments.join(''))}<br>${esc(g.pattern)}　${esc(tx(g, 'meaning'))}`);
+};
+function settle(right, explain) {
+  const q = quiz[qi];
+  right ? okN++ : (ngN++, wrongQs.push(q));
+  setMark(q.gid, right ? (progress[q.gid] === 'review' ? 'review' : 'known') : 'review');
+  $('#jd').innerHTML = `<div class="judge ${right ? 'right' : 'wrong'}">
+    <b>${right ? '✓ Benar ／ 正解' : '✗ Salah ／ 不正解'}</b>${explain}</div>`;
+  $('#qOk').textContent = okN; $('#qNg').textContent = ngN;
+  $('#qNext').style.display = '';
+  $('#qNext').focus();
+}
+$('#qNext').onclick = () => { qi++; showQ(); };
+function finish(quitted) {
+  $('#qArea').style.display = 'none';
+  const done = okN + ngN;
+  const pct = done ? Math.round(okN / done * 100) : 0;
+  $('#rPct').textContent = pct + '%';
+  $('#rTxt').innerHTML = `${done} soal ／ ${done}問中 <b>${okN}</b> benar ／ 正解　<b>${ngN}</b> salah ／ 不正解`
+    + (quitted ? '<br>(dihentikan ／ 途中でやめました)' : '');
+  $('#rWrong').style.display = wrongQs.length ? '' : 'none';
+  $('#qResult').style.display = '';
+  refreshStats();
+}
+document.addEventListener('keydown', e => {
+  if ($('#ov').classList.contains('on')) { if (e.key === 'Escape') closeModal(); return; }
+  if (!$('#p-quiz').classList.contains('on') || $('#qArea').style.display === 'none') return;
+  if (answered && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); $('#qNext').click(); return; }
+  if (!answered && /^[1-4]$/.test(e.key)) { const b = $$('#qCard .opt')[+e.key - 1]; if (b) b.click(); }
+});
+
+/* ========== ③ 学習状況 ========== */
+function refreshStats() {
+  const known = DATA.filter(g => progress[g.id] === 'known').length;
+  $('#hdStat').textContent = `${known} / ${DATA.length} hafal ／ 覚えた`;
+  $('#progWrap').innerHTML = LEVELS.map(lv => {
+    const all = DATA.filter(g => g.level === lv), k = all.filter(g => progress[g.id] === 'known').length;
+    const pct = all.length ? Math.round(k / all.length * 100) : 0;
+    return `<div class="prog"><div class="lv"><span>${lv}</span><span>${k} / ${all.length}（${pct}%）</span></div>
+      <div class="bar" style="margin-top:.4rem"><i style="width:${pct}%"></i></div></div>`;
+  }).join('');
+  const rev = DATA.filter(g => progress[g.id] === 'review');
+  $('#reviewGrid').innerHTML = rev.length ? rev.map(cardHTML).join('')
+    : '<p class="hint">Tidak ada ／ ありません</p>';
+  $$('#reviewGrid .gcard').forEach(b => b.onclick = () => openModal(b.dataset.id));
+}
+$('#expBtn').onclick = () => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(progress, null, 1)], { type: 'application/json' }));
+  a.download = 'bunpo-progress.json'; a.click(); URL.revokeObjectURL(a.href);
+};
+$('#resetBtn').onclick = () => {
+  if (confirm('Hapus semua catatan belajar? ／ 学習記録をすべて消しますか？')) {
+    progress = {}; save(); refreshStats(); renderList();
+  }
+};
+
+/* ========== タブ・言語・版 ========== */
+$$('.tab').forEach(t => t.onclick = () => {
+  $$('.tab').forEach(x => x.classList.remove('on')); t.classList.add('on');
+  $$('.panel').forEach(p => p.classList.toggle('on', p.id === t.dataset.p));
+  if (t.dataset.p === 'p-stat') refreshStats();
+});
+$('#langBtn').onclick = () => {
+  LANG = LANG === 'id' ? 'en' : 'id';
+  localStorage.setItem(LANGKEY, LANG);
+  $('#langBtn').textContent = '🌐 ' + LANG.toUpperCase();
+  renderList(); refreshStats();
+  if ($('#ov').classList.contains('on')) openModal(modalId);
+};
+$('#langBtn').textContent = '🌐 ' + LANG.toUpperCase();
+$('#verLabel').textContent = VERSION;
+$('#reloadBtn').onclick = async () => {
+  try { if (window.caches) for (const k of await caches.keys()) await caches.delete(k); } catch (e) {}
+  try { sessionStorage.removeItem('bunpo-reloaded-for'); } catch (e) {}
+  location.replace(location.pathname + '?v=' + Date.now());   // URLを変えて、確実に最新のHTMLを取り直す
+};
+function showLoadError(err) {
+  $('#grid').innerHTML = `<p style="color:var(--red)">Gagal memuat data ／ 読み込み失敗：${err}</p>`;
+}
+/* データの読み込みは合言葉を入れたあと（unlock 内）で行います */
+</script>
+</body>
+</html>

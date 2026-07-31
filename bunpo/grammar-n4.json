@@ -1,0 +1,6441 @@
+{
+ "level": "N4",
+ "count": 87,
+ "grammar": [
+  {
+   "id": "n4-tara",
+   "pattern": "〜たら",
+   "level": "N4",
+   "category": "条件",
+   "form": "動詞た形／い形容詞かった／名詞・な形容詞だった ＋ ら",
+   "meaning_id": "kalau ~ / setelah ~",
+   "meaning_en": "if ~ / when ~",
+   "note_id": "Pola pengandaian yang paling sering dipakai dalam percakapan sehari-hari di lokasi kerja.",
+   "note_en": "The most common conditional in everyday workplace conversation.",
+   "note_ja": "最も広く使える条件形。「痛かったら言ってください」など、利用者さんへの声かけの基本。",
+   "examples": [
+    {
+     "ja": "痛かったら、すぐに言ってくださいね。",
+     "reading": "いたかったら、すぐにいってくださいね。",
+     "id": "Kalau sakit, tolong segera katakan ya.",
+     "en": "If it hurts, please tell me right away.",
+     "scene": "声かけ"
+    },
+    {
+     "ja": "食事が終わったら、口の中を確認します。",
+     "reading": "しょくじがおわったら、くちのなかをかくにんします。",
+     "id": "Setelah makan selesai, saya memeriksa bagian dalam mulut.",
+     "en": "After the meal is over, I check inside the mouth.",
+     "scene": "食事介助"
+    },
+    {
+     "ja": "熱が下がったら、お風呂に入れます。",
+     "reading": "ねつがさがったら、おふろにはいれます。",
+     "id": "Kalau demamnya turun, ia boleh mandi.",
+     "en": "Once the fever goes down, they can bathe.",
+     "scene": "入浴介助"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "痛＿＿＿、すぐに言ってくださいね。",
+     "choices": [
+      "かったら",
+      "いたら",
+      "くたら",
+      "かったなら ば"
+     ],
+     "answer": 0,
+     "explain_id": "Kata sifat い: 痛い → 痛かった → 痛かったら。",
+     "explain_en": "い-adjective: 痛い → 痛かった → 痛かったら."
+    },
+    {
+     "type": "choice",
+     "q": "食事が＿＿＿ら、口の中を確認します。",
+     "choices": [
+      "終わった",
+      "終わる",
+      "終わって",
+      "終わり"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk た + ら = たら。",
+     "explain_en": "た-form + ら = たら."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "熱が",
+      "下がったら",
+      "お風呂に",
+      "入れます"
+     ],
+     "hint_id": "Kalau demamnya turun, ia boleh mandi.",
+     "hint_en": "Once the fever goes down, they can bathe."
+    }
+   ]
+  },
+  {
+   "id": "n4-to-jouken",
+   "pattern": "〜と（条件）",
+   "level": "N4",
+   "category": "条件",
+   "form": "動詞辞書形／ない形 ＋ と",
+   "meaning_id": "kalau ~ pasti ~ (akibat yang selalu terjadi)",
+   "meaning_en": "whenever ~ / if ~ then (always)",
+   "note_id": "Untuk akibat yang PASTI terjadi. Tidak bisa diikuti perintah atau ajakan.",
+   "note_en": "For results that always follow. Cannot be followed by a request or invitation.",
+   "note_ja": "必ずそうなる結果を表す。後ろに依頼・命令・勧誘は置けない（「〜と、〜てください」は誤り）。",
+   "examples": [
+    {
+     "ja": "急に立つと、めまいがします。",
+     "reading": "きゅうにたつと、めまいがします。",
+     "id": "Kalau berdiri mendadak, akan pusing.",
+     "en": "If you stand up suddenly, you get dizzy.",
+     "scene": "転倒予防"
+    },
+    {
+     "ja": "水分が足りないと、脱水になります。",
+     "reading": "すいぶんがたりないと、だっすいになります。",
+     "id": "Kalau kurang cairan, akan terjadi dehidrasi.",
+     "en": "If fluids are insufficient, dehydration occurs.",
+     "scene": "水分管理"
+    },
+    {
+     "ja": "このボタンを押すと、職員が来ます。",
+     "reading": "このボタンをおすと、しょくいんがきます。",
+     "id": "Kalau tombol ini ditekan, petugas akan datang.",
+     "en": "If you press this button, a staff member comes.",
+     "scene": "ナースコール"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "急に＿＿＿と、めまいがします。",
+     "choices": [
+      "立つ",
+      "立ち",
+      "立って",
+      "立った"
+     ],
+     "answer": 0,
+     "explain_id": "Sebelum 「と」 pakai bentuk kamus: 立つ。",
+     "explain_en": "Use the dictionary form before 「と」: 立つ."
+    },
+    {
+     "type": "choice",
+     "q": "水分が足り＿＿＿と、脱水になります。",
+     "choices": [
+      "ない",
+      "ないで",
+      "なくて",
+      "ません"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk ない + と juga bisa dipakai.",
+     "explain_en": "The ない-form + と is also possible."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "このボタンを",
+      "押すと",
+      "職員が",
+      "来ます"
+     ],
+     "hint_id": "Kalau tombol ini ditekan, petugas akan datang.",
+     "hint_en": "If you press this button, a staff member comes."
+    }
+   ]
+  },
+  {
+   "id": "n4-ba",
+   "pattern": "〜ば",
+   "level": "N4",
+   "category": "条件",
+   "form": "動詞（え段）＋ ば ／ い形容詞（い→ければ）",
+   "meaning_id": "kalau ~",
+   "meaning_en": "if ~",
+   "note_id": "Pengandaian yang agak formal; sering dipakai dalam laporan dan penjelasan tertulis.",
+   "note_en": "A slightly formal conditional, common in written reports and explanations.",
+   "note_ja": "やや硬い条件形。記録や説明文で使うことが多い。話し言葉では「たら」が自然。",
+   "examples": [
+    {
+     "ja": "手すりを使えば、安全に歩けます。",
+     "reading": "てすりをつかえば、あんぜんにあるけます。",
+     "id": "Kalau memakai pegangan tangan, bisa berjalan dengan aman.",
+     "en": "If you use the handrail, you can walk safely.",
+     "scene": "歩行介助"
+    },
+    {
+     "ja": "早く気づけば、転倒を防げます。",
+     "reading": "はやくきづけば、てんとうをふせげます。",
+     "id": "Kalau cepat menyadari, jatuh bisa dicegah.",
+     "en": "If you notice early, falls can be prevented.",
+     "scene": "事故予防"
+    },
+    {
+     "ja": "痛みが強ければ、看護師に報告してください。",
+     "reading": "いたみがつよければ、かんごしにほうこくしてください。",
+     "id": "Kalau rasa sakitnya kuat, tolong laporkan ke perawat.",
+     "en": "If the pain is severe, please report it to the nurse.",
+     "scene": "申し送り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "手すりを＿＿＿ば、安全に歩けます。",
+     "choices": [
+      "使え",
+      "使い",
+      "使う",
+      "使って"
+     ],
+     "answer": 0,
+     "explain_id": "使う → 使え + ば。Vokal akhir menjadi え。",
+     "explain_en": "使う → 使え + ば. The final vowel changes to え."
+    },
+    {
+     "type": "choice",
+     "q": "痛みが＿＿＿ば、看護師に報告してください。",
+     "choices": [
+      "強けれ",
+      "強い",
+      "強く",
+      "強かった"
+     ],
+     "answer": 0,
+     "explain_id": "Kata sifat い: 強い → 強ければ。",
+     "explain_en": "い-adjective: 強い → 強ければ."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "早く",
+      "気づけば",
+      "転倒を",
+      "防げます"
+     ],
+     "hint_id": "Kalau cepat menyadari, jatuh bisa dicegah.",
+     "hint_en": "If you notice early, falls can be prevented."
+    }
+   ]
+  },
+  {
+   "id": "n4-ta-hou-ga-ii",
+   "pattern": "〜たほうがいいです",
+   "level": "N4",
+   "category": "助言",
+   "form": "動詞た形 ＋ ほうがいいです",
+   "meaning_id": "sebaiknya ~",
+   "meaning_en": "you'd better ~ / it's better to ~",
+   "note_id": "Saran. Bentuk た, bukan bentuk kamus — kesalahan yang sering terjadi.",
+   "note_en": "Advice. Uses the た-form, not the dictionary form — a common error.",
+   "note_ja": "助言。辞書形ではなく「た形」を使う点が間違えやすい。",
+   "examples": [
+    {
+     "ja": "水分をもっと取ったほうがいいですよ。",
+     "reading": "すいぶんをもっととったほうがいいですよ。",
+     "id": "Sebaiknya minum lebih banyak ya.",
+     "en": "You'd better drink more fluids.",
+     "scene": "水分管理"
+    },
+    {
+     "ja": "看護師に見てもらったほうがいいです。",
+     "reading": "かんごしにみてもらったほうがいいです。",
+     "id": "Sebaiknya diperiksa oleh perawat.",
+     "en": "It's better to have the nurse take a look.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "今日は無理をしないほうがいいですね。",
+     "reading": "きょうはむりをしないほうがいいですね。",
+     "id": "Hari ini sebaiknya jangan memaksakan diri ya.",
+     "en": "You'd better not overdo it today.",
+     "scene": "声かけ"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "水分をもっと＿＿＿ほうがいいですよ。",
+     "choices": [
+      "取った",
+      "取る",
+      "取って",
+      "取り"
+     ],
+     "answer": 0,
+     "explain_id": "Pakai bentuk た: 取った + ほうがいい。",
+     "explain_en": "Use the た-form: 取った + ほうがいい."
+    },
+    {
+     "type": "choice",
+     "q": "今日は無理を＿＿＿ほうがいいですね。",
+     "choices": [
+      "しない",
+      "しなかった",
+      "しなくて",
+      "しないで"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk negatif: 〜ないほうがいい (bukan なかった)。",
+     "explain_en": "The negative is 〜ないほうがいい (not なかった)."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "看護師に",
+      "見てもらった",
+      "ほうが",
+      "いいです"
+     ],
+     "hint_id": "Sebaiknya diperiksa oleh perawat.",
+     "hint_en": "It's better to have the nurse take a look."
+    }
+   ]
+  },
+  {
+   "id": "n4-kamoshiremasen",
+   "pattern": "〜かもしれません",
+   "level": "N4",
+   "category": "推量",
+   "form": "普通形 ＋ かもしれません",
+   "meaning_id": "mungkin ~",
+   "meaning_en": "might ~ / may ~",
+   "note_id": "Kemungkinan yang belum pasti. WAJIB dipakai saat melaporkan dugaan, bukan fakta.",
+   "note_en": "An uncertain possibility — essential when reporting a guess rather than a fact.",
+   "note_ja": "確実でない可能性。事実ではなく推測を報告するときは必ずこれを付ける（記録の基本）。",
+   "examples": [
+    {
+     "ja": "風邪をひいたかもしれません。",
+     "reading": "かぜをひいたかもしれません。",
+     "id": "Mungkin ia terkena flu.",
+     "en": "He/She may have caught a cold.",
+     "scene": "観察・記録"
+    },
+    {
+     "ja": "少し痛みがあるかもしれません。",
+     "reading": "すこしいたみがあるかもしれません。",
+     "id": "Mungkin ada sedikit rasa sakit.",
+     "en": "There may be some pain.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "眠れなかったかもしれません。",
+     "reading": "ねむれなかったかもしれません。",
+     "id": "Mungkin ia tidak bisa tidur.",
+     "en": "He/She may not have slept.",
+     "scene": "夜勤記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "風邪を＿＿＿かもしれません。",
+     "choices": [
+      "ひいた",
+      "ひきます",
+      "ひいて",
+      "ひきました"
+     ],
+     "answer": 0,
+     "explain_id": "Sebelum かもしれません pakai bentuk biasa (futsuu-kei): ひいた。",
+     "explain_en": "Use the plain form before かもしれません: ひいた."
+    },
+    {
+     "type": "choice",
+     "q": "少し痛みが＿＿＿かもしれません。",
+     "choices": [
+      "ある",
+      "あります",
+      "あって",
+      "あった です"
+     ],
+     "answer": 0,
+     "explain_id": "あります → bentuk biasa = ある。",
+     "explain_en": "あります → plain form is ある."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "昨夜は",
+      "眠れなかった",
+      "かも",
+      "しれません"
+     ],
+     "hint_id": "Semalam mungkin ia tidak bisa tidur.",
+     "hint_en": "He/She may not have slept last night."
+    }
+   ]
+  },
+  {
+   "id": "n4-to-omoimasu",
+   "pattern": "〜と思います",
+   "level": "N4",
+   "category": "意見",
+   "form": "普通形 ＋ と思います",
+   "meaning_id": "saya pikir ~",
+   "meaning_en": "I think ~",
+   "note_id": "Pendapat pribadi. Dalam catatan resmi, pisahkan dengan jelas antara fakta dan pendapat.",
+   "note_en": "A personal opinion — in official records, keep facts and opinions clearly separate.",
+   "note_ja": "自分の意見。記録では「事実」と「意見」を混ぜないこと。意見にはこれを付ける。",
+   "examples": [
+    {
+     "ja": "少し疲れていると思います。",
+     "reading": "すこしつかれているとおもいます。",
+     "id": "Saya pikir ia sedikit lelah.",
+     "en": "I think he/she is a little tired.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "今日は入浴を控えたほうがいいと思います。",
+     "reading": "きょうはにゅうよくをひかえたほうがいいとおもいます。",
+     "id": "Saya pikir hari ini sebaiknya menahan diri untuk tidak mandi.",
+     "en": "I think it's better to skip the bath today.",
+     "scene": "カンファレンス"
+    },
+    {
+     "ja": "この方法のほうが安全だと思います。",
+     "reading": "このほうほうのほうがあんぜんだとおもいます。",
+     "id": "Saya pikir cara ini lebih aman.",
+     "en": "I think this way is safer.",
+     "scene": "カンファレンス"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "少し疲れて＿＿＿と思います。",
+     "choices": [
+      "いる",
+      "います",
+      "いて",
+      "いた です"
+     ],
+     "answer": 0,
+     "explain_id": "Sebelum と思います pakai bentuk biasa: いる。",
+     "explain_en": "Use the plain form before と思います: いる."
+    },
+    {
+     "type": "choice",
+     "q": "この方法のほうが安全＿＿＿と思います。",
+     "choices": [
+      "だ",
+      "です",
+      "である です",
+      "な"
+     ],
+     "answer": 0,
+     "explain_id": "Kata sifat な / kata benda + だ + と思います。",
+     "explain_en": "な-adjectives and nouns take だ before と思います."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "今日は",
+      "入浴を",
+      "控えたほうがいい",
+      "と思います"
+     ],
+     "hint_id": "Saya pikir hari ini sebaiknya tidak mandi dulu.",
+     "hint_en": "I think it's better to skip the bath today."
+    }
+   ]
+  },
+  {
+   "id": "n4-to-itte-imashita",
+   "pattern": "〜と言っていました",
+   "level": "N4",
+   "category": "伝聞",
+   "form": "普通形 ＋ と言っていました",
+   "meaning_id": "katanya ~ / (orang) mengatakan ~",
+   "meaning_en": "he/she said that ~",
+   "note_id": "Menyampaikan ucapan orang lain PERSIS seperti aslinya — dasar dari serah terima.",
+   "note_en": "Relays someone's exact words — the basis of shift handover.",
+   "note_ja": "利用者さんや他の職員の言葉をそのまま伝える。申し送りの土台になる文型。",
+   "examples": [
+    {
+     "ja": "田中さんが、頭が痛いと言っていました。",
+     "reading": "たなかさんが、あたまがいたいといっていました。",
+     "id": "Tanaka-san mengatakan kepalanya sakit.",
+     "en": "Mr./Ms. Tanaka said they had a headache.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "ご家族が、明日面会に来ると言っていました。",
+     "reading": "ごかぞくが、あしためんかいにくるといっていました。",
+     "id": "Keluarganya mengatakan besok akan datang menjenguk.",
+     "en": "The family said they will visit tomorrow.",
+     "scene": "連絡"
+    },
+    {
+     "ja": "夜勤の職員が、よく眠れていたと言っていました。",
+     "reading": "やきんのしょくいんが、よくねむれていたといっていました。",
+     "id": "Petugas shift malam mengatakan ia bisa tidur nyenyak.",
+     "en": "The night staff said he/she slept well.",
+     "scene": "申し送り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "田中さんが、頭が＿＿＿と言っていました。",
+     "choices": [
+      "痛い",
+      "痛いです",
+      "痛くて",
+      "痛み"
+     ],
+     "answer": 0,
+     "explain_id": "Sebelum と言っていました pakai bentuk biasa: 痛い。",
+     "explain_en": "Use the plain form before と言っていました: 痛い."
+    },
+    {
+     "type": "choice",
+     "q": "ご家族が、明日面会に＿＿＿と言っていました。",
+     "choices": [
+      "来る",
+      "来ます",
+      "来て",
+      "来た です"
+     ],
+     "answer": 0,
+     "explain_id": "来ます → bentuk biasa = 来る。",
+     "explain_en": "来ます → plain form is 来る."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "夜勤の職員が",
+      "よく眠れていた",
+      "と",
+      "言っていました"
+     ],
+     "hint_id": "Petugas shift malam mengatakan ia bisa tidur nyenyak.",
+     "hint_en": "The night staff said he/she slept well."
+    }
+   ]
+  },
+  {
+   "id": "n4-sou-desu-youtai",
+   "pattern": "〜そうです（様子）",
+   "level": "N4",
+   "category": "推量",
+   "form": "動詞ます形／い形容詞（い を取る）／な形容詞 ＋ そうです",
+   "meaning_id": "kelihatannya ~ / tampak ~",
+   "meaning_en": "looks ~ / seems ~",
+   "note_id": "Kesimpulan dari APA YANG TERLIHAT. Sangat penting untuk mencatat kondisi yang tidak bisa ditanyakan.",
+   "note_en": "A judgment from what you can SEE — vital for recording residents who cannot tell you.",
+   "note_ja": "見た目から判断したこと。話せない利用者さんの状態を記録するのに欠かせない。",
+   "examples": [
+    {
+     "ja": "田中さんは眠そうです。",
+     "reading": "たなかさんはねむそうです。",
+     "id": "Tanaka-san kelihatannya mengantuk.",
+     "en": "Mr./Ms. Tanaka looks sleepy.",
+     "scene": "観察・記録"
+    },
+    {
+     "ja": "痛そうな顔をしています。",
+     "reading": "いたそうなかおをしています。",
+     "id": "Wajahnya tampak kesakitan.",
+     "en": "He/She has a pained expression.",
+     "scene": "観察・記録"
+    },
+    {
+     "ja": "今にも転びそうでした。",
+     "reading": "いまにもころびそうでした。",
+     "id": "Sepertinya hampir saja jatuh.",
+     "en": "He/She looked about to fall.",
+     "scene": "ヒヤリハット"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "田中さんは＿＿＿そうです。",
+     "choices": [
+      "眠",
+      "眠い",
+      "眠くて",
+      "眠る"
+     ],
+     "answer": 0,
+     "explain_id": "Kata sifat い: hilangkan い → 眠 + そうです。",
+     "explain_en": "For い-adjectives, drop the い: 眠 + そうです."
+    },
+    {
+     "type": "choice",
+     "q": "今にも＿＿＿そうでした。",
+     "choices": [
+      "転び",
+      "転ぶ",
+      "転んで",
+      "転んだ"
+     ],
+     "answer": 0,
+     "explain_id": "転びます → hilangkan ます → 転び + そう。",
+     "explain_en": "転びます → drop ます → 転び + そう."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "痛そうな",
+      "顔を",
+      "して",
+      "います"
+     ],
+     "hint_id": "Wajahnya tampak kesakitan.",
+     "hint_en": "He/She has a pained expression."
+    }
+   ]
+  },
+  {
+   "id": "n4-sou-desu-denbun",
+   "pattern": "〜そうです（伝聞）",
+   "level": "N4",
+   "category": "伝聞",
+   "form": "普通形 ＋ そうです",
+   "meaning_id": "katanya ~ / kabarnya ~",
+   "meaning_en": "I hear that ~",
+   "note_id": "Informasi yang DIDENGAR dari orang lain. Bedakan dengan 「〜そうです」 bentuk 'kelihatannya' di atas.",
+   "note_en": "Information heard from someone else — distinct from the 'looks like' 〜そうです above.",
+   "note_ja": "人から聞いた情報。「様子のそうです」（ます形に付く）と接続が違うので区別する。",
+   "examples": [
+    {
+     "ja": "明日は新しい利用者さんが入るそうです。",
+     "reading": "あしたはあたらしいりようしゃさんがはいるそうです。",
+     "id": "Katanya besok ada penerima layanan baru yang masuk.",
+     "en": "I hear a new resident is coming in tomorrow.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "山田さんは昨日から食欲がないそうです。",
+     "reading": "やまださんはきのうからしょくよくがないそうです。",
+     "id": "Katanya Yamada-san tidak nafsu makan sejak kemarin.",
+     "en": "I hear Mr./Ms. Yamada has had no appetite since yesterday.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "来週、避難訓練があるそうです。",
+     "reading": "らいしゅう、ひなんくんれんがあるそうです。",
+     "id": "Katanya minggu depan ada latihan evakuasi.",
+     "en": "I hear there's an evacuation drill next week.",
+     "scene": "施設の連絡"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "明日は新しい利用者さんが＿＿＿そうです。",
+     "choices": [
+      "入る",
+      "入り",
+      "入って",
+      "入ります"
+     ],
+     "answer": 0,
+     "explain_id": "Kabar dari orang lain: bentuk biasa + そうです。",
+     "explain_en": "Hearsay uses the plain form + そうです."
+    },
+    {
+     "type": "choice",
+     "q": "山田さんは食欲が＿＿＿そうです。",
+     "choices": [
+      "ない",
+      "なさ",
+      "なく",
+      "ありません"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk biasa dari ありません = ない。",
+     "explain_en": "The plain form of ありません is ない."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "来週",
+      "避難訓練が",
+      "ある",
+      "そうです"
+     ],
+     "hint_id": "Katanya minggu depan ada latihan evakuasi.",
+     "hint_en": "I hear there's an evacuation drill next week."
+    }
+   ]
+  },
+  {
+   "id": "n4-you-desu",
+   "pattern": "〜ようです",
+   "level": "N4",
+   "category": "推量",
+   "form": "普通形（な形容詞な／名詞の）＋ ようです",
+   "meaning_id": "sepertinya ~",
+   "meaning_en": "it seems that ~",
+   "note_id": "Dugaan berdasarkan beberapa bukti yang dilihat sendiri. Lebih pasti daripada 「かもしれません」.",
+   "note_en": "An inference from evidence you observed — stronger than 「かもしれません」.",
+   "note_ja": "自分が見た複数の根拠からの推測。「かもしれません」より確からしい。",
+   "examples": [
+    {
+     "ja": "少し熱があるようです。",
+     "reading": "すこしねつがあるようです。",
+     "id": "Sepertinya ada sedikit demam.",
+     "en": "It seems there is a slight fever.",
+     "scene": "観察・記録"
+    },
+    {
+     "ja": "昨夜はよく眠れなかったようです。",
+     "reading": "さくやはよくねむれなかったようです。",
+     "id": "Sepertinya semalam ia tidak bisa tidur nyenyak.",
+     "en": "It seems he/she didn't sleep well last night.",
+     "scene": "夜勤記録"
+    },
+    {
+     "ja": "右足が痛いようです。かばって歩いています。",
+     "reading": "みぎあしがいたいようです。かばってあるいています。",
+     "id": "Sepertinya kaki kanannya sakit. Ia berjalan sambil melindunginya.",
+     "en": "His/Her right leg seems to hurt — they're favoring it when walking.",
+     "scene": "観察・記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "少し熱が＿＿＿ようです。",
+     "choices": [
+      "ある",
+      "あり",
+      "あって",
+      "あります"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk biasa + ようです。",
+     "explain_en": "Plain form + ようです."
+    },
+    {
+     "type": "choice",
+     "q": "昨夜はよく＿＿＿ようです。",
+     "choices": [
+      "眠れなかった",
+      "眠れません",
+      "眠れなくて",
+      "眠れないでした"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk biasa lampau negatif: 眠れなかった。",
+     "explain_en": "Plain past negative: 眠れなかった."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "右足が",
+      "痛い",
+      "ようです"
+     ],
+     "hint_id": "Sepertinya kaki kanannya sakit.",
+     "hint_en": "His/Her right leg seems to hurt."
+    }
+   ]
+  },
+  {
+   "id": "n4-te-agemasu",
+   "pattern": "〜てあげます",
+   "level": "N4",
+   "category": "授受",
+   "form": "動詞て形 ＋ あげます",
+   "meaning_id": "melakukan ~ untuk orang lain",
+   "meaning_en": "do ~ for someone",
+   "note_id": "HATI-HATI: kepada penerima layanan terdengar seperti berbaik hati dari atas. Lebih baik pakai 「〜します」 atau 「お〜します」.",
+   "note_en": "CAUTION: to a resident this can sound condescending. Prefer plain 「〜します」 or humble 「お〜します」.",
+   "note_ja": "利用者さんに使うと「してやる」という上からの響きになる。「〜します」「お〜します」を使うのが原則。仕組みの理解のために学ぶ。",
+   "examples": [
+    {
+     "ja": "新しい職員に、記録の書き方を教えてあげました。",
+     "reading": "あたらしいしょくいんに、きろくのかきかたをおしえてあげました。",
+     "id": "Saya mengajari petugas baru cara menulis catatan.",
+     "en": "I showed the new staff member how to write records.",
+     "scene": "職員間"
+    },
+    {
+     "ja": "同僚の代わりに、夜勤を代わってあげました。",
+     "reading": "どうりょうのかわりに、やきんをかわってあげました。",
+     "id": "Saya menggantikan shift malam rekan kerja.",
+     "en": "I covered a colleague's night shift for them.",
+     "scene": "職員間"
+    },
+    {
+     "ja": "（誤り）お茶を入れてあげましょうか。→（正しい）お茶をお入れしましょうか。",
+     "reading": "おちゃをおいれしましょうか。",
+     "id": "(Salah) 〜てあげましょうか → (Benar) お入れしましょうか — kepada penerima layanan.",
+     "en": "(Wrong) 〜てあげましょうか → (Right) お入れしましょうか when speaking to a resident.",
+     "scene": "敬語の注意"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "新しい職員に、記録の書き方を＿＿＿あげました。",
+     "choices": [
+      "教えて",
+      "教えって",
+      "教えるて",
+      "教えた"
+     ],
+     "answer": 0,
+     "explain_id": "教える → bentuk て = 教えて。",
+     "explain_en": "教える → te-form is 教えて."
+    },
+    {
+     "type": "choice",
+     "q": "利用者さんにお茶を出すとき、正しいのはどれですか。",
+     "choices": [
+      "お入れしましょうか",
+      "入れてあげましょうか",
+      "入れてやりましょうか",
+      "入れてあげますね"
+     ],
+     "answer": 0,
+     "explain_id": "Kepada penerima layanan pakai bentuk merendah 「お〜します」.",
+     "explain_en": "Use the humble 「お〜します」 with residents."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "同僚の代わりに",
+      "夜勤を",
+      "代わって",
+      "あげました"
+     ],
+     "hint_id": "Saya menggantikan shift malam rekan kerja.",
+     "hint_en": "I covered a colleague's night shift."
+    }
+   ]
+  },
+  {
+   "id": "n4-te-kuremasu",
+   "pattern": "〜てくれます",
+   "level": "N4",
+   "category": "授受",
+   "form": "動詞て形 ＋ くれます",
+   "meaning_id": "(orang lain) melakukan ~ untuk saya",
+   "meaning_en": "someone does ~ for me",
+   "note_id": "Menyatakan rasa terima kasih atas perbuatan orang lain kepada kita atau kelompok kita.",
+   "note_en": "Expresses gratitude for what someone did for me or my side.",
+   "note_ja": "相手が自分（の側）にしてくれたこと。感謝の気持ちが入る。記録では利用者の協力を書くのに使える。",
+   "examples": [
+    {
+     "ja": "先輩が、やり方を教えてくれました。",
+     "reading": "せんぱいが、やりかたをおしえてくれました。",
+     "id": "Senior saya mengajari cara melakukannya.",
+     "en": "My senior showed me how to do it.",
+     "scene": "職員間"
+    },
+    {
+     "ja": "田中さんが、自分で立ってくれました。",
+     "reading": "たなかさんが、じぶんでたってくれました。",
+     "id": "Tanaka-san bersedia berdiri sendiri.",
+     "en": "Mr./Ms. Tanaka stood up by themselves for me.",
+     "scene": "記録"
+    },
+    {
+     "ja": "ご家族が、着替えを持ってきてくれました。",
+     "reading": "ごかぞくが、きがえをもってきてくれました。",
+     "id": "Keluarganya membawakan pakaian ganti.",
+     "en": "The family brought a change of clothes for us.",
+     "scene": "連絡"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "先輩が、やり方を教えて＿＿＿。",
+     "choices": [
+      "くれました",
+      "あげました",
+      "もらいました",
+      "いきました"
+     ],
+     "answer": 0,
+     "explain_id": "Orang lain melakukan untuk SAYA = 〜てくれました。",
+     "explain_en": "Someone did it for ME = 〜てくれました."
+    },
+    {
+     "type": "choice",
+     "q": "ご家族が、着替えを持ってきて＿＿＿。",
+     "choices": [
+      "くれました",
+      "あげました",
+      "させました",
+      "おきました"
+     ],
+     "answer": 0,
+     "explain_id": "Pihak lain berbuat baik kepada kita = くれます。",
+     "explain_en": "The other party did something for us = くれます."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "田中さんが",
+      "自分で",
+      "立って",
+      "くれました"
+     ],
+     "hint_id": "Tanaka-san bersedia berdiri sendiri.",
+     "hint_en": "Mr./Ms. Tanaka stood up by themselves."
+    }
+   ]
+  },
+  {
+   "id": "n4-te-moraimasu",
+   "pattern": "〜てもらいます",
+   "level": "N4",
+   "category": "授受",
+   "form": "動詞て形 ＋ もらいます",
+   "meaning_id": "minta tolong (orang) untuk ~",
+   "meaning_en": "have someone do ~ / get someone to do ~",
+   "note_id": "Saya yang meminta, orang lain yang melakukan. Bentuk sopannya 「〜ていただきます」.",
+   "note_en": "I request; the other person acts. The polite version is 「〜ていただきます」.",
+   "note_ja": "こちらが頼んで相手にしてもらう。丁寧形は「〜ていただきます」で、介護記録ではこちらを使う。",
+   "examples": [
+    {
+     "ja": "看護師に血圧を測ってもらいました。",
+     "reading": "かんごしにけつあつをはかってもらいました。",
+     "id": "Saya minta perawat mengukur tekanan darahnya.",
+     "en": "I had the nurse take the blood pressure.",
+     "scene": "バイタル測定"
+    },
+    {
+     "ja": "ご家族に確認してもらってください。",
+     "reading": "ごかぞくにかくにんしてもらってください。",
+     "id": "Tolong minta keluarganya untuk memastikan.",
+     "en": "Please have the family confirm it.",
+     "scene": "連絡"
+    },
+    {
+     "ja": "田中さんに、少し待っていただきました。",
+     "reading": "たなかさんに、すこしまっていただきました。",
+     "id": "Saya meminta Tanaka-san untuk menunggu sebentar.",
+     "en": "I had Mr./Ms. Tanaka wait a little.",
+     "scene": "記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "看護師に血圧を測って＿＿＿。",
+     "choices": [
+      "もらいました",
+      "あげました",
+      "くれました",
+      "いきました"
+     ],
+     "answer": 0,
+     "explain_id": "Saya yang minta → 〜てもらいました。",
+     "explain_en": "I asked for it → 〜てもらいました."
+    },
+    {
+     "type": "choice",
+     "q": "利用者さんに使う丁寧な言い方はどれですか。",
+     "choices": [
+      "待っていただきました",
+      "待ってもらいました",
+      "待たせました",
+      "待ってあげました"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk sopan dari もらう adalah いただく。",
+     "explain_en": "The polite form of もらう is いただく."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "ご家族に",
+      "確認して",
+      "もらって",
+      "ください"
+     ],
+     "hint_id": "Tolong minta keluarganya untuk memastikan.",
+     "hint_en": "Please have the family confirm it."
+    }
+   ]
+  },
+  {
+   "id": "n4-te-itadakemasenka",
+   "pattern": "〜ていただけませんか",
+   "level": "N4",
+   "category": "依頼・指示",
+   "form": "動詞て形 ＋ いただけませんか",
+   "meaning_id": "bisakah Anda ~? (sangat sopan)",
+   "meaning_en": "could you kindly ~?",
+   "note_id": "Permintaan paling sopan. Dipakai kepada atasan, perawat, dokter, dan keluarga penerima layanan.",
+   "note_en": "The most polite request — for superiors, nurses, doctors, and families.",
+   "note_ja": "最も丁寧な依頼。上司・看護師・医師・ご家族に使う。実習生が最初に覚えるべき敬語の一つ。",
+   "examples": [
+    {
+     "ja": "すみません、少し手伝っていただけませんか。",
+     "reading": "すみません、すこしてつだっていただけませんか。",
+     "id": "Permisi, bisakah Anda membantu sedikit?",
+     "en": "Excuse me, could you help me for a moment?",
+     "scene": "職員間"
+    },
+    {
+     "ja": "看護師さんに見ていただけませんか。",
+     "reading": "かんごしさんにみていただけませんか。",
+     "id": "Bisakah perawat memeriksanya?",
+     "en": "Could the nurse take a look at this?",
+     "scene": "報告・連絡"
+    },
+    {
+     "ja": "もう一度、説明していただけませんか。",
+     "reading": "もういちど、せつめいしていただけませんか。",
+     "id": "Bisakah Anda menjelaskan sekali lagi?",
+     "en": "Could you explain that once more?",
+     "scene": "職員間"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "すみません、少し＿＿＿いただけませんか。",
+     "choices": [
+      "手伝って",
+      "手伝いて",
+      "手伝うて",
+      "手伝った"
+     ],
+     "answer": 0,
+     "explain_id": "手伝う → bentuk て = 手伝って。",
+     "explain_en": "手伝う → te-form is 手伝って."
+    },
+    {
+     "type": "choice",
+     "q": "上司に頼むとき、最も丁寧なのはどれですか。",
+     "choices": [
+      "説明していただけませんか",
+      "説明してください",
+      "説明してくれませんか",
+      "説明して"
+     ],
+     "answer": 0,
+     "explain_id": "いただけませんか paling sopan.",
+     "explain_en": "いただけませんか is the most polite."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "看護師さんに",
+      "見て",
+      "いただけ",
+      "ませんか"
+     ],
+     "hint_id": "Bisakah perawat memeriksanya?",
+     "hint_en": "Could the nurse take a look?"
+    }
+   ]
+  },
+  {
+   "id": "n4-te-okimasu",
+   "pattern": "〜ておきます",
+   "level": "N4",
+   "category": "準備",
+   "form": "動詞て形 ＋ おきます",
+   "meaning_id": "melakukan ~ terlebih dahulu (sebagai persiapan)",
+   "meaning_en": "do ~ in advance / leave it done",
+   "note_id": "Persiapan sebelum sesuatu terjadi. Inti dari pekerjaan sebelum shift berikutnya.",
+   "note_en": "Preparation done ahead of time — the core of getting things ready for the next shift.",
+   "note_ja": "あとのことを考えて、前もってやっておく。次の勤務者のための準備を表す基本文型。",
+   "examples": [
+    {
+     "ja": "お湯の温度を確認しておきます。",
+     "reading": "おゆのおんどをかくにんしておきます。",
+     "id": "Saya periksa dulu suhu airnya.",
+     "en": "I'll check the water temperature beforehand.",
+     "scene": "入浴介助"
+    },
+    {
+     "ja": "タオルを準備しておいてください。",
+     "reading": "タオルをじゅんびしておいてください。",
+     "id": "Tolong siapkan handuknya terlebih dahulu.",
+     "en": "Please have the towels ready in advance.",
+     "scene": "入浴準備"
+    },
+    {
+     "ja": "記録に書いておきましたので、確認してください。",
+     "reading": "きろくにかいておきましたので、かくにんしてください。",
+     "id": "Saya sudah menuliskannya di catatan, tolong diperiksa.",
+     "en": "I've written it in the record, so please check it.",
+     "scene": "申し送り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "お湯の温度を＿＿＿おきます。",
+     "choices": [
+      "確認して",
+      "確認し",
+      "確認する",
+      "確認した"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk て + おきます。",
+     "explain_en": "Te-form + おきます."
+    },
+    {
+     "type": "choice",
+     "q": "タオルを準備して＿＿＿ください。",
+     "choices": [
+      "おいて",
+      "おき",
+      "おく",
+      "おいた"
+     ],
+     "answer": 0,
+     "explain_id": "おきます → bentuk て = おいて。",
+     "explain_en": "おきます → te-form is おいて."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "記録に",
+      "書いて",
+      "おきました",
+      "ので"
+     ],
+     "hint_id": "Karena sudah saya tuliskan di catatan,",
+     "hint_en": "Since I've already written it in the record,"
+    }
+   ]
+  },
+  {
+   "id": "n4-te-arimasu",
+   "pattern": "〜てあります",
+   "level": "N4",
+   "category": "状態",
+   "form": "他動詞て形 ＋ あります",
+   "meaning_id": "sudah di~ (dan tetap dalam keadaan itu)",
+   "meaning_en": "has been done (and remains so)",
+   "note_id": "Hasil perbuatan seseorang yang masih terlihat. Berbeda dari 「〜ています」 yang menunjukkan keadaan alami.",
+   "note_en": "The visible result of someone's action — unlike 「〜ています」, which shows a natural state.",
+   "note_ja": "誰かが意図的にした結果が残っている状態。「窓が開いています」（自然の状態）との違いに注意。",
+   "examples": [
+    {
+     "ja": "ベッドの柵は上げてあります。",
+     "reading": "ベッドのさくはあげてあります。",
+     "id": "Pagar tempat tidurnya sudah dinaikkan.",
+     "en": "The bed rail has been raised.",
+     "scene": "転落予防"
+    },
+    {
+     "ja": "お薬は箱に入れてあります。",
+     "reading": "おくすりははこにいれてあります。",
+     "id": "Obatnya sudah dimasukkan ke dalam kotak.",
+     "en": "The medicine has been put in the box.",
+     "scene": "服薬管理"
+    },
+    {
+     "ja": "次の方の車いすが用意してあります。",
+     "reading": "つぎのかたのくるまいすがよういしてあります。",
+     "id": "Kursi roda untuk orang berikutnya sudah disiapkan.",
+     "en": "The wheelchair for the next person has been prepared.",
+     "scene": "入浴介助"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "ベッドの柵は＿＿＿あります。",
+     "choices": [
+      "上げて",
+      "上がって",
+      "上げ",
+      "上げる"
+     ],
+     "answer": 0,
+     "explain_id": "Kata kerja transitif (上げる) + てあります。",
+     "explain_en": "Transitive verb (上げる) + てあります."
+    },
+    {
+     "type": "choice",
+     "q": "誰かが用意した結果が残っているのはどちらですか。",
+     "choices": [
+      "用意してあります",
+      "用意しています",
+      "用意します",
+      "用意しました か"
+     ],
+     "answer": 0,
+     "explain_id": "「〜てあります」= hasil perbuatan yang tetap ada.",
+     "explain_en": "「〜てあります」= the lasting result of an action."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "お薬は",
+      "箱に",
+      "入れて",
+      "あります"
+     ],
+     "hint_id": "Obatnya sudah dimasukkan ke dalam kotak.",
+     "hint_en": "The medicine has been put in the box."
+    }
+   ]
+  },
+  {
+   "id": "n4-te-shimaimasu",
+   "pattern": "〜てしまいます",
+   "level": "N4",
+   "category": "完了・後悔",
+   "form": "動詞て形 ＋ しまいます",
+   "meaning_id": "terlanjur ~ / sampai habis ~",
+   "meaning_en": "end up doing ~ / do completely",
+   "note_id": "Dua arti: (1) selesai sepenuhnya, (2) terjadi hal yang tidak diinginkan. Dalam laporan insiden dipakai arti kedua.",
+   "note_en": "Two meanings: (1) completely finished, (2) something regrettable happened. Incident reports use the second.",
+   "note_ja": "（1）完全に終わる（2）望ましくないことが起きた。ヒヤリハット報告では（2）の意味で使う。",
+   "examples": [
+    {
+     "ja": "お茶をこぼしてしまいました。",
+     "reading": "おちゃをこぼしてしまいました。",
+     "id": "Tehnya tertumpah (tidak sengaja).",
+     "en": "I ended up spilling the tea.",
+     "scene": "ヒヤリハット"
+    },
+    {
+     "ja": "目を離したすきに、立ち上がってしまいました。",
+     "reading": "めをはなしたすきに、たちあがってしまいました。",
+     "id": "Saat lengah sebentar, ia terlanjur berdiri.",
+     "en": "The moment I looked away, they got up.",
+     "scene": "ヒヤリハット"
+    },
+    {
+     "ja": "薬を落としてしまったので、看護師に報告しました。",
+     "reading": "くすりをおとしてしまったので、かんごしにほうこくしました。",
+     "id": "Karena obatnya terjatuh, saya melaporkannya ke perawat.",
+     "en": "I dropped the medicine, so I reported it to the nurse.",
+     "scene": "服薬介助"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "お茶を＿＿＿しまいました。",
+     "choices": [
+      "こぼして",
+      "こぼし",
+      "こぼす",
+      "こぼした"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk て + しまいました。",
+     "explain_en": "Te-form + しまいました."
+    },
+    {
+     "type": "choice",
+     "q": "「立ち上がってしまいました」の意味に近いのはどれですか。",
+     "choices": [
+      "よくないことが起きた",
+      "わざとした",
+      "ゆっくり立った",
+      "立つ練習をした"
+     ],
+     "answer": 0,
+     "explain_id": "「〜てしまう」 menunjukkan hal yang tidak diinginkan.",
+     "explain_en": "「〜てしまう」 marks an unintended, unwanted event."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "薬を",
+      "落として",
+      "しまったので",
+      "報告しました"
+     ],
+     "hint_id": "Karena obatnya terjatuh, saya melaporkannya.",
+     "hint_en": "I dropped the medicine, so I reported it."
+    }
+   ]
+  },
+  {
+   "id": "n4-te-mimasu",
+   "pattern": "〜てみます",
+   "level": "N4",
+   "category": "試行",
+   "form": "動詞て形 ＋ みます",
+   "meaning_id": "mencoba ~",
+   "meaning_en": "try doing ~",
+   "note_id": "Mencoba sesuatu untuk melihat hasilnya. Cocok untuk mengajak penerima layanan tanpa memaksa.",
+   "note_en": "Trying something to see how it goes — good for inviting a resident without pressure.",
+   "note_ja": "試しにやってみる。押しつけずに利用者さんを誘うときに便利（「少し歩いてみましょうか」）。",
+   "examples": [
+    {
+     "ja": "少し歩いてみましょうか。",
+     "reading": "すこしあるいてみましょうか。",
+     "id": "Bagaimana kalau kita coba berjalan sedikit?",
+     "en": "Shall we try walking a little?",
+     "scene": "リハビリ"
+    },
+    {
+     "ja": "一口食べてみてください。",
+     "reading": "ひとくちたべてみてください。",
+     "id": "Tolong coba makan satu suap.",
+     "en": "Please try one bite.",
+     "scene": "食事介助"
+    },
+    {
+     "ja": "違う姿勢を試してみます。",
+     "reading": "ちがうしせいをためしてみます。",
+     "id": "Saya akan mencoba posisi yang berbeda.",
+     "en": "I'll try a different position.",
+     "scene": "体位変換"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "少し＿＿＿みましょうか。",
+     "choices": [
+      "歩いて",
+      "歩き",
+      "歩く",
+      "歩いた"
+     ],
+     "answer": 0,
+     "explain_id": "歩く → bentuk て = 歩いて + みます。",
+     "explain_en": "歩く → te-form 歩いて + みます."
+    },
+    {
+     "type": "choice",
+     "q": "一口食べて＿＿＿ください。",
+     "choices": [
+      "みて",
+      "み",
+      "みる",
+      "みた"
+     ],
+     "answer": 0,
+     "explain_id": "みます → bentuk て = みて。",
+     "explain_en": "みます → te-form is みて."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "違う姿勢を",
+      "試して",
+      "み",
+      "ます"
+     ],
+     "hint_id": "Saya akan mencoba posisi yang berbeda.",
+     "hint_en": "I'll try a different position."
+    }
+   ]
+  },
+  {
+   "id": "n4-yasui-nikui",
+   "pattern": "〜やすい／〜にくい",
+   "level": "N4",
+   "category": "性質",
+   "form": "動詞ます形（ます を取る）＋ やすい／にくい",
+   "meaning_id": "mudah ~ / sulit ~",
+   "meaning_en": "easy to ~ / hard to ~",
+   "note_id": "Menyatakan sifat yang mudah atau sulit terjadi. Kunci untuk menilai risiko pada penerima layanan.",
+   "note_en": "States a tendency — key for describing risk in a resident's condition.",
+   "note_ja": "起こりやすさ・しにくさを表す。「むせやすい」「飲み込みにくい」など、リスクの記録に必須。",
+   "examples": [
+    {
+     "ja": "この方はむせやすいので、注意してください。",
+     "reading": "このかたはむせやすいので、ちゅういしてください。",
+     "id": "Orang ini mudah tersedak, jadi tolong berhati-hati.",
+     "en": "This person chokes easily, so please be careful.",
+     "scene": "食事介助"
+    },
+    {
+     "ja": "かたい物は飲み込みにくいようです。",
+     "reading": "かたいものはのみこみにくいようです。",
+     "id": "Makanan keras sepertinya sulit ditelan.",
+     "en": "Hard foods seem difficult to swallow.",
+     "scene": "食事介助"
+    },
+    {
+     "ja": "この靴は滑りにくいので安全です。",
+     "reading": "このくつはすべりにくいのであんぜんです。",
+     "id": "Sepatu ini tidak mudah licin jadi aman.",
+     "en": "These shoes are slip-resistant, so they're safe.",
+     "scene": "転倒予防"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "この方は＿＿＿やすいので、注意してください。",
+     "choices": [
+      "むせ",
+      "むせる",
+      "むせて",
+      "むせた"
+     ],
+     "answer": 0,
+     "explain_id": "むせます → hilangkan ます → むせ + やすい。",
+     "explain_en": "むせます → drop ます → むせ + やすい."
+    },
+    {
+     "type": "choice",
+     "q": "かたい物は飲み込み＿＿＿ようです。",
+     "choices": [
+      "にくい",
+      "やすい",
+      "ないで",
+      "ながら"
+     ],
+     "answer": 0,
+     "explain_id": "'Sulit' = にくい。",
+     "explain_en": "'Hard to do' = にくい."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "この靴は",
+      "滑りにくい",
+      "ので",
+      "安全です"
+     ],
+     "hint_id": "Sepatu ini tidak mudah licin jadi aman.",
+     "hint_en": "These shoes are slip-resistant, so they're safe."
+    }
+   ]
+  },
+  {
+   "id": "n4-you-ni",
+   "pattern": "〜ように（目的）",
+   "level": "N4",
+   "category": "目的",
+   "form": "動詞辞書形／ない形 ＋ ように",
+   "meaning_id": "supaya ~",
+   "meaning_en": "so that ~",
+   "note_id": "Tujuan yang tidak bisa dikendalikan langsung (kata kerja tanpa kehendak). Bandingkan dengan 「ために」.",
+   "note_en": "A goal you cannot directly control (non-volitional verb) — contrast with 「ために」.",
+   "note_ja": "自分の意志では直接コントロールできない目的（無意志動詞）。意志的な目的は「ために」を使う。",
+   "examples": [
+    {
+     "ja": "転ばないように、手すりを付けました。",
+     "reading": "ころばないように、てすりをつけました。",
+     "id": "Supaya tidak jatuh, kami memasang pegangan tangan.",
+     "en": "We installed a handrail so they won't fall.",
+     "scene": "環境整備"
+    },
+    {
+     "ja": "よく見えるように、電気をつけましょう。",
+     "reading": "よくみえるように、でんきをつけましょう。",
+     "id": "Supaya terlihat jelas, ayo nyalakan lampu.",
+     "en": "Let's turn on the light so you can see well.",
+     "scene": "居室ケア"
+    },
+    {
+     "ja": "忘れないように、記録に書いておきます。",
+     "reading": "わすれないように、きろくにかいておきます。",
+     "id": "Supaya tidak lupa, saya tulis di catatan.",
+     "en": "I'll write it in the record so it isn't forgotten.",
+     "scene": "記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "転ば＿＿＿ように、手すりを付けました。",
+     "choices": [
+      "ない",
+      "なくて",
+      "ないで",
+      "ず に"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk ない + ように = supaya tidak.",
+     "explain_en": "ない-form + ように = so that ... not."
+    },
+    {
+     "type": "choice",
+     "q": "よく＿＿＿ように、電気をつけましょう。",
+     "choices": [
+      "見える",
+      "見る",
+      "見て",
+      "見た"
+     ],
+     "answer": 0,
+     "explain_id": "Kata kerja tanpa kehendak (見える) + ように。",
+     "explain_en": "Non-volitional verb (見える) + ように."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "忘れないように",
+      "記録に",
+      "書いて",
+      "おきます"
+     ],
+     "hint_id": "Supaya tidak lupa, saya tulis di catatan.",
+     "hint_en": "I'll write it in the record so it isn't forgotten."
+    }
+   ]
+  },
+  {
+   "id": "n4-tame-ni",
+   "pattern": "〜ために（目的）",
+   "level": "N4",
+   "category": "目的",
+   "form": "動詞辞書形／名詞 ＋ の ＋ ために",
+   "meaning_id": "untuk ~ / demi ~",
+   "meaning_en": "in order to ~ / for ~",
+   "note_id": "Tujuan yang dilakukan dengan sengaja. Subjek kedua bagian kalimat harus sama.",
+   "note_en": "A deliberate purpose — both clauses must share the same subject.",
+   "note_ja": "意志的な目的。前後の主語が同じでなければならない点が「ように」との違い。",
+   "examples": [
+    {
+     "ja": "床ずれを防ぐために、二時間ごとに体位を変えます。",
+     "reading": "とこずれをふせぐために、にじかんごとにたいいをかえます。",
+     "id": "Untuk mencegah luka baring, posisi tubuh diubah setiap dua jam.",
+     "en": "We change position every two hours to prevent bedsores.",
+     "scene": "体位変換"
+    },
+    {
+     "ja": "健康のために、毎日体操をしています。",
+     "reading": "けんこうのために、まいにちたいそうをしています。",
+     "id": "Demi kesehatan, kami senam setiap hari.",
+     "en": "We do exercises every day for our health.",
+     "scene": "レクリエーション"
+    },
+    {
+     "ja": "安全のために、二人で介助します。",
+     "reading": "あんぜんのために、ふたりでかいじょします。",
+     "id": "Demi keamanan, kami membantu berdua.",
+     "en": "For safety, two of us assist together.",
+     "scene": "移乗介助"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "床ずれを＿＿＿ために、体位を変えます。",
+     "choices": [
+      "防ぐ",
+      "防ぎ",
+      "防いで",
+      "防いだ"
+     ],
+     "answer": 0,
+     "explain_id": "Sebelum 「ために」 pakai bentuk kamus: 防ぐ。",
+     "explain_en": "Use the dictionary form before 「ために」: 防ぐ."
+    },
+    {
+     "type": "choice",
+     "q": "安全＿＿＿ために、二人で介助します。",
+     "choices": [
+      "の",
+      "を",
+      "が",
+      "に"
+     ],
+     "answer": 0,
+     "explain_id": "Kata benda + の + ために。",
+     "explain_en": "Noun + の + ために."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "健康の",
+      "ために",
+      "毎日",
+      "体操をしています"
+     ],
+     "hint_id": "Demi kesehatan, kami senam setiap hari.",
+     "hint_en": "We do exercises every day for our health."
+    }
+   ]
+  },
+  {
+   "id": "n4-node",
+   "pattern": "〜ので",
+   "level": "N4",
+   "category": "理由",
+   "form": "普通形（な形容詞な／名詞な）＋ ので",
+   "meaning_id": "karena ~ (sopan, objektif)",
+   "meaning_en": "because ~ (polite, objective)",
+   "note_id": "Lebih halus dan objektif daripada 「から」. Dipakai dalam laporan tertulis dan saat berbicara dengan keluarga.",
+   "note_en": "Softer and more objective than 「から」 — used in written reports and with families.",
+   "note_ja": "「から」より柔らかく客観的。記録・報告書やご家族への説明ではこちらを使う。",
+   "examples": [
+    {
+     "ja": "熱が高いので、入浴は中止しました。",
+     "reading": "ねつがたかいので、にゅうよくはちゅうししました。",
+     "id": "Karena demamnya tinggi, mandi dibatalkan.",
+     "en": "As the fever was high, the bath was cancelled.",
+     "scene": "記録"
+    },
+    {
+     "ja": "食欲がないので、少量にしました。",
+     "reading": "しょくよくがないので、しょうりょうにしました。",
+     "id": "Karena tidak nafsu makan, porsinya dikurangi.",
+     "en": "Since there was no appetite, we served a small portion.",
+     "scene": "食事記録"
+    },
+    {
+     "ja": "雨なので、散歩は中止です。",
+     "reading": "あめなので、さんぽはちゅうしです。",
+     "id": "Karena hujan, jalan-jalannya dibatalkan.",
+     "en": "As it's raining, the walk is cancelled.",
+     "scene": "レクリエーション"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "熱が＿＿＿ので、入浴は中止しました。",
+     "choices": [
+      "高い",
+      "高いです",
+      "高く",
+      "高くて"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk biasa + ので。",
+     "explain_en": "Plain form + ので."
+    },
+    {
+     "type": "choice",
+     "q": "雨＿＿＿ので、散歩は中止です。",
+     "choices": [
+      "な",
+      "だ",
+      "の",
+      "が"
+     ],
+     "answer": 0,
+     "explain_id": "Kata benda + な + ので。",
+     "explain_en": "Noun + な + ので."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "食欲が",
+      "ないので",
+      "少量に",
+      "しました"
+     ],
+     "hint_id": "Karena tidak nafsu makan, porsinya dikurangi.",
+     "hint_en": "Since there was no appetite, we served a small portion."
+    }
+   ]
+  },
+  {
+   "id": "n4-noni",
+   "pattern": "〜のに",
+   "level": "N4",
+   "category": "逆接",
+   "form": "普通形（な形容詞な／名詞な）＋ のに",
+   "meaning_id": "padahal ~ / walaupun ~",
+   "meaning_en": "even though ~",
+   "note_id": "Menyatakan keheranan karena hasilnya di luar dugaan. Berguna untuk mencatat perubahan yang tidak biasa.",
+   "note_en": "Marks surprise at an unexpected result — useful for recording unusual changes.",
+   "note_ja": "予想と違う結果への意外な気持ちが入る。いつもと違う様子を記録するときに使える。",
+   "examples": [
+    {
+     "ja": "薬を飲んだのに、熱が下がりません。",
+     "reading": "くすりをのんだのに、ねつがさがりません。",
+     "id": "Padahal sudah minum obat, demamnya tidak turun.",
+     "en": "Even though the medicine was taken, the fever hasn't come down.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "いつもは食べるのに、今日は残しました。",
+     "reading": "いつもはたべるのに、きょうはのこしました。",
+     "id": "Padahal biasanya makan, hari ini disisakan.",
+     "en": "Even though they usually eat, today they left food.",
+     "scene": "食事記録"
+    },
+    {
+     "ja": "寒いのに、上着を着てくれません。",
+     "reading": "さむいのに、うわぎをきてくれません。",
+     "id": "Padahal dingin, ia tidak mau memakai jaket.",
+     "en": "Even though it's cold, they won't put on a jacket.",
+     "scene": "声かけ"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "薬を＿＿＿のに、熱が下がりません。",
+     "choices": [
+      "飲んだ",
+      "飲みました",
+      "飲んで",
+      "飲み"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk biasa lampau + のに。",
+     "explain_en": "Plain past + のに."
+    },
+    {
+     "type": "choice",
+     "q": "「〜のに」に一番近い気持ちはどれですか。",
+     "choices": [
+      "予想と違って意外だ",
+      "理由を説明する",
+      "順番を表す",
+      "方法を表す"
+     ],
+     "answer": 0,
+     "explain_id": "「のに」 mengandung rasa heran/kecewa.",
+     "explain_en": "「のに」 carries surprise or disappointment."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "いつもは",
+      "食べるのに",
+      "今日は",
+      "残しました"
+     ],
+     "hint_id": "Padahal biasanya makan, hari ini disisakan.",
+     "hint_en": "Even though they usually eat, today they left food."
+    }
+   ]
+  },
+  {
+   "id": "n4-tagatte-imasu",
+   "pattern": "〜たがっています",
+   "level": "N4",
+   "category": "希望",
+   "form": "動詞ます形（ます を取る）＋ たがっています",
+   "meaning_id": "(orang lain) ingin ~",
+   "meaning_en": "someone (else) wants to ~",
+   "note_id": "Keinginan ORANG KETIGA. Untuk diri sendiri pakai 「〜たいです」. Inti dari mencatat keinginan penerima layanan.",
+   "note_en": "A THIRD PERSON's desire; use 「〜たいです」 for yourself. Central to recording residents' wishes.",
+   "note_ja": "第三者の希望。自分には「〜たいです」を使う。利用者さんの希望を記録する基本。",
+   "examples": [
+    {
+     "ja": "田中さんが外に出たがっています。",
+     "reading": "たなかさんがそとにでたがっています。",
+     "id": "Tanaka-san ingin keluar.",
+     "en": "Mr./Ms. Tanaka wants to go outside.",
+     "scene": "記録"
+    },
+    {
+     "ja": "山田さんはお風呂に入りたがりません。",
+     "reading": "やまださんはおふろにはいりたがりません。",
+     "id": "Yamada-san tidak mau mandi.",
+     "en": "Mr./Ms. Yamada doesn't want to bathe.",
+     "scene": "入浴介助"
+    },
+    {
+     "ja": "ご家族に会いたがっているようです。",
+     "reading": "ごかぞくにあいたがっているようです。",
+     "id": "Sepertinya ia ingin bertemu keluarganya.",
+     "en": "He/She seems to want to see the family.",
+     "scene": "申し送り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "田中さんが外に＿＿＿たがっています。",
+     "choices": [
+      "出",
+      "出る",
+      "出て",
+      "出た"
+     ],
+     "answer": 0,
+     "explain_id": "出ます → hilangkan ます → 出 + たがる。",
+     "explain_en": "出ます → drop ます → 出 + たがる."
+    },
+    {
+     "type": "choice",
+     "q": "利用者さんの希望を記録するとき、正しいのはどれですか。",
+     "choices": [
+      "帰りたがっています",
+      "帰りたいです",
+      "帰りましょう",
+      "帰るそうです か"
+     ],
+     "answer": 0,
+     "explain_id": "Keinginan orang ketiga = たがっています。",
+     "explain_en": "A third person's desire = たがっています."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "ご家族に",
+      "会いたがって",
+      "いる",
+      "ようです"
+     ],
+     "hint_id": "Sepertinya ia ingin bertemu keluarganya.",
+     "hint_en": "He/She seems to want to see the family."
+    }
+   ]
+  },
+  {
+   "id": "n4-hitsuyou-ga-arimasu",
+   "pattern": "〜必要があります",
+   "level": "N4",
+   "category": "義務",
+   "form": "動詞辞書形 ＋ 必要があります",
+   "meaning_id": "perlu ~",
+   "meaning_en": "it is necessary to ~",
+   "note_id": "Menyatakan kebutuhan secara objektif. Lebih cocok untuk laporan daripada 「なければなりません」.",
+   "note_en": "States a need objectively — better suited to reports than 「なければなりません」.",
+   "note_ja": "客観的に必要性を述べる。「なければなりません」より記録・報告向き。",
+   "examples": [
+    {
+     "ja": "見守りを続ける必要があります。",
+     "reading": "みまもりをつづけるひつようがあります。",
+     "id": "Perlu terus dilakukan pengawasan.",
+     "en": "Continued monitoring is necessary.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "水分量を記録する必要があります。",
+     "reading": "すいぶんりょうをきろくするひつようがあります。",
+     "id": "Perlu mencatat jumlah cairannya.",
+     "en": "The fluid intake needs to be recorded.",
+     "scene": "記録"
+    },
+    {
+     "ja": "急いで対応する必要はありません。",
+     "reading": "いそいでたいおうするひつようはありません。",
+     "id": "Tidak perlu ditangani dengan tergesa-gesa.",
+     "en": "There is no need to respond urgently.",
+     "scene": "申し送り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "見守りを＿＿＿必要があります。",
+     "choices": [
+      "続ける",
+      "続け",
+      "続けて",
+      "続けた"
+     ],
+     "answer": 0,
+     "explain_id": "Sebelum 必要があります pakai bentuk kamus.",
+     "explain_en": "Use the dictionary form before 必要があります."
+    },
+    {
+     "type": "choice",
+     "q": "「必要ではない」ことを表すのはどれですか。",
+     "choices": [
+      "必要はありません",
+      "必要があります",
+      "必要でした",
+      "必要にします"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk negatifnya: 必要はありません。",
+     "explain_en": "The negative is 必要はありません."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "水分量を",
+      "記録する",
+      "必要が",
+      "あります"
+     ],
+     "hint_id": "Perlu mencatat jumlah cairannya.",
+     "hint_en": "The fluid intake needs to be recorded."
+    }
+   ]
+  },
+  {
+   "id": "n4-kanoukei",
+   "pattern": "可能形（〜えます／〜られます）",
+   "level": "N4",
+   "category": "能力・可能",
+   "form": "1類：う段→え段＋ます ／ 2類：る→られます ／ する→できます・来る→来られます",
+   "meaning_id": "bisa ~ / dapat ~",
+   "meaning_en": "can ~ / be able to ~",
+   "note_id": "Lebih pendek daripada 「〜ことができます」 dan lebih sering dipakai dalam percakapan dan catatan.",
+   "note_en": "Shorter than 「〜ことができます」 and far more common in speech and records.",
+   "note_ja": "「〜ことができます」より短く、会話でも記録でもこちらが主流。ADLの記録の中心。",
+   "examples": [
+    {
+     "ja": "田中さんは手すりがあれば歩けます。",
+     "reading": "たなかさんはてすりがあればあるけます。",
+     "id": "Tanaka-san bisa berjalan kalau ada pegangan tangan.",
+     "en": "Mr./Ms. Tanaka can walk if there is a handrail.",
+     "scene": "記録・ADL"
+    },
+    {
+     "ja": "今日はスプーンで食べられました。",
+     "reading": "きょうはスプーンでたべられました。",
+     "id": "Hari ini ia bisa makan dengan sendok.",
+     "en": "Today he/she was able to eat with a spoon.",
+     "scene": "食事記録"
+    },
+    {
+     "ja": "痛みで、右手が上げられません。",
+     "reading": "いたみで、みぎてがあげられません。",
+     "id": "Karena sakit, tangan kanannya tidak bisa diangkat.",
+     "en": "Because of pain, the right arm cannot be raised.",
+     "scene": "観察・記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "田中さんは手すりがあれば＿＿＿。",
+     "choices": [
+      "歩けます",
+      "歩けれます",
+      "歩かれます",
+      "歩きられます"
+     ],
+     "answer": 0,
+     "explain_id": "歩く (kelompok 1): う段 → え段 = 歩け + ます。",
+     "explain_en": "歩く (group 1): change the final vowel to え = 歩け + ます."
+    },
+    {
+     "type": "choice",
+     "q": "今日はスプーンで＿＿＿ました。",
+     "choices": [
+      "食べられ",
+      "食べれられ",
+      "食べられれ",
+      "食べえ"
+     ],
+     "answer": 0,
+     "explain_id": "食べる (kelompok 2): る → られます。",
+     "explain_en": "食べる (group 2): る → られます."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "痛みで",
+      "右手が",
+      "上げられ",
+      "ません"
+     ],
+     "hint_id": "Karena sakit, tangan kanannya tidak bisa diangkat.",
+     "hint_en": "Because of pain, the right arm cannot be raised."
+    }
+   ]
+  },
+  {
+   "id": "n4-ukemi",
+   "pattern": "受身（〜られます）",
+   "level": "N4",
+   "category": "受身",
+   "form": "1類：あ段＋れます ／ 2類：る→られます ／ する→されます",
+   "meaning_id": "di~ / kena ~",
+   "meaning_en": "be ~ed (passive)",
+   "note_id": "Selain bentuk pasif, bentuk yang sama juga dipakai sebagai bahasa hormat kepada penerima layanan.",
+   "note_en": "Besides the passive, the same form is used as honorific language for residents.",
+   "note_ja": "受身のほか、同じ形が利用者さんへの尊敬語にもなる（「帰られました」）。この二役が重要。",
+   "examples": [
+    {
+     "ja": "田中さんは、ご家族に手紙を読まれました。",
+     "reading": "たなかさんは、ごかぞくにてがみをよまれました。",
+     "id": "Surat Tanaka-san dibacakan oleh keluarganya.",
+     "en": "Mr./Ms. Tanaka had a letter read to them by the family.",
+     "scene": "記録"
+    },
+    {
+     "ja": "山田さんが、そう言われました。",
+     "reading": "やまださんが、そういわれました。",
+     "id": "Yamada-san mengatakan demikian (bentuk hormat).",
+     "en": "Mr./Ms. Yamada said so (honorific).",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "新しい手すりが付けられました。",
+     "reading": "あたらしいてすりがつけられました。",
+     "id": "Pegangan tangan baru telah dipasang.",
+     "en": "A new handrail has been installed.",
+     "scene": "環境整備"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "新しい手すりが＿＿＿ました。",
+     "choices": [
+      "付けられ",
+      "付けれ",
+      "付かれ",
+      "付けさせ"
+     ],
+     "answer": 0,
+     "explain_id": "付ける (kelompok 2): る → られます。",
+     "explain_en": "付ける (group 2): る → られます."
+    },
+    {
+     "type": "choice",
+     "q": "「山田さんが言われました」の意味として正しいのはどれですか。",
+     "choices": [
+      "山田さんがおっしゃった（尊敬）",
+      "山田さんが叱られた",
+      "山田さんが言えなかった",
+      "山田さんに言わせた"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk られる juga berfungsi sebagai bahasa hormat.",
+     "explain_en": "The られる form also functions as honorific language."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "田中さんは",
+      "ご家族に",
+      "手紙を",
+      "読まれました"
+     ],
+     "hint_id": "Surat Tanaka-san dibacakan oleh keluarganya.",
+     "hint_en": "Mr./Ms. Tanaka had a letter read to them by the family."
+    }
+   ]
+  },
+  {
+   "id": "n4-shieki",
+   "pattern": "使役（〜させます）",
+   "level": "N4",
+   "category": "使役",
+   "form": "1類：あ段＋せます ／ 2類：る→させます ／ する→させます",
+   "meaning_id": "menyuruh / membiarkan ~",
+   "meaning_en": "make/let someone do ~",
+   "note_id": "HATI-HATI: kepada penerima layanan berarti memaksa. Gunakan 「〜していただく」 sebagai gantinya.",
+   "note_en": "CAUTION: using this about residents means forcing them. Use 「〜していただく」 instead.",
+   "note_ja": "利用者さんに使うと「強制する」意味になる。原則「〜していただく」に言い換える。虐待防止の観点でも重要。",
+   "examples": [
+    {
+     "ja": "（誤り）利用者さんを歩かせました。→（正しい）利用者さんに歩いていただきました。",
+     "reading": "りようしゃさんにあるいていただきました。",
+     "id": "(Salah) 歩かせました → (Benar) 歩いていただきました.",
+     "en": "(Wrong) 歩かせました → (Right) 歩いていただきました.",
+     "scene": "敬語の注意"
+    },
+    {
+     "ja": "新人に記録を書かせています。",
+     "reading": "しんじんにきろくをかかせています。",
+     "id": "Saya menyuruh staf baru menulis catatan.",
+     "en": "I have the new staff write the records.",
+     "scene": "職員間"
+    },
+    {
+     "ja": "少し休ませていただきます。",
+     "reading": "すこしやすませていただきます。",
+     "id": "Saya mohon izin beristirahat sebentar.",
+     "en": "I'll take a short break, if I may.",
+     "scene": "職員間"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "新人に記録を＿＿＿ています。",
+     "choices": [
+      "書かせ",
+      "書かれ",
+      "書けさせ",
+      "書きさせ"
+     ],
+     "answer": 0,
+     "explain_id": "書く (kelompok 1): あ段 + せます = 書かせます。",
+     "explain_en": "書く (group 1): あ-row + せます = 書かせます."
+    },
+    {
+     "type": "choice",
+     "q": "利用者さんに歩いてもらったときの正しい記録はどれですか。",
+     "choices": [
+      "歩いていただきました",
+      "歩かせました",
+      "歩かされました",
+      "歩かせてあげました"
+     ],
+     "answer": 0,
+     "explain_id": "Kepada penerima layanan tidak memakai bentuk menyuruh.",
+     "explain_en": "Don't use the causative about residents."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "少し",
+      "休ま",
+      "せて",
+      "いただきます"
+     ],
+     "hint_id": "Saya mohon izin beristirahat sebentar.",
+     "hint_en": "I'll take a short break, if I may."
+    }
+   ]
+  },
+  {
+   "id": "n4-sasete-itadakimasu",
+   "pattern": "〜させていただきます",
+   "level": "N4",
+   "category": "敬語",
+   "form": "動詞使役形 ＋ ていただきます",
+   "meaning_id": "saya akan ~ (dengan izin Anda)",
+   "meaning_en": "I will humbly ~ (with your permission)",
+   "note_id": "Bentuk merendah yang paling sering dipakai di lokasi kerja kaigo. Ucapkan sebelum memulai tindakan.",
+   "note_en": "The most-used humble form in care work — say it before starting any procedure.",
+   "note_ja": "介護現場で最も使う謙譲表現。ケアを始める前の声かけの基本形。",
+   "examples": [
+    {
+     "ja": "血圧を測らせていただきます。",
+     "reading": "けつあつをはからせていただきます。",
+     "id": "Saya akan mengukur tekanan darah Anda.",
+     "en": "I will take your blood pressure now.",
+     "scene": "バイタル測定"
+    },
+    {
+     "ja": "お部屋に入らせていただきます。",
+     "reading": "おへやにはいらせていただきます。",
+     "id": "Saya permisi masuk ke kamar Anda.",
+     "en": "I'll come into your room now.",
+     "scene": "居室訪問"
+    },
+    {
+     "ja": "お着替えを手伝わせていただきます。",
+     "reading": "おきがえをてつだわせていただきます。",
+     "id": "Saya akan membantu Anda berganti pakaian.",
+     "en": "I'll help you change your clothes.",
+     "scene": "更衣介助"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "血圧を＿＿＿ていただきます。",
+     "choices": [
+      "測らせ",
+      "測られ",
+      "測りさせ",
+      "測れさせ"
+     ],
+     "answer": 0,
+     "explain_id": "測る → bentuk menyuruh = 測らせる → 測らせていただきます。",
+     "explain_en": "測る → causative 測らせる → 測らせていただきます."
+    },
+    {
+     "type": "choice",
+     "q": "ケアを始める前の声かけとして最も丁寧なのはどれですか。",
+     "choices": [
+      "入らせていただきます",
+      "入ります",
+      "入りますね",
+      "入ってもいいです"
+     ],
+     "answer": 0,
+     "explain_id": "「させていただきます」 paling merendah dan sopan.",
+     "explain_en": "「させていただきます」 is the most humble and polite."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "お着替えを",
+      "手伝わせて",
+      "いただき",
+      "ます"
+     ],
+     "hint_id": "Saya akan membantu Anda berganti pakaian.",
+     "hint_en": "I'll help you change your clothes."
+    }
+   ]
+  },
+  {
+   "id": "n4-tsumori",
+   "pattern": "〜つもりです",
+   "level": "N4",
+   "category": "意志",
+   "form": "動詞辞書形／ない形 ＋ つもりです",
+   "meaning_id": "berniat ~ / berencana ~",
+   "meaning_en": "intend to ~",
+   "note_id": "Rencana yang sudah diputuskan sendiri. Untuk rencana yang sudah pasti dijadwalkan pakai 「〜ことになっています」.",
+   "note_en": "A decision you have made yourself; use 「〜ことになっています」 for externally fixed plans.",
+   "note_ja": "自分で決めた予定。組織として決まった予定は「〜ことになっています」を使う。",
+   "examples": [
+    {
+     "ja": "来月、介護福祉士の試験を受けるつもりです。",
+     "reading": "らいげつ、かいごふくししのしけんをうけるつもりです。",
+     "id": "Bulan depan saya berniat mengikuti ujian perawat lansia.",
+     "en": "I intend to take the care worker exam next month.",
+     "scene": "職員間"
+    },
+    {
+     "ja": "今日は残業しないつもりです。",
+     "reading": "きょうはざんぎょうしないつもりです。",
+     "id": "Hari ini saya berniat tidak lembur.",
+     "en": "I don't intend to work overtime today.",
+     "scene": "勤務"
+    },
+    {
+     "ja": "ご家族に電話するつもりでしたが、忘れてしまいました。",
+     "reading": "ごかぞくにでんわするつもりでしたが、わすれてしまいました。",
+     "id": "Saya berniat menelepon keluarganya, tetapi lupa.",
+     "en": "I meant to call the family, but I forgot.",
+     "scene": "連絡"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "来月、試験を＿＿＿つもりです。",
+     "choices": [
+      "受ける",
+      "受け",
+      "受けて",
+      "受けた"
+     ],
+     "answer": 0,
+     "explain_id": "Sebelum 「つもり」 pakai bentuk kamus.",
+     "explain_en": "Use the dictionary form before 「つもり」."
+    },
+    {
+     "type": "choice",
+     "q": "今日は残業＿＿＿つもりです。",
+     "choices": [
+      "しない",
+      "しません",
+      "しなくて",
+      "しないで"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk negatif: ない形 + つもり。",
+     "explain_en": "Negative: ない-form + つもり."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "ご家族に",
+      "電話する",
+      "つもり",
+      "でした"
+     ],
+     "hint_id": "Saya berniat menelepon keluarganya.",
+     "hint_en": "I intended to call the family."
+    }
+   ]
+  },
+  {
+   "id": "n4-you-to-omoimasu",
+   "pattern": "〜ようと思います",
+   "level": "N4",
+   "category": "意志",
+   "form": "動詞意向形 ＋ と思います",
+   "meaning_id": "saya berpikir untuk ~",
+   "meaning_en": "I'm thinking of ~ing",
+   "note_id": "Niat yang baru muncul saat berbicara. Lebih lunak daripada 「つもりです」.",
+   "note_en": "An intention formed as you speak — softer than 「つもりです」.",
+   "note_ja": "その場で決めた意志。「つもりです」より柔らかく、提案の場面で使いやすい。",
+   "examples": [
+    {
+     "ja": "体位を変えようと思います。",
+     "reading": "たいいをかえようとおもいます。",
+     "id": "Saya berpikir untuk mengubah posisi tubuhnya.",
+     "en": "I'm thinking of changing their position.",
+     "scene": "体位変換"
+    },
+    {
+     "ja": "看護師に相談しようと思います。",
+     "reading": "かんごしにそうだんしようとおもいます。",
+     "id": "Saya berpikir untuk berkonsultasi dengan perawat.",
+     "en": "I'm thinking of consulting the nurse.",
+     "scene": "報告・連絡"
+    },
+    {
+     "ja": "今日は早めに記録を書こうと思います。",
+     "reading": "きょうははやめにきろくをかこうとおもいます。",
+     "id": "Hari ini saya berpikir untuk menulis catatan lebih awal.",
+     "en": "I'm thinking of writing the records early today.",
+     "scene": "記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "体位を＿＿＿と思います。",
+     "choices": [
+      "変えよう",
+      "変える",
+      "変えて",
+      "変えた"
+     ],
+     "answer": 0,
+     "explain_id": "変える → bentuk kehendak = 変えよう。",
+     "explain_en": "変える → volitional form is 変えよう."
+    },
+    {
+     "type": "choice",
+     "q": "看護師に＿＿＿と思います。",
+     "choices": [
+      "相談しよう",
+      "相談する",
+      "相談して",
+      "相談した"
+     ],
+     "answer": 0,
+     "explain_id": "する → しよう。",
+     "explain_en": "する → volitional form is しよう."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "今日は",
+      "早めに",
+      "記録を",
+      "書こうと思います"
+     ],
+     "hint_id": "Hari ini saya berpikir untuk menulis catatan lebih awal.",
+     "hint_en": "I'm thinking of writing the records early today."
+    }
+   ]
+  },
+  {
+   "id": "n4-koto-ni-shimasu",
+   "pattern": "〜ことにします",
+   "level": "N4",
+   "category": "決定",
+   "form": "動詞辞書形／ない形 ＋ ことにします",
+   "meaning_id": "memutuskan untuk ~",
+   "meaning_en": "decide to ~",
+   "note_id": "Keputusan yang diambil sendiri. Bandingkan dengan 「〜ことになります」 yang diputuskan pihak lain.",
+   "note_en": "A decision you make yourself — contrast with 「〜ことになります」, decided by others.",
+   "note_ja": "自分の意志で決めたこと。組織や他者が決めた場合は「〜ことになります」。",
+   "examples": [
+    {
+     "ja": "今日は入浴を中止することにします。",
+     "reading": "きょうはにゅうよくをちゅうしすることにします。",
+     "id": "Kami memutuskan untuk membatalkan mandi hari ini.",
+     "en": "We've decided to cancel the bath today.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "様子を見ることにしました。",
+     "reading": "ようすをみることにしました。",
+     "id": "Kami memutuskan untuk mengamati dulu keadaannya.",
+     "en": "We decided to watch and wait.",
+     "scene": "記録"
+    },
+    {
+     "ja": "無理をさせないことにします。",
+     "reading": "むりをさせないことにします。",
+     "id": "Kami memutuskan untuk tidak memaksakan.",
+     "en": "We've decided not to push them.",
+     "scene": "カンファレンス"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "様子を＿＿＿ことにしました。",
+     "choices": [
+      "見る",
+      "見",
+      "見て",
+      "見た"
+     ],
+     "answer": 0,
+     "explain_id": "Sebelum 「ことにします」 pakai bentuk kamus.",
+     "explain_en": "Use the dictionary form before 「ことにします」."
+    },
+    {
+     "type": "choice",
+     "q": "自分たちで決めたことを表すのはどちらですか。",
+     "choices": [
+      "ことにしました",
+      "ことになりました",
+      "ことがあります",
+      "ことができます"
+     ],
+     "answer": 0,
+     "explain_id": "「ことにする」= keputusan sendiri.",
+     "explain_en": "「ことにする」= a decision you make yourself."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "今日は",
+      "入浴を",
+      "中止する",
+      "ことにします"
+     ],
+     "hint_id": "Kami memutuskan membatalkan mandi hari ini.",
+     "hint_en": "We've decided to cancel the bath today."
+    }
+   ]
+  },
+  {
+   "id": "n4-koto-ni-narimasu",
+   "pattern": "〜ことになります",
+   "level": "N4",
+   "category": "決定",
+   "form": "動詞辞書形／ない形 ＋ ことになります",
+   "meaning_id": "telah diputuskan bahwa ~",
+   "meaning_en": "it has been decided that ~",
+   "note_id": "Keputusan dari pihak lain (fasilitas, dokter, keluarga). Dipakai untuk menyampaikan aturan dan jadwal.",
+   "note_en": "A decision made by others (the facility, doctor, family) — used to convey rules and schedules.",
+   "note_ja": "施設・医師・ご家族など、他が決めたこと。規則や予定を伝えるときに使う。",
+   "examples": [
+    {
+     "ja": "来週から新しい担当になることになりました。",
+     "reading": "らいしゅうからあたらしいたんとうになることになりました。",
+     "id": "Telah diputuskan mulai minggu depan ada penanggung jawab baru.",
+     "en": "It's been decided that a new person will be in charge from next week.",
+     "scene": "施設の連絡"
+    },
+    {
+     "ja": "明日、病院を受診することになっています。",
+     "reading": "あした、びょういんをじゅしんすることになっています。",
+     "id": "Besok sudah dijadwalkan untuk berobat ke rumah sakit.",
+     "en": "He/She is scheduled to see the doctor tomorrow.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "食事は刻み食になることになりました。",
+     "reading": "しょくじはきざみしょくになることになりました。",
+     "id": "Telah diputuskan makanannya menjadi makanan cincang.",
+     "en": "It's been decided the meals will be switched to chopped food.",
+     "scene": "カンファレンス"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "明日、病院を＿＿＿ことになっています。",
+     "choices": [
+      "受診する",
+      "受診し",
+      "受診して",
+      "受診した"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk kamus + ことになっています。",
+     "explain_en": "Dictionary form + ことになっています."
+    },
+    {
+     "type": "choice",
+     "q": "施設が決めた予定を伝えるのはどちらですか。",
+     "choices": [
+      "ことになっています",
+      "ことにしています",
+      "ことができます",
+      "ことがあります"
+     ],
+     "answer": 0,
+     "explain_id": "「ことになっている」= sudah ditetapkan pihak lain.",
+     "explain_en": "「ことになっている」= established by others."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "来週から",
+      "新しい担当に",
+      "なる",
+      "ことになりました"
+     ],
+     "hint_id": "Mulai minggu depan ada penanggung jawab baru.",
+     "hint_en": "A new person will be in charge from next week."
+    }
+   ]
+  },
+  {
+   "id": "n4-you-ni-shimasu",
+   "pattern": "〜ようにします",
+   "level": "N4",
+   "category": "習慣",
+   "form": "動詞辞書形／ない形 ＋ ようにします",
+   "meaning_id": "berusaha untuk (selalu) ~",
+   "meaning_en": "make an effort to ~",
+   "note_id": "Usaha yang dilakukan terus-menerus, bukan sekali. Cocok untuk menulis rencana perawatan.",
+   "note_en": "An ongoing effort, not a one-off — good for care plans.",
+   "note_ja": "一回でなく継続的に心がけること。ケアプランの記述に向く。",
+   "examples": [
+    {
+     "ja": "二時間ごとに声をかけるようにします。",
+     "reading": "にじかんごとにこえをかけるようにします。",
+     "id": "Kami akan berusaha menyapa setiap dua jam.",
+     "en": "We'll make a point of checking in every two hours.",
+     "scene": "ケアプラン"
+    },
+    {
+     "ja": "水分を勧めるようにしています。",
+     "reading": "すいぶんをすすめるようにしています。",
+     "id": "Kami berusaha selalu menawarkan minum.",
+     "en": "We make a point of offering fluids.",
+     "scene": "水分管理"
+    },
+    {
+     "ja": "急がせないようにしています。",
+     "reading": "いそがせないようにしています。",
+     "id": "Kami berusaha untuk tidak membuatnya terburu-buru.",
+     "en": "We try not to rush them.",
+     "scene": "声かけ"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "二時間ごとに声を＿＿＿ようにします。",
+     "choices": [
+      "かける",
+      "かけ",
+      "かけて",
+      "かけた"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk kamus + ようにします。",
+     "explain_en": "Dictionary form + ようにします."
+    },
+    {
+     "type": "choice",
+     "q": "「急がせないようにしています」の意味に近いのはどれですか。",
+     "choices": [
+      "いつも急がせない",
+      "一度だけ急がせなかった",
+      "急ぐことができない",
+      "急がせてもよい"
+     ],
+     "answer": 0,
+     "explain_id": "「ようにしています」= usaha yang terus-menerus.",
+     "explain_en": "「ようにしています」= an ongoing effort."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "水分を",
+      "勧める",
+      "ように",
+      "しています"
+     ],
+     "hint_id": "Kami berusaha selalu menawarkan minum.",
+     "hint_en": "We make a point of offering fluids."
+    }
+   ]
+  },
+  {
+   "id": "n4-you-ni-narimasu",
+   "pattern": "〜ようになります",
+   "level": "N4",
+   "category": "変化",
+   "form": "動詞辞書形／可能形／ない形 ＋ ようになります",
+   "meaning_id": "menjadi bisa ~ / mulai ~",
+   "meaning_en": "come to be able to ~ / start to ~",
+   "note_id": "Perubahan kemampuan atau kebiasaan dari waktu ke waktu. Inti dari mencatat hasil rehabilitasi.",
+   "note_en": "A change in ability or habit over time — central to recording rehabilitation progress.",
+   "note_ja": "能力・習慣が時間とともに変わったこと。リハビリの成果を記録するのに使う。",
+   "examples": [
+    {
+     "ja": "一人で歩けるようになりました。",
+     "reading": "ひとりであるけるようになりました。",
+     "id": "Ia sekarang menjadi bisa berjalan sendiri.",
+     "en": "He/She has become able to walk alone.",
+     "scene": "リハビリ記録"
+    },
+    {
+     "ja": "最近、名前を呼べるようになりました。",
+     "reading": "さいきん、なまえをよべるようになりました。",
+     "id": "Akhir-akhir ini ia menjadi bisa menyebut nama.",
+     "en": "Recently they've become able to say names.",
+     "scene": "記録"
+    },
+    {
+     "ja": "あまり食べないようになりました。",
+     "reading": "あまりたべないようになりました。",
+     "id": "Ia menjadi kurang makan.",
+     "en": "He/She has come to eat less.",
+     "scene": "食事記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "一人で＿＿＿ようになりました。",
+     "choices": [
+      "歩ける",
+      "歩く",
+      "歩き",
+      "歩いて"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk potensial + ようになりました = menjadi bisa.",
+     "explain_en": "Potential form + ようになりました = became able to."
+    },
+    {
+     "type": "choice",
+     "q": "リハビリの成果を書くのに合うのはどれですか。",
+     "choices": [
+      "立てるようになりました",
+      "立つことにしました",
+      "立たれました",
+      "立たせました"
+     ],
+     "answer": 0,
+     "explain_id": "Perubahan kemampuan = ようになりました。",
+     "explain_en": "A change in ability = ようになりました."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "最近",
+      "名前を",
+      "呼べる",
+      "ようになりました"
+     ],
+     "hint_id": "Akhir-akhir ini ia menjadi bisa menyebut nama.",
+     "hint_en": "Recently they've become able to say names."
+    }
+   ]
+  },
+  {
+   "id": "n4-hazu-desu",
+   "pattern": "〜はずです",
+   "level": "N4",
+   "category": "推量",
+   "form": "普通形（な形容詞な／名詞の）＋ はずです",
+   "meaning_id": "seharusnya ~",
+   "meaning_en": "should be ~ / is supposed to be ~",
+   "note_id": "Dugaan kuat berdasarkan alasan yang jelas. Bukan perasaan, tetapi kesimpulan logis.",
+   "note_en": "A strong inference based on clear grounds — logic, not feeling.",
+   "note_ja": "根拠があって「当然そうだ」と考えられること。感覚ではなく論理的な推測。",
+   "examples": [
+    {
+     "ja": "薬は朝に飲んだはずです。",
+     "reading": "くすりはあさにのんだはずです。",
+     "id": "Obatnya seharusnya sudah diminum pagi tadi.",
+     "en": "The medicine should have been taken this morning.",
+     "scene": "服薬確認"
+    },
+    {
+     "ja": "記録に書いてあるはずです。",
+     "reading": "きろくにかいてあるはずです。",
+     "id": "Seharusnya sudah tertulis di catatan.",
+     "en": "It should be written in the record.",
+     "scene": "記録"
+    },
+    {
+     "ja": "担当は今日、夜勤のはずです。",
+     "reading": "たんとうはきょう、やきんのはずです。",
+     "id": "Penanggung jawabnya hari ini seharusnya shift malam.",
+     "en": "The person in charge should be on night shift today.",
+     "scene": "勤務"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "薬は朝に＿＿＿はずです。",
+     "choices": [
+      "飲んだ",
+      "飲みました",
+      "飲んで",
+      "飲み"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk biasa + はずです。",
+     "explain_en": "Plain form + はずです."
+    },
+    {
+     "type": "choice",
+     "q": "担当は今日、夜勤＿＿＿はずです。",
+     "choices": [
+      "の",
+      "な",
+      "だ",
+      "が"
+     ],
+     "answer": 0,
+     "explain_id": "Kata benda + の + はずです。",
+     "explain_en": "Noun + の + はずです."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "記録に",
+      "書いて",
+      "ある",
+      "はずです"
+     ],
+     "hint_id": "Seharusnya sudah tertulis di catatan.",
+     "hint_en": "It should be written in the record."
+    }
+   ]
+  },
+  {
+   "id": "n4-aida-ni",
+   "pattern": "〜あいだに",
+   "level": "N4",
+   "category": "時",
+   "form": "動詞ている／名詞の ＋ あいだに",
+   "meaning_id": "selagi ~ / selama ~ (dan sesuatu terjadi)",
+   "meaning_en": "while ~ (something happens)",
+   "note_id": "Sesuatu terjadi di dalam rentang waktu itu. Sering dipakai dalam laporan insiden.",
+   "note_en": "Something happens within that span of time — common in incident reports.",
+   "note_ja": "その時間の中で何かが起きたことを表す。ヒヤリハット報告でよく使う。",
+   "examples": [
+    {
+     "ja": "目を離しているあいだに、立ち上がっていました。",
+     "reading": "めをはなしているあいだに、たちあがっていました。",
+     "id": "Selagi saya lengah, ia sudah berdiri.",
+     "en": "While I looked away, they had stood up.",
+     "scene": "ヒヤリハット"
+    },
+    {
+     "ja": "入浴のあいだに、ベッドを整えます。",
+     "reading": "にゅうよくのあいだに、ベッドをととのえます。",
+     "id": "Selagi ia mandi, saya merapikan tempat tidur.",
+     "en": "While they bathe, I make the bed.",
+     "scene": "居室整備"
+    },
+    {
+     "ja": "寝ているあいだに、汗をかいたようです。",
+     "reading": "ねているあいだに、あせをかいたようです。",
+     "id": "Sepertinya ia berkeringat selama tidur.",
+     "en": "It seems he/she sweated while sleeping.",
+     "scene": "夜勤記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "目を離して＿＿＿あいだに、立ち上がっていました。",
+     "choices": [
+      "いる",
+      "います",
+      "いた です",
+      "おく"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk ている + あいだに。",
+     "explain_en": "The ている form + あいだに."
+    },
+    {
+     "type": "choice",
+     "q": "入浴＿＿＿あいだに、ベッドを整えます。",
+     "choices": [
+      "の",
+      "を",
+      "が",
+      "に"
+     ],
+     "answer": 0,
+     "explain_id": "Kata benda + の + あいだに。",
+     "explain_en": "Noun + の + あいだに."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "寝ている",
+      "あいだに",
+      "汗を",
+      "かいたようです"
+     ],
+     "hint_id": "Sepertinya ia berkeringat selama tidur.",
+     "hint_en": "It seems they sweated while sleeping."
+    }
+   ]
+  },
+  {
+   "id": "n4-uchi-ni",
+   "pattern": "〜うちに",
+   "level": "N4",
+   "category": "時",
+   "form": "動詞ている／ない形・い形容詞・名詞の ＋ うちに",
+   "meaning_id": "selagi masih ~ (sebelum berubah)",
+   "meaning_en": "while it is still ~",
+   "note_id": "Mengerjakan sesuatu SELAGI keadaan masih memungkinkan, karena nanti akan berubah.",
+   "note_en": "Doing something while conditions still allow, because they will change.",
+   "note_ja": "「今のうちに」＝状態が変わる前に。介助の段取りを考えるときの言い方。",
+   "examples": [
+    {
+     "ja": "温かいうちに、召し上がってください。",
+     "reading": "あたたかいうちに、めしあがってください。",
+     "id": "Silakan dimakan selagi masih hangat.",
+     "en": "Please eat it while it's still warm.",
+     "scene": "食事介助"
+    },
+    {
+     "ja": "明るいうちに、散歩に行きましょう。",
+     "reading": "あかるいうちに、さんぽにいきましょう。",
+     "id": "Selagi masih terang, ayo jalan-jalan.",
+     "en": "Let's take a walk while it's still light.",
+     "scene": "レクリエーション"
+    },
+    {
+     "ja": "忘れないうちに、記録を書きます。",
+     "reading": "わすれないうちに、きろくをかきます。",
+     "id": "Selagi belum lupa, saya tulis catatannya.",
+     "en": "I'll write the record before I forget.",
+     "scene": "記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "温かい＿＿＿、召し上がってください。",
+     "choices": [
+      "うちに",
+      "あいだに",
+      "ときに",
+      "までに"
+     ],
+     "answer": 0,
+     "explain_id": "「うちに」= selagi keadaan masih begitu.",
+     "explain_en": "「うちに」= while the state still holds."
+    },
+    {
+     "type": "choice",
+     "q": "＿＿＿うちに、記録を書きます。",
+     "choices": [
+      "忘れない",
+      "忘れる",
+      "忘れて",
+      "忘れた"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk ない + うちに = sebelum terjadi.",
+     "explain_en": "ない-form + うちに = before it happens."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "明るいうちに",
+      "散歩に",
+      "行き",
+      "ましょう"
+     ],
+     "hint_id": "Selagi masih terang, ayo jalan-jalan.",
+     "hint_en": "Let's take a walk while it's still light."
+    }
+   ]
+  },
+  {
+   "id": "n4-made-ni",
+   "pattern": "〜までに",
+   "level": "N4",
+   "category": "期限",
+   "form": "名詞／動詞辞書形 ＋ までに",
+   "meaning_id": "paling lambat sebelum ~ (batas waktu)",
+   "meaning_en": "by ~ (deadline)",
+   "note_id": "Batas waktu. Berbeda dari 「まで」 yang berarti terus-menerus sampai saat itu.",
+   "note_en": "A deadline — different from 「まで」, which means continuously up to that time.",
+   "note_ja": "期限を表す。継続を表す「まで」との違いが試験でも実務でも重要。",
+   "examples": [
+    {
+     "ja": "九時までに記録を書いてください。",
+     "reading": "くじまでにきろくをかいてください。",
+     "id": "Tolong tulis catatannya paling lambat pukul sembilan.",
+     "en": "Please write the record by nine o'clock.",
+     "scene": "勤務"
+    },
+    {
+     "ja": "申し送りまでに、体温を測っておきます。",
+     "reading": "もうしおくりまでに、たいおんをはかっておきます。",
+     "id": "Sebelum serah terima, saya akan mengukur suhu tubuhnya.",
+     "en": "I'll take the temperature before the handover.",
+     "scene": "バイタル測定"
+    },
+    {
+     "ja": "食事が始まるまでに、席の準備をします。",
+     "reading": "しょくじがはじまるまでに、せきのじゅんびをします。",
+     "id": "Sebelum makan dimulai, saya menyiapkan tempat duduknya.",
+     "en": "I get the seats ready before the meal starts.",
+     "scene": "食事準備"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "九時＿＿＿記録を書いてください。",
+     "choices": [
+      "までに",
+      "まで",
+      "からに",
+      "ごろまで が"
+     ],
+     "answer": 0,
+     "explain_id": "Batas waktu memakai までに。",
+     "explain_en": "A deadline uses までに."
+    },
+    {
+     "type": "choice",
+     "q": "食事が＿＿＿までに、席の準備をします。",
+     "choices": [
+      "始まる",
+      "始まり",
+      "始まって",
+      "始まった"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk kamus + までに。",
+     "explain_en": "Dictionary form + までに."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "申し送りまでに",
+      "体温を",
+      "測って",
+      "おきます"
+     ],
+     "hint_id": "Sebelum serah terima, saya akan mengukur suhu tubuhnya.",
+     "hint_en": "I'll take the temperature before the handover."
+    }
+   ]
+  },
+  {
+   "id": "n4-shi-shi",
+   "pattern": "〜し、〜し",
+   "level": "N4",
+   "category": "列挙",
+   "form": "普通形 ＋ し",
+   "meaning_id": "selain itu ~, juga ~",
+   "meaning_en": "and (moreover) ~",
+   "note_id": "Menyebut beberapa alasan atau sifat sekaligus. Cocok untuk menjelaskan alasan keputusan.",
+   "note_en": "Lists several reasons or qualities at once — good for explaining why a decision was made.",
+   "note_ja": "理由や性質を並べて挙げる。判断の根拠を複数示すときに使う。",
+   "examples": [
+    {
+     "ja": "熱もあるし、食欲もないので、受診しました。",
+     "reading": "ねつもあるし、しょくよくもないので、じゅしんしました。",
+     "id": "Karena ada demam dan juga tidak nafsu makan, ia dibawa berobat.",
+     "en": "He/She had a fever and no appetite, so we took them to the doctor.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "今日は天気もいいし、散歩に行きましょう。",
+     "reading": "きょうはてんきもいいし、さんぽにいきましょう。",
+     "id": "Hari ini cuacanya bagus, ayo jalan-jalan.",
+     "en": "The weather is nice today, so let's go for a walk.",
+     "scene": "レクリエーション"
+    },
+    {
+     "ja": "この方は目も悪いし、耳も遠いです。",
+     "reading": "このかたはめもわるいし、みみもとおいです。",
+     "id": "Orang ini penglihatannya kurang dan pendengarannya juga kurang.",
+     "en": "This person has poor eyesight and poor hearing.",
+     "scene": "アセスメント"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "熱も＿＿＿し、食欲もないので、受診しました。",
+     "choices": [
+      "ある",
+      "あり",
+      "あって",
+      "あります"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk biasa + し。",
+     "explain_en": "Plain form + し."
+    },
+    {
+     "type": "choice",
+     "q": "「〜し、〜し」の働きに近いのはどれですか。",
+     "choices": [
+      "理由をいくつも並べる",
+      "順番を表す",
+      "反対のことを言う",
+      "方法を表す"
+     ],
+     "answer": 0,
+     "explain_id": "「し」 menambahkan alasan atau sifat.",
+     "explain_en": "「し」 adds further reasons or qualities."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "この方は",
+      "目も悪いし",
+      "耳も",
+      "遠いです"
+     ],
+     "hint_id": "Penglihatannya kurang dan pendengarannya juga kurang.",
+     "hint_en": "They have poor eyesight and poor hearing."
+    }
+   ]
+  },
+  {
+   "id": "n4-ka-dou-ka",
+   "pattern": "〜かどうか",
+   "level": "N4",
+   "category": "疑問",
+   "form": "普通形 ＋ かどうか",
+   "meaning_id": "apakah ~ atau tidak",
+   "meaning_en": "whether or not ~",
+   "note_id": "Menyatakan hal yang belum pasti di dalam kalimat. Penting untuk melaporkan hal yang belum dikonfirmasi.",
+   "note_en": "Embeds an uncertainty in a sentence — important for reporting unconfirmed facts.",
+   "note_ja": "確認できていないことを文中に埋め込む。未確認の事項を報告するときに必要。",
+   "examples": [
+    {
+     "ja": "薬を飲んだかどうか、確認してください。",
+     "reading": "くすりをのんだかどうか、かくにんしてください。",
+     "id": "Tolong pastikan apakah obatnya sudah diminum atau belum.",
+     "en": "Please check whether the medicine was taken.",
+     "scene": "服薬確認"
+    },
+    {
+     "ja": "痛みがあるかどうか、分かりません。",
+     "reading": "いたみがあるかどうか、わかりません。",
+     "id": "Tidak tahu apakah ada rasa sakit atau tidak.",
+     "en": "I don't know whether there is pain.",
+     "scene": "観察・記録"
+    },
+    {
+     "ja": "眠れたかどうか、聞いてみます。",
+     "reading": "ねむれたかどうか、きいてみます。",
+     "id": "Saya akan coba tanyakan apakah ia bisa tidur.",
+     "en": "I'll ask whether they were able to sleep.",
+     "scene": "申し送り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "薬を＿＿＿かどうか、確認してください。",
+     "choices": [
+      "飲んだ",
+      "飲みました",
+      "飲んで",
+      "飲み"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk biasa + かどうか。",
+     "explain_en": "Plain form + かどうか."
+    },
+    {
+     "type": "choice",
+     "q": "確認できていないことを報告するのに合うのはどれですか。",
+     "choices": [
+      "痛みがあるかどうか分かりません",
+      "痛みがあります",
+      "痛みがありました",
+      "痛みをがまんしています"
+     ],
+     "answer": 0,
+     "explain_id": "「かどうか分かりません」= belum dipastikan.",
+     "explain_en": "「かどうか分かりません」= not yet confirmed."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "眠れたかどうか",
+      "聞いて",
+      "み",
+      "ます"
+     ],
+     "hint_id": "Saya akan coba tanyakan apakah ia bisa tidur.",
+     "hint_en": "I'll ask whether they were able to sleep."
+    }
+   ]
+  },
+  {
+   "id": "n4-mitai",
+   "pattern": "〜みたいです",
+   "level": "N4",
+   "category": "推量",
+   "form": "普通形（な形容詞・名詞はそのまま）＋ みたいです",
+   "meaning_id": "kelihatannya ~ (bahasa santai)",
+   "meaning_en": "seems like ~ (casual)",
+   "note_id": "Arti sama dengan 「ようです」 tetapi lebih santai. Dalam catatan resmi pakai 「ようです」.",
+   "note_en": "Same meaning as 「ようです」 but casual — use 「ようです」 in official records.",
+   "note_ja": "「ようです」と同じ意味だが話し言葉。記録には「ようです」を使う。",
+   "examples": [
+    {
+     "ja": "少し元気がないみたいです。",
+     "reading": "すこしげんきがないみたいです。",
+     "id": "Kelihatannya ia agak kurang bersemangat.",
+     "en": "He/She seems a bit down.",
+     "scene": "職員間の会話"
+    },
+    {
+     "ja": "眠れなかったみたいですね。",
+     "reading": "ねむれなかったみたいですね。",
+     "id": "Kelihatannya ia tidak bisa tidur ya.",
+     "en": "Looks like they couldn't sleep.",
+     "scene": "職員間の会話"
+    },
+    {
+     "ja": "喉が渇いているみたいです。",
+     "reading": "のどがかわいているみたいです。",
+     "id": "Kelihatannya ia haus.",
+     "en": "They seem thirsty.",
+     "scene": "水分管理"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "少し元気が＿＿＿みたいです。",
+     "choices": [
+      "ない",
+      "ないです",
+      "なくて",
+      "ありません"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk biasa + みたいです。",
+     "explain_en": "Plain form + みたいです."
+    },
+    {
+     "type": "choice",
+     "q": "公式の記録に書くときに適切なのはどちらですか。",
+     "choices": [
+      "元気がないようです",
+      "元気がないみたいです",
+      "元気がないっぽいです",
+      "元気がないでしょ"
+     ],
+     "answer": 0,
+     "explain_id": "Catatan resmi memakai 「ようです」.",
+     "explain_en": "Official records use 「ようです」."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "喉が",
+      "渇いている",
+      "みたい",
+      "です"
+     ],
+     "hint_id": "Kelihatannya ia haus.",
+     "hint_en": "They seem thirsty."
+    }
+   ]
+  },
+  {
+   "id": "n4-kata",
+   "pattern": "〜方（かた）",
+   "level": "N4",
+   "category": "方法",
+   "form": "動詞ます形（ます を取る）＋ 方",
+   "meaning_id": "cara ~",
+   "meaning_en": "the way to ~ / how to ~",
+   "note_id": "Mengubah kata kerja menjadi kata benda 'cara'. Dipakai saat mengajarkan prosedur.",
+   "note_en": "Turns a verb into the noun 'the way of doing' — used when teaching procedures.",
+   "note_ja": "動詞を「〜し方」という名詞にする。手順を教える・教わる場面で使う。",
+   "examples": [
+    {
+     "ja": "記録の書き方を教えてください。",
+     "reading": "きろくのかきかたをおしえてください。",
+     "id": "Tolong ajari saya cara menulis catatan.",
+     "en": "Please teach me how to write the records.",
+     "scene": "職員間"
+    },
+    {
+     "ja": "車いすの押し方に気をつけてください。",
+     "reading": "くるまいすのおしかたにきをつけてください。",
+     "id": "Tolong perhatikan cara mendorong kursi rodanya.",
+     "en": "Please be careful how you push the wheelchair.",
+     "scene": "移動介助"
+    },
+    {
+     "ja": "薬の飲み方が変わりました。",
+     "reading": "くすりののみかたがかわりました。",
+     "id": "Cara minum obatnya berubah.",
+     "en": "The way the medicine is taken has changed.",
+     "scene": "服薬介助"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "記録の＿＿＿方を教えてください。",
+     "choices": [
+      "書き",
+      "書く",
+      "書いて",
+      "書いた"
+     ],
+     "answer": 0,
+     "explain_id": "書きます → hilangkan ます → 書き + 方。",
+     "explain_en": "書きます → drop ます → 書き + 方."
+    },
+    {
+     "type": "choice",
+     "q": "車いすの＿＿＿方に気をつけてください。",
+     "choices": [
+      "押し",
+      "押す",
+      "押して",
+      "押した"
+     ],
+     "answer": 0,
+     "explain_id": "押します → 押し + 方。",
+     "explain_en": "押します → 押し + 方."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "薬の",
+      "飲み方が",
+      "変わり",
+      "ました"
+     ],
+     "hint_id": "Cara minum obatnya berubah.",
+     "hint_en": "The way the medicine is taken has changed."
+    }
+   ]
+  },
+  {
+   "id": "n4-bakari",
+   "pattern": "〜ばかり",
+   "level": "N4",
+   "category": "限定",
+   "form": "名詞／動詞て形 ＋ ばかり",
+   "meaning_id": "melulu ~ / baru saja ~",
+   "meaning_en": "nothing but ~ / just did ~",
+   "note_id": "Dua arti: hanya itu terus-menerus, dan baru saja terjadi (〜たばかり).",
+   "note_en": "Two uses: only that, over and over; and just happened (〜たばかり).",
+   "note_ja": "（1）そればかり繰り返す（2）「〜たばかり」＝したばかり。記録では時間の目安に使える。",
+   "examples": [
+    {
+     "ja": "今日は寝てばかりいます。",
+     "reading": "きょうはねてばかりいます。",
+     "id": "Hari ini ia tidur terus.",
+     "en": "Today they've been doing nothing but sleeping.",
+     "scene": "記録"
+    },
+    {
+     "ja": "さっき食事が終わったばかりです。",
+     "reading": "さっきしょくじがおわったばかりです。",
+     "id": "Makannya baru saja selesai tadi.",
+     "en": "The meal just finished a moment ago.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "入居したばかりで、まだ慣れていません。",
+     "reading": "にゅうきょしたばかりで、まだなれていません。",
+     "id": "Karena baru saja masuk, ia belum terbiasa.",
+     "en": "They've only just moved in and aren't used to it yet.",
+     "scene": "アセスメント"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "さっき食事が＿＿＿ばかりです。",
+     "choices": [
+      "終わった",
+      "終わる",
+      "終わって",
+      "終わり"
+     ],
+     "answer": 0,
+     "explain_id": "'Baru saja' = bentuk た + ばかり。",
+     "explain_en": "'Just did' = た-form + ばかり."
+    },
+    {
+     "type": "choice",
+     "q": "今日は＿＿＿ばかりいます。",
+     "choices": [
+      "寝て",
+      "寝る",
+      "寝た",
+      "寝"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk て + ばかり + います = terus-menerus.",
+     "explain_en": "Te-form + ばかり + います = keeps doing it."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "入居した",
+      "ばかりで",
+      "まだ",
+      "慣れていません"
+     ],
+     "hint_id": "Karena baru saja masuk, ia belum terbiasa.",
+     "hint_en": "They've only just moved in and aren't used to it yet."
+    }
+   ]
+  },
+  {
+   "id": "n4-nara",
+   "pattern": "〜なら",
+   "level": "N4",
+   "category": "条件",
+   "form": "名詞／普通形 ＋ なら",
+   "meaning_id": "kalau (soal) ~",
+   "meaning_en": "if it's ~ / as for ~",
+   "note_id": "Menanggapi topik yang baru saja disebut lawan bicara. Berguna untuk menjawab pertanyaan rekan kerja.",
+   "note_en": "Responds to a topic the other person just raised — useful when answering a colleague.",
+   "note_ja": "相手が出した話題を受けて答える条件。「田中さんなら食堂にいますよ」のように使う。",
+   "examples": [
+    {
+     "ja": "田中さんなら、食堂にいらっしゃいますよ。",
+     "reading": "たなかさんなら、しょくどうにいらっしゃいますよ。",
+     "id": "Kalau Tanaka-san, beliau ada di ruang makan.",
+     "en": "If you mean Mr./Ms. Tanaka, they're in the dining room.",
+     "scene": "職員間"
+    },
+    {
+     "ja": "痛みがあるなら、看護師を呼びます。",
+     "reading": "いたみがあるなら、かんごしをよびます。",
+     "id": "Kalau memang ada rasa sakit, saya panggil perawat.",
+     "en": "If there's pain, I'll call the nurse.",
+     "scene": "報告・連絡"
+    },
+    {
+     "ja": "入浴が難しいなら、清拭にします。",
+     "reading": "にゅうよくがむずかしいなら、せいしきにします。",
+     "id": "Kalau mandi sulit, kita ganti dengan lap badan.",
+     "en": "If bathing is difficult, we'll switch to a bed bath.",
+     "scene": "入浴介助"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "田中さん＿＿＿、食堂にいらっしゃいますよ。",
+     "choices": [
+      "なら",
+      "たら",
+      "ば",
+      "と"
+     ],
+     "answer": 0,
+     "explain_id": "Kata benda + なら, menanggapi topik lawan bicara.",
+     "explain_en": "Noun + なら, responding to the other person's topic."
+    },
+    {
+     "type": "choice",
+     "q": "痛みが＿＿＿なら、看護師を呼びます。",
+     "choices": [
+      "ある",
+      "あり",
+      "あって",
+      "あります"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk biasa + なら。",
+     "explain_en": "Plain form + なら."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "入浴が",
+      "難しいなら",
+      "清拭に",
+      "します"
+     ],
+     "hint_id": "Kalau mandi sulit, kita ganti dengan lap badan.",
+     "hint_en": "If bathing is difficult, we'll switch to a bed bath."
+    }
+   ]
+  },
+  {
+   "id": "n4-te-iku-kuru",
+   "pattern": "〜ていきます／〜てきます",
+   "level": "N4",
+   "category": "変化",
+   "form": "動詞て形 ＋ いきます／きます",
+   "meaning_id": "makin ~ (ke depan) / makin ~ (sampai sekarang)",
+   "meaning_en": "go on ~ing / have been ~ing",
+   "note_id": "「てきます」= perubahan sampai sekarang; 「ていきます」= perubahan mulai sekarang ke depan.",
+   "note_en": "「てきます」= change up to now; 「ていきます」= change from now onward.",
+   "note_ja": "「てきた」は今までの変化、「ていく」はこれからの変化。経過を記録するのに使う。",
+   "examples": [
+    {
+     "ja": "食欲が落ちてきました。",
+     "reading": "しょくよくがおちてきました。",
+     "id": "Nafsu makannya makin menurun (sampai sekarang).",
+     "en": "The appetite has been declining.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "だんだん歩けるようになってきました。",
+     "reading": "だんだんあるけるようになってきました。",
+     "id": "Sedikit demi sedikit ia menjadi bisa berjalan.",
+     "en": "Little by little they've become able to walk.",
+     "scene": "リハビリ記録"
+    },
+    {
+     "ja": "これからも見守りを続けていきます。",
+     "reading": "これからもみまもりをつづけていきます。",
+     "id": "Ke depan pun kami akan terus mengawasi.",
+     "en": "We will continue monitoring from here on.",
+     "scene": "ケアプラン"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "食欲が落ちて＿＿＿。",
+     "choices": [
+      "きました",
+      "いきました",
+      "おきました",
+      "ありました"
+     ],
+     "answer": 0,
+     "explain_id": "Perubahan sampai sekarang = てきました。",
+     "explain_en": "Change up to now = てきました."
+    },
+    {
+     "type": "choice",
+     "q": "これからも見守りを続けて＿＿＿。",
+     "choices": [
+      "いきます",
+      "きます",
+      "おきます",
+      "あります"
+     ],
+     "answer": 0,
+     "explain_id": "Perubahan ke depan = ていきます。",
+     "explain_en": "Change going forward = ていきます."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "だんだん",
+      "歩けるように",
+      "なって",
+      "きました"
+     ],
+     "hint_id": "Sedikit demi sedikit ia menjadi bisa berjalan.",
+     "hint_en": "Little by little they've become able to walk."
+    }
+   ]
+  },
+  {
+   "id": "n4-to-iu",
+   "pattern": "〜という",
+   "level": "N4",
+   "category": "説明",
+   "form": "名詞／文 ＋ という ＋ 名詞",
+   "meaning_id": "yang bernama ~ / yang berbunyi ~",
+   "meaning_en": "called ~ / that says ~",
+   "note_id": "Menyebut nama atau isi sesuatu. Dipakai saat menyampaikan isi laporan atau permintaan.",
+   "note_en": "Names something or states its content — used when relaying a report or request.",
+   "note_ja": "名前や内容を示す。「〜という連絡がありました」の形で報告に多用する。",
+   "examples": [
+    {
+     "ja": "面会に来るという連絡がありました。",
+     "reading": "めんかいにくるというれんらくがありました。",
+     "id": "Ada kabar yang mengatakan bahwa mereka akan datang menjenguk.",
+     "en": "We received word that they will come to visit.",
+     "scene": "連絡"
+    },
+    {
+     "ja": "デイサービスというサービスがあります。",
+     "reading": "デイサービスというサービスがあります。",
+     "id": "Ada layanan yang bernama day service.",
+     "en": "There is a service called day service.",
+     "scene": "制度の説明"
+    },
+    {
+     "ja": "痛みが強いという訴えがありました。",
+     "reading": "いたみがつよいといううったえがありました。",
+     "id": "Ada keluhan yang menyatakan rasa sakitnya kuat.",
+     "en": "There was a complaint of severe pain.",
+     "scene": "申し送り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "面会に来る＿＿＿連絡がありました。",
+     "choices": [
+      "という",
+      "とゆう",
+      "ということ",
+      "といって の"
+     ],
+     "answer": 0,
+     "explain_id": "Isi kabar + という + kata benda.",
+     "explain_en": "Content + という + noun."
+    },
+    {
+     "type": "choice",
+     "q": "痛みが強い＿＿＿訴えがありました。",
+     "choices": [
+      "という",
+      "といって",
+      "となる",
+      "とある の"
+     ],
+     "answer": 0,
+     "explain_id": "「〜という訴え」= keluhan yang isinya begitu.",
+     "explain_en": "「〜という訴え」= a complaint to that effect."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "デイサービス",
+      "という",
+      "サービスが",
+      "あります"
+     ],
+     "hint_id": "Ada layanan yang bernama day service.",
+     "hint_en": "There is a service called day service."
+    }
+   ]
+  },
+  {
+   "id": "n4-no-meishika",
+   "pattern": "〜のが／〜のは（名詞化）",
+   "level": "N4",
+   "category": "名詞化",
+   "form": "動詞辞書形 ＋ の ＋ が／は",
+   "meaning_id": "hal ~ (menjadikan kata kerja sebagai subjek/objek)",
+   "meaning_en": "the act of ~ing",
+   "note_id": "Mengubah kata kerja menjadi kata benda. Penting untuk menulis apa yang sulit atau mudah bagi penerima layanan.",
+   "note_en": "Turns a verb into a noun — key for writing what a resident finds hard or easy.",
+   "note_ja": "動詞を名詞にする。「立つのが難しい」など、利用者さんの困難さを書くのに必須。",
+   "examples": [
+    {
+     "ja": "一人で立つのが難しいです。",
+     "reading": "ひとりでたつのがむずかしいです。",
+     "id": "Berdiri sendiri itu sulit baginya.",
+     "en": "Standing up alone is difficult for them.",
+     "scene": "記録・ADL"
+    },
+    {
+     "ja": "歌を歌うのが好きです。",
+     "reading": "うたをうたうのがすきです。",
+     "id": "Ia suka bernyanyi.",
+     "en": "They like singing.",
+     "scene": "記録・趣味"
+    },
+    {
+     "ja": "薬を飲むのを忘れていました。",
+     "reading": "くすりをのむのをわすれていました。",
+     "id": "Ia lupa minum obat.",
+     "en": "They had forgotten to take the medicine.",
+     "scene": "服薬介助"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "一人で立つ＿＿＿難しいです。",
+     "choices": [
+      "のが",
+      "のを",
+      "のに は",
+      "ことを が"
+     ],
+     "answer": 0,
+     "explain_id": "Kata kerja + の + が, menjadi subjek.",
+     "explain_en": "Verb + の + が makes it the subject."
+    },
+    {
+     "type": "choice",
+     "q": "薬を飲む＿＿＿忘れていました。",
+     "choices": [
+      "のを",
+      "のが",
+      "のは",
+      "のに"
+     ],
+     "answer": 0,
+     "explain_id": "Objek dari 忘れる memakai を。",
+     "explain_en": "The object of 忘れる takes を."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "歌を",
+      "歌うのが",
+      "好き",
+      "です"
+     ],
+     "hint_id": "Ia suka bernyanyi.",
+     "hint_en": "They like singing."
+    }
+   ]
+  },
+  {
+   "id": "n4-gurai",
+   "pattern": "〜くらい／〜ぐらい",
+   "level": "N4",
+   "category": "程度",
+   "form": "数量詞／名詞／動詞普通形 ＋ くらい",
+   "meaning_id": "kira-kira ~ / sekitar ~",
+   "meaning_en": "about ~ / approximately ~",
+   "note_id": "Perkiraan jumlah. Dalam catatan, angka pastinya lebih baik, tetapi ini dipakai saat hanya bisa memperkirakan.",
+   "note_en": "An approximate amount — records prefer exact figures, but use this when only an estimate is possible.",
+   "note_ja": "おおよその量。記録では正確な数値が望ましいが、目測しかできない場合はこれを使う。",
+   "examples": [
+    {
+     "ja": "半分くらい飲まれました。",
+     "reading": "はんぶんくらいのまれました。",
+     "id": "Beliau minum kira-kira setengahnya.",
+     "en": "They drank about half of it.",
+     "scene": "水分記録"
+    },
+    {
+     "ja": "十分くらい歩かれました。",
+     "reading": "じゅっぷんくらいあるかれました。",
+     "id": "Beliau berjalan sekitar sepuluh menit.",
+     "en": "They walked for about ten minutes.",
+     "scene": "リハビリ記録"
+    },
+    {
+     "ja": "三分の一くらい残されています。",
+     "reading": "さんぶんのいちくらいのこされています。",
+     "id": "Sekitar sepertiganya disisakan.",
+     "en": "About one third has been left.",
+     "scene": "食事記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "十分＿＿＿歩かれました。",
+     "choices": [
+      "くらい",
+      "ずつ",
+      "だけに",
+      "までに は"
+     ],
+     "answer": 0,
+     "explain_id": "Perkiraan jumlah memakai くらい。",
+     "explain_en": "An approximate amount takes くらい."
+    },
+    {
+     "type": "choice",
+     "q": "記録として最も望ましいのはどれですか。",
+     "choices": [
+      "水分を200ml飲まれました",
+      "水分をたくさん飲まれました",
+      "水分をちょっと飲まれました",
+      "水分をまあまあ飲まれました"
+     ],
+     "answer": 0,
+     "explain_id": "Catatan sebaiknya memakai angka yang pasti.",
+     "explain_en": "Records should use exact figures where possible."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "三分の一",
+      "くらい",
+      "残されて",
+      "います"
+     ],
+     "hint_id": "Sekitar sepertiganya disisakan.",
+     "hint_en": "About one third has been left."
+    }
+   ]
+  },
+  {
+   "id": "n4-gimonshi-ka",
+   "pattern": "疑問詞＋か（何か・どこか）",
+   "level": "N4",
+   "category": "疑問",
+   "form": "何／どこ／だれ／いつ ＋ か",
+   "meaning_id": "sesuatu / suatu tempat / seseorang",
+   "meaning_en": "something / somewhere / someone",
+   "note_id": "Menanyakan keberadaan sesuatu tanpa menyebut spesifiknya. Sangat sering dipakai dalam sapaan.",
+   "note_en": "Asks about something without specifying it — very common in check-in questions.",
+   "note_ja": "具体的に特定せずに尋ねる。「どこか痛いですか」は毎日使う声かけ。",
+   "examples": [
+    {
+     "ja": "どこか痛いところはありますか。",
+     "reading": "どこかいたいところはありますか。",
+     "id": "Apakah ada bagian yang sakit?",
+     "en": "Is there anywhere that hurts?",
+     "scene": "観察"
+    },
+    {
+     "ja": "何か困っていることはありますか。",
+     "reading": "なにかこまっていることはありますか。",
+     "id": "Apakah ada sesuatu yang menyulitkan Anda?",
+     "en": "Is there anything troubling you?",
+     "scene": "声かけ"
+    },
+    {
+     "ja": "だれかご家族に連絡しましょうか。",
+     "reading": "だれかごかぞくにれんらくしましょうか。",
+     "id": "Apakah perlu saya hubungi salah satu anggota keluarga?",
+     "en": "Shall I contact someone in the family?",
+     "scene": "連絡"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "＿＿＿痛いところはありますか。",
+     "choices": [
+      "どこか",
+      "どこ",
+      "どこに は",
+      "どこでも が"
+     ],
+     "answer": 0,
+     "explain_id": "「どこか」= di suatu tempat (tidak spesifik).",
+     "explain_en": "「どこか」= somewhere (unspecified)."
+    },
+    {
+     "type": "choice",
+     "q": "＿＿＿困っていることはありますか。",
+     "choices": [
+      "何か",
+      "何",
+      "何が は",
+      "何でも を"
+     ],
+     "answer": 0,
+     "explain_id": "「何か」= sesuatu.",
+     "explain_en": "「何か」= something."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "だれか",
+      "ご家族に",
+      "連絡し",
+      "ましょうか"
+     ],
+     "hint_id": "Apakah perlu saya hubungi salah satu anggota keluarga?",
+     "hint_en": "Shall I contact someone in the family?"
+    }
+   ]
+  },
+  {
+   "id": "n4-temo",
+   "pattern": "〜ても",
+   "level": "N4",
+   "category": "逆接条件",
+   "form": "動詞て形／い形容詞くて／名詞・な形容詞で ＋ も",
+   "meaning_id": "walaupun ~ / meskipun ~",
+   "meaning_en": "even if ~",
+   "note_id": "Hasilnya tetap sama walaupun syaratnya berubah. Berguna untuk mencatat reaksi yang tidak berubah.",
+   "note_en": "The result stays the same even if the condition changes — useful for recording unchanged responses.",
+   "note_ja": "条件が変わっても結果が同じ。声かけへの反応がない場合の記録に使える。",
+   "examples": [
+    {
+     "ja": "声をかけても、返事がありません。",
+     "reading": "こえをかけても、へんじがありません。",
+     "id": "Walaupun dipanggil, tidak ada jawaban.",
+     "en": "Even when called, there is no response.",
+     "scene": "観察・記録"
+    },
+    {
+     "ja": "薬を飲んでも、痛みが取れないようです。",
+     "reading": "くすりをのんでも、いたみがとれないようです。",
+     "id": "Walaupun sudah minum obat, sakitnya sepertinya tidak hilang.",
+     "en": "Even after the medicine, the pain doesn't seem to go away.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "寒くても、上着を着たがりません。",
+     "reading": "さむくても、うわぎをきたがりません。",
+     "id": "Walaupun dingin, ia tidak mau memakai jaket.",
+     "en": "Even when it's cold, they don't want to wear a jacket.",
+     "scene": "記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "声を＿＿＿も、返事がありません。",
+     "choices": [
+      "かけて",
+      "かけ",
+      "かける",
+      "かけた"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk て + も = walaupun.",
+     "explain_en": "Te-form + も = even if."
+    },
+    {
+     "type": "choice",
+     "q": "＿＿＿ても、上着を着たがりません。",
+     "choices": [
+      "寒く",
+      "寒い",
+      "寒くて",
+      "寒かった"
+     ],
+     "answer": 0,
+     "explain_id": "Kata sifat い: 寒い → 寒くても。",
+     "explain_en": "い-adjective: 寒い → 寒くても."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "薬を",
+      "飲んでも",
+      "痛みが",
+      "取れないようです"
+     ],
+     "hint_id": "Walaupun sudah minum obat, sakitnya tidak hilang.",
+     "hint_en": "Even after the medicine, the pain doesn't go away."
+    }
+   ]
+  },
+  {
+   "id": "n4-temo-kamaimasen",
+   "pattern": "〜てもかまいません",
+   "level": "N4",
+   "category": "許可",
+   "form": "動詞て形 ＋ もかまいません",
+   "meaning_id": "tidak apa-apa kalau ~",
+   "meaning_en": "it doesn't matter if ~",
+   "note_id": "Izin yang lebih longgar daripada 「〜てもいいです」. Menenangkan penerima layanan yang sungkan.",
+   "note_en": "A looser permission than 「〜てもいいです」 — reassures residents who feel they are imposing.",
+   "note_ja": "「〜てもいいです」より許容の幅が広い。遠慮している利用者さんを楽にする言い方。",
+   "examples": [
+    {
+     "ja": "残してもかまいませんよ。",
+     "reading": "のこしてもかまいませんよ。",
+     "id": "Tidak apa-apa kalau disisakan.",
+     "en": "It's fine if you leave some.",
+     "scene": "食事介助"
+    },
+    {
+     "ja": "ゆっくりでもかまいません。",
+     "reading": "ゆっくりでもかまいません。",
+     "id": "Pelan-pelan juga tidak apa-apa.",
+     "en": "Taking your time is perfectly fine.",
+     "scene": "声かけ"
+    },
+    {
+     "ja": "呼んでくださってもかまいません。",
+     "reading": "よんでくださってもかまいません。",
+     "id": "Tidak apa-apa kalau Anda memanggil saya.",
+     "en": "Please feel free to call me.",
+     "scene": "ナースコール"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "残して＿＿＿かまいませんよ。",
+     "choices": [
+      "も",
+      "は",
+      "を",
+      "が"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk て + も + かまいません。",
+     "explain_en": "Te-form + も + かまいません."
+    },
+    {
+     "type": "choice",
+     "q": "遠慮している利用者さんに言う言葉として自然なのはどれですか。",
+     "choices": [
+      "残してもかまいませんよ",
+      "残してはいけません",
+      "残さなければなりません",
+      "残すことができます か"
+     ],
+     "answer": 0,
+     "explain_id": "「かまいません」 menenangkan orang yang sungkan.",
+     "explain_en": "「かまいません」 reassures someone who feels hesitant."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "ゆっくり",
+      "でも",
+      "かまい",
+      "ません"
+     ],
+     "hint_id": "Pelan-pelan juga tidak apa-apa.",
+     "hint_en": "Taking your time is perfectly fine."
+    }
+   ]
+  },
+  {
+   "id": "n4-tara-dou-desu-ka",
+   "pattern": "〜たらどうですか",
+   "level": "N4",
+   "category": "助言",
+   "form": "動詞た形 ＋ らどうですか",
+   "meaning_id": "bagaimana kalau ~?",
+   "meaning_en": "why don't you ~?",
+   "note_id": "Saran yang lembut, tidak memaksa. Cocok untuk mengusulkan kepada penerima layanan atau rekan kerja.",
+   "note_en": "A soft, non-forcing suggestion — good for residents and colleagues alike.",
+   "note_ja": "押しつけない提案。利用者さんにも同僚にも使える柔らかい助言。",
+   "examples": [
+    {
+     "ja": "少し休んだらどうですか。",
+     "reading": "すこしやすんだらどうですか。",
+     "id": "Bagaimana kalau istirahat sebentar?",
+     "en": "Why don't you rest a little?",
+     "scene": "声かけ"
+    },
+    {
+     "ja": "看護師に相談したらどうですか。",
+     "reading": "かんごしにそうだんしたらどうですか。",
+     "id": "Bagaimana kalau berkonsultasi dengan perawat?",
+     "en": "Why don't you consult the nurse?",
+     "scene": "職員間"
+    },
+    {
+     "ja": "車いすを使ったらどうでしょうか。",
+     "reading": "くるまいすをつかったらどうでしょうか。",
+     "id": "Bagaimana kalau memakai kursi roda saja?",
+     "en": "How about using a wheelchair?",
+     "scene": "移動介助"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "少し＿＿＿らどうですか。",
+     "choices": [
+      "休んだ",
+      "休む",
+      "休んで",
+      "休み"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk た + ら + どうですか。",
+     "explain_en": "た-form + ら + どうですか."
+    },
+    {
+     "type": "choice",
+     "q": "押しつけない助言はどれですか。",
+     "choices": [
+      "休んだらどうですか",
+      "休みなさい",
+      "休まなければなりません",
+      "休んではいけません"
+     ],
+     "answer": 0,
+     "explain_id": "「〜たらどうですか」 adalah saran yang lembut.",
+     "explain_en": "「〜たらどうですか」 is a soft suggestion."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "看護師に",
+      "相談したら",
+      "どう",
+      "ですか"
+     ],
+     "hint_id": "Bagaimana kalau berkonsultasi dengan perawat?",
+     "hint_en": "Why don't you consult the nurse?"
+    }
+   ]
+  },
+  {
+   "id": "n4-hajimemasu-owarimasu",
+   "pattern": "〜始めます／〜終わります",
+   "level": "N4",
+   "category": "開始・終了",
+   "form": "動詞ます形（ます を取る）＋ 始めます／終わります",
+   "meaning_id": "mulai ~ / selesai ~",
+   "meaning_en": "start ~ing / finish ~ing",
+   "note_id": "Menandai awal dan akhir suatu tindakan. Dipakai untuk mencatat waktu makan dan kegiatan.",
+   "note_en": "Marks the start and end of an action — used for recording meal and activity times.",
+   "note_ja": "動作の開始と終了。食事や活動の時刻を記録するのに使う。",
+   "examples": [
+    {
+     "ja": "十二時に食べ始めました。",
+     "reading": "じゅうにじにたべはじめました。",
+     "id": "Ia mulai makan pukul dua belas.",
+     "en": "They began eating at twelve o'clock.",
+     "scene": "食事記録"
+    },
+    {
+     "ja": "食べ終わったら、口腔ケアをします。",
+     "reading": "たべおわったら、こうくうケアをします。",
+     "id": "Setelah selesai makan, kami melakukan perawatan mulut.",
+     "en": "After they finish eating, we do oral care.",
+     "scene": "口腔ケア"
+    },
+    {
+     "ja": "急に泣き始めました。",
+     "reading": "きゅうになきはじめました。",
+     "id": "Tiba-tiba ia mulai menangis.",
+     "en": "They suddenly started crying.",
+     "scene": "記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "十二時に＿＿＿始めました。",
+     "choices": [
+      "食べ",
+      "食べる",
+      "食べて",
+      "食べた"
+     ],
+     "answer": 0,
+     "explain_id": "食べます → hilangkan ます → 食べ + 始めます。",
+     "explain_en": "食べます → drop ます → 食べ + 始めます."
+    },
+    {
+     "type": "choice",
+     "q": "食べ＿＿＿たら、口腔ケアをします。",
+     "choices": [
+      "終わっ",
+      "終わり",
+      "終わる",
+      "終わって"
+     ],
+     "answer": 0,
+     "explain_id": "食べ終わる → 食べ終わったら。",
+     "explain_en": "食べ終わる → 食べ終わったら."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "急に",
+      "泣き",
+      "始め",
+      "ました"
+     ],
+     "hint_id": "Tiba-tiba ia mulai menangis.",
+     "hint_en": "They suddenly started crying."
+    }
+   ]
+  },
+  {
+   "id": "n4-tsuzukemasu",
+   "pattern": "〜続けます",
+   "level": "N4",
+   "category": "継続",
+   "form": "動詞ます形（ます を取る）＋ 続けます",
+   "meaning_id": "terus ~ / melanjutkan ~",
+   "meaning_en": "keep on ~ing",
+   "note_id": "Tindakan yang berlanjut tanpa berhenti. Penting untuk mencatat gejala yang terus berlangsung.",
+   "note_en": "An action that continues without stopping — important for recording ongoing symptoms.",
+   "note_ja": "止まらずに続くこと。症状が続いている状態の記録に必要。",
+   "examples": [
+    {
+     "ja": "朝から咳が出続けています。",
+     "reading": "あさからせきがでつづけています。",
+     "id": "Sejak pagi batuknya terus keluar.",
+     "en": "The cough has continued since this morning.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "同じことを言い続けています。",
+     "reading": "おなじことをいいつづけています。",
+     "id": "Ia terus mengatakan hal yang sama.",
+     "en": "They keep repeating the same thing.",
+     "scene": "認知症ケア"
+    },
+    {
+     "ja": "見守りを続けます。",
+     "reading": "みまもりをつづけます。",
+     "id": "Kami akan terus mengawasi.",
+     "en": "We will continue monitoring.",
+     "scene": "ケアプラン"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "朝から咳が＿＿＿続けています。",
+     "choices": [
+      "出",
+      "出る",
+      "出て",
+      "出た"
+     ],
+     "answer": 0,
+     "explain_id": "出ます → 出 + 続けます。",
+     "explain_en": "出ます → 出 + 続けます."
+    },
+    {
+     "type": "choice",
+     "q": "同じことを＿＿＿続けています。",
+     "choices": [
+      "言い",
+      "言う",
+      "言って",
+      "言った"
+     ],
+     "answer": 0,
+     "explain_id": "言います → 言い + 続けます。",
+     "explain_en": "言います → 言い + 続けます."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "朝から",
+      "咳が",
+      "出続けて",
+      "います"
+     ],
+     "hint_id": "Sejak pagi batuknya terus keluar.",
+     "hint_en": "The cough has continued since this morning."
+    }
+   ]
+  },
+  {
+   "id": "n4-baai-wa",
+   "pattern": "〜場合は",
+   "level": "N4",
+   "category": "条件",
+   "form": "動詞普通形／名詞の ＋ 場合は",
+   "meaning_id": "dalam hal ~ / kalau terjadi ~",
+   "meaning_en": "in the case of ~",
+   "note_id": "Dipakai dalam aturan dan prosedur tertulis. Bahasa manual, bukan percakapan.",
+   "note_en": "Used in written rules and procedures — manual language, not conversation.",
+   "note_ja": "規則・手順書で使う書き言葉。マニュアルや緊急時対応の文で頻出。",
+   "examples": [
+    {
+     "ja": "転倒した場合は、すぐに看護師を呼んでください。",
+     "reading": "てんとうしたばあいは、すぐにかんごしをよんでください。",
+     "id": "Kalau terjadi jatuh, segera panggil perawat.",
+     "en": "In case of a fall, call the nurse immediately.",
+     "scene": "事故対応"
+    },
+    {
+     "ja": "熱が三十八度を超えた場合は、受診します。",
+     "reading": "ねつがさんじゅうはちどをこえたばあいは、じゅしんします。",
+     "id": "Kalau demam melebihi 38 derajat, dibawa berobat.",
+     "en": "If the fever exceeds 38 degrees, we see a doctor.",
+     "scene": "施設の手順"
+    },
+    {
+     "ja": "地震の場合は、まず身を守ります。",
+     "reading": "じしんのばあいは、まずみをまもります。",
+     "id": "Dalam hal gempa bumi, pertama lindungi diri.",
+     "en": "In case of an earthquake, protect yourself first.",
+     "scene": "防災"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "転倒した＿＿＿は、すぐに看護師を呼んでください。",
+     "choices": [
+      "場合",
+      "ため",
+      "ところ",
+      "うち"
+     ],
+     "answer": 0,
+     "explain_id": "Aturan tertulis memakai 「場合は」.",
+     "explain_en": "Written rules use 「場合は」."
+    },
+    {
+     "type": "choice",
+     "q": "地震＿＿＿場合は、まず身を守ります。",
+     "choices": [
+      "の",
+      "を",
+      "が",
+      "に"
+     ],
+     "answer": 0,
+     "explain_id": "Kata benda + の + 場合は。",
+     "explain_en": "Noun + の + 場合は."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "熱が",
+      "三十八度を",
+      "超えた場合は",
+      "受診します"
+     ],
+     "hint_id": "Kalau demam melebihi 38 derajat, dibawa berobat.",
+     "hint_en": "If the fever exceeds 38 degrees, we see a doctor."
+    }
+   ]
+  },
+  {
+   "id": "n4-toori-ni",
+   "pattern": "〜とおりに",
+   "level": "N4",
+   "category": "方法",
+   "form": "動詞辞書形／た形／名詞の ＋ とおりに",
+   "meaning_id": "sesuai dengan ~ / persis seperti ~",
+   "meaning_en": "exactly as ~",
+   "note_id": "Melakukan persis seperti yang diinstruksikan. Inti dari mengikuti rencana perawatan dan resep.",
+   "note_en": "Doing exactly as instructed — central to following care plans and prescriptions.",
+   "note_ja": "指示どおりに行うこと。ケアプランや医師の指示を守る場面で使う。",
+   "examples": [
+    {
+     "ja": "医師の指示のとおりに、薬を出してください。",
+     "reading": "いしのしじのとおりに、くすりをだしてください。",
+     "id": "Tolong berikan obatnya sesuai instruksi dokter.",
+     "en": "Please give the medicine exactly as the doctor instructed.",
+     "scene": "服薬介助"
+    },
+    {
+     "ja": "教わったとおりにやってみます。",
+     "reading": "おそわったとおりにやってみます。",
+     "id": "Saya akan coba lakukan persis seperti yang diajarkan.",
+     "en": "I'll try doing it exactly as I was taught.",
+     "scene": "職員間"
+    },
+    {
+     "ja": "ケアプランのとおりに支援します。",
+     "reading": "ケアプランのとおりにしえんします。",
+     "id": "Kami memberikan dukungan sesuai rencana perawatan.",
+     "en": "We provide support according to the care plan.",
+     "scene": "ケアプラン"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "教わった＿＿＿にやってみます。",
+     "choices": [
+      "とおり",
+      "ため",
+      "ところ",
+      "うち"
+     ],
+     "answer": 0,
+     "explain_id": "「〜たとおりに」= persis seperti itu.",
+     "explain_en": "「〜たとおりに」= exactly like that."
+    },
+    {
+     "type": "choice",
+     "q": "医師の指示＿＿＿とおりに、薬を出してください。",
+     "choices": [
+      "の",
+      "を",
+      "が",
+      "に"
+     ],
+     "answer": 0,
+     "explain_id": "Kata benda + の + とおりに。",
+     "explain_en": "Noun + の + とおりに."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "ケアプランの",
+      "とおりに",
+      "支援",
+      "します"
+     ],
+     "hint_id": "Kami memberikan dukungan sesuai rencana perawatan.",
+     "hint_en": "We provide support according to the care plan."
+    }
+   ]
+  },
+  {
+   "id": "n4-mama",
+   "pattern": "〜まま",
+   "level": "N4",
+   "category": "状態",
+   "form": "動詞た形／ない形・名詞の・形容詞 ＋ まま",
+   "meaning_id": "dalam keadaan ~ (tidak berubah)",
+   "meaning_en": "as it is / left ~",
+   "note_id": "Keadaan yang dibiarkan tidak berubah. Sering menandai risiko dalam laporan insiden.",
+   "note_en": "A state left unchanged — often flags a risk in incident reports.",
+   "note_ja": "そのままの状態が続いていること。放置によるリスクを示すのに使う。",
+   "examples": [
+    {
+     "ja": "靴を履いたまま、ベッドに寝ていました。",
+     "reading": "くつをはいたまま、ベッドにねていました。",
+     "id": "Ia tidur di tempat tidur dengan sepatu masih terpakai.",
+     "en": "They were lying in bed with their shoes still on.",
+     "scene": "ヒヤリハット"
+    },
+    {
+     "ja": "テレビをつけたまま、眠っています。",
+     "reading": "テレビをつけたまま、ねむっています。",
+     "id": "Ia tertidur dengan TV masih menyala.",
+     "en": "They fell asleep with the TV still on.",
+     "scene": "夜勤記録"
+    },
+    {
+     "ja": "座ったままでいいですよ。",
+     "reading": "すわったままでいいですよ。",
+     "id": "Tetap duduk saja tidak apa-apa.",
+     "en": "You can stay seated.",
+     "scene": "声かけ"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "靴を＿＿＿まま、ベッドに寝ていました。",
+     "choices": [
+      "履いた",
+      "履く",
+      "履いて",
+      "履き"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk た + まま = keadaan yang dibiarkan.",
+     "explain_en": "た-form + まま = a state left as is."
+    },
+    {
+     "type": "choice",
+     "q": "「座ったままでいいですよ」の意味はどれですか。",
+     "choices": [
+      "座ったままで大丈夫だ",
+      "立ってください",
+      "座ってはいけない",
+      "座り直してください"
+     ],
+     "answer": 0,
+     "explain_id": "「〜たままでいい」= boleh tetap begitu.",
+     "explain_en": "「〜たままでいい」= it's fine to stay that way."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "テレビを",
+      "つけたまま",
+      "眠って",
+      "います"
+     ],
+     "hint_id": "Ia tertidur dengan TV masih menyala.",
+     "hint_en": "They fell asleep with the TV still on."
+    }
+   ]
+  },
+  {
+   "id": "n4-zuni",
+   "pattern": "〜ずに",
+   "level": "N4",
+   "category": "付帯状況",
+   "form": "動詞ない形（ない を取る）＋ ずに ／ する→せずに",
+   "meaning_id": "tanpa ~",
+   "meaning_en": "without doing ~",
+   "note_id": "Bentuk tulis dari 「〜ないで」. Dipakai dalam catatan dan laporan resmi.",
+   "note_en": "The written-style version of 「〜ないで」 — used in records and formal reports.",
+   "note_ja": "「〜ないで」の書き言葉。記録・報告書ではこちらが自然。",
+   "examples": [
+    {
+     "ja": "朝食を取らずに、薬を飲まれました。",
+     "reading": "ちょうしょくをとらずに、くすりをのまれました。",
+     "id": "Beliau minum obat tanpa sarapan.",
+     "en": "They took the medicine without eating breakfast.",
+     "scene": "服薬記録"
+    },
+    {
+     "ja": "何も言わずに、部屋を出て行かれました。",
+     "reading": "なにもいわずに、へやをでていかれました。",
+     "id": "Beliau keluar kamar tanpa mengatakan apa pun.",
+     "en": "They left the room without saying anything.",
+     "scene": "記録"
+    },
+    {
+     "ja": "無理をせずに、様子を見ます。",
+     "reading": "むりをせずに、ようすをみます。",
+     "id": "Tanpa memaksakan, kami mengamati keadaannya.",
+     "en": "Without pushing, we'll watch how they do.",
+     "scene": "ケアプラン"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "朝食を＿＿＿ずに、薬を飲まれました。",
+     "choices": [
+      "取ら",
+      "取り",
+      "取る",
+      "取って"
+     ],
+     "answer": 0,
+     "explain_id": "取る → 取らない →「ない」を取って ずに。",
+     "explain_en": "取る → 取らない; drop ない and add ずに."
+    },
+    {
+     "type": "choice",
+     "q": "無理を＿＿＿ずに、様子を見ます。",
+     "choices": [
+      "せ",
+      "し",
+      "する",
+      "しな"
+     ],
+     "answer": 0,
+     "explain_id": "する → せずに (bentuk khusus)。",
+     "explain_en": "する becomes せずに (irregular)."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "何も",
+      "言わずに",
+      "部屋を",
+      "出て行かれました"
+     ],
+     "hint_id": "Beliau keluar kamar tanpa mengatakan apa pun.",
+     "hint_en": "They left the room without saying anything."
+    }
+   ]
+  },
+  {
+   "id": "n4-shika-nai",
+   "pattern": "〜しか〜ません",
+   "level": "N4",
+   "category": "限定",
+   "form": "名詞／数量詞 ＋ しか ＋ 動詞ません",
+   "meaning_id": "hanya ~ (dan itu sedikit)",
+   "meaning_en": "only ~ (and that's not enough)",
+   "note_id": "Selalu dengan kata kerja negatif, dan mengandung nuansa 'sedikit sekali'. Beda dari 「だけ」 yang netral.",
+   "note_en": "Always with a negative verb, and implies 'not enough' — unlike the neutral 「だけ」.",
+   "note_ja": "必ず否定と使い、「少ない」という気持ちが入る。中立の「だけ」との違いに注意。",
+   "examples": [
+    {
+     "ja": "水分を百ミリしか取っていません。",
+     "reading": "すいぶんをひゃくミリしかとっていません。",
+     "id": "Ia hanya minum 100 ml saja (terlalu sedikit).",
+     "en": "They have taken only 100 ml of fluid.",
+     "scene": "水分記録"
+    },
+    {
+     "ja": "三口しか食べられませんでした。",
+     "reading": "みくちしかたべられませんでした。",
+     "id": "Ia hanya bisa makan tiga suap saja.",
+     "en": "They could only manage three bites.",
+     "scene": "食事記録"
+    },
+    {
+     "ja": "夜は二時間しか眠れていません。",
+     "reading": "よるはにじかんしかねむれていません。",
+     "id": "Malam hari ia hanya bisa tidur dua jam.",
+     "en": "They have only slept two hours at night.",
+     "scene": "夜勤記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "水分を百ミリしか取って＿＿＿。",
+     "choices": [
+      "いません",
+      "います",
+      "いました",
+      "いるです"
+     ],
+     "answer": 0,
+     "explain_id": "「しか」 selalu dengan bentuk negatif.",
+     "explain_en": "「しか」 always pairs with a negative."
+    },
+    {
+     "type": "choice",
+     "q": "「少ない」という気持ちが入るのはどちらですか。",
+     "choices": [
+      "三口しか食べていません",
+      "三口だけ食べました",
+      "三口食べました",
+      "三口ずつ食べました"
+     ],
+     "answer": 0,
+     "explain_id": "「しか〜ない」 mengandung nuansa kurang.",
+     "explain_en": "「しか〜ない」 implies it wasn't enough."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "夜は",
+      "二時間しか",
+      "眠れて",
+      "いません"
+     ],
+     "hint_id": "Malam hari ia hanya bisa tidur dua jam.",
+     "hint_en": "They have only slept two hours at night."
+    }
+   ]
+  },
+  {
+   "id": "n4-deshou",
+   "pattern": "〜でしょう",
+   "level": "N4",
+   "category": "推量",
+   "form": "普通形 ＋ でしょう",
+   "meaning_id": "mungkin ~ / kan?",
+   "meaning_en": "probably ~ / right?",
+   "note_id": "Dua fungsi: dugaan, dan meminta persetujuan dengan nada naik.",
+   "note_en": "Two uses: a guess, and seeking agreement with rising intonation.",
+   "note_ja": "推量と、語尾を上げて同意を求める用法。声かけでは後者をよく使う。",
+   "examples": [
+    {
+     "ja": "明日には熱が下がるでしょう。",
+     "reading": "あしたにはねつがさがるでしょう。",
+     "id": "Besok demamnya mungkin akan turun.",
+     "en": "The fever will probably come down by tomorrow.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "寒いでしょう。毛布をかけますね。",
+     "reading": "さむいでしょう。もうふをかけますね。",
+     "id": "Dingin kan? Saya selimuti ya.",
+     "en": "You're cold, aren't you? I'll put a blanket on.",
+     "scene": "声かけ"
+    },
+    {
+     "ja": "疲れたでしょう。少し休みましょう。",
+     "reading": "つかれたでしょう。すこしやすみましょう。",
+     "id": "Capek kan? Ayo istirahat sebentar.",
+     "en": "You must be tired. Let's rest a bit.",
+     "scene": "リハビリ"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "明日には熱が＿＿＿でしょう。",
+     "choices": [
+      "下がる",
+      "下がり",
+      "下がって",
+      "下がります"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk biasa + でしょう。",
+     "explain_en": "Plain form + でしょう."
+    },
+    {
+     "type": "choice",
+     "q": "「寒いでしょう」と声をかける気持ちに近いのはどれですか。",
+     "choices": [
+      "相手に同意を求めている",
+      "命令している",
+      "禁止している",
+      "許可している"
+     ],
+     "answer": 0,
+     "explain_id": "Nada naik = meminta persetujuan.",
+     "explain_en": "Rising intonation = seeking agreement."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "疲れた",
+      "でしょう",
+      "少し",
+      "休みましょう"
+     ],
+     "hint_id": "Capek kan? Ayo istirahat sebentar.",
+     "hint_en": "You must be tired. Let's rest a bit."
+    }
+   ]
+  },
+  {
+   "id": "n4-te-hoshii",
+   "pattern": "〜てほしいです",
+   "level": "N4",
+   "category": "希望",
+   "form": "動詞て形 ＋ ほしいです",
+   "meaning_id": "ingin (orang lain) melakukan ~",
+   "meaning_en": "want someone to ~",
+   "note_id": "Keinginan agar ORANG LAIN berbuat sesuatu. Untuk penerima layanan, catat sebagai keinginan mereka.",
+   "note_en": "Wanting SOMEONE ELSE to act — record this as the resident's own wish.",
+   "note_ja": "相手にしてほしいこと。利用者さんの要望を記録するときに使える。",
+   "examples": [
+    {
+     "ja": "家族に会いに来てほしいと言っておられます。",
+     "reading": "かぞくにあいにきてほしいといっておられます。",
+     "id": "Beliau mengatakan ingin keluarganya datang menjenguk.",
+     "en": "They say they want their family to come and visit.",
+     "scene": "記録"
+    },
+    {
+     "ja": "もう少し待ってほしいそうです。",
+     "reading": "もうすこしまってほしいそうです。",
+     "id": "Katanya ia ingin kita menunggu sebentar lagi.",
+     "en": "They say they want us to wait a little longer.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "ゆっくり話してほしいです。",
+     "reading": "ゆっくりはなしてほしいです。",
+     "id": "Saya ingin Anda berbicara pelan-pelan.",
+     "en": "I'd like you to speak slowly.",
+     "scene": "職員間"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "もう少し＿＿＿ほしいそうです。",
+     "choices": [
+      "待って",
+      "待ち",
+      "待つ",
+      "待った"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk て + ほしい。",
+     "explain_en": "Te-form + ほしい."
+    },
+    {
+     "type": "choice",
+     "q": "利用者さんの要望を記録するのに合うのはどれですか。",
+     "choices": [
+      "会いに来てほしいと言っておられます",
+      "会いに行きたいです",
+      "会わせました",
+      "会わせてあげました"
+     ],
+     "answer": 0,
+     "explain_id": "Keinginan penerima layanan dicatat apa adanya.",
+     "explain_en": "Record the resident's wish as their own words."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "ゆっくり",
+      "話して",
+      "ほしい",
+      "です"
+     ],
+     "hint_id": "Saya ingin Anda berbicara pelan-pelan.",
+     "hint_en": "I'd like you to speak slowly."
+    }
+   ]
+  },
+  {
+   "id": "n4-you-ni-iimasu",
+   "pattern": "〜ように言います",
+   "level": "N4",
+   "category": "伝達",
+   "form": "動詞辞書形／ない形 ＋ ように ＋ 言います／伝えます",
+   "meaning_id": "menyampaikan supaya ~",
+   "meaning_en": "tell someone to ~",
+   "note_id": "Menyampaikan instruksi orang lain secara tidak langsung. Wajib dalam serah terima.",
+   "note_en": "Relays someone's instruction indirectly — essential in handovers.",
+   "note_ja": "人の指示を間接的に伝える。申し送りで必須の形。",
+   "examples": [
+    {
+     "ja": "看護師が、水分を多めに取るように言っていました。",
+     "reading": "かんごしが、すいぶんをおおめにとるようにいっていました。",
+     "id": "Perawat mengatakan supaya minum lebih banyak.",
+     "en": "The nurse said to increase fluid intake.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "無理をしないようにお伝えください。",
+     "reading": "むりをしないようにおつたえください。",
+     "id": "Tolong sampaikan supaya tidak memaksakan diri.",
+     "en": "Please tell them not to overdo it.",
+     "scene": "連絡"
+    },
+    {
+     "ja": "医師が、しばらく安静にするように指示しました。",
+     "reading": "いしが、しばらくあんせいにするようにしじしました。",
+     "id": "Dokter menginstruksikan supaya beristirahat total untuk sementara.",
+     "en": "The doctor instructed them to rest for a while.",
+     "scene": "申し送り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "水分を多めに＿＿＿ように言っていました。",
+     "choices": [
+      "取る",
+      "取り",
+      "取って",
+      "取った"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk kamus + ように言う。",
+     "explain_en": "Dictionary form + ように言う."
+    },
+    {
+     "type": "choice",
+     "q": "無理を＿＿＿ようにお伝えください。",
+     "choices": [
+      "しない",
+      "しなくて",
+      "しないで",
+      "しません"
+     ],
+     "answer": 0,
+     "explain_id": "Larangan tidak langsung: ない形 + ように。",
+     "explain_en": "Indirect prohibition: ない-form + ように."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "医師が",
+      "安静にする",
+      "ように",
+      "指示しました"
+     ],
+     "hint_id": "Dokter menginstruksikan supaya beristirahat total.",
+     "hint_en": "The doctor instructed them to rest."
+    }
+   ]
+  },
+  {
+   "id": "n4-jidoushi-tadoushi",
+   "pattern": "自動詞と他動詞（開く／開ける）",
+   "level": "N4",
+   "category": "自動詞・他動詞",
+   "form": "自動詞：〜が ＋ 動詞 ／ 他動詞：〜を ＋ 動詞",
+   "meaning_id": "kata kerja intransitif dan transitif",
+   "meaning_en": "intransitive vs transitive verbs",
+   "note_id": "Menentukan apakah sesuatu terjadi sendiri atau dilakukan seseorang — sangat penting dalam laporan insiden.",
+   "note_en": "Distinguishes what happened by itself from what someone did — crucial in incident reports.",
+   "note_ja": "「勝手にそうなった」のか「誰かがした」のかを区別する。事故報告では責任の所在に関わる。",
+   "examples": [
+    {
+     "ja": "窓が開いています。（自動詞）／窓を開けました。（他動詞）",
+     "reading": "まどがあいています。／まどをあけました。",
+     "id": "Jendelanya terbuka. (intransitif) / Saya membuka jendela. (transitif)",
+     "en": "The window is open. / I opened the window.",
+     "scene": "環境整備"
+    },
+    {
+     "ja": "薬が落ちていました。誰かが落としたようです。",
+     "reading": "くすりがおちていました。だれかがおとしたようです。",
+     "id": "Obatnya tergeletak jatuh. Sepertinya ada yang menjatuhkannya.",
+     "en": "The medicine was on the floor. Someone seems to have dropped it.",
+     "scene": "ヒヤリハット"
+    },
+    {
+     "ja": "ブレーキがかかっていませんでした。",
+     "reading": "ブレーキがかかっていませんでした。",
+     "id": "Remnya dalam keadaan tidak terpasang.",
+     "en": "The brake was not engaged.",
+     "scene": "事故報告"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "窓＿＿＿開いています。（自然にそうなっている）",
+     "choices": [
+      "が",
+      "を",
+      "に",
+      "で"
+     ],
+     "answer": 0,
+     "explain_id": "Kata kerja intransitif memakai が。",
+     "explain_en": "Intransitive verbs take が."
+    },
+    {
+     "type": "choice",
+     "q": "職員が窓を開けたことを書くのはどれですか。",
+     "choices": [
+      "窓を開けました",
+      "窓が開きました",
+      "窓が開いています",
+      "窓が開いていました"
+     ],
+     "answer": 0,
+     "explain_id": "Perbuatan orang = kata kerja transitif + を。",
+     "explain_en": "A person's action = transitive verb + を."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "ブレーキが",
+      "かかって",
+      "いません",
+      "でした"
+     ],
+     "hint_id": "Remnya dalam keadaan tidak terpasang.",
+     "hint_en": "The brake was not engaged."
+    }
+   ]
+  },
+  {
+   "id": "n4-teiru-tokoro",
+   "pattern": "〜ているところです",
+   "level": "N4",
+   "category": "時点",
+   "form": "動詞辞書形／ている／た ＋ ところです",
+   "meaning_id": "sedang dalam proses ~",
+   "meaning_en": "in the middle of ~ing",
+   "note_id": "Menunjukkan titik waktu: akan mulai (辞書形), sedang (ている), baru selesai (た).",
+   "note_en": "Marks the point in time: about to (dict.), in the middle of (ている), just finished (た).",
+   "note_ja": "時点を示す。これから（辞書形）・最中（ている）・終わった直後（た形）の三つ。",
+   "examples": [
+    {
+     "ja": "今、記録を書いているところです。",
+     "reading": "いま、きろくをかいているところです。",
+     "id": "Sekarang saya sedang menulis catatan.",
+     "en": "I'm in the middle of writing the records.",
+     "scene": "勤務"
+    },
+    {
+     "ja": "ちょうど入浴が終わったところです。",
+     "reading": "ちょうどにゅうよくがおわったところです。",
+     "id": "Mandinya baru saja selesai.",
+     "en": "The bath has just finished.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "これから食事を配るところです。",
+     "reading": "これからしょくじをくばるところです。",
+     "id": "Sekarang saya akan membagikan makanan.",
+     "en": "I'm about to serve the meals.",
+     "scene": "食事準備"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "今、記録を＿＿＿ところです。",
+     "choices": [
+      "書いている",
+      "書く",
+      "書いた",
+      "書き"
+     ],
+     "answer": 0,
+     "explain_id": "'Sedang' = ている + ところです。",
+     "explain_en": "'In the middle of' = ている + ところです."
+    },
+    {
+     "type": "choice",
+     "q": "「入浴が終わったところです」の意味はどれですか。",
+     "choices": [
+      "たった今終わった",
+      "これから終わる",
+      "まだ終わらない",
+      "終わる予定がない"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk た + ところ = baru saja selesai.",
+     "explain_en": "た-form + ところ = just finished."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "これから",
+      "食事を",
+      "配る",
+      "ところです"
+     ],
+     "hint_id": "Sekarang saya akan membagikan makanan.",
+     "hint_en": "I'm about to serve the meals."
+    }
+   ]
+  },
+  {
+   "id": "n4-miemasu-kikoemasu",
+   "pattern": "〜が見えます／〜が聞こえます",
+   "level": "N4",
+   "category": "知覚",
+   "form": "名詞 ＋ が ＋ 見えます／聞こえます",
+   "meaning_id": "terlihat ~ / terdengar ~",
+   "meaning_en": "can see ~ / can hear ~",
+   "note_id": "Terjadi secara alami tanpa niat. Beda dari 見られます／聞けます yang berarti bisa karena diusahakan.",
+   "note_en": "Happens naturally, not by intent — unlike 見られます／聞けます, which mean able to by effort.",
+   "note_ja": "意志と関係なく自然に見える・聞こえる。「見られます」（努力すればできる）との違いに注意。",
+   "examples": [
+    {
+     "ja": "最近、右目が見えにくいそうです。",
+     "reading": "さいきん、みぎめがみえにくいそうです。",
+     "id": "Katanya akhir-akhir ini mata kanannya sulit melihat.",
+     "en": "They say their right eye has become hard to see with.",
+     "scene": "アセスメント"
+    },
+    {
+     "ja": "小さい声が聞こえないようです。",
+     "reading": "ちいさいこえがきこえないようです。",
+     "id": "Sepertinya suara kecil tidak terdengar olehnya.",
+     "en": "Quiet voices don't seem to reach them.",
+     "scene": "コミュニケーション"
+    },
+    {
+     "ja": "部屋から物音が聞こえました。",
+     "reading": "へやからものおとがきこえました。",
+     "id": "Terdengar suara benda dari kamar.",
+     "en": "A noise was heard from the room.",
+     "scene": "夜勤記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "部屋から物音＿＿＿聞こえました。",
+     "choices": [
+      "が",
+      "を",
+      "に",
+      "で"
+     ],
+     "answer": 0,
+     "explain_id": "聞こえます memakai partikel が。",
+     "explain_en": "聞こえます takes the particle が."
+    },
+    {
+     "type": "choice",
+     "q": "自然に耳に入ることを表すのはどちらですか。",
+     "choices": [
+      "聞こえます",
+      "聞けます",
+      "聞きます",
+      "聞かせます"
+     ],
+     "answer": 0,
+     "explain_id": "「聞こえる」= terdengar tanpa niat.",
+     "explain_en": "「聞こえる」= audible without trying."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "小さい声が",
+      "聞こえない",
+      "ようです"
+     ],
+     "hint_id": "Sepertinya suara kecil tidak terdengar olehnya.",
+     "hint_en": "Quiet voices don't seem to reach them."
+    }
+   ]
+  },
+  {
+   "id": "n4-suuryou-mo",
+   "pattern": "数量＋も",
+   "level": "N4",
+   "category": "数量",
+   "form": "数量詞 ＋ も",
+   "meaning_id": "sebanyak ~ (jumlah yang besar)",
+   "meaning_en": "as many as ~",
+   "note_id": "Menekankan bahwa jumlahnya banyak, di luar dugaan. Berguna untuk menandai hal yang tidak biasa.",
+   "note_en": "Emphasizes that the amount is surprisingly large — useful for flagging the unusual.",
+   "note_ja": "「思ったより多い」ことを強調する。いつもと違う量を報告するときに効く。",
+   "examples": [
+    {
+     "ja": "今日は三回も転びそうになりました。",
+     "reading": "きょうはさんかいもころびそうになりました。",
+     "id": "Hari ini sampai tiga kali hampir jatuh.",
+     "en": "Today they nearly fell as many as three times.",
+     "scene": "ヒヤリハット"
+    },
+    {
+     "ja": "一リットルも飲まれました。",
+     "reading": "いちリットルものまれました。",
+     "id": "Beliau minum sampai satu liter.",
+     "en": "They drank a whole liter.",
+     "scene": "水分記録"
+    },
+    {
+     "ja": "二時間も同じ場所に座っておられます。",
+     "reading": "にじかんもおなじばしょにすわっておられます。",
+     "id": "Beliau duduk di tempat yang sama sampai dua jam.",
+     "en": "They have been sitting in the same spot for two whole hours.",
+     "scene": "見守り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "今日は三回＿＿＿転びそうになりました。",
+     "choices": [
+      "も",
+      "だけ",
+      "しか",
+      "ずつ"
+     ],
+     "answer": 0,
+     "explain_id": "数量 + も menekankan jumlah yang banyak.",
+     "explain_en": "Number + も emphasizes a large amount."
+    },
+    {
+     "type": "choice",
+     "q": "「二時間も座っておられます」に近い気持ちはどれですか。",
+     "choices": [
+      "長いと感じている",
+      "短いと感じている",
+      "ちょうどいいと思っている",
+      "気にしていない"
+     ],
+     "answer": 0,
+     "explain_id": "「も」 menunjukkan penilaian 'banyak/lama'.",
+     "explain_en": "「も」 signals the speaker finds it a lot."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "一リットルも",
+      "飲ま",
+      "れ",
+      "ました"
+     ],
+     "hint_id": "Beliau minum sampai satu liter.",
+     "hint_en": "They drank a whole liter."
+    }
+   ]
+  },
+  {
+   "id": "n4-nado",
+   "pattern": "〜など",
+   "level": "N4",
+   "category": "列挙",
+   "form": "名詞 ＋ など",
+   "meaning_id": "dan lain-lain / seperti ~",
+   "meaning_en": "and so on / such as ~",
+   "note_id": "Menyebut contoh dari beberapa hal. Dalam catatan sebaiknya tetap tulis yang penting secara lengkap.",
+   "note_en": "Gives examples from a set — in records, still list the important items in full.",
+   "note_ja": "例を挙げる。記録では重要な項目は省略せず書ききること。",
+   "examples": [
+    {
+     "ja": "血圧や体温などを記録します。",
+     "reading": "けつあつやたいおんなどをきろくします。",
+     "id": "Kami mencatat tekanan darah, suhu tubuh, dan sebagainya.",
+     "en": "We record blood pressure, temperature, and so on.",
+     "scene": "バイタル測定"
+    },
+    {
+     "ja": "歌や折り紙などのレクリエーションがあります。",
+     "reading": "うたやおりがみなどのレクリエーションがあります。",
+     "id": "Ada rekreasi seperti bernyanyi dan origami.",
+     "en": "There are activities such as singing and origami.",
+     "scene": "レクリエーション"
+    },
+    {
+     "ja": "タオルや着替えなどを準備してください。",
+     "reading": "タオルやきがえなどをじゅんびしてください。",
+     "id": "Tolong siapkan handuk, baju ganti, dan sebagainya.",
+     "en": "Please prepare towels, a change of clothes, and so on.",
+     "scene": "入浴準備"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "血圧や体温＿＿＿を記録します。",
+     "choices": [
+      "など",
+      "だけ",
+      "しか",
+      "ずつ"
+     ],
+     "answer": 0,
+     "explain_id": "「など」= dan lain-lain.",
+     "explain_en": "「など」= and so on."
+    },
+    {
+     "type": "choice",
+     "q": "歌や折り紙＿＿＿のレクリエーションがあります。",
+     "choices": [
+      "など",
+      "ながら",
+      "ばかり",
+      "までに"
+     ],
+     "answer": 0,
+     "explain_id": "「など」 + の + kata benda.",
+     "explain_en": "「など」 + の + noun."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "タオルや",
+      "着替えなどを",
+      "準備して",
+      "ください"
+     ],
+     "hint_id": "Tolong siapkan handuk, baju ganti, dan sebagainya.",
+     "hint_en": "Please prepare towels, a change of clothes, and so on."
+    }
+   ]
+  },
+  {
+   "id": "n4-demo",
+   "pattern": "〜でも（例示）",
+   "level": "N4",
+   "category": "申し出・提案",
+   "form": "名詞 ＋ でも",
+   "meaning_id": "~ atau apa gitu (menawarkan tanpa memaksa)",
+   "meaning_en": "~ or something (a light suggestion)",
+   "note_id": "Menawarkan satu contoh tanpa membatasi pilihan. Terdengar ringan dan tidak memaksa.",
+   "note_en": "Offers one example without limiting the choice — light and non-pushy.",
+   "note_ja": "一例として挙げて誘う。選択肢を狭めないので押しつけにならない。",
+   "examples": [
+    {
+     "ja": "お茶でもいかがですか。",
+     "reading": "おちゃでもいかがですか。",
+     "id": "Bagaimana kalau minum teh atau semacamnya?",
+     "en": "How about some tea or something?",
+     "scene": "声かけ"
+    },
+    {
+     "ja": "少し散歩でもしませんか。",
+     "reading": "すこしさんぽでもしませんか。",
+     "id": "Bagaimana kalau jalan-jalan sebentar?",
+     "en": "How about going for a little walk?",
+     "scene": "レクリエーション"
+    },
+    {
+     "ja": "テレビでも見ましょうか。",
+     "reading": "テレビでもみましょうか。",
+     "id": "Bagaimana kalau menonton TV?",
+     "en": "Shall we watch TV or something?",
+     "scene": "見守り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "お茶＿＿＿いかがですか。",
+     "choices": [
+      "でも",
+      "だけ",
+      "しか",
+      "ばかり"
+     ],
+     "answer": 0,
+     "explain_id": "「でも」 menawarkan satu contoh dengan ringan.",
+     "explain_en": "「でも」 lightly offers one example."
+    },
+    {
+     "type": "choice",
+     "q": "押しつけない誘い方はどれですか。",
+     "choices": [
+      "散歩でもしませんか",
+      "散歩しなさい",
+      "散歩しなければなりません",
+      "散歩してはいけません"
+     ],
+     "answer": 0,
+     "explain_id": "「でも」+「ませんか」 paling lembut.",
+     "explain_en": "「でも」+「ませんか」 is the gentlest."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "テレビでも",
+      "見",
+      "ましょう",
+      "か"
+     ],
+     "hint_id": "Bagaimana kalau menonton TV?",
+     "hint_en": "Shall we watch TV or something?"
+    }
+   ]
+  },
+  {
+   "id": "n4-meireikei",
+   "pattern": "命令形・禁止形（危険なとき）",
+   "level": "N4",
+   "category": "緊急",
+   "form": "命令形：う段→え段 ／ 禁止形：辞書形 ＋ な",
+   "meaning_id": "bentuk perintah dan larangan keras",
+   "meaning_en": "command and prohibition forms",
+   "note_id": "Kasar, TIDAK boleh dipakai sehari-hari. Hanya untuk keadaan darurat dan untuk memahami rambu.",
+   "note_en": "Rough — never for everyday use. Only for emergencies and for reading warning signs.",
+   "note_ja": "乱暴な言い方で、日常では絶対に使わない。災害・緊急時と、掲示物を読むためだけに覚える。",
+   "examples": [
+    {
+     "ja": "（火事のとき）逃げろ！",
+     "reading": "にげろ！",
+     "id": "(Saat kebakaran) Lari!",
+     "en": "(In a fire) Run!",
+     "scene": "防災訓練"
+    },
+    {
+     "ja": "（掲示）ここに立ち入るな。",
+     "reading": "ここにたちいるな。",
+     "id": "(Papan peringatan) Dilarang masuk.",
+     "en": "(Sign) Do not enter.",
+     "scene": "掲示物"
+    },
+    {
+     "ja": "（掲示）危険。近づくな。",
+     "reading": "きけん。ちかづくな。",
+     "id": "(Papan peringatan) Bahaya. Jangan mendekat.",
+     "en": "(Sign) Danger. Do not approach.",
+     "scene": "掲示物"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "利用者さんに避難を促すとき、正しいのはどれですか。",
+     "choices": [
+      "こちらへ逃げましょう",
+      "逃げろ",
+      "早くしろ",
+      "来い"
+     ],
+     "answer": 0,
+     "explain_id": "Kepada penerima layanan selalu pakai bentuk sopan.",
+     "explain_en": "Always use polite forms with residents."
+    },
+    {
+     "type": "choice",
+     "q": "「立ち入るな」の意味はどれですか。",
+     "choices": [
+      "入ってはいけない",
+      "入ってもいい",
+      "入りましょう",
+      "入りたい"
+     ],
+     "answer": 0,
+     "explain_id": "辞書形 + な = larangan keras.",
+     "explain_en": "Dictionary form + な = a blunt prohibition."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "利用者さんには",
+      "丁寧な",
+      "言い方を",
+      "使います"
+     ],
+     "hint_id": "Kepada penerima layanan kita memakai bahasa yang sopan.",
+     "hint_en": "With residents we use polite language."
+    }
+   ]
+  },
+  {
+   "id": "n4-nasai",
+   "pattern": "〜なさい",
+   "level": "N4",
+   "category": "指示",
+   "form": "動詞ます形（ます を取る）＋ なさい",
+   "meaning_id": "lakukanlah ~ (perintah dari atas)",
+   "meaning_en": "do ~ (instruction from a superior)",
+   "note_id": "Perintah dari orang tua kepada anak atau guru kepada murid. TIDAK dipakai kepada penerima layanan.",
+   "note_en": "A parent-to-child or teacher-to-student instruction — not for use with residents.",
+   "note_ja": "親から子・先生から生徒への指示。利用者さんに使うと失礼になるので使わない。",
+   "examples": [
+    {
+     "ja": "（試験問題）次の質問に答えなさい。",
+     "reading": "つぎのしつもんにこたえなさい。",
+     "id": "(Soal ujian) Jawablah pertanyaan berikut.",
+     "en": "(Exam) Answer the following questions.",
+     "scene": "試験・研修"
+    },
+    {
+     "ja": "（掲示）手をよく洗いなさい。",
+     "reading": "てをよくあらいなさい。",
+     "id": "(Papan) Cucilah tangan dengan bersih.",
+     "en": "(Sign) Wash your hands thoroughly.",
+     "scene": "掲示物"
+    },
+    {
+     "ja": "（研修の資料）よく読んで、答えを書きなさい。",
+     "reading": "よくよんで、こたえをかきなさい。",
+     "id": "(Materi pelatihan) Bacalah baik-baik lalu tulis jawabannya.",
+     "en": "(Training material) Read carefully and write your answer.",
+     "scene": "試験・研修"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "次の質問に＿＿＿なさい。",
+     "choices": [
+      "答え",
+      "答える",
+      "答えて",
+      "答えた"
+     ],
+     "answer": 0,
+     "explain_id": "答えます → 答え + なさい。",
+     "explain_en": "答えます → 答え + なさい."
+    },
+    {
+     "type": "choice",
+     "q": "利用者さんに手洗いを促すとき、正しいのはどれですか。",
+     "choices": [
+      "手を洗いましょう",
+      "手を洗いなさい",
+      "手を洗え",
+      "手を洗うな"
+     ],
+     "answer": 0,
+     "explain_id": "「なさい」 tidak dipakai kepada penerima layanan.",
+     "explain_en": "「なさい」 is not used with residents."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "利用者さんには",
+      "手を",
+      "洗いましょうと",
+      "言います"
+     ],
+     "hint_id": "Kepada penerima layanan kita mengatakan 'ayo cuci tangan'.",
+     "hint_en": "With residents we say 'let's wash our hands'."
+    }
+   ]
+  },
+  {
+   "id": "n4-noni-youto",
+   "pattern": "〜のに（用途）",
+   "level": "N4",
+   "category": "用途",
+   "form": "動詞辞書形 ＋ のに ＋ 使います／便利です",
+   "meaning_id": "untuk ~ (kegunaan)",
+   "meaning_en": "for ~ing (use)",
+   "note_id": "Menyatakan kegunaan alat. Berbeda dari 「のに」 yang berarti 'padahal'.",
+   "note_en": "States what a tool is for — different from the 'even though' 「のに」.",
+   "note_ja": "道具の用途を表す。逆接の「のに」とは意味が違うので文脈で区別する。",
+   "examples": [
+    {
+     "ja": "この用紙は、記録を書くのに使います。",
+     "reading": "このようしは、きろくをかくのにつかいます。",
+     "id": "Kertas ini digunakan untuk menulis catatan.",
+     "en": "This form is used for writing records.",
+     "scene": "記録"
+    },
+    {
+     "ja": "このベルトは、移乗するのに便利です。",
+     "reading": "このベルトは、いじょうするのにべんりです。",
+     "id": "Sabuk ini praktis untuk memindahkan (transfer).",
+     "en": "This belt is handy for transfers.",
+     "scene": "移乗介助"
+    },
+    {
+     "ja": "とろみ剤は、飲み込みやすくするのに使います。",
+     "reading": "とろみざいは、のみこみやすくするのにつかいます。",
+     "id": "Pengental dipakai untuk memudahkan menelan.",
+     "en": "Thickener is used to make swallowing easier.",
+     "scene": "食事介助"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "この用紙は、記録を＿＿＿のに使います。",
+     "choices": [
+      "書く",
+      "書き",
+      "書いて",
+      "書いた"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk kamus + のに + 使います。",
+     "explain_en": "Dictionary form + のに + 使います."
+    },
+    {
+     "type": "choice",
+     "q": "「移乗するのに便利です」の「のに」の意味はどれですか。",
+     "choices": [
+      "用途を表す",
+      "逆接を表す",
+      "理由を表す",
+      "時間を表す"
+     ],
+     "answer": 0,
+     "explain_id": "Di sini 「のに」 menyatakan kegunaan.",
+     "explain_en": "Here 「のに」 states a use."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "とろみ剤は",
+      "飲み込みやすく",
+      "するのに",
+      "使います"
+     ],
+     "hint_id": "Pengental dipakai untuk memudahkan menelan.",
+     "hint_en": "Thickener is used to make swallowing easier."
+    }
+   ]
+  },
+  {
+   "id": "n4-ichido-mo",
+   "pattern": "一度も〜ません",
+   "level": "N4",
+   "category": "否定強調",
+   "form": "一度も／何も／だれも ＋ 動詞ません",
+   "meaning_id": "sama sekali tidak ~",
+   "meaning_en": "not even once / not at all",
+   "note_id": "Penyangkalan total. Dipakai untuk mencatat bahwa sesuatu benar-benar tidak terjadi.",
+   "note_en": "A total negation — records that something did not happen at all.",
+   "note_ja": "完全な否定。「一度もない」ことを正確に記録するために使う。",
+   "examples": [
+    {
+     "ja": "夜間、一度も起きられませんでした。",
+     "reading": "やかん、いちどもおきられませんでした。",
+     "id": "Sepanjang malam ia sama sekali tidak terbangun.",
+     "en": "They did not wake up even once during the night.",
+     "scene": "夜勤記録"
+    },
+    {
+     "ja": "今日は何も召し上がっていません。",
+     "reading": "きょうはなにもめしあがっていません。",
+     "id": "Hari ini beliau sama sekali belum makan apa pun.",
+     "en": "They have not eaten anything today.",
+     "scene": "食事記録"
+    },
+    {
+     "ja": "だれも気づきませんでした。",
+     "reading": "だれもきづきませんでした。",
+     "id": "Tidak ada seorang pun yang menyadarinya.",
+     "en": "No one noticed.",
+     "scene": "事故報告"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "夜間、一度も＿＿＿。",
+     "choices": [
+      "起きられませんでした",
+      "起きられました",
+      "起きます",
+      "起きるでした"
+     ],
+     "answer": 0,
+     "explain_id": "「一度も」 selalu dengan bentuk negatif.",
+     "explain_en": "「一度も」 always takes a negative."
+    },
+    {
+     "type": "choice",
+     "q": "今日は＿＿＿召し上がっていません。",
+     "choices": [
+      "何も",
+      "何か",
+      "何が",
+      "何を も"
+     ],
+     "answer": 0,
+     "explain_id": "「何も」+ negatif = tidak ada apa pun.",
+     "explain_en": "「何も」+ negative = nothing at all."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "だれも",
+      "気づき",
+      "ません",
+      "でした"
+     ],
+     "hint_id": "Tidak ada seorang pun yang menyadarinya.",
+     "hint_en": "No one noticed."
+    }
+   ]
+  },
+  {
+   "id": "n4-hodo",
+   "pattern": "〜ほど",
+   "level": "N4",
+   "category": "程度",
+   "form": "名詞／動詞普通形 ＋ ほど",
+   "meaning_id": "sampai tingkat ~ / sekitar ~",
+   "meaning_en": "to the extent of ~ / about ~",
+   "note_id": "Menunjukkan tingkat atau perkiraan. Dalam catatan berguna untuk menggambarkan derajat gejala.",
+   "note_en": "Shows degree or an estimate — useful for describing how severe a symptom is.",
+   "note_ja": "程度やおおよその量を表す。症状の強さを説明するのに使える。",
+   "examples": [
+    {
+     "ja": "歩けないほど痛むそうです。",
+     "reading": "あるけないほどいたむそうです。",
+     "id": "Katanya sakitnya sampai tidak bisa berjalan.",
+     "en": "They say it hurts to the point of not being able to walk.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "三十分ほど休まれました。",
+     "reading": "さんじゅっぷんほどやすまれました。",
+     "id": "Beliau beristirahat sekitar tiga puluh menit.",
+     "en": "They rested for about thirty minutes.",
+     "scene": "記録"
+    },
+    {
+     "ja": "声が出ないほど喉が痛いようです。",
+     "reading": "こえがでないほどのどがいたいようです。",
+     "id": "Sepertinya tenggorokannya sakit sampai suaranya tidak keluar.",
+     "en": "Their throat seems so sore that no voice comes out.",
+     "scene": "観察・記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "歩けない＿＿＿痛むそうです。",
+     "choices": [
+      "ほど",
+      "だけ",
+      "しか",
+      "ずつ"
+     ],
+     "answer": 0,
+     "explain_id": "「ほど」 menunjukkan tingkat keparahan.",
+     "explain_en": "「ほど」 shows the degree."
+    },
+    {
+     "type": "choice",
+     "q": "三十分＿＿＿休まれました。",
+     "choices": [
+      "ほど",
+      "しか",
+      "だけに",
+      "までも"
+     ],
+     "answer": 0,
+     "explain_id": "「ほど」 juga bisa berarti kira-kira.",
+     "explain_en": "「ほど」 can also mean approximately."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "声が出ない",
+      "ほど",
+      "喉が",
+      "痛いようです"
+     ],
+     "hint_id": "Tenggorokannya sakit sampai suaranya tidak keluar.",
+     "hint_en": "Their throat is so sore that no voice comes out."
+    }
+   ]
+  },
+  {
+   "id": "n4-ta-tokoro",
+   "pattern": "〜たところ（〜たら）",
+   "level": "N4",
+   "category": "発見",
+   "form": "動詞た形 ＋ ところ",
+   "meaning_id": "setelah ~, ternyata ~",
+   "meaning_en": "when I did ~, it turned out that ~",
+   "note_id": "Melaporkan apa yang ditemukan setelah melakukan sesuatu. Bentuk baku untuk laporan tertulis.",
+   "note_en": "Reports what was found after doing something — the standard form for written reports.",
+   "note_ja": "何かをした結果、分かったことを述べる。報告書に適した書き言葉。",
+   "examples": [
+    {
+     "ja": "訪室したところ、床に座っておられました。",
+     "reading": "ほうしつしたところ、ゆかにすわっておられました。",
+     "id": "Setelah masuk ke kamar, ternyata beliau sedang duduk di lantai.",
+     "en": "When I entered the room, they were sitting on the floor.",
+     "scene": "事故報告"
+    },
+    {
+     "ja": "体温を測ったところ、三十八度五分でした。",
+     "reading": "たいおんをはかったところ、さんじゅうはちどごぶでした。",
+     "id": "Setelah diukur, suhunya ternyata 38,5 derajat.",
+     "en": "When I took the temperature, it was 38.5 degrees.",
+     "scene": "バイタル測定"
+    },
+    {
+     "ja": "声をかけたところ、返事がありませんでした。",
+     "reading": "こえをかけたところ、へんじがありませんでした。",
+     "id": "Setelah saya panggil, ternyata tidak ada jawaban.",
+     "en": "When I called out, there was no response.",
+     "scene": "観察・記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "体温を＿＿＿ところ、三十八度五分でした。",
+     "choices": [
+      "測った",
+      "測る",
+      "測って",
+      "測り"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk た + ところ。",
+     "explain_en": "た-form + ところ."
+    },
+    {
+     "type": "choice",
+     "q": "報告書に書くのに適しているのはどれですか。",
+     "choices": [
+      "訪室したところ、床に座っておられました",
+      "訪室したら、床に座ってた",
+      "訪室して、床に座ってる",
+      "訪室したけど、床にいた"
+     ],
+     "answer": 0,
+     "explain_id": "「〜たところ」 adalah bentuk tulis yang baku.",
+     "explain_en": "「〜たところ」 is the standard written form."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "声をかけた",
+      "ところ",
+      "返事が",
+      "ありませんでした"
+     ],
+     "hint_id": "Setelah saya panggil, ternyata tidak ada jawaban.",
+     "hint_en": "When I called out, there was no response."
+    }
+   ]
+  },
+  {
+   "id": "n4-sa-meishika",
+   "pattern": "〜さ（名詞化）",
+   "level": "N4",
+   "category": "名詞化",
+   "form": "い形容詞（い を取る）／な形容詞 ＋ さ",
+   "meaning_id": "tingkat ~ / ke~an",
+   "meaning_en": "the degree of ~ / -ness",
+   "note_id": "Mengubah kata sifat menjadi kata benda yang menyatakan derajat. Dipakai untuk menulis derajat gejala.",
+   "note_en": "Turns an adjective into a noun of degree — used to write how severe something is.",
+   "note_ja": "形容詞を「程度を表す名詞」に変える。症状の程度を記録するのに使う。",
+   "examples": [
+    {
+     "ja": "痛みの強さを聞いてください。",
+     "reading": "いたみのつよさをきいてください。",
+     "id": "Tolong tanyakan seberapa kuat rasa sakitnya.",
+     "en": "Please ask how strong the pain is.",
+     "scene": "観察"
+    },
+    {
+     "ja": "ベッドの高さを調整します。",
+     "reading": "ベッドのたかさをちょうせいします。",
+     "id": "Saya menyesuaikan tinggi tempat tidurnya.",
+     "en": "I'll adjust the height of the bed.",
+     "scene": "環境整備"
+    },
+    {
+     "ja": "食事の量の少なさが気になります。",
+     "reading": "しょくじのりょうのすくなさがきになります。",
+     "id": "Sedikitnya porsi makan menjadi perhatian.",
+     "en": "The small amount of food is a concern.",
+     "scene": "申し送り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "ベッドの＿＿＿を調整します。",
+     "choices": [
+      "高さ",
+      "高い",
+      "高く",
+      "高くて"
+     ],
+     "answer": 0,
+     "explain_id": "高い → hilangkan い → 高 + さ。",
+     "explain_en": "高い → drop い → 高 + さ."
+    },
+    {
+     "type": "choice",
+     "q": "痛みの＿＿＿を聞いてください。",
+     "choices": [
+      "強さ",
+      "強い",
+      "強く",
+      "強くて"
+     ],
+     "answer": 0,
+     "explain_id": "強い → 強さ (kata benda derajat)。",
+     "explain_en": "強い → 強さ, a noun of degree."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "食事の量の",
+      "少なさが",
+      "気に",
+      "なります"
+     ],
+     "hint_id": "Sedikitnya porsi makan menjadi perhatian.",
+     "hint_en": "The small amount of food is a concern."
+    }
+   ]
+  },
+  {
+   "id": "n4-garu",
+   "pattern": "〜がっています（痛がる・寒がる）",
+   "level": "N4",
+   "category": "感情",
+   "form": "い形容詞（い を取る）／な形容詞 ＋ がっています",
+   "meaning_id": "(orang lain) tampak merasa ~",
+   "meaning_en": "someone shows signs of feeling ~",
+   "note_id": "Perasaan ORANG LAIN yang terlihat dari luar. Perasaan sendiri cukup 「痛いです」.",
+   "note_en": "Another person's feeling as shown outwardly; for yourself just say 「痛いです」.",
+   "note_ja": "第三者の感情は外から見た様子でしか分からないため「〜がる」を使う。自分には使わない。",
+   "examples": [
+    {
+     "ja": "右肩を痛がっておられます。",
+     "reading": "みぎかたをいたがっておられます。",
+     "id": "Beliau tampak merasakan sakit di bahu kanannya.",
+     "en": "They appear to be in pain in the right shoulder.",
+     "scene": "観察・記録"
+    },
+    {
+     "ja": "とても寒がっています。",
+     "reading": "とてもさむがっています。",
+     "id": "Ia tampak sangat kedinginan.",
+     "en": "They seem to feel very cold.",
+     "scene": "居室ケア"
+    },
+    {
+     "ja": "入浴を嫌がることが増えました。",
+     "reading": "にゅうよくをいやがることがふえました。",
+     "id": "Semakin sering ia tampak tidak mau mandi.",
+     "en": "They have increasingly been reluctant to bathe.",
+     "scene": "申し送り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "右肩を＿＿＿がっておられます。",
+     "choices": [
+      "痛",
+      "痛い",
+      "痛く",
+      "痛くて"
+     ],
+     "answer": 0,
+     "explain_id": "痛い → hilangkan い → 痛 + がる。",
+     "explain_en": "痛い → drop い → 痛 + がる."
+    },
+    {
+     "type": "choice",
+     "q": "利用者さんの様子を書くとき、正しいのはどれですか。",
+     "choices": [
+      "寒がっています",
+      "寒いです",
+      "寒がります か",
+      "寒くなります"
+     ],
+     "answer": 0,
+     "explain_id": "Perasaan orang lain memakai 〜がる。",
+     "explain_en": "Another person's feeling uses 〜がる."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "入浴を",
+      "嫌がることが",
+      "増え",
+      "ました"
+     ],
+     "hint_id": "Semakin sering ia tampak tidak mau mandi.",
+     "hint_en": "They have increasingly been reluctant to bathe."
+    }
+   ]
+  },
+  {
+   "id": "n4-te-bakari-imasu",
+   "pattern": "〜てばかりいます",
+   "level": "N4",
+   "category": "継続",
+   "form": "動詞て形 ＋ ばかりいます",
+   "meaning_id": "kerjanya cuma ~ terus",
+   "meaning_en": "do nothing but ~",
+   "note_id": "Menyatakan satu tindakan yang berulang terus, sering dengan nada khawatir.",
+   "note_en": "One action repeated over and over, often with a note of concern.",
+   "note_ja": "同じ動作の繰り返し。心配や困りごとを示す響きがある。",
+   "examples": [
+    {
+     "ja": "今日は横になってばかりいます。",
+     "reading": "きょうはよこになってばかりいます。",
+     "id": "Hari ini kerjanya berbaring terus.",
+     "en": "Today they have done nothing but lie down.",
+     "scene": "記録"
+    },
+    {
+     "ja": "同じ話をしてばかりいます。",
+     "reading": "おなじはなしをしてばかりいます。",
+     "id": "Ia mengulang cerita yang sama terus-menerus.",
+     "en": "They keep telling the same story over and over.",
+     "scene": "認知症ケア"
+    },
+    {
+     "ja": "泣いてばかりで、理由が分かりません。",
+     "reading": "ないてばかりで、りゆうがわかりません。",
+     "id": "Ia menangis terus, dan alasannya tidak diketahui.",
+     "en": "They keep crying and we don't know why.",
+     "scene": "申し送り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "今日は横に＿＿＿ばかりいます。",
+     "choices": [
+      "なって",
+      "なり",
+      "なる",
+      "なった"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk て + ばかり + います。",
+     "explain_en": "Te-form + ばかり + います."
+    },
+    {
+     "type": "choice",
+     "q": "「同じ話をしてばかりいます」に近い意味はどれですか。",
+     "choices": [
+      "何度も繰り返している",
+      "一度だけ話した",
+      "話さなくなった",
+      "話し終わった"
+     ],
+     "answer": 0,
+     "explain_id": "「てばかりいる」= mengulang terus.",
+     "explain_en": "「てばかりいる」= keeps repeating."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "泣いて",
+      "ばかりで",
+      "理由が",
+      "分かりません"
+     ],
+     "hint_id": "Ia menangis terus, dan alasannya tidak diketahui.",
+     "hint_en": "They keep crying and we don't know why."
+    }
+   ]
+  },
+  {
+   "id": "n4-to-iu-koto-desu",
+   "pattern": "〜ということです",
+   "level": "N4",
+   "category": "伝聞",
+   "form": "普通形 ＋ ということです",
+   "meaning_id": "disampaikan bahwa ~",
+   "meaning_en": "the report is that ~",
+   "note_id": "Menyampaikan informasi resmi yang diterima. Lebih formal daripada 「〜そうです」.",
+   "note_en": "Relays officially received information — more formal than 「〜そうです」.",
+   "note_ja": "公式に受けた情報を伝える。「そうです」より硬く、報告書に向く。",
+   "examples": [
+    {
+     "ja": "医師から、明日退院できるということです。",
+     "reading": "いしから、あしたたいいんできるということです。",
+     "id": "Dari dokter disampaikan bahwa besok bisa pulang.",
+     "en": "The doctor reports they can be discharged tomorrow.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "ご家族は来週来られるということです。",
+     "reading": "ごかぞくはらいしゅうこられるということです。",
+     "id": "Disampaikan bahwa keluarganya akan datang minggu depan.",
+     "en": "We're told the family will come next week.",
+     "scene": "連絡"
+    },
+    {
+     "ja": "薬が変更になったということです。",
+     "reading": "くすりがへんこうになったということです。",
+     "id": "Disampaikan bahwa obatnya telah diubah.",
+     "en": "We're informed the medication has been changed.",
+     "scene": "服薬介助"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "明日退院＿＿＿ということです。",
+     "choices": [
+      "できる",
+      "できます",
+      "できて",
+      "できた です"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk biasa + ということです。",
+     "explain_en": "Plain form + ということです."
+    },
+    {
+     "type": "choice",
+     "q": "公式な報告として硬いのはどちらですか。",
+     "choices": [
+      "変更になったということです",
+      "変更になったみたいです",
+      "変更になったっぽいです",
+      "変更かな"
+     ],
+     "answer": 0,
+     "explain_id": "「ということです」 paling formal.",
+     "explain_en": "「ということです」 is the most formal."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "ご家族は",
+      "来週",
+      "来られる",
+      "ということです"
+     ],
+     "hint_id": "Disampaikan bahwa keluarganya akan datang minggu depan.",
+     "hint_en": "We're told the family will come next week."
+    }
+   ]
+  },
+  {
+   "id": "n4-aida",
+   "pattern": "〜あいだ（ずっと）",
+   "level": "N4",
+   "category": "時",
+   "form": "動詞ている／名詞の ＋ あいだ",
+   "meaning_id": "selama ~ (terus-menerus)",
+   "meaning_en": "during the whole time ~",
+   "note_id": "Sesuatu berlangsung TERUS selama rentang itu. Beda dari 「あいだに」 yang terjadi sekali di dalamnya.",
+   "note_en": "Something continues throughout the span — unlike 「あいだに」, which happens once within it.",
+   "note_ja": "その間ずっと続くこと。一点で起きる「あいだに」との違いが重要。",
+   "examples": [
+    {
+     "ja": "入浴のあいだ、ずっと見守っていました。",
+     "reading": "にゅうよくのあいだ、ずっとみまもっていました。",
+     "id": "Selama mandi, saya terus mengawasi.",
+     "en": "I watched over them the whole time they bathed.",
+     "scene": "入浴介助"
+    },
+    {
+     "ja": "食べているあいだ、そばにいます。",
+     "reading": "たべているあいだ、そばにいます。",
+     "id": "Selama ia makan, saya berada di sampingnya.",
+     "en": "I stay beside them the whole time they eat.",
+     "scene": "食事介助"
+    },
+    {
+     "ja": "夜のあいだ、何度も目を覚まされました。",
+     "reading": "よるのあいだ、なんどもめをさまされました。",
+     "id": "Sepanjang malam beliau berkali-kali terbangun.",
+     "en": "They woke up many times through the night.",
+     "scene": "夜勤記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "食べて＿＿＿あいだ、そばにいます。",
+     "choices": [
+      "いる",
+      "います",
+      "いた",
+      "おく"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk ている + あいだ。",
+     "explain_en": "The ている form + あいだ."
+    },
+    {
+     "type": "choice",
+     "q": "「入浴のあいだ、ずっと見守っていました」の意味はどれですか。",
+     "choices": [
+      "入浴中ずっと見ていた",
+      "入浴中に一度だけ見た",
+      "入浴の前に見た",
+      "入浴の後に見た"
+     ],
+     "answer": 0,
+     "explain_id": "「あいだ」= sepanjang waktu itu.",
+     "explain_en": "「あいだ」= throughout that time."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "夜のあいだ",
+      "何度も",
+      "目を",
+      "覚まされました"
+     ],
+     "hint_id": "Sepanjang malam beliau berkali-kali terbangun.",
+     "hint_en": "They woke up many times through the night."
+    }
+   ]
+  },
+  {
+   "id": "n4-koto-shiji",
+   "pattern": "〜こと（掲示・手順書の指示）",
+   "level": "N4",
+   "category": "指示",
+   "form": "動詞辞書形／ない形 ＋ こと",
+   "meaning_id": "harus ~ (aturan tertulis)",
+   "meaning_en": "be sure to ~ (written rule)",
+   "note_id": "Bentuk perintah pada papan pengumuman dan manual. Ringkas, tanpa 「ください」.",
+   "note_en": "The command form used on notices and in manuals — terse, with no 「ください」.",
+   "note_ja": "掲示物・手順書での指示の形。「ください」を付けずに言い切る書き言葉。",
+   "examples": [
+    {
+     "ja": "手を洗ってから入ること。",
+     "reading": "てをあらってからはいること。",
+     "id": "Harus mencuci tangan sebelum masuk.",
+     "en": "Wash your hands before entering.",
+     "scene": "掲示物"
+    },
+    {
+     "ja": "記録は当日中に書くこと。",
+     "reading": "きろくはとうじつちゅうにかくこと。",
+     "id": "Catatan harus ditulis pada hari yang sama.",
+     "en": "Records are to be written the same day.",
+     "scene": "施設の手順"
+    },
+    {
+     "ja": "一人で介助しないこと。",
+     "reading": "ひとりでかいじょしないこと。",
+     "id": "Jangan membantu sendirian.",
+     "en": "Do not assist alone.",
+     "scene": "施設の手順"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "記録は当日中に＿＿＿こと。",
+     "choices": [
+      "書く",
+      "書き",
+      "書いて",
+      "書いた"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk kamus + こと (aturan tertulis)。",
+     "explain_en": "Dictionary form + こと for written rules."
+    },
+    {
+     "type": "choice",
+     "q": "手順書に書く指示として自然なのはどれですか。",
+     "choices": [
+      "一人で介助しないこと",
+      "一人で介助しないでね",
+      "一人で介助しないだろう",
+      "一人で介助したい"
+     ],
+     "answer": 0,
+     "explain_id": "Manual memakai 「〜ないこと」.",
+     "explain_en": "Manuals use 「〜ないこと」."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "手を",
+      "洗ってから",
+      "入る",
+      "こと"
+     ],
+     "hint_id": "Harus mencuci tangan sebelum masuk.",
+     "hint_en": "Wash your hands before entering."
+    }
+   ]
+  },
+  {
+   "id": "n4-ni-tsuite",
+   "pattern": "〜について",
+   "level": "N4",
+   "category": "主題",
+   "form": "名詞 ＋ について",
+   "meaning_id": "mengenai ~ / tentang ~",
+   "meaning_en": "about ~ / regarding ~",
+   "note_id": "Menunjukkan topik pembicaraan atau laporan. Dipakai di awal laporan dan rapat.",
+   "note_en": "Marks the topic of a talk or report — used at the start of reports and meetings.",
+   "note_ja": "話題を示す。報告や会議の切り出しに使う。",
+   "examples": [
+    {
+     "ja": "田中さんの食事についてご報告します。",
+     "reading": "たなかさんのしょくじについてごほうこくします。",
+     "id": "Saya akan melaporkan mengenai makan Tanaka-san.",
+     "en": "I'll report on Mr./Ms. Tanaka's meals.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "転倒についての報告書を書きました。",
+     "reading": "てんとうについてのほうこくしょをかきました。",
+     "id": "Saya menulis laporan mengenai kejadian jatuh.",
+     "en": "I wrote a report about the fall.",
+     "scene": "事故報告"
+    },
+    {
+     "ja": "ケアプランについて話し合います。",
+     "reading": "ケアプランについてはなしあいます。",
+     "id": "Kami akan berdiskusi mengenai rencana perawatan.",
+     "en": "We will discuss the care plan.",
+     "scene": "カンファレンス"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "田中さんの食事＿＿＿ご報告します。",
+     "choices": [
+      "について",
+      "にとって",
+      "によって",
+      "にたいして"
+     ],
+     "answer": 0,
+     "explain_id": "Topik laporan memakai について。",
+     "explain_en": "The topic of a report takes について."
+    },
+    {
+     "type": "choice",
+     "q": "転倒＿＿＿の報告書を書きました。",
+     "choices": [
+      "について",
+      "について の が",
+      "につく",
+      "にある"
+     ],
+     "answer": 0,
+     "explain_id": "について + の + kata benda.",
+     "explain_en": "について + の + noun."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "ケアプランに",
+      "ついて",
+      "話し合い",
+      "ます"
+     ],
+     "hint_id": "Kami akan berdiskusi mengenai rencana perawatan.",
+     "hint_en": "We will discuss the care plan."
+    }
+   ]
+  },
+  {
+   "id": "n4-rashii",
+   "pattern": "〜らしいです",
+   "level": "N4",
+   "category": "推量",
+   "form": "普通形（な形容詞・名詞はそのまま）＋ らしいです",
+   "meaning_id": "sepertinya ~ (berdasarkan kabar)",
+   "meaning_en": "apparently ~",
+   "note_id": "Dugaan berdasarkan informasi dari luar, bukan pengamatan sendiri. Tanggung jawabnya lebih ringan.",
+   "note_en": "An inference from outside information rather than your own observation.",
+   "note_ja": "自分で見たのではなく、外からの情報に基づく推測。責任の度合いが軽い。",
+   "examples": [
+    {
+     "ja": "昨夜は眠れなかったらしいです。",
+     "reading": "さくやはねむれなかったらしいです。",
+     "id": "Sepertinya semalam ia tidak bisa tidur.",
+     "en": "Apparently they couldn't sleep last night.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "来週から新しい薬になるらしいです。",
+     "reading": "らいしゅうからあたらしいくすりになるらしいです。",
+     "id": "Sepertinya mulai minggu depan obatnya diganti.",
+     "en": "Apparently the medication changes from next week.",
+     "scene": "職員間"
+    },
+    {
+     "ja": "ご家族は遠くに住んでいるらしいです。",
+     "reading": "ごかぞくはとおくにすんでいるらしいです。",
+     "id": "Sepertinya keluarganya tinggal jauh.",
+     "en": "Apparently the family lives far away.",
+     "scene": "アセスメント"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "昨夜は＿＿＿らしいです。",
+     "choices": [
+      "眠れなかった",
+      "眠れません",
+      "眠れなくて",
+      "眠れないでした"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk biasa + らしいです。",
+     "explain_en": "Plain form + らしいです."
+    },
+    {
+     "type": "choice",
+     "q": "自分で見て判断したことを書くのはどちらですか。",
+     "choices": [
+      "痛そうです",
+      "痛いらしいです",
+      "痛いということです",
+      "痛いそうです"
+     ],
+     "answer": 0,
+     "explain_id": "Pengamatan sendiri = 「そうです」(様子)。",
+     "explain_en": "Your own observation = the 'looks' 「そうです」."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "ご家族は",
+      "遠くに",
+      "住んでいる",
+      "らしいです"
+     ],
+     "hint_id": "Sepertinya keluarganya tinggal jauh.",
+     "hint_en": "Apparently the family lives far away."
+    }
+   ]
+  },
+  {
+   "id": "n4-te-moraemasenka",
+   "pattern": "〜てもらえませんか",
+   "level": "N4",
+   "category": "依頼・指示",
+   "form": "動詞て形 ＋ もらえませんか",
+   "meaning_id": "bisakah Anda ~? (permintaan biasa)",
+   "meaning_en": "could you ~?",
+   "note_id": "Permintaan sopan kepada rekan sederajat. Untuk atasan pakai 「〜ていただけませんか」.",
+   "note_en": "A polite request to a peer; use 「〜ていただけませんか」 for superiors.",
+   "note_ja": "同僚への丁寧な依頼。上司・利用者さんには「〜ていただけませんか」を使う。",
+   "examples": [
+    {
+     "ja": "ちょっと手伝ってもらえませんか。",
+     "reading": "ちょっとてつだってもらえませんか。",
+     "id": "Bisakah kamu membantu sebentar?",
+     "en": "Could you give me a hand?",
+     "scene": "職員間"
+    },
+    {
+     "ja": "こちらを持ってもらえませんか。",
+     "reading": "こちらをもってもらえませんか。",
+     "id": "Bisakah kamu memegang yang ini?",
+     "en": "Could you hold this side?",
+     "scene": "移乗介助"
+    },
+    {
+     "ja": "記録を確認してもらえますか。",
+     "reading": "きろくをかくにんしてもらえますか。",
+     "id": "Bisakah kamu memeriksa catatannya?",
+     "en": "Could you check the record?",
+     "scene": "職員間"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "ちょっと＿＿＿もらえませんか。",
+     "choices": [
+      "手伝って",
+      "手伝い",
+      "手伝う",
+      "手伝った"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk て + もらえませんか。",
+     "explain_en": "Te-form + もらえませんか."
+    },
+    {
+     "type": "choice",
+     "q": "上司に頼むときに使うのはどちらですか。",
+     "choices": [
+      "確認していただけませんか",
+      "確認してもらえませんか",
+      "確認して",
+      "確認しろ"
+     ],
+     "answer": 0,
+     "explain_id": "Kepada atasan pakai いただけませんか。",
+     "explain_en": "Use いただけませんか with superiors."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "こちらを",
+      "持って",
+      "もらえ",
+      "ませんか"
+     ],
+     "hint_id": "Bisakah kamu memegang yang ini?",
+     "hint_en": "Could you hold this side?"
+    }
+   ]
+  },
+  {
+   "id": "n4-sasete-kudasai",
+   "pattern": "〜させてください",
+   "level": "N4",
+   "category": "許可",
+   "form": "動詞使役形 ＋ てください",
+   "meaning_id": "izinkan saya ~",
+   "meaning_en": "please let me ~",
+   "note_id": "Meminta izin untuk melakukan sesuatu sendiri. Dipakai kepada atasan dan keluarga penerima layanan.",
+   "note_en": "Asking permission to do something yourself — used with superiors and families.",
+   "note_ja": "自分がすることの許可を求める。上司やご家族に対して使う。",
+   "examples": [
+    {
+     "ja": "少し確認させてください。",
+     "reading": "すこしかくにんさせてください。",
+     "id": "Izinkan saya memastikan sebentar.",
+     "en": "Please let me check on something.",
+     "scene": "職員間"
+    },
+    {
+     "ja": "お身体を拭かせてください。",
+     "reading": "おからだをふかせてください。",
+     "id": "Izinkan saya menyeka badan Anda.",
+     "en": "Please let me wipe you down.",
+     "scene": "清拭"
+    },
+    {
+     "ja": "明日、休ませてください。",
+     "reading": "あした、やすませてください。",
+     "id": "Izinkan saya libur besok.",
+     "en": "Please let me take tomorrow off.",
+     "scene": "勤務"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "少し＿＿＿ください。",
+     "choices": [
+      "確認させて",
+      "確認されて",
+      "確認して もらって",
+      "確認しれて"
+     ],
+     "answer": 0,
+     "explain_id": "確認する → 確認させる → 確認させてください。",
+     "explain_en": "確認する → causative 確認させる → 確認させてください."
+    },
+    {
+     "type": "choice",
+     "q": "自分がすることの許可を求めるのはどれですか。",
+     "choices": [
+      "拭かせてください",
+      "拭いてください",
+      "拭かないでください",
+      "拭かれてください"
+     ],
+     "answer": 0,
+     "explain_id": "「させてください」= izinkan saya melakukannya.",
+     "explain_en": "「させてください」= let me do it."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "明日",
+      "休ませて",
+      "ください"
+     ],
+     "hint_id": "Izinkan saya libur besok.",
+     "hint_en": "Please let me take tomorrow off."
+    }
+   ]
+  },
+  {
+   "id": "n4-ba-yokatta",
+   "pattern": "〜ばよかったです",
+   "level": "N4",
+   "category": "後悔",
+   "form": "動詞ば形 ＋ よかったです",
+   "meaning_id": "seandainya tadi ~ (penyesalan)",
+   "meaning_en": "I should have ~",
+   "note_id": "Penyesalan atas hal yang tidak dilakukan. Dipakai saat merefleksikan insiden.",
+   "note_en": "Regret over something not done — used when reflecting on an incident.",
+   "note_ja": "しなかったことへの後悔。ヒヤリハットの振り返りで使う。",
+   "examples": [
+    {
+     "ja": "もっと早く気づけばよかったです。",
+     "reading": "もっとはやくきづけばよかったです。",
+     "id": "Seandainya saya menyadarinya lebih cepat.",
+     "en": "I should have noticed sooner.",
+     "scene": "ヒヤリハット"
+    },
+    {
+     "ja": "ブレーキを確認すればよかったです。",
+     "reading": "ブレーキをかくにんすればよかったです。",
+     "id": "Seandainya tadi saya memeriksa remnya.",
+     "en": "I should have checked the brake.",
+     "scene": "事故の振り返り"
+    },
+    {
+     "ja": "先に声をかければよかったですね。",
+     "reading": "さきにこえをかければよかったですね。",
+     "id": "Seandainya tadi kita memberi tahu lebih dulu ya.",
+     "en": "We should have said something first.",
+     "scene": "振り返り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "もっと早く＿＿＿ばよかったです。",
+     "choices": [
+      "気づけ",
+      "気づき",
+      "気づく",
+      "気づいて"
+     ],
+     "answer": 0,
+     "explain_id": "気づく → bentuk ば = 気づけば。",
+     "explain_en": "気づく → ba-form is 気づけば."
+    },
+    {
+     "type": "choice",
+     "q": "「確認すればよかったです」の気持ちはどれですか。",
+     "choices": [
+      "確認しなかったことを後悔している",
+      "確認したので安心している",
+      "これから確認する",
+      "確認しなくてよい"
+     ],
+     "answer": 0,
+     "explain_id": "「ばよかった」= penyesalan.",
+     "explain_en": "「ばよかった」= regret."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "先に",
+      "声をかければ",
+      "よかった",
+      "ですね"
+     ],
+     "hint_id": "Seandainya tadi kita memberi tahu lebih dulu ya.",
+     "hint_en": "We should have said something first."
+    }
+   ]
+  },
+  {
+   "id": "n4-sou-mo-nai",
+   "pattern": "〜そうもありません／〜なさそうです",
+   "level": "N4",
+   "category": "推量",
+   "form": "動詞ます形 ＋ そうもありません ／ い形容詞（い→く）＋ なさそうです",
+   "meaning_id": "kelihatannya tidak akan ~",
+   "meaning_en": "doesn't look like it will ~",
+   "note_id": "Bentuk negatif dari 「〜そうです」(kelihatannya). Dipakai untuk melaporkan hal yang tampaknya tidak terjadi.",
+   "note_en": "The negative of the 'looks like' 〜そうです — reports what seems unlikely to happen.",
+   "note_ja": "様子の「〜そうです」の否定形。起こりそうにないことを報告するのに使う。",
+   "examples": [
+    {
+     "ja": "今日は熱が下がりそうもありません。",
+     "reading": "きょうはねつがさがりそうもありません。",
+     "id": "Hari ini demamnya kelihatannya tidak akan turun.",
+     "en": "The fever doesn't look like it will come down today.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "食欲はなさそうです。",
+     "reading": "しょくよくはなさそうです。",
+     "id": "Kelihatannya tidak ada nafsu makan.",
+     "en": "They don't appear to have any appetite.",
+     "scene": "食事記録"
+    },
+    {
+     "ja": "痛みは強くなさそうです。",
+     "reading": "いたみはつよくなさそうです。",
+     "id": "Kelihatannya rasa sakitnya tidak kuat.",
+     "en": "The pain doesn't seem severe.",
+     "scene": "観察・記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "今日は熱が＿＿＿そうもありません。",
+     "choices": [
+      "下がり",
+      "下がる",
+      "下がって",
+      "下がった"
+     ],
+     "answer": 0,
+     "explain_id": "下がります → 下がり + そうもありません。",
+     "explain_en": "下がります → 下がり + そうもありません."
+    },
+    {
+     "type": "choice",
+     "q": "痛みは＿＿＿なさそうです。",
+     "choices": [
+      "強く",
+      "強い",
+      "強",
+      "強くて"
+     ],
+     "answer": 0,
+     "explain_id": "強い → 強く + なさそうです。",
+     "explain_en": "強い → 強く + なさそうです."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "食欲は",
+      "なさ",
+      "そう",
+      "です"
+     ],
+     "hint_id": "Kelihatannya tidak ada nafsu makan.",
+     "hint_en": "They don't appear to have any appetite."
+    }
+   ]
+  }
+ ]
+}
