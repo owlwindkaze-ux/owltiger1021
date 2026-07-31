@@ -63,8 +63,18 @@ select.sel{padding:.55rem .6rem;border:1.5px solid var(--line);border-radius:10p
 .t.lv{background:#f1f5f9;color:var(--muted)}
 .mean{font-size:.82rem;color:var(--muted);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .st{font-size:.72rem;color:var(--muted);margin-top:.3rem}
-.mark{position:absolute;top:.45rem;right:.45rem;width:9px;height:9px;border-radius:50%}
-.mark.known{background:var(--green)}.mark.review{background:var(--red)}
+.mark{position:absolute;top:.4rem;right:.4rem;font-size:.66rem;font-weight:800;border-radius:999px;
+  padding:.1rem .45rem;line-height:1.5;letter-spacing:.02em}
+.mark.known{background:var(--green);color:#fff}
+.mark.review{background:var(--red);color:#fff}
+.kcard.is-known{border-color:#6ee7b7;background:#f6fffb}
+.kcard.is-review{border-color:#fca5a5;background:#fffafa}
+.state{display:inline-flex;align-items:center;gap:.3rem;font-size:.78rem;font-weight:800;
+  border-radius:999px;padding:.2rem .6rem}
+.state.known{background:var(--green-l);color:var(--green)}
+.state.review{background:#fee2e2;color:var(--red)}
+.state.none{background:#f1f5f9;color:var(--muted)}
+.btn.active{box-shadow:0 0 0 3px rgba(37,99,235,.25)}
 
 .kvg{background:#fff;border:1px solid var(--line);border-radius:10px;display:block;cursor:pointer}
 svg path{fill:none}
@@ -411,9 +421,12 @@ footer a{color:var(--blue)}
       <div class="lb">KANJI PENYUSUN ／ 使われている漢字（タップで書き順）</div>
       <div class="grid" id="vmKanji" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))"></div>
     </div>
+    <div class="sec" style="text-align:center;margin-bottom:.6rem">
+      <span id="vmState" class="state none"></span>
+    </div>
     <div class="row">
       <button class="btn ng" id="vmNg">Perlu diulang ／ 要復習</button>
-      <button class="btn ok" id="vmOk">Sudah hafal ／ 覚えた</button>
+      <button class="btn ok" id="vmOk">Sudah hafal ／ この言葉を覚えた</button>
     </div>
   </div>
 </div></div>
@@ -426,6 +439,7 @@ footer a{color:var(--blue)}
       <div class="tags" id="mTags"></div>
       <div id="mMean" style="font-size:.9rem;color:var(--muted)"></div>
       <div id="mMeanEn" style="font-size:.75rem;color:#94a3b8"></div>
+      <div style="margin-top:.3rem"><span id="mState" class="state none"></span></div>
     </div>
     <button class="x" id="mX">×</button>
   </div>
@@ -457,7 +471,7 @@ footer a{color:var(--blue)}
     </div>
     <div class="row">
       <button class="btn ng" id="mNg">Perlu diulang ／ 要復習</button>
-      <button class="btn ok" id="mOk">Sudah hafal ／ 覚えた</button>
+      <button class="btn ok" id="mOk">Sudah hafal ／ この漢字を覚えた</button>
     </div>
   </div>
 </div></div>
@@ -504,7 +518,7 @@ else document.getElementById('gatePw').focus();
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-07-30';   // 更新日（版）
+const VERSION = '2026-07-30b';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -649,8 +663,9 @@ function renderList() {
     `<button class="btn" id="moreBtn" style="grid-column:1/-1">Tampilkan lagi ／ もっと表示（+${Math.min(120, arr.length - show.length)}）</button>` : '');
   if ($('#moreBtn')) $('#moreBtn').onclick = () => { listLimit += 120; renderList(); };
 }
-const cardHTML = k => `<button class="kcard" data-ch="${k.character}">
-  ${progress[k.character] ? `<span class="mark ${progress[k.character]}"></span>` : ''}
+const MARKLABEL = { known: '✓ 覚えた', review: '↻ 要復習' };
+const cardHTML = k => `<button class="kcard ${progress[k.character] ? 'is-' + progress[k.character] : ''}" data-ch="${k.character}">
+  ${progress[k.character] ? `<span class="mark ${progress[k.character]}">${MARKLABEL[progress[k.character]]}</span>` : ''}
   <div class="ch">${k.character}</div>
   <div class="body">
     <div class="tags"><span class="t lv">${k.level}</span>
@@ -701,13 +716,21 @@ function renderVocab() {
     || '<p class="hint">—</p>';
   if ($('#vMoreBtn')) $('#vMoreBtn').onclick = () => { vLimit += 120; renderVocab(); };
 }
-const vCardHTML = w => `<button class="kcard" data-word="${w.word}" style="flex-direction:column;align-items:flex-start;gap:.2rem">
-  ${vprogress[w.word] ? `<span class="mark ${vprogress[w.word]}"></span>` : ''}
+const vCardHTML = w => `<button class="kcard ${vprogress[w.word] ? 'is-' + vprogress[w.word] : ''}" data-word="${w.word}" style="flex-direction:column;align-items:flex-start;gap:.2rem">
+  ${vprogress[w.word] ? `<span class="mark ${vprogress[w.word]}">${MARKLABEL[vprogress[w.word]]}</span>` : ''}
   <div class="tags"><span class="t lv">${w.level}</span>${w.category ? `<span class="t kun">${w.category}</span>` : ''}${w.sub ? `<span class="t on-">${w.sub}</span>` : ''}</div>
   <div style="font-size:1.25rem;font-weight:700;line-height:1.3">${w.word}</div>
   <div style="font-size:.8rem;color:var(--blue)">${w.reading}</div>
   <div class="mean">${vMean(w)}</div></button>`;
 
+const STATE_TXT = { known: '✓ Sudah hafal ／ 覚えた', review: '↻ Perlu diulang ／ 要復習', none: 'Belum ditandai ／ まだ記録なし' };
+function paintState(el, st, okBtn, ngBtn) {
+  const k = st || 'none';
+  el.className = 'state ' + k;
+  el.textContent = STATE_TXT[k];
+  okBtn.classList.toggle('active', st === 'known');
+  ngBtn.classList.toggle('active', st === 'review');
+}
 let vModalWord = null;
 function openVocab(word) {
   const w = VBYW[word]; if (!w) return;
@@ -721,6 +744,7 @@ function openVocab(word) {
   const cards = (w.kanji || []).map(c => BYCH[c] ? cardHTML(BYCH[c])
     : `<div class="kcard" style="opacity:.55"><div class="ch">${c}</div><div class="body"><div class="mean">（未収録 / belum ada）</div></div></div>`);
   $('#vmKanji').innerHTML = cards.join('') || '<p class="hint">—</p>';
+  paintState($('#vmState'), vprogress[word], $('#vmOk'), $('#vmNg'));
   $('#vov').classList.add('on'); document.body.style.overflow = 'hidden';
 }
 const closeVocabModal = () => { $('#vov').classList.remove('on'); document.body.style.overflow = ''; };
@@ -795,6 +819,7 @@ async function openModal(ch) {
   const r = k.radical || {};
   $('#mMisc').textContent = [r.character && `${r.character}${r.name ? '（' + r.name + '）' : ''}`,
     r.meaning && (LANG === 'id' ? `arti radikal: ${r.meaning}` : `meaning: ${r.meaning}`)].filter(Boolean).join(' ／ ') || '—';
+  paintState($('#mState'), progress[ch], $('#mOk'), $('#mNg'));
   $('#ov').classList.add('on'); document.body.style.overflow = 'hidden';
 
   const S = await loadStrokes(), paths = S[ch] || [];
@@ -998,8 +1023,14 @@ $$('#vLvChips .chip').forEach(c => c.onclick = () => {
 });
 $('#vmX').onclick = closeVocabModal;
 $('#vov').onclick = e => { if (e.target === $('#vov')) closeVocabModal(); };
-$('#vmOk').onclick = () => { setVMark(vModalWord, 'known'); renderVocab(); closeVocabModal(); };
-$('#vmNg').onclick = () => { setVMark(vModalWord, 'review'); renderVocab(); closeVocabModal(); };
+const toggleV = st => {
+  const cur = vprogress[vModalWord];
+  setVMark(vModalWord, cur === st ? null : st);
+  paintState($('#vmState'), vprogress[vModalWord], $('#vmOk'), $('#vmNg'));
+  renderVocab();
+};
+$('#vmOk').onclick = () => toggleV('known');
+$('#vmNg').onclick = () => toggleV('review');
 $('#fcType').onchange = () => {
   const voc = fcIsVocab();
   $$('#fcMode option')[0].textContent = voc ? '熟語 → Cara baca ／ 読み' : '漢字 → Cara baca ／ 読み';
@@ -1025,8 +1056,14 @@ const replay = () => animate($('#mSvg'), (STROKES || {})[modalCh] || []);
 $('#mPlay').onclick = replay;
 $('#mSvg').onclick = replay;
 $('#mCh').onclick = replay;
-$('#mOk').onclick = () => { setMark(modalCh, 'known'); renderList(); closeModal(); };
-$('#mNg').onclick = () => { setMark(modalCh, 'review'); renderList(); closeModal(); };
+const toggleK = st => {
+  const cur = progress[modalCh];
+  setMark(modalCh, cur === st ? null : st);
+  paintState($('#mState'), progress[modalCh], $('#mOk'), $('#mNg'));
+  renderList();
+};
+$('#mOk').onclick = () => toggleK('known');
+$('#mNg').onclick = () => toggleK('review');
 
 $('#fcStart').onclick = buildDeck;
 $('#fcMode').onchange = showCard;
