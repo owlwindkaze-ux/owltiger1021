@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- 検索エンジンに載せない（URLを直接開く人は今までどおり使えます） -->
+<meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Untuk pemagang kaigo di Jepang: 612 kanji JLPT N5–N3 dan 3.200+ kosakata termasuk istilah perawatan lansia, dengan arti Bahasa Indonesia dan animasi urutan coretan. 介護の技能実習生向け：JLPT漢字612字と介護・医療の言葉を、インドネシア語訳と書き順アニメーションで学べます。">
 <title>Kanji &amp; Kosakata Kaigo ｜ 介護の漢字・言葉</title>
 <style>
@@ -409,7 +411,12 @@ footer a{color:var(--blue)}
     level kosakata：<a href="https://github.com/jamsinclair/open-anki-jlpt-decks" target="_blank" rel="noopener">open-anki-jlpt-decks</a>（tanos.co.uk, CC BY 4.0）<br>
     ※ JLPTは2010年以降、公式の漢字リストを公表していません。本ツールのレベル区分は上記データセットの分類（N5 79字・N4 166字・N3 367字＝累計612字）に基づきます。<br>
     ※ Terjemahan Bahasa Indonesia dibuat dengan bantuan AI dari arti bahasa Inggris ／ インドネシア語訳は英語原文からAIで作成しています。<br>
-    ※ Catatan belajar hanya tersimpan di perangkat Anda ／ 学習記録は端末内にのみ保存されます。
+    ※ Catatan belajar hanya tersimpan di perangkat Anda ／ 学習記録は端末内にのみ保存されます。<br>
+    &copy; 2026 西風梟風 — Program aplikasi ini dan terjemahan Bahasa Indonesianya dibuat sendiri; dilarang menyalin tanpa izin.
+    Data sumber di atas tetap mengikuti lisensinya masing-masing.<br>
+    ※ 本アプリのプログラムおよびインドネシア語訳は独自に作成したものです。無断転載・無断利用を禁じます。
+    ただし上記の出典データは、それぞれのライセンス（CC BY 4.0／CC BY-SA 3.0・4.0）に従います。
+    書き順データを含む再配布には、CC BY-SA 3.0 の条件（同一ライセンスでの公開と出典表示）が適用されます。
   </footer>
 </div>
 
@@ -532,7 +539,7 @@ else document.getElementById('gatePw').focus();
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-07-30d';   // 更新日（版）
+const VERSION = '2026-08-03a';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引

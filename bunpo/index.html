@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
+<!-- 検索エンジンに載せない（URLを直接開く人は今までどおり使えます） -->
+<meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Untuk pemagang kaigo di Jepang: pola kalimat (tata bahasa) JLPT N5–N3 dengan arti Bahasa Indonesia, contoh kalimat dari lokasi kerja perawatan lansia, dan latihan soal. 介護の技能実習生向け：JLPT N5〜N3の文型を、インドネシア語訳・介護現場の例文・練習問題で学べます。">
 <title>Pola Kalimat Kaigo ｜ 介護の文型</title>
 <style>
@@ -331,6 +333,9 @@ footer a{color:var(--green)}
      ・<button class="btn" id="reloadBtn" style="padding:.15rem .5rem;font-size:.7rem">🔄 Perbarui ／ 最新に更新</button></p>
   <p>Catatan belajar disimpan di perangkat ini saja ／ 学習記録はこの端末の中だけに保存されます。</p>
   <p>Contoh kalimat dan soal ditulis khusus untuk lokasi kerja kaigo ／ 例文・練習問題は介護の現場向けに書き下ろしたものです。</p>
+  <p>&copy; 2026 西風梟風 — Seluruh pola kalimat, contoh kalimat, soal latihan, dan terjemahannya dibuat khusus untuk aplikasi ini.
+     Dilarang menyalin atau menggunakannya tanpa izin.<br>
+     文型の解説・例文・練習問題およびその翻訳は、すべて本アプリのために作成したものです。無断転載・無断利用を禁じます。</p>
   <p><a href="../">→ Kanji &amp; Kosakata Kaigo ／ 漢字・言葉のアプリへ</a></p>
 </footer>
 </div><!-- /app -->
@@ -380,7 +385,7 @@ const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-grammar-progress-v1', LANGKEY = 'jlpt-kanji-lang';
 /* 版（更新日）。grammar.json の "app_version" と必ず同じ値にすること。
    ずれていると、アプリが「古いHTMLを表示している」と判断して自動で読み込み直します。 */
-const VERSION = '2026-08-03b';
+const VERSION = '2026-08-03c';
 
 let DATA = [], BYID = {}, LEVELS = [], CATS = [];
 let LANG = localStorage.getItem(LANGKEY) || 'id';
