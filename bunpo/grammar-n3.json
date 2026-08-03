@@ -7,12 +7,12 @@
    "pattern": "〜に違いない",
    "level": "N3",
    "category": "推量",
-   "form": "普通形（ナ形容詞・名詞は「だ」を取って直接つける）＋に違いない",
+   "form": "普通形（な形容詞・名詞は「だ」を取って直接つける）＋に違いない",
    "meaning_id": "pasti ~ (yakin berdasarkan bukti atau situasi, meskipun bukan fakta yang dipastikan langsung)",
    "meaning_en": "must be ~ / I'm sure that ~ (confident conjecture based on evidence)",
    "note_id": "Menunjukkan keyakinan kuat pembicara berdasarkan bukti atau situasi. Lebih tegas dan subjektif dibanding「はずだ」. Untuk kata sifat-na dan kata benda, langsung disambung tanpa「だ」.",
    "note_en": "Expresses the speaker's strong conviction based on evidence or the situation. More subjective and assertive than 「はずだ」. Na-adjectives and nouns attach directly without 「だ」.",
-   "note_ja": "話者の強い確信を表す。証拠や状況から判断して「きっとそうだ」という気持ち。「はずだ」より主観的・断定的。ナ形容詞・名詞は「だ」をつけずに直接「に違いない」を続ける。",
+   "note_ja": "話者の強い確信を表す。証拠や状況から判断して「きっとそうだ」という気持ち。「はずだ」より主観的・断定的。な形容詞・名詞は「だ」をつけずに直接「に違いない」を続ける。",
    "examples": [
     {
      "ja": "記録を見ると、この利用者様は夜中に何度もトイレに起きたに違いない。",
@@ -155,7 +155,7 @@
    "pattern": "〜はずがない",
    "level": "N3",
    "category": "推量",
-   "form": "普通形（ナ形容詞→な／名詞→の）＋はずがない",
+   "form": "普通形（な形容詞→な／名詞→の）＋はずがない",
    "meaning_id": "tidak mungkin ~ (yakin berdasarkan logika/pengetahuan bahwa hal itu mustahil)",
    "meaning_en": "there's no way that ~ (confident it's impossible, based on reasoning)",
    "note_id": "Menyangkal kuat kemungkinan sesuatu berdasarkan pengetahuan/akal sehat pembicara: \"tidak mungkin begitu\". Mirip dengan「わけがない」, tapi「はずがない」lebih menekankan situasi/bukti, sedangkan「わけがない」menekankan logika/alasan.",
@@ -208,7 +208,7 @@
       "高い"
      ],
      "answer": 3,
-     "explain_id": "イ形容詞の普通形「高い」に直接「はずがない」をつける。",
+     "explain_id": "い形容詞の普通形「高い」に直接「はずがない」をつける。",
      "explain_en": "The plain form of the i-adjective 「高い」 connects directly to 「はずがない」."
     },
     {
@@ -229,7 +229,7 @@
    "pattern": "〜はずだった",
    "level": "N3",
    "category": "予定",
-   "form": "普通形（ナ形容詞→な／名詞→の）＋はずだった",
+   "form": "普通形（な形容詞→な／名詞→の）＋はずだった",
    "meaning_id": "seharusnya ~ (tapi kenyataannya tidak terjadi / berbeda dari rencana)",
    "meaning_en": "was supposed to ~ (but it didn't happen / turned out differently)",
    "note_id": "Menunjukkan rencana atau perkiraan di masa lalu yang ternyata tidak sesuai kenyataan. Kalau「はずだ」adalah perkiraan saat ini, 「はずだった」menunjukkan rencana/perkiraan masa lalu yang meleset. Sering diikuti kata seperti「しかし」「でも」.",
@@ -969,7 +969,7 @@
    "pattern": "〜わけがない",
    "level": "N3",
    "category": "確信",
-   "form": "普通形（ナ形容詞→な／名詞→の）＋わけがない",
+   "form": "普通形（な形容詞→な／名詞→の）＋わけがない",
    "meaning_id": "tidak mungkin ~ (secara logika/alasan mustahil, penyangkalan kuat)",
    "meaning_en": "there's no way that ~ (logically impossible, a strong denial based on reasoning)",
    "note_id": "Menyangkal kuat berdasarkan logika/alasan pembicara: \"tidak mungkin begitu\". Mirip dengan「はずがない」, tapi「わけがない」lebih menekankan alasan/logika di baliknya.",
@@ -1043,7 +1043,7 @@
    "pattern": "〜わけだ",
    "level": "N3",
    "category": "納得・結論",
-   "form": "普通形（ナ形容詞→な／名詞→の）＋わけだ",
+   "form": "普通形（な形容詞→な／名詞→の）＋わけだ",
    "meaning_id": "jadi wajar/pantas ~ (kesimpulan logis, \"pantas saja\")",
    "meaning_en": "so that's why ~ / it's only natural that ~ (a logical conclusion, \"no wonder\")",
    "note_id": "Menunjukkan kesimpulan wajar yang didapat dari informasi sebelumnya: \"pantas saja begitu\". Sering dipakai bersama「道理で」. Jangan tertukar dengan「〜わけがない」(penyangkalan kuat).",
@@ -2227,7 +2227,7 @@
    "pattern": "〜にもかかわらず",
    "level": "N3",
    "category": "逆接",
-   "form": "動詞・イ形容詞普通形（ナ形容詞・名詞は「である」を入れることが多い）＋にもかかわらず",
+   "form": "動詞・い形容詞普通形（な形容詞・名詞は「である」を入れることが多い）＋にもかかわらず",
    "meaning_id": "meskipun ~ , walaupun ~ (kontras kuat, agak formal/tertulis)",
    "meaning_en": "despite ~, even though ~ (strong, rather formal/written contrast)",
    "note_id": "Mirip 「のに」tapi lebih formal dan sering dipakai dalam laporan atau catatan tertulis. Kata benda bisa langsung diikuti にもかかわらず tanpa である.",
@@ -2301,7 +2301,7 @@
    "pattern": "〜ものの",
    "level": "N3",
    "category": "逆接",
-   "form": "動詞・イ形容詞普通形（ナ形容詞は「な」、名詞は「である」）＋ものの",
+   "form": "動詞・い形容詞普通形（な形容詞は「な」、名詞は「である」）＋ものの",
    "meaning_id": "meskipun ~ (kenyataannya kurang sesuai harapan), agak formal/tertulis",
    "meaning_en": "although ~ (reality falls short of the expectation); rather formal/written",
    "note_id": "Mirip 「けれども」namun lebih formal/tertulis. Menyatakan suatu kenyataan, lalu kenyataan lain yang tidak sesuai harapan.",
@@ -2375,7 +2375,7 @@
    "pattern": "〜くせに",
    "level": "N3",
    "category": "逆接（非難）",
-   "form": "動詞・イ形容詞普通形＋くせに／ナ形容詞語幹＋な＋くせに／名詞＋の＋くせに",
+   "form": "動詞・い形容詞普通形＋くせに／な形容詞語幹＋な＋くせに／名詞＋の＋くせに",
    "meaning_id": "padahal ~ (mengandung nada tidak puas/menyindir; hati-hati saat memakainya)",
    "meaning_en": "even though ~ (carries a complaining/critical nuance — use with care)",
    "note_id": "Mirip 「のに」tapi nuansa tidak puas, mengkritik, atau sedikit menyindir jauh lebih kuat. Perhatikan lawan bicara dan situasi sebelum memakainya.",
@@ -2415,7 +2415,7 @@
       "痛くて"
      ],
      "answer": 1,
-     "explain_id": "「くせに」の前はイ形容詞の普通形（辞書形）：痛い。",
+     "explain_id": "「くせに」の前はい形容詞の普通形（辞書形）：痛い。",
      "explain_en": "Before くせに, use the plain form of the i-adjective: 痛い."
     },
     {
@@ -2449,7 +2449,7 @@
    "pattern": "〜とはいえ",
    "level": "N3",
    "category": "逆接",
-   "form": "動詞・イ形容詞・ナ形容詞・名詞の普通形＋とはいえ",
+   "form": "動詞・い形容詞・な形容詞・名詞の普通形＋とはいえ",
    "meaning_id": "meskipun (dikatakan) ~ , kenyataannya tetap ~ (mengakui premis, lalu menyatakan kenyataan yang berbeda)",
    "meaning_en": "even though it's said that ~ / granted that ~, still ~ (acknowledges a premise, then states a contrasting reality)",
    "note_id": "Mengakui isi kalimat sebelumnya sebagai benar, lalu tetap menyampaikan kenyataan yang berbeda/kurang sesuai. Agak formal, sering di tulisan.",
@@ -2523,7 +2523,7 @@
    "pattern": "〜ながらも",
    "level": "N3",
    "category": "逆接",
-   "form": "動詞ます形／イ形容詞（辞書形）／ナ形容詞語幹＋ながらも（名詞は「〜でありながらも」）",
+   "form": "動詞ます形／い形容詞（辞書形）／な形容詞語幹＋ながらも（名詞は「〜でありながらも」）",
    "meaning_id": "meskipun ~ (dua hal yang bertentangan ada dalam orang/hal yang sama)",
    "meaning_en": "although ~ (a contrast within the same subject)",
    "note_id": "Menyatakan kontradiksi di dalam diri yang sama (mis. enggan tapi tetap melakukan). Biasanya subjeknya sama antara dua bagian kalimat.",
@@ -2671,12 +2671,12 @@
    "pattern": "〜としても",
    "level": "N3",
    "category": "譲歩",
-   "form": "動詞・イ形容詞普通形（ナ形容詞・名詞は「だ」を入れる）＋としても",
+   "form": "動詞・い形容詞普通形（な形容詞・名詞は「だ」を入れる）＋としても",
    "meaning_id": "meskipun ~ / seandainya ~ pun (mengandaikan sesuatu benar, hasilnya tetap sama)",
    "meaning_en": "even if ~ (assumes something as true, then states the result doesn't change)",
    "note_id": "Menganggap sesuatu benar sebagai andaian, lalu menyatakan hasil yang tidak berubah. Mirip 「ても」tapi menekankan sifat andaian, bukan fakta yang pasti.",
    "note_en": "Assumes something as a hypothesis and states that the result stays the same. Similar to 「ても」 but emphasizes the hypothetical nature rather than an established fact.",
-   "note_ja": "「ても」と似ているが、「一応そうだと仮定しても」という前提を強調する。ナ形容詞・名詞には「だ」を入れる（例：小さなミスだとしても）。",
+   "note_ja": "「ても」と似ているが、「一応そうだと仮定しても」という前提を強調する。な形容詞・名詞には「だ」を入れる（例：小さなミスだとしても）。",
    "examples": [
     {
      "ja": "熱がないとしても、体調の変化には注意が必要です。",
@@ -2745,7 +2745,7 @@
    "pattern": "〜にしても",
    "level": "N3",
    "category": "譲歩",
-   "form": "動詞・イ形容詞普通形・名詞＋にしても",
+   "form": "動詞・い形容詞普通形・名詞＋にしても",
    "meaning_id": "meskipun (dianggap) ~ , sekalipun alasannya ~ (tetap belum cukup sebagai alasan)",
    "meaning_en": "even granting that ~ (still not a sufficient reason)",
    "note_id": "Mengakui suatu alasan/keadaan, tapi menyatakan itu belum cukup sebagai alasan untuk sesuatu. Bisa dipakai berpasangan：AにしてもBにしても。",
@@ -2893,7 +2893,7 @@
    "pattern": "〜にしろ〜にしろ",
    "level": "N3",
    "category": "譲歩（並列）",
-   "form": "動詞・イ形容詞普通形・名詞＋にしろ〜＋にしろ（並列の譲歩）",
+   "form": "動詞・い形容詞普通形・名詞＋にしろ〜＋にしろ（並列の譲歩）",
    "meaning_id": "baik ~ maupun ~ , dalam kedua kasus tetap sama (bentuk agak formal)",
    "meaning_en": "whether ~ or ~, either way ~ (formal parallel concession)",
    "note_id": "Bentuk agak formal/tertulis, mirip「にせよ〜にせよ」。Mengajukan dua pilihan/keadaan lalu menyatakan kesimpulan yang sama berlaku untuk semuanya.",
@@ -2967,7 +2967,7 @@
    "pattern": "〜であれ",
    "level": "N3",
    "category": "譲歩",
-   "form": "名詞・ナ形容詞語幹＋であれ（疑問詞と共に使うことが多い／「AであれBであれ」の形もある）",
+   "form": "名詞・な形容詞語幹＋であれ（疑問詞と共に使うことが多い／「AであれBであれ」の形もある）",
    "meaning_id": "meskipun/walaupun itu ~ (formal); apa pun/siapa pun ~ (dengan kata tanya)",
    "meaning_en": "even if it's ~ (formal); no matter what/who ~ (with question words)",
    "note_id": "Bentuk agak formal/tertulis. Sering dipasangkan dengan kata tanya（何・誰・どんな）untuk arti「apa pun/siapa pun」，atau diulang seperti「AであれBであれ」。",
@@ -3041,7 +3041,7 @@
    "pattern": "たとえ〜ても",
    "level": "N3",
    "category": "仮定譲歩",
-   "form": "たとえ＋動詞て形／イ形容詞くて／ナ形容詞で／名詞で＋も",
+   "form": "たとえ＋動詞て形／い形容詞くて／な形容詞で／名詞で＋も",
    "meaning_id": "meskipun ~ sekalipun (menekankan pengandaian ekstrem)",
    "meaning_en": "even if ~ (emphasizes an extreme hypothetical)",
    "note_id": "「たとえ」diletakkan di awal kalimat untuk menekankan pengandaian, berpasangan dengan 「〜ても」 di akhir. Kalimat tetap benar tanpa「たとえ」，tapi kesan penekanannya jadi lebih kuat dengan「たとえ」。",
@@ -3123,8 +3123,8 @@
    "note_ja": "動詞の意向形（う・よう）＋と（も）のかたい表現。「何が」「誰が」「どんなに」などと一緒に使われることが多い。日常会話よりも書き言葉的。",
    "examples": [
     {
-     "ja": "何が起ころうと、まず利用者さんの安全を確認します。",
-     "reading": "なにがおころうと、まずりようしゃさんのあんぜんをかくにんします。",
+     "ja": "何が起ころうと、まず利用者様の安全を確認します。",
+     "reading": "なにがおころうと、まずりようしゃさまのあんぜんをかくにんします。",
      "id": "Apa pun yang terjadi, hal pertama yang dilakukan adalah memastikan keselamatan pengguna layanan.",
      "en": "Whatever happens, I first make sure the resident's safety.",
      "scene": "夜勤"
@@ -3147,7 +3147,7 @@
    "quiz": [
     {
      "type": "choice",
-     "q": "何が＿＿＿と、まず利用者さんの安全を確認します。",
+     "q": "何が＿＿＿と、まず利用者様の安全を確認します。",
      "choices": [
       "起きる",
       "起こる",
@@ -3263,7 +3263,7 @@
    "pattern": "〜からといって",
    "level": "N3",
    "category": "逆接（否定的結論）",
-   "form": "動詞・イ形容詞・ナ形容詞・名詞の普通形（ナ形容詞・名詞は「だ」）＋からといって",
+   "form": "動詞・い形容詞・な形容詞・名詞の普通形（な形容詞・名詞は「だ」）＋からといって",
    "meaning_id": "hanya karena ~ , bukan berarti ~ (menyangkal kesimpulan yang terlalu sederhana)",
    "meaning_en": "just because ~ doesn't mean ~ (denies a simplistic conclusion)",
    "note_id": "Hampir selalu diikuti oleh bentuk negatif seperti「〜わけではない」「〜とは限らない」。Dipakai untuk menolak kesimpulan yang terlalu sederhana dari satu alasan.",
@@ -3303,7 +3303,7 @@
       "からいって"
      ],
      "answer": 2,
-     "explain_id": "名詞・ナ形容詞は「だ」を入れて「〜だからといって」の形になる。",
+     "explain_id": "名詞・な形容詞は「だ」を入れて「〜だからといって」の形になる。",
      "explain_en": "With nouns/na-adjectives, insert だ: 〜だからといって."
     },
     {
@@ -6675,8 +6675,8 @@
    "note_ja": "あるできごとが変化のきっかけ・スタート地点になることを表す。単なる理由の「〜ので」と違い、「そのできごとが転機になった」という含みがある。名詞には「を」、文には「たこと」を挟むことが多い。",
    "examples": [
     {
-     "ja": "利用者さんが転倒したことをきっかけに、施設全体で床の滑り止め対策を始めました。",
-     "reading": "りようしゃさんがてんとうしたことをきっかけに、しせつぜんたいでゆかのすべりどめたいさくをはじめました。",
+     "ja": "利用者様が転倒したことをきっかけに、施設全体で床の滑り止め対策を始めました。",
+     "reading": "りようしゃさまがてんとうしたことをきっかけに、しせつぜんたいでゆかのすべりどめたいさくをはじめました。",
      "id": "Berawal dari kejadian pengguna layanan terjatuh, seluruh fasilitas mulai memasang alas anti-selip di lantai.",
      "en": "Triggered by a resident falling, the whole facility started adding anti-slip measures to the floors.",
      "scene": "転倒予防"
@@ -6699,7 +6699,7 @@
    "quiz": [
     {
      "type": "choice",
-     "q": "利用者さんが転倒した＿＿＿、施設全体で対策を始めました。",
+     "q": "利用者様が転倒した＿＿＿、施設全体で対策を始めました。",
      "choices": [
       "ことをきっかけに",
       "ことをこめて",
@@ -6897,15 +6897,15 @@
    "note_ja": "本来気にするはずのことを気にせず、行動する様子を表す。「〜にもかかわらず」より、無頓着さ・大胆さのニュアンスが強い。",
    "examples": [
     {
-     "ja": "その職員は、周りの目もかまわず利用者さんに大声で怒ってしまいました。",
-     "reading": "そのしょくいんは、まわりのめもかまわずりようしゃさんにおおごえでおこってしまいました。",
+     "ja": "その職員は、周りの目もかまわず利用者様に大声で怒ってしまいました。",
+     "reading": "そのしょくいんは、まわりのめもかまわずりようしゃさまにおおごえでおこってしまいました。",
      "id": "Petugas itu tanpa peduli tatapan orang di sekitarnya, malah memarahi pengguna layanan dengan suara keras.",
      "en": "That staff member, ignoring the eyes of those around, ended up yelling at the resident.",
      "scene": "声かけ"
     },
     {
-     "ja": "利用者さんは足の痛みもかまわず、一人で立ち上がろうとしました。",
-     "reading": "りようしゃさんはあしのいたみもかまわず、ひとりでたちあがろうとしました。",
+     "ja": "利用者様は足の痛みもかまわず、一人で立ち上がろうとしました。",
+     "reading": "りようしゃさまはあしのいたみもかまわず、ひとりでたちあがろうとしました。",
      "id": "Pengguna layanan tanpa peduli rasa sakit di kakinya, mencoba berdiri sendiri.",
      "en": "The resident, ignoring the pain in their leg, tried to stand up alone.",
      "scene": "転倒予防"
@@ -6921,7 +6921,7 @@
    "quiz": [
     {
      "type": "choice",
-     "q": "利用者さんは足の痛み＿＿＿、一人で立ち上がろうとしました。",
+     "q": "利用者様は足の痛み＿＿＿、一人で立ち上がろうとしました。",
      "choices": [
       "もとわず",
       "もかねて",
@@ -6971,15 +6971,15 @@
    "note_ja": "その話題を一旦わきに置いて、もっと大事な話に移るときに使う。「〜を問わず」（全く無関係）とは異なり、「今はそれより重要な点がある」というニュアンス。",
    "examples": [
     {
-     "ja": "見た目はともかく、味は利用者さんに好評な刻み食です。",
-     "reading": "みためはともかく、あじはりようしゃさんにこうひょうなきざみしょくです。",
+     "ja": "見た目はともかく、味は利用者様に好評な刻み食です。",
+     "reading": "みためはともかく、あじはりようしゃさまにこうひょうなきざみしょくです。",
      "id": "Penampilannya sih tidak masalah, tapi makanan cincang ini rasanya disukai para pengguna layanan.",
      "en": "Leaving aside the appearance, this minced food is popular with residents for its taste.",
      "scene": "食事介助"
     },
     {
-     "ja": "細かい手順はともかく、まず利用者さんの安全を第一に考えてください。",
-     "reading": "こまかいてじゅんはともかく、まずりようしゃさんのあんぜんをだいいちにかんがえてください。",
+     "ja": "細かい手順はともかく、まず利用者様の安全を第一に考えてください。",
+     "reading": "こまかいてじゅんはともかく、まずりようしゃさまのあんぜんをだいいちにかんがえてください。",
      "id": "Prosedur detail dikesampingkan dulu, yang penting utamakan dulu keselamatan pengguna layanan.",
      "en": "Never mind the detailed procedure for now — first, please put the resident's safety first.",
      "scene": "新人指導"
@@ -6995,7 +6995,7 @@
    "quiz": [
     {
      "type": "choice",
-     "q": "見た目＿＿＿、味は利用者さんに好評です。",
+     "q": "見た目＿＿＿、味は利用者様に好評です。",
      "choices": [
       "にくわえて",
       "はともかく",
@@ -7052,8 +7052,8 @@
      "scene": "新人指導"
     },
     {
-     "ja": "認知症の利用者さんのみならず、そのご家族への支援も施設の役割です。",
-     "reading": "にんちしょうのりようしゃさんのみならず、そのごかぞくへのしえんもしせつのやくわりです。",
+     "ja": "認知症の利用者様のみならず、そのご家族への支援も施設の役割です。",
+     "reading": "にんちしょうのりようしゃさまのみならず、そのごかぞくへのしえんもしせつのやくわりです。",
      "id": "Bukan hanya pengguna layanan dengan demensia, dukungan bagi keluarga mereka juga merupakan peran fasilitas.",
      "en": "Not only residents with dementia, but supporting their families is also part of the facility's role.",
      "scene": "家族対応"
@@ -7096,7 +7096,7 @@
     {
      "type": "order",
      "segments": [
-      "認知症の利用者さんのみならず",
+      "認知症の利用者様のみならず",
       "そのご家族への",
       "支援も",
       "施設の役割です"
@@ -7126,8 +7126,8 @@
      "scene": "食事介助"
     },
     {
-     "ja": "移乗介助は、腰に負担がかかるばかりでなく、利用者さんにも不安を与えることがあります。",
-     "reading": "いじょうかいじょは、こしにふたんがかかるばかりでなく、りようしゃさんにもふあんをあたえることがあります。",
+     "ja": "移乗介助は、腰に負担がかかるばかりでなく、利用者様にも不安を与えることがあります。",
+     "reading": "いじょうかいじょは、こしにふたんがかかるばかりでなく、りようしゃさまにもふあんをあたえることがあります。",
      "id": "Bantuan berpindah bukan hanya membebani pinggang, tetapi juga bisa membuat pengguna layanan merasa cemas.",
      "en": "Transfer assistance not only puts strain on the lower back, but can also make residents feel anxious.",
      "scene": "移乗介助"
@@ -7200,8 +7200,8 @@
      "scene": "夜勤"
     },
     {
-     "ja": "新人スタッフには、専門知識はもちろん、利用者さんへの思いやりも大切です。",
-     "reading": "しんじんスタッフには、せんもんちしきはもちろん、りようしゃさんへのおもいやりもたいせつです。",
+     "ja": "新人スタッフには、専門知識はもちろん、利用者様への思いやりも大切です。",
+     "reading": "しんじんスタッフには、せんもんちしきはもちろん、りようしゃさまへのおもいやりもたいせつです。",
      "id": "Bagi staf baru, pengetahuan profesional tentu penting, dan rasa peduli terhadap pengguna layanan juga penting.",
      "en": "For new staff, professional knowledge goes without saying, and compassion for residents is important too.",
      "scene": "新人指導"
@@ -7348,8 +7348,8 @@
      "scene": "見守り"
     },
     {
-     "ja": "その職員は仕事が丁寧な上に、利用者さんへの声かけも優しいです。",
-     "reading": "そのしょくいんはしごとがていねいなうえに、りようしゃさんへのこえかけもやさしいです。",
+     "ja": "その職員は仕事が丁寧な上に、利用者様への声かけも優しいです。",
+     "reading": "そのしょくいんはしごとがていねいなうえに、りようしゃさまへのこえかけもやさしいです。",
      "id": "Petugas itu kerjanya teliti, dan bahkan cara menyapa pengguna layanannya juga lembut.",
      "en": "That staff member is careful with their work, and on top of that is gentle when talking to residents.",
      "scene": "声かけ"
@@ -7415,8 +7415,8 @@
    "note_ja": "「そのことだけが原因で、悪い結果になってしまった」という後悔・残念な気持ちを表す。良い結果には使えない点に注意（「頑張ったばかりに合格した」は誤り）。",
    "examples": [
     {
-     "ja": "焦って車椅子のブレーキをかけ忘れたばかりに、利用者さんが転倒しそうになりました。",
-     "reading": "あせってくるまいすのブレーキをかけわすれたばかりに、りようしゃさんがてんとうしそうになりました。",
+     "ja": "焦って車椅子のブレーキをかけ忘れたばかりに、利用者様が転倒しそうになりました。",
+     "reading": "あせってくるまいすのブレーキをかけわすれたばかりに、りようしゃさまがてんとうしそうになりました。",
      "id": "Hanya gara-gara terburu-buru dan lupa mengunci rem kursi roda, pengguna layanan hampir terjatuh.",
      "en": "Just because I hurried and forgot to lock the wheelchair brake, the resident nearly fell.",
      "scene": "ヒヤリハット"
@@ -7439,7 +7439,7 @@
    "quiz": [
     {
      "type": "choice",
-     "q": "焦ってブレーキをかけ忘れた＿＿＿、利用者さんが転倒しそうになりました。",
+     "q": "焦ってブレーキをかけ忘れた＿＿＿、利用者様が転倒しそうになりました。",
      "choices": [
       "ばかりに",
       "上に",
@@ -7563,8 +7563,8 @@
    "note_ja": "「〜する余裕・状況ではない」という意味。「〜どころか」と形が似ているが、意味は別（あちらは「逆の結果」、こちらは「余裕がない」）。緊急時や多忙な場面でよく使う。",
    "examples": [
     {
-     "ja": "利用者さんが急変して、今は休憩どころではありません。",
-     "reading": "りようしゃさんがきゅうへんして、いまはきゅうけいどころではありません。",
+     "ja": "利用者様が急変して、今は休憩どころではありません。",
+     "reading": "りようしゃさまがきゅうへんして、いまはきゅうけいどころではありません。",
      "id": "Kondisi pengguna layanan mendadak memburuk, sekarang bukan waktunya untuk istirahat.",
      "en": "A resident's condition suddenly changed, so it's not the time for a break right now.",
      "scene": "事故対応"
@@ -7587,7 +7587,7 @@
    "quiz": [
     {
      "type": "choice",
-     "q": "利用者さんが急変して、今は休憩＿＿＿。",
+     "q": "利用者様が急変して、今は休憩＿＿＿。",
      "choices": [
       "上にありません",
       "どころではありません",
@@ -7637,8 +7637,8 @@
    "note_ja": "「これくらいは当然できるはず」ということさえも難しい、という極端な例を挙げて程度を強調する。「〜も」より強調の度合いが強い。",
    "examples": [
     {
-     "ja": "その利用者さんは、自分の名前さえ思い出せなくなってしまいました。",
-     "reading": "そのりようしゃさんは、じぶんのなまえさえおもいだせなくなってしまいました。",
+     "ja": "その利用者様は、自分の名前さえ思い出せなくなってしまいました。",
+     "reading": "そのりようしゃさまは、じぶんのなまえさえおもいだせなくなってしまいました。",
      "id": "Pengguna layanan itu bahkan sampai lupa nama dirinya sendiri.",
      "en": "That resident could no longer even remember their own name.",
      "scene": "認知症ケア"
@@ -7661,7 +7661,7 @@
    "quiz": [
     {
      "type": "choice",
-     "q": "その利用者さんは、自分の名前＿＿＿思い出せなくなりました。",
+     "q": "その利用者様は、自分の名前＿＿＿思い出せなくなりました。",
      "choices": [
       "はともかく",
       "ばかりに",
@@ -8909,8 +8909,8 @@
      "scene": "服薬管理"
     },
     {
-     "ja": "部屋に入ったとたん、利用者さんが泣き出した。",
-     "reading": "へやにはいったとたん、りようしゃさんがなきだした。",
+     "ja": "部屋に入ったとたん、利用者様が泣き出した。",
+     "reading": "へやにはいったとたん、りようしゃさまがなきだした。",
      "id": "Begitu masuk kamar, penerima layanan langsung menangis.",
      "en": "The moment I entered the room, the resident suddenly started crying.",
      "scene": "見守り・声かけ"
@@ -8976,15 +8976,15 @@
      "scene": "ナースコール"
     },
     {
-     "ja": "利用者さんが目を覚ますか覚まさないかのうちに、検温を始めた。",
-     "reading": "りようしゃさんがめをさますかさまさないかのうちに、けんおんをはじめた。",
+     "ja": "利用者様が目を覚ますか覚まさないかのうちに、検温を始めた。",
+     "reading": "りようしゃさまがめをさますかさまさないかのうちに、けんおんをはじめた。",
      "id": "Hampir bersamaan saat penerima layanan bangun, kami langsung mulai mengukur suhu tubuhnya.",
      "en": "Almost as soon as the resident woke up, we started taking his temperature.",
      "scene": "バイタル測定"
     },
     {
-     "ja": "スプーンを口に運ぶか運ばないかのうちに、利用者さんがむせてしまった。",
-     "reading": "スプーンをくちにはこぶかはこばないかのうちに、りようしゃさんがむせてしまった。",
+     "ja": "スプーンを口に運ぶか運ばないかのうちに、利用者様がむせてしまった。",
+     "reading": "スプーンをくちにはこぶかはこばないかのうちに、りようしゃさまがむせてしまった。",
      "id": "Belum sempat sendok sampai ke mulutnya, penerima layanan sudah tersedak.",
      "en": "Almost before the spoon reached his mouth, the resident choked.",
      "scene": "食事介助"
@@ -9006,7 +9006,7 @@
     },
     {
      "type": "choice",
-     "q": "スプーンを口に＿＿＿かのうちに、利用者さんがむせてしまった。",
+     "q": "スプーンを口に＿＿＿かのうちに、利用者様がむせてしまった。",
      "choices": [
       "運ぶか運ばない",
       "運んでいるか運んでいないか",
@@ -9020,7 +9020,7 @@
     {
      "type": "order",
      "segments": [
-      "利用者さんが",
+      "利用者様が",
       "目を覚ますか覚まさないかのうちに、",
       "検温を",
       "始めた。"
@@ -9032,7 +9032,7 @@
   },
   {
    "id": "n3-te-hajimete",
-   "pattern": "〜て（は）じめて",
+   "pattern": "〜てはじめて",
    "level": "N3",
    "category": "経験して初めて",
    "form": "動詞て形 ＋ 初めて",
@@ -9043,8 +9043,8 @@
    "note_ja": "実際に経験した後で初めて気づいたり理解したりしたことを強調する。「〜てから」（単なる時間の前後関係）との違いに注意。後件には気づき・発見を表す表現がよく来る。",
    "examples": [
     {
-     "ja": "利用者さんの介助をして初めて、その大変さがわかった。",
-     "reading": "りようしゃさんのかいじょをしてはじめて、そのたいへんさがわかった。",
+     "ja": "利用者様の介助をして初めて、その大変さがわかった。",
+     "reading": "りようしゃさまのかいじょをしてはじめて、そのたいへんさがわかった。",
      "id": "Baru setelah benar-benar membantu penerima layanan, saya mengerti betapa beratnya pekerjaan ini.",
      "en": "Only after actually assisting a resident did I understand how demanding it is.",
      "scene": "新人指導"
@@ -9094,7 +9094,7 @@
     {
      "type": "order",
      "segments": [
-      "利用者さんの",
+      "利用者様の",
       "介助をして初めて、",
       "その大変さが",
       "わかった。"
@@ -9272,8 +9272,8 @@
      "scene": "体位変換"
     },
     {
-     "ja": "家族が面会に来るたびに、利用者さんは笑顔になります。",
-     "reading": "かぞくがめんかいにくるたびに、りようしゃさんはえがおになります。",
+     "ja": "家族が面会に来るたびに、利用者様は笑顔になります。",
+     "reading": "かぞくがめんかいにくるたびに、りようしゃさまはえがおになります。",
      "id": "Setiap kali keluarga datang berkunjung, penerima layanan menjadi tersenyum.",
      "en": "Every time the family comes to visit, the resident smiles.",
      "scene": "家族対応・面会対応"
@@ -9302,7 +9302,7 @@
     },
     {
      "type": "choice",
-     "q": "面会の＿＿＿、利用者さんは笑顔になります。",
+     "q": "面会の＿＿＿、利用者様は笑顔になります。",
      "choices": [
       "たびに",
       "たびが",
@@ -9339,8 +9339,8 @@
    "note_ja": "〜たびにと似ているが、につけは感情・思考を表す動詞（思う・感じる・聞く等）と共に使われ、そのたびに自然に湧く気持ちを強調する、やや書き言葉的な表現。",
    "examples": [
     {
-     "ja": "利用者さんの笑顔を見るにつけ、この仕事のやりがいを感じる。",
-     "reading": "りようしゃさんのえがおをみるにつけ、このしごとのやりがいをかんじる。",
+     "ja": "利用者様の笑顔を見るにつけ、この仕事のやりがいを感じる。",
+     "reading": "りようしゃさまのえがおをみるにつけ、このしごとのやりがいをかんじる。",
      "id": "Setiap kali melihat senyum penerima layanan, saya merasakan makna dari pekerjaan ini.",
      "en": "Every time I see a resident's smile, I feel the rewarding nature of this job.",
      "scene": "見守り・声かけ"
@@ -9363,7 +9363,7 @@
    "quiz": [
     {
      "type": "choice",
-     "q": "利用者さんの笑顔を＿＿＿につけ、やりがいを感じる。",
+     "q": "利用者様の笑顔を＿＿＿につけ、やりがいを感じる。",
      "choices": [
       "見る",
       "見た",
@@ -9561,8 +9561,8 @@
    "note_ja": "話し手の強い決意や当然の義務を表す。後件には意志・義務・当然の表現が来る。131番「〜以上（は）」とほぼ同じ意味で置き換え可能なことが多いが、からにはの方がやや口語的。",
    "examples": [
     {
-     "ja": "介護の仕事を選んだからには、利用者さん一人ひとりに誠実に向き合いたい。",
-     "reading": "かいごのしごとをえらんだからには、りようしゃさんひとりひとりにせいじつにむきあいたい。",
+     "ja": "介護の仕事を選んだからには、利用者様一人ひとりに誠実に向き合いたい。",
+     "reading": "かいごのしごとをえらんだからには、りようしゃさまひとりひとりにせいじつにむきあいたい。",
      "id": "Karena sudah memilih pekerjaan sebagai caregiver, saya ingin menghadapi setiap penerima layanan dengan tulus.",
      "en": "Now that I've chosen caregiving as my job, I want to face each resident sincerely.",
      "scene": "新人指導"
@@ -9649,8 +9649,8 @@
      "scene": "感染対策"
     },
     {
-     "ja": "利用者さんの命を預かる以上は、小さなミスも見逃せません。",
-     "reading": "りようしゃさんのいのちをあずかるいじょうは、ちいさなミスもみのがせません。",
+     "ja": "利用者様の命を預かる以上は、小さなミスも見逃せません。",
+     "reading": "りようしゃさまのいのちをあずかるいじょうは、ちいさなミスもみのがせません。",
      "id": "Karena bertanggung jawab atas nyawa penerima layanan, kesalahan sekecil apa pun tidak boleh dibiarkan.",
      "en": "Since we are entrusted with residents' lives, even a small mistake cannot be overlooked.",
      "scene": "ヒヤリハット・事故予防"
@@ -9686,7 +9686,7 @@
     {
      "type": "order",
      "segments": [
-      "利用者さんの",
+      "利用者様の",
       "命を預かる以上は、",
       "小さなミスも",
       "見逃せません。"
@@ -9709,8 +9709,8 @@
    "note_ja": "話し手の仮定・想像に基づく条件を表す。普通形に接続する。次項の「〜からすると／からすれば」（判断の根拠を表す）と形が似ているが意味は別なので混同しないこと。",
    "examples": [
     {
-     "ja": "もし利用者さんが急に倒れたとしたら、まず何をしますか。",
-     "reading": "もしりようしゃさんがきゅうにたおれたとしたら、まずなにをしますか。",
+     "ja": "もし利用者様が急に倒れたとしたら、まず何をしますか。",
+     "reading": "もしりようしゃさまがきゅうにたおれたとしたら、まずなにをしますか。",
      "id": "Andaikan penerima layanan tiba-tiba jatuh/pingsan, apa yang pertama kali harus dilakukan?",
      "en": "Supposing a resident suddenly collapsed, what would you do first?",
      "scene": "事故予防・ヒヤリハット"
@@ -9760,7 +9760,7 @@
     {
      "type": "order",
      "segments": [
-      "もし利用者さんが",
+      "もし利用者様が",
       "急に倒れたとしたら、",
       "まず",
       "何をしますか。"
@@ -9783,8 +9783,8 @@
    "note_ja": "名詞に接続し、判断の根拠・観点を表す。「〜としたら／とすれば」（仮定）と形が似ているため混同しやすいが、意味は全く別物なので注意。",
    "examples": [
     {
-     "ja": "表情からすると、利用者さんは今日、気分が良さそうです。",
-     "reading": "ひょうじょうからすると、りようしゃさんはきょう、きぶんがよさそうです。",
+     "ja": "表情からすると、利用者様は今日、気分が良さそうです。",
+     "reading": "ひょうじょうからすると、りようしゃさまはきょう、きぶんがよさそうです。",
      "id": "Kalau dilihat dari ekspresi wajahnya, sepertinya perasaan penerima layanan hari ini bagus.",
      "en": "Judging from his expression, the resident seems to be in a good mood today.",
      "scene": "見守り・声かけ"
@@ -9807,7 +9807,7 @@
    "quiz": [
     {
      "type": "choice",
-     "q": "利用者さんの表情＿＿＿、今日は気分が良さそうです。",
+     "q": "利用者様の表情＿＿＿、今日は気分が良さそうです。",
      "choices": [
       "につけ",
       "からすると",
@@ -9871,8 +9871,8 @@
      "scene": "新人指導"
     },
     {
-     "ja": "家族ならではの声かけで、利用者さんの表情が和らいだ。",
-     "reading": "かぞくならではのこえかけで、りようしゃさんのひょうじょうがやわらいだ。",
+     "ja": "家族ならではの声かけで、利用者様の表情が和らいだ。",
+     "reading": "かぞくならではのこえかけで、りようしゃさまのひょうじょうがやわらいだ。",
      "id": "Berkat sapaan khas dari keluarga, ekspresi penerima layanan menjadi lebih tenang.",
      "en": "Thanks to the kind of words only family can offer, the resident's expression softened.",
      "scene": "家族対応・面会対応"
@@ -9931,8 +9931,8 @@
    "note_ja": "「AあってのB」で「AがあるからこそBが成り立つ」という存在の前提を表す。感謝や、物事の根本にあるものへの気づきを述べる時によく使う表現。",
    "examples": [
     {
-     "ja": "利用者さんあっての介護の仕事だと、いつも心に留めています。",
-     "reading": "りようしゃさんあってのかいごのしごとだと、いつもこころにとめています。",
+     "ja": "利用者様あっての介護の仕事だと、いつも心に留めています。",
+     "reading": "りようしゃさまあってのかいごのしごとだと、いつもこころにとめています。",
      "id": "Saya selalu mengingat bahwa pekerjaan caregiver ini ada berkat adanya penerima layanan.",
      "en": "I always keep in mind that caregiving work only exists because of the residents.",
      "scene": "新人指導"
@@ -9955,7 +9955,7 @@
    "quiz": [
     {
      "type": "choice",
-     "q": "利用者さん＿＿＿介護の仕事だと、いつも心に留めています。",
+     "q": "利用者様＿＿＿介護の仕事だと、いつも心に留めています。",
      "choices": [
       "あっての",
       "にとっての",
@@ -10604,8 +10604,8 @@
      "scene": "申し送り"
     },
     {
-     "ja": "利用者さんの笑顔を見ると、こちらまで嬉しくなるくらいだ。",
-     "reading": "りようしゃさんのえがおをみると、こちらまでうれしくなるくらいだ。",
+     "ja": "利用者様の笑顔を見ると、こちらまで嬉しくなるくらいだ。",
+     "reading": "りようしゃさまのえがおをみると、こちらまでうれしくなるくらいだ。",
      "id": "Melihat senyum pengguna layanan, sampai-sampai kita ikut senang.",
      "en": "Seeing the resident's smile makes even us happy.",
      "scene": "レクリエーション"
@@ -10678,8 +10678,8 @@
      "scene": "夜勤"
     },
     {
-     "ja": "利用者さんが笑顔を見せてくれると、どんなに嬉しいことか。",
-     "reading": "りようしゃさんがえがおをみせてくれると、どんなにうれしいことか。",
+     "ja": "利用者様が笑顔を見せてくれると、どんなに嬉しいことか。",
+     "reading": "りようしゃさまがえがおをみせてくれると、どんなにうれしいことか。",
      "id": "Betapa senangnya ketika pengguna layanan menunjukkan senyumnya.",
      "en": "How happy it makes me when a resident shows a smile!",
      "scene": "レクリエーション"
@@ -10722,7 +10722,7 @@
     {
      "type": "order",
      "segments": [
-      "利用者さんが",
+      "利用者様が",
       "笑顔を見せてくれると",
       "どんなに",
       "嬉しいことか"
@@ -10745,8 +10745,8 @@
    "note_ja": "感情を表す言葉（驚いた、残念な、嬉しいなど）について、文の前に置いて話し手の気持ちを先に示す。後ろの文全体に対する感想を表す。",
    "examples": [
     {
-     "ja": "驚いたことに、あの利用者さんが一人で歩けるようになった。",
-     "reading": "おどろいたことに、あのりようしゃさんがひとりであるけるようになった。",
+     "ja": "驚いたことに、あの利用者様が一人で歩けるようになった。",
+     "reading": "おどろいたことに、あのりようしゃさまがひとりであるけるようになった。",
      "id": "Yang mengejutkan, pengguna layanan itu kini bisa berjalan sendiri.",
      "en": "To my surprise, that resident became able to walk by herself.",
      "scene": "リハビリ"
@@ -10769,7 +10769,7 @@
    "quiz": [
     {
      "type": "choice",
-     "q": "＿＿＿、あの利用者さんが一人で歩けるようになった。",
+     "q": "＿＿＿、あの利用者様が一人で歩けるようになった。",
      "choices": [
       "驚くことなく",
       "驚くといっても",

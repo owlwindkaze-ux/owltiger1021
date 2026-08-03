@@ -12,7 +12,7 @@
    "meaning_en": "if ~ / when ~",
    "note_id": "Pola pengandaian yang paling sering dipakai dalam percakapan sehari-hari di lokasi kerja.",
    "note_en": "The most common conditional in everyday workplace conversation.",
-   "note_ja": "最も広く使える条件形。「痛かったら言ってください」など、利用者さんへの声かけの基本。",
+   "note_ja": "最も広く使える条件形。「痛かったら言ってください」など、利用者様への声かけの基本。",
    "examples": [
     {
      "ja": "痛かったら、すぐに言ってくださいね。",
@@ -456,7 +456,7 @@
    "meaning_en": "he/she said that ~",
    "note_id": "Menyampaikan ucapan orang lain PERSIS seperti aslinya — dasar dari serah terima.",
    "note_en": "Relays someone's exact words — the basis of shift handover.",
-   "note_ja": "利用者さんや他の職員の言葉をそのまま伝える。申し送りの土台になる文型。",
+   "note_ja": "利用者様や他の職員の言葉をそのまま伝える。申し送りの土台になる文型。",
    "examples": [
     {
      "ja": "田中さんが、頭が痛いと言っていました。",
@@ -530,7 +530,7 @@
    "meaning_en": "looks ~ / seems ~",
    "note_id": "Kesimpulan dari APA YANG TERLIHAT. Sangat penting untuk mencatat kondisi yang tidak bisa ditanyakan.",
    "note_en": "A judgment from what you can SEE — vital for recording residents who cannot tell you.",
-   "note_ja": "見た目から判断したこと。話せない利用者さんの状態を記録するのに欠かせない。",
+   "note_ja": "見た目から判断したこと。話せない利用者様の状態を記録するのに欠かせない。",
    "examples": [
     {
      "ja": "田中さんは眠そうです。",
@@ -607,8 +607,8 @@
    "note_ja": "人から聞いた情報。「様子のそうです」（ます形に付く）と接続が違うので区別する。",
    "examples": [
     {
-     "ja": "明日は新しい利用者さんが入るそうです。",
-     "reading": "あしたはあたらしいりようしゃさんがはいるそうです。",
+     "ja": "明日は新しい利用者様が入るそうです。",
+     "reading": "あしたはあたらしいりようしゃさまがはいるそうです。",
      "id": "Katanya besok ada penerima layanan baru yang masuk.",
      "en": "I hear a new resident is coming in tomorrow.",
      "scene": "申し送り"
@@ -631,7 +631,7 @@
    "quiz": [
     {
      "type": "choice",
-     "q": "明日は新しい利用者さんが＿＿＿そうです。",
+     "q": "明日は新しい利用者様が＿＿＿そうです。",
      "choices": [
       "入る",
       "入り",
@@ -751,7 +751,7 @@
    "meaning_en": "do ~ for someone",
    "note_id": "HATI-HATI: kepada penerima layanan terdengar seperti berbaik hati dari atas. Lebih baik pakai 「〜します」 atau 「お〜します」.",
    "note_en": "CAUTION: to a resident this can sound condescending. Prefer plain 「〜します」 or humble 「お〜します」.",
-   "note_ja": "利用者さんに使うと「してやる」という上からの響きになる。「〜します」「お〜します」を使うのが原則。仕組みの理解のために学ぶ。",
+   "note_ja": "利用者様に使うと「してやる」という上からの響きになる。「〜します」「お〜します」を使うのが原則。仕組みの理解のために学ぶ。",
    "examples": [
     {
      "ja": "新しい職員に、記録の書き方を教えてあげました。",
@@ -791,7 +791,7 @@
     },
     {
      "type": "choice",
-     "q": "利用者さんにお茶を出すとき、正しいのはどれですか。",
+     "q": "利用者様にお茶を出すとき、正しいのはどれですか。",
      "choices": [
       "お入れしましょうか",
       "入れてあげましょうか",
@@ -939,7 +939,7 @@
     },
     {
      "type": "choice",
-     "q": "利用者さんに使う丁寧な言い方はどれですか。",
+     "q": "利用者様に使う丁寧な言い方はどれですか。",
      "choices": [
       "待っていただきました",
       "待ってもらいました",
@@ -1269,7 +1269,7 @@
    "meaning_en": "try doing ~",
    "note_id": "Mencoba sesuatu untuk melihat hasilnya. Cocok untuk mengajak penerima layanan tanpa memaksa.",
    "note_en": "Trying something to see how it goes — good for inviting a resident without pressure.",
-   "note_ja": "試しにやってみる。押しつけずに利用者さんを誘うときに便利（「少し歩いてみましょうか」）。",
+   "note_ja": "試しにやってみる。押しつけずに利用者様を誘うときに便利（「少し歩いてみましょうか」）。",
    "examples": [
     {
      "ja": "少し歩いてみましょうか。",
@@ -1713,7 +1713,7 @@
    "meaning_en": "someone (else) wants to ~",
    "note_id": "Keinginan ORANG KETIGA. Untuk diri sendiri pakai 「〜たいです」. Inti dari mencatat keinginan penerima layanan.",
    "note_en": "A THIRD PERSON's desire; use 「〜たいです」 for yourself. Central to recording residents' wishes.",
-   "note_ja": "第三者の希望。自分には「〜たいです」を使う。利用者さんの希望を記録する基本。",
+   "note_ja": "第三者の希望。自分には「〜たいです」を使う。利用者様の希望を記録する基本。",
    "examples": [
     {
      "ja": "田中さんが外に出たがっています。",
@@ -1753,7 +1753,7 @@
     },
     {
      "type": "choice",
-     "q": "利用者さんの希望を記録するとき、正しいのはどれですか。",
+     "q": "利用者様の希望を記録するとき、正しいのはどれですか。",
      "choices": [
       "帰りたがっています",
       "帰りたいです",
@@ -1935,7 +1935,7 @@
    "meaning_en": "be ~ed (passive)",
    "note_id": "Selain bentuk pasif, bentuk yang sama juga dipakai sebagai bahasa hormat kepada penerima layanan.",
    "note_en": "Besides the passive, the same form is used as honorific language for residents.",
-   "note_ja": "受身のほか、同じ形が利用者さんへの尊敬語にもなる（「帰られました」）。この二役が重要。",
+   "note_ja": "受身のほか、同じ形が利用者様への尊敬語にもなる（「帰られました」）。この二役が重要。",
    "examples": [
     {
      "ja": "田中さんは、ご家族に手紙を読まれました。",
@@ -2009,11 +2009,11 @@
    "meaning_en": "make/let someone do ~",
    "note_id": "HATI-HATI: kepada penerima layanan berarti memaksa. Gunakan 「〜していただく」 sebagai gantinya.",
    "note_en": "CAUTION: using this about residents means forcing them. Use 「〜していただく」 instead.",
-   "note_ja": "利用者さんに使うと「強制する」意味になる。原則「〜していただく」に言い換える。虐待防止の観点でも重要。",
+   "note_ja": "利用者様に使うと「強制する」意味になる。原則「〜していただく」に言い換える。虐待防止の観点でも重要。",
    "examples": [
     {
-     "ja": "（誤り）利用者さんを歩かせました。→（正しい）利用者さんに歩いていただきました。",
-     "reading": "りようしゃさんにあるいていただきました。",
+     "ja": "（誤り）利用者様を歩かせました。→（正しい）利用者様に歩いていただきました。",
+     "reading": "りようしゃさまにあるいていただきました。",
      "id": "(Salah) 歩かせました → (Benar) 歩いていただきました.",
      "en": "(Wrong) 歩かせました → (Right) 歩いていただきました.",
      "scene": "敬語の注意"
@@ -2049,7 +2049,7 @@
     },
     {
      "type": "choice",
-     "q": "利用者さんに歩いてもらったときの正しい記録はどれですか。",
+     "q": "利用者様に歩いてもらったときの正しい記録はどれですか。",
      "choices": [
       "歩いていただきました",
       "歩かせました",
@@ -3489,7 +3489,7 @@
    "meaning_en": "the act of ~ing",
    "note_id": "Mengubah kata kerja menjadi kata benda. Penting untuk menulis apa yang sulit atau mudah bagi penerima layanan.",
    "note_en": "Turns a verb into a noun — key for writing what a resident finds hard or easy.",
-   "note_ja": "動詞を名詞にする。「立つのが難しい」など、利用者さんの困難さを書くのに必須。",
+   "note_ja": "動詞を名詞にする。「立つのが難しい」など、利用者様の困難さを書くのに必須。",
    "examples": [
     {
      "ja": "一人で立つのが難しいです。",
@@ -3785,7 +3785,7 @@
    "meaning_en": "it doesn't matter if ~",
    "note_id": "Izin yang lebih longgar daripada 「〜てもいいです」. Menenangkan penerima layanan yang sungkan.",
    "note_en": "A looser permission than 「〜てもいいです」 — reassures residents who feel they are imposing.",
-   "note_ja": "「〜てもいいです」より許容の幅が広い。遠慮している利用者さんを楽にする言い方。",
+   "note_ja": "「〜てもいいです」より許容の幅が広い。遠慮している利用者様を楽にする言い方。",
    "examples": [
     {
      "ja": "残してもかまいませんよ。",
@@ -3825,7 +3825,7 @@
     },
     {
      "type": "choice",
-     "q": "遠慮している利用者さんに言う言葉として自然なのはどれですか。",
+     "q": "遠慮している利用者様に言う言葉として自然なのはどれですか。",
      "choices": [
       "残してもかまいませんよ",
       "残してはいけません",
@@ -3859,7 +3859,7 @@
    "meaning_en": "why don't you ~?",
    "note_id": "Saran yang lembut, tidak memaksa. Cocok untuk mengusulkan kepada penerima layanan atau rekan kerja.",
    "note_en": "A soft, non-forcing suggestion — good for residents and colleagues alike.",
-   "note_ja": "押しつけない提案。利用者さんにも同僚にも使える柔らかい助言。",
+   "note_ja": "押しつけない提案。利用者様にも同僚にも使える柔らかい助言。",
    "examples": [
     {
      "ja": "少し休んだらどうですか。",
@@ -4525,7 +4525,7 @@
    "meaning_en": "want someone to ~",
    "note_id": "Keinginan agar ORANG LAIN berbuat sesuatu. Untuk penerima layanan, catat sebagai keinginan mereka.",
    "note_en": "Wanting SOMEONE ELSE to act — record this as the resident's own wish.",
-   "note_ja": "相手にしてほしいこと。利用者さんの要望を記録するときに使える。",
+   "note_ja": "相手にしてほしいこと。利用者様の要望を記録するときに使える。",
    "examples": [
     {
      "ja": "家族に会いに来てほしいと言っておられます。",
@@ -4565,7 +4565,7 @@
     },
     {
      "type": "choice",
-     "q": "利用者さんの要望を記録するのに合うのはどれですか。",
+     "q": "利用者様の要望を記録するのに合うのはどれですか。",
      "choices": [
       "会いに来てほしいと言っておられます",
       "会いに行きたいです",
@@ -5143,7 +5143,7 @@
    "quiz": [
     {
      "type": "choice",
-     "q": "利用者さんに避難を促すとき、正しいのはどれですか。",
+     "q": "利用者様に避難を促すとき、正しいのはどれですか。",
      "choices": [
       "こちらへ逃げましょう",
       "逃げろ",
@@ -5170,7 +5170,7 @@
     {
      "type": "order",
      "segments": [
-      "利用者さんには",
+      "利用者様には",
       "丁寧な",
       "言い方を",
       "使います"
@@ -5190,7 +5190,7 @@
    "meaning_en": "do ~ (instruction from a superior)",
    "note_id": "Perintah dari orang tua kepada anak atau guru kepada murid. TIDAK dipakai kepada penerima layanan.",
    "note_en": "A parent-to-child or teacher-to-student instruction — not for use with residents.",
-   "note_ja": "親から子・先生から生徒への指示。利用者さんに使うと失礼になるので使わない。",
+   "note_ja": "親から子・先生から生徒への指示。利用者様に使うと失礼になるので使わない。",
    "examples": [
     {
      "ja": "（試験問題）次の質問に答えなさい。",
@@ -5230,7 +5230,7 @@
     },
     {
      "type": "choice",
-     "q": "利用者さんに手洗いを促すとき、正しいのはどれですか。",
+     "q": "利用者様に手洗いを促すとき、正しいのはどれですか。",
      "choices": [
       "手を洗いましょう",
       "手を洗いなさい",
@@ -5244,7 +5244,7 @@
     {
      "type": "order",
      "segments": [
-      "利用者さんには",
+      "利用者様には",
       "手を",
       "洗いましょうと",
       "言います"
@@ -5674,7 +5674,7 @@
     },
     {
      "type": "choice",
-     "q": "利用者さんの様子を書くとき、正しいのはどれですか。",
+     "q": "利用者様の様子を書くとき、正しいのはどれですか。",
      "choices": [
       "寒がっています",
       "寒いです",
@@ -6152,7 +6152,7 @@
    "meaning_en": "could you ~?",
    "note_id": "Permintaan sopan kepada rekan sederajat. Untuk atasan pakai 「〜ていただけませんか」.",
    "note_en": "A polite request to a peer; use 「〜ていただけませんか」 for superiors.",
-   "note_ja": "同僚への丁寧な依頼。上司・利用者さんには「〜ていただけませんか」を使う。",
+   "note_ja": "同僚への丁寧な依頼。上司・利用者様には「〜ていただけませんか」を使う。",
    "examples": [
     {
      "ja": "ちょっと手伝ってもらえませんか。",

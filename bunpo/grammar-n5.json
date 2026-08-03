@@ -12,7 +12,7 @@
    "meaning_en": "please do ~",
    "note_id": "Permintaan sopan. Kepada penerima layanan, akan terdengar lebih lembut jika ditambah 「〜てくださいね」.",
    "note_en": "Polite request. Adding 「〜てくださいね」 sounds softer to residents.",
-   "note_ja": "丁寧な依頼だが、あくまで「指示」。利用者さんには「〜てくださいね」と「ね」を付けると、指示ではなく共有の気持ちになり、柔らかく聞こえる。",
+   "note_ja": "丁寧な依頼だが、あくまで「指示」。利用者様には「〜てくださいね」と「ね」を付けると、指示ではなく共有の気持ちになり、柔らかく聞こえる。",
    "examples": [
     {
      "ja": "手すりを持ってください。",
@@ -234,7 +234,7 @@
    "meaning_en": "let's ~",
    "note_id": "Mengajak melakukan bersama. Terdengar lebih ramah daripada 「〜てください」 saat mengajak penerima layanan.",
    "note_en": "Invites doing something together; friendlier than 「〜てください」 when guiding a resident.",
-   "note_ja": "「一緒にやりましょう」と誘う言い方。利用者さんを誘導するときは「〜てください」より親しみが出る。",
+   "note_ja": "「一緒にやりましょう」と誘う言い方。利用者様を誘導するときは「〜てください」より親しみが出る。",
    "examples": [
     {
      "ja": "そろそろお風呂に入りましょう。",
@@ -753,11 +753,11 @@
    "meaning_en": "must not ~",
    "note_id": "Larangan tegas berdasarkan aturan. Kepada penerima layanan pakai 「〜ないでください」 yang lebih halus.",
    "note_en": "A firm, rule-based prohibition. Use the softer 「〜ないでください」 with residents.",
-   "note_ja": "規則としての強い禁止。利用者さんには、より柔らかい「〜ないでください」を使う。職員同士や研修で使う言い方。",
+   "note_ja": "規則としての強い禁止。利用者様には、より柔らかい「〜ないでください」を使う。職員同士や研修で使う言い方。",
    "examples": [
     {
-     "ja": "利用者さんの薬を勝手に変えてはいけません。",
-     "reading": "りようしゃさんのくすりをかってにかえてはいけません。",
+     "ja": "利用者様の薬を勝手に変えてはいけません。",
+     "reading": "りようしゃさまのくすりをかってにかえてはいけません。",
      "id": "Tidak boleh mengubah obat penerima layanan seenaknya.",
      "en": "You must not change a resident's medication on your own.",
      "scene": "服薬介助"
@@ -780,7 +780,7 @@
    "quiz": [
     {
      "type": "choice",
-     "q": "利用者さんの薬を勝手に＿＿＿はいけません。",
+     "q": "利用者様の薬を勝手に＿＿＿はいけません。",
      "choices": [
       "変えて",
       "変えって",
@@ -901,7 +901,7 @@
    "meaning_en": "you don't have to ~",
    "note_id": "Menyatakan sesuatu tidak wajib. Berguna untuk menenangkan penerima layanan yang cemas.",
    "note_en": "Says something isn't required — useful for reassuring anxious residents.",
-   "note_ja": "「しなくてよい」と伝える言い方。不安がっている利用者さんを安心させるときに使える。",
+   "note_ja": "「しなくてよい」と伝える言い方。不安がっている利用者様を安心させるときに使える。",
    "examples": [
     {
      "ja": "急がなくてもいいですよ。ゆっくりどうぞ。",
@@ -975,7 +975,7 @@
    "meaning_en": "can ~ / be able to ~",
    "note_id": "Sangat penting untuk mencatat kemampuan penerima layanan (ADL) dalam laporan.",
    "note_en": "Essential for recording what a resident can do (ADL) in reports.",
-   "note_ja": "利用者さんの「できること」（ADL）を記録するときに欠かせない。できない場合は「〜ことができません」。",
+   "note_ja": "利用者様の「できること」（ADL）を記録するときに欠かせない。できない場合は「〜ことができません」。",
    "examples": [
     {
      "ja": "田中さんは一人で立つことができます。",
@@ -1049,7 +1049,7 @@
    "meaning_en": "have done ~ before",
    "note_id": "Pengalaman di masa lalu. Berguna untuk menanyakan riwayat penerima layanan.",
    "note_en": "Past experience — useful for asking about a resident's history.",
-   "note_ja": "過去の経験。「前に転んだことがありますか」など、利用者さんの既往を聞くときに使える。",
+   "note_ja": "過去の経験。「前に転んだことがありますか」など、利用者様の既往を聞くときに使える。",
    "examples": [
     {
      "ja": "前に転んだことがありますか。",
@@ -1716,7 +1716,7 @@
    "meaning_en": "become ~",
    "note_id": "Menyatakan perubahan keadaan — inti dari pencatatan kondisi penerima layanan.",
    "note_en": "Expresses change of state — the core of recording a resident's condition.",
-   "note_ja": "状態の変化を表す。利用者さんの変化を記録するときの中心となる文型。",
+   "note_ja": "状態の変化を表す。利用者様の変化を記録するときの中心となる文型。",
    "examples": [
     {
      "ja": "足のむくみが強くなりました。",
@@ -1938,7 +1938,7 @@
    "meaning_en": "like ~ / be good at ~",
    "note_id": "Objeknya memakai partikel が, bukan を. Berguna untuk mencatat kesukaan penerima layanan.",
    "note_en": "Takes が, not を. Useful for recording a resident's preferences.",
-   "note_ja": "助詞は「を」ではなく「が」。利用者さんの好みを把握・記録するのに使う。",
+   "note_ja": "助詞は「を」ではなく「が」。利用者様の好みを把握・記録するのに使う。",
    "examples": [
     {
      "ja": "田中さんは歌が好きです。",
@@ -2103,8 +2103,8 @@
      "scene": "食事介助"
     },
     {
-     "ja": "利用者さんに一枚ずつタオルを配ります。",
-     "reading": "りようしゃさんにいちまいずつタオルをくばります。",
+     "ja": "利用者様に一枚ずつタオルを配ります。",
+     "reading": "りようしゃさまにいちまいずつタオルをくばります。",
      "id": "Saya membagikan handuk satu lembar untuk masing-masing penerima layanan.",
      "en": "I hand out one towel to each resident.",
      "scene": "入浴準備"
@@ -2126,7 +2126,7 @@
     },
     {
      "type": "choice",
-     "q": "利用者さんに一枚＿＿＿タオルを配ります。",
+     "q": "利用者様に一枚＿＿＿タオルを配ります。",
      "choices": [
       "ずつ",
       "だけ",
@@ -2234,7 +2234,7 @@
    "meaning_en": "could you please ~?",
    "note_id": "Lebih sopan daripada 「〜てください」. Dipakai kepada penerima layanan, keluarga, dan atasan.",
    "note_en": "More polite than 「〜てください」 — for residents, families, and superiors.",
-   "note_ja": "「〜てください」より丁寧。利用者さん・ご家族・上司に対して使う。",
+   "note_ja": "「〜てください」より丁寧。利用者様・ご家族・上司に対して使う。",
    "examples": [
     {
      "ja": "少しお待ちくださいませんか。",
