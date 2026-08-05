@@ -204,6 +204,7 @@ footer a{color:var(--blue)}
   <button class="tab on" data-tab="list">Kanji<span class="sub">漢字一覧</span></button>
   <button class="tab" data-tab="vocab">Kosakata<span class="sub">熟語</span></button>
   <button class="tab" data-tab="card">Kartu<span class="sub">フラッシュカード</span></button>
+  <button class="tab" data-tab="quiz">Latihan<span class="sub">練習問題</span></button>
   <button class="tab" data-tab="stroke">Urutan Coretan<span class="sub">書き順</span></button>
   <button class="tab" data-tab="stats">Progres<span class="sub">学習状況</span></button>
 </div></nav>
@@ -267,6 +268,8 @@ footer a{color:var(--blue)}
         <option value="作業">作業一般 ／ Pekerjaan umum</option>
         <option value="製造">製造・工場 ／ Pabrik</option>
         <option value="品質">品質・管理 ／ Kualitas</option>
+        <option value="基本語">基本語（かな） ／ Kata dasar</option>
+        <option value="カタカナ語">カタカナ語 ／ Kata serapan</option>
       </select>
       <select class="sel" id="vSub"><option value="all">小分類すべて ／ Semua sub-bidang</option></select>
       <span class="hint" id="vCnt"></span>
@@ -359,6 +362,64 @@ footer a{color:var(--blue)}
           <button class="btn" id="fcRedo">Ulang yang salah ／ 要復習だけ</button>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== Latihan / 練習問題（JLPT形式） ===== -->
+  <section class="panel" id="p-quiz">
+    <div class="fc-wrap" style="max-width:620px">
+      <div class="toolbar" style="justify-content:center;margin:0">
+        <select class="sel" id="qzType">
+          <option value="mix">全形式まとめて ／ 総合</option>
+          <option value="reading">問題1 漢字読み ／ Cara baca kanji</option>
+          <option value="orth">問題2 表記 ／ Penulisan kanji</option>
+          <option value="context">問題3 文脈規定 ／ Pilih kata yang tepat</option>
+          <option value="kanjiread">問題4 漢字1字の読み ／ Baca kanji tunggal</option>
+        </select>
+        <select class="sel" id="qzLv">
+          <option value="all">Semua level</option><option value="N5">N5</option>
+          <option value="N4">N4</option><option value="N3">N3</option>
+          <option value="介護">介護 / Kaigo</option>
+        </select>
+        <select class="sel" id="qzNum">
+          <option value="10">10問</option><option value="20">20問</option><option value="30">30問</option>
+        </select>
+        <button class="btn pri" id="qzStart">Mulai ／ 開始</button>
+      </div>
+
+      <div class="fc-meta" id="qzMeta" style="display:none">
+        <span id="qzCount">0 / 0</span>
+        <span><i class="dot g"></i><span id="qzOk">正解 0</span></span>
+        <span><i class="dot r"></i><span id="qzNg">不正解 0</span></span>
+      </div>
+      <div class="bar" id="qzBarWrap" style="display:none"><i id="qzBar" style="width:0"></i></div>
+
+      <div id="qzArea" style="width:100%;display:none">
+        <div style="background:var(--card);border:2px solid var(--line);border-radius:18px;padding:1.2rem;box-shadow:var(--sh-l)">
+          <div class="lb" id="qzKind"></div>
+          <div id="qzQ" style="font-size:1.35rem;font-weight:700;line-height:1.6;margin:.4rem 0 1rem"></div>
+          <div id="qzChoices" style="display:grid;gap:.5rem"></div>
+          <div id="qzFeedback" style="margin-top:.8rem;display:none"></div>
+        </div>
+        <div class="row" style="margin-top:.8rem">
+          <button class="btn pri" id="qzNext" style="display:none">次の問題 ／ Berikutnya →</button>
+        </div>
+      </div>
+
+      <div id="qzDone" style="display:none;text-align:center;padding:1rem;width:100%">
+        <div style="font-size:2rem">🎉</div>
+        <h3 id="qzScore"></h3>
+        <p style="color:var(--muted)" id="qzMsg"></p>
+        <div id="qzWrongList" style="text-align:left;margin:1rem 0"></div>
+        <div class="row">
+          <button class="btn pri" id="qzAgain">もう一度 ／ Ulangi</button>
+          <button class="btn" id="qzRetryWrong">間違えた問題だけ ／ Yang salah saja</button>
+        </div>
+      </div>
+
+      <p class="hint" style="white-space:normal;text-align:center">
+        JLPTの問題形式（漢字読み・表記・文脈規定）に合わせた4択問題です。<br>
+        間違えた語は自動で「要復習」に登録されます ／ Kata yang salah otomatis masuk "perlu diulang".</p>
     </div>
   </section>
 
@@ -539,7 +600,7 @@ else document.getElementById('gatePw').focus();
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-08-03a';   // 更新日（版）
+const VERSION = '2026-08-03b';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -983,6 +1044,146 @@ function finish() {
   $('#fcRedo').style.display = wrong.length ? '' : 'none';
 }
 
+
+/* ================= 練習問題（JLPT形式） ================= */
+const KANJI_RE2 = /[一-鿿]/;
+let qz = { list: [], i: 0, ok: 0, ng: 0, wrong: [], answered: false };
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const pick = (arr, n) => shuffle([...arr]).slice(0, n);
+
+/** 出題対象の語（レベル指定つき） */
+function quizPool(lv) {
+  return VOCAB.filter(w => (lv === 'all' || w.level === lv) && w.word && w.reading && (w.meaning_id || w.meaning));
+}
+/** 誤答（似た語）を選ぶ：同じレベル・同じくらいの長さ・読みが違うもの */
+function distractors(pool, correct, key, n = 3) {
+  const same = pool.filter(w => w[key] && w[key] !== correct[key] &&
+    Math.abs(w.word.length - correct.word.length) <= 1);
+  const chosen = [];
+  const seen = new Set([correct[key]]);
+  for (const w of shuffle(same)) {
+    if (seen.has(w[key])) continue;
+    seen.add(w[key]); chosen.push(w);
+    if (chosen.length >= n) break;
+  }
+  return chosen;
+}
+/** 1問を作る */
+function makeQuestion(type, pool, kpool) {
+  if (type === 'kanjiread') {
+    const k = pick(kpool, 1)[0]; if (!k) return null;
+    const reads = k.on.concat(k.kun).filter(Boolean);
+    if (!reads.length) return null;
+    const ans = reads[0].replace(/\./g, '');
+    const others = pick(kpool.filter(x => x.character !== k.character), 12)
+      .map(x => (x.on.concat(x.kun)[0] || '').replace(/\./g, '')).filter(r => r && r !== ans);
+    const ch = [...new Set(others)].slice(0, 3);
+    if (ch.length < 3) return null;
+    return { kind: '問題4 漢字の読み ／ Baca kanji ini',
+      q: `<span style="font-family:var(--kfont);font-size:3rem">${k.character}</span>`,
+      choices: shuffle([ans, ...ch]), answer: ans, key: k.character, isKanji: true,
+      note: `${k.character}：${meanOf(k).slice(0, 3).join(', ')}` };
+  }
+  const w = pick(pool, 1)[0]; if (!w) return null;
+  if (type === 'reading') {
+    if (!KANJI_RE2.test(w.word)) return null;
+    const ds = distractors(pool, w, 'reading'); if (ds.length < 3) return null;
+    return { kind: '問題1 　＿＿の読み方 ／ Cara baca kata bergaris',
+      q: `<u style="text-underline-offset:4px">${w.word}</u> の読み方は？`,
+      choices: shuffle([w.reading, ...ds.map(d => d.reading)]), answer: w.reading,
+      key: w.word, note: `${w.word}（${w.reading}）＝ ${vMean(w)}` };
+  }
+  if (type === 'orth') {
+    if (!KANJI_RE2.test(w.word)) return null;
+    const ds = distractors(pool, w, 'word').filter(d => KANJI_RE2.test(d.word));
+    if (ds.length < 3) return null;
+    return { kind: '問題2 　ただしい漢字は？ ／ Penulisan kanji yang benar',
+      q: `<span style="color:var(--blue)">${w.reading}</span><br><span style="font-size:.9rem;color:var(--muted)">${vMean(w)}</span>`,
+      choices: shuffle([w.word, ...ds.map(d => d.word)]), answer: w.word,
+      key: w.word, note: `${w.word}（${w.reading}）＝ ${vMean(w)}` };
+  }
+  /* context: 意味に合う語を選ぶ */
+  const ds = distractors(pool, w, 'word'); if (ds.length < 3) return null;
+  return { kind: '問題3 　意味に合う言葉は？ ／ Kata yang sesuai artinya',
+    q: `<span style="font-size:1.1rem">${vMean(w)}</span>`,
+    choices: shuffle([w.word, ...ds.map(d => d.word)]), answer: w.word,
+    key: w.word, note: `${w.word}（${w.reading}）＝ ${vMean(w)}` };
+}
+function buildQuiz() {
+  const lv = $('#qzLv').value, type = $('#qzType').value, n = +$('#qzNum').value;
+  const pool = quizPool(lv);
+  const kpool = DATA.filter(k => lv === 'all' || k.level === lv);
+  if (pool.length < 8) { alert('この範囲は語が少なすぎます。レベルを変えてください。'); return; }
+  const types = type === 'mix' ? ['reading', 'orth', 'context', 'kanjiread'] : [type];
+  const list = []; let guard = 0;
+  while (list.length < n && guard++ < n * 40) {
+    const t = types[list.length % types.length];
+    const q = makeQuestion(t, pool, kpool);
+    if (q && !list.some(x => x.key === q.key && x.kind === q.kind)) list.push(q);
+  }
+  if (!list.length) { alert('問題を作れませんでした。範囲を広げてください。'); return; }
+  qz = { list, i: 0, ok: 0, ng: 0, wrong: [], answered: false };
+  $('#qzMeta').style.display = 'flex'; $('#qzBarWrap').style.display = '';
+  $('#qzArea').style.display = ''; $('#qzDone').style.display = 'none';
+  showQuestion();
+}
+function showQuestion() {
+  const q = qz.list[qz.i];
+  if (!q) return finishQuiz();
+  qz.answered = false;
+  $('#qzKind').textContent = q.kind;
+  $('#qzQ').innerHTML = q.q;
+  $('#qzChoices').innerHTML = q.choices.map((c, i) =>
+    `<button class="btn qz-choice" data-c="${c}" style="text-align:left;font-size:1.05rem;padding:.7rem .9rem">
+       <span style="color:var(--muted);margin-right:.5rem">${i + 1}</span>${c}</button>`).join('');
+  $('#qzFeedback').style.display = 'none';
+  $('#qzNext').style.display = 'none';
+  $('#qzCount').textContent = `${qz.i + 1} / ${qz.list.length}`;
+  $('#qzBar').style.width = (qz.i / qz.list.length * 100) + '%';
+}
+function answerQuiz(choice) {
+  if (qz.answered) return;
+  qz.answered = true;
+  const q = qz.list[qz.i], right = choice === q.answer;
+  if (right) qz.ok++; else { qz.ng++; qz.wrong.push(q);
+    if (q.isKanji) setMark(q.key, 'review'); else setVMark(q.key, 'review'); }
+  $$('.qz-choice').forEach(b => {
+    if (b.dataset.c === q.answer) { b.style.background = 'var(--green)'; b.style.color = '#fff'; b.style.borderColor = 'var(--green)'; }
+    else if (b.dataset.c === choice) { b.style.background = '#fee2e2'; b.style.color = 'var(--red)'; b.style.borderColor = 'var(--red)'; }
+    b.disabled = true;
+  });
+  $('#qzFeedback').innerHTML = `<div class="state ${right ? 'known' : 'review'}">${right ? '✓ Benar ／ 正解' : '✗ Salah ／ 不正解'}</div>
+    <div style="margin-top:.4rem;font-size:.9rem">${q.note}</div>`;
+  $('#qzFeedback').style.display = '';
+  $('#qzOk').textContent = `正解 ${qz.ok}`; $('#qzNg').textContent = `不正解 ${qz.ng}`;
+  $('#qzNext').style.display = '';
+  $('#qzNext').textContent = qz.i >= qz.list.length - 1 ? '結果を見る ／ Lihat hasil' : '次の問題 ／ Berikutnya →';
+}
+function finishQuiz() {
+  $('#qzArea').style.display = 'none'; $('#qzBar').style.width = '100%';
+  $('#qzDone').style.display = '';
+  const total = qz.ok + qz.ng, pct = total ? Math.round(qz.ok / total * 100) : 0;
+  $('#qzScore').textContent = `${qz.ok} / ${total}（${pct}%）`;
+  $('#qzMsg').textContent = pct >= 80 ? 'よくできました！ ／ Bagus sekali!'
+    : pct >= 60 ? 'あと少しです ／ Sedikit lagi!' : 'もう一度復習しましょう ／ Ayo ulangi lagi';
+  $('#qzWrongList').innerHTML = qz.wrong.length
+    ? `<div class="lb">間違えた問題 ／ Yang salah（要復習に登録しました）</div><ul class="ex">` +
+      qz.wrong.map(w => `<li class="w-review"><div class="m">${w.note}</div></li>`).join('') + '</ul>'
+    : '';
+  $('#qzRetryWrong').style.display = qz.wrong.length ? '' : 'none';
+  refreshStats();
+}
+$('#qzStart').onclick = () => loadVocab().then(buildQuiz);
+$('#qzAgain').onclick = () => buildQuiz();
+$('#qzRetryWrong').onclick = () => {
+  qz = { list: shuffle(qz.wrong), i: 0, ok: 0, ng: 0, wrong: [], answered: false };
+  $('#qzDone').style.display = 'none'; $('#qzArea').style.display = ''; showQuestion();
+};
+$('#qzNext').onclick = () => { qz.i++; showQuestion(); };
+$('#qzChoices').addEventListener('click', e => {
+  const b = e.target.closest('.qz-choice'); if (b) answerQuiz(b.dataset.c);
+});
+
 /* ---------- stats ---------- */
 function refreshStats() {
   if (!DATA.length) return;
@@ -1010,6 +1211,7 @@ $$('.tab').forEach(t => t.onclick = () => {
   $('#p-' + t.dataset.tab).classList.add('on');
   if (t.dataset.tab === 'stroke') renderStroke();
   if (t.dataset.tab === 'vocab') loadVocab().then(renderVocab);
+  if (t.dataset.tab === 'quiz') loadVocab();
   if (t.dataset.tab === 'stats') refreshStats();
   window.scrollTo({ top: 0 });
 });
