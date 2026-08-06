@@ -63,7 +63,7 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 | `kanji-data.json` | 漢字612字のデータ（読み・意味・用例・部首など） |
 | `kanji-strokes.json` | 書き順データ（KanjiVG のパス、612字ぶん） |
 | `vocab.json` | 熟語3,254語（JLPT語彙＋介護・看護201語＋現場125語） |
-| `sentences.json` | 練習問題（JLPT形式）用の例文993件（介護・現場・N5をカバー） |
+| `sentences.json` | 練習問題（JLPT形式）用の例文1,625件（介護・現場・N5・N4をカバー） |
 | `vocab-extra.csv` | 施設独自の専門用語（Excelで編集して追加・修正） |
 | `MANUAL.md` | 使用説明書 |
 | `SPEC.md` | 仕様書 |
