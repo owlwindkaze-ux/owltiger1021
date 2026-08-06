@@ -376,7 +376,7 @@ footer a{color:var(--blue)}
           <option value="context">問題3 文脈規定 ／ Pilih kata yang tepat</option>
           <option value="para">問題4 言い換え類義 ／ Kata yang searti</option>
           <option value="usage">問題5 用法 ／ Pemakaian yang benar</option>
-          <option value="kanjiread">漢字1字の読み ／ Baca kanji tunggal</option>
+          <option value="kanjiread">漢字の読み（1字・熟語）／ Baca kanji</option>
         </select>
         <select class="sel" id="qzLv">
           <option value="all">Semua level</option><option value="N5">N5</option>
@@ -1145,6 +1145,38 @@ function buildSyn() {
   });
 }
 
+/* ---------- 漢字1字の読み：熟語の中で出すための補助 ---------- */
+const LVRANK = { 'N5': 1, 'N4': 2, 'N3': 3, '介護': 4 };
+const kRank = ch => LVRANK[(BYCH[ch] || {}).level] || 5;   // 未収録＝いちばん上とみなす
+const rdList = k => [...new Set((k.on || []).concat(k.kun || [])
+  .map(r => r.split('.')[0].replace(/-/g, '')).filter(Boolean))];
+/** 2字熟語のなかで、その漢字が読む部分を切り出す（確実に分かるときだけ返す） */
+function splitReading(word, ch, reading) {
+  const cs = [...word];
+  if (cs.length !== 2 || !/^[ぁ-ゖ]+$/.test(reading)) return null;
+  const kk = BYCH[ch]; if (!kk) return null;
+  const cands = rdList(kk).filter(r => /^[ぁ-ゖ]+$/.test(r));
+  if (cs[0] === ch) {
+    for (const r of cands) if (reading.startsWith(r) && reading.length > r.length)
+      return { target: r, other: cs[1], otherRead: reading.slice(r.length), first: true };
+  } else if (cs[1] === ch) {
+    for (const r of cands) if (reading.endsWith(r) && reading.length > r.length)
+      return { target: r, other: cs[0], otherRead: reading.slice(0, reading.length - r.length), first: false };
+  }
+  return null;
+}
+/** 読みの誤答：まぎらわしい形→足りなければ他の漢字の同じ長さの読み */
+function readDistractors(ans, kpool, ch, n = 3) {
+  let out = pick(readVariants(ans), n);
+  if (out.length < n) {
+    const more = [];
+    kpool.forEach(x => { if (x.character !== ch) rdList(x).forEach(r => {
+      if (KANA_ONLY.test(r) && r.length === ans.length) more.push(r); }); });
+    out = [...new Set(out.concat(pick(more, 30)))].filter(x => x !== ans && KANA_ONLY.test(x)).slice(0, n);
+  }
+  return out;
+}
+
 /** 出題対象の語（レベル指定つき） */
 function quizPool(lv) {
   return VOCAB.filter(w => (lv === 'all' || w.level === lv) && w.word && w.reading && (w.meaning_id || w.meaning));
@@ -1166,17 +1198,39 @@ function distractors(pool, correct, key, n = 3) {
 function makeQuestion(type, pool, kpool) {
   if (type === 'kanjiread') {
     const k = pick(kpool, 1)[0]; if (!k) return null;
-    const reads = k.on.concat(k.kun).filter(Boolean);
+    const ch = k.character, MEAN = meanOf(k).slice(0, 3).join(', ');
+    /* ① その1字で意味のある語（山・水・手など）は、1字のまま出す */
+    if (VBYW[ch] && KANA_ONLY.test(VBYW[ch].reading)) {
+      const ans = VBYW[ch].reading, ds = readDistractors(ans, kpool, ch);
+      if (ds.length === 3) return { kind: '漢字の読み ／ Baca kanji ini',
+        q: `<span style="font-family:var(--kfont);font-size:3rem">${ch}</span>`,
+        choices: shuffle([ans, ...ds]), answer: ans, key: ch, isKanji: true,
+        note: `${ch}（${ans}）：${MEAN}` };
+    }
+    /* ② 1字では使わない漢字は、熟語の中で出す。相手の字が上のレベルならふりがなを付ける */
+    for (const w of shuffle((WORDS_OF[ch] || []).filter(x => [...x.word].length === 2 &&
+        KANA_ONLY.test(x.reading) && !x.word.includes('々')))) {
+      const sp = splitReading(w.word, ch, w.reading); if (!sp) continue;
+      const ds = readDistractors(sp.target, kpool, ch); if (ds.length < 3) continue;
+      /* ふりがなは「相手が漢字」かつ「相手のほうが上のレベル」かつ「答えが読めてしまわない」ときだけ */
+      const ruby = KANJI_RE2.test(sp.other) && kRank(sp.other) > kRank(ch) &&
+        !sp.otherRead.includes(sp.target) && !sp.target.includes(sp.otherRead);
+      const oth = ruby
+        ? `<ruby>${sp.other}<rt style="font-size:.34em;font-weight:400">${sp.otherRead}</rt></ruby>` : sp.other;
+      return { kind: '漢字の読み（熟語の中で） ／ Baca kanji bergaris',
+        q: `<span style="font-family:var(--kfont);font-size:2.6rem;line-height:1.9">${sp.first ? UL(ch) + oth : oth + UL(ch)}</span>`,
+        choices: shuffle([sp.target, ...ds]), answer: sp.target, key: ch, isKanji: true,
+        note: `${w.word}（${w.reading}）＝ ${vMean(w)}　／　${ch}：${MEAN}` };
+    }
+    /* ③ どちらもできないときは、代表的な読みを1字で */
+    const reads = rdList(k).filter(r => KANA_ONLY.test(r));
     if (!reads.length) return null;
-    const ans = reads[0].replace(/\./g, '');
-    const others = pick(kpool.filter(x => x.character !== k.character), 12)
-      .map(x => (x.on.concat(x.kun)[0] || '').replace(/\./g, '')).filter(r => r && r !== ans);
-    const ch = [...new Set(others)].slice(0, 3);
-    if (ch.length < 3) return null;
-    return { kind: '問題4 漢字の読み ／ Baca kanji ini',
-      q: `<span style="font-family:var(--kfont);font-size:3rem">${k.character}</span>`,
-      choices: shuffle([ans, ...ch]), answer: ans, key: k.character, isKanji: true,
-      note: `${k.character}：${meanOf(k).slice(0, 3).join(', ')}` };
+    const ans = reads[0], ds = readDistractors(ans, kpool, ch);
+    if (ds.length < 3) return null;
+    return { kind: '漢字の読み ／ Baca kanji ini',
+      q: `<span style="font-family:var(--kfont);font-size:3rem">${ch}</span>`,
+      choices: shuffle([ans, ...ds]), answer: ans, key: ch, isKanji: true,
+      note: `${ch}：${MEAN}` };
   }
   const w = pick(pool, 1)[0]; if (!w) return null;
   const e = sentOf(w), NOTE = x => `${x.word}（${x.reading}）＝ ${vMean(x)}`;
