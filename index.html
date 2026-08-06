@@ -604,7 +604,7 @@ else document.getElementById('gatePw').focus();
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-08-06';   // 更新日（版）
+const VERSION = '2026-08-06b';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -715,20 +715,45 @@ const loadStrokes = () => strokePromise || (strokePromise =
   fetch('kanji-strokes.json', { cache: 'no-cache' }).then(r => r.json()).then(j => (STROKES = j.strokes)));
 
 /* ---------- filter / sort ---------- */
+const KANJI_RE0 = /[一-鿿]/g;
+/** ローマ字は「語の先頭」だけ一致（air が chair に当たらないようにする） */
+const wordHead = (text, q) => text.split(/[^a-z0-9]+/).some(w => w && w.startsWith(q));
+const rdClean = r => r.replace(/[.\-]/g, '');
+/** 検索の当たり具合を点数にする。0＝当たらない。大きいほど「よく当たっている」 */
+function scoreKanji(k, q, qk) {
+  if (qk) return qk.includes(k.character) ? 100 : 0;      // 漢字で検索＝その漢字だけ
+  if (/^[0-9]+$/.test(q)) return String(k.strokes) === q ? 100 : 0;   // 数字＝画数
+  const rs = k.on.concat(k.kun).map(rdClean).filter(Boolean);
+  const ms = k.meanings.concat(k.meanings_id || []).map(m => m.toLowerCase());
+  if (rs.includes(q)) return 95;                          // 読みがぴったり
+  if (ms.includes(q)) return 90;                          // 意味がぴったり
+  if (rs.some(r => r.startsWith(q))) return 80;           // 読みの先頭が一致
+  if (ms.some(m => wordHead(m, q))) return 70;            // 意味の語頭が一致
+  if (rs.some(r => r.includes(q))) return 50;             // 読みの途中に含む
+  return 0;
+}
+/** 直接は当たらなかったとき用：この字を使う熟語で当たるか */
+function scoreByWords(k, q) {
+  return k.examples.some(e => e.word.includes(q) || rdClean(e.reading).startsWith(q) ||
+    wordHead((e.meaning_id || '').toLowerCase(), q) || wordHead(e.meaning.toLowerCase(), q)) ? 20 : 0;
+}
 function filterKanji(q, lv, mk) {
   q = (q || '').trim().toLowerCase();
-  return DATA.filter(k => {
+  const qk = (q.match(KANJI_RE0) || []).join('') || null;   // 検索語に含まれる漢字
+  const base = DATA.filter(k => {
     if (lv !== 'all' && k.level !== lv) return false;
     if (mk === 'known' && progress[k.character] !== 'known') return false;
     if (mk === 'review' && progress[k.character] !== 'review') return false;
     if (mk === 'unseen' && progress[k.character]) return false;
-    if (!q) return true;
-    if (k.character.includes(q) || String(k.strokes) === q) return true;
-    if (k.on.some(r => r.includes(q)) || k.kun.some(r => r.includes(q))) return true;
-    if (k.meanings.concat(k.meanings_id || []).some(m => m.toLowerCase().includes(q))) return true;
-    return k.examples.some(e => e.word.includes(q) || e.reading.includes(q) ||
-      e.meaning.toLowerCase().includes(q) || (e.meaning_id || '').toLowerCase().includes(q));
+    return true;
   });
+  if (!q) { base.forEach(k => k._s = 0); return base; }
+  let hit = [];
+  base.forEach(k => { const s = scoreKanji(k, q, qk); if (s) { k._s = s; hit.push(k); } });
+  if (!hit.length) {                                       // 直接当たらないときだけ熟語から探す
+    base.forEach(k => { const s = scoreByWords(k, q); if (s) { k._s = s; hit.push(k); } });
+  }
+  return hit;
 }
 function sortKanji(arr, mode) {
   const a = [...arr], o = { N5: 0, N4: 1, N3: 2, '介護': 3 }, f = x => x.freq || 9999;
@@ -736,6 +761,7 @@ function sortKanji(arr, mode) {
   else if (mode === 'stroke-desc') a.sort((x, y) => y.strokes - x.strokes || f(x) - f(y));
   else if (mode === 'freq') a.sort((x, y) => f(x) - f(y));
   else a.sort((x, y) => o[x.level] - o[y.level] || f(x) - f(y));
+  a.sort((x, y) => (y._s || 0) - (x._s || 0));             // よく当たった順を優先
   return a;
 }
 
@@ -764,16 +790,28 @@ const cardHTML = k => `<button class="kcard ${progress[k.character] ? 'is-' + pr
 /* ---------- 熟語タブ ---------- */
 let vLimit = 120, vLv = 'all';
 const LVORD = { N5: 0, N4: 1, N3: 2, '介護': 3, '現場': 4, '施設': 5, '追加': 6 };
+/** 熟語の検索：ぴったり＞先頭一致＞途中に含む。意味（ローマ字）は語頭だけ見る */
+function scoreVocab(w, q) {
+  const mi = (w.meaning_id || '').toLowerCase(), me = (w.meaning || '').toLowerCase();
+  if (w.word === q || w.reading === q) return 100;
+  if (mi === q || me === q) return 90;
+  if (w.word.startsWith(q) || w.reading.startsWith(q)) return 80;
+  if (wordHead(mi, q) || wordHead(me, q)) return 70;
+  if (w.word.includes(q) || w.reading.includes(q)) return 50;
+  return 0;
+}
 function filterVocab() {
   const q = ($('#vq').value || '').trim().toLowerCase(), cat = $('#vCat').value, sub = $('#vSub').value;
   return VOCAB.filter(w => {
     if (vLv !== 'all' && w.level !== vLv) return false;
     if (cat !== 'all' && w.category !== cat) return false;
     if (sub !== 'all' && w.sub !== sub) return false;
-    if (!q) return true;
-    return w.word.includes(q) || w.reading.includes(q) ||
-      w.meaning.toLowerCase().includes(q) || (w.meaning_id || '').toLowerCase().includes(q);
-  }).sort((a, b) => LVORD[a.level] - LVORD[b.level] || a.reading.localeCompare(b.reading, 'ja'));
+    if (!q) { w._s = 0; return true; }
+    const s = scoreVocab(w, q);
+    if (s) { w._s = s; return true; }
+    return false;
+  }).sort((a, b) => (b._s || 0) - (a._s || 0) ||
+    LVORD[a.level] - LVORD[b.level] || a.reading.localeCompare(b.reading, 'ja'));
 }
 function refreshSubOptions() {
   const cat = $('#vCat').value, cur = $('#vSub').value;
