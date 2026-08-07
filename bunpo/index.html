@@ -442,7 +442,7 @@ async function boot() {
   $$('#lvChips .chip').forEach(b => b.onclick = () => {
     $$('#lvChips .chip').forEach(x => x.classList.remove('on')); b.classList.add('on'); renderList();
   });
-  renderList(); refreshStats();
+  renderList(); refreshStats(); openFromHash();
 }
 
 /* ========== ① 一覧 ========== */
@@ -701,11 +701,23 @@ $('#resetBtn').onclick = () => {
 };
 
 /* ========== タブ・言語・版 ========== */
-$$('.tab').forEach(t => t.onclick = () => {
+/** タブを開く（入口メニューからは bunpo/index.html#quiz のように直接呼べる） */
+function openTab(pid, scroll = true) {
+  const t = $(`.tab[data-p="${pid}"]`); if (!t) return;
   $$('.tab').forEach(x => x.classList.remove('on')); t.classList.add('on');
-  $$('.panel').forEach(p => p.classList.toggle('on', p.id === t.dataset.p));
-  if (t.dataset.p === 'p-stat') refreshStats();
+  $$('.panel').forEach(p => p.classList.toggle('on', p.id === pid));
+  if (pid === 'p-stat') refreshStats();
+  if (scroll) window.scrollTo({ top: 0 });
+}
+$$('.tab').forEach(t => t.onclick = () => {
+  openTab(t.dataset.p);
+  history.replaceState(null, '', '#' + t.dataset.p.replace('p-', ''));
 });
+function openFromHash() {
+  const h = (location.hash || '').replace('#', '');
+  if (['list', 'quiz', 'stat'].includes(h)) openTab('p-' + h, false);
+}
+window.addEventListener('hashchange', openFromHash);
 $('#langBtn').onclick = () => {
   LANG = LANG === 'id' ? 'en' : 'id';
   localStorage.setItem(LANGKEY, LANG);

@@ -626,7 +626,7 @@ async function boot() {
   const json = await (await fetch('kanji-data.json', { cache: 'no-cache' })).json();
   DATA = json.kanji; DATA.forEach(k => BYCH[k.character] = k);
   $('#langBtn').textContent = LANG === 'id' ? '🌐 ID' : '🌐 EN';
-  renderList(); refreshStats();
+  renderList(); refreshStats(); openFromHash();
   loadVocab().then(() => {                       // 熟語は後から読み込み（表示を待たせない）
     $('#hdStat').textContent = `${DATA.length} kanji ・ ${VOCAB.length} kosakata`;
     if ($('#p-vocab').classList.contains('on')) renderVocab();
@@ -1440,16 +1440,28 @@ function refreshStats() {
 }
 
 /* ---------- events ---------- */
-$$('.tab').forEach(t => t.onclick = () => {
+/** タブを開く（入口メニューからは kanji.html#quiz のように直接呼べる） */
+function openTab(name, scroll = true) {
+  const t = $(`.tab[data-tab="${name}"]`); if (!t) return;
   $$('.tab').forEach(x => x.classList.toggle('on', x === t));
   $$('.panel').forEach(p => p.classList.remove('on'));
-  $('#p-' + t.dataset.tab).classList.add('on');
-  if (t.dataset.tab === 'stroke') renderStroke();
-  if (t.dataset.tab === 'vocab') loadVocab().then(renderVocab);
-  if (t.dataset.tab === 'quiz') { loadVocab(); loadSentences(); }
-  if (t.dataset.tab === 'stats') refreshStats();
-  window.scrollTo({ top: 0 });
+  $('#p-' + name).classList.add('on');
+  if (name === 'stroke') renderStroke();
+  if (name === 'vocab') loadVocab().then(renderVocab);
+  if (name === 'quiz') { loadVocab(); loadSentences(); }
+  if (name === 'stats') refreshStats();
+  if (scroll) window.scrollTo({ top: 0 });
+}
+$$('.tab').forEach(t => t.onclick = () => {
+  openTab(t.dataset.tab);
+  history.replaceState(null, '', '#' + t.dataset.tab);   // 戻る/共有できるようにURLへ反映
 });
+const TABS = ['list', 'vocab', 'card', 'quiz', 'stroke', 'stats'];
+function openFromHash() {
+  const h = (location.hash || '').replace('#', '');
+  if (TABS.includes(h)) openTab(h, false);
+}
+window.addEventListener('hashchange', openFromHash);
 $('#langBtn').onclick = () => {
   LANG = LANG === 'id' ? 'en' : 'id'; localStorage.setItem(LANGKEY, LANG);
   $('#langBtn').textContent = LANG === 'id' ? '🌐 ID' : '🌐 EN';

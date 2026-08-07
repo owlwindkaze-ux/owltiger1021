@@ -29,27 +29,40 @@ main{flex:1;max-width:760px;width:100%;margin:0 auto;padding:1.4rem 1rem 2rem}
 .lead{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:1.1rem;line-height:1.7}
 .menu{display:grid;gap:1rem}
 @media(min-width:640px){.menu{grid-template-columns:1fr 1fr}}
-a.card{display:block;text-decoration:none;color:inherit;background:var(--card);
-  border:2px solid var(--line);border-radius:20px;padding:1.3rem 1.2rem;box-shadow:var(--sh);
-  transition:transform .12s,box-shadow .12s,border-color .12s}
-a.card:hover,a.card:focus{transform:translateY(-3px);box-shadow:var(--sh-l);outline:none}
-a.card.k:hover,a.card.k:focus{border-color:var(--blue)}
-a.card.g:hover,a.card.g:focus{border-color:var(--green)}
-.icon{font-family:var(--kfont);font-size:2.6rem;line-height:1;letter-spacing:.05em}
-a.card.k .icon{color:var(--blue)}
-a.card.g .icon{color:var(--green)}
-.ttl{font-size:1.15rem;font-weight:800;margin:.55rem 0 .15rem}
-.ttl small{display:block;font-size:.78rem;font-weight:600;color:var(--muted);margin-top:.15rem}
-.desc{font-size:.86rem;color:var(--muted);line-height:1.65;margin:.5rem 0 .7rem}
-.tags{display:flex;flex-wrap:wrap;gap:.35rem}
-.tag{font-size:.72rem;font-weight:700;border-radius:999px;padding:.2rem .6rem}
-a.card.k .tag{background:#eff6ff;color:var(--blue-d)}
-a.card.g .tag{background:#ecfdf5;color:var(--green-d)}
-.go{margin-top:.9rem;font-size:.85rem;font-weight:800}
-a.card.k .go{color:var(--blue-d)}
-a.card.g .go{color:var(--green-d)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:20px;
+  padding:1.1rem 1.1rem 1.2rem;box-shadow:var(--sh)}
+.card-k{border-top:6px solid var(--blue)}
+.card-g{border-top:6px solid var(--green)}
+.head{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.15rem}
+.icon{font-family:var(--kfont);font-size:2.1rem;line-height:1.15;letter-spacing:.05em;flex:none}
+.card-k .icon{color:var(--blue)}
+.card-g .icon{color:var(--green)}
+.ttl{font-size:1.08rem;font-weight:800;line-height:1.35}
+.ttl small{display:block;font-size:.76rem;font-weight:600;color:var(--muted);margin-top:.1rem}
+.bar{height:7px;border-radius:999px;background:#e2e8f0;overflow:hidden;margin:.15rem 0 .5rem}
+.bar i{display:block;height:100%;border-radius:999px}
+.card-k .bar i{background:var(--blue)}
+.card-g .bar i{background:var(--green)}
+.pg{font-size:.75rem;color:var(--muted);font-weight:700;margin-bottom:.2rem}
+.desc{font-size:.84rem;color:var(--muted);line-height:1.6;margin:.45rem 0 .8rem}
+/* 中のメニュー（各システムのタブへ直接とぶ） */
+.sub-menu{display:grid;gap:.4rem}
+a.item{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:inherit;
+  border:1.5px solid var(--line);border-radius:12px;padding:.55rem .7rem;background:#fff;
+  transition:background .12s,border-color .12s,transform .12s}
+a.item:hover,a.item:focus{transform:translateX(3px);outline:none}
+.card-k a.item:hover,.card-k a.item:focus{background:#eff6ff;border-color:var(--blue)}
+.card-g a.item:hover,.card-g a.item:focus{background:#ecfdf5;border-color:var(--green)}
+.item .em{font-size:1.15rem;width:1.6rem;text-align:center;flex:none}
+.item .tx{flex:1;min-width:0}
+.item .n{display:block;font-size:.9rem;font-weight:800;line-height:1.3}
+.item .r{display:block;font-size:.72rem;color:var(--muted);line-height:1.35;margin-top:.1rem}
+.item .ar{font-weight:800;flex:none}
+.card-k .item .ar{color:var(--blue-d)}
+.card-g .item .ar{color:var(--green-d)}
 footer{text-align:center;font-size:.72rem;color:var(--muted);padding:1rem;line-height:1.8}
-footer a{color:var(--muted)}
+footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px;
+  padding:.35rem .9rem;font-size:.78rem;font-weight:700;color:var(--ink);cursor:pointer;margin-bottom:.5rem}
 /* ---- 合言葉 ---- */
 #gate{position:fixed;inset:0;z-index:200;background:linear-gradient(135deg,#1d4ed8,#047857);
   display:flex;align-items:center;justify-content:center;padding:1.2rem}
@@ -88,38 +101,61 @@ footer a{color:var(--muted)}
   <p class="lead">勉強したいものを選んでください。<br>Pilih yang ingin Anda pelajari.</p>
 
   <div class="menu">
-    <a class="card k" href="kanji.html">
-      <div class="icon">漢字</div>
-      <div class="ttl">Kanji &amp; Kosakata
-        <small>漢字・言葉（語彙）</small></div>
-      <div class="desc">漢字の読み・意味・書き順と、介護の言葉。JLPT形式の練習問題つき。<br>
-        Cara baca, arti, urutan coretan, dan latihan soal model JLPT.</div>
-      <div class="tags">
-        <span class="tag">漢字 744字</span><span class="tag">言葉 3,800語</span>
-        <span class="tag">書き順</span><span class="tag">練習問題</span>
-      </div>
-      <div class="go">はじめる ／ Mulai →</div>
-    </a>
 
-    <a class="card g" href="bunpo/index.html">
-      <div class="icon">文型</div>
-      <div class="ttl">Pola Kalimat
-        <small>文型（文法）</small></div>
-      <div class="desc">「〜てもいいです」など、話すときに使う文の形。介護の現場の例文つき。<br>
-        Pola kalimat yang dipakai saat berbicara, dengan contoh di tempat kerja.</div>
-      <div class="tags">
-        <span class="tag">文型 268</span><span class="tag">N5・N4・N3</span>
-        <span class="tag">例文</span>
+    <section class="card card-k">
+      <div class="head">
+        <div class="icon">漢字</div>
+        <div>
+          <div class="ttl">Kanji &amp; Kosakata<small>漢字・言葉（語彙）</small></div>
+        </div>
       </div>
-      <div class="go">はじめる ／ Mulai →</div>
-    </a>
+      <div class="pg" id="pgK">覚えた 0 / 744字 ・ 0 / 3,800語</div>
+      <div class="bar"><i id="barK" style="width:0"></i></div>
+      <p class="desc">漢字744字と言葉3,800語。書き順・カード・JLPT形式の練習問題。</p>
+      <div class="sub-menu">
+        <a class="item" href="kanji.html#list"><span class="em">📖</span>
+          <span class="tx"><span class="n">漢字一覧</span><span class="r">Kanji ／ 読み・意味・部首を見る</span></span><span class="ar">→</span></a>
+        <a class="item" href="kanji.html#vocab"><span class="em">📝</span>
+          <span class="tx"><span class="n">熟語（言葉）</span><span class="r">Kosakata ／ 介護の言葉・分野でしぼる</span></span><span class="ar">→</span></a>
+        <a class="item" href="kanji.html#card"><span class="em">🃏</span>
+          <span class="tx"><span class="n">フラッシュカード</span><span class="r">Kartu ／ めくって覚える</span></span><span class="ar">→</span></a>
+        <a class="item" href="kanji.html#quiz"><span class="em">✏️</span>
+          <span class="tx"><span class="n">練習問題</span><span class="r">Latihan ／ JLPTと同じ5つの形式</span></span><span class="ar">→</span></a>
+        <a class="item" href="kanji.html#stroke"><span class="em">🖌️</span>
+          <span class="tx"><span class="n">書き順</span><span class="r">Urutan coretan ／ 一画ずつ動く</span></span><span class="ar">→</span></a>
+        <a class="item" href="kanji.html#stats"><span class="em">📊</span>
+          <span class="tx"><span class="n">学習状況</span><span class="r">Progres ／ どこまで覚えたか</span></span><span class="ar">→</span></a>
+      </div>
+    </section>
+
+    <section class="card card-g">
+      <div class="head">
+        <div class="icon">文型</div>
+        <div>
+          <div class="ttl">Pola Kalimat<small>文型（文法）</small></div>
+        </div>
+      </div>
+      <div class="pg" id="pgG">覚えた 0 / 268文型</div>
+      <div class="bar"><i id="barG" style="width:0"></i></div>
+      <p class="desc">「〜てもいいです」など話すときの文の形。268文型・現場の例文つき。</p>
+      <div class="sub-menu">
+        <a class="item" href="bunpo/index.html#list"><span class="em">📘</span>
+          <span class="tx"><span class="n">文型一覧</span><span class="r">Daftar pola ／ 意味・作り方・例文</span></span><span class="ar">→</span></a>
+        <a class="item" href="bunpo/index.html#quiz"><span class="em">✏️</span>
+          <span class="tx"><span class="n">練習問題</span><span class="r">Latihan ／ 文型を選ぶ4択</span></span><span class="ar">→</span></a>
+        <a class="item" href="bunpo/index.html#stat"><span class="em">📊</span>
+          <span class="tx"><span class="n">学習状況</span><span class="r">Progres ／ どこまで覚えたか</span></span><span class="ar">→</span></a>
+      </div>
+    </section>
+
   </div>
 </main>
 
 <footer>
+  <button id="refreshBtn">🔄 最新にする ／ Perbarui</button><br>
   合言葉は一度入れれば、どちらのシステムでもそのまま使えます。<br>
   Kata sandi cukup dimasukkan sekali untuk kedua sistem.<br>
-  © 2026 owlwindkaze　このシステムは施設内の学習用です。
+  <span id="ver"></span> ・ © 2026 owlwindkaze　このシステムは施設内の学習用です。
 </footer>
 
 <script>
@@ -144,6 +180,35 @@ document.getElementById('gateBtn').onclick = tryUnlock;
 document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
 if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock();
 else document.getElementById('gatePw').focus();
+
+/* ---- それぞれの進み具合を出す（記録はこの端末の localStorage にある） ---- */
+const VERSION = '2026-08-06c';
+const KTOTAL = 744, VTOTAL = 3800, GTOTAL = 268;
+const nKnown = (key, want) => {
+  try {
+    const o = JSON.parse(localStorage.getItem(key) || '{}');
+    return Object.values(o).filter(v => v === want).length;
+  } catch (e) { return 0; }
+};
+function showProgress() {
+  const k = nKnown('jlpt-kanji-progress-v1', 'known');
+  const v = nKnown('jlpt-kanji-progress-v1-vocab', 'known');
+  const g = nKnown('jlpt-grammar-progress-v1', 'known');
+  document.getElementById('pgK').textContent =
+    `覚えた ${k} / ${KTOTAL}字 ・ ${v.toLocaleString()} / ${VTOTAL.toLocaleString()}語`;
+  document.getElementById('pgG').textContent = `覚えた ${g} / ${GTOTAL}文型`;
+  document.getElementById('barK').style.width =
+    Math.round((k + v) / (KTOTAL + VTOTAL) * 100) + '%';
+  document.getElementById('barG').style.width = Math.round(g / GTOTAL * 100) + '%';
+  document.getElementById('ver').textContent = '版 ' + VERSION;
+}
+showProgress();
+
+/* ---- 「最新にする」：キャッシュを消して読み込み直す ---- */
+document.getElementById('refreshBtn').onclick = async () => {
+  try { if (window.caches) for (const n of await caches.keys()) await caches.delete(n); } catch (e) {}
+  location.reload(true);
+};
 </script>
 </body>
 </html>

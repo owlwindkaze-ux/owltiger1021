@@ -119,6 +119,17 @@
 | フラッシュカード | 出題対象を「漢字／熟語」で切替可能（4形式・レベル別・未学習／要復習） |
 | 学習記録 | 漢字とは別に保存（`localStorage` キー `jlpt-kanji-progress-v1-vocab`） |
 
+### 2.6-z 入口メニュー（`index.html`）
+
+| 項目 | 仕様 |
+|---|---|
+| 役割 | 公開URLの直下。合言葉を入れ、**2つのシステムのメニューを全部並べて**表示する |
+| メニュー | 漢字側6項目（漢字一覧・熟語・フラッシュカード・練習問題・書き順・学習状況）／文型側3項目（文型一覧・練習問題・学習状況）。押すと該当タブが直接ひらく |
+| 直接リンク | `kanji.html#list/#vocab/#card/#quiz/#stroke/#stats`、`bunpo/index.html#list/#quiz/#stat`。両アプリはURLのハッシュを読んで該当タブを開き（`openFromHash()`）、タブ切替時は `history.replaceState` でハッシュを書き戻す。**開いていたタブは再訪時に復元される** |
+| 進み具合 | `localStorage` の `jlpt-kanji-progress-v1`（漢字）・同 `-vocab`（熟語）・`jlpt-grammar-progress-v1`（文型）から「覚えた」件数を数え、件数とバーで表示。端末内の記録のみを読むため通信は発生しない |
+| その他 | 版（VERSION）の表示、Cache Storage を消して読み込み直す「🔄 最新にする」ボタン |
+| 合言葉 | 保存キー・保存値をアプリ側と統一しているため、**入口で一度入れれば両システムが開く** |
+
 ### 2.6-d 練習問題タブ（Latihan／JLPT形式）
 
 JLPT本試験（言語知識・文字語彙）の**5つの大問形式すべて**に対応。
@@ -272,7 +283,7 @@ python3 -c "import hashlib;print(hashlib.sha256('新しい合言葉'.encode()).h
 
 | ファイル | サイズ | 役割 | 状態 |
 |---|---|---|---|
-| `index.html` | 約6 KB | 入口メニュー（漢字・言葉／文型 の選択＋合言葉） | 最新 |
+| `index.html` | 約9 KB | 入口メニュー（両システムの全メニューを一覧表示＋進み具合＋合言葉＋更新ボタン） | 最新 |
 | `kanji.html` | 約40 KB | 漢字・言葉アプリ本体（HTML＋CSS＋JavaScript 単一ファイル） | 最新 |
 | `kanji-data.json` | 約458 KB | 漢字612字のデータ | 最新 |
 | `kanji-strokes.json` | 約460 KB | 書き順データ612字ぶん | 最新 |
