@@ -62,6 +62,8 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 | `index.html` | **入口メニュー**（漢字・言葉／文型 を選ぶ画面。合言葉もここで入れる） |
 | `kanji.html` | 漢字・言葉アプリ本体（HTML/CSS/JS 単一ファイル、外部ライブラリなし） |
 | `bunpo/index.html` | 文型（文法）アプリ本体 |
+| `dokkai/index.html` | 読解アプリ本体 |
+| `dokkai/reading-n5/n4/n3.json` | 読解の文章30本・設問50問（すべてオリジナル） |
 | `kanji-data.json` | 漢字612字のデータ（読み・意味・用例・部首など） |
 | `kanji-strokes.json` | 書き順データ（KanjiVG のパス、612字ぶん） |
 | `vocab.json` | 熟語3,254語（JLPT語彙＋介護・看護201語＋現場125語） |

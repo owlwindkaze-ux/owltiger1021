@@ -11,6 +11,7 @@
 :root{
   --blue:#2563eb; --blue-d:#1d4ed8;
   --green:#059669; --green-d:#047857;
+  --pur:#7c3aed; --pur-d:#5b21b6;
   --red:#dc2626;
   --bg:#f1f5f9; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
   --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
@@ -29,10 +30,16 @@ main{flex:1;max-width:760px;width:100%;margin:0 auto;padding:1.4rem 1rem 2rem}
 .lead{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:1.1rem;line-height:1.7}
 .menu{display:grid;gap:1rem}
 @media(min-width:640px){.menu{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.menu{grid-template-columns:repeat(3,1fr)}}
 .card{background:var(--card);border:2px solid var(--line);border-radius:20px;
   padding:1.1rem 1.1rem 1.2rem;box-shadow:var(--sh)}
 .card-k{border-top:6px solid var(--blue)}
 .card-g{border-top:6px solid var(--green)}
+.card-d{border-top:6px solid var(--pur)}
+.card-d .icon{color:var(--pur)}
+.card-d a.item:hover,.card-d a.item:focus{background:#f5f3ff;border-color:var(--pur)}
+.card-d .item .ar{color:var(--pur-d)}
+.card-d .bar i{background:var(--pur)}
 .head{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.15rem}
 .icon{font-family:var(--kfont);font-size:2.1rem;line-height:1.15;letter-spacing:.05em;flex:none}
 .card-k .icon{color:var(--blue)}
@@ -148,6 +155,27 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
       </div>
     </section>
 
+
+    <section class="card card-d">
+      <div class="head">
+        <div class="icon">読解</div>
+        <div>
+          <div class="ttl">Membaca<small>読解（文章を読む）</small></div>
+        </div>
+      </div>
+      <div class="pg" id="pgD">読んだ文章 0 / 30 本</div>
+      <div class="bar"><i id="barD" style="width:0"></i></div>
+      <p class="desc">申し送り・シフト表・体験談などを読んで答える。JLPT本試験と同じ形式。</p>
+      <div class="sub-menu">
+        <a class="item" href="dokkai/index.html#list"><span class="em">📄</span>
+          <span class="tx"><span class="n">文章一覧</span><span class="r">Daftar teks ／ レベル・分野・設問で選ぶ</span></span><span class="ar">→</span></a>
+        <a class="item" href="dokkai/index.html#read"><span class="em">🔍</span>
+          <span class="tx"><span class="n">読む・答える</span><span class="r">Baca ／ 読んで4択で答える</span></span><span class="ar">→</span></a>
+        <a class="item" href="dokkai/index.html#stat"><span class="em">📊</span>
+          <span class="tx"><span class="n">学習状況</span><span class="r">Progres ／ どこまで読んだか</span></span><span class="ar">→</span></a>
+      </div>
+    </section>
+
   </div>
 </main>
 
@@ -182,8 +210,8 @@ if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock();
 else document.getElementById('gatePw').focus();
 
 /* ---- それぞれの進み具合を出す（記録はこの端末の localStorage にある） ---- */
-const VERSION = '2026-08-06c';
-const KTOTAL = 744, VTOTAL = 3800, GTOTAL = 268;
+const VERSION = '2026-08-07';
+const KTOTAL = 744, VTOTAL = 3800, GTOTAL = 268, DTOTAL = 30;
 const nKnown = (key, want) => {
   try {
     const o = JSON.parse(localStorage.getItem(key) || '{}');
@@ -194,12 +222,17 @@ function showProgress() {
   const k = nKnown('jlpt-kanji-progress-v1', 'known');
   const v = nKnown('jlpt-kanji-progress-v1-vocab', 'known');
   const g = nKnown('jlpt-grammar-progress-v1', 'known');
+  let d = 0;
+  try { d = Object.values(JSON.parse(localStorage.getItem('jlpt-dokkai-progress-v1') || '{}'))
+    .filter(v => v && v.done).length; } catch (e) {}
   document.getElementById('pgK').textContent =
     `覚えた ${k} / ${KTOTAL}字 ・ ${v.toLocaleString()} / ${VTOTAL.toLocaleString()}語`;
   document.getElementById('pgG').textContent = `覚えた ${g} / ${GTOTAL}文型`;
   document.getElementById('barK').style.width =
     Math.round((k + v) / (KTOTAL + VTOTAL) * 100) + '%';
   document.getElementById('barG').style.width = Math.round(g / GTOTAL * 100) + '%';
+  document.getElementById('pgD').textContent = `読んだ文章 ${d} / ${DTOTAL} 本`;
+  document.getElementById('barD').style.width = Math.round(d / DTOTAL * 100) + '%';
   document.getElementById('ver').textContent = '版 ' + VERSION;
 }
 showProgress();
