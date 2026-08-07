@@ -27,7 +27,7 @@
 
 ### 1.1 設計方針
 
-- **外部ライブラリ・CDN・APIを一切使わない**（`index.html` 単体で完結）。海外の回線でも軽く、リンク切れで壊れない
+- **外部ライブラリ・CDN・APIを一切使わない**（`kanji.html` 単体で完結）。海外の回線でも軽く、リンク切れで壊れない
 - **サーバー側処理なし**（静的ファイルのみ）。DB・ログイン・バックエンド不要で保守コストゼロ
 - データ（JSON）とアプリ（HTML）を分離。漢字の追加・修正はJSONの編集だけで完結する
 
@@ -170,8 +170,8 @@ UIの見出しは常にインドネシア語＋日本語の併記。
 | 動作 | サイトを開くと合言葉の入力画面を表示。正しく入力するまで漢字データを読み込まない |
 | 現在の合言葉 | `owltiger2026` |
 | 記憶 | 一度入力した端末は次回から入力不要（`localStorage` キー `jlpt-kanji-gate-v1`） |
-| 実装 | 合言葉のSHA-256ハッシュを `index.html` の `PASS_SHA256` に保持し、入力値のハッシュと照合 |
-| 変更方法 | 下記コマンドで新しいハッシュを作り、`index.html` の `PASS_SHA256` を置き換えてプッシュ |
+| 実装 | 合言葉のSHA-256ハッシュを `index.html`（入口）・`kanji.html`・`bunpo/index.html` の `PASS_SHA256` に保持し、入力値のハッシュと照合。保存キーは3つとも `jlpt-kanji-gate-v1`、保存値もハッシュで統一しているため、**入口で一度入れれば両方のシステムが開く** |
+| 変更方法 | 下記コマンドで新しいハッシュを作り、**3ファイルすべて**の `PASS_SHA256` を置き換えてプッシュ |
 
 ```bash
 python3 -c "import hashlib;print(hashlib.sha256('新しい合言葉'.encode()).hexdigest())"
@@ -187,7 +187,7 @@ python3 -c "import hashlib;print(hashlib.sha256('新しい合言葉'.encode()).h
 |---|---|
 | 配信方式 | 静的サイト（GitHub Pages）。**アプリストアの更新は不要**で、次回アクセス時に自動で新版を取得 |
 | データ取得 | `kanji-data.json` `kanji-strokes.json` `vocab.json` `vocab-extra.csv` を `cache: 'no-cache'` で取得（毎回サーバーに更新確認、未更新なら304で軽量） |
-| 版の表示 | フッターに `VERSION`（更新日）を表示。`index.html` の `const VERSION = 'YYYY-MM-DD'` を更新時に書き換える |
+| 版の表示 | フッターに `VERSION`（更新日）を表示。`kanji.html` の `const VERSION = 'YYYY-MM-DD'` を更新時に書き換える |
 | 手動更新 | フッターの「🔄 最新に更新」ボタン。Cache Storage を破棄して再読み込み |
 | HTML自体のキャッシュ | GitHub Pages の既定（約10分）。上記ボタンまたはブラウザ再読み込みで即時取得 |
 | 学習記録 | 更新しても `localStorage` の記録は保持される |
@@ -272,7 +272,8 @@ python3 -c "import hashlib;print(hashlib.sha256('新しい合言葉'.encode()).h
 
 | ファイル | サイズ | 役割 | 状態 |
 |---|---|---|---|
-| `index.html` | 約39 KB | アプリ本体（HTML＋CSS＋JavaScript 単一ファイル） | 最新 |
+| `index.html` | 約6 KB | 入口メニュー（漢字・言葉／文型 の選択＋合言葉） | 最新 |
+| `kanji.html` | 約40 KB | 漢字・言葉アプリ本体（HTML＋CSS＋JavaScript 単一ファイル） | 最新 |
 | `kanji-data.json` | 約458 KB | 漢字612字のデータ | 最新 |
 | `kanji-strokes.json` | 約460 KB | 書き順データ612字ぶん | 最新 |
 | `vocab.json` | 約540 KB | 語彙3,800語（JLPT漢字語・かな語・カタカナ語＋介護＋現場） | 最新 |
@@ -429,7 +430,7 @@ mkdir -p kvg && cd kvg && xargs -P 10 -n 1 curl -sS -O < ../urls.txt && ls | wc 
 - 表記は標準インドネシア語（Bahasa Indonesia baku）。マレー語表現・俗語は不可
 - 動詞は `berjalan` のように動詞形（`untuk` は付けない）、助数詞は `penghitung untuk 〜`
 
-**ステップ5：アプリ側でN2を選べるようにする（`index.html` の6か所）**
+**ステップ5：アプリ側でN2を選べるようにする（`kanji.html` の6か所）**
 
 | 行 | 変更内容 |
 |---|---|

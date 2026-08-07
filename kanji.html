@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- 検索エンジンに載せない（URLを直接開く人は今までどおり使えます） -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Untuk pemagang kaigo di Jepang: 612 kanji JLPT N5–N3 dan 3.200+ kosakata termasuk istilah perawatan lansia, dengan arti Bahasa Indonesia dan animasi urutan coretan. 介護の技能実習生向け：JLPT漢字612字と介護・医療の言葉を、インドネシア語訳と書き順アニメーションで学べます。">
+<title>Kanji &amp; Kosakata Kaigo ｜ 介護の漢字・言葉</title>
+<style>
+:root{
+  --blue:#2563eb; --blue-d:#1d4ed8; --blue-l:#eff6ff;
+  --amber:#b45309; --amber-l:#fffbeb;
+  --green:#059669; --green-l:#ecfdf5;
+  --red:#dc2626;
+  --bg:#f1f5f9; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
+  --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
+  --sh-l:0 10px 25px -5px rgba(15,23,42,.15);
+  --kfont:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,"Noto Sans JP",system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.6;padding-bottom:env(safe-area-inset-bottom)}
+button,select,input{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer}
+.sub{font-size:.72rem;opacity:.75;font-weight:400}
+
+header{background:linear-gradient(135deg,#1e40af,#2563eb);color:#fff;padding:.85rem 1rem;box-shadow:var(--sh-l)}
+.hd{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.hd h1{font-size:1.1rem;font-weight:800;letter-spacing:.01em}
+.hd .stat{margin-left:auto;font-size:.75rem;background:rgba(255,255,255,.18);padding:.25rem .7rem;border-radius:999px}
+.langbtn{border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.12);color:#fff;
+  border-radius:999px;padding:.3rem .8rem;font-size:.78rem;font-weight:700}
+
+nav.tabs{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40}
+.tabs-in{max-width:1200px;margin:0 auto;display:flex;gap:.2rem;padding:0 .4rem;overflow-x:auto}
+.tab{padding:.6rem .85rem;border:0;background:none;color:var(--muted);font-size:.9rem;font-weight:700;
+  border-bottom:3px solid transparent;white-space:nowrap;line-height:1.25;text-align:center}
+.tab.on{color:var(--blue);border-bottom-color:var(--blue)}
+.tab .sub{display:block;font-size:.65rem;font-weight:600}
+
+.wrap{max-width:1200px;margin:0 auto;padding:1rem}
+.panel{display:none}.panel.on{display:block}
+
+.toolbar{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-bottom:.9rem}
+.search{flex:1 1 210px;min-width:0;padding:.6rem .9rem .6rem 2.3rem;border:1.5px solid var(--line);border-radius:10px;background:#fff
+ url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M11.74 10.34a6.5 6.5 0 1 0-1.4 1.4l3.85 3.85a1 1 0 0 0 1.42-1.42l-3.86-3.83zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") no-repeat .7rem center;outline:none}
+.search:focus{border-color:var(--blue)}
+select.sel{padding:.55rem .6rem;border:1.5px solid var(--line);border-radius:10px;background:#fff;outline:none;font-size:.85rem}
+.chips{display:flex;gap:.3rem}
+.chip{padding:.45rem .75rem;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-size:.82rem;font-weight:700;color:var(--muted)}
+.chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.hint{font-size:.8rem;color:var(--muted);white-space:nowrap}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.7rem}
+.kcard{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:.8rem;display:flex;gap:.75rem;
+  text-align:left;box-shadow:var(--sh);transition:.15s;position:relative;overflow:hidden;width:100%}
+.kcard:hover{border-color:var(--blue);box-shadow:var(--sh-l);transform:translateY(-2px)}
+.kcard .ch{font-family:var(--kfont);font-size:3rem;line-height:1.05;min-width:3rem;text-align:center}
+.kcard .body{flex:1;min-width:0}
+.tags{display:flex;flex-wrap:wrap;gap:.22rem;margin-bottom:.28rem}
+.t{font-size:.69rem;padding:.08rem .42rem;border-radius:5px;font-weight:700}
+.t.on-{background:var(--blue-l);color:var(--blue)}
+.t.kun{background:var(--amber-l);color:var(--amber)}
+.t.lv{background:#f1f5f9;color:var(--muted)}
+.mean{font-size:.82rem;color:var(--muted);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.st{font-size:.72rem;color:var(--muted);margin-top:.3rem}
+.mark{position:absolute;top:.4rem;right:.4rem;font-size:.66rem;font-weight:800;border-radius:999px;
+  padding:.1rem .45rem;line-height:1.5;letter-spacing:.02em}
+.mark.known{background:var(--green);color:#fff}
+.mark.review{background:var(--red);color:#fff}
+.kcard.is-known{border-color:#6ee7b7;background:#f6fffb}
+.kcard.is-review{border-color:#fca5a5;background:#fffafa}
+.state{display:inline-flex;align-items:center;gap:.3rem;font-size:.78rem;font-weight:800;
+  border-radius:999px;padding:.2rem .6rem}
+.state.known{background:var(--green-l);color:var(--green)}
+.state.review{background:#fee2e2;color:var(--red)}
+.state.none{background:#f1f5f9;color:var(--muted)}
+.btn.active{box-shadow:0 0 0 3px rgba(37,99,235,.25)}
+/* 一覧行の学習状態（文字色で表す） */
+.ex li.w-known{background:#f0fdf7;border-color:#a7f3d0;border-left:4px solid var(--green)}
+.ex li.w-known .w{color:var(--green)}
+.ex li.w-review{background:#fff7f7;border-color:#fecaca;border-left:4px solid var(--red)}
+.ex li.w-review .w{color:var(--red)}
+.wm{font-size:.75rem;font-weight:800;margin-left:.35rem}
+.wm.known{color:var(--green)}.wm.review{color:var(--red)}
+/* カード見出しの文字も状態色に */
+.kcard.is-known .ch,.kcard.is-known .vw{color:var(--green)}
+.kcard.is-review .ch,.kcard.is-review .vw{color:var(--red)}
+
+.kvg{background:#fff;border:1px solid var(--line);border-radius:10px;display:block;cursor:pointer}
+svg path{fill:none}
+.grid-l{stroke:#e2e8f0;fill:none;stroke-width:.6;stroke-dasharray:4 4}
+.bg-s{stroke:#e5e9ef;fill:none;stroke-width:4.2;stroke-linecap:round;stroke-linejoin:round}
+.fg-s{stroke:var(--ink);fill:none;stroke-width:4.2;stroke-linecap:round;stroke-linejoin:round}
+.hi-s{stroke:var(--red);fill:none;stroke-width:4.8;stroke-linecap:round;stroke-linejoin:round}
+svg text{font-size:7px;fill:var(--red);font-family:system-ui,sans-serif;font-weight:700}
+
+.ov{display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:100;padding:.75rem;overflow-y:auto}
+.ov.on{display:flex;align-items:flex-start;justify-content:center}
+.modal{background:var(--card);border-radius:16px;max-width:620px;width:100%;margin:auto;box-shadow:var(--sh-l);animation:pop .18s ease}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.98)}}
+.m-head{display:flex;gap:.9rem;padding:.9rem 1rem;border-bottom:1px solid var(--line);align-items:flex-start}
+.m-ch{font-family:var(--kfont);font-size:3.8rem;line-height:1}
+.m-head .info{flex:1;min-width:0}
+.x{border:0;background:none;font-size:1.6rem;line-height:1;color:var(--muted);padding:0 .3rem}
+.m-body{padding:1rem}
+.sec{margin-bottom:1rem}.sec:last-child{margin-bottom:0}
+.lb{font-size:.7rem;font-weight:800;letter-spacing:.06em;color:var(--muted);margin-bottom:.4rem}
+.rd-row{display:flex;gap:.5rem;align-items:baseline;margin-bottom:.28rem;flex-wrap:wrap}
+.rd-k{font-size:.7rem;font-weight:800;color:var(--muted);min-width:4.4rem}
+.ex{list-style:none;display:grid;gap:.4rem}
+.ex li{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:.45rem .65rem}
+.ex .w{font-size:1.05rem;font-weight:700}
+.ex .r{font-size:.78rem;color:var(--blue);margin-left:.35rem}
+.ex .m{font-size:.8rem;color:var(--muted)}
+.ex .en{font-size:.72rem;color:#94a3b8}
+.ex .jl{font-size:.64rem;background:var(--green-l);color:var(--green);border-radius:4px;padding:.03rem .32rem;font-weight:800;margin-left:.35rem}
+.btn{padding:.5rem .9rem;border:1.5px solid var(--line);border-radius:10px;background:#fff;font-weight:700;font-size:.85rem;line-height:1.3}
+.btn:hover{border-color:var(--blue);color:var(--blue)}
+.btn.pri{background:var(--blue);border-color:var(--blue);color:#fff}.btn.pri:hover{background:var(--blue-d);color:#fff}
+.btn.ok{background:var(--green);border-color:var(--green);color:#fff}
+.btn.ng{background:#fff;border-color:var(--red);color:var(--red)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+
+.fc-wrap{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:.8rem;align-items:center}
+.fc{width:100%;background:var(--card);border:2px solid var(--line);border-radius:18px;min-height:290px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;padding:1.4rem 1.1rem;
+  box-shadow:var(--sh-l);user-select:none;position:relative;cursor:pointer}
+.fc .q{font-family:var(--kfont);font-size:5.6rem;line-height:1}
+.fc .q.small{font-family:inherit;font-size:1.7rem;font-weight:700;text-align:center}
+.fc .tip{position:absolute;bottom:.6rem;font-size:.72rem;color:var(--muted)}
+.fc-meta{display:flex;gap:1rem;font-size:.8rem;color:var(--muted);flex-wrap:wrap;justify-content:center}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:.25rem}
+.dot.g{background:var(--green)}.dot.r{background:var(--red)}
+.bar{height:7px;background:var(--line);border-radius:999px;overflow:hidden;width:100%}
+.bar>i{display:block;height:100%;background:var(--green);border-radius:999px;transition:width .3s}
+
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:.7rem}
+.scard{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:.75rem;box-shadow:var(--sh);text-align:center}
+.scard .cap{display:flex;justify-content:space-between;align-items:baseline;font-size:.76rem;color:var(--muted)}
+.scard .cap b{font-size:.95rem;color:var(--ink)}
+.seq{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;margin-top:.45rem}
+.seq svg{width:34px;height:34px;border:1px solid var(--line);border-radius:6px;background:#fff}
+.prog-wrap{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
+.prog{flex:1 1 165px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.7rem .8rem;box-shadow:var(--sh)}
+.prog .lv{font-size:.75rem;color:var(--muted);font-weight:800;display:flex;justify-content:space-between}
+
+/* ---- 合言葉ゲート ---- */
+#gate{position:fixed;inset:0;z-index:200;background:linear-gradient(135deg,#1e40af,#2563eb);
+  display:flex;align-items:center;justify-content:center;padding:1.5rem}
+#gate .box{background:#fff;border-radius:18px;padding:1.8rem 1.5rem;max-width:390px;width:100%;
+  box-shadow:0 20px 40px -10px rgba(0,0,0,.35);text-align:center}
+#gate h2{font-size:1.15rem;margin-bottom:.2rem}
+#gate p{font-size:.8rem;color:var(--muted);margin-bottom:1.1rem}
+#gate input{width:100%;padding:.7rem .9rem;border:1.5px solid var(--line);border-radius:10px;
+  font-size:1.05rem;text-align:center;outline:none;margin-bottom:.7rem}
+#gate input:focus{border-color:var(--blue)}
+#gate .err{color:var(--red);font-size:.8rem;min-height:1.2rem;margin-top:.5rem}
+#app{display:none}
+footer{max-width:1200px;margin:2rem auto 0;padding:1rem;font-size:.72rem;color:var(--muted);border-top:1px solid var(--line);line-height:1.75}
+footer a{color:var(--blue)}
+.loading{text-align:center;padding:3rem 1rem;color:var(--muted)}
+
+@media(max-width:600px){
+  .wrap{padding:.7rem}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:.55rem}
+  .kcard{flex-direction:column;gap:.35rem;padding:.65rem}
+  .kcard .ch{font-size:2.5rem;min-width:0}
+  .m-ch{font-size:3rem}
+  .fc .q{font-size:4.4rem}
+  .sgrid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}
+  .rd-k{min-width:3.6rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 合言葉ゲート ／ Kata sandi ===== -->
+<div id="gate">
+  <div class="box">
+    <div style="font-size:2.2rem;font-family:'Yu Mincho','Hiragino Mincho ProN',serif">介護</div>
+    <h2>Kanji &amp; Kosakata Kaigo</h2>
+    <p>Masukkan kata sandi ／ 合言葉を入力してください</p>
+    <input id="gatePw" type="password" inputmode="text" autocomplete="current-password" placeholder="••••••••">
+    <button class="btn pri" id="gateBtn" style="width:100%">Masuk ／ 入る</button>
+    <div class="err" id="gateErr"></div>
+    <p style="margin:.6rem 0 0;font-size:.72rem">Tanyakan kata sandi kepada perusahaan Anda<br>合言葉は会社の担当者にお聞きください</p>
+  </div>
+</div>
+
+<div id="app">
+<header><div class="hd">
+  <div>
+    <h1>Kanji &amp; Kosakata Kaigo</h1>
+    <div class="sub">Kanji・Kosakata kaigo・Urutan coretan ／ 漢字・介護の言葉・書き順</div>
+  </div>
+  <a class="langbtn" href="index.html" style="text-decoration:none">☰ メニュー</a>
+  <button class="langbtn" id="langBtn">🌐 ID</button>
+  <div class="stat" id="hdStat">…</div>
+</div></header>
+
+<nav class="tabs"><div class="tabs-in">
+  <button class="tab on" data-tab="list">Kanji<span class="sub">漢字一覧</span></button>
+  <button class="tab" data-tab="vocab">Kosakata<span class="sub">熟語</span></button>
+  <button class="tab" data-tab="card">Kartu<span class="sub">フラッシュカード</span></button>
+  <button class="tab" data-tab="quiz">Latihan<span class="sub">練習問題</span></button>
+  <button class="tab" data-tab="stroke">Urutan Coretan<span class="sub">書き順</span></button>
+  <button class="tab" data-tab="stats">Progres<span class="sub">学習状況</span></button>
+</div></nav>
+
+<div class="wrap">
+
+  <!-- ===== Daftar / 一覧 ===== -->
+  <section class="panel on" id="p-list">
+    <div class="toolbar">
+      <input class="search" id="q" placeholder="Cari kanji / cara baca / arti … 検索">
+      <div class="chips" id="lvChips">
+        <button class="chip on" data-lv="all">Semua</button>
+        <button class="chip" data-lv="N5">N5</button>
+        <button class="chip" data-lv="N4">N4</button>
+        <button class="chip" data-lv="N3">N3</button>
+        <button class="chip" data-lv="介護">介護 / Kaigo</button>
+      </div>
+      <select class="sel" id="sort">
+        <option value="level">Urut: level (mudah dulu) ／ レベル順</option>
+        <option value="freq">Urut: paling sering dipakai ／ 頻度順</option>
+        <option value="stroke-asc">Urut: coretan sedikit ／ 画数が少ない順</option>
+        <option value="stroke-desc">Urut: coretan banyak ／ 画数が多い順</option>
+      </select>
+      <select class="sel" id="mark">
+        <option value="all">Tampilkan semua ／ すべて</option>
+        <option value="unseen">Belum dipelajari ／ 未学習</option>
+        <option value="review">Perlu diulang ／ 要復習</option>
+        <option value="known">Sudah hafal ／ 覚えた</option>
+      </select>
+      <span class="hint" id="cnt"></span>
+    </div>
+    <div class="grid" id="grid"><div class="loading">Memuat data… 読み込み中…</div></div>
+  </section>
+
+  <!-- ===== Kosakata / 熟語 ===== -->
+  <section class="panel" id="p-vocab">
+    <div class="toolbar">
+      <input class="search" id="vq" placeholder="Cari kosakata / cara baca / arti … 熟語・読み・意味で検索">
+      <div class="chips" id="vLvChips">
+        <button class="chip on" data-lv="all">Semua</button>
+        <button class="chip" data-lv="N5">N5</button>
+        <button class="chip" data-lv="N4">N4</button>
+        <button class="chip" data-lv="N3">N3</button>
+        <button class="chip" data-lv="介護">介護 / Kaigo</button>
+        <button class="chip" data-lv="施設">施設独自 / Fasilitas</button>
+        <button class="chip" data-lv="現場">現場 / Kerja</button>
+      </div>
+      <select class="sel" id="vCat">
+        <option value="all">Semua bidang ／ 分野すべて</option>
+        <option value="介護">介護（ケア） ／ Perawatan lansia</option>
+        <option value="声かけ">声かけ ／ Kalimat untuk lansia</option>
+        <option value="医療">医療・症状 ／ Medis &amp; gejala</option>
+        <option value="認知症">認知症 ／ Demensia</option>
+        <option value="リハビリ">リハビリ ／ Rehabilitasi</option>
+        <option value="身体">身体・部位 ／ Bagian tubuh</option>
+        <option value="施設">施設・職種 ／ Fasilitas &amp; staf</option>
+        <option value="記録">記録・勤務 ／ Catatan &amp; shift</option>
+        <option value="安全">安全 ／ Keselamatan</option>
+        <option value="健康">健康 ／ Kesehatan</option>
+        <option value="生活">生活・手続き ／ Kehidupan</option>
+        <option value="作業">作業一般 ／ Pekerjaan umum</option>
+        <option value="製造">製造・工場 ／ Pabrik</option>
+        <option value="品質">品質・管理 ／ Kualitas</option>
+        <option value="基本語">基本語（かな） ／ Kata dasar</option>
+        <option value="カタカナ語">カタカナ語 ／ Kata serapan</option>
+      </select>
+      <select class="sel" id="vSub"><option value="all">小分類すべて ／ Semua sub-bidang</option></select>
+      <span class="hint" id="vCnt"></span>
+    </div>
+    <p class="hint" style="margin-bottom:.7rem">Ketuk kata untuk melihat kanji penyusunnya ／ 熟語をタップすると、使われている漢字の書き順を確認できます<br>
+      <span style="color:var(--green);font-weight:800">■ hijau = sudah hafal ／ 緑＝覚えた</span>　
+      <span style="color:var(--red);font-weight:800">■ merah = perlu diulang ／ 赤＝要復習</span></p>
+
+    <details style="margin-bottom:.9rem;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:.7rem .9rem">
+      <summary style="cursor:pointer;font-weight:700;font-size:.9rem">＋ 施設の言葉を追加する ／ Tambah kosakata</summary>
+      <p class="hint" style="white-space:normal;margin:.5rem 0">
+        施設で使う言葉をこの端末に追加できます。全員に配るときは「CSVを書き出す」で保存し、
+        <code>vocab-extra.csv</code> に貼り付けてGitHubへアップロードしてください（使用説明書 2-8）。</p>
+      <div class="toolbar" style="margin:.4rem 0 0">
+        <input class="search" id="nwWord" placeholder="言葉（例：入浴チェック表）" style="background-image:none;padding-left:.9rem;flex:1 1 160px">
+        <input class="search" id="nwRead" placeholder="ふりがな（例：にゅうよくちぇっくひょう）" style="background-image:none;padding-left:.9rem;flex:1 1 160px">
+        <input class="search" id="nwMean" placeholder="意味（インドネシア語）" style="background-image:none;padding-left:.9rem;flex:1 1 160px">
+        <select class="sel" id="nwCat">
+          <option value="介護">介護（ケア）</option><option value="声かけ">声かけ</option>
+          <option value="医療">医療・症状</option><option value="認知症">認知症</option>
+          <option value="リハビリ">リハビリ</option><option value="身体">身体・部位</option>
+          <option value="施設">施設・職種</option><option value="記録">記録・勤務</option>
+          <option value="安全">安全</option><option value="生活">生活・手続き</option>
+        </select>
+        <input class="search" id="nwSub" placeholder="小分類（任意：例 食事・嚥下）" style="background-image:none;padding-left:.9rem;flex:1 1 140px">
+        <button class="btn pri" id="nwAdd">追加 ／ Tambah</button>
+        <button class="btn" id="nwExport">CSVを書き出す</button>
+        <span class="hint" id="nwCount"></span>
+      </div>
+    </details>
+
+    <div class="grid" id="vgrid"><div class="loading">Memuat… 読み込み中…</div></div>
+  </section>
+
+  <!-- ===== Kartu / フラッシュカード ===== -->
+  <section class="panel" id="p-card">
+    <div class="fc-wrap">
+      <div class="toolbar" style="justify-content:center;margin:0">
+        <select class="sel" id="fcType">
+          <option value="kanji">Kanji ／ 漢字</option>
+          <option value="vocab">Kosakata ／ 熟語</option>
+        </select>
+        <select class="sel" id="fcMode">
+          <option value="k2r">問題 → Cara baca ／ 読み</option>
+          <option value="k2m">問題 → Arti ／ 意味</option>
+          <option value="r2k">Cara baca → 問題 ／ 読み→漢字・熟語</option>
+          <option value="m2k">Arti → 問題 ／ 意味→漢字・熟語</option>
+        </select>
+        <select class="sel" id="fcLv">
+          <option value="all">Semua level</option><option value="N5">N5</option>
+          <option value="N4">N4</option><option value="N3">N3</option>
+          <option value="介護">介護 / Kaigo</option><option value="現場">現場 / Kerja</option>
+        </select>
+        <select class="sel" id="fcPick">
+          <option value="all">Semua kanji ／ 全部</option>
+          <option value="unseen">Belum dipelajari ／ 未学習</option>
+          <option value="review">Perlu diulang ／ 要復習</option>
+        </select>
+        <button class="btn pri" id="fcStart">Mulai ／ 開始</button>
+      </div>
+
+      <div class="fc-meta">
+        <span id="fcCount">0 / 0</span>
+        <span><i class="dot g"></i><span id="fcOk">Hafal 0</span></span>
+        <span><i class="dot r"></i><span id="fcNg">Ulang 0</span></span>
+      </div>
+      <div class="bar"><i id="fcBar" style="width:0"></i></div>
+
+      <div class="fc" id="fcCard">
+        <div class="q" id="fcQ">—</div>
+        <div id="fcA" style="display:none;text-align:center"></div>
+        <div class="tip" id="fcTip">Ketuk kartu untuk melihat jawaban ／ タップで答え</div>
+      </div>
+
+      <div class="row" id="fcNav">
+        <button class="btn" id="fcPrev">←</button>
+        <button class="btn pri" id="fcFlip">Lihat jawaban ／ 答えを見る</button>
+        <button class="btn" id="fcNext">→</button>
+      </div>
+      <div class="row" id="fcJudge" style="display:none">
+        <button class="btn ng" id="fcBad">Belum hafal ／ まだ（1）</button>
+        <button class="btn ok" id="fcGood">Hafal ／ 覚えた（2）</button>
+      </div>
+      <div id="fcDone" style="display:none;text-align:center;padding:1rem">
+        <div style="font-size:2rem">🎉</div>
+        <h3>Selesai! ／ おつかれさま！</h3>
+        <p style="color:var(--muted)" id="fcResult"></p>
+        <div class="row" style="margin-top:.8rem">
+          <button class="btn pri" id="fcAgain">Ulangi ／ もう一度</button>
+          <button class="btn" id="fcRedo">Ulang yang salah ／ 要復習だけ</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Latihan / 練習問題（JLPT形式） ===== -->
+  <section class="panel" id="p-quiz">
+    <div class="fc-wrap" style="max-width:620px">
+      <div class="toolbar" style="justify-content:center;margin:0">
+        <select class="sel" id="qzType">
+          <option value="mix">全形式まとめて ／ 総合</option>
+          <option value="reading">問題1 漢字読み ／ Cara baca kanji</option>
+          <option value="orth">問題2 表記 ／ Penulisan kanji</option>
+          <option value="context">問題3 文脈規定 ／ Pilih kata yang tepat</option>
+          <option value="para">問題4 言い換え類義 ／ Kata yang searti</option>
+          <option value="usage">問題5 用法 ／ Pemakaian yang benar</option>
+          <option value="kanjiread">漢字の読み（1字・熟語）／ Baca kanji</option>
+        </select>
+        <select class="sel" id="qzLv">
+          <option value="all">Semua level</option><option value="N5">N5</option>
+          <option value="N4">N4</option><option value="N3">N3</option>
+          <option value="介護">介護 / Kaigo</option>
+          <option value="現場">現場・生活 / Tempat kerja</option>
+        </select>
+        <select class="sel" id="qzNum">
+          <option value="10">10問</option><option value="20">20問</option><option value="30">30問</option>
+        </select>
+        <button class="btn pri" id="qzStart">Mulai ／ 開始</button>
+      </div>
+
+      <div class="fc-meta" id="qzMeta" style="display:none">
+        <span id="qzCount">0 / 0</span>
+        <span><i class="dot g"></i><span id="qzOk">正解 0</span></span>
+        <span><i class="dot r"></i><span id="qzNg">不正解 0</span></span>
+      </div>
+      <div class="bar" id="qzBarWrap" style="display:none"><i id="qzBar" style="width:0"></i></div>
+
+      <div id="qzArea" style="width:100%;display:none">
+        <div style="background:var(--card);border:2px solid var(--line);border-radius:18px;padding:1.2rem;box-shadow:var(--sh-l)">
+          <div class="lb" id="qzKind"></div>
+          <div id="qzQ" style="font-size:1.35rem;font-weight:700;line-height:1.6;margin:.4rem 0 1rem"></div>
+          <div id="qzChoices" style="display:grid;gap:.5rem"></div>
+          <div id="qzFeedback" style="margin-top:.8rem;display:none"></div>
+        </div>
+        <div class="row" style="margin-top:.8rem">
+          <button class="btn pri" id="qzNext" style="display:none">次の問題 ／ Berikutnya →</button>
+        </div>
+      </div>
+
+      <div id="qzDone" style="display:none;text-align:center;padding:1rem;width:100%">
+        <div style="font-size:2rem">🎉</div>
+        <h3 id="qzScore"></h3>
+        <p style="color:var(--muted)" id="qzMsg"></p>
+        <div id="qzWrongList" style="text-align:left;margin:1rem 0"></div>
+        <div class="row">
+          <button class="btn pri" id="qzAgain">もう一度 ／ Ulangi</button>
+          <button class="btn" id="qzRetryWrong">間違えた問題だけ ／ Yang salah saja</button>
+        </div>
+      </div>
+
+      <p class="hint" style="white-space:normal;text-align:center">
+        JLPT本試験と同じ5つの形式（漢字読み・表記・文脈規定・言い換え類義・用法）の4択問題です。<br>
+        例文のある語は本試験と同じく文の中で出題します ／ Soal disajikan dalam kalimat, seperti ujian JLPT.<br>
+        間違えた語は自動で「要復習」に登録されます ／ Kata yang salah otomatis masuk "perlu diulang".</p>
+    </div>
+  </section>
+
+  <!-- ===== Urutan coretan / 書き順 ===== -->
+  <section class="panel" id="p-stroke">
+    <div class="toolbar">
+      <input class="search" id="sq" placeholder="Cari kanji / jumlah coretan … 検索">
+      <div class="chips" id="sLvChips">
+        <button class="chip on" data-lv="all">Semua</button>
+        <button class="chip" data-lv="N5">N5</button>
+        <button class="chip" data-lv="N4">N4</button>
+        <button class="chip" data-lv="N3">N3</button>
+        <button class="chip" data-lv="介護">介護 / Kaigo</button>
+      </div>
+      <select class="sel" id="sSort">
+        <option value="level">Urut: level ／ レベル順</option>
+        <option value="stroke-asc">Coretan sedikit ／ 画数少ない順</option>
+        <option value="stroke-desc">Coretan banyak ／ 画数多い順</option>
+      </select>
+      <span class="hint" id="sCnt"></span>
+    </div>
+    <p class="hint" style="margin-bottom:.7rem">▶ Ketuk gambar kanji untuk melihat animasi coretan satu per satu ／ 文字をタップすると1画ずつ書きます</p>
+    <div class="sgrid" id="sgrid"><div class="loading">Memuat… 読み込み中…</div></div>
+    <div style="text-align:center;margin:1rem 0"><button class="btn" id="sMore">Tampilkan lagi ／ もっと表示</button></div>
+  </section>
+
+  <!-- ===== Progres / 学習状況 ===== -->
+  <section class="panel" id="p-stats">
+    <div class="prog-wrap" id="progWrap"></div>
+    <div class="sec">
+      <div class="lb">PERLU DIULANG ／ 要復習</div>
+      <div class="grid" id="reviewGrid"></div>
+    </div>
+    <div class="row" style="margin-top:1.5rem">
+      <button class="btn" id="expBtn">Simpan catatan belajar ／ 学習記録を書き出す</button>
+      <button class="btn ng" id="resetBtn">Hapus semua catatan ／ 記録を消す</button>
+    </div>
+  </section>
+
+  <footer>
+    <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:.6rem">
+      <span class="t lv">Versi ／ 版：<span id="verLabel"></span></span>
+      <button class="btn" id="reloadBtn" style="padding:.3rem .7rem;font-size:.78rem">🔄 Perbarui ／ 最新に更新</button>
+      <span class="hint" id="reloadHint" style="white-space:normal">Kalau ada kata baru tapi belum muncul, tekan tombol ini ／ 新しい言葉が出ないときはこれを押してください</span>
+    </div>
+    <b>Sumber data / データ出典（オープンライセンス）</b><br>
+    Cara baca・arti・jumlah coretan・level JLPT：<a href="https://github.com/davidluzgouveia/kanji-data" target="_blank" rel="noopener">kanji-data</a>（KANJIDIC2 / EDRDG, CC BY-SA 4.0）／
+    contoh kata・radikal：<a href="https://github.com/kanjialive/kanji-data-media" target="_blank" rel="noopener">Kanji alive</a>（University of Chicago, CC BY 4.0）／
+    urutan coretan：<a href="http://kanjivg.tagaini.net" target="_blank" rel="noopener">KanjiVG</a>（Ulrich Apel, CC BY-SA 3.0）／
+    level kosakata：<a href="https://github.com/jamsinclair/open-anki-jlpt-decks" target="_blank" rel="noopener">open-anki-jlpt-decks</a>（tanos.co.uk, CC BY 4.0）<br>
+    ※ JLPTは2010年以降、公式の漢字リストを公表していません。本ツールのレベル区分は上記データセットの分類（N5 79字・N4 166字・N3 367字＝累計612字）に基づきます。<br>
+    ※ Terjemahan Bahasa Indonesia dibuat dengan bantuan AI dari arti bahasa Inggris ／ インドネシア語訳は英語原文からAIで作成しています。<br>
+    ※ Catatan belajar hanya tersimpan di perangkat Anda ／ 学習記録は端末内にのみ保存されます。<br>
+    &copy; 2026 西風梟風 — Program aplikasi ini dan terjemahan Bahasa Indonesianya dibuat sendiri; dilarang menyalin tanpa izin.
+    Data sumber di atas tetap mengikuti lisensinya masing-masing.<br>
+    ※ 本アプリのプログラムおよびインドネシア語訳は独自に作成したものです。無断転載・無断利用を禁じます。
+    ただし上記の出典データは、それぞれのライセンス（CC BY 4.0／CC BY-SA 3.0・4.0）に従います。
+    書き順データを含む再配布には、CC BY-SA 3.0 の条件（同一ライセンスでの公開と出典表示）が適用されます。
+  </footer>
+</div>
+
+<!-- ===== 熟語モーダル ===== -->
+<div class="ov" id="vov"><div class="modal">
+  <div class="m-head">
+    <div style="flex:1;min-width:0">
+      <div class="tags" id="vmTags"></div>
+      <div id="vmWord" style="font-size:2rem;font-weight:700;line-height:1.25"></div>
+      <div id="vmRead" style="font-size:1rem;color:var(--blue)"></div>
+    </div>
+    <button class="btn" id="vmBack" style="display:none;padding:.3rem .6rem;font-size:.78rem;margin-right:.3rem;white-space:nowrap">← 戻る</button>
+    <button class="x" id="vmX">×</button>
+  </div>
+  <div class="m-body">
+    <div class="sec">
+      <div class="lb">ARTI ／ 意味</div>
+      <div id="vmMean" style="font-size:1.05rem"></div>
+      <div id="vmMeanEn" style="font-size:.78rem;color:#94a3b8;margin-top:.2rem"></div>
+    </div>
+    <div class="sec">
+      <div class="lb">KANJI PENYUSUN ／ 使われている漢字（タップで書き順）</div>
+      <div class="grid" id="vmKanji" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))"></div>
+    </div>
+    <div class="sec" style="text-align:center;margin-bottom:.6rem">
+      <span id="vmState" class="state none"></span>
+    </div>
+    <div class="row">
+      <button class="btn ng" id="vmNg">Perlu diulang ／ 要復習</button>
+      <button class="btn ok" id="vmOk">Sudah hafal ／ この言葉を覚えた</button>
+    </div>
+  </div>
+</div></div>
+
+<!-- ===== Modal ===== -->
+<div class="ov" id="ov"><div class="modal">
+  <div class="m-head">
+    <div class="m-ch" id="mCh"></div>
+    <div class="info">
+      <div class="tags" id="mTags"></div>
+      <div id="mMean" style="font-size:.9rem;color:var(--muted)"></div>
+      <div id="mMeanEn" style="font-size:.75rem;color:#94a3b8"></div>
+      <div style="margin-top:.3rem"><span id="mState" class="state none"></span></div>
+    </div>
+    <button class="btn" id="mBack" style="display:none;padding:.3rem .6rem;font-size:.78rem;margin-right:.3rem;white-space:nowrap">← 戻る</button>
+    <button class="x" id="mX">×</button>
+  </div>
+  <div class="m-body">
+    <div class="sec">
+      <div class="lb">URUTAN CORETAN ／ 書き順（1画ずつ）</div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-start;justify-content:center">
+        <div style="text-align:center">
+          <svg class="kvg" id="mSvg" width="180" height="180" viewBox="0 0 109 109"></svg>
+          <div class="row" style="margin-top:.5rem">
+            <button class="btn" id="mPlay">▶ Putar ulang ／ 再生</button>
+          </div>
+        </div>
+        <div style="flex:1;min-width:180px"><div class="seq" id="mSeq"></div></div>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="lb">CARA BACA ／ 読み方</div>
+      <div class="rd-row"><span class="rd-k">On/音読み</span><span id="mOn"></span></div>
+      <div class="rd-row"><span class="rd-k">Kun/訓読み</span><span id="mKun"></span></div>
+    </div>
+    <div class="sec" id="mWordsSec">
+      <div class="lb">KATA YANG MEMAKAI KANJI INI ／ この字を使う言葉（タップで詳しく）</div>
+      <ul class="ex" id="mWords"></ul>
+    </div>
+    <div class="sec">
+      <div class="lb">RADIKAL ／ 部首</div>
+      <div id="mMisc" style="font-size:.85rem;color:var(--muted)"></div>
+    </div>
+    <div class="row">
+      <button class="btn ng" id="mNg">Perlu diulang ／ 要復習</button>
+      <button class="btn ok" id="mOk">Sudah hafal ／ この漢字を覚えた</button>
+    </div>
+  </div>
+</div></div>
+</div><!-- /#app -->
+
+<script>
+"use strict";
+
+/* =========================================================
+   合言葉（パスワード）設定
+   ---------------------------------------------------------
+   下の PASS_SHA256 は合言葉の SHA-256 ハッシュです。
+   合言葉を変更するときは、新しい合言葉のハッシュを作って置き換えます。
+
+     python3 -c "import hashlib;print(hashlib.sha256('新しい合言葉'.encode()).hexdigest())"
+
+   ※ これは「部外者よけの目隠し」です。ページのソースやJSONファイルを
+     直接開ける人には見えてしまいます（完全な保護ではありません）。
+   ========================================================= */
+const PASS_SHA256 = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
+const GATEKEY = 'jlpt-kanji-gate-v1';
+
+async function sha256(text) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+function unlock() {
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  if (!window.__booted) { window.__booted = true; boot().catch(showLoadError); }
+}
+async function tryUnlock() {
+  const pw = document.getElementById('gatePw').value.trim();
+  const err = document.getElementById('gateErr');
+  if (!pw) { err.textContent = 'Kata sandi kosong ／ 未入力です'; return; }
+  const h = await sha256(pw);
+  if (h === PASS_SHA256) { localStorage.setItem(GATEKEY, h); unlock(); }
+  else { err.textContent = 'Kata sandi salah ／ 合言葉が違います'; document.getElementById('gatePw').select(); }
+}
+document.getElementById('gateBtn').onclick = tryUnlock;
+document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock();   // 一度入れた端末は次回から省略
+else document.getElementById('gatePw').focus();
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
+const VERSION = '2026-08-06b';   // 更新日（版）
+
+let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
+let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
+let LANG = localStorage.getItem(LANGKEY) || 'id';
+let progress = {}, vprogress = {};
+try { progress = JSON.parse(localStorage.getItem(STORE) || '{}'); } catch (e) {}
+try { vprogress = JSON.parse(localStorage.getItem(STORE + '-vocab') || '{}'); } catch (e) {}
+const save = () => { try { localStorage.setItem(STORE, JSON.stringify(progress));
+  localStorage.setItem(STORE + '-vocab', JSON.stringify(vprogress)); } catch (e) {} };
+const setMark = (ch, v) => { v ? progress[ch] = v : delete progress[ch]; save(); refreshStats(); };
+const setVMark = (w, v) => { v ? vprogress[w] = v : delete vprogress[w]; save(); refreshStats(); };
+
+/* arti: Indonesia kalau ada, kalau tidak Inggris */
+const meanOf = k => (LANG === 'id' && k.meanings_id && k.meanings_id.length ? k.meanings_id : k.meanings);
+const exMean = e => (LANG === 'id' && e.meaning_id) ? e.meaning_id : e.meaning;
+
+async function boot() {
+  const json = await (await fetch('kanji-data.json', { cache: 'no-cache' })).json();
+  DATA = json.kanji; DATA.forEach(k => BYCH[k.character] = k);
+  $('#langBtn').textContent = LANG === 'id' ? '🌐 ID' : '🌐 EN';
+  renderList(); refreshStats();
+  loadVocab().then(() => {                       // 熟語は後から読み込み（表示を待たせない）
+    $('#hdStat').textContent = `${DATA.length} kanji ・ ${VOCAB.length} kosakata`;
+    if ($('#p-vocab').classList.contains('on')) renderVocab();
+    refreshStats();
+  }).catch(() => {});
+  $('#hdStat').textContent = `${DATA.length} kanji（N5 ${cnt('N5')}・N4 ${cnt('N4')}・N3 ${cnt('N3')}・介護 ${cnt('介護')}）`;
+}
+let vocabPromise = null;
+function loadVocab() {
+  return vocabPromise || (vocabPromise = fetch('vocab.json', { cache: 'no-cache' }).then(r => r.json()).then(async j => {
+    VOCAB = j.words;
+    await mergeExtraCsv();                       // 施設独自の語（vocab-extra.csv）
+    mergeMyWords();                              // この端末で追加した語
+    reindexVocab();
+    return VOCAB;
+  }));
+}
+function reindexVocab() {
+  VBYW = {}; WORDS_OF = {};
+  VOCAB.forEach(w => {
+    VBYW[w.word] = w;
+    (w.kanji || []).forEach(c => (WORDS_OF[c] = WORDS_OF[c] || []).push(w));
+  });
+}
+const KANJI_RE = /[一-鿿]/;
+function splitCsvLine(line) {                    // 簡易CSV（"..." のカンマに対応）
+  const out = []; let cur = '', q = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (q) { if (c === '"') { if (line[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += c; }
+    else if (c === '"') q = true;
+    else if (c === ',') { out.push(cur); cur = ''; }
+    else cur += c;
+  }
+  out.push(cur); return out.map(s => s.trim());
+}
+/** vocab-extra.csv を読み込み、既存語は上書き、新規語は追加。削除欄に○があれば非表示 */
+async function mergeExtraCsv() {
+  let text;
+  try {
+    const res = await fetch('vocab-extra.csv', { cache: 'no-cache' });
+    if (!res.ok) return; text = await res.text();
+  } catch (e) { return; }
+  const lines = text.replace(/^﻿/, '').split(/\r?\n/).filter(l => l.trim());
+  if (!lines.length) return;
+  const byWord = {}; VOCAB.forEach(w => byWord[w.word] = w);
+  const del = new Set();
+  lines.slice(1).forEach(line => {
+    const [word, reading, mid, cat, sub, men, rm] = splitCsvLine(line);
+    if (!word) return;
+    if ((rm || '').match(/[○◯x×削除]/i)) { del.add(word); return; }
+    const rec = byWord[word];
+    if (rec) {                                   // 既存語を上書き
+      if (reading) rec.reading = reading;
+      if (mid) rec.meaning_id = mid;
+      if (men) rec.meaning = men;
+      if (cat) rec.category = cat;
+      if (sub) rec.sub = sub;
+      rec.custom = true;
+    } else {                                     // 新規追加
+      const w = { word, reading: reading || '', meaning: men || mid || '', meaning_id: mid || '',
+                  level: '施設', category: cat || '介護', sub: sub || '', custom: true,
+                  kanji: [...word].filter(c => KANJI_RE.test(c)) };
+      VOCAB.push(w); byWord[word] = w;
+    }
+  });
+  if (del.size) VOCAB = VOCAB.filter(w => !del.has(w.word));
+}
+/** この端末で追加した語（localStorage） */
+const MYKEY = 'jlpt-kanji-mywords-v1';
+let myWords = [];
+try { myWords = JSON.parse(localStorage.getItem(MYKEY) || '[]'); } catch (e) { myWords = []; }
+const saveMyWords = () => { try { localStorage.setItem(MYKEY, JSON.stringify(myWords)); } catch (e) {} };
+function mergeMyWords() {
+  const byWord = {}; VOCAB.forEach(w => byWord[w.word] = w);
+  myWords.forEach(m => {
+    const rec = byWord[m.word];
+    if (rec) { Object.assign(rec, { reading: m.reading || rec.reading, meaning_id: m.meaning_id || rec.meaning_id,
+      category: m.category || rec.category, sub: m.sub || rec.sub, mine: true }); }
+    else VOCAB.push({ ...m, level: '追加', mine: true, meaning: m.meaning || m.meaning_id || '',
+      kanji: [...m.word].filter(c => KANJI_RE.test(c)) });
+  });
+}
+const vMean = w => (LANG === 'id' && w.meaning_id) ? w.meaning_id : w.meaning;
+const cnt = lv => DATA.filter(k => k.level === lv).length;
+const loadStrokes = () => strokePromise || (strokePromise =
+  fetch('kanji-strokes.json', { cache: 'no-cache' }).then(r => r.json()).then(j => (STROKES = j.strokes)));
+
+/* ---------- filter / sort ---------- */
+const KANJI_RE0 = /[一-鿿]/g;
+/** ローマ字は「語の先頭」だけ一致（air が chair に当たらないようにする） */
+const wordHead = (text, q) => text.split(/[^a-z0-9]+/).some(w => w && w.startsWith(q));
+const rdClean = r => r.replace(/[.\-]/g, '');
+/** 検索の当たり具合を点数にする。0＝当たらない。大きいほど「よく当たっている」 */
+function scoreKanji(k, q, qk) {
+  if (qk) return qk.includes(k.character) ? 100 : 0;      // 漢字で検索＝その漢字だけ
+  if (/^[0-9]+$/.test(q)) return String(k.strokes) === q ? 100 : 0;   // 数字＝画数
+  const rs = k.on.concat(k.kun).map(rdClean).filter(Boolean);
+  const ms = k.meanings.concat(k.meanings_id || []).map(m => m.toLowerCase());
+  if (rs.includes(q)) return 95;                          // 読みがぴったり
+  if (ms.includes(q)) return 90;                          // 意味がぴったり
+  if (rs.some(r => r.startsWith(q))) return 80;           // 読みの先頭が一致
+  if (ms.some(m => wordHead(m, q))) return 70;            // 意味の語頭が一致
+  if (rs.some(r => r.includes(q))) return 50;             // 読みの途中に含む
+  return 0;
+}
+/** 直接は当たらなかったとき用：この字を使う熟語で当たるか */
+function scoreByWords(k, q) {
+  return k.examples.some(e => e.word.includes(q) || rdClean(e.reading).startsWith(q) ||
+    wordHead((e.meaning_id || '').toLowerCase(), q) || wordHead(e.meaning.toLowerCase(), q)) ? 20 : 0;
+}
+function filterKanji(q, lv, mk) {
+  q = (q || '').trim().toLowerCase();
+  const qk = (q.match(KANJI_RE0) || []).join('') || null;   // 検索語に含まれる漢字
+  const base = DATA.filter(k => {
+    if (lv !== 'all' && k.level !== lv) return false;
+    if (mk === 'known' && progress[k.character] !== 'known') return false;
+    if (mk === 'review' && progress[k.character] !== 'review') return false;
+    if (mk === 'unseen' && progress[k.character]) return false;
+    return true;
+  });
+  if (!q) { base.forEach(k => k._s = 0); return base; }
+  let hit = [];
+  base.forEach(k => { const s = scoreKanji(k, q, qk); if (s) { k._s = s; hit.push(k); } });
+  if (!hit.length) {                                       // 直接当たらないときだけ熟語から探す
+    base.forEach(k => { const s = scoreByWords(k, q); if (s) { k._s = s; hit.push(k); } });
+  }
+  return hit;
+}
+function sortKanji(arr, mode) {
+  const a = [...arr], o = { N5: 0, N4: 1, N3: 2, '介護': 3 }, f = x => x.freq || 9999;
+  if (mode === 'stroke-asc') a.sort((x, y) => x.strokes - y.strokes || f(x) - f(y));
+  else if (mode === 'stroke-desc') a.sort((x, y) => y.strokes - x.strokes || f(x) - f(y));
+  else if (mode === 'freq') a.sort((x, y) => f(x) - f(y));
+  else a.sort((x, y) => o[x.level] - o[y.level] || f(x) - f(y));
+  a.sort((x, y) => (y._s || 0) - (x._s || 0));             // よく当たった順を優先
+  return a;
+}
+
+/* ---------- list ---------- */
+let listLimit = 120, curLv = 'all';
+function renderList() {
+  const arr = sortKanji(filterKanji($('#q').value, curLv, $('#mark').value), $('#sort').value);
+  $('#cnt').textContent = `${arr.length} kanji`;
+  const show = arr.slice(0, listLimit);
+  $('#grid').innerHTML = show.map(cardHTML).join('') + (arr.length > show.length ?
+    `<button class="btn" id="moreBtn" style="grid-column:1/-1">Tampilkan lagi ／ もっと表示（+${Math.min(120, arr.length - show.length)}）</button>` : '');
+  if ($('#moreBtn')) $('#moreBtn').onclick = () => { listLimit += 120; renderList(); };
+}
+const MARKLABEL = { known: '✓ 覚えた', review: '↻ 要復習' };
+const cardHTML = k => `<button class="kcard ${progress[k.character] ? 'is-' + progress[k.character] : ''}" data-ch="${k.character}">
+  ${progress[k.character] ? `<span class="mark ${progress[k.character]}">${MARKLABEL[progress[k.character]]}</span>` : ''}
+  <div class="ch">${k.character}</div>
+  <div class="body">
+    <div class="tags"><span class="t lv">${k.level}</span>
+      ${k.on.slice(0, 2).map(r => `<span class="t on-">${r}</span>`).join('')}
+      ${k.kun.slice(0, 2).map(r => `<span class="t kun">${r}</span>`).join('')}</div>
+    <div class="mean">${meanOf(k).slice(0, 3).join(', ')}</div>
+    <div class="st">${k.strokes} coretan／画</div>
+  </div></button>`;
+
+/* ---------- 熟語タブ ---------- */
+let vLimit = 120, vLv = 'all';
+const LVORD = { N5: 0, N4: 1, N3: 2, '介護': 3, '現場': 4, '施設': 5, '追加': 6 };
+/** 熟語の検索：ぴったり＞先頭一致＞途中に含む。意味（ローマ字）は語頭だけ見る */
+function scoreVocab(w, q) {
+  const mi = (w.meaning_id || '').toLowerCase(), me = (w.meaning || '').toLowerCase();
+  if (w.word === q || w.reading === q) return 100;
+  if (mi === q || me === q) return 90;
+  if (w.word.startsWith(q) || w.reading.startsWith(q)) return 80;
+  if (wordHead(mi, q) || wordHead(me, q)) return 70;
+  if (w.word.includes(q) || w.reading.includes(q)) return 50;
+  return 0;
+}
+function filterVocab() {
+  const q = ($('#vq').value || '').trim().toLowerCase(), cat = $('#vCat').value, sub = $('#vSub').value;
+  return VOCAB.filter(w => {
+    if (vLv !== 'all' && w.level !== vLv) return false;
+    if (cat !== 'all' && w.category !== cat) return false;
+    if (sub !== 'all' && w.sub !== sub) return false;
+    if (!q) { w._s = 0; return true; }
+    const s = scoreVocab(w, q);
+    if (s) { w._s = s; return true; }
+    return false;
+  }).sort((a, b) => (b._s || 0) - (a._s || 0) ||
+    LVORD[a.level] - LVORD[b.level] || a.reading.localeCompare(b.reading, 'ja'));
+}
+function refreshSubOptions() {
+  const cat = $('#vCat').value, cur = $('#vSub').value;
+  const counts = {};
+  VOCAB.forEach(w => {
+    if (!w.sub) return;
+    if (vLv !== 'all' && w.level !== vLv) return;
+    if (cat !== 'all' && w.category !== cat) return;
+    counts[w.sub] = (counts[w.sub] || 0) + 1;
+  });
+  const subs = Object.keys(counts);
+  const sel = $('#vSub');
+  sel.style.display = subs.length > 1 ? '' : 'none';
+  sel.innerHTML = '<option value="all">小分類すべて ／ Semua sub-bidang</option>' +
+    subs.map(x => `<option value="${x}">${x}（${counts[x]}）</option>`).join('');
+  sel.value = subs.includes(cur) ? cur : 'all';
+}
+function renderVocab() {
+  if (!VOCAB.length) { $('#vgrid').innerHTML = '<div class="loading">Memuat… 読み込み中…</div>'; return; }
+  refreshSubOptions();
+  const arr = filterVocab();
+  $('#vCnt').textContent = `${arr.length} kosakata`;
+  const show = arr.slice(0, vLimit);
+  $('#vgrid').innerHTML = show.map(vCardHTML).join('') + (arr.length > show.length ?
+    `<button class="btn" id="vMoreBtn" style="grid-column:1/-1">Tampilkan lagi ／ もっと表示（+${Math.min(120, arr.length - show.length)}）</button>` : '')
+    || '<p class="hint">—</p>';
+  if ($('#vMoreBtn')) $('#vMoreBtn').onclick = () => { vLimit += 120; renderVocab(); };
+}
+const vCardHTML = w => `<button class="kcard ${vprogress[w.word] ? 'is-' + vprogress[w.word] : ''}" data-word="${w.word}" style="flex-direction:column;align-items:flex-start;gap:.2rem">
+  ${vprogress[w.word] ? `<span class="mark ${vprogress[w.word]}">${MARKLABEL[vprogress[w.word]]}</span>` : ''}
+  <div class="tags"><span class="t lv">${w.level}</span>${w.category ? `<span class="t kun">${w.category}</span>` : ''}${w.sub ? `<span class="t on-">${w.sub}</span>` : ''}</div>
+  <div class="vw" style="font-size:1.25rem;font-weight:700;line-height:1.3">${w.word}</div>
+  <div style="font-size:.8rem;color:var(--blue)">${w.reading}</div>
+  <div class="mean">${vMean(w)}</div></button>`;
+
+const STATE_TXT = { known: '✓ Sudah hafal ／ 覚えた', review: '↻ Perlu diulang ／ 要復習', none: 'Belum ditandai ／ まだ記録なし' };
+function paintState(el, st, okBtn, ngBtn) {
+  const k = st || 'none';
+  el.className = 'state ' + k;
+  el.textContent = STATE_TXT[k];
+  okBtn.classList.toggle('active', st === 'known');
+  ngBtn.classList.toggle('active', st === 'review');
+}
+let vModalWord = null;
+function openVocab(word) {
+  const w = VBYW[word]; if (!w) return;
+  vModalWord = word;
+  $('#vmTags').innerHTML = `<span class="t lv">${w.level}</span>` + (w.category ? `<span class="t kun">${w.category}</span>` : '')
+    + (w.sub ? `<span class="t on-">${w.sub}</span>` : '');
+  $('#vmWord').textContent = w.word;
+  $('#vmRead').textContent = w.reading;
+  $('#vmMean').textContent = vMean(w);
+  $('#vmMeanEn').textContent = (LANG === 'id' && w.meaning_id) ? 'EN: ' + w.meaning : '';
+  const cards = (w.kanji || []).map(c => BYCH[c] ? cardHTML(BYCH[c])
+    : `<div class="kcard" style="opacity:.55"><div class="ch">${c}</div><div class="body"><div class="mean">（未収録 / belum ada）</div></div></div>`);
+  $('#vmKanji').innerHTML = cards.join('') || '<p class="hint">—</p>';
+  paintState($('#vmState'), vprogress[word], $('#vmOk'), $('#vmNg'));
+  $('#vov').classList.add('on'); document.body.style.overflow = 'hidden';
+}
+const closeVocabModal = (clearNav = true) => {
+  $('#vov').classList.remove('on');
+  if (clearNav) { navStack = []; document.body.style.overflow = ''; }
+  updateBackBtns();
+};
+/* どの画面から来たかを覚えて「戻る」で帰れるようにする */
+let navStack = [];
+function updateBackBtns() {
+  const show = navStack.length ? '' : 'none';
+  if ($('#mBack')) $('#mBack').style.display = show;
+  if ($('#vmBack')) $('#vmBack').style.display = show;
+}
+function goBack() {
+  const from = navStack.pop();
+  updateBackBtns();
+  if (!from) return;
+  if (from.type === 'kanji') { closeVocabModal(false); openModal(from.key, true); }
+  else { closeModal(false); openVocab(from.key, true); }
+}
+
+/* ---------- stroke rendering ---------- */
+const GRID = `<path class="grid-l" d="M54.5 0v109M0 54.5h109"/>`;
+const svgUpTo = (p, n) => GRID + p.map(d => `<path class="bg-s" d="${d}"/>`).join('') +
+  p.slice(0, n).map((d, i) => `<path class="${i === n - 1 ? 'hi-s' : 'fg-s'}" d="${d}"/>`).join('');
+const svgFull = p => GRID + p.map(d => `<path class="fg-s" d="${d}"/>`).join('');
+function addNumbers(svgEl, paths) {
+  const ns = 'http://www.w3.org/2000/svg';
+  paths.forEach((d, i) => {
+    const tmp = document.createElementNS(ns, 'path'); tmp.setAttribute('d', d); svgEl.appendChild(tmp);
+    let pt; try { pt = tmp.getPointAtLength(0); } catch (e) { pt = { x: 6, y: 9 }; }
+    tmp.remove();
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', Math.max(3, Math.min(105, pt.x - 1)));
+    t.setAttribute('y', Math.max(7, Math.min(107, pt.y - 1.5)));
+    t.textContent = i + 1; svgEl.appendChild(t);
+  });
+}
+let animToken = 0;
+async function animate(svgEl, paths, speed) {
+  const my = ++animToken;
+  svgEl.innerHTML = GRID + paths.map(d => `<path class="bg-s" d="${d}"/>`).join('');
+  const ns = 'http://www.w3.org/2000/svg';
+  for (let i = 0; i < paths.length; i++) {
+    if (my !== animToken) return;
+    const p = document.createElementNS(ns, 'path');
+    p.setAttribute('d', paths[i]); p.setAttribute('class', 'hi-s'); svgEl.appendChild(p);
+    const len = p.getTotalLength(), ms = Math.max(240, Math.min(750, len * 20)) * (speed || 1);
+    p.style.strokeDasharray = len; p.style.strokeDashoffset = len;
+    p.style.transition = `stroke-dashoffset ${ms}ms linear`;
+    await new Promise(r => requestAnimationFrame(() => {
+      p.style.strokeDashoffset = 0;
+      setTimeout(() => { p.setAttribute('class', 'fg-s'); r(); }, ms + 110);
+    }));
+  }
+  if (my === animToken) { svgEl.innerHTML = svgFull(paths); addNumbers(svgEl, paths); }
+}
+
+/* ---------- modal ---------- */
+let modalCh = null;
+async function openModal(ch, isBack) {
+  const k = BYCH[ch]; if (!k) return;
+  updateBackBtns();
+  modalCh = ch;
+  $('#mCh').textContent = ch;
+  $('#mTags').innerHTML = `<span class="t lv">${k.level}</span><span class="t lv">${k.strokes} coretan/画</span>` +
+    (k.grade ? `<span class="t lv">SD kelas ${k.grade}／小${k.grade}</span>` : '') +
+    (k.freq ? `<span class="t lv">#${k.freq}</span>` : '');
+  $('#mMean').textContent = meanOf(k).join(', ');
+  $('#mMeanEn').textContent = (LANG === 'id' && k.meanings_id) ? 'EN: ' + k.meanings.join(', ') : '';
+  $('#mOn').innerHTML = k.on.length ? k.on.map(r => `<span class="t on-">${r}</span>`).join(' ') : '—';
+  $('#mKun').innerHTML = k.kun.length ? k.kun.map(r => `<span class="t kun">${r}</span>`).join(' ') : '—';
+  /* 用例（辞書の例）と熟語データを1つにまとめて重複を除く */
+  const seenW = new Set(), merged = [];
+  (WORDS_OF[ch] || []).forEach(w => { if (!seenW.has(w.word)) { seenW.add(w.word); merged.push({ ...w, tap: true }); } });
+  (k.examples || []).forEach(e => {
+    if (seenW.has(e.word)) return;
+    seenW.add(e.word);
+    merged.push({ word: e.word, reading: e.reading, meaning: e.meaning, meaning_id: e.meaning_id,
+                  level: e.jlpt || '', tap: false });
+  });
+  merged.sort((a, b) => (LVORD[a.level] ?? 9) - (LVORD[b.level] ?? 9) || a.word.length - b.word.length);
+  const rel = merged.slice(0, 14);
+  $('#mWordsSec').style.display = rel.length ? '' : 'none';
+  $('#mWords').innerHTML = rel.map(w => {
+    const st = vprogress[w.word] || '';
+    return `<li class="${st ? 'w-' + st : ''}" ${w.tap ? `data-word="${w.word}" style="cursor:pointer"` : ''}>
+      <div><span class="w">${w.word}</span><span class="r">${w.reading}</span>${w.level ? `<span class="jl">${w.level}</span>` : ''}${st ? `<span class="wm ${st}">${st === 'known' ? '✓' : '↻'}</span>` : ''}</div>
+      <div class="m">${(LANG === 'id' && w.meaning_id) ? w.meaning_id : w.meaning}</div>
+      ${(LANG === 'id' && w.meaning_id && w.meaning && w.meaning_id !== w.meaning) ? `<div class="en">EN: ${w.meaning}</div>` : ''}</li>`;
+  }).join('')
+    + (merged.length > rel.length ? `<li style="text-align:center;color:var(--muted);font-size:.78rem">…ほか${merged.length - rel.length}語</li>` : '');
+  const r = k.radical || {};
+  $('#mMisc').textContent = [r.character && `${r.character}${r.name ? '（' + r.name + '）' : ''}`,
+    r.meaning && (LANG === 'id' ? `arti radikal: ${r.meaning}` : `meaning: ${r.meaning}`)].filter(Boolean).join(' ／ ') || '—';
+  paintState($('#mState'), progress[ch], $('#mOk'), $('#mNg'));
+  $('#ov').classList.add('on'); document.body.style.overflow = 'hidden';
+
+  const S = await loadStrokes(), paths = S[ch] || [];
+  $('#mSeq').innerHTML = paths.map((_, i) => `<svg viewBox="0 0 109 109">${svgUpTo(paths, i + 1)}</svg>`).join('');
+  animate($('#mSvg'), paths);          // ← 開いたら自動で1画ずつ書く
+}
+const closeModal = (clearNav = true) => {
+  animToken++; $('#ov').classList.remove('on');
+  if (clearNav) { navStack = []; document.body.style.overflow = ''; }
+  updateBackBtns();
+};
+
+/* ---------- stroke guide ---------- */
+let sLimit = 60, curSLv = 'all';
+async function renderStroke() {
+  const S = await loadStrokes();
+  const arr = sortKanji(filterKanji($('#sq').value, curSLv, 'all'), $('#sSort').value);
+  $('#sCnt').textContent = `${arr.length} kanji`;
+  const show = arr.slice(0, sLimit);
+  $('#sgrid').innerHTML = show.map(k => {
+    const p = S[k.character] || [];
+    return `<div class="scard" data-ch="${k.character}">
+      <div class="cap"><b>${k.character}</b><span>${k.level}・${k.strokes}画</span></div>
+      <svg class="kvg sv-main" data-ch="${k.character}" width="100%" viewBox="0 0 109 109" style="max-width:145px;margin:.3rem auto">${svgFull(p)}</svg>
+      <div class="cap" style="justify-content:center">${k.on.slice(0, 1).concat(k.kun.slice(0, 1)).join('・') || '&nbsp;'}</div>
+      <div class="seq">${p.map((_, i) => `<svg viewBox="0 0 109 109">${svgUpTo(p, i + 1)}</svg>`).join('')}</div>
+    </div>`;
+  }).join('');
+  $$('#sgrid .sv-main').forEach(svg => addNumbers(svg, S[svg.dataset.ch] || []));
+  $('#sMore').style.display = arr.length > show.length ? '' : 'none';
+  $('#sMore').textContent = `Tampilkan lagi ／ もっと表示（+${Math.min(60, arr.length - show.length)}）`;
+}
+
+/* ---------- flashcards ---------- */
+let deck = [], di = 0, flipped = false, okN = 0, ngN = 0, wrong = [];
+const fcIsVocab = () => $('#fcType').value === 'vocab';
+const cardKey = x => fcIsVocab() ? x.word : x.character;
+const cardProg = () => fcIsVocab() ? vprogress : progress;
+function buildDeck() {
+  const lv = $('#fcLv').value, pick = $('#fcPick').value, P = cardProg();
+  let arr = (fcIsVocab() ? VOCAB : DATA).filter(x => {
+    const key = fcIsVocab() ? x.word : x.character;
+    if (lv !== 'all' && x.level !== lv) return false;
+    if (pick === 'unseen' && P[key]) return false;
+    if (pick === 'review' && P[key] !== 'review') return false;
+    return true;
+  });
+  for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; }
+  deck = arr; di = 0; okN = ngN = 0; wrong = []; flipped = false;
+  $('#fcOk').textContent = 'Hafal 0'; $('#fcNg').textContent = 'Ulang 0';
+  $('#fcDone').style.display = 'none'; $('#fcCard').style.display = ''; showCard();
+}
+function showCard() {
+  if (!deck.length) { $('#fcQ').textContent = '—'; $('#fcCount').textContent = '0 / 0'; return; }
+  if (di >= deck.length) return finish();
+  const k = deck[di], mode = $('#fcMode').value, voc = fcIsVocab(); flipped = false;
+  $('#fcA').style.display = 'none'; $('#fcQ').style.display = '';
+  $('#fcJudge').style.display = 'none'; $('#fcNav').style.display = 'flex';
+  $('#fcTip').textContent = 'Ketuk kartu untuk jawaban ／ タップで答え';
+  const q = $('#fcQ');
+  if (mode === 'r2k') { q.className = 'q small'; q.textContent = voc ? k.reading : (k.on.concat(k.kun).slice(0, 4).join('  /  ') || '—'); }
+  else if (mode === 'm2k') { q.className = 'q small'; q.textContent = voc ? vMean(k) : meanOf(k).slice(0, 3).join(', '); }
+  else if (voc) { q.className = 'q small'; q.style.fontSize = '2.6rem'; q.textContent = k.word; }
+  else { q.className = 'q'; q.style.fontSize = ''; q.textContent = k.character; }
+  $('#fcCount').textContent = `${di + 1} / ${deck.length}`;
+  $('#fcBar').style.width = (di / deck.length * 100) + '%';
+  $('#fcPrev').disabled = di === 0; $('#fcNext').disabled = di >= deck.length - 1;
+}
+function flip() {
+  if (!deck.length || di >= deck.length) return;
+  const k = deck[di], mode = $('#fcMode').value;
+  flipped = !flipped; if (!flipped) return showCard();
+  if (fcIsVocab()) {                                   // 熟語カードの裏面
+    const kj = (k.kanji || []).map(c => `<span class="t lv" style="font-size:1rem">${c}</span>`).join(' ');
+    let h;
+    if (mode === 'm2k' || mode === 'r2k')
+      h = `<div style="font-size:2.4rem;font-weight:700;line-height:1.25">${k.word}</div>
+           <div style="color:var(--blue)">${k.reading}</div>
+           <div style="color:var(--muted);font-size:.9rem">${vMean(k)}</div>`;
+    else if (mode === 'k2m')
+      h = `<div style="font-size:1.15rem">${vMean(k)}</div><div style="color:var(--blue)">${k.reading}</div>`;
+    else
+      h = `<div style="font-size:1.6rem;color:var(--blue)">${k.reading}</div>
+           <div style="color:var(--muted);font-size:.95rem">${vMean(k)}</div>`;
+    $('#fcQ').style.display = 'none';
+    $('#fcA').innerHTML = h + `<div style="margin-top:.5rem">${kj}</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:.3rem">${k.level}${k.category ? '・' + k.category : ''}</div>`;
+    $('#fcA').style.display = ''; $('#fcJudge').style.display = 'flex'; $('#fcNav').style.display = 'none';
+    $('#fcTip').textContent = 'Sudah hafal? ／ 覚えていましたか？';
+    return;
+  }
+  const ex = k.examples.slice(0, 2).map(e =>
+    `<div style="font-size:.83rem;color:var(--muted)">${e.word}（${e.reading}）— ${exMean(e)}</div>`).join('');
+  let html;
+  if (mode === 'k2r') html = `<div style="margin-bottom:.35rem">${k.on.map(r => `<span class="t on-">${r}</span>`).join(' ')} ${k.kun.map(r => `<span class="t kun">${r}</span>`).join(' ')}</div>
+    <div style="color:var(--muted);font-size:.9rem">${meanOf(k).slice(0, 3).join(', ')}</div>${ex}`;
+  else if (mode === 'k2m') html = `<div style="font-size:1.1rem;margin-bottom:.25rem">${meanOf(k).slice(0, 4).join(', ')}</div>
+    <div style="font-size:.85rem;color:var(--muted)">${k.on.concat(k.kun).slice(0, 4).join(' / ')}</div>${ex}`;
+  else html = `<div style="font-family:var(--kfont);font-size:4.3rem;line-height:1">${k.character}</div>
+    <div style="color:var(--muted);font-size:.88rem">${k.on.concat(k.kun).slice(0, 3).join(' / ')}</div>${ex}`;
+  $('#fcQ').style.display = 'none';
+  $('#fcA').innerHTML = html + `<div style="font-size:.72rem;color:var(--muted);margin-top:.35rem">${k.level}・${k.strokes}画</div>`;
+  $('#fcA').style.display = ''; $('#fcJudge').style.display = 'flex'; $('#fcNav').style.display = 'none';
+  $('#fcTip').textContent = 'Sudah hafal? ／ 覚えていましたか？';
+}
+function judge(ok) {
+  if (di >= deck.length) return;
+  const key = cardKey(deck[di]), mark = fcIsVocab() ? setVMark : setMark;
+  ok ? (okN++, mark(key, 'known')) : (ngN++, wrong.push(deck[di]), mark(key, 'review'));
+  $('#fcOk').textContent = `Hafal ${okN}`; $('#fcNg').textContent = `Ulang ${ngN}`;
+  di++; showCard();
+}
+function finish() {
+  $('#fcCard').style.display = 'none'; $('#fcNav').style.display = 'none'; $('#fcJudge').style.display = 'none';
+  $('#fcDone').style.display = ''; $('#fcBar').style.width = '100%';
+  const t = okN + ngN;
+  $('#fcResult').textContent = t ? `${okN}/${t}（${Math.round(okN / t * 100)}%）hafal ／ 覚えました` : '';
+  $('#fcRedo').style.display = wrong.length ? '' : 'none';
+}
+
+
+/* ================= 練習問題（JLPT形式） ================= */
+const KANJI_RE2 = /[一-鿿]/;
+const KANA_ONLY = /^[ぁ-ゖァ-ヺー]+$/;
+let qz = { list: [], i: 0, ok: 0, ng: 0, wrong: [], answered: false };
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const pick = (arr, n) => shuffle([...arr]).slice(0, n);
+
+/* ---------- 例文データ（JLPT形式の問題で使う） ---------- */
+let SENT = {}, sentPromise = null;
+function loadSentences() {
+  return sentPromise || (sentPromise = fetch('sentences.json', { cache: 'no-cache' })
+    .then(r => r.json()).then(j => (SENT = j.sentences || {})).catch(() => (SENT = {})));
+}
+/** 語 → {s:例文, sur:文中の形, r:その読み}（例文がなければ null） */
+function sentOf(w) {
+  const v = SENT[w.word]; if (!v) return null;
+  return typeof v === 'string' ? { s: v, sur: w.word, r: w.reading } : { s: v[0], sur: v[1], r: v[2] };
+}
+const UL = t => `<u style="text-underline-offset:5px">${t}</u>`;
+const onceOnly = e => e.s.split(e.sur).length === 2;   // 例文中に1回だけ出る
+/** 例文の該当部分を rep に置きかえる（und=false なら下線なし） */
+function sentHTML(e, rep, und = true) {
+  const i = e.s.indexOf(e.sur), t = rep === undefined ? e.sur : rep;
+  return e.s.slice(0, i) + (und ? UL(t) : t) + e.s.slice(i + e.sur.length);
+}
+
+/* ---------- まぎらわしい読み（清濁・長短・促音…）を作る ---------- */
+const SEION = 'かきくけこさしすせそたちつてとはひふへほ';
+const DAKUON = 'がぎぐげござじずぜぞだぢづでどばびぶべぼ';
+const HA = 'はひふへほ', PA = 'ぱぴぷぺぽ';
+const OCOL = 'おこそとのほもよろごぞどぼぽょ';       // 長音（う）が付きやすい母音
+const KSEI = 'かきくけこさしすせそたちつてとぱぴぷぺぽ';
+function readVariants(r) {
+  const out = new Set(), rep = (i, k) => r.slice(0, i) + k + r.slice(i + 1);
+  const del = i => r.slice(0, i) + r.slice(i + 1);
+  for (let i = 0; i < r.length; i++) {
+    const c = r[i]; let j;
+    if ((j = SEION.indexOf(c)) >= 0) out.add(rep(i, DAKUON[j]));      // 清音→濁音
+    if ((j = DAKUON.indexOf(c)) >= 0) out.add(rep(i, SEION[j]));      // 濁音→清音
+    if ((j = HA.indexOf(c)) >= 0) out.add(rep(i, PA[j]));             // は行→ぱ行
+    if ((j = PA.indexOf(c)) >= 0) out.add(rep(i, HA[j]));
+    if ('っんー'.includes(c)) out.add(del(i));                        // 促音・撥音・長音をぬく
+    if ('ゃゅょ'.includes(c)) { out.add(del(i)); out.add(rep(i, { 'ゃ': 'や', 'ゅ': 'ゆ', 'ょ': 'よ' }[c])); }
+    if (c === 'う' && i > 0) out.add(del(i));                         // 長音をぬく
+    if (OCOL.includes(c)) out.add(r.slice(0, i + 1) + 'う' + r.slice(i + 1)); // 長音を足す
+    if (i > 0 && KSEI.includes(c) && r[i - 1] !== 'っ') out.add(r.slice(0, i) + 'っ' + r.slice(i));
+  }
+  out.delete(r);
+  return [...out].filter(x => x.length >= 2 && Math.abs(x.length - r.length) <= 1);
+}
+
+/* ---------- 形のにた漢字（同じ部首・同じ音読み）で にせの熟語を作る ---------- */
+let SIMK = null;
+function buildSimK() {
+  SIMK = {};
+  const byRad = {}, byOn = {}, on1 = k => (k.on || []).slice(0, 1).map(o => o.replace(/\./g, '')).filter(Boolean);
+  DATA.forEach(k => {
+    const rd = k.radical && k.radical.character;
+    if (rd) (byRad[rd] = byRad[rd] || []).push(k.character);
+    on1(k).forEach(o => (byOn[o] = byOn[o] || []).push(k.character));
+  });
+  DATA.forEach(k => {
+    const set = new Set(), rd = k.radical && k.radical.character;
+    (byRad[rd] || []).forEach(c => { if (c !== k.character) set.add(c); });
+    on1(k).forEach(o => (byOn[o] || []).forEach(c => { if (c !== k.character) set.add(c); }));
+    SIMK[k.character] = [...set];
+  });
+}
+function fakeWords(word, n) {
+  if (!SIMK) buildSimK();
+  const chars = [...word], cand = [];
+  chars.forEach((c, i) => (SIMK[c] || []).forEach(s => {
+    const w = chars.slice(0, i).join('') + s + chars.slice(i + 1).join('');
+    if (w !== word && !VBYW[w]) cand.push(w);
+  }));
+  return pick([...new Set(cand)], n);
+}
+
+/* ---------- 類義語（意味が同じ語どうし） ---------- */
+let SYN = null;
+function buildSyn() {
+  SYN = {};
+  const g = {};
+  VOCAB.forEach(w => {
+    [w.meaning_id, w.meaning].forEach(t => {
+      const m = (t || '').trim().toLowerCase();
+      if (m.length > 2) (g[m] = g[m] || []).push(w.word);
+    });
+  });
+  Object.values(g).forEach(list => {
+    const u = [...new Set(list)];
+    if (u.length < 2 || u.length > 6) return;
+    u.forEach(a => (SYN[a] = [...new Set((SYN[a] || []).concat(u.filter(b => b !== a)))]));
+  });
+}
+
+/* ---------- 漢字1字の読み：熟語の中で出すための補助 ---------- */
+const LVRANK = { 'N5': 1, 'N4': 2, 'N3': 3, '介護': 4 };
+const kRank = ch => LVRANK[(BYCH[ch] || {}).level] || 5;   // 未収録＝いちばん上とみなす
+const rdList = k => [...new Set((k.on || []).concat(k.kun || [])
+  .map(r => r.split('.')[0].replace(/-/g, '')).filter(Boolean))];
+/** 2字熟語のなかで、その漢字が読む部分を切り出す（確実に分かるときだけ返す） */
+function splitReading(word, ch, reading) {
+  const cs = [...word];
+  if (cs.length !== 2 || !/^[ぁ-ゖ]+$/.test(reading)) return null;
+  const kk = BYCH[ch]; if (!kk) return null;
+  const cands = rdList(kk).filter(r => /^[ぁ-ゖ]+$/.test(r));
+  if (cs[0] === ch) {
+    for (const r of cands) if (reading.startsWith(r) && reading.length > r.length)
+      return { target: r, other: cs[1], otherRead: reading.slice(r.length), first: true };
+  } else if (cs[1] === ch) {
+    for (const r of cands) if (reading.endsWith(r) && reading.length > r.length)
+      return { target: r, other: cs[0], otherRead: reading.slice(0, reading.length - r.length), first: false };
+  }
+  return null;
+}
+/** 読みの誤答：まぎらわしい形→足りなければ他の漢字の同じ長さの読み */
+function readDistractors(ans, kpool, ch, n = 3) {
+  let out = pick(readVariants(ans), n);
+  if (out.length < n) {
+    const more = [];
+    kpool.forEach(x => { if (x.character !== ch) rdList(x).forEach(r => {
+      if (KANA_ONLY.test(r) && r.length === ans.length) more.push(r); }); });
+    out = [...new Set(out.concat(pick(more, 30)))].filter(x => x !== ans && KANA_ONLY.test(x)).slice(0, n);
+  }
+  return out;
+}
+
+/** 出題対象の語（レベル指定つき） */
+function quizPool(lv) {
+  return VOCAB.filter(w => (lv === 'all' || w.level === lv) && w.word && w.reading && (w.meaning_id || w.meaning));
+}
+/** 誤答（似た語）を選ぶ：同じレベル・同じくらいの長さ・読みが違うもの */
+function distractors(pool, correct, key, n = 3) {
+  const same = pool.filter(w => w[key] && w[key] !== correct[key] &&
+    Math.abs(w.word.length - correct.word.length) <= 1);
+  const chosen = [];
+  const seen = new Set([correct[key]]);
+  for (const w of shuffle(same)) {
+    if (seen.has(w[key])) continue;
+    seen.add(w[key]); chosen.push(w);
+    if (chosen.length >= n) break;
+  }
+  return chosen;
+}
+/** 1問を作る */
+function makeQuestion(type, pool, kpool) {
+  if (type === 'kanjiread') {
+    const k = pick(kpool, 1)[0]; if (!k) return null;
+    const ch = k.character, MEAN = meanOf(k).slice(0, 3).join(', ');
+    /* ① その1字で意味のある語（山・水・手など）は、1字のまま出す */
+    if (VBYW[ch] && KANA_ONLY.test(VBYW[ch].reading)) {
+      const ans = VBYW[ch].reading, ds = readDistractors(ans, kpool, ch);
+      if (ds.length === 3) return { kind: '漢字の読み ／ Baca kanji ini',
+        q: `<span style="font-family:var(--kfont);font-size:3rem">${ch}</span>`,
+        choices: shuffle([ans, ...ds]), answer: ans, key: ch, isKanji: true,
+        note: `${ch}（${ans}）：${MEAN}` };
+    }
+    /* ② 1字では使わない漢字は、熟語の中で出す。相手の字が上のレベルならふりがなを付ける */
+    for (const w of shuffle((WORDS_OF[ch] || []).filter(x => [...x.word].length === 2 &&
+        KANA_ONLY.test(x.reading) && !x.word.includes('々')))) {
+      const sp = splitReading(w.word, ch, w.reading); if (!sp) continue;
+      const ds = readDistractors(sp.target, kpool, ch); if (ds.length < 3) continue;
+      /* ふりがなは「相手が漢字」かつ「相手のほうが上のレベル」かつ「答えが読めてしまわない」ときだけ */
+      const ruby = KANJI_RE2.test(sp.other) && kRank(sp.other) > kRank(ch) &&
+        !sp.otherRead.includes(sp.target) && !sp.target.includes(sp.otherRead);
+      const oth = ruby
+        ? `<ruby>${sp.other}<rt style="font-size:.34em;font-weight:400">${sp.otherRead}</rt></ruby>` : sp.other;
+      return { kind: '漢字の読み（熟語の中で） ／ Baca kanji bergaris',
+        q: `<span style="font-family:var(--kfont);font-size:2.6rem;line-height:1.9">${sp.first ? UL(ch) + oth : oth + UL(ch)}</span>`,
+        choices: shuffle([sp.target, ...ds]), answer: sp.target, key: ch, isKanji: true,
+        note: `${w.word}（${w.reading}）＝ ${vMean(w)}　／　${ch}：${MEAN}` };
+    }
+    /* ③ どちらもできないときは、代表的な読みを1字で */
+    const reads = rdList(k).filter(r => KANA_ONLY.test(r));
+    if (!reads.length) return null;
+    const ans = reads[0], ds = readDistractors(ans, kpool, ch);
+    if (ds.length < 3) return null;
+    return { kind: '漢字の読み ／ Baca kanji ini',
+      q: `<span style="font-family:var(--kfont);font-size:3rem">${ch}</span>`,
+      choices: shuffle([ans, ...ds]), answer: ans, key: ch, isKanji: true,
+      note: `${ch}：${MEAN}` };
+  }
+  const w = pick(pool, 1)[0]; if (!w) return null;
+  const e = sentOf(w), NOTE = x => `${x.word}（${x.reading}）＝ ${vMean(x)}`;
+
+  if (type === 'reading') {                     /* 問題1 漢字読み */
+    if (!KANJI_RE2.test(w.word)) return null;
+    const ans = e ? e.r : w.reading;
+    if (!KANA_ONLY.test(ans)) return null;       // 「～じゅう」「いく; ゆく」などは出さない
+    let ch = pick(readVariants(ans), 3);
+    if (ch.length < 3) ch = [...new Set(ch.concat(distractors(pool, w, 'reading').map(d => d.reading)))]
+      .filter(x => x !== ans && KANA_ONLY.test(x)).slice(0, 3);
+    if (ch.length < 3) return null;
+    return { kind: '問題1 　＿＿の言葉の読み方は？ ／ Cara baca kata bergaris',
+      q: e ? sentHTML(e) : `${UL(w.word)} の読み方は？`,
+      choices: shuffle([ans, ...ch]), answer: ans, key: w.word, note: NOTE(w) };
+  }
+  if (type === 'orth') {                        /* 問題2 表記 */
+    const ee = e && onceOnly(e) ? e : null;
+    const ans = ee ? ee.sur : w.word;
+    if (!KANJI_RE2.test(ans)) return null;
+    const rd = ee ? ee.r : w.reading;
+    if (!KANA_ONLY.test(rd)) return null;
+    let ch = fakeWords(ans, 3);
+    if (ch.length < 3) ch = [...new Set(ch.concat(distractors(pool, w, 'word')
+      .filter(d => KANJI_RE2.test(d.word) && d.reading !== rd).map(d => d.word)))]
+      .filter(x => x !== ans && !(VBYW[x] && VBYW[x].reading === rd)).slice(0, 3);
+    if (ch.length < 3) return null;
+    return { kind: '問題2 　＿＿の言葉を漢字で書くと？ ／ Penulisan kanji yang benar',
+      q: ee ? sentHTML(ee, rd) : `<span style="color:var(--blue)">${w.reading}</span>
+             <br><span style="font-size:.9rem;color:var(--muted)">${vMean(w)}</span>`,
+      choices: shuffle([ans, ...ch]), answer: ans, key: w.word, note: NOTE(w) };
+  }
+  if (type === 'context') {                     /* 問題3 文脈規定 */
+    if (e && onceOnly(e)) {
+      const ds = pick(pool.filter(x => x.word !== w.word && SENT[x.word] &&
+        Math.abs(x.word.length - w.word.length) <= 2), 3).map(sentOf).filter(Boolean)
+        .filter(o => o.sur !== e.sur);
+      if (ds.length < 3) return null;
+      return { kind: '問題3 　（　）に入る言葉は？ ／ Kata yang tepat untuk bagian kosong',
+        q: sentHTML(e, '（　　　）', false),
+        choices: shuffle([e.sur, ...ds.map(o => o.sur)]), answer: e.sur, key: w.word, note: NOTE(w) };
+    }
+    const ds = distractors(pool, w, 'word'); if (ds.length < 3) return null;
+    return { kind: '問題3 　意味に合う言葉は？ ／ Kata yang sesuai artinya',
+      q: `<span style="font-size:1.1rem">${vMean(w)}</span>`,
+      choices: shuffle([w.word, ...ds.map(d => d.word)]), answer: w.word, key: w.word, note: NOTE(w) };
+  }
+  if (type === 'para') {                        /* 問題4 言い換え類義 */
+    if (!SYN) buildSyn();
+    const syn = (SYN[w.word] || []).filter(s => VBYW[s]);
+    if (!syn.length) return null;
+    const ans = syn[0], ds = distractors(pool, w, 'word')
+      .filter(d => d.word !== ans && !syn.includes(d.word)).slice(0, 3);
+    if (ds.length < 3) return null;
+    return { kind: '問題4 　意味がいちばん近い言葉は？ ／ Kata yang paling dekat artinya',
+      q: e ? sentHTML(e) + `<div style="font-size:.95rem;color:var(--muted);margin-top:.4rem">${UL(w.word)} とだいたい同じ意味の言葉は？</div>`
+           : `${UL(w.word)} とだいたい同じ意味の言葉は？`,
+      choices: shuffle([ans, ...ds.map(d => d.word)]), answer: ans, key: w.word,
+      note: `${w.word}＝${ans}（${vMean(w)}）` };
+  }
+  if (type === 'usage') {                       /* 問題5 用法 */
+    if (!e) return null;
+    const others = pick(pool.filter(x => x.word !== w.word && SENT[x.word] &&
+      (x.category || '_') !== (w.category || '')), 3).map(sentOf).filter(Boolean);
+    if (others.length < 3) return null;
+    const wrong = others.map(o => o.s.replace(o.sur, e.sur)).filter(s => s !== e.s);
+    if (wrong.length < 3) return null;
+    return { kind: '問題5 　使い方が正しい文は？ ／ Kalimat yang pemakaiannya benar',
+      q: `<span style="font-family:var(--kfont);font-size:1.8rem">${w.word}</span>
+          <span style="font-size:.9rem;color:var(--muted)">（${w.reading}）</span>`,
+      choices: shuffle([e.s, ...wrong]), answer: e.s, key: w.word, note: NOTE(w) };
+  }
+  return null;
+}
+function buildQuiz() {
+  const lv = $('#qzLv').value, type = $('#qzType').value, n = +$('#qzNum').value;
+  const pool = quizPool(lv);
+  const kpool = DATA.filter(k => lv === 'all' || k.level === lv);
+  if (pool.length < 8) { alert('この範囲は語が少なすぎます。レベルを変えてください。'); return; }
+  const types = type === 'mix' ? ['reading', 'orth', 'context', 'para', 'usage'] : [type];
+  const list = []; let guard = 0;
+  while (list.length < n && guard++ < n * 40) {
+    const t = types[list.length % types.length];
+    const q = makeQuestion(t, pool, kpool);
+    if (q && !list.some(x => x.key === q.key && x.kind === q.kind)) list.push(q);
+  }
+  if (!list.length) { alert('問題を作れませんでした。範囲を広げてください。'); return; }
+  qz = { list, i: 0, ok: 0, ng: 0, wrong: [], answered: false };
+  $('#qzMeta').style.display = 'flex'; $('#qzBarWrap').style.display = '';
+  $('#qzArea').style.display = ''; $('#qzDone').style.display = 'none';
+  showQuestion();
+}
+function showQuestion() {
+  const q = qz.list[qz.i];
+  if (!q) return finishQuiz();
+  qz.answered = false;
+  $('#qzKind').textContent = q.kind;
+  $('#qzQ').innerHTML = q.q;
+  $('#qzChoices').innerHTML = q.choices.map((c, i) =>
+    `<button class="btn qz-choice" data-c="${c}" style="text-align:left;font-size:1.05rem;padding:.7rem .9rem">
+       <span style="color:var(--muted);margin-right:.5rem">${i + 1}</span>${c}</button>`).join('');
+  $('#qzFeedback').style.display = 'none';
+  $('#qzNext').style.display = 'none';
+  $('#qzCount').textContent = `${qz.i + 1} / ${qz.list.length}`;
+  $('#qzBar').style.width = (qz.i / qz.list.length * 100) + '%';
+}
+function answerQuiz(choice) {
+  if (qz.answered) return;
+  qz.answered = true;
+  const q = qz.list[qz.i], right = choice === q.answer;
+  if (right) qz.ok++; else { qz.ng++; qz.wrong.push(q);
+    if (q.isKanji) setMark(q.key, 'review'); else setVMark(q.key, 'review'); }
+  $$('.qz-choice').forEach(b => {
+    if (b.dataset.c === q.answer) { b.style.background = 'var(--green)'; b.style.color = '#fff'; b.style.borderColor = 'var(--green)'; }
+    else if (b.dataset.c === choice) { b.style.background = '#fee2e2'; b.style.color = 'var(--red)'; b.style.borderColor = 'var(--red)'; }
+    b.disabled = true;
+  });
+  $('#qzFeedback').innerHTML = `<div class="state ${right ? 'known' : 'review'}">${right ? '✓ Benar ／ 正解' : '✗ Salah ／ 不正解'}</div>
+    <div style="margin-top:.4rem;font-size:.9rem">${q.note}</div>`;
+  $('#qzFeedback').style.display = '';
+  $('#qzOk').textContent = `正解 ${qz.ok}`; $('#qzNg').textContent = `不正解 ${qz.ng}`;
+  $('#qzNext').style.display = '';
+  $('#qzNext').textContent = qz.i >= qz.list.length - 1 ? '結果を見る ／ Lihat hasil' : '次の問題 ／ Berikutnya →';
+}
+function finishQuiz() {
+  $('#qzArea').style.display = 'none'; $('#qzBar').style.width = '100%';
+  $('#qzDone').style.display = '';
+  const total = qz.ok + qz.ng, pct = total ? Math.round(qz.ok / total * 100) : 0;
+  $('#qzScore').textContent = `${qz.ok} / ${total}（${pct}%）`;
+  $('#qzMsg').textContent = pct >= 80 ? 'よくできました！ ／ Bagus sekali!'
+    : pct >= 60 ? 'あと少しです ／ Sedikit lagi!' : 'もう一度復習しましょう ／ Ayo ulangi lagi';
+  $('#qzWrongList').innerHTML = qz.wrong.length
+    ? `<div class="lb">間違えた問題 ／ Yang salah（要復習に登録しました）</div><ul class="ex">` +
+      qz.wrong.map(w => `<li class="w-review"><div class="m">${w.note}</div></li>`).join('') + '</ul>'
+    : '';
+  $('#qzRetryWrong').style.display = qz.wrong.length ? '' : 'none';
+  refreshStats();
+}
+$('#qzStart').onclick = () => Promise.all([loadVocab(), loadSentences()]).then(buildQuiz);
+$('#qzAgain').onclick = () => buildQuiz();
+$('#qzRetryWrong').onclick = () => {
+  qz = { list: shuffle(qz.wrong), i: 0, ok: 0, ng: 0, wrong: [], answered: false };
+  $('#qzDone').style.display = 'none'; $('#qzArea').style.display = ''; showQuestion();
+};
+$('#qzNext').onclick = () => { qz.i++; showQuestion(); };
+$('#qzChoices').addEventListener('click', e => {
+  const b = e.target.closest('.qz-choice'); if (b) answerQuiz(b.dataset.c);
+});
+
+/* ---------- stats ---------- */
+function refreshStats() {
+  if (!DATA.length) return;
+  const bar = (label, all, P, key) => {
+    const kn = all.filter(x => P[key(x)] === 'known').length;
+    const rv = all.filter(x => P[key(x)] === 'review').length;
+    return `<div class="prog"><div class="lv"><span>${label}</span><span>${kn}/${all.length}</span></div>
+      <div class="bar" style="margin-top:.4rem"><i style="width:${all.length ? kn / all.length * 100 : 0}%"></i></div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:.3rem">Hafal ${kn}・Ulang ${rv}</div></div>`;
+  };
+  $('#progWrap').innerHTML =
+    '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted)">KANJI ／ 漢字</div>' +
+    ['N5', 'N4', 'N3', '介護'].map(lv => bar(lv, DATA.filter(k => k.level === lv), progress, x => x.character)).join('') +
+    (VOCAB.length ? '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted);margin-top:.5rem">KOSAKATA ／ 熟語</div>' +
+      ['N5', 'N4', 'N3', '介護', '現場', '施設', '追加'].filter(lv => VOCAB.some(w => w.level === lv)).map(lv => bar(lv, VOCAB.filter(w => w.level === lv), vprogress, x => x.word)).join('') : '');
+  const rev = DATA.filter(k => progress[k.character] === 'review');
+  $('#reviewGrid').innerHTML = rev.length ? rev.map(cardHTML).join('')
+    : '<p style="color:var(--muted);font-size:.85rem">— </p>';
+}
+
+/* ---------- events ---------- */
+$$('.tab').forEach(t => t.onclick = () => {
+  $$('.tab').forEach(x => x.classList.toggle('on', x === t));
+  $$('.panel').forEach(p => p.classList.remove('on'));
+  $('#p-' + t.dataset.tab).classList.add('on');
+  if (t.dataset.tab === 'stroke') renderStroke();
+  if (t.dataset.tab === 'vocab') loadVocab().then(renderVocab);
+  if (t.dataset.tab === 'quiz') { loadVocab(); loadSentences(); }
+  if (t.dataset.tab === 'stats') refreshStats();
+  window.scrollTo({ top: 0 });
+});
+$('#langBtn').onclick = () => {
+  LANG = LANG === 'id' ? 'en' : 'id'; localStorage.setItem(LANGKEY, LANG);
+  $('#langBtn').textContent = LANG === 'id' ? '🌐 ID' : '🌐 EN';
+  renderList(); refreshStats(); if ($('#ov').classList.contains('on')) openModal(modalCh);
+};
+$('#q').oninput = () => { listLimit = 120; renderList(); };
+$('#sort').onchange = renderList;
+$('#mark').onchange = () => { listLimit = 120; renderList(); };
+$$('#lvChips .chip').forEach(c => c.onclick = () => {
+  $$('#lvChips .chip').forEach(x => x.classList.toggle('on', x === c));
+  curLv = c.dataset.lv; listLimit = 120; renderList();
+});
+$$('#sLvChips .chip').forEach(c => c.onclick = () => {
+  $$('#sLvChips .chip').forEach(x => x.classList.toggle('on', x === c));
+  curSLv = c.dataset.lv; sLimit = 60; renderStroke();
+});
+$('#sq').oninput = () => { sLimit = 60; renderStroke(); };
+$('#sSort').onchange = () => renderStroke();
+$('#sMore').onclick = () => { sLimit += 60; renderStroke(); };
+
+/* --- 施設の言葉を追加（この端末に保存） --- */
+function refreshMyCount() {
+  $('#nwCount').textContent = myWords.length ? `この端末に${myWords.length}語` : '';
+}
+$('#nwAdd').onclick = () => {
+  const word = $('#nwWord').value.trim(), reading = $('#nwRead').value.trim(),
+        mid = $('#nwMean').value.trim(), cat = $('#nwCat').value, sub = $('#nwSub').value.trim();
+  if (!word) { $('#nwWord').focus(); return; }
+  myWords = myWords.filter(m => m.word !== word);
+  myWords.push({ word, reading, meaning_id: mid, meaning: mid, category: cat, sub });
+  saveMyWords();
+  VOCAB = VOCAB.filter(w => w.word !== word);
+  VOCAB.push({ word, reading, meaning_id: mid, meaning: mid, category: cat, sub, level: '追加', mine: true,
+               kanji: [...word].filter(c => KANJI_RE.test(c)) });
+  reindexVocab();
+  $('#nwWord').value = $('#nwRead').value = $('#nwMean').value = $('#nwSub').value = '';
+  refreshMyCount(); vLimit = 120; renderVocab(); refreshStats();
+};
+$('#nwExport').onclick = () => {
+  const esc = s => /[",]/.test(s || '') ? `"${String(s).replace(/"/g, '""')}"` : (s || '');
+  const csv = '﻿熟語,ふりがな,意味（インドネシア語）,分野,小分類,意味（英語）,削除\n' +
+    myWords.map(m => [m.word, m.reading, m.meaning_id, m.category, m.sub || '', '', ''].map(esc).join(',')).join('\n') + '\n';
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+  a.download = 'vocab-extra.csv'; a.click(); URL.revokeObjectURL(a.href);
+};
+refreshMyCount();
+
+$('#vq').oninput = () => { vLimit = 120; renderVocab(); };
+$('#vCat').onchange = () => { $('#vSub').value = 'all'; vLimit = 120; renderVocab(); };
+$('#vSub').onchange = () => { vLimit = 120; renderVocab(); };
+$$('#vLvChips .chip').forEach(c => c.onclick = () => {
+  $$('#vLvChips .chip').forEach(x => x.classList.toggle('on', x === c));
+  vLv = c.dataset.lv; vLimit = 120; renderVocab();
+});
+$('#vmX').onclick = () => closeVocabModal();
+$('#vmBack').onclick = goBack;
+$('#mBack').onclick = goBack;
+$('#vov').onclick = e => { if (e.target === $('#vov')) { navStack.length ? goBack() : closeVocabModal(); } };
+const toggleV = st => {
+  const cur = vprogress[vModalWord];
+  setVMark(vModalWord, cur === st ? null : st);
+  paintState($('#vmState'), vprogress[vModalWord], $('#vmOk'), $('#vmNg'));
+  renderVocab();
+};
+$('#vmOk').onclick = () => toggleV('known');
+$('#vmNg').onclick = () => toggleV('review');
+$('#fcType').onchange = () => {
+  const voc = fcIsVocab();
+  $$('#fcMode option')[0].textContent = voc ? '熟語 → Cara baca ／ 読み' : '漢字 → Cara baca ／ 読み';
+  $$('#fcMode option')[1].textContent = voc ? '熟語 → Arti ／ 意味' : '漢字 → Arti ／ 意味';
+  $$('#fcMode option')[2].textContent = voc ? 'Cara baca → 熟語 ／ 読み→熟語' : 'Cara baca → 漢字 ／ 読み→漢字';
+  $$('#fcMode option')[3].textContent = voc ? 'Arti → 熟語 ／ 意味→熟語' : 'Arti → 漢字 ／ 意味→漢字';
+  if (voc) loadVocab().then(buildDeck); else buildDeck();
+};
+
+document.addEventListener('click', e => {
+  const wl = e.target.closest('#mWords li[data-word]');
+  if (wl) { navStack.push({ type: 'kanji', key: modalCh }); closeModal(false); return openVocab(wl.dataset.word); }
+  const vc = e.target.closest('[data-word]');
+  if (vc) return openVocab(vc.dataset.word);
+  const sv = e.target.closest('.sv-main');
+  if (sv) { e.stopPropagation(); return animate(sv, (STROKES || {})[sv.dataset.ch] || []); }
+  const card = e.target.closest('.kcard');
+  if (card) {
+    if (card.closest('#vmKanji')) { navStack.push({ type: 'vocab', key: vModalWord }); closeVocabModal(false); }
+    return openModal(card.dataset.ch);
+  }
+  const sc = e.target.closest('.scard'); if (sc) return openModal(sc.dataset.ch);
+});
+$('#mX').onclick = () => closeModal();
+$('#ov').onclick = e => { if (e.target === $('#ov')) { navStack.length ? goBack() : closeModal(); } };
+const replay = () => animate($('#mSvg'), (STROKES || {})[modalCh] || []);
+$('#mPlay').onclick = replay;
+$('#mSvg').onclick = replay;
+$('#mCh').onclick = replay;
+const toggleK = st => {
+  const cur = progress[modalCh];
+  setMark(modalCh, cur === st ? null : st);
+  paintState($('#mState'), progress[modalCh], $('#mOk'), $('#mNg'));
+  renderList();
+};
+$('#mOk').onclick = () => toggleK('known');
+$('#mNg').onclick = () => toggleK('review');
+
+$('#fcStart').onclick = buildDeck;
+$('#fcMode').onchange = showCard;
+$('#fcCard').onclick = flip; $('#fcFlip').onclick = flip;
+$('#fcPrev').onclick = () => { if (di > 0) { di--; showCard(); } };
+$('#fcNext').onclick = () => { if (di < deck.length - 1) { di++; showCard(); } };
+$('#fcGood').onclick = () => judge(true);
+$('#fcBad').onclick = () => judge(false);
+$('#fcAgain').onclick = buildDeck;
+$('#fcRedo').onclick = () => { deck = wrong; di = 0; okN = ngN = 0; wrong = []; $('#fcDone').style.display = 'none'; $('#fcCard').style.display = ''; showCard(); };
+
+$('#resetBtn').onclick = () => { if (confirm('Hapus semua catatan belajar? ／ 学習記録をすべて消しますか？')) { progress = {}; save(); refreshStats(); renderList(); } };
+$('#expBtn').onclick = () => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(progress, null, 1)], { type: 'application/json' }));
+  a.download = 'kanji-progress.json'; a.click(); URL.revokeObjectURL(a.href);
+};
+document.addEventListener('keydown', e => {
+  if ($('#vov').classList.contains('on')) {
+    if (e.key === 'Escape') { navStack.length ? goBack() : closeVocabModal(); }
+    return;
+  }
+  if ($('#ov').classList.contains('on')) {
+    if (e.key === 'Escape') { navStack.length ? goBack() : closeModal(); }
+    return;
+  }
+  if (!$('#p-card').classList.contains('on')) return;
+  if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flip(); }
+  else if (e.key === 'ArrowRight') $('#fcNext').click();
+  else if (e.key === 'ArrowLeft') $('#fcPrev').click();
+  else if (e.key === '1' && flipped) judge(false);
+  else if (e.key === '2' && flipped) judge(true);
+});
+
+$('#verLabel').textContent = VERSION;
+$('#reloadBtn').onclick = async () => {
+  try { if (window.caches) for (const k of await caches.keys()) await caches.delete(k); } catch (e) {}
+  location.reload();
+};
+
+function showLoadError(err) {
+  $('#grid').innerHTML = `<p style="color:var(--red)">Gagal memuat data ／ 読み込み失敗：${err}</p>`;
+}
+/* データの読み込みは合言葉を入れたあと（unlock 内）で行います */
+</script>
+</body>
+</html>
