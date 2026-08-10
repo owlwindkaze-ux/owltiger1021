@@ -1439,6 +1439,7 @@ $('#qzChoices').addEventListener('click', e => {
 });
 
 /* ---------- stats ---------- */
+let revLimitK = 200, revLimitV = 200;   // 要復習一覧の表示件数（ボタンで増える）
 function refreshStats() {
   if (!DATA.length) return;
   const bar = (label, all, P, key) => {
@@ -1453,17 +1454,26 @@ function refreshStats() {
     ['N5', 'N4', 'N3', '介護'].map(lv => bar(lv, DATA.filter(k => k.level === lv), progress, x => x.character)).join('') +
     (VOCAB.length ? '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted);margin-top:.5rem">KOSAKATA ／ 熟語</div>' +
       ['N5', 'N4', 'N3', '介護', '現場', '施設', '追加'].filter(lv => VOCAB.some(w => w.level === lv)).map(lv => bar(lv, VOCAB.filter(w => w.level === lv), vprogress, x => x.word)).join('') : '');
+  /* 要復習の一覧：漢字も熟語も全部出す。多いときは少しずつ表示して画面を軽く保つ */
   const rev = DATA.filter(k => progress[k.character] === 'review');
   const vrev = VOCAB.filter(w => vprogress[w.word] === 'review');
+  const kShow = rev.slice(0, revLimitK), vShow = vrev.slice(0, revLimitV);
+  const moreBtn = (id, shown, total, unit) => shown < total
+    ? `<div style="grid-column:1/-1;text-align:center;margin:.4rem 0">
+         <button class="btn" id="${id}">あと ${total - shown} ${unit}を表示 ／ Tampilkan lagi</button></div>` : '';
   $('#reviewGrid').innerHTML =
-    (rev.length ? `<div class="lb" style="grid-column:1/-1">漢字 ${rev.length}字</div>` + rev.map(cardHTML).join('') : '') +
+    (rev.length ? `<div class="lb" style="grid-column:1/-1">漢字 ${rev.length}字</div>` +
+      kShow.map(cardHTML).join('') + moreBtn('revMoreK', kShow.length, rev.length, '字') : '') +
     (vrev.length ? `<div class="lb" style="grid-column:1/-1;margin-top:.6rem">熟語 ${vrev.length}語</div>` +
-      vrev.slice(0, 120).map(w => `<button class="kcard is-review" data-w="${h(w.word)}">
+      vShow.map(w => `<button class="kcard is-review" data-w="${h(w.word)}">
         <div class="ch" style="font-size:1.15rem;line-height:1.5">${h(w.word)}</div>
         <div class="rd">${h(w.reading)}</div>
-        <div class="mean">${h(vMean(w))}</div></button>`).join('') : '') ||
+        <div class="mean">${h(vMean(w))}</div></button>`).join('') +
+      moreBtn('revMoreV', vShow.length, vrev.length, '語') : '') ||
     '<p style="color:var(--muted);font-size:.85rem">— まだありません ／ Belum ada</p>';
   $$('#reviewGrid .kcard[data-w]').forEach(b => b.onclick = () => openVocab(b.dataset.w));
+  if ($('#revMoreK')) $('#revMoreK').onclick = () => { revLimitK += 200; refreshStats(); };
+  if ($('#revMoreV')) $('#revMoreV').onclick = () => { revLimitV += 200; refreshStats(); };
 }
 
 /* ---------- events ---------- */
