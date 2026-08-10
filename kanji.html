@@ -253,6 +253,12 @@ footer a{color:var(--blue)}
         <button class="chip" data-lv="施設">施設独自 / Fasilitas</button>
         <button class="chip" data-lv="現場">現場 / Kerja</button>
       </div>
+      <select class="sel" id="vMark">
+        <option value="all">記録すべて ／ Semua</option>
+        <option value="unseen">未学習 ／ Belum dipelajari</option>
+        <option value="review">要復習 ／ Perlu diulang</option>
+        <option value="known">覚えた ／ Sudah hafal</option>
+      </select>
       <select class="sel" id="vCat">
         <option value="all">Semua bidang ／ 分野すべて</option>
         <option value="介護">介護（ケア） ／ Perawatan lansia</option>
@@ -459,8 +465,16 @@ footer a{color:var(--blue)}
       <div class="grid" id="reviewGrid"></div>
     </div>
     <div class="row" style="margin-top:1.5rem">
-      <button class="btn" id="expBtn">Simpan catatan belajar ／ 学習記録を書き出す</button>
+      <button class="btn pri" id="expCsv">📄 一覧をExcelで書き出す ／ CSV</button>
+      <button class="btn" id="expBtn">💾 バックアップを保存 ／ Cadangkan</button>
+      <button class="btn" id="impBtn">📂 バックアップを読み込む ／ Pulihkan</button>
+      <input type="file" id="impFile" accept=".json" style="display:none">
       <button class="btn ng" id="resetBtn">Hapus semua catatan ／ 記録を消す</button>
+    </div>
+    <p class="hint" style="white-space:normal;margin-top:.6rem">
+      <b>CSV</b>＝Excelで開ける一覧表です（漢字・熟語の一つずつの状態）。<br>
+      <b>バックアップ</b>＝漢字・熟語・文型・読解の記録をまとめて保存するファイルです。
+      機種変更のときは、新しい端末で「読み込む」を押してこのファイルを選んでください。
     </div>
   </section>
 
@@ -605,7 +619,7 @@ else document.getElementById('gatePw').focus();
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-08-06b';   // 更新日（版）
+const VERSION = '2026-08-07';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -803,8 +817,12 @@ function scoreVocab(w, q) {
 }
 function filterVocab() {
   const q = ($('#vq').value || '').trim().toLowerCase(), cat = $('#vCat').value, sub = $('#vSub').value;
+  const mk = $('#vMark') ? $('#vMark').value : 'all';
   return VOCAB.filter(w => {
     if (vLv !== 'all' && w.level !== vLv) return false;
+    if (mk === 'known' && vprogress[w.word] !== 'known') return false;
+    if (mk === 'review' && vprogress[w.word] !== 'review') return false;
+    if (mk === 'unseen' && vprogress[w.word]) return false;
     if (cat !== 'all' && w.category !== cat) return false;
     if (sub !== 'all' && w.sub !== sub) return false;
     if (!q) { w._s = 0; return true; }
@@ -1090,6 +1108,7 @@ function finish() {
 
 /* ================= 練習問題（JLPT形式） ================= */
 const KANJI_RE2 = /[一-鿿]/;
+const h = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const KANA_ONLY = /^[ぁ-ゖァ-ヺー]+$/;
 let qz = { list: [], i: 0, ok: 0, ng: 0, wrong: [], answered: false };
 const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
@@ -1435,8 +1454,16 @@ function refreshStats() {
     (VOCAB.length ? '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted);margin-top:.5rem">KOSAKATA ／ 熟語</div>' +
       ['N5', 'N4', 'N3', '介護', '現場', '施設', '追加'].filter(lv => VOCAB.some(w => w.level === lv)).map(lv => bar(lv, VOCAB.filter(w => w.level === lv), vprogress, x => x.word)).join('') : '');
   const rev = DATA.filter(k => progress[k.character] === 'review');
-  $('#reviewGrid').innerHTML = rev.length ? rev.map(cardHTML).join('')
-    : '<p style="color:var(--muted);font-size:.85rem">— </p>';
+  const vrev = VOCAB.filter(w => vprogress[w.word] === 'review');
+  $('#reviewGrid').innerHTML =
+    (rev.length ? `<div class="lb" style="grid-column:1/-1">漢字 ${rev.length}字</div>` + rev.map(cardHTML).join('') : '') +
+    (vrev.length ? `<div class="lb" style="grid-column:1/-1;margin-top:.6rem">熟語 ${vrev.length}語</div>` +
+      vrev.slice(0, 120).map(w => `<button class="kcard is-review" data-w="${h(w.word)}">
+        <div class="ch" style="font-size:1.15rem;line-height:1.5">${h(w.word)}</div>
+        <div class="rd">${h(w.reading)}</div>
+        <div class="mean">${h(vMean(w))}</div></button>`).join('') : '') ||
+    '<p style="color:var(--muted);font-size:.85rem">— まだありません ／ Belum ada</p>';
+  $$('#reviewGrid .kcard[data-w]').forEach(b => b.onclick = () => openVocab(b.dataset.w));
 }
 
 /* ---------- events ---------- */
@@ -1511,6 +1538,7 @@ $('#nwExport').onclick = () => {
 refreshMyCount();
 
 $('#vq').oninput = () => { vLimit = 120; renderVocab(); };
+$('#vMark').onchange = () => { vLimit = 120; renderVocab(); };
 $('#vCat').onchange = () => { $('#vSub').value = 'all'; vLimit = 120; renderVocab(); };
 $('#vSub').onchange = () => { vLimit = 120; renderVocab(); };
 $$('#vLvChips .chip').forEach(c => c.onclick = () => {
@@ -1578,10 +1606,55 @@ $('#fcAgain').onclick = buildDeck;
 $('#fcRedo').onclick = () => { deck = wrong; di = 0; okN = ngN = 0; wrong = []; $('#fcDone').style.display = 'none'; $('#fcCard').style.display = ''; showCard(); };
 
 $('#resetBtn').onclick = () => { if (confirm('Hapus semua catatan belajar? ／ 学習記録をすべて消しますか？')) { progress = {}; save(); refreshStats(); renderList(); } };
-$('#expBtn').onclick = () => {
+/* --- 学習記録の書き出し・読み込み --- */
+const PKEYS = ['jlpt-kanji-progress-v1', 'jlpt-kanji-progress-v1-vocab',
+               'jlpt-grammar-progress-v1', 'jlpt-dokkai-progress-v1'];
+const dl = (name, text, type) => {
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([JSON.stringify(progress, null, 1)], { type: 'application/json' }));
-  a.download = 'kanji-progress.json'; a.click(); URL.revokeObjectURL(a.href);
+  a.href = URL.createObjectURL(new Blob([text], { type }));
+  a.download = name; a.click(); URL.revokeObjectURL(a.href);
+};
+/** ① Excelで開ける一覧表 */
+$('#expCsv').onclick = () => {
+  const esc2 = v => /[",\n]/.test(v || '') ? `"${String(v).replace(/"/g, '""')}"` : (v || '');
+  const st = v => v === 'known' ? '覚えた' : v === 'review' ? '要復習' : '未学習';
+  const rows = [['種類', 'レベル', '言葉・漢字', '読み', '意味', '状態']];
+  DATA.forEach(k => rows.push(['漢字', k.level, k.character,
+    k.on.concat(k.kun).slice(0, 3).join('・'), meanOf(k).slice(0, 3).join(', '), st(progress[k.character])]));
+  VOCAB.forEach(w => rows.push(['熟語', w.level, w.word, w.reading, vMean(w), st(vprogress[w.word])]));
+  const d = new Date(), p2 = n => String(n).padStart(2, '0');
+  dl(`学習記録_${d.getFullYear()}${p2(d.getMonth() + 1)}${p2(d.getDate())}.csv`,
+     '\ufeff' + rows.map(r => r.map(esc2).join(',')).join('\r\n'), 'text/csv;charset=utf-8');
+};
+/** ② バックアップ（4システムまとめて） */
+$('#expBtn').onclick = () => {
+  const all = { app: 'owltiger1021', version: VERSION, saved: new Date().toISOString(), data: {} };
+  PKEYS.forEach(k => { const v = localStorage.getItem(k); if (v) all.data[k] = v; });
+  const d = new Date(), p2 = n => String(n).padStart(2, '0');
+  dl(`学習記録_バックアップ_${d.getFullYear()}${p2(d.getMonth() + 1)}${p2(d.getDate())}.json`,
+     JSON.stringify(all, null, 1), 'application/json');
+};
+/** ③ バックアップの読み込み */
+$('#impBtn').onclick = () => $('#impFile').click();
+$('#impFile').onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const j = JSON.parse(r.result);
+      const d = j.data || j;                       // 古い形式（漢字だけ）にも対応
+      let n = 0;
+      if (j.data) { PKEYS.forEach(k => { if (d[k]) { localStorage.setItem(k, d[k]); n++; } }); }
+      else { localStorage.setItem('jlpt-kanji-progress-v1', JSON.stringify(d)); n = 1; }
+      if (!n) throw new Error('中身がありません');
+      alert('読み込みました。画面を更新します。 ／ Berhasil dipulihkan.');
+      location.reload();
+    } catch (err) {
+      alert('このファイルは読み込めません。 ／ File tidak dapat dibaca.\n' + err);
+    }
+  };
+  r.readAsText(f);
+  e.target.value = '';
 };
 document.addEventListener('keydown', e => {
   if ($('#vov').classList.contains('on')) {
