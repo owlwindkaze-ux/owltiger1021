@@ -2,8 +2,10 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>介護の日本語 聴解練習（N3）</title>
+<meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="介護の技能実習生向け 聴解（聞き取り）練習。申し送り・声かけ・利用者の言葉を聞いて答えます。">
+<title>Menyimak Kaigo ｜ 介護の聴解練習</title>
 <style>
   :root{
     --ink:#17202E;
@@ -146,6 +148,43 @@
 
   footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;font-size:12.5px;color:var(--muted)}
 
+  /* ---- 他システムと共通の導線 ---- */
+  .header-inner{position:relative}
+  .navrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+  .navbtn{
+    border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.1);color:var(--paper);
+    border-radius:999px;padding:5px 13px;font-size:12.5px;font-weight:700;
+    text-decoration:none;cursor:pointer;font-family:inherit;
+  }
+  .navbtn:hover{background:rgba(255,255,255,.2)}
+  .hdstat{
+    margin-left:auto;font-size:12.5px;background:rgba(255,255,255,.16);
+    padding:4px 12px;border-radius:999px;color:var(--paper);
+  }
+  .part.done .part-no::after{content:" ✓";color:var(--teal)}
+
+  /* ---- 合言葉 ---- */
+  #gate{
+    position:fixed;inset:0;z-index:200;background:var(--ink);
+    display:flex;align-items:center;justify-content:center;padding:20px;
+  }
+  #gate .gbox{
+    background:var(--card);padding:30px 26px;max-width:390px;width:100%;
+    text-align:center;border:1px solid var(--line);
+  }
+  #gate h2{font-family:var(--mincho);font-size:19px;margin:0 0 6px;font-weight:600}
+  #gate p{font-size:13px;color:var(--muted);margin:0 0 18px;line-height:1.7}
+  #gate input{
+    width:100%;padding:11px 14px;border:1px solid var(--line);background:#fff;
+    font-size:16px;text-align:center;letter-spacing:.1em;font-family:inherit;color:var(--ink);
+  }
+  #gate button{
+    width:100%;margin-top:12px;padding:11px;border:0;background:var(--ink);
+    color:var(--paper);font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;
+  }
+  #gate .err{color:var(--rose);font-size:13px;min-height:20px;margin-top:8px}
+  #app-root{display:none}
+
   :focus-visible{outline:2px solid var(--teal);outline-offset:2px}
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important}
@@ -160,12 +199,29 @@
 </head>
 <body>
 
+<div id="gate">
+  <div class="gbox">
+    <div style="font-size:30px">🔒</div>
+    <h2>Kata sandi ／ 合言葉</h2>
+    <p>Masukkan kata sandi untuk masuk.<br>合言葉を入れてください。</p>
+    <input id="gatePw" type="password" autocomplete="current-password" placeholder="••••••••">
+    <button id="gateBtn">Masuk ／ 入る</button>
+    <div class="err" id="gateErr"></div>
+  </div>
+</div>
+
+<div id="app-root">
 <header>
   <div class="header-inner">
+    <div class="navrow">
+      <a class="navbtn" href="../index.html">☰ メニュー</a>
+      <span class="hdstat" id="hdStat">— / 17</span>
+    </div>
     <p class="eyebrow">KAIGO NO NIHONGO ／ CHOUKAI</p>
     <h1>介護の日本語　聴解練習</h1>
     <p class="sub">N3レベル・技能実習生向け／ Latihan menyimak untuk pemagang kerja<br>
-    出典教材：『介護の日本語』（公益社団法人日本介護福祉士会）</p>
+    場面の参考：『介護の日本語』（公益社団法人日本介護福祉士会）<br>
+    ※ 音声・設問・解説は、このシステムのために書き下ろしたものです。</p>
   </div>
 </header>
 
@@ -199,8 +255,37 @@
     自習用。答え合わせのあとで、必ずスクリプトを声に出して読んでみましょう。
   </footer>
 </div>
+</div>
 
 <script>
+/* ---------- 合言葉（入口と 共通） ---------- */
+const GATEKEY = 'jlpt-kanji-gate-v1';
+const PASS_SHA256 = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
+const appRoot = document.getElementById('app-root');
+const gateEl = document.getElementById('gate');
+async function sha256(t){
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
+  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2,'0')).join('');
+}
+function unlock(){
+  gateEl.style.display = 'none';
+  appRoot.style.display = 'block';
+  openFromHash();
+}
+async function tryUnlock(){
+  const pw = document.getElementById('gatePw').value.trim();
+  const err = document.getElementById('gateErr');
+  if(await sha256(pw) === PASS_SHA256){
+    try{ localStorage.setItem(GATEKEY, PASS_SHA256); }catch(e){}
+    unlock();
+  }else{
+    err.textContent = '合言葉が ちがいます ／ Kata sandi salah';
+  }
+}
+document.getElementById('gateBtn').addEventListener('click', tryUnlock);
+document.getElementById('gatePw').addEventListener('keydown', e => { if(e.key === 'Enter') tryUnlock(); });
+try{ if(localStorage.getItem(GATEKEY) === PASS_SHA256) unlock(); }catch(e){}
+
 const DATA = [
   {
     no: "PART 1",
@@ -383,10 +468,18 @@ const notice = document.getElementById('notice');
 const voiceSel = document.getElementById('voices');
 const canSpeak = 'speechSynthesis' in window;
 
+/* 声の質は 端末に よって ちがいます。よい 声を 先に 出します。 */
+const GOOD = ['google 日本語','google japanese','kyoko','o-ren','otoya','nanami','ayumi','haruka','ichiro','sayaka','microsoft'];
+function vScore(v){
+  const n = (v.name || '').toLowerCase();
+  for(let i = 0; i < GOOD.length; i++) if(n.indexOf(GOOD[i]) >= 0) return GOOD.length - i;
+  return 0;
+}
 function loadVoices(){
   if(!canSpeak) return;
   const all = speechSynthesis.getVoices();
-  jaVoices = all.filter(v => v.lang && v.lang.toLowerCase().indexOf('ja') === 0);
+  jaVoices = all.filter(v => v.lang && v.lang.toLowerCase().replace('_','-').indexOf('ja') === 0);
+  jaVoices.sort((a,b) => vScore(b) - vScore(a) || a.name.localeCompare(b.name));
   voiceSel.innerHTML = '';
   if(!jaVoices.length){
     notice.classList.add('on');
@@ -421,26 +514,59 @@ document.getElementById('speeds').addEventListener('click', e => {
 });
 
 let currentBtn = null;
+/* 長い 文は 一文ずつ 読ませます。切れにくく、間（ま）も 自然に なります。 */
+function chunks(text){
+  return String(text).replace(/\n/g,'').split(/(?<=[。？！])/)
+    .map(t => t.trim()).filter(Boolean);
+}
 function speak(text, btn){
   if(!canSpeak || !jaVoices.length) return;
   speechSynthesis.cancel();
   if(currentBtn) currentBtn.classList.remove('speaking');
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'ja-JP'; u.rate = rate; u.pitch = 1;
-  if(voice) u.voice = voice;
   currentBtn = btn;
   btn.classList.add('speaking');
-  u.onend = u.onerror = () => btn.classList.remove('speaking');
-  speechSynthesis.speak(u);
+  const parts = chunks(text);
+  const done = () => { if(currentBtn === btn) btn.classList.remove('speaking'); };
+  parts.forEach((t, i) => {
+    const u = new SpeechSynthesisUtterance(t);
+    u.lang = 'ja-JP'; u.rate = rate; u.pitch = 1; u.volume = 1;
+    if(voice) u.voice = voice;
+    if(i === parts.length - 1) u.onend = done;
+    u.onerror = done;
+    speechSynthesis.speak(u);
+  });
 }
 
 /* ---------- render ---------- */
 const app = document.getElementById('app');
-const state = DATA.map(p => p.items.map(() => null));
+const PKEY = 'jlpt-choukai-progress-v1';
+function loadProg(){
+  try{ return JSON.parse(localStorage.getItem(PKEY) || '{}'); }catch(e){ return {}; }
+}
+function saveProg(o){
+  try{ localStorage.setItem(PKEY, JSON.stringify(o)); }catch(e){}
+}
+let prog = loadProg();
+const state = DATA.map((p, pi) => p.items.map((it, qi) => {
+  const v = prog[pi + '-' + qi];
+  return (v === true || v === false) ? v : null;
+}));
+const QTOTAL = DATA.reduce((n, p) => n + p.items.length, 0);
+const hdStat = document.getElementById('hdStat');
+function updateHead(){
+  const got = state.flat().filter(v => v === true).length;
+  const ans = state.flat().filter(v => v !== null).length;
+  hdStat.textContent = ans ? ('正解 ' + got + ' / ' + QTOTAL) : ('— / ' + QTOTAL);
+  DATA.forEach((p, pi) => {
+    const sec = app.querySelectorAll('.part')[pi];
+    if(sec) sec.classList.toggle('done', state[pi].every(v => v !== null));
+  });
+}
 
 DATA.forEach((part, pi) => {
   const sec = document.createElement('section');
   sec.className = 'part';
+  sec.id = 'part' + (pi + 1);
   sec.innerHTML =
     '<div class="part-head"><span class="part-no">' + part.no + '</span>' +
     '<h2>' + part.title + '</h2></div>' +
@@ -485,32 +611,54 @@ DATA.forEach((part, pi) => {
 
     const after = q.querySelector('.after');
     const verdict = q.querySelector('.verdict');
+    function reveal(ok, oi){
+      q.querySelectorAll('.opt').forEach((b, bi) => {
+        b.disabled = true;
+        if(bi === it.ans) b.classList.add('correct');
+        else if(bi === oi) b.classList.add('wrong');
+      });
+      verdict.textContent = ok ? '正解' : '不正解';
+      verdict.className = 'verdict ' + (ok ? 'ok' : 'ng');
+      after.classList.add('on');
+    }
     q.querySelectorAll('.opt').forEach(btn => {
       btn.addEventListener('click', () => {
         if(state[pi][qi] !== null) return;
         const oi = Number(btn.dataset.oi);
         const ok = oi === it.ans;
         state[pi][qi] = ok;
-        q.querySelectorAll('.opt').forEach((b, bi) => {
-          b.disabled = true;
-          if(bi === it.ans) b.classList.add('correct');
-          else if(bi === oi) b.classList.add('wrong');
-        });
-        verdict.textContent = ok ? '正解' : '不正解';
-        verdict.className = 'verdict ' + (ok ? 'ok' : 'ng');
-        after.classList.add('on');
+        prog[pi + '-' + qi] = ok;
+        prog.sel = prog.sel || {};
+        prog.sel[pi + '-' + qi] = oi;
+        saveProg(prog);
+        reveal(ok, oi);
         updateScore(pi);
+        updateHead();
       });
     });
+    /* 前に 答えた 分を もどします */
+    if(state[pi][qi] !== null){
+      const sel = (prog.sel || {})[pi + '-' + qi];
+      reveal(state[pi][qi], sel === undefined ? (state[pi][qi] ? it.ans : -1) : sel);
+    }
 
     sec.appendChild(q);
   });
 
   const score = document.createElement('div');
   score.className = 'score';
-  score.innerHTML = '<span>このパートの 得点　<b>0</b> / ' + part.items.length + '</span>' +
+  const got0 = state[pi].filter(v => v === true).length;
+  score.innerHTML = '<span>このパートの 得点　<b>' + got0 + '</b> / ' + part.items.length + '</span>' +
                     '<button type="button" class="reset">もう一度 やる</button>';
-  score.querySelector('.reset').addEventListener('click', () => location.reload());
+  score.querySelector('.reset').addEventListener('click', () => {
+    part.items.forEach((x, qi) => {
+      delete prog[pi + '-' + qi];
+      if(prog.sel) delete prog.sel[pi + '-' + qi];
+    });
+    saveProg(prog);
+    location.hash = 'part' + (pi + 1);
+    location.reload();
+  });
   sec.appendChild(score);
   app.appendChild(sec);
 });
@@ -519,6 +667,17 @@ function updateScore(pi){
   const got = state[pi].filter(v => v === true).length;
   app.querySelectorAll('.part')[pi].querySelector('.score b').textContent = got;
 }
+
+/* ---------- ハッシュで パートへ とぶ ---------- */
+function openFromHash(){
+  const h = (location.hash || '').replace('#','');
+  if(!/^part[1-9][0-9]*$/.test(h)) return;
+  const el = document.getElementById(h);
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+window.addEventListener('hashchange', openFromHash);
+updateHead();
+if(appRoot.style.display === 'block') openFromHash();
 </script>
 </body>
 </html>

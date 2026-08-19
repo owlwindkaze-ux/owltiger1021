@@ -1618,7 +1618,8 @@ $('#fcRedo').onclick = () => { deck = wrong; di = 0; okN = ngN = 0; wrong = []; 
 $('#resetBtn').onclick = () => { if (confirm('Hapus semua catatan belajar? ／ 学習記録をすべて消しますか？')) { progress = {}; save(); refreshStats(); renderList(); } };
 /* --- 学習記録の書き出し・読み込み --- */
 const PKEYS = ['jlpt-kanji-progress-v1', 'jlpt-kanji-progress-v1-vocab',
-               'jlpt-grammar-progress-v1', 'jlpt-dokkai-progress-v1'];
+               'jlpt-grammar-progress-v1', 'jlpt-dokkai-progress-v1',
+               'jlpt-choukai-progress-v1'];
 const dl = (name, text, type) => {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([text], { type }));
