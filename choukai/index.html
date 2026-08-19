@@ -231,9 +231,10 @@
     <div class="ctl-row">
       <span class="ctl-label">話す速さ</span>
       <div class="speeds" id="speeds" role="group" aria-label="話す速さ">
-        <button type="button" data-rate="0.6" aria-pressed="false">ゆっくり<small>はじめて</small></button>
-        <button type="button" data-rate="0.8" aria-pressed="true">すこし速く<small>れんしゅう</small></button>
-        <button type="button" data-rate="1.0" aria-pressed="false">ふつう<small>現場の速さ</small></button>
+        <button type="button" data-rate="0.7" aria-pressed="false">ゆっくり<small>はじめて</small></button>
+        <button type="button" data-rate="0.85" aria-pressed="false">すこし速く<small>れんしゅう</small></button>
+        <button type="button" data-rate="1.0" aria-pressed="true">ふつう<small>現場の速さ</small></button>
+        <button type="button" data-rate="1.15" aria-pressed="false">速い<small>試験の速さ</small></button>
       </div>
     </div>
     <div class="ctl-row" style="margin-top:12px">
@@ -463,7 +464,9 @@ const DATA = [
 ];
 
 /* ---------- speech ---------- */
-let rate = 0.8, voice = null, jaVoices = [];
+const RKEY = 'jlpt-choukai-rate';
+let rate = 1.0, voice = null, jaVoices = [];
+try{ const r = parseFloat(localStorage.getItem(RKEY)); if(r > 0) rate = r; }catch(e){}
 const notice = document.getElementById('notice');
 const voiceSel = document.getElementById('voices');
 const canSpeak = 'speechSynthesis' in window;
@@ -505,13 +508,19 @@ if(canSpeak){
 }
 voiceSel.addEventListener('change', e => { voice = jaVoices[e.target.value] || null; });
 
-document.getElementById('speeds').addEventListener('click', e => {
+const speedsEl = document.getElementById('speeds');
+function markSpeed(){
+  [...speedsEl.querySelectorAll('button')].forEach(x =>
+    x.setAttribute('aria-pressed', String(parseFloat(x.dataset.rate) === rate)));
+}
+speedsEl.addEventListener('click', e => {
   const b = e.target.closest('button');
   if(!b) return;
   rate = parseFloat(b.dataset.rate);
-  [...e.currentTarget.querySelectorAll('button')].forEach(x =>
-    x.setAttribute('aria-pressed', String(x === b)));
+  try{ localStorage.setItem(RKEY, String(rate)); }catch(e){}
+  markSpeed();
 });
+markSpeed();   /* 前に選んだ速さを覚えておく */
 
 let currentBtn = null;
 /* 長い 文は 一文ずつ 読ませます。切れにくく、間（ま）も 自然に なります。 */
