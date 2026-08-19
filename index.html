@@ -12,6 +12,7 @@
   --blue:#2563eb; --blue-d:#1d4ed8;
   --green:#059669; --green-d:#047857;
   --pur:#7c3aed; --pur-d:#5b21b6;
+  --amb:#c2410c; --amb-d:#9a3412;
   --red:#dc2626;
   --bg:#f1f5f9; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
   --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
@@ -30,7 +31,7 @@ main{flex:1;max-width:760px;width:100%;margin:0 auto;padding:1.4rem 1rem 2rem}
 .lead{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:1.1rem;line-height:1.7}
 .menu{display:grid;gap:1rem}
 @media(min-width:640px){.menu{grid-template-columns:1fr 1fr}}
-@media(min-width:1000px){.menu{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1000px){.menu{grid-template-columns:repeat(2,1fr)}}
 .card{background:var(--card);border:2px solid var(--line);border-radius:20px;
   padding:1.1rem 1.1rem 1.2rem;box-shadow:var(--sh)}
 .card-k{border-top:6px solid var(--blue)}
@@ -40,6 +41,11 @@ main{flex:1;max-width:760px;width:100%;margin:0 auto;padding:1.4rem 1rem 2rem}
 .card-d a.item:hover,.card-d a.item:focus{background:#f5f3ff;border-color:var(--pur)}
 .card-d .item .ar{color:var(--pur-d)}
 .card-d .bar i{background:var(--pur)}
+.card-c{border-top:6px solid var(--amb)}
+.card-c .icon{color:var(--amb)}
+.card-c a.item:hover,.card-c a.item:focus{background:#fff7ed;border-color:var(--amb)}
+.card-c .item .ar{color:var(--amb-d)}
+.card-c .bar i{background:var(--amb)}
 .head{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.15rem}
 .icon{font-family:var(--kfont);font-size:1.75rem;line-height:1.2;letter-spacing:.03em;flex:none;white-space:nowrap}
 .card-k .icon{color:var(--blue)}
@@ -174,6 +180,25 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
         <a class="item" href="dokkai/index.html#stat"><span class="em">📊</span>
           <span class="tx"><span class="n">学習状況</span><span class="r">Progres ／ どこまで読んだか</span></span><span class="ar">→</span></a>
       </div>
+
+    <section class="card card-c">
+      <div class="head">
+        <div class="icon">聴解</div>
+        <div>
+          <div class="ttl">Menyimak<small>聴解（聞いて答える）</small></div>
+        </div>
+      </div>
+      <div class="pg" id="pgC">答えた問題 0 / 17 問</div>
+      <div class="bar"><i id="barC" style="width:0"></i></div>
+      <p class="desc">申し送り・利用者さんの言葉を聞いて答える。音声はこの端末が読み上げます。</p>
+      <div class="sub-menu">
+        <a class="item" href="choukai/index.html#part1"><span class="em">📣</span>
+          <span class="tx"><span class="n">申し送りを聞く</span><span class="r">Serah terima ／ 夜勤からの申し送り</span></span><span class="ar">→</span></a>
+        <a class="item" href="choukai/index.html#part2"><span class="em">🗣️</span>
+          <span class="tx"><span class="n">職員どうしの会話</span><span class="r">Percakapan staf ／ 指示・報告を聞く</span></span><span class="ar">→</span></a>
+        <a class="item" href="choukai/index.html#part3"><span class="em">👵</span>
+          <span class="tx"><span class="n">利用者さんの言葉</span><span class="r">Kata penghuni ／ 訴えを聞いて対応を選ぶ</span></span><span class="ar">→</span></a>
+      </div>
     </section>
 
   </div>
@@ -210,8 +235,8 @@ if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock();
 else document.getElementById('gatePw').focus();
 
 /* ---- それぞれの進み具合を出す（記録はこの端末の localStorage にある） ---- */
-const VERSION = '2026-08-07';
-const KTOTAL = 744, VTOTAL = 3800, GTOTAL = 268, DTOTAL = 30;
+const VERSION = '2026-08-19';
+const KTOTAL = 744, VTOTAL = 3800, GTOTAL = 268, DTOTAL = 30, CTOTAL = 17;
 const nKnown = (key, want) => {
   try {
     const o = JSON.parse(localStorage.getItem(key) || '{}');
@@ -233,6 +258,14 @@ function showProgress() {
   document.getElementById('barG').style.width = Math.round(g / GTOTAL * 100) + '%';
   document.getElementById('pgD').textContent = `読んだ文章 ${d} / ${DTOTAL} 本`;
   document.getElementById('barD').style.width = Math.round(d / DTOTAL * 100) + '%';
+  let c = 0, cok = 0;
+  try {
+    const o = JSON.parse(localStorage.getItem('jlpt-choukai-progress-v1') || '{}');
+    Object.keys(o).forEach(k => { if (k !== 'sel' && typeof o[k] === 'boolean') { c++; if (o[k]) cok++; } });
+  } catch (e) {}
+  document.getElementById('pgC').textContent =
+    c ? `答えた ${c} / ${CTOTAL} 問（正解 ${cok}）` : `答えた問題 0 / ${CTOTAL} 問`;
+  document.getElementById('barC').style.width = Math.round(c / CTOTAL * 100) + '%';
   document.getElementById('ver').textContent = '版 ' + VERSION;
 }
 showProgress();

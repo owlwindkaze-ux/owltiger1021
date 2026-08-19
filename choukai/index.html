@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="介護の技能実習生向け 聴解（聞き取り）練習。申し送り・声かけ・利用者の言葉を聞いて答えます。">
+<title>Menyimak Kaigo ｜ 介護の聴解練習</title>
+<style>
+  :root{
+    --ink:#17202E;
+    --ink-soft:#3C4759;
+    --paper:#EEF1EC;
+    --card:#FBFCFA;
+    --line:#D3DAD2;
+    --teal:#2F7A6F;
+    --teal-pale:#E3EFEB;
+    --amber:#C98A18;
+    --rose:#B4553F;
+    --rose-pale:#F6E7E2;
+    --muted:#6B7684;
+    --gothic:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP","Meiryo",sans-serif;
+    --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP","MS PMincho",serif;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--gothic);line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:740px;margin:0 auto;padding:0 20px 80px}
+
+  /* ---- header ---- */
+  header{
+    background:var(--ink);color:var(--paper);
+    padding:34px 20px 30px;margin-bottom:26px;
+  }
+  .header-inner{max-width:740px;margin:0 auto}
+  .eyebrow{
+    font-size:12px;letter-spacing:.28em;color:#9AA8B8;margin:0 0 10px;
+  }
+  h1{
+    font-family:var(--mincho);font-size:29px;font-weight:600;
+    margin:0 0 8px;letter-spacing:.04em;
+  }
+  .sub{margin:0;font-size:13.5px;color:#A9B6C4;line-height:1.7}
+
+  /* ---- control bar ---- */
+  .controls{
+    background:var(--card);border:1px solid var(--line);
+    padding:18px 20px;margin-bottom:32px;
+  }
+  .ctl-row{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
+  .ctl-label{font-size:12px;color:var(--muted);letter-spacing:.1em;min-width:74px}
+  .speeds{display:flex;gap:0;border:1px solid var(--line)}
+  .speeds button{
+    font-family:inherit;font-size:13px;padding:7px 13px;border:0;
+    background:transparent;color:var(--ink-soft);cursor:pointer;
+    border-right:1px solid var(--line);line-height:1.4;
+  }
+  .speeds button:last-child{border-right:0}
+  .speeds button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+  .speeds small{display:block;font-size:10px;color:inherit;opacity:.75}
+  select{
+    font-family:inherit;font-size:13px;padding:6px 8px;
+    border:1px solid var(--line);background:var(--card);color:var(--ink);max-width:240px;
+  }
+  .notice{
+    margin-top:14px;padding:12px 14px;background:var(--rose-pale);
+    border-left:3px solid var(--rose);font-size:13px;line-height:1.7;display:none;
+  }
+  .notice.on{display:block}
+
+  /* ---- part ---- */
+  .part{margin-bottom:52px}
+  .part-head{border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:8px}
+  .part-no{
+    font-family:var(--mincho);font-size:13px;letter-spacing:.2em;color:var(--teal);
+    display:block;margin-bottom:2px;
+  }
+  .part-head h2{font-family:var(--mincho);font-size:21px;font-weight:600;margin:0}
+  .part-task{font-size:13.5px;color:var(--ink-soft);margin:12px 0 4px}
+  .part-task .id{display:block;color:var(--muted);font-size:12.5px;font-style:italic}
+
+  /* ---- question ---- */
+  .q{background:var(--card);border:1px solid var(--line);padding:20px;margin-top:18px}
+  .q-top{display:flex;gap:16px;align-items:flex-start}
+  .listen{flex:0 0 auto;text-align:center}
+  .play{
+    width:66px;height:66px;border-radius:50%;border:2px solid var(--ink);
+    background:var(--amber);color:var(--ink);cursor:pointer;
+    font-family:var(--mincho);font-size:15px;font-weight:600;letter-spacing:.08em;
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .12s ease, background .12s ease;
+  }
+  .play:hover{transform:translateY(-2px)}
+  .play:active{transform:translateY(0)}
+  .play.speaking{background:var(--ink);color:var(--paper);animation:pulse 1.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(23,32,46,.28)}50%{box-shadow:0 0 0 9px rgba(23,32,46,0)}}
+  .count{font-size:11px;color:var(--muted);margin-top:7px;letter-spacing:.06em}
+  .q-body{flex:1 1 auto;min-width:0}
+  .q-num{font-family:var(--mincho);font-size:12px;letter-spacing:.16em;color:var(--teal);display:block}
+  .q-text{font-size:15.5px;font-weight:600;margin:2px 0 12px}
+  .hint{font-size:12.5px;color:var(--muted);margin:-8px 0 12px}
+
+  .opts{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;
+    font-family:inherit;font-size:14.5px;line-height:1.7;color:var(--ink);
+    background:transparent;border:1px solid var(--line);padding:10px 13px;cursor:pointer;
+  }
+  .opt:hover:not(:disabled){border-color:var(--ink);background:#fff}
+  .opt:disabled{cursor:default}
+  .opt .mark{font-family:var(--mincho);color:var(--muted);flex:0 0 auto}
+  .opt.correct{background:var(--teal-pale);border-color:var(--teal)}
+  .opt.correct .mark{color:var(--teal)}
+  .opt.wrong{background:var(--rose-pale);border-color:var(--rose)}
+  .opt.wrong .mark{color:var(--rose)}
+
+  .after{margin-top:14px;display:none}
+  .after.on{display:block}
+  .verdict{font-family:var(--mincho);font-size:15px;font-weight:600;margin:0 0 6px}
+  .verdict.ok{color:var(--teal)}
+  .verdict.ng{color:var(--rose)}
+  .exp{font-size:13.5px;line-height:1.8;margin:0}
+  .exp .id{display:block;color:var(--muted);font-size:12.5px;font-style:italic;margin-top:3px}
+  details{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+  summary{
+    font-size:12.5px;color:var(--teal);cursor:pointer;letter-spacing:.06em;
+  }
+  .script{
+    font-family:var(--mincho);font-size:14.5px;line-height:2;
+    background:#fff;border-left:3px solid var(--amber);padding:12px 15px;margin-top:10px;
+    white-space:pre-wrap;
+  }
+
+  /* ---- score ---- */
+  .score{
+    margin-top:20px;padding:14px 18px;background:var(--ink);color:var(--paper);
+    font-size:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  }
+  .score b{font-family:var(--mincho);font-size:20px;font-weight:600}
+  .reset{
+    font-family:inherit;font-size:12.5px;background:transparent;color:#A9B6C4;
+    border:1px solid #46536A;padding:6px 12px;cursor:pointer;
+  }
+  .reset:hover{color:var(--paper);border-color:var(--paper)}
+
+  footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;font-size:12.5px;color:var(--muted)}
+
+  /* ---- 他システムと共通の導線 ---- */
+  .header-inner{position:relative}
+  .navrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+  .navbtn{
+    border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.1);color:var(--paper);
+    border-radius:999px;padding:5px 13px;font-size:12.5px;font-weight:700;
+    text-decoration:none;cursor:pointer;font-family:inherit;
+  }
+  .navbtn:hover{background:rgba(255,255,255,.2)}
+  .hdstat{
+    margin-left:auto;font-size:12.5px;background:rgba(255,255,255,.16);
+    padding:4px 12px;border-radius:999px;color:var(--paper);
+  }
+  .part.done .part-no::after{content:" ✓";color:var(--teal)}
+
+  /* ---- 合言葉 ---- */
+  #gate{
+    position:fixed;inset:0;z-index:200;background:var(--ink);
+    display:flex;align-items:center;justify-content:center;padding:20px;
+  }
+  #gate .gbox{
+    background:var(--card);padding:30px 26px;max-width:390px;width:100%;
+    text-align:center;border:1px solid var(--line);
+  }
+  #gate h2{font-family:var(--mincho);font-size:19px;margin:0 0 6px;font-weight:600}
+  #gate p{font-size:13px;color:var(--muted);margin:0 0 18px;line-height:1.7}
+  #gate input{
+    width:100%;padding:11px 14px;border:1px solid var(--line);background:#fff;
+    font-size:16px;text-align:center;letter-spacing:.1em;font-family:inherit;color:var(--ink);
+  }
+  #gate button{
+    width:100%;margin-top:12px;padding:11px;border:0;background:var(--ink);
+    color:var(--paper);font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;
+  }
+  #gate .err{color:var(--rose);font-size:13px;min-height:20px;margin-top:8px}
+  #app-root{display:none}
+
+  :focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+  @media (max-width:560px){
+    h1{font-size:24px}
+    .q-top{flex-direction:column;gap:12px}
+    .listen{display:flex;align-items:center;gap:12px}
+    .count{margin-top:0}
+  }
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gbox">
+    <div style="font-size:30px">🔒</div>
+    <h2>Kata sandi ／ 合言葉</h2>
+    <p>Masukkan kata sandi untuk masuk.<br>合言葉を入れてください。</p>
+    <input id="gatePw" type="password" autocomplete="current-password" placeholder="••••••••">
+    <button id="gateBtn">Masuk ／ 入る</button>
+    <div class="err" id="gateErr"></div>
+  </div>
+</div>
+
+<div id="app-root">
+<header>
+  <div class="header-inner">
+    <div class="navrow">
+      <a class="navbtn" href="../index.html">☰ メニュー</a>
+      <span class="hdstat" id="hdStat">— / 17</span>
+    </div>
+    <p class="eyebrow">KAIGO NO NIHONGO ／ CHOUKAI</p>
+    <h1>介護の日本語　聴解練習</h1>
+    <p class="sub">N3レベル・技能実習生向け／ Latihan menyimak untuk pemagang kerja<br>
+    場面の参考：『介護の日本語』（公益社団法人日本介護福祉士会）<br>
+    ※ 音声・設問・解説は、このシステムのために書き下ろしたものです。</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="controls">
+    <div class="ctl-row">
+      <span class="ctl-label">話す速さ</span>
+      <div class="speeds" id="speeds" role="group" aria-label="話す速さ">
+        <button type="button" data-rate="0.6" aria-pressed="false">ゆっくり<small>はじめて</small></button>
+        <button type="button" data-rate="0.8" aria-pressed="true">すこし速く<small>れんしゅう</small></button>
+        <button type="button" data-rate="1.0" aria-pressed="false">ふつう<small>現場の速さ</small></button>
+      </div>
+    </div>
+    <div class="ctl-row" style="margin-top:12px">
+      <span class="ctl-label">声</span>
+      <select id="voices" aria-label="読み上げの声"></select>
+    </div>
+    <div class="notice" id="notice">
+      この端末では 日本語の 読み上げが 使えません。各問題の「スクリプトを見る」を ひらいて、
+      職員の方が 読み上げてください。<br>
+      <span style="font-style:italic">Suara bahasa Jepang tidak tersedia di perangkat ini. Silakan buka skrip dan minta staf membacakannya.</span>
+    </div>
+  </div>
+
+  <div id="app"></div>
+
+  <footer>
+    音声は、この端末に入っている読み上げ機能を使っています。声が機械的に聞こえる場合は、
+    速さを「ゆっくり」にすると聞き取りやすくなります。<br>
+    自習用。答え合わせのあとで、必ずスクリプトを声に出して読んでみましょう。
+  </footer>
+</div>
+</div>
+
+<script>
+/* ---------- 合言葉（入口と 共通） ---------- */
+const GATEKEY = 'jlpt-kanji-gate-v1';
+const PASS_SHA256 = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
+const appRoot = document.getElementById('app-root');
+const gateEl = document.getElementById('gate');
+async function sha256(t){
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
+  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2,'0')).join('');
+}
+function unlock(){
+  gateEl.style.display = 'none';
+  appRoot.style.display = 'block';
+  openFromHash();
+}
+async function tryUnlock(){
+  const pw = document.getElementById('gatePw').value.trim();
+  const err = document.getElementById('gateErr');
+  if(await sha256(pw) === PASS_SHA256){
+    try{ localStorage.setItem(GATEKEY, PASS_SHA256); }catch(e){}
+    unlock();
+  }else{
+    err.textContent = '合言葉が ちがいます ／ Kata sandi salah';
+  }
+}
+document.getElementById('gateBtn').addEventListener('click', tryUnlock);
+document.getElementById('gatePw').addEventListener('keydown', e => { if(e.key === 'Enter') tryUnlock(); });
+try{ if(localStorage.getItem(GATEKEY) === PASS_SHA256) unlock(); }catch(e){}
+
+const DATA = [
+  {
+    no: "PART 1",
+    title: "申し送りを聞く",
+    task: "申し送りを 聞いて、質問に 答えてください。まず 3回 聞いてから、答えを えらびましょう。",
+    taskId: "Dengarkan laporan serah terima, lalu jawab pertanyaannya. Dengarkan 3 kali sebelum menjawab.",
+    items: [
+      {
+        script: "おはようございます。夜勤の田中です。申し送りをします。二百二号室の佐藤さんですが、昨夜十一時ごろ、ナースコールがありました。おなかが痛いと言われましたので、看護師に報告しました。熱は三十六度九分で、便は三日出ていません。今朝は少し元気になられましたが、朝食は半分残されました。日中も様子を見て、水分をすすめてください。",
+        show: "おはようございます。夜勤の田中です。申し送りをします。\n202号室の佐藤さんですが、昨夜11時ごろ、ナースコールがありました。おなかが痛いと言われましたので、看護師に報告しました。\n熱は36度9分で、便は3日出ていません。\n今朝は少し元気になられましたが、朝食は半分残されました。日中も様子を見て、水分をすすめてください。",
+        q: "佐藤さんは 昨夜、どんな 訴えが ありましたか。",
+        opts: ["頭が 痛い", "おなかが 痛い", "胸が 苦しい", "足が 痛い"],
+        ans: 1,
+        exp: "「おなかが痛いと言われました」と 言っています。訴え（うったえ）＝利用者さんが 職員に 伝える からだの つらさです。",
+        expId: "\"Uttae\" = keluhan yang disampaikan penghuni kepada staf."
+      },
+      {
+        sameAudioAs: 0,
+        q: "便は 何日 出ていませんか。",
+        opts: ["1日", "2日", "3日", "4日"],
+        ans: 2,
+        exp: "「便は3日出ていません」。3日以上 出ていない ときは 便秘を 疑い、看護師に 報告します。",
+        expId: "Jika tidak BAB 3 hari atau lebih, laporkan ke perawat (kemungkinan sembelit)."
+      },
+      {
+        sameAudioAs: 0,
+        q: "今朝の 朝食は どうでしたか。",
+        opts: ["全部 食べた", "半分 残した", "全部 残した", "食べていない"],
+        ans: 1,
+        exp: "「朝食は半分残されました」。食事量は「全量・半分・少量」などで 記録します。",
+        expId: "Jumlah makanan dicatat dengan: seluruhnya / setengah / sedikit."
+      },
+      {
+        script: "三百五号室の山田さんです。今日の午後、リハビリのあとで、少しふらつきがありました。転倒はしていません。血圧は少し低めでした。夜、トイレに行かれるときは、必ず付きそってください。それから、明日の午前中に、ご家族の面会があります。",
+        show: "305号室の山田さんです。\n今日の午後、リハビリのあとで、少しふらつきがありました。転倒はしていません。血圧は少し低めでした。\n夜、トイレに行かれるときは、必ず付きそってください。\nそれから、明日の午前中に、ご家族の面会があります。",
+        q: "山田さんが ふらついたのは いつですか。",
+        opts: ["朝食の あと", "リハビリの あと", "入浴の あと", "面会の あと"],
+        ans: 1,
+        exp: "「今日の午後、リハビリのあとで」。運動の あとは 疲れや 血圧低下で ふらつきやすく なります。",
+        expId: "Setelah rehabilitasi, penghuni mudah limbung karena lelah / tekanan darah turun."
+      },
+      {
+        sameAudioAs: 3,
+        q: "夜、トイレに 行かれる ときは どうしますか。",
+        opts: ["一人で 行っていただく", "必ず 付きそう", "おむつを 使う", "看護師を 呼ぶ"],
+        ans: 1,
+        exp: "「必ず付きそってください」。「付きそう」＝そばに いて 安全を 守ることです。",
+        expId: "\"Tsukisou\" = mendampingi di sisi penghuni untuk menjaga keselamatan."
+      },
+      {
+        sameAudioAs: 3,
+        q: "明日の 午前中には 何が ありますか。",
+        opts: ["リハビリ", "入浴", "ご家族の 面会", "受診"],
+        ans: 2,
+        exp: "「明日の午前中に、ご家族の面会があります」。予定は 申し送りで 必ず 伝えます。",
+        expId: "Jadwal (rencana) selalu disampaikan dalam serah terima."
+      }
+    ]
+  },
+  {
+    no: "PART 2",
+    title: "声かけを聞いて、よいか よくないか 考える",
+    task: "介護職員の 声かけを 聞いて、よい声かけか どうか えらんでください。",
+    taskId: "Dengarkan sapaan staf, lalu tentukan apakah sapaan itu baik atau tidak.",
+    items: [
+      {
+        script: "田中さん、これから体温を測りますが、よろしいですか。",
+        show: "田中さん、これから体温を測りますが、よろしいですか。",
+        q: "この 声かけは よいですか。",
+        opts: ["よい 声かけ", "よくない 声かけ"],
+        ans: 0,
+        exp: "介助の 前に、何を するか 説明して、同意を いただいています。これが「説明と同意」の 基本です。",
+        expId: "Menjelaskan tindakan lalu meminta persetujuan — dasar dari \"penjelasan dan persetujuan\"."
+      },
+      {
+        script: "早く食べてください。時間がありませんから。",
+        show: "早く食べてください。時間がありませんから。",
+        q: "この 声かけは よいですか。",
+        opts: ["よい 声かけ", "よくない 声かけ"],
+        ans: 1,
+        exp: "職員の 都合を 優先した 命令口調です。急がせると 誤嚥の 危険も あります。「ゆっくり 召し上がってくださいね」と 言いかえます。",
+        expId: "Nada memerintah dan terburu-buru menambah risiko tersedak. Ganti: \"Silakan makan pelan-pelan.\""
+      },
+      {
+        script: "おむつ替えますよー。はい、足上げて。",
+        show: "おむつ替えますよー。はい、足上げて。",
+        q: "この 声かけは よいですか。",
+        opts: ["よい 声かけ", "よくない 声かけ"],
+        ans: 1,
+        exp: "排泄のことを 大きな声で 言うのは、はずかしい 思いを させます。部屋で 小さな声で 伝え、「失礼します。おむつを 交換させていただきますね」と 言います。",
+        expId: "Jangan menyebut soal BAB/BAK dengan suara keras — menjaga harga diri penghuni."
+      },
+      {
+        script: "失礼します。今、お時間よろしいでしょうか。",
+        show: "失礼します。今、お時間よろしいでしょうか。",
+        q: "この 声かけは よいですか。",
+        opts: ["よい 声かけ", "よくない 声かけ"],
+        ans: 0,
+        exp: "部屋に 入る ときの 基本です。ノックを して、返事を 待ってから 入ります。",
+        expId: "Dasar saat masuk kamar: ketuk pintu, tunggu jawaban, baru masuk."
+      },
+      {
+        script: "ご自分でブレーキをかけられますか。",
+        show: "ご自分でブレーキをかけられますか。",
+        q: "この 声かけは よいですか。",
+        opts: ["よい 声かけ", "よくない 声かけ"],
+        ans: 0,
+        exp: "できることは ご自分で していただく「自立支援」の 声かけです。できない ときだけ お手伝いします。",
+        expId: "Ini adalah dukungan kemandirian: biarkan penghuni melakukan yang masih bisa dilakukan."
+      },
+      {
+        script: "また転ぶから、動かないで。",
+        show: "また転ぶから、動かないで。",
+        q: "この 声かけは よいですか。",
+        opts: ["よい 声かけ", "よくない 声かけ"],
+        ans: 1,
+        exp: "禁止だけの 声かけは、意欲を 下げます。「お手伝いしますので、立つ ときは 呼んでくださいね」と、代わりの 方法を 伝えます。",
+        expId: "Larangan saja menurunkan semangat. Tawarkan alternatif: \"Panggil saya saat ingin berdiri.\""
+      }
+    ]
+  },
+  {
+    no: "PART 3",
+    title: "利用者さんの ことばを 聞いて、次の 行動を えらぶ",
+    task: "利用者さんの ことばを 聞いて、あなたが 次に する ことを えらんでください。",
+    taskId: "Dengarkan ucapan penghuni, lalu pilih tindakan yang harus Anda lakukan berikutnya.",
+    items: [
+      {
+        script: "なんだか、胸が苦しいんだよ。",
+        show: "なんだか、胸が苦しいんだよ。",
+        q: "あなたは 次に どうしますか。",
+        opts: ["お茶を すすめる", "すぐに 看護師に 報告する", "しばらく 様子を 見る", "お風呂を すすめる"],
+        ans: 1,
+        exp: "胸の 苦しさは 心疾患の サインの ことが あります。自分で 判断せず、すぐに 看護師へ 報告します。",
+        expId: "Sesak dada bisa jadi tanda penyakit jantung. Jangan menilai sendiri — segera lapor ke perawat."
+      },
+      {
+        script: "のどがかわいたねえ。",
+        show: "のどがかわいたねえ。",
+        q: "あなたは 次に どうしますか。",
+        opts: ["食事の 時間まで 待っていただく", "お茶を お持ちする", "看護師に 報告する", "窓を 開ける"],
+        ans: 1,
+        exp: "水分の 訴えです。脱水予防の ため、こまめに 水分を すすめます。とろみが 必要な方かどうかは 事前に 確認します。",
+        expId: "Ini permintaan minum. Untuk mencegah dehidrasi, tawarkan minum sesering mungkin."
+      },
+      {
+        script: "トイレに行きたいんだけど、一人じゃ、ちょっとねえ。",
+        show: "トイレに行きたいんだけど、一人じゃ、ちょっとねえ。",
+        q: "あなたは 次に どうしますか。",
+        opts: ["おむつを すすめる", "「あとで 行きましょう」と 言う", "トイレまで 付きそう", "他の 職員を 呼びに 行き、その場を 離れる"],
+        ans: 2,
+        exp: "排泄の 訴えは 我慢させません。すぐに 付きそって トイレへ 誘導します。一人に する ことは 転倒の 危険が あります。",
+        expId: "Jangan menyuruh menahan BAK/BAB. Segera dampingi ke toilet; jangan tinggalkan sendirian."
+      },
+      {
+        script: "昨日から足が痛くてね。今日は歩けないよ。",
+        show: "昨日から足が痛くてね。今日は歩けないよ。",
+        q: "あなたは 次に どうしますか。",
+        opts: ["がんばって 歩いていただく", "痛みの 場所と 様子を 確認して、看護師に 報告する", "何も しない", "すぐに 湿布を はる"],
+        ans: 1,
+        exp: "痛みは まず 確認と 報告です。職員の 判断で 薬や 湿布を 使う ことは できません。無理に 歩かせるのも 危険です。",
+        expId: "Untuk nyeri: pastikan lokasinya lalu laporkan. Staf perawatan tidak boleh memberi obat sendiri."
+      },
+      {
+        script: "あんた、だれ。ここは、どこなの。",
+        show: "あんた、だれ。ここは、どこなの。",
+        q: "あなたは 次に どうしますか。",
+        opts: ["「さっきも 言いましたよ」と 教える", "「ちがいます」と 否定する", "名前を 名のって、安心できるように 声を かける", "返事を しない"],
+        ans: 2,
+        exp: "認知症の ある方への 対応です。否定したり 何度も 訂正したり せず、笑顔で 自己紹介を し、安心できる 声かけを します。",
+        expId: "Untuk penghuni dengan demensia: jangan menyangkal atau mengoreksi berulang kali. Perkenalkan diri dengan ramah."
+      }
+    ]
+  }
+];
+
+/* ---------- speech ---------- */
+let rate = 0.8, voice = null, jaVoices = [];
+const notice = document.getElementById('notice');
+const voiceSel = document.getElementById('voices');
+const canSpeak = 'speechSynthesis' in window;
+
+/* 声の質は 端末に よって ちがいます。よい 声を 先に 出します。 */
+const GOOD = ['google 日本語','google japanese','kyoko','o-ren','otoya','nanami','ayumi','haruka','ichiro','sayaka','microsoft'];
+function vScore(v){
+  const n = (v.name || '').toLowerCase();
+  for(let i = 0; i < GOOD.length; i++) if(n.indexOf(GOOD[i]) >= 0) return GOOD.length - i;
+  return 0;
+}
+function loadVoices(){
+  if(!canSpeak) return;
+  const all = speechSynthesis.getVoices();
+  jaVoices = all.filter(v => v.lang && v.lang.toLowerCase().replace('_','-').indexOf('ja') === 0);
+  jaVoices.sort((a,b) => vScore(b) - vScore(a) || a.name.localeCompare(b.name));
+  voiceSel.innerHTML = '';
+  if(!jaVoices.length){
+    notice.classList.add('on');
+    voiceSel.innerHTML = '<option>（日本語の声が ありません）</option>';
+    voiceSel.disabled = true;
+    return;
+  }
+  notice.classList.remove('on');
+  voiceSel.disabled = false;
+  jaVoices.forEach((v,i) => {
+    const o = document.createElement('option');
+    o.value = i; o.textContent = v.name;
+    voiceSel.appendChild(o);
+  });
+  voice = jaVoices[0];
+}
+if(canSpeak){
+  loadVoices();
+  speechSynthesis.onvoiceschanged = loadVoices;
+}else{
+  notice.classList.add('on');
+  voiceSel.disabled = true;
+}
+voiceSel.addEventListener('change', e => { voice = jaVoices[e.target.value] || null; });
+
+document.getElementById('speeds').addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if(!b) return;
+  rate = parseFloat(b.dataset.rate);
+  [...e.currentTarget.querySelectorAll('button')].forEach(x =>
+    x.setAttribute('aria-pressed', String(x === b)));
+});
+
+let currentBtn = null;
+/* 長い 文は 一文ずつ 読ませます。切れにくく、間（ま）も 自然に なります。 */
+function chunks(text){
+  return String(text).replace(/\n/g,'').split(/(?<=[。？！])/)
+    .map(t => t.trim()).filter(Boolean);
+}
+function speak(text, btn){
+  if(!canSpeak || !jaVoices.length) return;
+  speechSynthesis.cancel();
+  if(currentBtn) currentBtn.classList.remove('speaking');
+  currentBtn = btn;
+  btn.classList.add('speaking');
+  const parts = chunks(text);
+  const done = () => { if(currentBtn === btn) btn.classList.remove('speaking'); };
+  parts.forEach((t, i) => {
+    const u = new SpeechSynthesisUtterance(t);
+    u.lang = 'ja-JP'; u.rate = rate; u.pitch = 1; u.volume = 1;
+    if(voice) u.voice = voice;
+    if(i === parts.length - 1) u.onend = done;
+    u.onerror = done;
+    speechSynthesis.speak(u);
+  });
+}
+
+/* ---------- render ---------- */
+const app = document.getElementById('app');
+const PKEY = 'jlpt-choukai-progress-v1';
+function loadProg(){
+  try{ return JSON.parse(localStorage.getItem(PKEY) || '{}'); }catch(e){ return {}; }
+}
+function saveProg(o){
+  try{ localStorage.setItem(PKEY, JSON.stringify(o)); }catch(e){}
+}
+let prog = loadProg();
+const state = DATA.map((p, pi) => p.items.map((it, qi) => {
+  const v = prog[pi + '-' + qi];
+  return (v === true || v === false) ? v : null;
+}));
+const QTOTAL = DATA.reduce((n, p) => n + p.items.length, 0);
+const hdStat = document.getElementById('hdStat');
+function updateHead(){
+  const got = state.flat().filter(v => v === true).length;
+  const ans = state.flat().filter(v => v !== null).length;
+  hdStat.textContent = ans ? ('正解 ' + got + ' / ' + QTOTAL) : ('— / ' + QTOTAL);
+  DATA.forEach((p, pi) => {
+    const sec = app.querySelectorAll('.part')[pi];
+    if(sec) sec.classList.toggle('done', state[pi].every(v => v !== null));
+  });
+}
+
+DATA.forEach((part, pi) => {
+  const sec = document.createElement('section');
+  sec.className = 'part';
+  sec.id = 'part' + (pi + 1);
+  sec.innerHTML =
+    '<div class="part-head"><span class="part-no">' + part.no + '</span>' +
+    '<h2>' + part.title + '</h2></div>' +
+    '<p class="part-task">' + part.task + '<span class="id">' + part.taskId + '</span></p>';
+
+  part.items.forEach((it, qi) => {
+    const src = it.sameAudioAs != null ? part.items[it.sameAudioAs] : it;
+    const q = document.createElement('div');
+    q.className = 'q';
+
+    const optsHtml = it.opts.map((o, oi) =>
+      '<li><button type="button" class="opt" data-oi="' + oi + '">' +
+      '<span class="mark">' + (oi+1) + '</span><span>' + o + '</span></button></li>').join('');
+
+    q.innerHTML =
+      '<div class="q-top">' +
+        '<div class="listen">' +
+          '<button type="button" class="play">聞く</button>' +
+          '<div class="count">0回</div>' +
+        '</div>' +
+        '<div class="q-body">' +
+          '<span class="q-num">問 ' + (qi+1) + '</span>' +
+          '<p class="q-text">' + it.q + '</p>' +
+          (it.sameAudioAs != null ? '<p class="hint">※ 前の 問題と 同じ 音声です</p>' : '') +
+          '<ul class="opts">' + optsHtml + '</ul>' +
+          '<div class="after">' +
+            '<p class="verdict"></p>' +
+            '<p class="exp">' + it.exp + '<span class="id">' + it.expId + '</span></p>' +
+            '<details><summary>スクリプトを見る ／ Lihat skrip</summary>' +
+            '<div class="script">' + src.show + '</div></details>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    const playBtn = q.querySelector('.play');
+    const countEl = q.querySelector('.count');
+    let n = 0;
+    playBtn.addEventListener('click', () => {
+      n++; countEl.textContent = n + '回';
+      speak(src.script, playBtn);
+    });
+
+    const after = q.querySelector('.after');
+    const verdict = q.querySelector('.verdict');
+    function reveal(ok, oi){
+      q.querySelectorAll('.opt').forEach((b, bi) => {
+        b.disabled = true;
+        if(bi === it.ans) b.classList.add('correct');
+        else if(bi === oi) b.classList.add('wrong');
+      });
+      verdict.textContent = ok ? '正解' : '不正解';
+      verdict.className = 'verdict ' + (ok ? 'ok' : 'ng');
+      after.classList.add('on');
+    }
+    q.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if(state[pi][qi] !== null) return;
+        const oi = Number(btn.dataset.oi);
+        const ok = oi === it.ans;
+        state[pi][qi] = ok;
+        prog[pi + '-' + qi] = ok;
+        prog.sel = prog.sel || {};
+        prog.sel[pi + '-' + qi] = oi;
+        saveProg(prog);
+        reveal(ok, oi);
+        updateScore(pi);
+        updateHead();
+      });
+    });
+    /* 前に 答えた 分を もどします */
+    if(state[pi][qi] !== null){
+      const sel = (prog.sel || {})[pi + '-' + qi];
+      reveal(state[pi][qi], sel === undefined ? (state[pi][qi] ? it.ans : -1) : sel);
+    }
+
+    sec.appendChild(q);
+  });
+
+  const score = document.createElement('div');
+  score.className = 'score';
+  const got0 = state[pi].filter(v => v === true).length;
+  score.innerHTML = '<span>このパートの 得点　<b>' + got0 + '</b> / ' + part.items.length + '</span>' +
+                    '<button type="button" class="reset">もう一度 やる</button>';
+  score.querySelector('.reset').addEventListener('click', () => {
+    part.items.forEach((x, qi) => {
+      delete prog[pi + '-' + qi];
+      if(prog.sel) delete prog.sel[pi + '-' + qi];
+    });
+    saveProg(prog);
+    location.hash = 'part' + (pi + 1);
+    location.reload();
+  });
+  sec.appendChild(score);
+  app.appendChild(sec);
+});
+
+function updateScore(pi){
+  const got = state[pi].filter(v => v === true).length;
+  app.querySelectorAll('.part')[pi].querySelector('.score b').textContent = got;
+}
+
+/* ---------- ハッシュで パートへ とぶ ---------- */
+function openFromHash(){
+  const h = (location.hash || '').replace('#','');
+  if(!/^part[1-9][0-9]*$/.test(h)) return;
+  const el = document.getElementById(h);
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+window.addEventListener('hashchange', openFromHash);
+updateHead();
+if(appRoot.style.display === 'block') openFromHash();
+</script>
+</body>
+</html>

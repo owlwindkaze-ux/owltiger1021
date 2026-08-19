@@ -59,11 +59,12 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 
 | ファイル | 内容 |
 |---|---|
-| `index.html` | **入口メニュー**（漢字・言葉／文型 を選ぶ画面。合言葉もここで入れる） |
+| `index.html` | **入口メニュー**（漢字・語彙／文型・文法／読解／聴解 を選ぶ画面。合言葉もここで入れる） |
 | `kanji.html` | 漢字・言葉アプリ本体（HTML/CSS/JS 単一ファイル、外部ライブラリなし） |
 | `bunpo/index.html` | 文型（文法）アプリ本体 |
 | `dokkai/index.html` | 読解アプリ本体 |
 | `dokkai/reading-n5/n4/n3.json` | 読解の文章30本・設問50問（すべてオリジナル） |
+| `choukai/index.html` | 聴解アプリ本体（3パート17問。音声は端末の音声合成が読み上げるので音声ファイルなし） |
 | `kanji-data.json` | 漢字612字のデータ（読み・意味・用例・部首など） |
 | `kanji-strokes.json` | 書き順データ（KanjiVG のパス、612字ぶん） |
 | `vocab.json` | 熟語3,254語（JLPT語彙＋介護・看護201語＋現場125語） |
