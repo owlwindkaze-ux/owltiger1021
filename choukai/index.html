@@ -242,10 +242,22 @@
       <select id="voices" aria-label="読み上げの声"></select>
     </div>
     <div class="notice" id="notice">
-      この端末では 日本語の 読み上げが 使えません。各問題の「スクリプトを見る」を ひらいて、
-      職員の方が 読み上げてください。<br>
+      この端末に 日本語の 声が 見つかりませんでした。「聞く」を おしても 音が 出ない ときは、
+      各問題の「スクリプトを見る」を ひらいて、職員の方が 読み上げてください。<br>
       <span style="font-style:italic">Suara bahasa Jepang tidak tersedia di perangkat ini. Silakan buka skrip dan minta staf membacakannya.</span>
     </div>
+  </div>
+
+  <div class="notice" id="nosound">
+    <b>音が 出ませんか？ ／ Tidak ada suara?</b><br>
+    ① スマホの <b>音量</b>を 上げる（横の ボタン）<br>
+    ② iPhone：本体の <b>サイレントスイッチ</b>（マナーモード）を <b>解除</b>する<br>
+    ③ <b>Chrome</b>（Android）／<b>Safari</b>（iPhone）で ひらく<br>
+    ④ 日本語の 声を 入れる：<br>
+    　Android＝設定 → システム → 言語と入力 → 音声出力 → 日本語<br>
+    　iPhone＝設定 → アクセシビリティ → 読み上げコンテンツ → 声 → 日本語<br>
+    ⑤ それでも だめな ときは「スクリプトを見る」で 文を 読んでください<br>
+    <span style="font-style:italic">Naikkan volume, matikan mode senyap (iPhone), buka dengan Chrome/Safari, dan pastikan suara bahasa Jepang terpasang.</span>
   </div>
 
   <div id="app"></div>
@@ -485,9 +497,11 @@ function loadVoices(){
   jaVoices.sort((a,b) => vScore(b) - vScore(a) || a.name.localeCompare(b.name));
   voiceSel.innerHTML = '';
   if(!jaVoices.length){
+    /* 声の一覧が 空でも、端末が あとから 読める ことが あるので 止めません */
     notice.classList.add('on');
-    voiceSel.innerHTML = '<option>（日本語の声が ありません）</option>';
+    voiceSel.innerHTML = '<option>（この端末の 標準の 声）</option>';
     voiceSel.disabled = true;
+    voice = null;
     return;
   }
   notice.classList.remove('on');
@@ -523,28 +537,61 @@ speedsEl.addEventListener('click', e => {
 markSpeed();   /* 前に選んだ速さを覚えておく */
 
 let currentBtn = null;
+/* iPhone・iPad は 読み上げの くせが 強いので 分けて あつかいます */
+const IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+            (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+let unlocked = false;
+
 /* 長い 文は 一文ずつ 読ませます。切れにくく、間（ま）も 自然に なります。 */
 function chunks(text){
   return String(text).replace(/\n/g,'').split(/(?<=[。？！])/)
     .map(t => t.trim()).filter(Boolean);
 }
+function mkUtter(t){
+  const u = new SpeechSynthesisUtterance(t);
+  u.lang = 'ja-JP'; u.rate = rate; u.pitch = 1; u.volume = 1;
+  if(voice) u.voice = voice;
+  return u;
+}
+/* スマホは 最初の タップで 音を「開ける」必要が あります */
+function unlockAudio(){
+  if(unlocked || !canSpeak) return;
+  unlocked = true;
+  try{
+    const u = new SpeechSynthesisUtterance(' ');
+    u.volume = 0; u.lang = 'ja-JP';
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
 function speak(text, btn){
-  if(!canSpeak || !jaVoices.length) return;
-  speechSynthesis.cancel();
+  if(!canSpeak) return;
+  unlockAudio();
+  if(speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel();
   if(currentBtn) currentBtn.classList.remove('speaking');
   currentBtn = btn;
   btn.classList.add('speaking');
-  const parts = chunks(text);
   const done = () => { if(currentBtn === btn) btn.classList.remove('speaking'); };
-  parts.forEach((t, i) => {
-    const u = new SpeechSynthesisUtterance(t);
-    u.lang = 'ja-JP'; u.rate = rate; u.pitch = 1; u.volume = 1;
-    if(voice) u.voice = voice;
+  /* iPhone は 分けて 入れると 止まる ことが あるので、まとめて 読ませます */
+  const parts = IOS ? [String(text).replace(/\n/g,'')] : chunks(text);
+  const go = () => parts.forEach((t, i) => {
+    const u = mkUtter(t);
     if(i === parts.length - 1) u.onend = done;
     u.onerror = done;
     speechSynthesis.speak(u);
   });
+  /* cancel() の 直後に speak() すると 鳴らない 端末が あるため 少し ずらします */
+  setTimeout(go, 60);
+  /* 5秒 たっても 鳴らない ときは 助けを 出します */
+  setTimeout(() => {
+    if(!speechSynthesis.speaking && !speechSynthesis.pending && currentBtn === btn){
+      done();
+      document.getElementById('nosound').classList.add('on');
+    }
+  }, 5000);
 }
+/* 最初の タップで 音を 開ける（iPhone 対策） */
+document.addEventListener('touchend', unlockAudio, {once:true});
+document.addEventListener('click', unlockAudio, {once:true});
 
 /* ---------- render ---------- */
 const app = document.getElementById('app');
