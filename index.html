@@ -122,9 +122,9 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
           <div class="ttl">Kanji &amp; Kosakata<small>漢字・言葉（語彙）</small></div>
         </div>
       </div>
-      <div class="pg" id="pgK">覚えた 0 / 744字 ・ 0 / 3,800語</div>
+      <div class="pg" id="pgK">覚えた 0 / 746字 ・ 0 / 3,802語</div>
       <div class="bar"><i id="barK" style="width:0"></i></div>
-      <p class="desc">漢字744字と言葉3,800語。書き順・カード・JLPT形式の練習問題。</p>
+      <p class="desc">漢字746字と言葉3,802語。書き順・カード・JLPT形式の練習問題。</p>
       <div class="sub-menu">
         <a class="item" href="kanji.html#list"><span class="em">📖</span>
           <span class="tx"><span class="n">漢字一覧</span><span class="r">Kanji ／ 読み・意味・部首を見る</span></span><span class="ar">→</span></a>
@@ -236,8 +236,8 @@ if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock();
 else document.getElementById('gatePw').focus();
 
 /* ---- それぞれの進み具合を出す（記録はこの端末の localStorage にある） ---- */
-const VERSION = '2026-08-19';
-const KTOTAL = 744, VTOTAL = 3800, GTOTAL = 268, DTOTAL = 30, CTOTAL = 17;
+const VERSION = '2026-08-20';
+const KTOTAL = 746, VTOTAL = 3802, GTOTAL = 268, DTOTAL = 30, CTOTAL = 17;
 const nKnown = (key, want) => {
   try {
     const o = JSON.parse(localStorage.getItem(key) || '{}');
