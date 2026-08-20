@@ -252,6 +252,16 @@
     </div>
   </div>
 
+  <div class="notice" id="inapp" style="border-left-color:var(--amber)">
+    <b>音を 出すには、Chrome（クローム）で ひらいて ください</b><br>
+    LINEや メールの リンクから ひらくと、音が 出ません。<br>
+    右上の「⋮」→「他のアプリで開く」→ <b>Chrome</b> を えらんで ください。<br>
+    <button type="button" id="copyUrl" style="margin-top:8px;font-family:inherit;font-size:13px;
+      padding:7px 12px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer">
+      📋 このページの アドレスを コピー</button><br>
+    <span style="font-style:italic">Buka dengan <b>Chrome</b>, jangan dari link di dalam LINE/email. Suara tidak keluar di browser dalam aplikasi.</span>
+  </div>
+
   <div class="notice" id="nosound">
     <b>音が 出ませんか？ ／ Tidak ada suara?</b><br>
     ① スマホの <b>音量</b>を 上げる（横の ボタン）<br>
@@ -270,7 +280,7 @@
     音声は、この端末に入っている読み上げ機能を使っています。声が機械的に聞こえる場合は、
     速さを「ゆっくり」にすると聞き取りやすくなります。<br>
     自習用。答え合わせのあとで、必ずスクリプトを声に出して読んでみましょう。<br>
-    <span style="opacity:.8">版 2026-08-19b</span>
+    <span style="opacity:.8">版 2026-08-20</span>
   </footer>
 </div>
 </div>
@@ -603,6 +613,27 @@ function speak(text, btn){
     }
   }, 5000);
 }
+/* LINE・メールなど「アプリの中のブラウザ」は 読み上げが 使えません */
+function inAppBrowser(){
+  const ua = navigator.userAgent;
+  return /Line\/|FBAN|FBAV|Instagram|; wv\)|GSA\/|Twitter|MicroMessenger/i.test(ua);
+}
+function showInApp(){
+  const box = document.getElementById('inapp');
+  if(!box) return;
+  box.classList.add('on');
+  const copy = document.getElementById('copyUrl');
+  copy.addEventListener('click', async () => {
+    const url = location.href.split('#')[0];
+    try{
+      await navigator.clipboard.writeText(url);
+      copy.textContent = '✓ コピーしました ／ Tersalin';
+    }catch(e){
+      copy.textContent = url;   /* コピーできない端末では URL を出す */
+    }
+  });
+}
+
 /* 音のテスト：短い言葉を1つだけ読ませて、端末の様子を出します */
 function diagText(){
   const all = canSpeak ? speechSynthesis.getVoices() : [];
@@ -626,6 +657,10 @@ if(testBtn){
       speechSynthesis.speak(u);
     }, 80);
   });
+}
+
+if(inAppBrowser() || (canSpeak && !speechSynthesis.getVoices().length)){
+  setTimeout(() => { if(!jaVoices.length) showInApp(); }, 2500);
 }
 
 /* 最初の タップで 音を 開ける（iPhone 対策） */
