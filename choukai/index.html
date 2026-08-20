@@ -257,7 +257,9 @@
     　Android＝設定 → システム → 言語と入力 → 音声出力 → 日本語<br>
     　iPhone＝設定 → アクセシビリティ → 読み上げコンテンツ → 声 → 日本語<br>
     ⑤ それでも だめな ときは「スクリプトを見る」で 文を 読んでください<br>
-    <span style="font-style:italic">Naikkan volume, matikan mode senyap (iPhone), buka dengan Chrome/Safari, dan pastikan suara bahasa Jepang terpasang.</span>
+    <span style="font-style:italic">Naikkan volume, matikan mode senyap (iPhone), buka dengan Chrome/Safari, dan pastikan suara bahasa Jepang terpasang.</span><br>
+    <button type="button" id="testBtn" class="play" style="margin-top:10px">🔊 音のテスト ／ Tes suara</button>
+    <div id="diag" style="margin-top:8px;font-size:11px;opacity:.8;word-break:break-all"></div>
   </div>
 
   <div id="app"></div>
@@ -499,6 +501,8 @@ function loadVoices(){
   if(!jaVoices.length){
     /* 声の一覧が 空でも、端末が あとから 読める ことが あるので 止めません */
     notice.classList.add('on');
+    const ns = document.getElementById('nosound');
+    if(ns) ns.classList.add('on');
     voiceSel.innerHTML = '<option>（この端末の 標準の 声）</option>';
     voiceSel.disabled = true;
     voice = null;
@@ -516,6 +520,12 @@ function loadVoices(){
 if(canSpeak){
   loadVoices();
   speechSynthesis.onvoiceschanged = loadVoices;
+  /* 端末に よっては 声の一覧が あとから 出ます。しばらく 取り直します。 */
+  let tries = 0;
+  const retry = setInterval(() => {
+    if(jaVoices.length || ++tries > 20) clearInterval(retry);
+    else loadVoices();
+  }, 500);
 }else{
   notice.classList.add('on');
   voiceSel.disabled = true;
@@ -562,6 +572,7 @@ function unlockAudio(){
     u.volume = 0; u.lang = 'ja-JP';
     speechSynthesis.speak(u);
   }catch(e){}
+  setTimeout(loadVoices, 300);   /* タップ後に 声が 出てくる 端末が ある */
 }
 function speak(text, btn){
   if(!canSpeak) return;
@@ -589,6 +600,31 @@ function speak(text, btn){
     }
   }, 5000);
 }
+/* 音のテスト：短い言葉を1つだけ読ませて、端末の様子を出します */
+function diagText(){
+  const all = canSpeak ? speechSynthesis.getVoices() : [];
+  return '読み上げ機能：' + (canSpeak ? 'あり' : 'なし') +
+    ' ／ 声の数：' + all.length + '（日本語 ' + jaVoices.length + '）' +
+    (jaVoices.length ? ' ／ 使う声：' + jaVoices[0].name : '') +
+    ' ／ 端末：' + navigator.userAgent;
+}
+const testBtn = document.getElementById('testBtn');
+const diag = document.getElementById('diag');
+if(testBtn){
+  testBtn.addEventListener('click', () => {
+    unlockAudio();
+    loadVoices();
+    diag.textContent = diagText();
+    if(!canSpeak) return;
+    setTimeout(() => {
+      const u = mkUtter('おはようございます。');
+      u.onstart = () => { diag.textContent = '▶ 鳴っています。' + diagText(); };
+      u.onerror = e => { diag.textContent = '× エラー：' + (e.error || '不明') + ' ／ ' + diagText(); };
+      speechSynthesis.speak(u);
+    }, 80);
+  });
+}
+
 /* 最初の タップで 音を 開ける（iPhone 対策） */
 document.addEventListener('touchend', unlockAudio, {once:true});
 document.addEventListener('click', unlockAudio, {once:true});
