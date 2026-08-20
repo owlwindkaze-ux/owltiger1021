@@ -52,6 +52,8 @@
   }
   .ctl-row{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
   .ctl-label{font-size:12px;color:var(--muted);letter-spacing:.1em;min-width:74px}
+  #testBtn{font-family:inherit;font-size:13px;padding:7px 12px;cursor:pointer;
+    border:1px solid var(--ink);background:var(--ink);color:var(--paper)}
   .speeds{display:flex;gap:0;border:1px solid var(--line)}
   .speeds button{
     font-family:inherit;font-size:13px;padding:7px 13px;border:0;
@@ -240,7 +242,9 @@
     <div class="ctl-row" style="margin-top:12px">
       <span class="ctl-label">声</span>
       <select id="voices" aria-label="読み上げの声"></select>
+      <button type="button" id="testBtn">🔊 音のテスト</button>
     </div>
+    <div id="diag" style="margin-top:8px;font-size:11px;color:var(--muted);word-break:break-all"></div>
     <div class="notice" id="notice">
       この端末に 日本語の 声が 見つかりませんでした。「聞く」を おしても 音が 出ない ときは、
       各問題の「スクリプトを見る」を ひらいて、職員の方が 読み上げてください。<br>
@@ -257,9 +261,7 @@
     　Android＝設定 → システム → 言語と入力 → 音声出力 → 日本語<br>
     　iPhone＝設定 → アクセシビリティ → 読み上げコンテンツ → 声 → 日本語<br>
     ⑤ それでも だめな ときは「スクリプトを見る」で 文を 読んでください<br>
-    <span style="font-style:italic">Naikkan volume, matikan mode senyap (iPhone), buka dengan Chrome/Safari, dan pastikan suara bahasa Jepang terpasang.</span><br>
-    <button type="button" id="testBtn" class="play" style="margin-top:10px">🔊 音のテスト ／ Tes suara</button>
-    <div id="diag" style="margin-top:8px;font-size:11px;opacity:.8;word-break:break-all"></div>
+    <span style="font-style:italic">Naikkan volume, matikan mode senyap (iPhone), buka dengan Chrome/Safari, dan pastikan suara bahasa Jepang terpasang.</span>
   </div>
 
   <div id="app"></div>
@@ -267,7 +269,8 @@
   <footer>
     音声は、この端末に入っている読み上げ機能を使っています。声が機械的に聞こえる場合は、
     速さを「ゆっくり」にすると聞き取りやすくなります。<br>
-    自習用。答え合わせのあとで、必ずスクリプトを声に出して読んでみましょう。
+    自習用。答え合わせのあとで、必ずスクリプトを声に出して読んでみましょう。<br>
+    <span style="opacity:.8">版 2026-08-19b</span>
   </footer>
 </div>
 </div>
