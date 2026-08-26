@@ -250,6 +250,7 @@ footer a{color:var(--blue)}
         <button class="chip" data-lv="N4">N4</button>
         <button class="chip" data-lv="N3">N3</button>
         <button class="chip" data-lv="介護">介護 / Kaigo</button>
+        <button class="chip" data-lv="記録">記録 / Rekaman</button>
         <button class="chip" data-lv="施設">施設独自 / Fasilitas</button>
         <button class="chip" data-lv="現場">現場 / Kerja</button>
       </div>
@@ -519,6 +520,9 @@ footer a{color:var(--blue)}
       <div class="lb">ARTI ／ 意味</div>
       <div id="vmMean" style="font-size:1.05rem"></div>
       <div id="vmMeanEn" style="font-size:.78rem;color:#94a3b8;margin-top:.2rem"></div>
+      <div id="vmMeanJa" style="font-size:.9rem;color:var(--muted);margin-top:.35rem;line-height:1.6"></div>
+      <div id="vmCaution" style="display:none;margin-top:.5rem;padding:.5rem .7rem;border-left:3px solid var(--red);
+        background:#fef2f2;border-radius:0 8px 8px 0;font-size:.84rem;line-height:1.6"></div>
     </div>
     <div class="sec">
       <div class="lb">KANJI PENYUSUN ／ 使われている漢字（タップで書き順）</div>
@@ -622,7 +626,7 @@ else document.getElementById('gatePw').focus();
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-08-20';   // 更新日（版）
+const VERSION = '2026-08-26';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -727,7 +731,7 @@ function mergeMyWords() {
       kanji: [...m.word].filter(c => KANJI_RE.test(c)) });
   });
 }
-const vMean = w => (LANG === 'id' && w.meaning_id) ? w.meaning_id : w.meaning;
+const vMean = w => (LANG === 'id' && w.meaning_id) ? w.meaning_id : (w.meaning || w.meaning_ja || w.meaning_id);
 const cnt = lv => DATA.filter(k => k.level === lv).length;
 const loadStrokes = () => strokePromise || (strokePromise =
   fetch('kanji-strokes.json', { cache: 'no-cache' }).then(r => r.json()).then(j => (STROKES = j.strokes)));
@@ -807,7 +811,7 @@ const cardHTML = k => `<button class="kcard ${progress[k.character] ? 'is-' + pr
 
 /* ---------- 熟語タブ ---------- */
 let vLimit = 120, vLv = 'all';
-const LVORD = { N5: 0, N4: 1, N3: 2, '介護': 3, '現場': 4, '施設': 5, '追加': 6 };
+const LVORD = { N5: 0, N4: 1, N3: 2, '介護': 3, '記録': 4, '現場': 5, '施設': 6, '追加': 7 };
 /** 熟語の検索：ぴったり＞先頭一致＞途中に含む。意味（ローマ字）は語頭だけ見る */
 function scoreVocab(w, q) {
   const mi = (w.meaning_id || '').toLowerCase(), me = (w.meaning || '').toLowerCase();
@@ -887,7 +891,14 @@ function openVocab(word) {
   $('#vmWord').textContent = w.word;
   $('#vmRead').textContent = w.reading;
   $('#vmMean').textContent = vMean(w);
-  $('#vmMeanEn').textContent = (LANG === 'id' && w.meaning_id) ? 'EN: ' + w.meaning : '';
+  $('#vmMeanEn').textContent = (LANG === 'id' && w.meaning_id && w.meaning && w.meaning !== w.meaning_ja)
+    ? 'EN: ' + w.meaning : '';
+  /* やさしい日本語の意味（記録の言葉に付いている） */
+  $('#vmMeanJa').textContent = w.meaning_ja ? '日本語：' + w.meaning_ja : '';
+  const cau = $('#vmCaution');
+  cau.style.display = w.caution ? 'block' : 'none';
+  if (w.caution) cau.innerHTML = '⚠️ ' + h(w.caution) +
+    '<br><span style="font-style:italic;color:var(--muted)">Petugas tidak boleh memutuskan sendiri penggunaan obat. Selalu konfirmasi ke perawat.</span>';
   const cards = (w.kanji || []).map(c => BYCH[c] ? cardHTML(BYCH[c])
     : `<div class="kcard" style="opacity:.55"><div class="ch">${c}</div><div class="body"><div class="mean">（未収録 / belum ada）</div></div></div>`);
   $('#vmKanji').innerHTML = cards.join('') || '<p class="hint">—</p>';

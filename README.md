@@ -67,8 +67,8 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 | `choukai/index.html` | 聴解アプリ本体（3パート17問。音声は端末の音声合成が読み上げるので音声ファイルなし） |
 | `kanji-data.json` | 漢字746字のデータ（読み・意味・用例・部首など） |
 | `kanji-strokes.json` | 書き順データ（KanjiVG のパス、746字ぶん） |
-| `vocab.json` | 熟語3,801語（JLPT語彙＋介護・看護201語＋現場125語） |
-| `sentences.json` | 練習問題（JLPT形式）用の例文3,701件（収録語彙3,801語の97%をカバー） |
+| `vocab.json` | 熟語4,558語（JLPT語彙＋介護・看護201語＋現場125語） |
+| `sentences.json` | 練習問題（JLPT形式）用の例文4,338件（収録語彙4,558語の95%をカバー） |
 | `vocab-extra.csv` | 施設独自の専門用語（Excelで編集して追加・修正） |
 | `MANUAL.md` | 使用説明書 |
 | `SPEC.md` | 仕様書 |
