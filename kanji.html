@@ -258,6 +258,7 @@ footer a{color:var(--blue)}
         <option value="unseen">未学習 ／ Belum dipelajari</option>
         <option value="review">要復習 ／ Perlu diulang</option>
         <option value="known">覚えた ／ Sudah hafal</option>
+        <option value="notrans">訳なし ／ Belum ada arti</option>
       </select>
       <select class="sel" id="vCat">
         <option value="all">Semua bidang ／ 分野すべて</option>
@@ -288,8 +289,10 @@ footer a{color:var(--blue)}
     <details style="margin-bottom:.9rem;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:.7rem .9rem">
       <summary style="cursor:pointer;font-weight:700;font-size:.9rem">＋ 施設の言葉を追加する ／ Tambah kosakata</summary>
       <p class="hint" style="white-space:normal;margin:.5rem 0">
-        施設で使う言葉をこの端末に追加できます。全員に配るときは「CSVを書き出す」で保存し、
-        <code>vocab-extra.csv</code> に貼り付けてGitHubへアップロードしてください（使用説明書 2-8）。</p>
+        施設で使う言葉をこの端末に追加できます。<b>インドネシア語の意味も入れてください。</b>
+        分からないときは空のままでも追加できます（あとから直せます）。全員に配るときは
+        「CSVを書き出す」で保存し、<code>vocab-extra.csv</code> に貼り付けてGitHubへ
+        アップロードしてください（使用説明書 2-8）。</p>
       <div class="toolbar" style="margin:.4rem 0 0">
         <input class="search" id="nwWord" placeholder="言葉（例：入浴チェック表）" style="background-image:none;padding-left:.9rem;flex:1 1 160px">
         <input class="search" id="nwRead" placeholder="ふりがな（例：にゅうよくちぇっくひょう）" style="background-image:none;padding-left:.9rem;flex:1 1 160px">
@@ -823,6 +826,7 @@ function filterVocab() {
     if (mk === 'known' && vprogress[w.word] !== 'known') return false;
     if (mk === 'review' && vprogress[w.word] !== 'review') return false;
     if (mk === 'unseen' && vprogress[w.word]) return false;
+    if (mk === 'notrans' && (w.meaning_id || '').trim()) return false;
     if (cat !== 'all' && w.category !== cat) return false;
     if (sub !== 'all' && w.sub !== sub) return false;
     if (!q) { w._s = 0; return true; }
@@ -1527,6 +1531,10 @@ $('#nwAdd').onclick = () => {
   const word = $('#nwWord').value.trim(), reading = $('#nwRead').value.trim(),
         mid = $('#nwMean').value.trim(), cat = $('#nwCat').value, sub = $('#nwSub').value.trim();
   if (!word) { $('#nwWord').focus(); return; }
+  if (!mid && !confirm(
+      'インドネシア語の意味が空です。\n訳なしのまま追加しますか？\n\n' +
+      '（あとで「訳なし」で絞り込んで直せます）\n\n' +
+      'Arti bahasa Indonesia kosong. Tetap tambahkan?')) { $('#nwMean').focus(); return; }
   myWords = myWords.filter(m => m.word !== word);
   myWords.push({ word, reading, meaning_id: mid, meaning: mid, category: cat, sub });
   saveMyWords();
