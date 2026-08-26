@@ -1,0 +1,2438 @@
+{
+ "level": "記録",
+ "count": 33,
+ "grammar": [
+  {
+   "id": "k-ari-nashi",
+   "pattern": "～あり／～なし",
+   "level": "記録",
+   "category": "状態・様子",
+   "form": "名詞 ＋ あり ／ なし（記録の短い書き方）",
+   "meaning_id": "ada ~ / tidak ada ~",
+   "meaning_en": "present / absent",
+   "note_ja": "記録では「〜があります」を「〜あり」と短く書く。話すときは使わない。「なし」は「ありません」の意味。",
+   "note_id": "Dalam catatan, 「〜があります」ditulis singkat 「〜あり」. Tidak dipakai saat berbicara.",
+   "note_en": "In records, 「〜があります」is shortened to 「〜あり」. Not used in speech.",
+   "examples": [
+    {
+     "ja": "両足に発赤あり。",
+     "reading": "りょうあしにほっせきあり。",
+     "id": "Ada kemerahan pada kedua kaki.",
+     "en": "Redness present on both legs.",
+     "scene": "皮膚の記録"
+    },
+    {
+     "ja": "熱なし。咳なし。",
+     "reading": "ねつなし。せきなし。",
+     "id": "Tidak ada demam. Tidak ada batuk.",
+     "en": "No fever. No cough.",
+     "scene": "バイタル"
+    },
+    {
+     "ja": "夜間、ナースコールあり。",
+     "reading": "やかん、なーすこーるあり。",
+     "id": "Malam hari ada panggilan perawat.",
+     "en": "Nurse call during the night.",
+     "scene": "申し送り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "両足に発赤＿＿＿。",
+     "choices": [
+      "あり",
+      "ある",
+      "あります",
+      "あった"
+     ],
+     "answer": 0,
+     "explain_id": "Catatan memakai bentuk singkat 「あり」.",
+     "explain_en": "Records use the short form 「あり」."
+    },
+    {
+     "type": "choice",
+     "q": "「熱なし」の意味はどれですか。",
+     "choices": [
+      "熱がありません",
+      "熱があります",
+      "熱が下がりました",
+      "熱を測りません"
+     ],
+     "answer": 0,
+     "explain_id": "「なし」= tidak ada.",
+     "explain_en": "「なし」= there is none."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "夜間",
+      "ナースコール",
+      "あり"
+     ],
+     "hint_id": "Malam hari ada panggilan perawat.",
+     "hint_en": "Nurse call during the night."
+    }
+   ]
+  },
+  {
+   "id": "k-ga-mirareru",
+   "pattern": "～が見られる",
+   "level": "記録",
+   "category": "状態・様子",
+   "form": "名詞 ＋ が見られる（観察して分かったこと）",
+   "meaning_id": "terlihat ~ / tampak ~",
+   "meaning_en": "~ is observed",
+   "note_ja": "自分の目で見て確認したことに使う。断定しすぎず、客観的に書ける。記録でいちばん多い表現の一つ。",
+   "note_id": "Untuk hal yang dilihat sendiri. Objektif tanpa terlalu memastikan. Sangat sering di catatan.",
+   "note_en": "For what you saw yourself. Objective without over-asserting. Very common in records.",
+   "examples": [
+    {
+     "ja": "右肘に皮下出血が見られた。",
+     "reading": "みぎひじにひかしゅっけつがみられた。",
+     "id": "Terlihat memar di siku kanan.",
+     "en": "Bruising was observed on the right elbow.",
+     "scene": "皮膚の記録"
+    },
+    {
+     "ja": "夜間、脱衣行為が見られた。",
+     "reading": "やかん、だついこういがみられた。",
+     "id": "Malam hari terlihat perilaku melepas baju.",
+     "en": "Undressing behaviour was observed at night.",
+     "scene": "認知症の記録"
+    },
+    {
+     "ja": "食事中にむせ込みが見られた。",
+     "reading": "しょくじちゅうにむせこみがみられた。",
+     "id": "Terlihat tersedak saat makan.",
+     "en": "Choking was observed during the meal.",
+     "scene": "食事記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "右肘に皮下出血＿＿＿見られた。",
+     "choices": [
+      "が",
+      "を",
+      "に",
+      "で"
+     ],
+     "answer": 0,
+     "explain_id": "「見られる」memakai 「が」.",
+     "explain_en": "「見られる」takes 「が」."
+    },
+    {
+     "type": "choice",
+     "q": "自分の目で確認したことを書く形はどれですか。",
+     "choices": [
+      "が見られた",
+      "と言っていた",
+      "かもしれない",
+      "だろう"
+     ],
+     "answer": 0,
+     "explain_id": "Yang dilihat sendiri: 「が見られた」.",
+     "explain_en": "What you saw: 「が見られた」."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "食事中に",
+      "むせ込み",
+      "が",
+      "見られた"
+     ],
+     "hint_id": "Terlihat tersedak saat makan.",
+     "hint_en": "Choking was observed during the meal."
+    }
+   ]
+  },
+  {
+   "id": "k-ga-kikareru",
+   "pattern": "～が聞かれる",
+   "level": "記録",
+   "category": "伝聞・引用",
+   "form": "名詞 ＋ が聞かれる（声・音・訴えを耳で確認した）",
+   "meaning_id": "terdengar ~",
+   "meaning_en": "~ is heard",
+   "note_ja": "耳で確認したことに使う。「唸り声が聞かれた」「肺雑音が聞かれた」など。見た場合は「見られる」。",
+   "note_id": "Untuk yang didengar. Jika dilihat, pakai 「見られる」.",
+   "note_en": "For what you heard. If you saw it, use 「見られる」.",
+   "examples": [
+    {
+     "ja": "訪室時、唸り声が聞かれた。",
+     "reading": "ほうしつじ、うなりごえがきかれた。",
+     "id": "Saat masuk kamar terdengar suara mengerang.",
+     "en": "A groaning sound was heard on entering the room.",
+     "scene": "見守り"
+    },
+    {
+     "ja": "痛みの訴えが聞かれた。",
+     "reading": "いたみのうったえがきかれた。",
+     "id": "Terdengar keluhan nyeri.",
+     "en": "A complaint of pain was heard.",
+     "scene": "体調確認"
+    },
+    {
+     "ja": "独語が聞かれたが、落ち着いておられた。",
+     "reading": "どくごがきかれたが、おちついておられた。",
+     "id": "Terdengar bicara sendiri, tetapi beliau tenang.",
+     "en": "Talking to oneself was heard, but they were calm.",
+     "scene": "認知症の記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "訪室時、唸り声＿＿＿聞かれた。",
+     "choices": [
+      "が",
+      "を",
+      "に",
+      "で"
+     ],
+     "answer": 0,
+     "explain_id": "「聞かれる」memakai 「が」.",
+     "explain_en": "「聞かれる」takes 「が」."
+    },
+    {
+     "type": "choice",
+     "q": "目で見たことを書くときはどれですか。",
+     "choices": [
+      "が見られた",
+      "が聞かれた",
+      "と聞いた",
+      "と思う"
+     ],
+     "answer": 0,
+     "explain_id": "Yang dilihat: 「見られた」.",
+     "explain_en": "What was seen: 「見られた」."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "痛みの訴え",
+      "が",
+      "聞かれた"
+     ],
+     "hint_id": "Terdengar keluhan nyeri.",
+     "hint_en": "A complaint of pain was heard."
+    }
+   ]
+  },
+  {
+   "id": "k-to-omowareru",
+   "pattern": "～と思われる",
+   "level": "記録",
+   "category": "推量・判断",
+   "form": "普通形 ＋ と思われる",
+   "meaning_id": "diperkirakan ~",
+   "meaning_en": "it appears that ~",
+   "note_ja": "確実ではないが、そう考えられるときに使う。「〜だ」と決めつけずに書けるので、記録で安全。",
+   "note_id": "Dipakai saat belum pasti tetapi diduga demikian. Aman untuk catatan.",
+   "note_en": "Used when not certain but likely. A safe way to write in records.",
+   "examples": [
+    {
+     "ja": "拘縮が消化器に影響していると思われる。",
+     "reading": "こうしゅくがしょうかきにえいきょうしているとおもわれる。",
+     "id": "Diperkirakan kontraktur memengaruhi pencernaan.",
+     "en": "The contracture appears to affect digestion.",
+     "scene": "記録"
+    },
+    {
+     "ja": "水分不足が原因と思われる。",
+     "reading": "すいぶんぶそくがげんいんとおもわれる。",
+     "id": "Diperkirakan penyebabnya kurang minum.",
+     "en": "Insufficient fluids appear to be the cause.",
+     "scene": "記録"
+    },
+    {
+     "ja": "夜間の物音で目が覚めたと思われる。",
+     "reading": "やかんのものおとでめがさめたとおもわれる。",
+     "id": "Diperkirakan terbangun karena suara di malam hari.",
+     "en": "They appear to have woken from a night-time noise.",
+     "scene": "申し送り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "水分不足が原因＿＿＿思われる。",
+     "choices": [
+      "と",
+      "を",
+      "に",
+      "が"
+     ],
+     "answer": 0,
+     "explain_id": "Isi dugaan ditandai 「と」.",
+     "explain_en": "The supposition is marked by 「と」."
+    },
+    {
+     "type": "choice",
+     "q": "断定を避ける書き方はどれですか。",
+     "choices": [
+      "と思われる",
+      "に決まっている",
+      "にちがいない",
+      "である"
+     ],
+     "answer": 0,
+     "explain_id": "Menghindari kepastian: 「と思われる」.",
+     "explain_en": "Avoids asserting: 「と思われる」."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "夜間の物音で",
+      "目が覚めた",
+      "と",
+      "思われる"
+     ],
+     "hint_id": "Diperkirakan terbangun karena suara.",
+     "hint_en": "They appear to have woken from a noise."
+    }
+   ]
+  },
+  {
+   "id": "k-kanousei",
+   "pattern": "～の可能性がある",
+   "level": "記録",
+   "category": "推量・判断",
+   "form": "名詞 ＋ の可能性がある ／ 動詞普通形 ＋ 可能性がある",
+   "meaning_id": "ada kemungkinan ~",
+   "meaning_en": "there is a possibility of ~",
+   "note_ja": "危険や病気の見込みを伝える。可能性を書いたら、必ず看護師にも口頭で伝える。",
+   "note_id": "Menyampaikan kemungkinan bahaya atau penyakit. Setelah menulis, laporkan juga secara lisan.",
+   "note_en": "States a possible risk or illness. After writing it, also tell the nurse in person.",
+   "examples": [
+    {
+     "ja": "汚れた紙パンツは皮膚トラブルにつながる可能性がある。",
+     "reading": "よごれたかみぱんつはひふとらぶるにつながるかのうせいがある。",
+     "id": "Popok kotor berpotensi menyebabkan masalah kulit.",
+     "en": "Soiled pads may lead to skin problems.",
+     "scene": "排泄介助"
+    },
+    {
+     "ja": "脱水の可能性があるため、水分を促した。",
+     "reading": "だっすいのかのうせいがあるため、すいぶんをうながした。",
+     "id": "Karena ada kemungkinan dehidrasi, minum dianjurkan.",
+     "en": "As dehydration was possible, fluids were encouraged.",
+     "scene": "水分記録"
+    },
+    {
+     "ja": "転倒の可能性があるので、見守りを強化した。",
+     "reading": "てんとうのかのうせいがあるので、みまもりをきょうかした。",
+     "id": "Karena ada kemungkinan jatuh, pengawasan diperketat.",
+     "en": "As a fall was possible, monitoring was increased.",
+     "scene": "安全"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "脱水＿＿＿可能性がある。",
+     "choices": [
+      "の",
+      "が",
+      "を",
+      "に"
+     ],
+     "answer": 0,
+     "explain_id": "Kata benda + 「の可能性がある」.",
+     "explain_en": "Noun + 「の可能性がある」."
+    },
+    {
+     "type": "choice",
+     "q": "可能性を記録に書いたあと、することはどれですか。",
+     "choices": [
+      "看護師にも口頭で伝える",
+      "様子を見るだけ",
+      "家族に電話する",
+      "何もしない"
+     ],
+     "answer": 0,
+     "explain_id": "Risiko harus dilaporkan juga secara lisan.",
+     "explain_en": "A risk must also be reported verbally."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "転倒の",
+      "可能性がある",
+      "ので",
+      "見守りを強化した"
+     ],
+     "hint_id": "Karena mungkin jatuh, pengawasan diperketat.",
+     "hint_en": "As a fall was possible, monitoring increased."
+    }
+   ]
+  },
+  {
+   "id": "k-tono-koto",
+   "pattern": "～とのこと",
+   "level": "記録",
+   "category": "伝聞・引用",
+   "form": "普通形 ＋ とのこと（人から聞いた内容）",
+   "meaning_id": "katanya ~ / dikabarkan ~",
+   "meaning_en": "I am told that ~",
+   "note_ja": "他の人・家族・病院から聞いたことを書く。自分が見たことは「見られる」。区別が大切。",
+   "note_id": "Untuk hal yang didengar dari orang lain. Yang dilihat sendiri pakai 「見られる」.",
+   "note_en": "For what you heard from someone else. What you saw uses 「見られる」.",
+   "examples": [
+    {
+     "ja": "ご家族より、来週受診するとのこと。",
+     "reading": "ごかぞくより、らいしゅうじゅしんするとのこと。",
+     "id": "Dari keluarga: katanya minggu depan berobat.",
+     "en": "The family says they will see a doctor next week.",
+     "scene": "連絡"
+    },
+    {
+     "ja": "夜勤者より、良眠されたとのこと。",
+     "reading": "やきんしゃより、りょうみんされたとのこと。",
+     "id": "Dari petugas malam: katanya tidur nyenyak.",
+     "en": "The night staff report that they slept well.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "病院より、検査結果は問題なしとのこと。",
+     "reading": "びょういんより、けんさけっかはもんだいなしとのこと。",
+     "id": "Dari rumah sakit: hasil pemeriksaan tidak ada masalah.",
+     "en": "The hospital reports the test results are fine.",
+     "scene": "通院"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "ご家族より、来週受診する＿＿＿。",
+     "choices": [
+      "とのこと",
+      "と思われる",
+      "が見られる",
+      "のこと"
+     ],
+     "answer": 0,
+     "explain_id": "Informasi dari orang lain: 「とのこと」.",
+     "explain_en": "Information from others: 「とのこと」."
+    },
+    {
+     "type": "choice",
+     "q": "自分が見たことを書くのはどれですか。",
+     "choices": [
+      "が見られた",
+      "とのこと",
+      "と聞いた",
+      "そうだ"
+     ],
+     "answer": 0,
+     "explain_id": "Yang dilihat sendiri: 「が見られた」.",
+     "explain_en": "What you saw: 「が見られた」."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "夜勤者より",
+      "良眠された",
+      "とのこと"
+     ],
+     "hint_id": "Dari petugas malam: tidur nyenyak.",
+     "hint_en": "Night staff report they slept well."
+    }
+   ]
+  },
+  {
+   "id": "k-ni-tomonai",
+   "pattern": "～に伴い",
+   "level": "記録",
+   "category": "理由・原因",
+   "form": "名詞 ＋ に伴い（それといっしょに起こる変化）",
+   "meaning_id": "seiring dengan ~",
+   "meaning_en": "along with ~, as ~",
+   "note_ja": "あることが起きたので、続けて別のことが起きたと書く。書き言葉。話すときは「〜のため」。",
+   "note_id": "Menyatakan perubahan yang menyertai. Bahasa tulis; saat bicara pakai 「〜のため」.",
+   "note_en": "States a change that accompanies another. Written style; in speech use 「〜のため」.",
+   "examples": [
+    {
+     "ja": "体調の回復に伴い、食事量が増えた。",
+     "reading": "たいちょうのかいふくにともない、しょくじりょうがふえた。",
+     "id": "Seiring pemulihan kondisi, porsi makan bertambah.",
+     "en": "As their condition improved, food intake increased.",
+     "scene": "記録"
+    },
+    {
+     "ja": "薬の変更に伴い、様子を観察している。",
+     "reading": "くすりのへんこうにともない、ようすをかんさつしている。",
+     "id": "Seiring perubahan obat, kondisi diamati.",
+     "en": "Following the medication change, we are observing them.",
+     "scene": "服薬記録"
+    },
+    {
+     "ja": "気温の上昇に伴い、水分をこまめにすすめている。",
+     "reading": "きおんのじょうしょうにともない、すいぶんをこまめにすすめている。",
+     "id": "Seiring naiknya suhu, minum dianjurkan lebih sering.",
+     "en": "As the temperature rose, we encourage fluids more often.",
+     "scene": "水分補給"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "体調の回復＿＿＿伴い、食事量が増えた。",
+     "choices": [
+      "に",
+      "を",
+      "が",
+      "で"
+     ],
+     "answer": 0,
+     "explain_id": "Kata benda + 「に伴い」.",
+     "explain_en": "Noun + 「に伴い」."
+    },
+    {
+     "type": "choice",
+     "q": "話すときに使う言い方はどれですか。",
+     "choices": [
+      "体調がよくなったので",
+      "回復に伴い",
+      "回復に際し",
+      "回復をもって"
+     ],
+     "answer": 0,
+     "explain_id": "Saat bicara pakai bahasa sehari-hari.",
+     "explain_en": "In speech, use plain wording."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "薬の変更",
+      "に伴い",
+      "様子を",
+      "観察している"
+     ],
+     "hint_id": "Seiring perubahan obat, kondisi diamati.",
+     "hint_en": "Following the change, we observe them."
+    }
+   ]
+  },
+  {
+   "id": "k-ni-yori",
+   "pattern": "～により／～による",
+   "level": "記録",
+   "category": "理由・原因",
+   "form": "名詞 ＋ により（原因・方法）　名詞 ＋ による ＋ 名詞",
+   "meaning_id": "karena ~ / berdasarkan ~",
+   "meaning_en": "due to ~ / by ~",
+   "note_ja": "原因や方法を書く硬い言い方。「〜で」の書き言葉版。記録・報告書でよく使う。",
+   "note_id": "Cara formal menyatakan sebab atau metode. Versi tulis dari 「〜で」.",
+   "note_en": "A formal way to state cause or means. The written form of 「〜で」.",
+   "examples": [
+    {
+     "ja": "転倒により、右膝を打撲された。",
+     "reading": "てんとうにより、みぎひざをだぼくされた。",
+     "id": "Karena terjatuh, lutut kanan memar.",
+     "en": "Due to a fall, the right knee was bruised.",
+     "scene": "事故記録"
+    },
+    {
+     "ja": "医師の指示により、軟膏を変更した。",
+     "reading": "いしのしじにより、なんこうをへんこうした。",
+     "id": "Berdasarkan instruksi dokter, salep diganti.",
+     "en": "On the doctor's instructions, the ointment was changed.",
+     "scene": "服薬記録"
+    },
+    {
+     "ja": "加齢による皮膚の乾燥が見られる。",
+     "reading": "かれいによるひふのかんそうがみられる。",
+     "id": "Terlihat kulit kering karena penuaan.",
+     "en": "Dryness of the skin due to ageing is seen.",
+     "scene": "皮膚の記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "医師の指示＿＿＿、軟膏を変更した。",
+     "choices": [
+      "により",
+      "によって",
+      "による",
+      "にとって"
+     ],
+     "answer": 0,
+     "explain_id": "Sebelum kata kerja: 「により」.",
+     "explain_en": "Before a verb: 「により」."
+    },
+    {
+     "type": "choice",
+     "q": "名詞の前に来る形はどれですか。",
+     "choices": [
+      "による",
+      "により",
+      "によって",
+      "にて"
+     ],
+     "answer": 0,
+     "explain_id": "Sebelum kata benda: 「による」.",
+     "explain_en": "Before a noun: 「による」."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "転倒",
+      "により",
+      "右膝を",
+      "打撲された"
+     ],
+     "hint_id": "Karena jatuh, lutut kanan memar.",
+     "hint_en": "Due to a fall, the right knee was bruised."
+    }
+   ]
+  },
+  {
+   "id": "k-keikou",
+   "pattern": "～傾向がある",
+   "level": "記録",
+   "category": "状態・様子",
+   "form": "名詞 ／ 動詞辞書形 ＋ 傾向がある",
+   "meaning_id": "ada kecenderungan ~",
+   "meaning_en": "tends to ~",
+   "note_ja": "一度きりでなく、そうなりやすいと伝える。記録で「最近の様子」を書くのに便利。",
+   "note_id": "Menyatakan kecenderungan, bukan kejadian sekali. Berguna untuk menulis kondisi belakangan ini.",
+   "note_en": "States a tendency, not a one-off event. Useful for describing recent condition.",
+   "examples": [
+    {
+     "ja": "夕方に落ち着かなくなる傾向がある。",
+     "reading": "ゆうがたにおちつかなくなるけいこうがある。",
+     "id": "Ada kecenderungan gelisah menjelang sore.",
+     "en": "They tend to become restless in the evening.",
+     "scene": "認知症の記録"
+    },
+    {
+     "ja": "食事量が減る傾向がある。",
+     "reading": "しょくじりょうがへるけいこうがある。",
+     "id": "Ada kecenderungan porsi makan berkurang.",
+     "en": "Food intake tends to decrease.",
+     "scene": "食事記録"
+    },
+    {
+     "ja": "便秘の傾向があるため、水分をすすめている。",
+     "reading": "べんぴのけいこうがあるため、すいぶんをすすめている。",
+     "id": "Karena ada kecenderungan sembelit, minum dianjurkan.",
+     "en": "As they tend towards constipation, we encourage fluids.",
+     "scene": "排泄記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "食事量が減る＿＿＿がある。",
+     "choices": [
+      "傾向",
+      "可能性",
+      "予定",
+      "つもり"
+     ],
+     "answer": 0,
+     "explain_id": "Kecenderungan: 「傾向がある」.",
+     "explain_en": "A tendency: 「傾向がある」."
+    },
+    {
+     "type": "choice",
+     "q": "「傾向がある」が表すのはどれですか。",
+     "choices": [
+      "何度もそうなりやすい",
+      "一度だけ起きた",
+      "これから必ず起きる",
+      "もう起きない"
+     ],
+     "answer": 0,
+     "explain_id": "Sering terjadi, bukan sekali.",
+     "explain_en": "It happens repeatedly, not once."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "便秘の",
+      "傾向がある",
+      "ため",
+      "水分をすすめている"
+     ],
+     "hint_id": "Cenderung sembelit, jadi minum dianjurkan.",
+     "hint_en": "They tend to constipation, so we encourage fluids."
+    }
+   ]
+  },
+  {
+   "id": "k-keika-kansatsu",
+   "pattern": "～経過観察",
+   "level": "記録",
+   "category": "目的・方法",
+   "form": "名詞 ＋ は経過観察　／　経過観察とする",
+   "meaning_id": "observasi lanjutan",
+   "meaning_en": "continued observation",
+   "note_ja": "すぐに処置をせず、様子を見続けること。記録では「経過観察」と名詞で書くことが多い。",
+   "note_id": "Tidak langsung ditangani, tetapi terus diamati. Di catatan sering ditulis sebagai kata benda.",
+   "note_en": "Not treating at once but continuing to watch. Often written as a noun in records.",
+   "examples": [
+    {
+     "ja": "皮下出血は経過観察とする。",
+     "reading": "ひかしゅっけつはけいかかんさつとする。",
+     "id": "Memar akan diobservasi lanjut.",
+     "en": "The bruise will be kept under observation.",
+     "scene": "皮膚の記録"
+    },
+    {
+     "ja": "血腫は自然に吸収されるため、経過観察となった。",
+     "reading": "けっしゅはしぜんにきゅうしゅうされるため、けいかかんさつとなった。",
+     "id": "Karena hematoma akan terserap sendiri, dilakukan observasi.",
+     "en": "As the haematoma will resorb, it is under observation.",
+     "scene": "通院記録"
+    },
+    {
+     "ja": "発赤は軽減しており、経過良好である。",
+     "reading": "ほっせきはけいげんしており、けいかりょうこうである。",
+     "id": "Kemerahan berkurang, perkembangannya baik.",
+     "en": "The redness has lessened; progress is good.",
+     "scene": "皮膚の記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "皮下出血は＿＿＿とする。",
+     "choices": [
+      "経過観察",
+      "経過良好",
+      "経過不良",
+      "観察経過"
+     ],
+     "answer": 0,
+     "explain_id": "Terus diamati: 「経過観察」.",
+     "explain_en": "Keep watching: 「経過観察」."
+    },
+    {
+     "type": "choice",
+     "q": "「経過良好」の意味はどれですか。",
+     "choices": [
+      "よくなってきている",
+      "悪くなっている",
+      "変わらない",
+      "終わった"
+     ],
+     "answer": 0,
+     "explain_id": "Perkembangan baik.",
+     "explain_en": "Progress is good."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "発赤は",
+      "軽減しており",
+      "経過良好",
+      "である"
+     ],
+     "hint_id": "Kemerahan berkurang, perkembangan baik.",
+     "hint_en": "Redness has lessened; progress is good."
+    }
+   ]
+  },
+  {
+   "id": "k-keizoku",
+   "pattern": "～継続／～中止",
+   "level": "記録",
+   "category": "変化・継続",
+   "form": "名詞 ＋ 継続（続ける）　／　名詞 ＋ 中止（やめる）",
+   "meaning_id": "dilanjutkan / dihentikan",
+   "meaning_en": "continued / discontinued",
+   "note_ja": "処置や薬を続けるか、やめるかを短く書く。判断は職員がせず、必ず指示に従う。",
+   "note_id": "Menulis singkat apakah tindakan/obat dilanjutkan atau dihentikan. Keputusan bukan oleh staf perawatan.",
+   "note_en": "States briefly whether care or medicine continues or stops. Care staff never decide this.",
+   "examples": [
+    {
+     "ja": "軟膏塗布は継続。",
+     "reading": "なんこうとふはけいぞく。",
+     "id": "Pengolesan salep dilanjutkan.",
+     "en": "Ointment application is continued.",
+     "scene": "服薬記録"
+    },
+    {
+     "ja": "本日で軟膏の塗布を終了した。",
+     "reading": "ほんじつでなんこうのとふをしゅうりょうした。",
+     "id": "Hari ini pengolesan salep diakhiri.",
+     "en": "Ointment application ended today.",
+     "scene": "服薬記録"
+    },
+    {
+     "ja": "入浴は中止し、清拭で対応した。",
+     "reading": "にゅうよくはちゅうしし、せいしきでたいおうした。",
+     "id": "Mandi dibatalkan, diganti lap badan.",
+     "en": "The bath was cancelled; a bed bath was given.",
+     "scene": "入浴記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "軟膏塗布は＿＿＿。",
+     "choices": [
+      "継続",
+      "中止",
+      "終了",
+      "開始"
+     ],
+     "answer": 0,
+     "explain_id": "Dilanjutkan: 「継続」.",
+     "explain_en": "Continued: 「継続」."
+    },
+    {
+     "type": "choice",
+     "q": "薬を続けるか止めるかを決めるのはだれですか。",
+     "choices": [
+      "医師・看護師",
+      "介護職員",
+      "本人",
+      "家族"
+     ],
+     "answer": 0,
+     "explain_id": "Keputusan ada pada dokter/perawat.",
+     "explain_en": "The doctor or nurse decides."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "入浴は",
+      "中止し",
+      "清拭で",
+      "対応した"
+     ],
+     "hint_id": "Mandi dibatalkan, diganti lap badan.",
+     "hint_en": "The bath was cancelled; a bed bath given."
+    }
+   ]
+  },
+  {
+   "id": "k-kawarinashi",
+   "pattern": "～変わりなし／～変化なし",
+   "level": "記録",
+   "category": "状態・様子",
+   "form": "名詞 ＋ 変わりなし ／ 変化なし",
+   "meaning_id": "tidak ada perubahan",
+   "meaning_en": "no change",
+   "note_ja": "前と同じだと書く。ただし「何が」変わらないのかを書くと、より正確な記録になる。",
+   "note_id": "Menyatakan sama seperti sebelumnya. Lebih baik jelaskan apanya yang tidak berubah.",
+   "note_en": "States it is the same as before. Better records say what has not changed.",
+   "examples": [
+    {
+     "ja": "微熱変わらず。エアー入り良好。",
+     "reading": "びねつかわらず。えあーいりりょうこう。",
+     "id": "Demam ringan tidak berubah. Udara masuk baik.",
+     "en": "Low-grade fever unchanged. Air entry good.",
+     "scene": "バイタル"
+    },
+    {
+     "ja": "前額部の隆起に変化はなかった。",
+     "reading": "ぜんがくぶのりゅうきにへんかはなかった。",
+     "id": "Tidak ada perubahan pada benjolan di dahi.",
+     "en": "There was no change in the forehead swelling.",
+     "scene": "皮膚の記録"
+    },
+    {
+     "ja": "食事量は昨日と変わりなし。",
+     "reading": "しょくじりょうはきのうとかわりなし。",
+     "id": "Porsi makan tidak berubah dari kemarin.",
+     "en": "Food intake is unchanged from yesterday.",
+     "scene": "食事記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "食事量は昨日と＿＿＿。",
+     "choices": [
+      "変わりなし",
+      "変わりあり",
+      "変わる",
+      "変わった"
+     ],
+     "answer": 0,
+     "explain_id": "Tidak berubah: 「変わりなし」.",
+     "explain_en": "Unchanged: 「変わりなし」."
+    },
+    {
+     "type": "choice",
+     "q": "よりよい記録はどれですか。",
+     "choices": [
+      "食事量は昨日と変わりなし",
+      "変わりなし",
+      "同じ",
+      "いつもどおり"
+     ],
+     "answer": 0,
+     "explain_id": "Sebutkan apa yang tidak berubah.",
+     "explain_en": "Say what has not changed."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "前額部の隆起",
+      "に",
+      "変化は",
+      "なかった"
+     ],
+     "hint_id": "Tidak ada perubahan pada benjolan dahi.",
+     "hint_en": "No change in the forehead swelling."
+    }
+   ]
+  },
+  {
+   "id": "k-nite",
+   "pattern": "～にて",
+   "level": "記録",
+   "category": "目的・方法",
+   "form": "名詞 ＋ にて（＝で。場所・方法・道具）",
+   "meaning_id": "di / dengan (bentuk tulis)",
+   "meaning_en": "at / by (written style)",
+   "note_ja": "「〜で」の書き言葉。「二人介助にて」「車いすにて」のように記録でよく使う。話すときは「〜で」。",
+   "note_id": "Bentuk tulis dari 「〜で」. Sering di catatan: 「二人介助にて」. Saat bicara pakai 「〜で」.",
+   "note_en": "The written form of 「〜で」. Common in records. In speech, use 「〜で」.",
+   "examples": [
+    {
+     "ja": "二人介助にてベッドへ移乗した。",
+     "reading": "ふたりかいじょにてべっどへいじょうした。",
+     "id": "Dipindahkan ke tempat tidur dengan bantuan dua petugas.",
+     "en": "Transferred to bed with two-person assistance.",
+     "scene": "移乗介助"
+    },
+    {
+     "ja": "車いすにて食堂へ移動された。",
+     "reading": "くるまいすにてしょくどうへいどうされた。",
+     "id": "Beliau pindah ke ruang makan dengan kursi roda.",
+     "en": "They moved to the dining room by wheelchair.",
+     "scene": "移動介助"
+    },
+    {
+     "ja": "本日、施設にて看取りとなった。",
+     "reading": "ほんじつ、しせつにてみとりとなった。",
+     "id": "Hari ini dilakukan perawatan akhir hayat di fasilitas.",
+     "en": "End-of-life care took place at the facility today.",
+     "scene": "記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "二人介助＿＿＿ベッドへ移乗した。",
+     "choices": [
+      "にて",
+      "にで",
+      "へて",
+      "をて"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk tulis dari 「で」: 「にて」.",
+     "explain_en": "The written form of 「で」: 「にて」."
+    },
+    {
+     "type": "choice",
+     "q": "話すときの言い方はどれですか。",
+     "choices": [
+      "二人介助で",
+      "二人介助にて",
+      "二人介助をて",
+      "二人介助のて"
+     ],
+     "answer": 0,
+     "explain_id": "Saat bicara: 「で」.",
+     "explain_en": "In speech: 「で」."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "車いす",
+      "にて",
+      "食堂へ",
+      "移動された"
+     ],
+     "hint_id": "Pindah ke ruang makan dengan kursi roda.",
+     "hint_en": "Moved to the dining room by wheelchair."
+    }
+   ]
+  },
+  {
+   "id": "k-teido",
+   "pattern": "～程度",
+   "level": "記録",
+   "category": "程度・比較",
+   "form": "数量・名詞 ＋ 程度（だいたいそのくらい）",
+   "meaning_id": "sekitar ~",
+   "meaning_en": "about ~, roughly ~",
+   "note_ja": "はっきりした数が分からないときに使う。食事量・水分量の記録でとてもよく使う。",
+   "note_id": "Dipakai saat angka pastinya tidak diketahui. Sangat sering pada catatan makan/minum.",
+   "note_en": "Used when the exact figure is unknown. Very common in food and fluid records.",
+   "examples": [
+    {
+     "ja": "昼食は五割程度摂取された。",
+     "reading": "ちゅうしょくはごわりていどせっしゅされた。",
+     "id": "Makan siang dikonsumsi sekitar 50%.",
+     "en": "About half the lunch was eaten.",
+     "scene": "食事記録"
+    },
+    {
+     "ja": "水分は一口程度しか摂取されなかった。",
+     "reading": "すいぶんはひとくちていどしかせっしゅされなかった。",
+     "id": "Minum hanya sekitar satu teguk.",
+     "en": "Only about one sip of fluid was taken.",
+     "scene": "水分記録"
+    },
+    {
+     "ja": "三十分程度、臥床して休まれた。",
+     "reading": "さんじゅっぷんていど、がしょうしてやすまれた。",
+     "id": "Beliau berbaring istirahat sekitar 30 menit.",
+     "en": "They rested lying down for about 30 minutes.",
+     "scene": "記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "昼食は五割＿＿＿摂取された。",
+     "choices": [
+      "程度",
+      "ごろ",
+      "ずつ",
+      "ばかり"
+     ],
+     "answer": 0,
+     "explain_id": "Perkiraan jumlah: 「程度」.",
+     "explain_en": "Approximate amount: 「程度」."
+    },
+    {
+     "type": "choice",
+     "q": "時こくに使うのはどれですか。",
+     "choices": [
+      "ごろ",
+      "程度",
+      "ずつ",
+      "のみ"
+     ],
+     "answer": 0,
+     "explain_id": "Perkiraan waktu: 「ごろ」.",
+     "explain_en": "Approximate time: 「ごろ」."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "三十分",
+      "程度",
+      "臥床して",
+      "休まれた"
+     ],
+     "hint_id": "Istirahat berbaring sekitar 30 menit.",
+     "hint_en": "Rested lying down about 30 minutes."
+    }
+   ]
+  },
+  {
+   "id": "k-joutai",
+   "pattern": "～状態",
+   "level": "記録",
+   "category": "状態・様子",
+   "form": "名詞 ／ 動詞ている ＋ 状態（そのときの様子）",
+   "meaning_id": "kondisi / keadaan ~",
+   "meaning_en": "the state of ~",
+   "note_ja": "そのときの様子を名詞で表す。「浅眠状態」「傾眠状態」のように、記録では短くまとめる。",
+   "note_id": "Menyatakan keadaan sebagai kata benda. Di catatan diringkas: 「傾眠状態」.",
+   "note_en": "Expresses a state as a noun. Records shorten it: 「傾眠状態」.",
+   "examples": [
+    {
+     "ja": "夜間は浅眠の状態だった。",
+     "reading": "やかんはせんみんのじょうたいだった。",
+     "id": "Malam hari dalam kondisi tidur ringan.",
+     "en": "They were in a state of light sleep at night.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "日中は傾眠状態が続いている。",
+     "reading": "にっちゅうはけいみんじょうたいがつづいている。",
+     "id": "Siang hari terus dalam kondisi mengantuk berat.",
+     "en": "A drowsy state continued through the day.",
+     "scene": "記録"
+    },
+    {
+     "ja": "座位を保持できる状態である。",
+     "reading": "ざいをほじできるじょうたいである。",
+     "id": "Dalam kondisi mampu mempertahankan posisi duduk.",
+     "en": "They are in a state of being able to hold a sitting position.",
+     "scene": "移乗記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "夜間は浅眠の＿＿＿だった。",
+     "choices": [
+      "状態",
+      "可能性",
+      "傾向",
+      "程度"
+     ],
+     "answer": 0,
+     "explain_id": "Keadaan saat itu: 「状態」.",
+     "explain_en": "The state at the time: 「状態」."
+    },
+    {
+     "type": "choice",
+     "q": "「傾眠状態」の意味はどれですか。",
+     "choices": [
+      "うとうとして眠りがちな様子",
+      "よく眠れている様子",
+      "眠れない様子",
+      "起きている様子"
+     ],
+     "answer": 0,
+     "explain_id": "Mengantuk berat, mudah tertidur.",
+     "explain_en": "Drowsy, easily falling asleep."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "日中は",
+      "傾眠状態が",
+      "続いている"
+     ],
+     "hint_id": "Siang hari kondisi mengantuk berlanjut.",
+     "hint_en": "A drowsy state continues in the daytime."
+    }
+   ]
+  },
+  {
+   "id": "k-ji",
+   "pattern": "～時（じ）",
+   "level": "記録",
+   "category": "時・順序",
+   "form": "名詞 ／ 動詞辞書形 ＋ 時（そのとき・その場面）",
+   "meaning_id": "saat ~",
+   "meaning_en": "at the time of ~",
+   "note_ja": "「訪室時」「移乗時」「入浴時」のように、場面を短く示す。読み方は「じ」。",
+   "note_id": "Menunjukkan situasi secara singkat: 「訪室時」. Dibaca \"ji\".",
+   "note_en": "Shows the situation briefly: 「訪室時」. Read \"ji\".",
+   "examples": [
+    {
+     "ja": "訪室時、ベッドから降りようとされていた。",
+     "reading": "ほうしつじ、べっどからおりようとされていた。",
+     "id": "Saat masuk kamar, beliau mencoba turun dari tempat tidur.",
+     "en": "On entering the room, they were trying to get out of bed.",
+     "scene": "見守り"
+    },
+    {
+     "ja": "移乗時に右肘をぶつけられた。",
+     "reading": "いじょうじにみぎひじをぶつけられた。",
+     "id": "Saat pindah posisi, siku kanan terbentur.",
+     "en": "During the transfer, they knocked their right elbow.",
+     "scene": "移乗介助"
+    },
+    {
+     "ja": "入浴時、皮膚の状態を確認した。",
+     "reading": "にゅうよくじ、ひふのじょうたいをかくにんした。",
+     "id": "Saat mandi, kondisi kulit diperiksa.",
+     "en": "At bath time, the skin was checked.",
+     "scene": "入浴介助"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "「訪室時」の読み方はどれですか。",
+     "choices": [
+      "ほうしつじ",
+      "ほうしつとき",
+      "ほうしつどき",
+      "ほうしつじかん"
+     ],
+     "answer": 0,
+     "explain_id": "Dibaca \"ji\".",
+     "explain_en": "It is read \"ji\"."
+    },
+    {
+     "type": "choice",
+     "q": "移乗＿＿＿に右肘をぶつけられた。",
+     "choices": [
+      "時",
+      "中",
+      "前",
+      "後"
+     ],
+     "answer": 0,
+     "explain_id": "Saat melakukan: 「時」.",
+     "explain_en": "At the moment of: 「時」."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "入浴時",
+      "皮膚の状態を",
+      "確認した"
+     ],
+     "hint_id": "Saat mandi, kondisi kulit diperiksa.",
+     "hint_en": "At bath time, the skin was checked."
+    }
+   ]
+  },
+  {
+   "id": "k-go-mae",
+   "pattern": "～後／～前",
+   "level": "記録",
+   "category": "時・順序",
+   "form": "名詞 ＋ 後（ご）／ 前（まえ）（食後・入浴後・眠前 など）",
+   "meaning_id": "setelah ~ / sebelum ~",
+   "meaning_en": "after ~ / before ~",
+   "note_ja": "「食後」「入浴後」「眠前」など、記録では漢語で短く書く。「眠前薬」は寝る前に飲む薬。",
+   "note_id": "Di catatan ditulis singkat: 「食後」「眠前」. 「眠前薬」= obat sebelum tidur.",
+   "note_en": "Records use short forms: 「食後」「眠前」. 「眠前薬」is medicine before sleep.",
+   "examples": [
+    {
+     "ja": "食後に眠前薬以外の薬を服用された。",
+     "reading": "しょくごにみんぜんやくいがいのくすりをふくようされた。",
+     "id": "Setelah makan, obat selain obat malam diminum.",
+     "en": "After the meal, medicines other than the bedtime dose were taken.",
+     "scene": "服薬記録"
+    },
+    {
+     "ja": "入浴後に皮膚の状態を確認した。",
+     "reading": "にゅうよくごにひふのじょうたいをかくにんした。",
+     "id": "Setelah mandi, kondisi kulit diperiksa.",
+     "en": "After the bath, the skin was checked.",
+     "scene": "入浴記録"
+    },
+    {
+     "ja": "食前に血糖を測定した。",
+     "reading": "しょくぜんにけっとうをそくていした。",
+     "id": "Sebelum makan, gula darah diukur.",
+     "en": "Blood sugar was measured before the meal.",
+     "scene": "バイタル"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "「眠前薬」はいつ飲む薬ですか。",
+     "choices": [
+      "寝る前",
+      "起きた後",
+      "食事の前",
+      "入浴の後"
+     ],
+     "answer": 0,
+     "explain_id": "「眠前」= sebelum tidur.",
+     "explain_en": "「眠前」= before sleeping."
+    },
+    {
+     "type": "choice",
+     "q": "入浴＿＿＿に皮膚の状態を確認した。",
+     "choices": [
+      "後",
+      "前",
+      "時",
+      "中"
+     ],
+     "answer": 0,
+     "explain_id": "Setelah mandi: 「後」.",
+     "explain_en": "After the bath: 「後」."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "食前",
+      "に",
+      "血糖を",
+      "測定した"
+     ],
+     "hint_id": "Sebelum makan, gula darah diukur.",
+     "hint_en": "Blood sugar was measured before the meal."
+    }
+   ]
+  },
+  {
+   "id": "k-kaishi-shuryo",
+   "pattern": "～開始／～終了",
+   "level": "記録",
+   "category": "変化・継続",
+   "form": "名詞 ＋ 開始（はじめる）／ 終了（おわる）",
+   "meaning_id": "dimulai / diakhiri",
+   "meaning_en": "started / finished",
+   "note_ja": "処置や食事の始まりと終わりを短く書く。時刻とセットで書くと、より正確な記録になる。",
+   "note_id": "Menulis singkat awal dan akhir tindakan. Lebih baik ditulis bersama jamnya.",
+   "note_en": "Briefly states the start and end of care. Better written together with the time.",
+   "examples": [
+    {
+     "ja": "十時に酸素投与を開始した。",
+     "reading": "じゅうじにさんそとうよをかいしした。",
+     "id": "Pukul 10 pemberian oksigen dimulai.",
+     "en": "Oxygen administration started at 10.",
+     "scene": "医療的ケア"
+    },
+    {
+     "ja": "十二時三十分に食事介助を終了した。",
+     "reading": "じゅうにじさんじゅっぷんにしょくじかいじょをしゅうりょうした。",
+     "id": "Pukul 12.30 bantuan makan selesai.",
+     "en": "Meal assistance finished at 12:30.",
+     "scene": "食事介助"
+    },
+    {
+     "ja": "本日で軟膏塗布は終了となった。",
+     "reading": "ほんじつでなんこうとふはしゅうりょうとなった。",
+     "id": "Hari ini pengolesan salep diakhiri.",
+     "en": "Ointment application ended today.",
+     "scene": "服薬記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "十時に酸素投与を＿＿＿した。",
+     "choices": [
+      "開始",
+      "終了",
+      "中止",
+      "継続"
+     ],
+     "answer": 0,
+     "explain_id": "Mulai: 「開始」.",
+     "explain_en": "Start: 「開始」."
+    },
+    {
+     "type": "choice",
+     "q": "よりよい記録はどれですか。",
+     "choices": [
+      "十時に開始した",
+      "開始した",
+      "開始",
+      "始めた"
+     ],
+     "answer": 0,
+     "explain_id": "Tulis bersama waktunya.",
+     "explain_en": "Include the time."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "本日で",
+      "軟膏塗布は",
+      "終了と",
+      "なった"
+     ],
+     "hint_id": "Hari ini pengolesan salep diakhiri.",
+     "hint_en": "Ointment application ended today."
+    }
+   ]
+  },
+  {
+   "id": "k-jisshi",
+   "pattern": "～実施",
+   "level": "記録",
+   "category": "目的・方法",
+   "form": "名詞 ＋ 実施（＝行う）",
+   "meaning_id": "dilaksanakan",
+   "meaning_en": "carried out",
+   "note_ja": "「行った」を漢語で短く書く形。「吸引実施」「清拭実施」など。話すときは「〜しました」。",
+   "note_id": "Bentuk ringkas dari 「行った」: 「吸引実施」. Saat bicara pakai 「〜しました」.",
+   "note_en": "A short form of 「行った」. In speech, use 「〜しました」.",
+   "examples": [
+    {
+     "ja": "ゴロ音があり、吸引を実施した。",
+     "reading": "ごろおんがあり、きゅういんをじっしした。",
+     "id": "Ada suara berdahak, dilakukan penyedotan.",
+     "en": "There were rattling sounds, so suctioning was carried out.",
+     "scene": "医療的ケア"
+    },
+    {
+     "ja": "入浴の代わりに清拭を実施した。",
+     "reading": "にゅうよくのかわりにせいしきをじっしした。",
+     "id": "Sebagai ganti mandi, dilakukan lap badan.",
+     "en": "A bed bath was carried out instead of a bath.",
+     "scene": "入浴記録"
+    },
+    {
+     "ja": "体位変換を二時間ごとに実施している。",
+     "reading": "たいいへんかんをにじかんごとにじっししている。",
+     "id": "Perubahan posisi dilakukan setiap dua jam.",
+     "en": "Repositioning is carried out every two hours.",
+     "scene": "褥瘡予防"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "吸引を＿＿＿した。",
+     "choices": [
+      "実施",
+      "実行",
+      "実現",
+      "実感"
+     ],
+     "answer": 0,
+     "explain_id": "Melakukan tindakan: 「実施」.",
+     "explain_en": "Carrying out care: 「実施」."
+    },
+    {
+     "type": "choice",
+     "q": "話すときの言い方はどれですか。",
+     "choices": [
+      "吸引をしました",
+      "吸引実施",
+      "吸引を実施",
+      "吸引実施した"
+     ],
+     "answer": 0,
+     "explain_id": "Saat bicara pakai bahasa biasa.",
+     "explain_en": "Use plain wording in speech."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "体位変換を",
+      "二時間ごとに",
+      "実施している"
+     ],
+     "hint_id": "Perubahan posisi tiap dua jam.",
+     "hint_en": "Repositioning every two hours."
+    }
+   ]
+  },
+  {
+   "id": "k-taiou",
+   "pattern": "～対応",
+   "level": "記録",
+   "category": "目的・方法",
+   "form": "名詞 ＋ 対応（そのやり方で対処する）",
+   "meaning_id": "penanganan dengan ~",
+   "meaning_en": "handled by ~",
+   "note_ja": "どう対処したかを短く書く。「オムツ対応」「清拭対応」など。何をしたかが分かるように書く。",
+   "note_id": "Menulis singkat cara penanganan: 「オムツ対応」. Pastikan isinya jelas.",
+   "note_en": "Briefly states how it was handled. Make sure it is clear what was done.",
+   "examples": [
+    {
+     "ja": "腰痛が強いため、トイレ介助からオムツ対応へ切り替えた。",
+     "reading": "ようつうがつよいため、といれかいじょからおむつたいおうへきりかえた。",
+     "id": "Karena nyeri pinggang kuat, dari bantuan toilet diganti ke popok.",
+     "en": "Due to strong back pain, toilet assistance was switched to pad care.",
+     "scene": "排泄介助"
+    },
+    {
+     "ja": "発熱があり、クーリングで対応した。",
+     "reading": "はつねつがあり、くーりんぐでたいおうした。",
+     "id": "Ada demam, ditangani dengan kompres dingin.",
+     "en": "There was a fever, handled with cooling.",
+     "scene": "体調確認"
+    },
+    {
+     "ja": "入浴を希望されず、清拭対応とした。",
+     "reading": "にゅうよくをきぼうされず、せいしきたいおうとした。",
+     "id": "Karena tidak ingin mandi, ditangani dengan lap badan.",
+     "en": "As they did not want a bath, a bed bath was given.",
+     "scene": "入浴記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "発熱があり、クーリング＿＿＿対応した。",
+     "choices": [
+      "で",
+      "を",
+      "に",
+      "が"
+     ],
+     "answer": 0,
+     "explain_id": "Cara penanganan: 「で」.",
+     "explain_en": "The means takes 「で」."
+    },
+    {
+     "type": "choice",
+     "q": "よい記録はどれですか。",
+     "choices": [
+      "清拭対応とした",
+      "対応した",
+      "対応",
+      "対応済み"
+     ],
+     "answer": 0,
+     "explain_id": "Tulis apa yang dilakukan.",
+     "explain_en": "State what was actually done."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "入浴を",
+      "希望されず",
+      "清拭対応と",
+      "した"
+     ],
+     "hint_id": "Tidak ingin mandi, ditangani lap badan.",
+     "hint_en": "They declined a bath; a bed bath was given."
+    }
+   ]
+  },
+  {
+   "id": "k-kyohi",
+   "pattern": "～拒否／～拒否あり",
+   "level": "記録",
+   "category": "状態・様子",
+   "form": "名詞 ＋ 拒否（したくないと断られた）",
+   "meaning_id": "penolakan ~",
+   "meaning_en": "refusal of ~",
+   "note_ja": "利用者さんが断られたことを書く。無理にさせず、理由も一緒に書くとよい記録になる。",
+   "note_id": "Menulis bahwa penghuni menolak. Jangan memaksa; tulis juga alasannya bila tahu.",
+   "note_en": "Records that the resident declined. Never force them; also note the reason if known.",
+   "examples": [
+    {
+     "ja": "入浴の声かけをしたが、拒否あり。",
+     "reading": "にゅうよくのこえかけをしたが、きょひあり。",
+     "id": "Sudah ditawari mandi, tetapi menolak.",
+     "en": "They were invited to bathe but refused.",
+     "scene": "入浴介助"
+    },
+    {
+     "ja": "眠前薬の内服を拒否された。",
+     "reading": "みんぜんやくのないふくをきょひされた。",
+     "id": "Beliau menolak minum obat malam.",
+     "en": "They refused to take the bedtime medicine.",
+     "scene": "服薬介助"
+    },
+    {
+     "ja": "起こされたせいか、少し拒否があった。",
+     "reading": "おこされたせいか、すこしきょひがあった。",
+     "id": "Mungkin karena dibangunkan, ada sedikit penolakan.",
+     "en": "Perhaps because they were woken, there was some refusal.",
+     "scene": "記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "入浴の声かけをしたが、＿＿＿あり。",
+     "choices": [
+      "拒否",
+      "希望",
+      "承諾",
+      "同意"
+     ],
+     "answer": 0,
+     "explain_id": "Menolak: 「拒否」.",
+     "explain_en": "Refusal: 「拒否」."
+    },
+    {
+     "type": "choice",
+     "q": "拒否されたとき、まずどうしますか。",
+     "choices": [
+      "無理にさせず理由を確認する",
+      "無理にさせる",
+      "記録しない",
+      "家族に電話する"
+     ],
+     "answer": 0,
+     "explain_id": "Jangan memaksa; cari tahu alasannya.",
+     "explain_en": "Do not force; find out why."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "眠前薬の",
+      "内服を",
+      "拒否された"
+     ],
+     "hint_id": "Menolak minum obat malam.",
+     "hint_en": "They refused the bedtime medicine."
+    }
+   ]
+  },
+  {
+   "id": "k-uttae",
+   "pattern": "～訴えあり",
+   "level": "記録",
+   "category": "伝聞・引用",
+   "form": "症状 ＋ の訴えあり（本人が言われたつらさ）",
+   "meaning_id": "ada keluhan ~",
+   "meaning_en": "complaint of ~",
+   "note_ja": "利用者さんが自分で言われたことに使う。職員が見て分かったことは「見られる」。",
+   "note_id": "Untuk hal yang dikatakan penghuni sendiri. Yang terlihat oleh staf pakai 「見られる」.",
+   "note_en": "For what the resident said themselves. What staff saw uses 「見られる」.",
+   "examples": [
+    {
+     "ja": "耳の痛みの訴えあり。看護師に報告した。",
+     "reading": "みみのいたみのうったえあり。かんごしにほうこくした。",
+     "id": "Ada keluhan nyeri telinga. Dilaporkan ke perawat.",
+     "en": "Complaint of ear pain. Reported to the nurse.",
+     "scene": "体調確認"
+    },
+    {
+     "ja": "頭皮に軽い圧痛の訴えがあった。",
+     "reading": "とうひにかるいあっつうのうったえがあった。",
+     "id": "Ada keluhan nyeri tekan ringan di kulit kepala.",
+     "en": "There was a complaint of mild tenderness on the scalp.",
+     "scene": "記録"
+    },
+    {
+     "ja": "腹部の張りの訴えがあり、排便を確認した。",
+     "reading": "ふくぶのはりのうったえがあり、はいべんをかくにんした。",
+     "id": "Ada keluhan perut kembung, BAB diperiksa.",
+     "en": "A complaint of abdominal bloating; bowel movements were checked.",
+     "scene": "排泄記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "耳の痛み＿＿＿訴えあり。",
+     "choices": [
+      "の",
+      "が",
+      "を",
+      "に"
+     ],
+     "answer": 0,
+     "explain_id": "「痛み」+「の訴え」.",
+     "explain_en": "「痛み」+「の訴え」."
+    },
+    {
+     "type": "choice",
+     "q": "訴えを聞いたあと、必ずすることはどれですか。",
+     "choices": [
+      "看護師に報告する",
+      "薬を渡す",
+      "湿布をはる",
+      "様子を見ない"
+     ],
+     "answer": 0,
+     "explain_id": "Nyeri selalu dilaporkan ke perawat.",
+     "explain_en": "Pain is always reported to the nurse."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "腹部の張りの",
+      "訴えがあり",
+      "排便を",
+      "確認した"
+     ],
+     "hint_id": "Ada keluhan perut kembung; BAB diperiksa.",
+     "hint_en": "Complaint of bloating; bowel movements checked."
+    }
+   ]
+  },
+  {
+   "id": "k-kaijo-nite",
+   "pattern": "～介助にて／～介助を要する",
+   "level": "記録",
+   "category": "義務・必要",
+   "form": "名詞 ＋ 介助にて（手伝ってもらって）　／　介助を要する（手伝いが必要）",
+   "meaning_id": "dengan bantuan ~ / memerlukan bantuan",
+   "meaning_en": "with assistance / requires assistance",
+   "note_ja": "どのくらい手伝いが必要かを書く。「全介助」「一部介助」「見守り」の区別が大切。",
+   "note_id": "Menulis seberapa banyak bantuan diperlukan. Bedakan 「全介助」「一部介助」「見守り」.",
+   "note_en": "States how much help is needed. Distinguish full, partial and supervision.",
+   "examples": [
+    {
+     "ja": "食事は一部介助にて摂取された。",
+     "reading": "しょくじはいちぶかいじょにてせっしゅされた。",
+     "id": "Makan dilakukan dengan bantuan sebagian.",
+     "en": "The meal was eaten with partial assistance.",
+     "scene": "食事介助"
+    },
+    {
+     "ja": "移乗時に介助を要する。",
+     "reading": "いじょうじにかいじょをようする。",
+     "id": "Saat pindah posisi memerlukan bantuan.",
+     "en": "Assistance is required during transfers.",
+     "scene": "移乗記録"
+    },
+    {
+     "ja": "入浴は全介助にて実施した。",
+     "reading": "にゅうよくはぜんかいじょにてじっしした。",
+     "id": "Mandi dilakukan dengan bantuan penuh.",
+     "en": "The bath was carried out with full assistance.",
+     "scene": "入浴記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "食事は一部介助＿＿＿摂取された。",
+     "choices": [
+      "にて",
+      "へて",
+      "をて",
+      "がて"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk tulis dari 「で」.",
+     "explain_en": "The written form of 「で」."
+    },
+    {
+     "type": "choice",
+     "q": "「見守り」の意味はどれですか。",
+     "choices": [
+      "そばで見ているが手は出さない",
+      "全部手伝う",
+      "半分手伝う",
+      "何もしない"
+     ],
+     "answer": 0,
+     "explain_id": "Mengawasi tanpa membantu langsung.",
+     "explain_en": "Watching without physically helping."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "入浴は",
+      "全介助にて",
+      "実施した"
+     ],
+     "hint_id": "Mandi dengan bantuan penuh.",
+     "hint_en": "The bath was done with full assistance."
+    }
+   ]
+  },
+  {
+   "id": "k-ryoukou-furyou",
+   "pattern": "～良好／～不良",
+   "level": "記録",
+   "category": "状態・様子",
+   "form": "名詞 ＋ 良好（よい）／ 不良（よくない）",
+   "meaning_id": "baik / kurang baik",
+   "meaning_en": "good / poor",
+   "note_ja": "状態のよしあしを漢語で短く書く。「顔色良好」「経過良好」「酸素化不良」など。",
+   "note_id": "Menyatakan baik/buruk secara ringkas: 「顔色良好」「酸素化不良」.",
+   "note_en": "States good or poor briefly: 「顔色良好」「酸素化不良」.",
+   "examples": [
+    {
+     "ja": "笑顔があり、顔色も良好である。",
+     "reading": "えがおがあり、かおいろもりょうこうである。",
+     "id": "Ada senyum dan wajahnya tampak segar.",
+     "en": "They were smiling and their colour was good.",
+     "scene": "記録"
+    },
+    {
+     "ja": "血中酸素の値が低く、酸素化不良が見られた。",
+     "reading": "けっちゅうさんそのあたいがひくく、さんそかふりょうがみられた。",
+     "id": "Kadar oksigen darah rendah, terlihat oksigenasi kurang baik.",
+     "en": "Blood oxygen was low and poor oxygenation was seen.",
+     "scene": "バイタル"
+    },
+    {
+     "ja": "夜間は良眠され、経過良好である。",
+     "reading": "やかんはりょうみんされ、けいかりょうこうである。",
+     "id": "Malam hari tidur nyenyak, perkembangan baik.",
+     "en": "They slept well at night; progress is good.",
+     "scene": "申し送り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "笑顔があり、顔色も＿＿＿である。",
+     "choices": [
+      "良好",
+      "不良",
+      "不足",
+      "不明"
+     ],
+     "answer": 0,
+     "explain_id": "Kondisi baik: 「良好」.",
+     "explain_en": "Good condition: 「良好」."
+    },
+    {
+     "type": "choice",
+     "q": "「酸素化不良」の意味はどれですか。",
+     "choices": [
+      "酸素が体に十分行き渡っていない",
+      "酸素が十分ある",
+      "酸素を使っていない",
+      "酸素をやめた"
+     ],
+     "answer": 0,
+     "explain_id": "Oksigen tidak cukup sampai ke tubuh.",
+     "explain_en": "Oxygen is not reaching the body well."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "夜間は",
+      "良眠され",
+      "経過良好",
+      "である"
+     ],
+     "hint_id": "Malam tidur nyenyak, perkembangan baik.",
+     "hint_en": "They slept well; progress is good."
+    }
+   ]
+  },
+  {
+   "id": "k-douyou",
+   "pattern": "～同様／～と同様に",
+   "level": "記録",
+   "category": "程度・比較",
+   "form": "名詞 ＋ 同様　／　名詞 ＋ と同様に",
+   "meaning_id": "sama seperti ~",
+   "meaning_en": "the same as ~",
+   "note_ja": "前と同じだと書く硬い言い方。「昨日同様」「前回と同様に」。何と同じかを必ず書く。",
+   "note_id": "Cara formal menyatakan sama seperti sebelumnya. Sebutkan dengan apa dibandingkan.",
+   "note_en": "A formal way to say it is the same as before. Always say what it is compared with.",
+   "examples": [
+    {
+     "ja": "昨日同様、食事は全量摂取された。",
+     "reading": "きのうどうよう、しょくじはぜんりょうせっしゅされた。",
+     "id": "Sama seperti kemarin, makanan habis semua.",
+     "en": "As yesterday, the whole meal was eaten.",
+     "scene": "食事記録"
+    },
+    {
+     "ja": "前回と同様に、清拭で対応した。",
+     "reading": "ぜんかいとどうように、せいしきでたいおうした。",
+     "id": "Sama seperti sebelumnya, ditangani dengan lap badan.",
+     "en": "As last time, a bed bath was given.",
+     "scene": "入浴記録"
+    },
+    {
+     "ja": "午前と同様に、傾眠が続いている。",
+     "reading": "ごぜんとどうように、けいみんがつづいている。",
+     "id": "Sama seperti pagi, kondisi mengantuk berlanjut.",
+     "en": "As in the morning, drowsiness continues.",
+     "scene": "記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "前回＿＿＿同様に、清拭で対応した。",
+     "choices": [
+      "と",
+      "を",
+      "に",
+      "が"
+     ],
+     "answer": 0,
+     "explain_id": "Perbandingan memakai 「と」.",
+     "explain_en": "Comparison uses 「と」."
+    },
+    {
+     "type": "choice",
+     "q": "よい記録はどれですか。",
+     "choices": [
+      "昨日同様、全量摂取された",
+      "同様に摂取された",
+      "同様",
+      "いつもと同じ"
+     ],
+     "answer": 0,
+     "explain_id": "Sebutkan apa yang dibandingkan.",
+     "explain_en": "Say what it is compared with."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "午前と",
+      "同様に",
+      "傾眠が",
+      "続いている"
+     ],
+     "hint_id": "Sama seperti pagi, mengantuk berlanjut.",
+     "hint_en": "As in the morning, drowsiness continues."
+    }
+   ]
+  },
+  {
+   "id": "k-saido",
+   "pattern": "～再度／～改めて",
+   "level": "記録",
+   "category": "時・順序",
+   "form": "再度 ＋ 動詞　／　改めて ＋ 動詞（もう一度）",
+   "meaning_id": "sekali lagi / kembali",
+   "meaning_en": "again, once more",
+   "note_ja": "もう一度行ったことを書く。何回目かが分かるよう、時刻や回数も書くとよい。",
+   "note_id": "Menulis bahwa dilakukan sekali lagi. Sebaiknya tulis juga jam atau jumlahnya.",
+   "note_en": "Records that something was done again. Better to add the time or count.",
+   "examples": [
+    {
+     "ja": "十四時に再度、水分をすすめた。",
+     "reading": "じゅうよじにさいど、すいぶんをすすめた。",
+     "id": "Pukul 14 sekali lagi dianjurkan minum.",
+     "en": "Fluids were encouraged again at 14:00.",
+     "scene": "水分記録"
+    },
+    {
+     "ja": "改めて排泄の確認を行った。",
+     "reading": "あらためてはいせつのかくにんをおこなった。",
+     "id": "Pemeriksaan BAB/BAK dilakukan kembali.",
+     "en": "Toileting was checked once more.",
+     "scene": "排泄記録"
+    },
+    {
+     "ja": "再度訪室すると、入眠されていた。",
+     "reading": "さいどほうしつすると、にゅうみんされていた。",
+     "id": "Saat masuk kamar lagi, beliau sudah tertidur.",
+     "en": "On visiting the room again, they were asleep.",
+     "scene": "見守り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "十四時に＿＿＿、水分をすすめた。",
+     "choices": [
+      "再度",
+      "初回",
+      "最後",
+      "中止"
+     ],
+     "answer": 0,
+     "explain_id": "Sekali lagi: 「再度」.",
+     "explain_en": "Once more: 「再度」."
+    },
+    {
+     "type": "choice",
+     "q": "よりよい記録はどれですか。",
+     "choices": [
+      "十四時に再度すすめた",
+      "再度すすめた",
+      "すすめた",
+      "再度"
+     ],
+     "answer": 0,
+     "explain_id": "Tambahkan jamnya.",
+     "explain_en": "Add the time."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "再度",
+      "訪室すると",
+      "入眠されていた"
+     ],
+     "hint_id": "Masuk kamar lagi, beliau tertidur.",
+     "hint_en": "On revisiting, they were asleep."
+    }
+   ]
+  },
+  {
+   "id": "k-tekigi",
+   "pattern": "～適宜／～随時／～必要時",
+   "level": "記録",
+   "category": "時・順序",
+   "form": "適宜 ／ 随時 ／ 必要時 ＋ 動詞",
+   "meaning_id": "sesuai kebutuhan / kapan saja / bila perlu",
+   "meaning_en": "as appropriate / at any time / when needed",
+   "note_ja": "決まった時間ではなく、様子を見て行うこと。指示書によく出るので、意味を正確に覚える。",
+   "note_id": "Bukan pada jam tetap, tetapi sesuai kondisi. Sering muncul di lembar instruksi.",
+   "note_en": "Not at fixed times but as the situation requires. Common on instruction sheets.",
+   "examples": [
+    {
+     "ja": "適宜、白色ワセリンを塗布してください。",
+     "reading": "てきぎ、はくしょくわせりんをとふしてください。",
+     "id": "Oleskan petrolatum putih sesuai kebutuhan.",
+     "en": "Please apply white petrolatum as appropriate.",
+     "scene": "服薬記録"
+    },
+    {
+     "ja": "必要時、吸引を実施する。",
+     "reading": "ひつようじ、きゅういんをじっしする。",
+     "id": "Bila perlu, lakukan penyedotan.",
+     "en": "Carry out suctioning when needed.",
+     "scene": "医療的ケア"
+    },
+    {
+     "ja": "随時、水分をすすめている。",
+     "reading": "ずいじ、すいぶんをすすめている。",
+     "id": "Minum dianjurkan kapan saja diperlukan.",
+     "en": "Fluids are encouraged at any time.",
+     "scene": "水分記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "＿＿＿、白色ワセリンを塗布してください。",
+     "choices": [
+      "適宜",
+      "必ず",
+      "毎回",
+      "一度"
+     ],
+     "answer": 0,
+     "explain_id": "Sesuai kebutuhan: 「適宜」.",
+     "explain_en": "As appropriate: 「適宜」."
+    },
+    {
+     "type": "choice",
+     "q": "「必要時」の意味はどれですか。",
+     "choices": [
+      "必要になったとき",
+      "必ず毎回",
+      "決まった時間に",
+      "一度だけ"
+     ],
+     "answer": 0,
+     "explain_id": "Saat diperlukan saja.",
+     "explain_en": "Only when it becomes necessary."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "必要時",
+      "吸引を",
+      "実施する"
+     ],
+     "hint_id": "Bila perlu, lakukan penyedotan.",
+     "hint_en": "Carry out suctioning when needed."
+    }
+   ]
+  },
+  {
+   "id": "k-ga-kakunin",
+   "pattern": "～が確認される／～を確認した",
+   "level": "記録",
+   "category": "目的・方法",
+   "form": "名詞 ＋ が確認される　／　名詞 ＋ を確認した",
+   "meaning_id": "~ dipastikan / memastikan ~",
+   "meaning_en": "~ is confirmed / confirmed ~",
+   "note_ja": "検査や目視ではっきり分かったことに書く。「見られる」よりも確かなときに使う。",
+   "note_id": "Untuk hal yang sudah dipastikan lewat pemeriksaan atau pengamatan langsung.",
+   "note_en": "For things confirmed by a test or direct check. Stronger than 「見られる」.",
+   "examples": [
+    {
+     "ja": "CTで腹部に多量の便貯留が確認された。",
+     "reading": "しーてぃーでふくぶにたりょうのべんちょりゅうがかくにんされた。",
+     "id": "Dengan CT dipastikan ada banyak tumpukan feses di perut.",
+     "en": "CT confirmed a large amount of stool retention.",
+     "scene": "通院記録"
+    },
+    {
+     "ja": "尿バッグ内の尿量を確認した。",
+     "reading": "にょうばっぐないのにょうりょうをかくにんした。",
+     "id": "Jumlah urin dalam kantong urin diperiksa.",
+     "en": "The urine volume in the bag was checked.",
+     "scene": "排泄記録"
+    },
+    {
+     "ja": "お名前を確認してから、お薬をお渡しした。",
+     "reading": "おなまえをかくにんしてから、おくすりをおわたしした。",
+     "id": "Setelah memastikan nama, obat diserahkan.",
+     "en": "After confirming the name, the medicine was given.",
+     "scene": "服薬介助"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "尿バッグ内の尿量＿＿＿確認した。",
+     "choices": [
+      "を",
+      "が",
+      "に",
+      "で"
+     ],
+     "answer": 0,
+     "explain_id": "「確認した」memakai 「を」.",
+     "explain_en": "「確認した」takes 「を」."
+    },
+    {
+     "type": "choice",
+     "q": "薬を渡す前に必ずすることはどれですか。",
+     "choices": [
+      "名前の確認",
+      "時間の確認",
+      "家族への連絡",
+      "記録の記入"
+     ],
+     "answer": 0,
+     "explain_id": "Pastikan identitas sebelum memberi obat.",
+     "explain_en": "Confirm identity before giving medicine."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "お名前を",
+      "確認してから",
+      "お薬を",
+      "お渡しした"
+     ],
+     "hint_id": "Setelah memastikan nama, obat diserahkan.",
+     "hint_en": "After confirming the name, the medicine was given."
+    }
+   ]
+  },
+  {
+   "id": "k-you",
+   "pattern": "～様（よう）／～のような",
+   "level": "記録",
+   "category": "状態・様子",
+   "form": "名詞 ＋ 様（よう）　／　名詞 ＋ のような（似ている）",
+   "meaning_id": "seperti ~ / menyerupai ~",
+   "meaning_en": "~-like",
+   "note_ja": "はっきり言い切れないとき、似ている様子を書く。「いぼ様」「発疹様」など医療記録の言い方。",
+   "note_id": "Saat belum bisa memastikan, tulis kemiripannya: 「いぼ様」. Gaya catatan medis.",
+   "note_en": "When you cannot be certain, describe the resemblance. A medical-record style.",
+   "examples": [
+    {
+     "ja": "膝の裏にいぼ様の皮膚変化があった。",
+     "reading": "ひざのうらにいぼようのひふへんかがあった。",
+     "id": "Di belakang lutut ada perubahan kulit menyerupai kutil.",
+     "en": "There was a wart-like skin change behind the knee.",
+     "scene": "皮膚の記録"
+    },
+    {
+     "ja": "風邪のような症状が見られる。",
+     "reading": "かぜのようなしょうじょうがみられる。",
+     "id": "Terlihat gejala seperti flu.",
+     "en": "Cold-like symptoms are seen.",
+     "scene": "体調確認"
+    },
+    {
+     "ja": "発疹様の赤みが両足に見られた。",
+     "reading": "ほっしんようのあかみがりょうあしにみられた。",
+     "id": "Terlihat kemerahan menyerupai ruam di kedua kaki.",
+     "en": "Rash-like redness was seen on both legs.",
+     "scene": "皮膚の記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "膝の裏にいぼ＿＿＿の皮膚変化があった。",
+     "choices": [
+      "様",
+      "中",
+      "前",
+      "後"
+     ],
+     "answer": 0,
+     "explain_id": "Menyerupai: 「様（よう）」.",
+     "explain_en": "Resembling: 「様（よう）」."
+    },
+    {
+     "type": "choice",
+     "q": "この書き方を使う理由はどれですか。",
+     "choices": [
+      "断定できないから",
+      "確実だから",
+      "早く書けるから",
+      "短いから"
+     ],
+     "answer": 0,
+     "explain_id": "Karena belum bisa dipastikan.",
+     "explain_en": "Because it cannot be asserted yet."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "風邪の",
+      "ような",
+      "症状が",
+      "見られる"
+     ],
+     "hint_id": "Terlihat gejala seperti flu.",
+     "hint_en": "Cold-like symptoms are seen."
+    }
+   ]
+  },
+  {
+   "id": "k-nomi",
+   "pattern": "～のみ／～しか～ない",
+   "level": "記録",
+   "category": "限定・範囲",
+   "form": "名詞 ＋ のみ（＝だけ）　／　名詞 ＋ しか ＋ 否定",
+   "meaning_id": "hanya ~",
+   "meaning_en": "only ~",
+   "note_ja": "「のみ」は「だけ」の書き言葉。「しか〜ない」は「少ない」という気持ちが入る。",
+   "note_id": "「のみ」adalah bentuk tulis dari 「だけ」. 「しか〜ない」mengandung nuansa \"sedikit\".",
+   "note_en": "「のみ」is the written form of 「だけ」. 「しか〜ない」adds a sense of \"too little\".",
+   "examples": [
+    {
+     "ja": "ズボンのみ更衣を行った。",
+     "reading": "ずぼんのみこういをおこなった。",
+     "id": "Hanya celana yang diganti.",
+     "en": "Only the trousers were changed.",
+     "scene": "更衣介助"
+    },
+    {
+     "ja": "水分は一口しか摂取されなかった。",
+     "reading": "すいぶんはひとくちしかせっしゅされなかった。",
+     "id": "Minum hanya satu teguk saja.",
+     "en": "They drank only one sip.",
+     "scene": "水分記録"
+    },
+    {
+     "ja": "主食のみ全量摂取された。",
+     "reading": "しゅしょくのみぜんりょうせっしゅされた。",
+     "id": "Hanya makanan pokok yang habis.",
+     "en": "Only the staple food was fully eaten.",
+     "scene": "食事記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "ズボン＿＿＿更衣を行った。",
+     "choices": [
+      "のみ",
+      "だけの",
+      "しか",
+      "ばかり"
+     ],
+     "answer": 0,
+     "explain_id": "Bentuk tulis dari 「だけ」: 「のみ」.",
+     "explain_en": "The written form of 「だけ」: 「のみ」."
+    },
+    {
+     "type": "choice",
+     "q": "「一口しか摂取されなかった」の意味はどれですか。",
+     "choices": [
+      "とても少ない",
+      "十分だ",
+      "ちょうどよい",
+      "多い"
+     ],
+     "answer": 0,
+     "explain_id": "Menekankan jumlah yang sangat sedikit.",
+     "explain_en": "Stresses that it was very little."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "水分は",
+      "一口しか",
+      "摂取され",
+      "なかった"
+     ],
+     "hint_id": "Minum hanya satu teguk.",
+     "hint_en": "They drank only one sip."
+    }
+   ]
+  },
+  {
+   "id": "k-kikkake",
+   "pattern": "～をきっかけに／～を機に",
+   "level": "記録",
+   "category": "時・順序",
+   "form": "名詞 ＋ をきっかけに（それが始まりとなって）",
+   "meaning_id": "berawal dari ~",
+   "meaning_en": "triggered by ~",
+   "note_ja": "変化の始まりを書く。「転倒をきっかけに」のように、いつから変わったかが分かる。",
+   "note_id": "Menulis awal mula perubahan: 「転倒をきっかけに」.",
+   "note_en": "States what started a change: \"following a fall\".",
+   "examples": [
+    {
+     "ja": "転倒をきっかけに、歩行が不安定になった。",
+     "reading": "てんとうをきっかけに、ほこうがふあんていになった。",
+     "id": "Berawal dari terjatuh, jalannya menjadi tidak stabil.",
+     "en": "Since the fall, their walking has become unsteady.",
+     "scene": "記録"
+    },
+    {
+     "ja": "入院をきっかけに、食事量が減った。",
+     "reading": "にゅういんをきっかけに、しょくじりょうがへった。",
+     "id": "Sejak dirawat inap, porsi makan berkurang.",
+     "en": "Since the hospital stay, food intake has decreased.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "面会をきっかけに、表情が明るくなられた。",
+     "reading": "めんかいをきっかけに、ひょうじょうがあかるくなられた。",
+     "id": "Sejak kunjungan keluarga, wajahnya menjadi cerah.",
+     "en": "Since the family visit, their expression has brightened.",
+     "scene": "記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "転倒＿＿＿きっかけに、歩行が不安定になった。",
+     "choices": [
+      "を",
+      "が",
+      "に",
+      "で"
+     ],
+     "answer": 0,
+     "explain_id": "Kata benda + 「をきっかけに」.",
+     "explain_en": "Noun + 「をきっかけに」."
+    },
+    {
+     "type": "choice",
+     "q": "この表現が示すのはどれですか。",
+     "choices": [
+      "変化が始まった時点",
+      "変化が終わった時点",
+      "変化がない",
+      "原因が不明"
+     ],
+     "answer": 0,
+     "explain_id": "Titik awal perubahan.",
+     "explain_en": "The point where a change began."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "面会を",
+      "きっかけに",
+      "表情が",
+      "明るくなられた"
+     ],
+     "hint_id": "Sejak kunjungan, wajahnya cerah.",
+     "hint_en": "Since the visit, their expression brightened."
+    }
+   ]
+  },
+  {
+   "id": "k-you-ni-onegai",
+   "pattern": "～ようお願いします（記録・指示）",
+   "level": "記録",
+   "category": "依頼・指示",
+   "form": "動詞辞書形 ／ ない形 ＋ ようお願いします（申し送りの依頼）",
+   "meaning_id": "mohon agar ~",
+   "meaning_en": "please ensure that ~",
+   "note_ja": "申し送りで次の勤務者に頼むときの書き方。話し言葉の「〜ようにお願いします」より短い。",
+   "note_id": "Cara menulis permintaan kepada shift berikutnya. Lebih ringkas dari bentuk lisan.",
+   "note_en": "How to write a request to the next shift. Shorter than the spoken form.",
+   "examples": [
+    {
+     "ja": "日中も様子を見て、水分をすすめるようお願いします。",
+     "reading": "にっちゅうもようすをみて、すいぶんをすすめるようおねがいします。",
+     "id": "Mohon pantau siang hari dan anjurkan minum.",
+     "en": "Please watch during the day and encourage fluids.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "夜間トイレへ行かれるときは、必ず付きそうようお願いします。",
+     "reading": "やかんといれへいかれるときは、かならずつきそうようおねがいします。",
+     "id": "Mohon selalu dampingi saat ke toilet malam hari.",
+     "en": "Please always accompany them to the toilet at night.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "適宜、白色ワセリンを塗布するようお願いします。",
+     "reading": "てきぎ、はくしょくわせりんをとふするようおねがいします。",
+     "id": "Mohon oleskan petrolatum putih sesuai kebutuhan.",
+     "en": "Please apply white petrolatum as appropriate.",
+     "scene": "申し送り"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "水分をすすめる＿＿＿お願いします。",
+     "choices": [
+      "よう",
+      "ように",
+      "ような",
+      "ようで"
+     ],
+     "answer": 0,
+     "explain_id": "Dalam catatan: 「〜ようお願いします」.",
+     "explain_en": "In records: 「〜ようお願いします」."
+    },
+    {
+     "type": "choice",
+     "q": "申し送りで大切なことはどれですか。",
+     "choices": [
+      "次の人が何をすればよいか分かる",
+      "短ければよい",
+      "漢字が多ければよい",
+      "自分の意見を書く"
+     ],
+     "answer": 0,
+     "explain_id": "Yang penting: jelas apa yang harus dilakukan.",
+     "explain_en": "What matters is that the next person knows what to do."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "夜間トイレへ",
+      "行かれるときは",
+      "必ず付きそう",
+      "ようお願いします"
+     ],
+     "hint_id": "Mohon selalu dampingi ke toilet malam hari.",
+     "hint_en": "Please always accompany them at night."
+    }
+   ]
+  },
+  {
+   "id": "k-ka-fumei",
+   "pattern": "～か不明／～は不明",
+   "level": "記録",
+   "category": "推量・判断",
+   "form": "名詞 ／ 疑問文 ＋ か不明（分からない）",
+   "meaning_id": "tidak diketahui apakah ~",
+   "meaning_en": "it is unclear whether ~",
+   "note_ja": "分からないことを「分からないまま」正直に書く。推測で書かないことが、よい記録の基本。",
+   "note_id": "Menulis dengan jujur bahwa belum diketahui. Jangan menulis dugaan sebagai fakta.",
+   "note_en": "Honestly records what is not known. Never write a guess as fact.",
+   "examples": [
+    {
+     "ja": "いつからの傷か不明である。",
+     "reading": "いつからのきずかふめいである。",
+     "id": "Tidak diketahui sejak kapan lukanya.",
+     "en": "It is unclear when the wound appeared.",
+     "scene": "皮膚の記録"
+    },
+    {
+     "ja": "原因は不明だが、経過を観察している。",
+     "reading": "げんいんはふめいだが、けいかをかんさつしている。",
+     "id": "Penyebabnya tidak diketahui, tetapi terus diamati.",
+     "en": "The cause is unknown, but we are observing.",
+     "scene": "記録"
+    },
+    {
+     "ja": "内服されたかどうか不明のため、看護師に確認した。",
+     "reading": "ないふくされたかどうかふめいのため、かんごしにかくにんした。",
+     "id": "Karena tidak jelas apakah obat sudah diminum, dikonfirmasi ke perawat.",
+     "en": "As it was unclear whether the medicine was taken, we checked with the nurse.",
+     "scene": "服薬介助"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "いつからの傷＿＿＿不明である。",
+     "choices": [
+      "か",
+      "が",
+      "を",
+      "に"
+     ],
+     "answer": 0,
+     "explain_id": "「〜か不明」memakai 「か」.",
+     "explain_en": "「〜か不明」uses 「か」."
+    },
+    {
+     "type": "choice",
+     "q": "分からないことを記録するとき、正しいのはどれですか。",
+     "choices": [
+      "不明と書く",
+      "たぶんと書く",
+      "書かない",
+      "分かったことにする"
+     ],
+     "answer": 0,
+     "explain_id": "Tulis apa adanya: 「不明」.",
+     "explain_en": "Write it honestly as unknown."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "内服されたか",
+      "どうか不明",
+      "のため",
+      "看護師に確認した"
+     ],
+     "hint_id": "Tidak jelas apakah diminum, dikonfirmasi.",
+     "hint_en": "Unclear if taken, so we checked."
+    }
+   ]
+  }
+ ]
+}

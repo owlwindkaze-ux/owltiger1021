@@ -61,7 +61,7 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 |---|---|
 | `index.html` | **入口メニュー**（漢字・語彙／文型・文法／読解／聴解 を選ぶ画面。合言葉もここで入れる） |
 | `kanji.html` | 漢字・言葉アプリ本体（HTML/CSS/JS 単一ファイル、外部ライブラリなし） |
-| `bunpo/index.html` | 文型（文法）アプリ本体（343項目・例文1,029・練習問題1,029） |
+| `bunpo/index.html` | 文型（文法）アプリ本体（376項目・例文1,128・練習問題1,128） |
 | `dokkai/index.html` | 読解アプリ本体 |
 | `dokkai/reading-n5/n4/n3.json` | 読解の文章30本・設問50問（すべてオリジナル） |
 | `choukai/index.html` | 聴解アプリ本体（3パート17問。音声は端末の音声合成が読み上げるので音声ファイルなし） |
