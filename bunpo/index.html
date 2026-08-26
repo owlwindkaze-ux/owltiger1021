@@ -431,7 +431,10 @@ async function boot() {
   }
   DATA = items;
   DATA.forEach(g => BYID[g.id] = g);
-  LEVELS = [...new Set(DATA.map(g => g.level))].sort((a, b) => b.localeCompare(a));  // N5, N4, N3…
+  /* 並び順は N5 → N4 → N3 → 記録。知らないレベルは最後に回す */
+  const LVORDER = ['N5', 'N4', 'N3', '記録'];
+  const lvKey = lv => { const i = LVORDER.indexOf(lv); return i < 0 ? 99 : i; };
+  LEVELS = [...new Set(DATA.map(g => g.level))].sort((a, b) => lvKey(a) - lvKey(b) || a.localeCompare(b));
   CATS = [...new Set(DATA.map(g => g.category))];
 
   LEVELS.forEach(lv => {
