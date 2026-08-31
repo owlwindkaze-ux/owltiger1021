@@ -169,9 +169,9 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
           <div class="ttl">Membaca<small>読解（文章を読む）</small></div>
         </div>
       </div>
-      <div class="pg" id="pgD">読んだ文章 0 / 38 本</div>
+      <div class="pg" id="pgD">読んだ文章 0 / 45 本</div>
       <div class="bar"><i id="barD" style="width:0"></i></div>
-      <p class="desc">お知らせ・シフト表・申し送りなどを読んで答える。38本・66問。</p>
+      <p class="desc">お知らせ・シフト表・申し送りなどを読んで答える。45本・98問。</p>
       <div class="sub-menu">
         <a class="item" href="dokkai/index.html#list"><span class="em">📄</span>
           <span class="tx"><span class="n">文章一覧</span><span class="r">Daftar teks ／ レベル・分野・設問で選ぶ</span></span><span class="ar">→</span></a>
@@ -236,8 +236,8 @@ if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock();
 else document.getElementById('gatePw').focus();
 
 /* ---- それぞれの進み具合を出す（記録はこの端末の localStorage にある） ---- */
-const VERSION = '2026-08-31';
-const KTOTAL = 746, VTOTAL = 4559, GTOTAL = 376, DTOTAL = 38, CTOTAL = 17;
+const VERSION = '2026-09-01';
+const KTOTAL = 746, VTOTAL = 4559, GTOTAL = 376, DTOTAL = 45, CTOTAL = 17;
 const nKnown = (key, want) => {
   try {
     const o = JSON.parse(localStorage.getItem(key) || '{}');
