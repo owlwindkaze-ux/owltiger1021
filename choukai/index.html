@@ -164,6 +164,11 @@
     padding:4px 12px;border-radius:999px;color:var(--paper);
   }
   .part.done .part-no::after{content:" ✓";color:var(--teal)}
+  .partnav{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 4px}
+  .partnav a{font-size:12.5px;text-decoration:none;color:var(--ink);
+    border:1px solid var(--line);padding:5px 9px;background:var(--card)}
+  .partnav a:hover{border-color:var(--teal);color:var(--teal)}
+  .partnav .lb{font-size:11.5px;color:var(--muted);align-self:center;margin-right:4px}
 
   /* ---- 合言葉 ---- */
   #gate{
@@ -217,7 +222,7 @@
   <div class="header-inner">
     <div class="navrow">
       <a class="navbtn" href="../index.html">☰ メニュー</a>
-      <span class="hdstat" id="hdStat">— / 17</span>
+      <span class="hdstat" id="hdStat">— / 48</span>
     </div>
     <p class="eyebrow">KAIGO NO NIHONGO ／ CHOUKAI</p>
     <h1>介護の日本語　聴解練習</h1>
@@ -274,13 +279,15 @@
     <span style="font-style:italic">Naikkan volume, matikan mode senyap (iPhone), buka dengan Chrome/Safari, dan pastikan suara bahasa Jepang terpasang.</span>
   </div>
 
+  <nav class="partnav" id="partNav" aria-label="パートへ とぶ"></nav>
+
   <div id="app"></div>
 
   <footer>
     音声は、この端末に入っている読み上げ機能を使っています。声が機械的に聞こえる場合は、
     速さを「ゆっくり」にすると聞き取りやすくなります。<br>
     自習用。答え合わせのあとで、必ずスクリプトを声に出して読んでみましょう。<br>
-    <span style="opacity:.8">版 2026-08-20</span>
+    <span style="opacity:.8">版 2026-09-01</span>
   </footer>
 </div>
 </div>
@@ -487,7 +494,323 @@ const DATA = [
         expId: "Untuk penghuni dengan demensia: jangan menyangkal atau mengoreksi berulang kali. Perkenalkan diri dengan ramah."
       }
     ]
-  }
+  },
+  {
+    no: "PART 4",
+    title: "課題理解 ― このあと 何を しますか",
+    task: "会話を 聞いて、「このあと 何を するか」を えらんでください。JLPT聴解の 問題1と 同じ形です。",
+    taskId: "Dengarkan percakapan, lalu pilih apa yang harus dilakukan setelah itu. Sama seperti soal 1 JLPT.",
+    items: [
+      {
+        script: "先輩：ワヤンさん、佐藤さんの体温、三十七度八分でしたね。まず看護師さんに伝えてください。クーリングは、看護師さんの指示を聞いてからにしましょう。ワヤン：はい、わかりました。",
+        show: "先輩：ワヤンさん、佐藤さんの体温、三十七度八分でしたね。まず看護師さんに伝えてください。クーリングは、看護師さんの指示を聞いてからにしましょう。ワヤン：はい、わかりました。",
+        q: "ワヤンさんは このあと まず 何を しますか。",
+        opts: ["クーリングを する", "看護師に 伝える", "体温を もう一度 測る", "記録を 書く"],
+        ans: 1,
+        exp: "「まず看護師さんに伝えてください」と 言われています。クーリングは そのあと、指示を 聞いてからです。",
+        expId: "\"Pertama sampaikan ke perawat.\" Pendinginan dilakukan setelah ada instruksi."
+      },
+      {
+        script: "先輩：これから山田さんを食堂へお連れします。その前に、トイレにお誘いしてもらえますか。車いすは私が持ってきます。デウィ：はい、では声をかけてきます。",
+        show: "先輩：これから山田さんを食堂へお連れします。その前に、トイレにお誘いしてもらえますか。車いすは私が持ってきます。デウィ：はい、では声をかけてきます。",
+        q: "デウィさんは このあと 何を しますか。",
+        opts: ["車いすを 持って くる", "山田さんを 食堂へ 連れて 行く", "トイレに 誘う 声かけを する", "記録を 書く"],
+        ans: 2,
+        exp: "「その前に、トイレにお誘いしてもらえますか」と 頼まれています。車いすは 先輩が 持って きます。",
+        expId: "Dimintai tolong mengajak ke toilet dulu. Kursi roda dibawa oleh senior."
+      },
+      {
+        script: "看護師：この方、お薬が変わりました。今日から夕食後の分だけです。朝と昼はありません。介護職員のみなさんは、私が来るまで薬に触らないでくださいね。職員：わかりました。",
+        show: "看護師：この方、お薬が変わりました。今日から夕食後の分だけです。朝と昼はありません。介護職員のみなさんは、私が来るまで薬に触らないでくださいね。職員：わかりました。",
+        q: "職員は 薬に ついて どう しますか。",
+        opts: ["夕食後に 自分で 渡す", "朝と 昼に 渡す", "看護師が 来るまで 触らない", "家族に 連絡する"],
+        ans: 2,
+        exp: "「私が来るまで薬に触らないでください」と 言われています。薬は 看護師の 管理です。",
+        expId: "\"Jangan sentuh obat sampai saya datang.\" Obat dikelola perawat."
+      },
+      {
+        script: "先輩：床にお茶がこぼれています。すべると危ないので、すぐ拭いてください。そのあとで、掃除の人に報告をお願いします。ワヤン：はい。",
+        show: "先輩：床にお茶がこぼれています。すべると危ないので、すぐ拭いてください。そのあとで、掃除の人に報告をお願いします。ワヤン：はい。",
+        q: "ワヤンさんが 最初に する ことは 何ですか。",
+        opts: ["掃除の 人に 報告する", "こぼれた お茶を 拭く", "お茶を 新しく 入れる", "利用者さんを 呼ぶ"],
+        ans: 1,
+        exp: "「すぐ拭いてください。そのあとで、報告を」と 言われています。転倒の 危険が あるので 拭くのが 先です。",
+        expId: "Lap dulu karena berbahaya (bisa terpeleset), baru melapor."
+      },
+      {
+        script: "先輩：明日の入浴、鈴木さんは中止です。熱が三十七度五分ありましたから。清拭で対応してください。それから、ご家族にはこちらから連絡しますので、大丈夫です。デウィ：はい、わかりました。",
+        show: "先輩：明日の入浴、鈴木さんは中止です。熱が三十七度五分ありましたから。清拭で対応してください。それから、ご家族にはこちらから連絡しますので、大丈夫です。デウィ：はい、わかりました。",
+        q: "デウィさんが する ことは 何ですか。",
+        opts: ["ご家族に 連絡する", "鈴木さんを お風呂に 入れる", "清拭を する", "熱を 測り直す"],
+        ans: 2,
+        exp: "「清拭で対応してください」が デウィさんの 仕事です。家族への 連絡は 先輩が します。",
+        expId: "Tugas Dewi adalah menyeka badan. Keluarga dihubungi oleh senior."
+      },
+      {
+        script: "職員A：田中さんが「トイレに行きたい」と言われています。でも今、私は手が離せません。職員B：わかりました、私が付きそいます。あなたは食事の準備を続けてください。",
+        show: "職員A：田中さんが「トイレに行きたい」と言われています。でも今、私は手が離せません。職員B：わかりました、私が付きそいます。あなたは食事の準備を続けてください。",
+        q: "職員Aは このあと どう しますか。",
+        opts: ["田中さんに 付きそう", "食事の 準備を 続ける", "トイレの 掃除を する", "休憩に 行く"],
+        ans: 1,
+        exp: "職員Bが 付きそうので、職員Aは「食事の準備を続けてください」と 言われています。",
+        expId: "B yang mendampingi; A melanjutkan persiapan makan."
+      },
+    ]
+  },
+  {
+    no: "PART 5",
+    title: "ポイント理解 ― 質問を 先に 読む",
+    task: "先に 質問を 読んでから 音声を 聞き、必要な ところだけ 聞き取ってください。JLPT聴解の 問題2と 同じ形です。",
+    taskId: "Baca pertanyaan dulu, lalu dengarkan dan tangkap hanya informasi yang diperlukan. Sama seperti soal 2 JLPT.",
+    items: [
+      {
+        script: "夜勤の報告です。佐藤さんは、夜中の二時ごろ一度起きられましたが、水分を少し取られたあと、すぐに眠られました。朝までよく眠られています。朝食は全部召し上がりました。",
+        show: "夜勤の報告です。佐藤さんは、夜中の二時ごろ一度起きられましたが、水分を少し取られたあと、すぐに眠られました。朝までよく眠られています。朝食は全部召し上がりました。",
+        q: "佐藤さんが 起きたのは 何時ごろですか。",
+        opts: ["夜中の 十二時ごろ", "夜中の 二時ごろ", "朝の 四時ごろ", "朝の 六時ごろ"],
+        ans: 1,
+        exp: "「夜中の二時ごろ一度起きられました」と 言っています。ほかの 情報に まどわされないように しましょう。",
+        expId: "\"Sekitar pukul dua dini hari.\" Jangan terkecoh oleh informasi lain."
+      },
+      {
+        sameAudioAs: 0,
+        q: "佐藤さんの 朝食は どうでしたか。",
+        opts: ["全部 食べた", "半分 残した", "食べなかった", "まだ 食べていない"],
+        ans: 0,
+        exp: "最後に「朝食は全部召し上がりました」と 言っています。",
+        expId: "Di akhir disebut: \"Sarapan dihabiskan semua.\""
+      },
+      {
+        script: "山田さんですが、昨日から右のひざに赤みがあります。痛みの訴えはありません。看護師に報告して、軟膏を塗っていただきました。今日も入浴のあとで、皮膚の状態を見てください。",
+        show: "山田さんですが、昨日から右のひざに赤みがあります。痛みの訴えはありません。看護師に報告して、軟膏を塗っていただきました。今日も入浴のあとで、皮膚の状態を見てください。",
+        q: "赤みが あるのは どこですか。",
+        opts: ["左の ひざ", "右の ひざ", "右の ひじ", "背中"],
+        ans: 1,
+        exp: "「右のひざに赤みがあります」。左右を 聞きまちがえないように 注意しましょう。",
+        expId: "\"Lutut kanan.\" Hati-hati membedakan kiri dan kanan."
+      },
+      {
+        sameAudioAs: 2,
+        q: "痛みは ありますか。",
+        opts: ["強い 痛みが ある", "少し 痛みが ある", "痛みの 訴えは ない", "わからない"],
+        ans: 2,
+        exp: "「痛みの訴えはありません」と はっきり 言っています。",
+        expId: "\"Tidak ada keluhan nyeri.\""
+      },
+      {
+        script: "来週の行事の連絡です。水曜日の午後二時から、ホールで夏祭りを行います。参加される方は、動きやすい服装でお願いします。雨の場合も、室内で行いますので中止にはなりません。",
+        show: "来週の行事の連絡です。水曜日の午後二時から、ホールで夏祭りを行います。参加される方は、動きやすい服装でお願いします。雨の場合も、室内で行いますので中止にはなりません。",
+        q: "夏祭りは いつ ありますか。",
+        opts: ["月曜日の 午前", "水曜日の 午後", "金曜日の 午後", "土曜日の 午前"],
+        ans: 1,
+        exp: "「水曜日の午後二時から」と 言っています。",
+        expId: "\"Rabu, mulai pukul dua siang.\""
+      },
+      {
+        sameAudioAs: 4,
+        q: "雨が 降ったら どう なりますか。",
+        opts: ["中止に なる", "次の 週に なる", "室内で 行う", "時間が 変わる"],
+        ans: 2,
+        exp: "「雨の場合も、室内で行いますので中止にはなりません」と 言っています。",
+        expId: "\"Kalau hujan tetap dilaksanakan di dalam ruangan.\""
+      },
+    ]
+  },
+  {
+    no: "PART 6",
+    title: "概要理解 ― 何の 話ですか",
+    task: "全体を 聞いて、「何を いちばん 伝えたいか」を えらんでください。細かい ことばは 覚えなくて だいじょうぶです。JLPT聴解の 問題3と 同じ形です。",
+    taskId: "Dengarkan keseluruhan, lalu pilih inti yang ingin disampaikan. Sama seperti soal 3 JLPT.",
+    items: [
+      {
+        script: "みなさん、記録は、あとで読む人のために書くものです。自分が覚えているから書かなくてもいい、ということはありません。あなたが休みの日に、その記録を読んで介護をする人がいます。だれが読んでも同じことがわかるように書いてください。",
+        show: "みなさん、記録は、あとで読む人のために書くものです。自分が覚えているから書かなくてもいい、ということはありません。あなたが休みの日に、その記録を読んで介護をする人がいます。だれが読んでも同じことがわかるように書いてください。",
+        q: "この 話の 内容は 何ですか。",
+        opts: ["記録は 早く 書いた ほうが よい", "記録は だれが 読んでも わかるように 書く", "記録は 書かなくても よい ときが ある", "記録は 休みの 日に 書く"],
+        ans: 1,
+        exp: "最後の 一文が いちばん 言いたい ことです。「だれが読んでも同じことがわかるように」。",
+        expId: "Inti: tulis agar siapa pun yang membaca memahami hal yang sama."
+      },
+      {
+        script: "手を洗うときは、指と指の間、それから親指の周りを忘れやすいので気をつけてください。時間は三十秒が目安です。急いでいるときほど短くなりがちですが、そこで菌が残ります。感染を防ぐいちばん簡単な方法が、手洗いです。",
+        show: "手を洗うときは、指と指の間、それから親指の周りを忘れやすいので気をつけてください。時間は三十秒が目安です。急いでいるときほど短くなりがちですが、そこで菌が残ります。感染を防ぐいちばん簡単な方法が、手洗いです。",
+        q: "この 話の 内容は 何ですか。",
+        opts: ["手洗いの 時間と やり方の 注意", "手が よごれる 理由", "石けんの 選び方", "感染症の 種類"],
+        ans: 0,
+        exp: "洗い忘れやすい 場所と 三十秒という 時間の 話です。",
+        expId: "Tentang cara dan durasi cuci tangan yang benar."
+      },
+      {
+        script: "利用者さんが同じことを何度も聞かれるとき、「さっきも言いましたよ」と答えたくなります。でも、その方にとっては、いつも初めて聞くことなんです。忘れているのは事実でも、心配している気持ちは本物です。何度でも、初めてのように答えてください。",
+        show: "利用者さんが同じことを何度も聞かれるとき、「さっきも言いましたよ」と答えたくなります。でも、その方にとっては、いつも初めて聞くことなんです。忘れているのは事実でも、心配している気持ちは本物です。何度でも、初めてのように答えてください。",
+        q: "この 話の 内容は 何ですか。",
+        opts: ["同じ 質問には 答えなくて よい", "何度 聞かれても 初めてのように 答える", "利用者さんに 覚えてもらう", "質問の 回数を 記録する"],
+        ans: 1,
+        exp: "「何度でも、初めてのように答えてください」が 結論です。",
+        expId: "Kesimpulan: jawablah seolah baru pertama kali, berapa kali pun ditanya."
+      },
+      {
+        script: "車いすを押す前に、必ず一言声をかけてください。「これから食堂へ行きますね」。それだけです。急に動くと、座っている方はとてもこわい思いをされます。忙しいときほど忘れますが、この一言があるほうが、そのあとの介助がうまくいきます。",
+        show: "車いすを押す前に、必ず一言声をかけてください。「これから食堂へ行きますね」。それだけです。急に動くと、座っている方はとてもこわい思いをされます。忙しいときほど忘れますが、この一言があるほうが、そのあとの介助がうまくいきます。",
+        q: "この 話の 内容は 何ですか。",
+        opts: ["車いすは ゆっくり 押す", "車いすを 押す 前に 声を かける", "車いすは 二人で 押す", "車いすの 点検を する"],
+        ans: 1,
+        exp: "「押す前に、必ず一言声をかけてください」が 中心です。",
+        expId: "Intinya: sapa dulu sebelum mendorong kursi roda."
+      },
+      {
+        script: "熱が高いとき、すぐに冷やしたくなりますが、いちばん先にするのは看護師への報告です。熱の原因は一つではありません。感染症のこともあれば、水分が足りないこともあります。原因によって対応が変わりますから、自分で判断しないでください。",
+        show: "熱が高いとき、すぐに冷やしたくなりますが、いちばん先にするのは看護師への報告です。熱の原因は一つではありません。感染症のこともあれば、水分が足りないこともあります。原因によって対応が変わりますから、自分で判断しないでください。",
+        q: "この 話の 内容は 何ですか。",
+        opts: ["熱が 出たら すぐ 冷やす", "熱が 出たら まず 看護師に 報告する", "熱の 原因は いつも 同じ", "熱は 記録しなくて よい"],
+        ans: 1,
+        exp: "「いちばん先にするのは看護師への報告です」「自分で判断しないでください」。",
+        expId: "Intinya: laporkan ke perawat dulu; jangan memutuskan sendiri."
+      },
+    ]
+  },
+  {
+    no: "PART 7",
+    title: "発話表現 ― こんなとき 何と 言いますか",
+    task: "場面を 聞いて、その とき あなたが 言う ことばを えらんでください。JLPT聴解の 問題4と 同じ形です。",
+    taskId: "Dengarkan situasinya, lalu pilih ucapan yang tepat. Sama seperti soal 4 JLPT.",
+    items: [
+      {
+        script: "利用者さんの お部屋に 入ります。ドアの 前で 何と 言いますか。",
+        show: "利用者さんの お部屋に 入ります。ドアの 前で 何と 言いますか。",
+        q: "何と 言いますか。",
+        opts: ["失礼します。佐藤さん、入ってもよろしいですか。", "入りますよ。", "もう入りました。"],
+        ans: 0,
+        exp: "ノックの あと、名前を 呼び、許可を いただいてから 入ります。お部屋は その方の 生活の 場所です。",
+        expId: "Ketuk, sebut nama, lalu minta izin sebelum masuk. Kamar adalah ruang pribadi penghuni."
+      },
+      {
+        script: "これから 体温を 測ります。利用者さんに 何と 言いますか。",
+        show: "これから 体温を 測ります。利用者さんに 何と 言いますか。",
+        q: "何と 言いますか。",
+        opts: ["体温、測りますからね。", "これから体温を測りますが、よろしいですか。", "じっとしていてください。"],
+        ans: 1,
+        exp: "何を するかを 説明し、同意を いただきます。「説明と同意」が 介助の 基本です。",
+        expId: "Jelaskan tindakan lalu minta persetujuan — dasar dari penjelasan dan persetujuan."
+      },
+      {
+        script: "食事の 途中で、利用者さんが むせました。まず 何と 言いますか。",
+        show: "食事の 途中で、利用者さんが むせました。まず 何と 言いますか。",
+        q: "何と 言いますか。",
+        opts: ["だいじょうぶですか。ゆっくりで いいですよ。", "早く 飲みこんでください。", "もう 食べないでください。"],
+        ans: 0,
+        exp: "まず 落ち着いて 声を かけ、ゆっくりで よいと 伝えます。急がせると 誤嚥の 危険が 高まります。",
+        expId: "Tenangkan dulu dan katakan boleh pelan-pelan. Terburu-buru menambah risiko tersedak."
+      },
+      {
+        script: "利用者さんが「息子はまだ来ないのか」と 何度も 聞かれます。何と 言いますか。",
+        show: "利用者さんが「息子はまだ来ないのか」と 何度も 聞かれます。何と 言いますか。",
+        q: "何と 言いますか。",
+        opts: ["さっきも お話ししましたよ。", "息子さんは 夕方に いらっしゃるそうですよ。", "もう 聞かないでください。"],
+        ans: 1,
+        exp: "否定や 訂正を せず、安心できる 答えを します。その方には 毎回が 初めてです。",
+        expId: "Jangan menyangkal atau mengoreksi; beri jawaban yang menenangkan."
+      },
+      {
+        script: "先輩に 分からない 言葉を 聞きたいです。忙しそうです。何と 言いますか。",
+        show: "先輩に 分からない 言葉を 聞きたいです。忙しそうです。何と 言いますか。",
+        q: "何と 言いますか。",
+        opts: ["ちょっと いいですか。", "すみません、今 よろしいでしょうか。一つ お聞きしたいことが あります。", "あとで 教えてください。"],
+        ans: 1,
+        exp: "相手の 都合を 確かめてから、用件を 伝えます。「すみません」＋「よろしいでしょうか」が 丁寧です。",
+        expId: "Pastikan dulu apakah waktunya tepat, baru sampaikan keperluan."
+      },
+      {
+        script: "利用者さんの 車いすを 押します。動かす 前に 何と 言いますか。",
+        show: "利用者さんの 車いすを 押します。動かす 前に 何と 言いますか。",
+        q: "何と 言いますか。",
+        opts: ["これから 食堂へ 行きますね。", "動きます。", "はい、出発。"],
+        ans: 0,
+        exp: "次に 何が 起こるかを 伝えます。急に 動くと こわい 思いを されます。",
+        expId: "Sampaikan apa yang akan terjadi. Gerakan mendadak membuat penghuni takut."
+      },
+    ]
+  },
+  {
+    no: "PART 8",
+    title: "即時応答 ― すぐに 答える",
+    task: "短い ことばを 聞いて、すぐに 合う 返事を えらんでください。JLPT聴解の 問題5と 同じ形です。",
+    taskId: "Dengarkan ucapan pendek, lalu pilih jawaban yang tepat. Sama seperti soal 5 JLPT.",
+    items: [
+      {
+        script: "ワヤンさん、佐藤さんの記録、もう書きましたか。",
+        show: "ワヤンさん、佐藤さんの記録、もう書きましたか。",
+        q: "何と 答えますか。",
+        opts: ["はい、書きました。", "はい、書きます。", "いいえ、書きます。"],
+        ans: 0,
+        exp: "「もう〜ましたか」には、終わって いれば「はい、〜ました」と 答えます。",
+        expId: "Pertanyaan \"sudah ~?\" dijawab \"ya, sudah ~\"."
+      },
+      {
+        script: "この書類、明日までにお願いできますか。",
+        show: "この書類、明日までにお願いできますか。",
+        q: "何と 答えますか。",
+        opts: ["はい、承知しました。", "はい、お願いします。", "いいえ、けっこうです。"],
+        ans: 0,
+        exp: "頼まれた ときは「承知しました」「わかりました」と 答えます。「お願いします」は 頼む 側の ことばです。",
+        expId: "Saat dimintai tolong, jawab \"baik, saya mengerti\"."
+      },
+      {
+        script: "すみません、この漢字の読み方を教えていただけませんか。",
+        show: "すみません、この漢字の読み方を教えていただけませんか。",
+        q: "何と 答えますか。",
+        opts: ["はい、いいですよ。", "はい、教えてください。", "いいえ、読みません。"],
+        ans: 0,
+        exp: "「〜ていただけませんか」は お願いです。引き受ける ときは「はい、いいですよ」。",
+        expId: "\"〜te itadakemasen ka\" adalah permintaan; terima dengan \"ya, boleh\"."
+      },
+      {
+        script: "田中さん、少しお茶を飲まれますか。",
+        show: "田中さん、少しお茶を飲まれますか。",
+        q: "何と 答えますか。",
+        opts: ["いただきます。", "めしあがります。", "飲ませます。"],
+        ans: 0,
+        exp: "自分が 飲む ときは「いただきます」。「めしあがる」は 相手に 使う 尊敬語です。",
+        expId: "Untuk diri sendiri pakai \"itadakimasu\"; \"meshiagaru\" untuk lawan bicara (hormat)."
+      },
+      {
+        script: "お先に失礼します。",
+        show: "お先に失礼します。",
+        q: "何と 答えますか。",
+        opts: ["おつかれさまでした。", "いってきます。", "失礼しました。"],
+        ans: 0,
+        exp: "帰る 人には「おつかれさまでした」と 返します。",
+        expId: "Kepada yang pulang duluan, jawab \"otsukaresama deshita\"."
+      },
+      {
+        script: "ワヤンさん、体調はどうですか。",
+        show: "ワヤンさん、体調はどうですか。",
+        q: "何と 答えますか。",
+        opts: ["おかげさまで、だいじょうぶです。", "そうですか、心配ですね。", "お大事にしてください。"],
+        ans: 0,
+        exp: "自分の ことを 聞かれて います。「おかげさまで」を 付けると ていねいです。",
+        expId: "Anda yang ditanya. \"Okagesama de\" membuatnya lebih sopan."
+      },
+      {
+        script: "この利用者さん、今日は少し元気がないようですね。",
+        show: "この利用者さん、今日は少し元気がないようですね。",
+        q: "何と 答えますか。",
+        opts: ["そうですね。看護師さんに 伝えておきます。", "そうですね。元気に させます。", "そうですね。ほうっておきます。"],
+        ans: 0,
+        exp: "気づいた ことは 共有し、報告します。「見つける」と「伝える」は セットです。",
+        expId: "Bagikan dan laporkan apa yang Anda perhatikan."
+      },
+      {
+        script: "すみません、ちょっと手を貸していただけますか。",
+        show: "すみません、ちょっと手を貸していただけますか。",
+        q: "何と 答えますか。",
+        opts: ["はい、今 行きます。", "はい、手が あります。", "いいえ、貸せません。"],
+        ans: 0,
+        exp: "「手を貸す」＝手伝う です。すぐに 行く ことを 伝えます。",
+        expId: "\"Te o kasu\" = membantu. Sampaikan bahwa Anda segera datang."
+      },
+    ]
+  },
 ];
 
 /* ---------- speech ---------- */
@@ -797,6 +1120,16 @@ function updateScore(pi){
   const got = state[pi].filter(v => v === true).length;
   app.querySelectorAll('.part')[pi].querySelector('.score b').textContent = got;
 }
+
+/* ---------- 上の パート一覧（押すと その パートへ とぶ） ---------- */
+const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+(function buildNav(){
+  const nav = document.getElementById('partNav');
+  if(!nav) return;
+  nav.innerHTML = '<span class="lb">パート：</span>' + DATA.map((p, i) =>
+    '<a href="#part' + (i+1) + '">' + esc(p.no.replace('PART ','')) + '　' + esc(p.title.split(' ―')[0]) + '</a>'
+  ).join('');
+})();
 
 /* ---------- ハッシュで パートへ とぶ ---------- */
 function openFromHash(){
