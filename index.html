@@ -189,9 +189,9 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
           <div class="ttl">Menyimak<small>聴解（聞いて答える）</small></div>
         </div>
       </div>
-      <div class="pg" id="pgC">答えた問題 0 / 17 問</div>
+      <div class="pg" id="pgC">答えた問題 0 / 48 問</div>
       <div class="bar"><i id="barC" style="width:0"></i></div>
-      <p class="desc">申し送り・利用者さんの言葉を聞いて答える。音声はこの端末が読み上げます。</p>
+      <p class="desc">申し送り・声かけ・JLPT形式（課題理解・即時応答など）。48問。音声はこの端末が読み上げます。</p>
       <div class="sub-menu">
         <a class="item" href="choukai/index.html#part1"><span class="em">📣</span>
           <span class="tx"><span class="n">申し送りを聞く</span><span class="r">Serah terima ／ 夜勤からの申し送り</span></span><span class="ar">→</span></a>
@@ -199,6 +199,8 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
           <span class="tx"><span class="n">職員どうしの会話</span><span class="r">Percakapan staf ／ 指示・報告を聞く</span></span><span class="ar">→</span></a>
         <a class="item" href="choukai/index.html#part3"><span class="em">👵</span>
           <span class="tx"><span class="n">利用者さんの言葉</span><span class="r">Kata penghuni ／ 訴えを聞いて対応を選ぶ</span></span><span class="ar">→</span></a>
+        <a class="item" href="choukai/index.html#part4"><span class="em">📝</span>
+          <span class="tx"><span class="n">JLPT形式の練習</span><span class="r">Format JLPT ／ 課題理解・即時応答など5形式31問</span></span><span class="ar">→</span></a>
       </div>
     </section>
 
@@ -237,7 +239,7 @@ else document.getElementById('gatePw').focus();
 
 /* ---- それぞれの進み具合を出す（記録はこの端末の localStorage にある） ---- */
 const VERSION = '2026-09-01';
-const KTOTAL = 746, VTOTAL = 4559, GTOTAL = 376, DTOTAL = 45, CTOTAL = 17;
+const KTOTAL = 746, VTOTAL = 4559, GTOTAL = 376, DTOTAL = 45, CTOTAL = 48;
 const nKnown = (key, want) => {
   try {
     const o = JSON.parse(localStorage.getItem(key) || '{}');
