@@ -104,6 +104,8 @@ select.sel{padding:.55rem .6rem;border:1.5px solid var(--line);border-radius:10p
 .btn.pri{background:var(--green);border-color:var(--green);color:#fff}.btn.pri:hover{background:#047857;color:#fff}
 .btn.ok{background:var(--green);border-color:var(--green);color:#fff}
 .btn.ng{background:#fff;border-color:var(--red);color:var(--red)}
+.btn.clr{background:#fff;border-color:var(--muted);color:var(--muted)}
+.btn.clr:disabled{opacity:.35;cursor:not-allowed}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 .row{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
 
@@ -322,6 +324,7 @@ footer a{color:var(--green)}
     <div class="m-head" style="border-top:1px solid var(--line);border-bottom:0;justify-content:space-between;align-items:center">
       <span class="state none" id="mState">Belum ／ 未学習</span>
       <div style="display:flex;gap:.5rem">
+        <button class="btn clr" id="mClr">Hapus tanda ／ クリア</button>
         <button class="btn ng" id="mNg">△ Perlu ulang ／ 要復習</button>
         <button class="btn ok" id="mOk">✓ Hafal ／ 覚えた</button>
       </div>
@@ -495,6 +498,7 @@ function paintState() {
   el.textContent = p === 'known' ? '✓ Sudah hafal ／ 覚えた' : p === 'review' ? '△ Perlu diulang ／ 要復習' : 'Belum ／ 未学習';
   $('#mOk').classList.toggle('active', p === 'known');
   $('#mNg').classList.toggle('active', p === 'review');
+  $('#mClr').disabled = !p;          /* 記録がないときは押せない */
 }
 function openModal(id) {
   const g = BYID[id]; if (!g) return;
@@ -519,9 +523,13 @@ function openModal(id) {
 const closeModal = () => { $('#ov').classList.remove('on'); renderList(); };
 $('#mClose').onclick = closeModal;
 $('#ov').onclick = e => { if (e.target === $('#ov')) closeModal(); };
-const toggleMark = st => { setMark(modalId, progress[modalId] === st ? null : st); paintState(); };
+const toggleMark = st => {
+  setMark(modalId, (st === null || progress[modalId] === st) ? null : st);
+  paintState(); renderList();
+};
 $('#mOk').onclick = () => toggleMark('known');
 $('#mNg').onclick = () => toggleMark('review');
+$('#mClr').onclick = () => toggleMark(null);   /* 記録を消して未学習に戻す */
 
 /* ========== ② 練習問題 ========== */
 let quiz = [], qi = 0, okN = 0, ngN = 0, wrongQs = [], answered = false, slot = [], pool = [];

@@ -121,6 +121,9 @@ svg text{font-size:7px;fill:var(--red);font-family:system-ui,sans-serif;font-wei
 .btn.pri{background:var(--blue);border-color:var(--blue);color:#fff}.btn.pri:hover{background:var(--blue-d);color:#fff}
 .btn.ok{background:var(--green);border-color:var(--green);color:#fff}
 .btn.ng{background:#fff;border-color:var(--red);color:var(--red)}
+.btn.clr{background:#fff;border-color:var(--muted);color:var(--muted)}
+.btn.clr:hover{border-color:var(--ink);color:var(--ink)}
+.btn.clr:disabled{opacity:.35}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 .row{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
 
@@ -532,6 +535,7 @@ footer a{color:var(--blue)}
       <span id="vmState" class="state none"></span>
     </div>
     <div class="row">
+      <button class="btn clr" id="vmClr">Hapus tanda ／ クリア</button>
       <button class="btn ng" id="vmNg">Perlu diulang ／ 要復習</button>
       <button class="btn ok" id="vmOk">Sudah hafal ／ この言葉を覚えた</button>
     </div>
@@ -578,6 +582,7 @@ footer a{color:var(--blue)}
       <div id="mMisc" style="font-size:.85rem;color:var(--muted)"></div>
     </div>
     <div class="row">
+      <button class="btn clr" id="mClr">Hapus tanda ／ クリア</button>
       <button class="btn ng" id="mNg">Perlu diulang ／ 要復習</button>
       <button class="btn ok" id="mOk">Sudah hafal ／ この漢字を覚えた</button>
     </div>
@@ -626,7 +631,7 @@ else document.getElementById('gatePw').focus();
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-08-26';   // 更新日（版）
+const VERSION = '2026-08-31';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -875,12 +880,14 @@ const vCardHTML = w => `<button class="kcard ${vprogress[w.word] ? 'is-' + vprog
   <div class="mean">${vMean(w)}</div></button>`;
 
 const STATE_TXT = { known: '✓ Sudah hafal ／ 覚えた', review: '↻ Perlu diulang ／ 要復習', none: 'Belum ditandai ／ まだ記録なし' };
-function paintState(el, st, okBtn, ngBtn) {
+function paintState(el, st, okBtn, ngBtn, clrBtn) {
   const k = st || 'none';
   el.className = 'state ' + k;
   el.textContent = STATE_TXT[k];
   okBtn.classList.toggle('active', st === 'known');
   ngBtn.classList.toggle('active', st === 'review');
+  /* 記録がないときは「クリア」を押せなくする */
+  if (clrBtn) clrBtn.disabled = !st;
 }
 let vModalWord = null;
 function openVocab(word) {
@@ -902,7 +909,7 @@ function openVocab(word) {
   const cards = (w.kanji || []).map(c => BYCH[c] ? cardHTML(BYCH[c])
     : `<div class="kcard" style="opacity:.55"><div class="ch">${c}</div><div class="body"><div class="mean">（未収録 / belum ada）</div></div></div>`);
   $('#vmKanji').innerHTML = cards.join('') || '<p class="hint">—</p>';
-  paintState($('#vmState'), vprogress[word], $('#vmOk'), $('#vmNg'));
+  paintState($('#vmState'), vprogress[word], $('#vmOk'), $('#vmNg'), $('#vmClr'));
   $('#vov').classList.add('on'); document.body.style.overflow = 'hidden';
 }
 const closeVocabModal = (clearNav = true) => {
@@ -999,7 +1006,7 @@ async function openModal(ch, isBack) {
   const r = k.radical || {};
   $('#mMisc').textContent = [r.character && `${r.character}${r.name ? '（' + r.name + '）' : ''}`,
     r.meaning && (LANG === 'id' ? `arti radikal: ${r.meaning}` : `meaning: ${r.meaning}`)].filter(Boolean).join(' ／ ') || '—';
-  paintState($('#mState'), progress[ch], $('#mOk'), $('#mNg'));
+  paintState($('#mState'), progress[ch], $('#mOk'), $('#mNg'), $('#mClr'));
   $('#ov').classList.add('on'); document.body.style.overflow = 'hidden';
 
   const S = await loadStrokes(), paths = S[ch] || [];
@@ -1580,12 +1587,13 @@ $('#mBack').onclick = goBack;
 $('#vov').onclick = e => { if (e.target === $('#vov')) { navStack.length ? goBack() : closeVocabModal(); } };
 const toggleV = st => {
   const cur = vprogress[vModalWord];
-  setVMark(vModalWord, cur === st ? null : st);
-  paintState($('#vmState'), vprogress[vModalWord], $('#vmOk'), $('#vmNg'));
-  renderVocab();
+  setVMark(vModalWord, (st === null || cur === st) ? null : st);
+  paintState($('#vmState'), vprogress[vModalWord], $('#vmOk'), $('#vmNg'), $('#vmClr'));
+  renderVocab(); refreshStats();
 };
 $('#vmOk').onclick = () => toggleV('known');
 $('#vmNg').onclick = () => toggleV('review');
+$('#vmClr').onclick = () => toggleV(null);   /* 記録を消して「まだ記録なし」に戻す */
 $('#fcType').onchange = () => {
   const voc = fcIsVocab();
   $$('#fcMode option')[0].textContent = voc ? '熟語 → Cara baca ／ 読み' : '漢字 → Cara baca ／ 読み';
@@ -1617,12 +1625,13 @@ $('#mSvg').onclick = replay;
 $('#mCh').onclick = replay;
 const toggleK = st => {
   const cur = progress[modalCh];
-  setMark(modalCh, cur === st ? null : st);
-  paintState($('#mState'), progress[modalCh], $('#mOk'), $('#mNg'));
-  renderList();
+  setMark(modalCh, (st === null || cur === st) ? null : st);
+  paintState($('#mState'), progress[modalCh], $('#mOk'), $('#mNg'), $('#mClr'));
+  renderList(); refreshStats();
 };
 $('#mOk').onclick = () => toggleK('known');
 $('#mNg').onclick = () => toggleK('review');
+$('#mClr').onclick = () => toggleK(null);   /* 記録を消して「まだ記録なし」に戻す */
 
 $('#fcStart').onclick = buildDeck;
 $('#fcMode').onchange = showCard;
