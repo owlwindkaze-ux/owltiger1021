@@ -1933,15 +1933,15 @@
    "form": "1類：あ段＋れます ／ 2類：る→られます ／ する→されます",
    "meaning_id": "di~ / kena ~",
    "meaning_en": "be ~ed (passive)",
-   "note_id": "Selain bentuk pasif, bentuk yang sama juga dipakai sebagai bahasa hormat kepada penerima layanan.",
-   "note_en": "Besides the passive, the same form is used as honorific language for residents.",
-   "note_ja": "受身のほか、同じ形が利用者様への尊敬語にもなる（「帰られました」）。この二役が重要。",
+   "note_id": "Selain bentuk pasif, bentuk yang sama juga dipakai sebagai bahasa hormat kepada penerima layanan. Hati-hati: pola 「〜は〜に〜を〜られる」bisa berarti \"dilakukan tanpa izin\" (nuansa negatif).",
+   "note_en": "Besides the passive, the same form is used as honorific language for residents. Careful: the pattern 「〜は〜に〜を〜られる」can mean something was done without permission (adverse nuance).",
+   "note_ja": "受身のほか、同じ形が利用者様への尊敬語にもなる（「読まれていました」「帰られました」）。この二役が重要。注意：「〜は 〜に 〜を 〜られる」の形は「勝手に〜された」という迷惑の意味になることがある（誤：ご家族に手紙を読まれました＝手紙を勝手に見られた）。利用者様の動作を敬って言うときは「ご家族からの手紙を読まれていました」のように書く。",
    "examples": [
     {
-     "ja": "田中さんは、ご家族に手紙を読まれました。",
-     "reading": "たなかさんは、ごかぞくにてがみをよまれました。",
-     "id": "Surat Tanaka-san dibacakan oleh keluarganya.",
-     "en": "Mr./Ms. Tanaka had a letter read to them by the family.",
+     "ja": "田中さんは、ご家族からの手紙を読まれていました。",
+     "reading": "たなかさんは、ごかぞくからのてがみをよまれていました。",
+     "id": "Tanaka-san sedang membaca surat dari keluarganya. (bentuk hormat)",
+     "en": "Mr./Ms. Tanaka was reading a letter from their family. (honorific)",
      "scene": "記録"
     },
     {
@@ -1957,6 +1957,13 @@
      "id": "Pegangan tangan baru telah dipasang.",
      "en": "A new handrail has been installed.",
      "scene": "環境整備"
+    },
+    {
+     "ja": "お薬は看護師によって管理されています。",
+     "reading": "おくすりはかんごしによってかんりされています。",
+     "id": "Obat dikelola oleh perawat. (bentuk pasif)",
+     "en": "Medicines are managed by the nurses. (passive)",
+     "scene": "服薬管理"
     }
    ],
    "quiz": [
@@ -1990,12 +1997,25 @@
      "type": "order",
      "segments": [
       "田中さんは",
-      "ご家族に",
-      "手紙を",
-      "読まれました"
+      "ご家族からの手紙を",
+      "読まれて",
+      "いました"
      ],
-     "hint_id": "Surat Tanaka-san dibacakan oleh keluarganya.",
-     "hint_en": "Mr./Ms. Tanaka had a letter read to them by the family."
+     "hint_id": "Tanaka-san sedang membaca surat dari keluarganya.",
+     "hint_en": "Mr./Ms. Tanaka was reading a letter from their family."
+    },
+    {
+     "type": "choice",
+     "q": "「ご家族に手紙を読まれました」の意味として正しいのはどれですか。",
+     "choices": [
+      "手紙を勝手に見られてしまった",
+      "ご家族が読んでくださった",
+      "自分で手紙を読んだ",
+      "手紙を書いてもらった"
+     ],
+     "answer": 0,
+     "explain_id": "Pola ini bernuansa \"dilakukan tanpa izin\". Untuk maksud sopan, tulis 「ご家族からの手紙を読まれていました」.",
+     "explain_en": "This pattern carries an adverse nuance. For the polite meaning, write 「ご家族からの手紙を読まれていました」."
     }
    ]
   },
