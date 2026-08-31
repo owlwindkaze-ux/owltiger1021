@@ -152,6 +152,12 @@ footer{text-align:center;font-size:.72rem;color:var(--muted);padding:1.2rem;line
 
 <!-- ① 一覧 -->
 <section class="panel on" id="p-list">
+  <div class="toolbar" style="margin-bottom:.4rem">
+    <span style="font-size:.8rem;color:var(--muted);font-weight:700">おすすめ ／ Pilihan：</span>
+    <button class="chip" id="recField">🏥 現場で読む（N4）</button>
+    <button class="chip" id="recExam">📝 N3試験の練習</button>
+    <button class="chip" id="recAll">すべて見る ／ Semua</button>
+  </div>
   <div class="toolbar">
     <div class="chips" id="lvChips">
       <button class="chip on" data-lv="all">Semua</button>
@@ -215,7 +221,7 @@ footer{text-align:center;font-size:.72rem;color:var(--muted);padding:1.2rem;line
 <script>
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
-const VERSION = '2026-08-07';
+const VERSION = '2026-08-31';
 const STORE = 'jlpt-dokkai-progress-v1', RBKEY = 'jlpt-dokkai-ruby';
 const PASS_SHA256 = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
 const GATEKEY = 'jlpt-kanji-gate-v1';
@@ -309,6 +315,20 @@ $$('#lvChips .chip').forEach(c => c.onclick = () => {
   $$('#lvChips .chip').forEach(x => x.classList.remove('on')); c.classList.add('on'); renderList();
 });
 ['#genreSel', '#typeSel', '#qtSel', '#doneSel'].forEach(s => $(s).onchange = renderList);
+
+/* おすすめ：ボタン1つで、その人に合う文章だけを出す */
+function setFilters(lv, genre, type, qt) {
+  $$('#lvChips .chip').forEach(c => c.classList.toggle('on', c.dataset.lv === lv));
+  $('#genreSel').value = genre; $('#typeSel').value = type;
+  $('#qtSel').value = qt; $('#doneSel').value = 'all';
+  renderList();
+  $('#plist').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+/* これから現場に入る人：お知らせ・表を読む練習 */
+$('#recField').onclick = () => setFilters('N4', '介護', 'all', 'all');
+/* 合格が近い人：長めの文章を読む練習 */
+$('#recExam').onclick = () => setFilters('N3', 'all', 'all', 'all');
+$('#recAll').onclick = () => setFilters('all', 'all', 'all', 'all');
 
 /* ---------- ② 読む ---------- */
 function tableHTML(t) {
