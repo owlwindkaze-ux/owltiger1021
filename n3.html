@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JLPT N3 合格100日学習｜タブレット学習</title>
+<style>
+  :root{
+    --ink:#16212B; --ink-soft:#4A5B6B; --paper:#EDF0F3; --card:#FFFFFF;
+    --navy:#2E4A63; --navy-deep:#1D3245; --teal:#0E7C6B; --amber:#C87F16;
+    --red:#B23A2E; --rule:#CBD4DC; --box:#F7F8FA;
+    --jp:"Hiragino Kaku Gothic ProN","Yu Gothic",YuGothic,"Noto Sans JP","Meiryo",sans-serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--jp);line-height:1.75;
+       -webkit-text-size-adjust:100%;font-size:16px}
+  .wrap{max-width:820px;margin:0 auto;padding:0 16px 120px}
+
+  header{background:var(--navy-deep);color:#fff;padding:18px 0 0}
+  header .wrap{padding-bottom:0}
+  .eyebrow{font-size:11px;letter-spacing:.18em;color:#9FB6C9;margin:0 0 4px;font-weight:700}
+  h1{font-size:20px;margin:0 0 2px;font-weight:800}
+  .sub{font-size:12px;color:#B7C8D6;margin:0 0 14px}
+
+  nav.weeks{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+  nav.weeks button{background:transparent;color:#9FB6C9;border:1.5px solid #3C566E;
+    border-radius:999px;padding:5px 15px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer}
+  nav.weeks button.on{background:#fff;color:var(--navy-deep);border-color:#fff}
+  nav.tabs{display:flex;gap:4px;overflow-x:auto;padding-bottom:0}
+  nav.tabs button{
+    flex:none;background:#2A4157;color:#C6D6E2;border:0;border-radius:6px 6px 0 0;
+    padding:11px 17px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;
+    position:relative;
+  }
+  nav.tabs button.on{background:var(--paper);color:var(--navy-deep)}
+  nav.tabs button .dot{
+    display:block;width:6px;height:6px;border-radius:50%;background:var(--teal);
+    position:absolute;top:6px;right:7px;
+  }
+
+  h2.sec{font-size:15px;color:var(--navy);border-bottom:2px solid var(--navy);
+         padding-bottom:5px;margin:26px 0 10px;font-weight:800}
+  h3.sub3{font-size:14px;margin:18px 0 6px;font-weight:800;color:#25313D}
+  p.body{margin:8px 0}
+
+  .passage{background:var(--box);border:1px solid #C9D2DA;border-left:5px solid var(--navy);
+           border-radius:4px;padding:14px 16px;margin:10px 0 16px}
+  .passage p{margin:6px 0}
+  .passage table,.ref table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}
+  .passage th,.passage td,.ref th,.ref td{border:1px solid var(--rule);padding:6px 8px;text-align:left}
+  .passage th,.ref th{background:#E8EDF2;font-weight:700}
+  .ref{margin:10px 0 16px;overflow-x:auto}
+
+  .q{background:var(--card);border:1px solid var(--rule);border-radius:8px;
+     padding:14px 15px;margin:12px 0;box-shadow:0 1px 2px rgba(22,33,43,.05)}
+  .q .qt{font-weight:700;margin:0 0 10px;display:flex;gap:9px;align-items:baseline}
+  .q .qn{color:#fff;background:var(--navy);border-radius:4px;padding:1px 9px;font-size:13px;flex:none}
+  .q.drill .qn{background:#6B7C8C}
+  .opt{display:flex;gap:11px;align-items:flex-start;padding:11px 12px;margin:6px 0;
+       border:1.5px solid var(--rule);border-radius:6px;cursor:pointer;background:#fff;
+       transition:border-color .1s,background .1s}
+  .opt:active{background:#EEF2F6}
+  .opt .num{flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--rule);
+            display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;
+            color:var(--ink-soft);background:#fff}
+  .opt.sel{border-color:var(--navy);background:#EDF3F8}
+  .opt.sel .num{background:var(--navy);border-color:var(--navy);color:#fff}
+  .opt.ok{border-color:var(--teal);background:#E7F4F1}
+  .opt.ok .num{background:var(--teal);border-color:var(--teal);color:#fff}
+  .opt.ng{border-color:var(--red);background:#FBECEA}
+  .opt.ng .num{background:var(--red);border-color:var(--red);color:#fff}
+  .expl{margin:9px 0 0;padding:10px 12px;background:#F2F6F5;border-left:4px solid var(--teal);
+        border-radius:3px;font-size:14px;display:none}
+  .expl.show{display:block}
+  .expl b.v{color:var(--teal)}
+  .expl b.x{color:var(--red)}
+
+  .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--rule);
+       box-shadow:0 -2px 12px rgba(22,33,43,.08);z-index:20}
+  .bar .wrap{padding:10px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .bar .stat{font-size:13px;color:var(--ink-soft);flex:1;min-width:120px}
+  .bar .stat b{color:var(--ink);font-size:16px;font-variant-numeric:tabular-nums}
+  button.act{background:var(--navy);color:#fff;border:1px solid var(--navy);border-radius:6px;
+             padding:11px 18px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer}
+  button.act:active{background:var(--navy-deep)}
+  button.act.ghost{background:#fff;color:var(--navy)}
+  button.act.warn{background:var(--red);border-color:var(--red)}
+  button.act[disabled]{opacity:.4}
+
+  .timer{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;
+         margin:12px 0;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .timer .clock{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+  .timer .clock.low{color:var(--red)}
+
+  .player{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px;margin:12px 0}
+  .player .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+  .player select,.player input[type=range]{font-family:inherit;font-size:14px}
+  .player select{padding:6px;border:1px solid var(--rule);border-radius:4px;max-width:190px}
+  .playbtn{background:var(--teal);color:#fff;border:0;border-radius:6px;padding:9px 15px;
+           font-weight:700;font-family:inherit;font-size:14px;cursor:pointer}
+  .playbtn.on{background:var(--amber)}
+  .warnbox{background:#FDECEA;border:1px solid #E2B4AE;border-left:5px solid var(--red);
+           padding:11px 14px;border-radius:4px;font-size:14px;margin:10px 0}
+  .note{background:#FFF6E2;border:1px solid #E6CF9B;border-left:5px solid var(--amber);
+        padding:11px 14px;border-radius:4px;font-size:14px;margin:10px 0}
+
+  .rec table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0}
+  .rec th,.rec td{border:1px solid var(--rule);padding:8px 10px;text-align:left}
+  .rec th{background:#E8EDF2}
+  .rec td.n{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+
+  @media (max-width:520px){
+    body{font-size:15px}
+    nav.tabs button{padding:10px 13px;font-size:14px}
+    .q{padding:12px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">JLPT N3 合格100日学習</p>
+    <h1 id="h1">タブレット学習</h1>
+    <p class="sub">試験日まで <b id="days">—</b> 日　／　解答はこの端末に保存されます</p>
+    <nav class="weeks" id="weeks"></nav>
+    <nav class="tabs" id="tabs"></nav>
+  </div>
+</header>
+
+<div class="wrap"><main id="pane"></main></div>
+
+<div class="bar"><div class="wrap">
+  <span class="stat" id="stat">—</span>
+  <button class="act ghost" id="btnClear">この日をやり直す</button>
+  <button class="act" id="btnMark">採点する</button>
+</div></div>
+
+<script>
+(function(){
+"use strict";
+
+var WEEKS = {"1": {"days": [{"key": "月曜", "title": "短文読解 ── お知らせを読む", "blocks": [{"t": "h2", "v": "本文"}, {"t": "passage", "v": "<p><b>マンション住民の皆様へ　断水のお知らせ</b></p><p>水道管の点検工事のため、下記のとおり断水いたします。</p><p>　日時：9月10日（木）午前9時〜午後3時</p><p>　対象：A棟・B棟の全戸（C棟は断水しません）</p><p>工事中は水道が使えません。飲み水や洗濯用の水は、<b>前日までに</b>ご用意ください。なお、工事が早く終わった場合は、午後3時より前に水が出るようになります。その場合、最初のうちは水がにごることがありますので、<b>しばらく流してからお使いください</b>。</p><p>天候により工事の日が変わることがあります。変更する場合は、前日までに掲示板でお知らせします。</p><p>　　さくらマンション管理室</p>"}, {"t": "h2", "v": "設問"}, {"t": "q", "id": "問1", "text": "このお知らせについて、正しいものはどれか。  ", "opts": ["C棟の住民も水を用意しなければならない  ", "9月10日は一日中、水が使えない  ", "工事が早く終われば、午後3時前に水が出ることがある  ", "工事の日が変わったら、当日に掲示板で知らせる"], "tag": "naiyou"}, {"t": "q", "id": "問2", "text": "水が出るようになったとき、住民は何をしなければならないか。  ", "opts": ["管理室に連絡する  ", "すぐに洗濯を始める  ", "水をしばらく出してから使う  ", "水を沸かしてから飲む"], "tag": "naiyou"}, {"t": "h2", "v": "本文から拾う語彙（10語）"}, {"t": "table", "v": "<table><thead><tr><th></th><th>語</th><th>読み</th><th>意味</th><th>Bahasa Indonesia</th></tr></thead><tbody><tr><td>1</td><td>点検</td><td>てんけん</td><td>悪いところがないか調べること</td><td>pemeriksaan</td></tr><tr><td>2</td><td>工事</td><td>こうじ</td><td>建物や道路をつくったり直したりすること</td><td>pekerjaan konstruksi</td></tr><tr><td>3</td><td>対象</td><td>たいしょう</td><td>それに当てはまる人やもの</td><td>sasaran / yang dikenai</td></tr><tr><td>4</td><td>全戸</td><td>ぜんこ</td><td>すべての家</td><td>seluruh rumah/unit</td></tr><tr><td>5</td><td>用意する</td><td>よういする</td><td>前に準備する</td><td>menyiapkan</td></tr><tr><td>6</td><td>なお</td><td>―</td><td>「それに加えて」（説明を足すとき）</td><td>selain itu</td></tr><tr><td>7</td><td>にごる</td><td>―</td><td>水が透明でなくなる</td><td>keruh</td></tr><tr><td>8</td><td>しばらく</td><td>―</td><td>少しの間</td><td>sebentar / beberapa saat</td></tr><tr><td>9</td><td>天候</td><td>てんこう</td><td>天気のこと（かたい言い方）</td><td>cuaca</td></tr><tr><td>10</td><td>掲示板</td><td>けいじばん</td><td>お知らせをはる板</td><td>papan pengumuman</td></tr></tbody></table>"}, {"t": "h2", "v": "文法（2項目）"}, {"t": "p", "v": "<b>①〜ておく</b>（準備・そのままにする／Melakukan sesuatu sebelumnya sebagai persiapan）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞て形 ＋ おく</td><td>前の日に水を買っ<b>ておきます</b>。</td></tr></tbody></table>"}, {"t": "p", "v": "意味A（準備）：あとで必要だから、前にやる。"}, {"t": "p", "v": "意味B（放置）：そのままの状態にする。→「窓は開け<b>ておいて</b>ください」"}, {"t": "p", "v": "話し言葉では「〜とく」になります。（買っておく → 買っとく）"}, {"t": "p", "v": "<b>②〜てしまう</b>（完了・残念な気持ち／Telah selesai / Sayangnya ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞て形 ＋ しまう</td><td>水を出しっぱなしにし<b>てしまいました</b>。</td></tr></tbody></table>"}, {"t": "p", "v": "意味A（完了）：全部終わった。→「宿題をやっ<b>てしまいました</b>」"}, {"t": "p", "v": "意味B（後悔）：しまった、失敗した。→「電車で寝過ごし<b>てしまった</b>」"}, {"t": "p", "v": "話し言葉では「〜ちゃう／〜じゃう」。（忘れてしまう → 忘れちゃう）"}, {"t": "h2", "v": "確認ドリル（6問）"}, {"t": "p", "v": "<b>A 語彙（3問）</b>"}, {"t": "q", "id": "1", "text": "あしたの会議の資料を（　　）しておきます。  ", "opts": ["用意", "点検", "対象", "工事"], "drill": true}, {"t": "q", "id": "2", "text": "雨がふったので、川の水が（　　）います。  ", "opts": ["すいて", "にごって", "かわいて", "ひえて"], "drill": true}, {"t": "q", "id": "3", "text": "この割引の（　　）は、65歳以上の方です。  ", "opts": ["全戸", "天候", "対象", "点検"], "drill": true}, {"t": "p", "v": "<b>B 文法（3問）</b>"}, {"t": "q", "id": "4", "text": "お客さんが来る前に、部屋をそうじし（　　）ました。  ", "opts": ["ておき", "てしまい", "ておく", "てしまう"], "drill": true}, {"t": "q", "id": "5", "text": "大事な書類をなくし（　　）。どうしましょう。  ", "opts": ["ておきました", "てしまいました", "ておきます", "ています"], "drill": true}, {"t": "q", "id": "6", "text": "まだ使うので、パソコンは消さないで（　　）ください。  ", "opts": ["しまって", "おいて", "いって", "みて"], "drill": true}]}, {"key": "火曜", "title": "短文読解 ── メールを読む", "blocks": [{"t": "h2", "v": "本文"}, {"t": "passage", "v": "<p>差出人：山下</p><p>件名：シフトの相談</p><p>中村さん</p><p>お疲れさまです。山下です。</p><p>来週の木曜日（17日）のシフトのことでご相談です。実は、その日に大学の試験が入ってしまいました。試験は午後1時からなので、夕方5時からのシフトには間に合うと思っていたのですが、試験のあとに提出しなければならないレポートがあることが分かりました。</p><p>そこで、17日を休ませていただけないでしょうか。<b>その代わり</b>、今週の土曜日は空いていますので、私が入ります。土曜日は人が足りないと聞きました。</p><p>急なお願いで申し訳ありません。難しいようでしたら、遠慮なくおっしゃってください。</p><p>山下</p>"}, {"t": "h2", "v": "設問"}, {"t": "q", "id": "問1", "text": "山下さんが17日に働けないと思ったのは、なぜか。  ", "opts": ["午後1時から試験があるから  ", "試験のあとにレポートを出さなければならないから  ", "土曜日にシフトを入れたいから  ", "夕方5時に間に合わないから"], "tag": "naiyou"}, {"t": "q", "id": "問2", "text": "「<b>その代わり</b>」とあるが、山下さんは何をすると言っているか。  ", "opts": ["17日の朝に働く  ", "レポートを早く出す  ", "今週の土曜日に働く  ", "ほかの人を探す"], "tag": "naiyou"}, {"t": "q", "id": "問3", "text": "このメールから分かる山下さんの気持ちはどれか。  ", "opts": ["17日は絶対に休みたい  ", "無理なら断ってもらってかまわない  ", "土曜日は働きたくない  ", "中村さんに怒っている"], "tag": "naiyou"}, {"t": "h2", "v": "本文から拾う語彙（10語）"}, {"t": "table", "v": "<table><thead><tr><th></th><th>語</th><th>読み</th><th>意味</th><th>Bahasa Indonesia</th></tr></thead><tbody><tr><td>1</td><td>相談</td><td>そうだん</td><td>人に話して意見を聞くこと</td><td>konsultasi</td></tr><tr><td>2</td><td>実は</td><td>じつは</td><td>本当のことを言うと</td><td>sebenarnya</td></tr><tr><td>3</td><td>間に合う</td><td>まにあう</td><td>決まった時間に遅れない</td><td>sempat / tepat waktu</td></tr><tr><td>4</td><td>提出する</td><td>ていしゅつする</td><td>書類などを出す</td><td>menyerahkan</td></tr><tr><td>5</td><td>そこで</td><td>―</td><td>だから（前の理由を受けて）</td><td>oleh karena itu</td></tr><tr><td>6</td><td>その代わり</td><td>そのかわり</td><td>一方をやめて、別のことをする</td><td>sebagai gantinya</td></tr><tr><td>7</td><td>空いている</td><td>あいている</td><td>予定がない／使われていない</td><td>kosong / luang</td></tr><tr><td>8</td><td>足りない</td><td>たりない</td><td>必要な数や量がない</td><td>kurang</td></tr><tr><td>9</td><td>急な</td><td>きゅうな</td><td>突然の</td><td>mendadak</td></tr><tr><td>10</td><td>遠慮なく</td><td>えんりょなく</td><td>気をつかわないで</td><td>tanpa sungkan</td></tr></tbody></table>"}, {"t": "h2", "v": "文法（2項目）"}, {"t": "p", "v": "<b>①〜ことになる</b>（自分以外の力で決まる／Telah diputuskan bahwa ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞辞書形・ない形 ＋ ことになる</td><td>来月、大阪へ転勤する<b>ことになりました</b>。</td></tr></tbody></table>"}, {"t": "p", "v": "<b>②〜ことにする</b>（自分で決める／Saya memutuskan untuk ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞辞書形・ない形 ＋ ことにする</td><td>今日から毎朝走る<b>ことにしました</b>。</td></tr></tbody></table>"}, {"t": "passage", "v": "<p><b>見分け方</b>：決めたのが<b>自分＝ことにする</b>／<b>自分以外（会社・学校・状況）＝ことになる</b>。</p><p>日本語では、自分で決めたことでも遠慮して「〜ことになりました」と言うことがあります。（例：結婚することになりました）N3では基本の使い分けが出ます。</p>"}, {"t": "h2", "v": "確認ドリル（6問）"}, {"t": "p", "v": "<b>A 語彙（3問）</b>"}, {"t": "q", "id": "1", "text": "電車が遅れて、会議に（　　）ませんでした。  ", "opts": ["間に合い", "提出し", "相談し", "空き"], "drill": true}, {"t": "q", "id": "2", "text": "レポートは金曜日までに（　　）してください。  ", "opts": ["相談", "提出", "用意", "遠慮"], "drill": true}, {"t": "q", "id": "3", "text": "質問があれば、（　　）聞いてください。  ", "opts": ["急に", "実は", "遠慮なく", "その代わり"], "drill": true}, {"t": "p", "v": "<b>B 文法（3問）</b>"}, {"t": "q", "id": "4", "text": "会社の決定で、来月から東京で働く（　　）。  ", "opts": ["ことにしました", "ことになりました", "ようにしました", "ようになりました"], "drill": true}, {"t": "q", "id": "5", "text": "体のために、たばこをやめる（　　）。  ", "opts": ["ことにしました", "ことになりました", "ようになりました", "ところです"], "drill": true}, {"t": "q", "id": "6", "text": "話し合いの結果、旅行は来年に延期する（　　）。  ", "opts": ["ことにします", "ことになりました", "ようにします", "つもりです"], "drill": true}]}, {"key": "水曜", "title": "中文読解 ── エッセイを読む", "blocks": [{"t": "h2", "v": "本文"}, {"t": "passage", "v": "<p>大学生のとき、私はよく友人との約束を忘れました。手帳は持っていましたが、書くのが面倒で、頭の中で覚えていればいいと思っていたのです。<b>①それ</b>で困ったことは何度もありました。</p><p>あるとき、友人に「君と約束すると不安になる」と言われました。少しショックでしたが、そのとおりだと思いました。彼は私を責めているのではなく、心配していたのです。</p><p>その日から、私は決めたことをすぐにメモするようにしました。最初は面倒でした。しかし、続けているうちに、あることに気づきました。メモを取ると、<b>②覚えようとしなくてよくなる</b>のです。頭の中に「忘れないように」という緊張が残らないので、目の前のことに集中できます。</p><p>つまり、メモは記憶を助ける道具だと思っていたのですが、実は、<b>忘れるための道具</b>だったのです。忘れていいと分かっているから、安心して忘れられる。</p><p>今でも私は記憶力がいいほうではありません。それでも、約束を破ることはなくなりました。変わったのは記憶力ではなく、方法だけです。</p>"}, {"t": "h2", "v": "設問"}, {"t": "q", "id": "問1", "text": "「<b>①それ</b>」は何を指すか。  ", "opts": ["手帳を持っていたこと  ", "頭の中だけで覚えようとしていたこと  ", "友人との約束をすること  ", "書くのが面倒だと思ったこと"], "tag": "shiji"}, {"t": "q", "id": "問2", "text": "「<b>②覚えようとしなくてよくなる</b>」とあるが、それによってどうなったか。  ", "opts": ["記憶力がよくなった  ", "手帳を持たなくてもよくなった  ", "目の前のことに集中できるようになった  ", "友人が心配しなくなった"], "tag": "naiyou"}, {"t": "q", "id": "問3", "text": "筆者はメモをどのようなものだと考えるようになったか。  ", "opts": ["記憶力を強くする道具  ", "安心して忘れるための道具  ", "友人との約束を守る約束  ", "面倒だが必要な習慣"], "tag": "naiyou"}, {"t": "q", "id": "問4", "text": "この文章で筆者が最も言いたいことはどれか。  ", "opts": ["記憶力が悪い人は手帳を持つべきだ  ", "友人の言うことは素直に聞いたほうがいい  ", "能力を変えなくても、方法を変えれば結果は変わる  ", "メモを取る習慣は若いうちに身につけるべきだ"], "tag": "shucho"}, {"t": "h2", "v": "本文から拾う語彙（10語）"}, {"t": "table", "v": "<table><thead><tr><th></th><th>語</th><th>読み</th><th>意味</th><th>Bahasa Indonesia</th></tr></thead><tbody><tr><td>1</td><td>面倒（な）</td><td>めんどう</td><td>やりたくない、手間がかかる</td><td>merepotkan</td></tr><tr><td>2</td><td>責める</td><td>せめる</td><td>相手の悪いところを言う</td><td>menyalahkan</td></tr><tr><td>3</td><td>不安（な）</td><td>ふあん</td><td>心配な気持ち</td><td>cemas</td></tr><tr><td>4</td><td>緊張</td><td>きんちょう</td><td>気持ちがはりつめること</td><td>ketegangan</td></tr><tr><td>5</td><td>集中する</td><td>しゅうちゅうする</td><td>一つのことに気持ちを向ける</td><td>berkonsentrasi</td></tr><tr><td>6</td><td>つまり</td><td>―</td><td>言いかえると</td><td>dengan kata lain</td></tr><tr><td>7</td><td>実は</td><td>じつは</td><td>本当は</td><td>sebenarnya</td></tr><tr><td>8</td><td>記憶力</td><td>きおくりょく</td><td>覚える力</td><td>daya ingat</td></tr><tr><td>9</td><td>約束を破る</td><td>やくそくをやぶる</td><td>約束を守らない</td><td>mengingkari janji</td></tr><tr><td>10</td><td>〜うちに</td><td>―</td><td>その間に</td><td>selagi / dalam proses</td></tr></tbody></table>"}, {"t": "h2", "v": "文法（2項目）"}, {"t": "p", "v": "<b>①〜のに</b>（予想と違う結果／Padahal ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞・い形容詞の普通形 ＋ のに</td><td>薬を飲んだ<b>のに</b>、熱が下がりません。</td></tr><tr><td>な形容詞 ＋ な ＋ のに／名詞 ＋ な ＋ のに</td><td>日曜日な<b>のに</b>、働いています。</td></tr></tbody></table>"}, {"t": "p", "v": "「〜のに」には<b>不満・意外</b>の気持ちが入ります。ただ反対のことを言うだけなら「〜が」「〜けれども」を使います。"}, {"t": "p", "v": "<b>②〜ているうちに</b>（している間に、変化が起きる／Selagi ~, lama-lama ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞ている形 ＋ うちに</td><td>話し<b>ているうちに</b>、仲よくなりました。</td></tr><tr><td>動詞ない形 ＋ うちに</td><td>暗くなら<b>ないうちに</b>、帰りましょう。</td></tr></tbody></table>"}, {"t": "h2", "v": "確認ドリル（6問）"}, {"t": "p", "v": "<b>A 語彙（3問）</b>"}, {"t": "q", "id": "1", "text": "試験の前は（　　）して、手がふるえます。  ", "opts": ["集中", "緊張", "不安", "面倒"], "drill": true}, {"t": "q", "id": "2", "text": "失敗した人を（　　）ても、問題は解決しません。  ", "opts": ["責め", "破れ", "集め", "助け"], "drill": true}, {"t": "q", "id": "3", "text": "雨の音がうるさくて、勉強に（　　）できません。  ", "opts": ["緊張", "記憶", "集中", "用意"], "drill": true}, {"t": "p", "v": "<b>B 文法（3問）</b>"}, {"t": "q", "id": "4", "text": "約束した（　　）、彼は来ませんでした。  ", "opts": ["ので", "のに", "うちに", "ように"], "drill": true}, {"t": "q", "id": "5", "text": "音楽を聞い（　　）、眠ってしまいました。  ", "opts": ["たのに", "ているうちに", "たうちに", "るのに"], "drill": true}, {"t": "q", "id": "6", "text": "忘れ（　　）うちに、メモしておきましょう。  ", "opts": ["る", "た", "ない", "ている"], "drill": true}]}, {"key": "木曜", "title": "中文読解 ── 意見文を読む", "blocks": [{"t": "h2", "v": "本文"}, {"t": "passage", "v": "<p>「早起きは三文の徳」ということわざがあります。朝早く起きると、少しだけよいことがあるという意味です。私はこの言葉が苦手でした。夜のほうが仕事が進むタイプだからです。</p><p>ところが去年、生活を朝型に変えざるをえない事情ができました。子どもが小学校に入り、朝7時には家を出るようになったのです。仕方なく、私も5時に起きるようになりました。</p><p>半年たって気づいたのは、作業の量ではなく、<b>種類</b>が変わったということです。夜にやっていたのは、メールの返事や資料の整理といった、頭をあまり使わない仕事でした。ところが朝は、企画を考えたり、文章を書いたりする仕事がよく進みます。同じ2時間でも、できることが違うのです。</p><p>だから私は今、「朝型が夜型よりよい」とは思っていません。<b>大事なのは、どの時間に何をやるかを決めることです</b>。夜にしかできないこともあります。人によって、集中できる時間帯は違うでしょう。</p><p>ただ、一度も朝型を試したことがない人は、一週間だけ試してみる価値はあると思います。自分に合わないと分かることも、一つの発見だからです。</p>"}, {"t": "h2", "v": "設問"}, {"t": "q", "id": "問1", "text": "筆者が朝型に変えたのは、なぜか。  ", "opts": ["「早起きは三文の徳」を信じたから  ", "夜は仕事が進まなくなったから  ", "子どもの生活に合わせる必要があったから  ", "朝のほうが集中できると分かったから"], "tag": "naiyou"}, {"t": "q", "id": "問2", "text": "半年後に筆者が気づいたことは何か。  ", "opts": ["朝は夜より多くの仕事ができる  ", "朝と夜では、進む仕事の種類が違う  ", "早起きすると体調がよくなる  ", "2時間の作業では足りない"], "tag": "naiyou"}, {"t": "q", "id": "問3", "text": "「<b>大事なのは、どの時間に何をやるかを決めることです</b>」とあるが、筆者の考えに合うものはどれか。  ", "opts": ["すべての人が朝型にしたほうがよい  ", "頭を使う仕事は必ず朝にやるべきだ  ", "自分に合う時間帯を知り、仕事を分けるとよい  ", "夜型の人は生活を変えるべきではない"], "tag": "naiyou"}, {"t": "q", "id": "問4", "text": "筆者は、朝型を試したことがない人にどうすすめているか。  ", "opts": ["すぐに朝型に変えるべきだ  ", "短い期間だけ試してみるとよい  ", "無理に変える必要はない  ", "子どもがいる人だけ試すとよい"], "tag": "naiyou"}, {"t": "h2", "v": "本文から拾う語彙（10語）"}, {"t": "table", "v": "<table><thead><tr><th></th><th>語</th><th>読み</th><th>意味</th><th>Bahasa Indonesia</th></tr></thead><tbody><tr><td>1</td><td>ことわざ</td><td>―</td><td>昔から伝わる短い教えの言葉</td><td>peribahasa</td></tr><tr><td>2</td><td>ところが</td><td>―</td><td>しかし（意外なことが起きたとき）</td><td>akan tetapi</td></tr><tr><td>3</td><td>事情</td><td>じじょう</td><td>そうなった理由・わけ</td><td>keadaan / alasan</td></tr><tr><td>4</td><td>仕方なく</td><td>しかたなく</td><td>ほかに方法がないので</td><td>mau tak mau</td></tr><tr><td>5</td><td>作業</td><td>さぎょう</td><td>手や頭を動かしてする仕事</td><td>pekerjaan / tugas</td></tr><tr><td>6</td><td>種類</td><td>しゅるい</td><td>タイプ、分け方</td><td>jenis</td></tr><tr><td>7</td><td>整理</td><td>せいり</td><td>きちんとかたづけること</td><td>penataan / merapikan</td></tr><tr><td>8</td><td>企画</td><td>きかく</td><td>新しい計画を考えること</td><td>perencanaan</td></tr><tr><td>9</td><td>時間帯</td><td>じかんたい</td><td>一日の中のある時間の幅</td><td>rentang waktu</td></tr><tr><td>10</td><td>価値</td><td>かち</td><td>それだけのねうち</td><td>nilai</td></tr></tbody></table>"}, {"t": "h2", "v": "文法（2項目）"}, {"t": "p", "v": "<b>①〜ようだ／〜みたいだ</b>（自分が見て judge した推量／Sepertinya ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞・い形容詞の普通形 ＋ ようだ</td><td>道がぬれている。雨がふった<b>ようだ</b>。</td></tr><tr><td>な形容詞 ＋ な ＋ ようだ／名詞 ＋ の ＋ ようだ</td><td>彼は元気な<b>ようです</b>。</td></tr><tr><td>（みたいだ は名詞・な形容詞に直接つく）</td><td>風邪<b>みたい</b>です。</td></tr></tbody></table>"}, {"t": "p", "v": "<b>②〜らしい</b>（人から聞いた情報にもとづく推量／Katanya ~ / Kelihatannya ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞・い形容詞の普通形 ＋ らしい</td><td>山田さんは来月やめる<b>らしい</b>です。</td></tr><tr><td>な形容詞・名詞 ＋ らしい</td><td>明日は雨<b>らしい</b>。</td></tr></tbody></table>"}, {"t": "passage", "v": "<p><b>使い分け</b>：<b>ようだ＝自分で見た・感じた</b>／<b>らしい＝人から聞いた・うわさ</b>。</p><p>「らしい」にはもう一つ「〜にふさわしい」の意味もあります。（例：今日は春<b>らしい</b>天気だ＝いかにも春の感じだ）N3ではこちらも出ます。</p>"}, {"t": "h2", "v": "確認ドリル（6問）"}, {"t": "p", "v": "<b>A 語彙（3問）</b>"}, {"t": "q", "id": "1", "text": "机の上を（　　）してから帰ります。  ", "opts": ["企画", "整理", "作業", "種類"], "drill": true}, {"t": "q", "id": "2", "text": "家庭の（　　）で、会社をやめることになりました。  ", "opts": ["価値", "事情", "種類", "時間帯"], "drill": true}, {"t": "q", "id": "3", "text": "この本は高いですが、読む（　　）があります。  ", "opts": ["価値", "事情", "作業", "企画"], "drill": true}, {"t": "p", "v": "<b>B 文法（3問）</b>"}, {"t": "q", "id": "4", "text": "電気が消えている。田中さんはもう帰った（　　）。  ", "opts": ["らしいと聞いた", "ようだ", "らしくない", "ようにする"], "drill": true}, {"t": "q", "id": "5", "text": "ニュースによると、来週は寒くなる（　　）です。  ", "opts": ["よう", "らしい", "そうに", "みたいな"], "drill": true}, {"t": "q", "id": "6", "text": "きょうは秋（　　）、すずしくていい天気だ。  ", "opts": ["のようで", "らしくて", "みたいに", "のように"], "drill": true}]}, {"key": "金曜", "title": "情報検索 ── 案内から答えを探す", "blocks": [{"t": "passage", "v": "<p><b>これはN3で最も点になりやすい問題です。</b></p><p>本文を全部読んではいけません。<b>設問の条件（年齢・曜日・金額・人数）に線を引き、表の中からその条件に合う行だけを探します。</b></p>"}, {"t": "h2", "v": "本文"}, {"t": "passage", "v": "<p><b>みどり市民センター　秋の教室 参加者募集</b></p><table><thead><tr><th>教室名</th><th>曜日・時間</th><th>回数</th><th>料金</th><th>対象</th></tr></thead><tbody><tr><td>① はじめての書道</td><td>火 10:00〜11:30</td><td>全6回</td><td>3,000円</td><td>どなたでも</td></tr><tr><td>② パソコン入門</td><td>水 19:00〜20:30</td><td>全8回</td><td>5,000円</td><td>18歳以上</td></tr><tr><td>③ 親子リズム体操</td><td>木 10:00〜11:00</td><td>全6回</td><td>2,000円</td><td>3〜5歳と保護者</td></tr><tr><td>④ 健康ヨガ</td><td>土 9:30〜11:00</td><td>全10回</td><td>6,000円</td><td>18歳以上</td></tr><tr><td>⑤ 子ども英語</td><td>土 14:00〜15:00</td><td>全8回</td><td>4,000円</td><td>小学生</td></tr></tbody></table><p><b>お申し込み</b></p><p>・9月1日（火）〜9月20日（日）に、センター窓口またはホームページからお申し込みください。</p><p>・申込者が定員（各20名）を超えた場合は、抽選になります。</p><p>・市外にお住まいの方は、料金が1,000円高くなります。</p><p>・<b>65歳以上の方は、料金が半額</b>になります。（市外の方の割増分は半額になりません）</p><p>・お支払いは、初回の教室の日に、現金でお願いします。</p>"}, {"t": "h2", "v": "設問"}, {"t": "q", "id": "問1", "text": "みどり市に住んでいる70歳の女性が「健康ヨガ」に申し込む。料金はいくらか。  ", "opts": ["3,000円  ", "6,000円  ", "3,500円  ", "7,000円"], "tag": "joken"}, {"t": "q", "id": "問2", "text": "市外に住んでいる35歳の男性が「パソコン入門」に申し込みたい。この人について正しいものはどれか。  ", "opts": ["申し込むことができない  ", "料金は5,000円である  ", "料金は6,000円である  ", "土曜日に通うことになる"], "tag": "joken"}, {"t": "q", "id": "問3", "text": "平日の夜に通える教室を探している会社員がいる。この人が申し込める教室はどれか。  ", "opts": ["①  ", "②  ", "④  ", "⑤"], "tag": "joken"}, {"t": "h2", "v": "本文から拾う語彙（10語）"}, {"t": "table", "v": "<table><thead><tr><th></th><th>語</th><th>読み</th><th>意味</th><th>Bahasa Indonesia</th></tr></thead><tbody><tr><td>1</td><td>募集</td><td>ぼしゅう</td><td>人を集めること</td><td>perekrutan / pendaftaran</td></tr><tr><td>2</td><td>対象</td><td>たいしょう</td><td>当てはまる人</td><td>sasaran</td></tr><tr><td>3</td><td>保護者</td><td>ほごしゃ</td><td>子どもの親など</td><td>wali / orang tua</td></tr><tr><td>4</td><td>窓口</td><td>まどぐち</td><td>受付の場所</td><td>loket</td></tr><tr><td>5</td><td>定員</td><td>ていいん</td><td>入れる人数の上限</td><td>kuota</td></tr><tr><td>6</td><td>超える</td><td>こえる</td><td>ある数より多くなる</td><td>melebihi</td></tr><tr><td>7</td><td>抽選</td><td>ちゅうせん</td><td>くじで決めること</td><td>undian</td></tr><tr><td>8</td><td>半額</td><td>はんがく</td><td>半分の値段</td><td>setengah harga</td></tr><tr><td>9</td><td>割増</td><td>わりまし</td><td>決まった額より高くすること</td><td>biaya tambahan</td></tr><tr><td>10</td><td>初回</td><td>しょかい</td><td>1回目</td><td>pertama kali</td></tr></tbody></table>"}, {"t": "h2", "v": "文法（2項目）"}, {"t": "p", "v": "<b>①〜によって</b>（① 手段 ② 違いのもと ③ 受身の動作主）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>名詞 ＋ によって</td><td>人<b>によって</b>考え方が違います。（違いのもと）</td></tr><tr><td></td><td>話し合い<b>によって</b>決めます。（手段）</td></tr><tr><td></td><td>この寺は有名な建築家<b>によって</b>建てられました。（受身の動作主）</td></tr></tbody></table>"}, {"t": "p", "v": "N3で最もよく出るのは<b>「〜によって違う／変わる」</b>の形です。"}, {"t": "p", "v": "<b>②〜に対して</b>（相手・対象を示す／Terhadap ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>名詞 ＋ に対して</td><td>目上の人<b>に対して</b>、ていねいな言葉を使います。</td></tr></tbody></table>"}, {"t": "passage", "v": "<p><b>注意</b>：「〜に対して」は<b>相手に向かう動作</b>。「〜について」は<b>話題</b>です。</p><p>「先生<b>について</b>話す」＝先生が話題／「先生<b>に対して</b>失礼だ」＝先生が相手。</p>"}, {"t": "h2", "v": "確認ドリル（6問）"}, {"t": "p", "v": "<b>A 語彙（3問）</b>"}, {"t": "q", "id": "1", "text": "申込者が（　　）を超えたので、抽選になりました。  ", "opts": ["対象", "定員", "初回", "窓口"], "drill": true}, {"t": "q", "id": "2", "text": "学生証を見せると、料金が（　　）になります。  ", "opts": ["半額", "割増", "募集", "抽選"], "drill": true}, {"t": "q", "id": "3", "text": "詳しいことは、1階の（　　）でお聞きください。  ", "opts": ["定員", "窓口", "保護者", "初回"], "drill": true}, {"t": "p", "v": "<b>B 文法（3問）</b>"}, {"t": "q", "id": "4", "text": "季節（　　）、開いている時間が変わります。  ", "opts": ["について", "によって", "に対して", "にとって"], "drill": true}, {"t": "q", "id": "5", "text": "お客様（　　）、そのような言い方をしてはいけません。  ", "opts": ["について", "によって", "に対して", "のために"], "drill": true}, {"t": "q", "id": "6", "text": "この問題（　　）、みんなで話し合いましょう。  ", "opts": ["について", "に対して", "によって", "にとって"], "drill": true}]}, {"key": "土曜", "title": "読解通しテスト（60分）", "blocks": [{"t": "passage", "v": "<p>タイマーを<b>60分</b>にセットしてください。途中で止めないこと。</p><p>時間配分の目安：中文6分／長文12分／情報検索8分。</p>"}, {"t": "h2", "v": "問題1　中文（3問）"}, {"t": "passage", "v": "<p>私が働いている店では、去年から「おすすめしない」という方針をとっています。お客様に商品をすすめてはいけない、という意味ではありません。<b>聞かれる前にすすめない</b>ということです。</p><p>以前は、お客様が店に入ってこられたらすぐに近づいて、「何かお探しですか」と声をかけていました。売上を上げるためです。しかし、あるお客様に「ゆっくり見たいので」と言われたことがきっかけで、店長がお客様100人にアンケートをとりました。すると、7割の人が「声をかけられるのが苦手だ」と答えたのです。</p><p>方針を変えてから、店の売上は最初の2か月、少し下がりました。しかし、3か月目からは以前より上がりました。理由を考えてみると、お客様が店にいる時間が長くなったからだと思います。落ち着いて選べるので、結局たくさん買ってくださるのです。</p><p>声をかけないことは、無視することとは違います。私たちは、お客様が顔を上げたその瞬間に近づけるよう、いつでも見ています。</p>"}, {"t": "q", "id": "問1", "text": "「おすすめしない」とは、どういう意味か。  ", "opts": ["商品をすすめてはいけないということ  ", "お客様に聞かれるまではすすめないということ  ", "売れない商品はすすめないということ  ", "お客様に声をかけないということ"], "tag": "naiyou"}, {"t": "q", "id": "問2", "text": "方針を変えた結果、どうなったか。  ", "opts": ["売上はずっと下がったままだった  ", "すぐに売上が上がった  ", "一度下がったが、そのあと以前より上がった  ", "売上は変わらなかった"], "tag": "naiyou"}, {"t": "q", "id": "問3", "text": "筆者は、店員の仕事をどのようなものだと考えているか。  ", "opts": ["お客様に話しかけないで、遠くから見ていること  ", "お客様を無視して、仕事に集中すること  ", "お客様が必要としたときにすぐ動けるよう、見ていること  ", "お客様が長く店にいられるように、商品を増やすこと"], "tag": "naiyou"}, {"t": "h2", "v": "問題2　中文（3問）"}, {"t": "passage", "v": "<p>弟が中学生のとき、家族で山に登りました。頂上まであと少しというところで、弟が「もう歩けない」と座り込みました。父は「あと10分だ、がんばれ」と言いましたが、弟は動きません。</p><p>そのとき母が、「じゃあ、ここでお弁当にしよう」と言いました。父は驚いた顔をしました。頂上で食べる予定だったからです。しかし母はリュックを下ろし、その場に座りました。</p><p>30分後、弁当を食べ終わった弟は、何も言わずに立ち上がって歩きはじめました。頂上まで、10分もかかりませんでした。</p><p>あとで母に聞くと、「あの子は疲れていたんじゃなくて、おなかがすいていたのよ」と笑っていました。私はそのとき、<b>問題を解決するには、まず問題が何かを知らなければならない</b>のだと思いました。父も私も、弟が「疲れている」と決めつけて、「がんばれ」と言っていたのです。</p>"}, {"t": "q", "id": "問4", "text": "母は、なぜその場でお弁当にしたのか。  ", "opts": ["頂上まで行くのをあきらめたから  ", "自分もおなかがすいていたから  ", "弟の問題は疲れではないと分かっていたから  ", "父の言い方がよくないと思ったから"], "tag": "naiyou"}, {"t": "q", "id": "問5", "text": "「<b>問題を解決するには、まず問題が何かを知らなければならない</b>」とあるが、この文章では具体的に何を指すか。  ", "opts": ["山に登る前に準備をすること  ", "弟が疲れているのか、おなかがすいているのかを見分けること  ", "家族でよく話し合うこと  ", "頂上まであと何分かを知ること"], "tag": "shiji"}, {"t": "q", "id": "問6", "text": "筆者は父と自分について、どう考えているか。  ", "opts": ["弟にやさしくしすぎた  ", "弟の状態をよく確かめずに判断していた  ", "弟を待つ時間が足りなかった  ", "母に相談するべきだった"], "tag": "naiyou"}, {"t": "h2", "v": "問題3　長文（4問）"}, {"t": "passage", "v": "<p>「ものを大切にしなさい」と子どものころから言われてきました。私もそう信じて、こわれたものは直し、使えるものは捨てずに取っておきました。気がつくと、家の中は「まだ使えるもの」でいっぱいになっていました。</p><p>去年、引っ越しをすることになり、荷物を整理しました。押し入れから、10年以上開けていない箱が5つ出てきました。中身は、学生時代のノート、もらった手紙、こわれた時計、着なくなった服。どれも「大切なもの」として取っておいたはずのものです。<b>しかし、10年間、私は一度もそれらを思い出しませんでした。</b></p><p>そのとき気づいたのです。私がしていたのは、ものを大切にすることではなく、<b>判断を先に延ばすこと</b>だったのだと。捨てるかどうかを決めるのは面倒です。だから「まだ使えるから」という理由をつけて、箱に入れる。決めなくてよくなるので、そのときは楽になります。けれども、その箱は10年後の自分に届く宿題のようなものです。</p><p>引っ越しのとき、私は5つの箱のうち4つを捨てました。残した1つには、祖母の写真と、初めて自分で買った本が入っています。数は減りましたが、この1箱の中身は、以前よりずっと大切になりました。<b>選んだからです。</b></p><p>ものを大切にするというのは、たくさん持つことではないのでしょう。何が自分にとって大切かを決めて、そのほかを手放すことなのだと、今は思います。ただ、これは若いときには難しいかもしれません。何が大切かは、時間がたたないと分からないこともあるからです。</p>"}, {"t": "q", "id": "問7", "text": "「<b>しかし、10年間、私は一度もそれらを思い出しませんでした</b>」とあるが、筆者はこのことから何を知ったか。  ", "opts": ["記憶力が悪くなっていること  ", "箱の中のものは本当は必要ではなかったこと  ", "引っ越しをするべきだったこと  ", "押し入れが狭すぎたこと"], "tag": "naiyou"}, {"t": "q", "id": "問8", "text": "「<b>判断を先に延ばすこと</b>」とは、ここではどういうことか。  ", "opts": ["こわれたものを直さないでおくこと  ", "捨てるかどうか決めないで、しまっておくこと  ", "引っ越しの準備を遅らせること  ", "大切なものを人にあげること"], "tag": "naiyou"}, {"t": "q", "id": "問9", "text": "「<b>選んだからです</b>」とあるが、何が言いたいのか。  ", "opts": ["数が少ないほど、ものは長持ちする  ", "自分で決めて残したから、価値が増した  ", "高いものだけを残したから、大切になった  ", "捨てるのに時間がかかったから、思い出が増えた"], "tag": "naiyou"}, {"t": "q", "id": "問10", "text": "この文章の内容に合うものはどれか。  ", "opts": ["ものはできるだけ捨てないほうがよい  ", "若い人ほど、ものを整理するべきだ  ", "大切にするとは、選んで残すことである  ", "引っ越しは人生を変えるよい機会である"], "tag": "naiyou"}, {"t": "h2", "v": "問題4　情報検索（3問）"}, {"t": "passage", "v": "<p><b>なかまち図書館　利用案内</b></p><table><thead><tr><th></th><th>一般（16歳以上）</th><th>中学生以下</th></tr></thead><tbody><tr><td>貸出冊数</td><td>5冊まで</td><td>3冊まで</td></tr><tr><td>貸出期間</td><td>2週間</td><td>2週間</td></tr><tr><td>延長</td><td>1回だけ（＋1週間）</td><td>1回だけ（＋1週間）</td></tr><tr><td>DVD</td><td>2枚まで（1週間）</td><td>借りられません</td></tr></tbody></table><p><b>開館時間</b></p><p>・火〜金：9:00〜19:00</p><p>・土・日：9:00〜17:00</p><p>・月曜休館（月曜が祝日の場合は、翌日の火曜が休館）</p><p><b>ご注意</b></p><p>・延長は、返却日の<b>前日まで</b>に、電話またはホームページでお申し込みください。</p><p>・返却日を過ぎた本がある方は、新しく借りることも、延長することもできません。</p><p>・返却は、閉館後でも入口横の返却ポストをご利用いただけます。ただし、DVDはポストに入れないでください。</p>"}, {"t": "q", "id": "問11", "text": "中学2年生が図書館でできることはどれか。  ", "opts": ["本を5冊借りる  ", "DVDを1枚借りる  ", "本を3冊、2週間借りる  ", "延長を2回する"], "tag": "joken"}, {"t": "q", "id": "問12", "text": "借りた本の返却日が9月18日（金）である。延長したい場合、いつまでに申し込めばよいか。  ", "opts": ["9月17日（木）まで  ", "9月18日（金）まで  ", "9月19日（土）まで  ", "9月25日（金）まで"], "tag": "joken"}, {"t": "q", "id": "問13", "text": "日曜日の夜8時に、借りていた本2冊とDVD1枚を返したい。どうすればよいか。  ", "opts": ["どちらも返却ポストに入れる  ", "どちらも次の日に持って行く  ", "本はポストに入れ、DVDは別の日に窓口へ持って行く  ", "DVDはポストに入れ、本は窓口へ持って行く"], "tag": "joken"}]}, {"key": "日曜", "title": "聴解30分 ＋ 復習30分", "blocks": [{"t": "h2", "v": "Part 1　聴解（20分・7問）"}, {"t": "passage", "v": "<p><b>注意</b>：この紙には会話は書いてありません。音を聞いて答えます。</p><p>会話は<b>1回だけ</b>流れます。メモを取ってもかまいません。</p><p>「問題1・問題2」は、下の選択肢から一つ選びます。「問題3」は、紙に何も書いてありません。聞いて答えを選びます。</p>"}, {"t": "h3", "v": "問題1　課題理解（2問）"}, {"t": "passage", "v": "<p>このあと何をしますか。会話を聞いて、正しいものを一つ選んでください。</p>"}, {"t": "q", "id": "問1", "text": "", "opts": ["資料を会議室に運ぶ", "資料を2部印刷する", "部長に連絡する", "参加者に電話する"]}, {"t": "q", "id": "問2", "text": "", "opts": ["飲み物", "野菜", "紙皿とコップ", "何も持って行かない"]}, {"t": "h3", "v": "問題2　ポイント理解（2問）"}, {"t": "passage", "v": "<p>質問を聞いてから会話を聞き、正しいものを一つ選んでください。</p>"}, {"t": "q", "id": "問3", "text": "", "opts": ["駅から遠いから", "家賃が高いから", "隣の音がうるさいから", "部屋が狭いから"]}, {"t": "q", "id": "問4", "text": "", "opts": ["値段が安いこと", "味がいいこと", "店員の対応がいいこと", "家から近いこと"]}, {"t": "h3", "v": "問題3　即時応答（3問）"}, {"t": "passage", "v": "<p>この問題には、選択肢が書いてありません。短い文を聞いて、返事として最もよいものを、1・2・3の中から一つ選んでください。</p>"}, {"t": "q", "id": "問5", "text": "1　　2　　3", "opts": ["1", "2", "3"], "audioOnly": true}, {"t": "q", "id": "問6", "text": "1　　2　　3", "opts": ["1", "2", "3"], "audioOnly": true}, {"t": "q", "id": "問7", "text": "1　　2　　3", "opts": ["1", "2", "3"], "audioOnly": true}, {"t": "h3", "v": "聞き取りメモ欄"}, {"t": "passage", "v": ""}, {"t": "h2", "v": "Part 2　今週の復習テスト（20問）"}, {"t": "h3", "v": "A 語彙（10問）"}, {"t": "q", "id": "1", "text": "会議の資料を（　　）してください。", "opts": ["提出", "用意", "抽選", "募集"], "drill": true}, {"t": "q", "id": "2", "text": "電車が遅れて、約束の時間に（　　）なかった。", "opts": ["間に合わ", "空か", "超え", "足り"], "drill": true}, {"t": "q", "id": "3", "text": "申込者が定員を（　　）ので、抽選します。", "opts": ["足りた", "超えた", "空いた", "責めた"], "drill": true}, {"t": "q", "id": "4", "text": "家庭の（　　）で引っ越すことになった。", "opts": ["価値", "事情", "種類", "対象"], "drill": true}, {"t": "q", "id": "5", "text": "机の上を（　　）する。", "opts": ["整理", "集中", "緊張", "募集"], "drill": true}, {"t": "q", "id": "6", "text": "65歳以上は料金が（　　）になります。", "opts": ["割増", "半額", "定員", "初回"], "drill": true}, {"t": "q", "id": "7", "text": "失敗した人を（　　）べきではない。", "opts": ["責める", "破る", "超える", "空ける"], "drill": true}, {"t": "q", "id": "8", "text": "この本は買う（　　）がある。", "opts": ["事情", "価値", "種類", "作業"], "drill": true}, {"t": "q", "id": "9", "text": "質問があれば（　　）どうぞ。", "opts": ["急に", "実は", "遠慮なく", "仕方なく"], "drill": true}, {"t": "q", "id": "10", "text": "雨で川の水が（　　）いる。", "opts": ["にごって", "空いて", "足りて", "超えて"], "drill": true}, {"t": "h3", "v": "B 文法（10問）"}, {"t": "q", "id": "11", "text": "お客さんが来る前に、部屋を片付け（　　）。", "opts": ["ておきます", "てしまいます", "ています", "てみます"], "drill": true}, {"t": "q", "id": "12", "text": "大切な書類をなくし（　　）。", "opts": ["ておきました", "てしまいました", "ておきます", "ています"], "drill": true}, {"t": "q", "id": "13", "text": "会社の命令で、来月から大阪で働く（　　）。", "opts": ["ことにしました", "ことになりました", "ようにします", "つもりです"], "drill": true}, {"t": "q", "id": "14", "text": "健康のために、毎朝走る（　　）。", "opts": ["ことにしました", "ことになりました", "ようになりました", "ところです"], "drill": true}, {"t": "q", "id": "15", "text": "たくさん勉強した（　　）、合格できなかった。", "opts": ["ので", "のに", "うちに", "から"], "drill": true}, {"t": "q", "id": "16", "text": "本を読ん（　　）、眠くなってきた。", "opts": ["だのに", "でいるうちに", "だうちに", "でおいて"], "drill": true}, {"t": "q", "id": "17", "text": "電気が消えている。もう帰った（　　）。", "opts": ["ようだ", "らしくない", "ようにする", "ことにする"], "drill": true}, {"t": "q", "id": "18", "text": "天気予報によると、明日は雪が降る（　　）。", "opts": ["ようにする", "らしい", "ようだった", "みたいな"], "drill": true}, {"t": "q", "id": "19", "text": "人（　　）、考え方が違う。", "opts": ["について", "に対して", "によって", "にとって"], "drill": true}, {"t": "q", "id": "20", "text": "目上の人（　　）失礼な言い方をしてはいけない。", "opts": ["について", "に対して", "によって", "のために"], "drill": true}]}], "answers": {"月曜": {"問1": [3, "「工事が早く終わった場合は、午後3時より前に水が出る」。1はC棟が対象外、2は9時〜15時のみ、4は「前日までに」なので誤り。"], "問2": [3, "「しばらく流してからお使いください」。"], "d1": [1, ""], "d2": [2, ""], "d3": [3, ""], "d4": [1, ""], "d5": [2, ""], "d6": [2, ""]}, "火曜": {"問1": [2, "「試験のあとに提出しなければならないレポートがあることが分かりました」。1は理由の一部ですが、5時には間に合うと本人が言っています。"], "問2": [3, "指示語の直後に「今週の土曜日は空いていますので、私が入ります」。"], "問3": [2, "最後の「難しいようでしたら、遠慮なくおっしゃってください」。"], "d1": [1, ""], "d2": [2, ""], "d3": [3, ""], "d4": [2, ""], "d5": [1, ""], "d6": [2, ""]}, "水曜": {"問1": [2, "指示語「それ」の直前は「頭の中で覚えていればいいと思っていた」。"], "問2": [3, "「緊張が残らないので、目の前のことに集中できます」。"], "問3": [2, "「忘れるための道具」「安心して忘れられる」。"], "問4": [3, "最終段落「変わったのは記憶力ではなく、方法だけです」。"], "d1": [2, ""], "d2": [1, ""], "d3": [3, ""], "d4": [2, ""], "d5": [2, ""], "d6": [3, ""]}, "木曜": {"問1": [3, "「子どもが小学校に入り……仕方なく、私も5時に起きるようになりました」。"], "問2": [2, "「作業の量ではなく、種類が変わった」。"], "問3": [3, "「人によって、集中できる時間帯は違うでしょう」。"], "問4": [2, "「一週間だけ試してみる価値はある」。"], "d1": [2, ""], "d2": [2, ""], "d3": [1, ""], "d4": [2, ""], "d5": [2, ""], "d6": [2, ""]}, "金曜": {"問1": [1, "6,000円の半額＝3,000円。市内在住なので割増なし。"], "問2": [3, "18歳以上なので申込可。5,000円＋市外1,000円＝6,000円。"], "問3": [2, "平日の夜は②パソコン入門（水19:00〜）だけ。①は平日だが昼、④⑤は土曜。"], "d1": [2, ""], "d2": [1, ""], "d3": [2, ""], "d4": [2, ""], "d5": [3, ""], "d6": [1, ""]}, "土曜": {"問1": [2, "「聞かれる前にすすめない」と本文が定義しています。"], "問2": [3, "「最初の2か月、少し下がりました。しかし、3か月目からは以前より上がりました」。"], "問3": [3, "最終段落「顔を上げたその瞬間に近づけるよう、いつでも見ています」。"], "問4": [3, "母の言葉「疲れていたんじゃなくて、おなかがすいていたのよ」。"], "問5": [2, "直後に「弟が『疲れている』と決めつけて」とあります。"], "問6": [2, "「決めつけて」＝確かめずに判断した。"], "問7": [2, "10年思い出さなかった＝必要なかった。"], "問8": [2, "直後の説明「捨てるかどうかを決めるのは面倒です。だから……箱に入れる」。"], "問9": [2, "「数は減りましたが……ずっと大切になりました。選んだからです」。"], "問10": [3, "最終段落「何が自分にとって大切かを決めて、そのほかを手放すこと」。"], "問11": [3, "中学生は本3冊・2週間。DVDは借りられず、延長は1回のみ。"], "問12": [1, "「返却日の前日まで」＝18日の前日＝17日。"], "問13": [3, "「DVDはポストに入れないでください」。"]}, "日曜": {"L1": [2, ""], "L2": [3, ""], "L3": [3, ""], "L4": [3, ""], "L5": [2, ""], "L6": [1, ""], "L7": [2, ""], "r1": [2, ""], "r2": [1, ""], "r3": [2, ""], "r4": [2, ""], "r5": [1, ""], "r6": [2, ""], "r7": [1, ""], "r8": [2, ""], "r9": [3, ""], "r10": [1, ""], "r11": [1, ""], "r12": [2, ""], "r13": [2, ""], "r14": [1, ""], "r15": [2, ""], "r16": [2, ""], "r17": [1, ""], "r18": [2, ""], "r19": [3, ""], "r20": [2, ""]}}, "listen": [
+    { group:'問題1　課題理解', hint:'はじめに質問を聞いてください。それから会話を聞いて、問題用紙の1〜4から一つ選びます。',
+      items:[
+        { no:'問1', label:'このあとまず何をしますか', answer:'2　資料を2部印刷する',
+          why:'「2部追加で印刷しますね」→ 女の人が「運ぶのはそのあとでいい」と言っている。順番に注意。',
+          steps:[
+            {k:'q', v:'男の人は、このあとまず何をしますか。'},
+            {k:'pause', s:2},
+            {k:'line', sp:'女', v:'田中さん、明日の会議の資料、できてる？'},
+            {k:'line', sp:'男', v:'はい、印刷まで終わりました。あとは会議室に運ぶだけです。'},
+            {k:'line', sp:'女', v:'ありがとう。あ、そうだ。部長から連絡があって、参加者が二人増えたの。'},
+            {k:'line', sp:'男', v:'じゃあ、二部追加で印刷しますね。'},
+            {k:'line', sp:'女', v:'お願い。運ぶのはそのあとでいいから。'},
+            {k:'pause', s:1},
+            {k:'q', v:'男の人は、このあとまず何をしますか。'},
+            {k:'pause', s:12, a:true}
+          ]},
+        { no:'問2', label:'何を持って行きますか', answer:'3　紙皿とコップ',
+          why:'飲み物は男の人、野菜は山田さん。残ったものを女の人が持って行く。',
+          steps:[
+            {k:'q', v:'女の人は、何を持って行きますか。'},
+            {k:'pause', s:2},
+            {k:'line', sp:'男', v:'週末のバーベキュー、飲み物は僕が買っておくよ。'},
+            {k:'line', sp:'女', v:'じゃあ、わたしは野菜を切って持って行こうか。'},
+            {k:'line', sp:'男', v:'あ、野菜は山田さんが持ってくるって。'},
+            {k:'line', sp:'女', v:'そうなんだ。じゃあ、紙のお皿とコップは？'},
+            {k:'line', sp:'男', v:'それ、まだ誰も言ってないな。助かる。'},
+            {k:'pause', s:1},
+            {k:'q', v:'女の人は、何を持って行きますか。'},
+            {k:'pause', s:12, a:true}
+          ]}
+      ]},
+    { group:'問題2　ポイント理解', hint:'質問のあと、選択肢を読む時間があります。それから会話を聞きます。',
+      items:[
+        { no:'問3', label:'どうして引っ越すことにしましたか', answer:'3　隣の音がうるさいから',
+          why:'「家賃が高いのが一番の理由」と言ったあとに「実は……それで決めたよ」と続く。最後まで聞く。',
+          steps:[
+            {k:'q', v:'男の人は、どうして引っ越すことにしましたか。'},
+            {k:'pause', s:15, r:true},
+            {k:'line', sp:'女', v:'来月引っ越すんだって？　今の部屋、駅から近くて便利じゃない。'},
+            {k:'line', sp:'男', v:'うん、便利なんだけどね。家賃が高いのが一番の理由かな。'},
+            {k:'line', sp:'女', v:'やっぱりお金？'},
+            {k:'line', sp:'男', v:'それもあるけど、実は隣の部屋の音がすごくて。夜、眠れないんだ。それで決めたよ。'},
+            {k:'pause', s:1},
+            {k:'q', v:'男の人は、どうして引っ越すことにしましたか。'},
+            {k:'pause', s:12, a:true}
+          ]},
+        { no:'問4', label:'この店のどこがいいと言っていますか', answer:'3　店員の対応がいいこと',
+          why:'値段は高め、味は普通。「でもね」のあとが答え。',
+          steps:[
+            {k:'q', v:'女の人は、この店のどこがいいと言っていますか。'},
+            {k:'pause', s:15, r:true},
+            {k:'line', sp:'男', v:'この店、よく来るの？'},
+            {k:'line', sp:'女', v:'うん、月に二回くらい。'},
+            {k:'line', sp:'男', v:'値段は少し高めだよね。'},
+            {k:'line', sp:'女', v:'そうなの。味も、まあ普通かな。でもね、ここは店員さんがすごくいいの。忙しくても、必ず「ゆっくりどうぞ」って言ってくれる。それで来ちゃう。'},
+            {k:'pause', s:1},
+            {k:'q', v:'女の人は、この店のどこがいいと言っていますか。'},
+            {k:'pause', s:12, a:true}
+          ]}
+      ]},
+    { group:'問題3　即時応答', hint:'問題用紙には何も書いてありません。短い文を聞いて、返事として最もよいものを1〜3から選びます。',
+      items:[
+        { no:'問5', label:'返事を選ぶ', answer:'2　すみません、お願いします',
+          why:'「〜ておきましょうか」は申し出。1は過去形なので合わない。',
+          steps:[
+            {k:'line', sp:'女', v:'この資料、コピーしておきましょうか。'},
+            {k:'line', sp:'男', v:'1、はい、しておきました。'},
+            {k:'line', sp:'男', v:'2、すみません、お願いします。'},
+            {k:'line', sp:'男', v:'3、いいえ、コピーです。'},
+            {k:'pause', s:8, a:true}
+          ]},
+        { no:'問6', label:'返事を選ぶ', answer:'1　お疲れさまでした',
+          why:'先に帰る人への決まった返事。職場で毎日使う。',
+          steps:[
+            {k:'line', sp:'男', v:'お先に失礼します。'},
+            {k:'line', sp:'女', v:'1、お疲れさまでした。'},
+            {k:'line', sp:'女', v:'2、いらっしゃいませ。'},
+            {k:'line', sp:'女', v:'3、こちらこそ。'},
+            {k:'pause', s:8, a:true}
+          ]},
+        { no:'問7', label:'返事を選ぶ', answer:'2　電車が遅れているそうです',
+          why:'「まだ来ていないの？」に理由で答えている。1は「まだ」と矛盾する。',
+          steps:[
+            {k:'line', sp:'女', v:'あれ、山田さん、まだ来ていないの？'},
+            {k:'line', sp:'男', v:'1、さっき来ましたよ。'},
+            {k:'line', sp:'男', v:'2、電車が遅れているそうです。'},
+            {k:'line', sp:'男', v:'3、行ってきます。'},
+            {k:'pause', s:8, a:true}
+          ]}
+      ]}
+  ]}, "2": {"days": [{"key": "月曜", "title": "短文読解 ── 店のお知らせを読む", "blocks": [{"t": "h2", "v": "本文"}, {"t": "passage", "v": "<p><b>商品の交換・返品について</b></p><p>お買い上げの商品は、レシートをお持ちいただければ、<b>8日以内に限り</b>交換できます。返品（返金）は、商品に不具合があった場合のみお受けします。</p><p>セール品は交換・返品ともにできません。<b>ただし</b>、不具合があった場合は、セール品でも交換いたします。</p><p>下着と食品は、衛生上の理由から、どのような場合でもお受けできません。</p><p>ご不明な点は、2階サービスカウンターまでお願いいたします。</p><p>　　みどりストア</p>"}, {"t": "h2", "v": "設問"}, {"t": "q", "id": "問1", "text": "セール品のシャツを買ったが、家でボタンが取れているのに気づいた。どうなるか。", "opts": ["交換も返品もできない", "交換できる", "お金が返ってくる", "サービスカウンターでは受け付けない"], "tag": "naiyou"}, {"t": "q", "id": "問2", "text": "この店で交換をしてもらうとき、必ず必要なものは何か。", "opts": ["商品の箱", "レシート", "会員カード", "身分証明書"], "tag": "naiyou"}, {"t": "q", "id": "問3", "text": "このお知らせの内容に合うものはどれか。", "opts": ["買ってから10日たった商品も交換できる", "食品は不具合があれば交換できる", "不具合がなくても返金してもらえる", "不具合がなければ、返金はしてもらえない"], "tag": "naiyou"}, {"t": "h2", "v": "本文から拾う語彙（10語）"}, {"t": "table", "v": "<table><thead><tr><th></th><th>語</th><th>読み</th><th>意味</th><th>Bahasa Indonesia</th></tr></thead><tbody><tr><td>1</td><td>交換</td><td>こうかん</td><td>別のものと取りかえること</td><td>penukaran</td></tr><tr><td>2</td><td>返品</td><td>へんぴん</td><td>買ったものを店に返すこと</td><td>pengembalian barang</td></tr><tr><td>3</td><td>返金</td><td>へんきん</td><td>お金を返してもらうこと</td><td>pengembalian uang</td></tr><tr><td>4</td><td>不具合</td><td>ふぐあい</td><td>こわれている、正しく動かない状態</td><td>cacat / kerusakan</td></tr><tr><td>5</td><td>〜以内</td><td>いない</td><td>その中（それを超えない）</td><td>dalam (jangka) ~</td></tr><tr><td>6</td><td>〜に限り</td><td>にかぎり</td><td>〜の場合だけ</td><td>hanya untuk ~</td></tr><tr><td>7</td><td>ただし</td><td>―</td><td>例外を言うときの言葉</td><td>namun / kecuali</td></tr><tr><td>8</td><td>衛生</td><td>えいせい</td><td>清潔で健康によい状態</td><td>higiene</td></tr><tr><td>9</td><td>不明</td><td>ふめい</td><td>はっきり分からないこと</td><td>tidak jelas</td></tr><tr><td>10</td><td>受け付ける</td><td>うけつける</td><td>申し出を受け入れる</td><td>menerima (permintaan)</td></tr></tbody></table>"}, {"t": "h2", "v": "文法（2項目）"}, {"t": "p", "v": "<b>①〜たばかり</b>（したすぐあと／Baru saja ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞た形 ＋ ばかり</td><td>この店は先月開いた<b>ばかり</b>です。</td></tr></tbody></table>"}, {"t": "p", "v": "・気持ちの上で「まだ新しい」と感じていれば使えます。「日本に来た<b>ばかり</b>のころ」のように、何年か前のことにも使えます。"}, {"t": "p", "v": "<b>②〜たところだ</b>（ちょうど今、終わった／Baru saja selesai, tepat sekarang）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞た形 ＋ ところだ</td><td>今、家に着い<b>たところ</b>です。</td></tr></tbody></table>"}, {"t": "p", "v": "・「〜るところだ」＝これからする／「〜ているところだ」＝今している／「〜たところだ」＝今終わった。"}, {"t": "p", "v": "・<b>見分け方</b>：「ばかり」は時間の幅があってもよい。「ところだ」は<b>今この瞬間</b>だけ。「3年前に卒業したばかり」は○、「3年前に卒業したところ」は×。"}, {"t": "h2", "v": "確認ドリル（6問）"}, {"t": "p", "v": "<b>A 語彙（3問）</b>"}, {"t": "q", "id": "1", "text": "この商品は（　　）があったので、店に持って行きました。", "opts": ["不明", "不具合", "衛生", "交換"], "drill": true}, {"t": "q", "id": "2", "text": "申し込みは20日（　　）にお願いします。", "opts": ["以内", "以上", "以外", "以下"], "drill": true}, {"t": "q", "id": "3", "text": "食品は（　　）上の理由で、返品できません。", "opts": ["交換", "衛生", "不明", "受付"], "drill": true}, {"t": "p", "v": "<b>B 文法（3問）</b>"}, {"t": "q", "id": "4", "text": "さっき昼ごはんを食べた（　　）なので、おなかはすいていません。", "opts": ["ところ", "ばかり", "とき", "まま"], "drill": true}, {"t": "q", "id": "5", "text": "すみません、今ちょうど電車に乗った（　　）です。あとでかけ直します。", "opts": ["ばかり", "ところ", "まま", "うち"], "drill": true}, {"t": "q", "id": "6", "text": "日本に来た（　　）のころは、ひらがなも読めませんでした。", "opts": ["ところ", "ばかり", "うち", "まま"], "drill": true}]}, {"key": "火曜", "title": "短文読解 ── お礼のメールを読む", "blocks": [{"t": "h2", "v": "本文"}, {"t": "passage", "v": "<p>件名：資料をありがとうございました</p><p>中村先輩</p><p>お疲れさまです。木村です。</p><p>先週お借りした資料、今朝コピーを取り終わりました。おかげさまで、発表の準備が予定より早く進んでいます。本当に助かりました。</p><p>原本は明日お返しするつもりでしたが、先輩は明日から出張だとうかがいました。<b>そこで</b>、机の上に置いておくのではなく、山田さんにお預けしておきます。<b>もし別の方法がよろしければ</b>、今日中にご連絡ください。</p><p>出張、お気をつけて。</p><p>木村</p>"}, {"t": "h2", "v": "設問"}, {"t": "q", "id": "問1", "text": "木村さんは、資料をどうすることにしたか。", "opts": ["明日、中村先輩に直接返す", "中村先輩の机の上に置いておく", "山田さんに預けておく", "出張から帰るまで持っている"], "tag": "naiyou"}, {"t": "q", "id": "問2", "text": "木村さんが中村先輩に連絡してほしいのは、どのような場合か。", "opts": ["資料をもう一度借りたい場合", "別の渡し方のほうがよい場合", "出張の予定が変わった場合", "コピーが必要な場合"], "tag": "naiyou"}, {"t": "q", "id": "問3", "text": "このメールから分かることはどれか。", "opts": ["発表の準備が遅れている", "木村さんは資料をまだコピーしていない", "中村先輩は明日から出張である", "山田さんも出張に行く"], "tag": "naiyou"}, {"t": "h2", "v": "本文から拾う語彙（10語）"}, {"t": "table", "v": "<table><thead><tr><th></th><th>語</th><th>読み</th><th>意味</th><th>Bahasa Indonesia</th></tr></thead><tbody><tr><td>1</td><td>資料</td><td>しりょう</td><td>調べたり説明したりするための書類</td><td>materi / dokumen</td></tr><tr><td>2</td><td>原本</td><td>げんぽん</td><td>コピーではない、もとのもの</td><td>dokumen asli</td></tr><tr><td>3</td><td>預ける</td><td>あずける</td><td>人に持っていてもらう</td><td>menitipkan</td></tr><tr><td>4</td><td>うかがう</td><td>―</td><td>「聞く」のていねいな言い方</td><td>mendengar (bentuk sopan)</td></tr><tr><td>5</td><td>おかげさまで</td><td>―</td><td>助けてもらってうまくいった、という感謝</td><td>berkat bantuan Anda</td></tr><tr><td>6</td><td>準備</td><td>じゅんび</td><td>前もって用意すること</td><td>persiapan</td></tr><tr><td>7</td><td>発表</td><td>はっぴょう</td><td>みんなの前で話すこと</td><td>presentasi</td></tr><tr><td>8</td><td>出張</td><td>しゅっちょう</td><td>仕事で遠くへ行くこと</td><td>perjalanan dinas</td></tr><tr><td>9</td><td>今日中</td><td>きょうじゅう</td><td>今日が終わるまでに</td><td>dalam hari ini</td></tr><tr><td>10</td><td>方法</td><td>ほうほう</td><td>やり方</td><td>cara / metode</td></tr></tbody></table>"}, {"t": "h2", "v": "文法（2項目）"}, {"t": "p", "v": "<b>①〜てもらう／〜ていただく</b>（自分のために、人にしてもらう／Meminta tolong dilakukan untuk saya）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞て形 ＋ もらう</td><td>友だちに手伝っ<b>てもらいました</b>。</td></tr><tr><td>動詞て形 ＋ いただく（ていねい）</td><td>先輩に教え<b>ていただきました</b>。</td></tr></tbody></table>"}, {"t": "p", "v": "<b>②〜てくれる／〜てくださる</b>（相手が、自分のためにしてくれる／Orang lain melakukan untuk saya）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞て形 ＋ くれる</td><td>友だちが手伝っ<b>てくれました</b>。</td></tr><tr><td>動詞て形 ＋ くださる（ていねい）</td><td>先輩が教え<b>てくださいました</b>。</td></tr></tbody></table>"}, {"t": "passage", "v": "<p><b>見分け方</b>：主語がだれかで決まります。</p><p><b>わたしが</b> →「〜てもらう」　例：わたしは先輩に<b>教えてもらった</b>。</p><p><b>相手が</b> →「〜てくれる」　例：先輩が<b>教えてくれた</b>。</p><p>意味はほぼ同じですが、助詞が変わります（に／が）。ここが試験で狙われます。</p>"}, {"t": "h2", "v": "確認ドリル（6問）"}, {"t": "p", "v": "<b>A 語彙（3問）</b>"}, {"t": "q", "id": "1", "text": "コピーではなく（　　）を持ってきてください。", "opts": ["資料", "原本", "方法", "準備"], "drill": true}, {"t": "q", "id": "2", "text": "荷物を駅のロッカーに（　　）ました。", "opts": ["預け", "借り", "返し", "受け"], "drill": true}, {"t": "q", "id": "3", "text": "会議の（　　）は、もうできています。", "opts": ["出張", "発表", "準備", "方法"], "drill": true}, {"t": "p", "v": "<b>B 文法（3問）</b>"}, {"t": "q", "id": "4", "text": "わたしは友だちに空港まで送っ（　　）。", "opts": ["てくれました", "てもらいました", "てあげました", "ておきました"], "drill": true}, {"t": "q", "id": "5", "text": "部長が駅まで車で送っ（　　）。", "opts": ["ていただきました", "てくださいました", "てもらいました", "てさしあげました"], "drill": true}, {"t": "q", "id": "6", "text": "分からないところを、先生に教え（　　）。", "opts": ["てくださいました", "てくれました", "ていただきました", "てあげました"], "drill": true}]}, {"key": "水曜", "title": "中文読解 ── エッセイを読む", "blocks": [{"t": "h2", "v": "本文"}, {"t": "passage", "v": "<p>駅前に立っていると、私はよく道を聞かれます。ほかにも人はたくさんいるのに、なぜか私に聞く人が多いのです。</p><p>以前は、少し面倒に思っていました。急いでいるときに呼び止められると、心の中で「ほかの人に聞いてほしい」と思ったこともあります。</p><p>考えが変わったのは、外国へ旅行に行ったときです。地図を見ても駅の場所が分からず、道行く人に声をかけようとしたのですが、なかなかできませんでした。<b>①みんな忙しそうに見えた</b>からです。何人もの前を通り過ぎて、やっと一人に声をかけました。その人は道を教えるだけでなく、途中まで一緒に歩いてくれました。</p><p>そのとき初めて分かりました。<b>聞くほうにも勇気がいる</b>のだ、と。私に道を聞いた人たちも、たぶん同じでした。何人もの前を通り過ぎたあとで、やっと私に声をかけたのでしょう。</p><p>それ以来、道を聞かれるのがうれしくなりました。<b>②聞きやすい顔をしている</b>のだとしたら、それは悪いことではないはずです。</p>"}, {"t": "h2", "v": "設問"}, {"t": "q", "id": "問1", "text": "「<b>①みんな忙しそうに見えた</b>」とあるが、このとき筆者はどうしたか。", "opts": ["すぐに近くの人に声をかけた", "地図をもう一度よく見た", "何人もの前を通り過ぎてから、やっと声をかけた", "だれにも聞かずに駅を探した"], "tag": "naiyou"}, {"t": "q", "id": "問2", "text": "筆者の考えが変わったのは、なぜか。", "opts": ["外国で親切な人に助けられたから", "自分が人に道を聞く側になってみたから", "道を聞かれる回数が減ったから", "急いでいることが少なくなったから"], "tag": "naiyou"}, {"t": "q", "id": "問3", "text": "「<b>②聞きやすい顔をしている</b>」とあるが、筆者はそれをどう思っているか。", "opts": ["少し恥ずかしいと思っている", "直したいと思っている", "悪くないと思っている", "人によって違うと思っている"], "tag": "naiyou"}, {"t": "q", "id": "問4", "text": "この文章で筆者が最も言いたいことはどれか。", "opts": ["外国では地図が役に立たない", "道を聞かれたら親切に教えるべきだ", "助けを求めるほうにも勇気がいる", "駅前には道に迷う人が多い"], "tag": "shucho"}, {"t": "h2", "v": "本文から拾う語彙（10語）"}, {"t": "table", "v": "<table><thead><tr><th></th><th>語</th><th>読み</th><th>意味</th><th>Bahasa Indonesia</th></tr></thead><tbody><tr><td>1</td><td>呼び止める</td><td>よびとめる</td><td>声をかけて止まらせる</td><td>memanggil untuk berhenti</td></tr><tr><td>2</td><td>急ぐ</td><td>いそぐ</td><td>早くしようとする</td><td>terburu-buru</td></tr><tr><td>3</td><td>地図</td><td>ちず</td><td>場所を示した図</td><td>peta</td></tr><tr><td>4</td><td>道行く人</td><td>みちゆくひと</td><td>道を歩いている人</td><td>orang yang lewat</td></tr><tr><td>5</td><td>通り過ぎる</td><td>とおりすぎる</td><td>止まらずに前を通る</td><td>melewati</td></tr><tr><td>6</td><td>やっと</td><td>―</td><td>時間がかかって、ようやく</td><td>akhirnya</td></tr><tr><td>7</td><td>勇気</td><td>ゆうき</td><td>こわくても行動する心</td><td>keberanian</td></tr><tr><td>8</td><td>途中</td><td>とちゅう</td><td>目的地に着く前の間</td><td>di tengah jalan</td></tr><tr><td>9</td><td>それ以来</td><td>それいらい</td><td>そのときからずっと</td><td>sejak saat itu</td></tr><tr><td>10</td><td>初めて</td><td>はじめて</td><td>そのときが最初</td><td>untuk pertama kali</td></tr></tbody></table>"}, {"t": "h2", "v": "文法（2項目）"}, {"t": "p", "v": "<b>①〜だけでなく（〜も）</b>（Aだけではなく、Bも／Tidak hanya ~, tetapi juga ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>名詞・動詞普通形 ＋ だけでなく</td><td>道を教える<b>だけでなく</b>、一緒に歩いてくれた。</td></tr></tbody></table>"}, {"t": "p", "v": "・「〜だけじゃなく」は話し言葉。書くときは「だけでなく」。"}, {"t": "p", "v": "<b>②〜はずだ</b>（理由があって、そうだと思う／Seharusnya ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞・い形容詞の普通形 ＋ はずだ</td><td>8時の電車だから、もう着いている<b>はずです</b>。</td></tr><tr><td>な形容詞 ＋ な ＋ はずだ／名詞 ＋ の ＋ はずだ</td><td>今日は休みの<b>はず</b>です。</td></tr></tbody></table>"}, {"t": "passage", "v": "<p><b>注意</b>：「はずだ」は<b>根拠があるときの推測</b>。ただの希望には使いません。</p><p>「〜はずがない」＝そんなことは絶対にない。「彼が休む<b>はずがない</b>」</p>"}, {"t": "h2", "v": "確認ドリル（6問）"}, {"t": "p", "v": "<b>A 語彙（3問）</b>"}, {"t": "q", "id": "1", "text": "駅で知らない人に（　　）られて、道を聞かれました。", "opts": ["通り過ぎ", "呼び止め", "急ぎ", "教え"], "drill": true}, {"t": "q", "id": "2", "text": "一時間探して、（　　）お店を見つけました。", "opts": ["やっと", "すぐに", "いつも", "たぶん"], "drill": true}, {"t": "q", "id": "3", "text": "大勢の前で話すには（　　）が必要です。", "opts": ["地図", "勇気", "途中", "準備"], "drill": true}, {"t": "p", "v": "<b>B 文法（3問）</b>"}, {"t": "q", "id": "4", "text": "あの人は英語（　　）、中国語も話せます。", "opts": ["だけで", "だけでなく", "のように", "について"], "drill": true}, {"t": "q", "id": "5", "text": "昨日出したから、手紙はもう届いている（　　）です。", "opts": ["はず", "つもり", "らしく", "そう"], "drill": true}, {"t": "q", "id": "6", "text": "まじめな彼が、約束を忘れる（　　）。", "opts": ["はずです", "はずがありません", "ようにします", "ことにします"], "drill": true}]}, {"key": "木曜", "title": "中文読解 ── 意見文を読む", "blocks": [{"t": "h2", "v": "本文"}, {"t": "passage", "v": "<p>学生のころ、私は1,000円の傘を毎年買い替えていました。安いので、なくしても気になりません。実際、よくなくしました。</p><p>5年前、思いきって8,000円の傘を買いました。高い買い物でしたが、<b>①ある変化</b>が起きました。なくさなくなったのです。店に置き忘れそうになっても、体が覚えているのか、必ず気づいて取りに戻ります。</p><p>つまり、安い傘をなくしていたのは、私の性格の問題ではなく、<b>値段の問題</b>だったのかもしれません。1,000円の傘を5年で5本買えば5,000円。8,000円の傘を10年使えば、1年あたり800円です。長い目で見れば、高いほうが安いことになります。</p><p><b>②ただし、これはどんなものにも当てはまるわけではありません。</b>子どもの服のように、すぐに小さくなって着られなくなるものは、安いほうがいいでしょう。</p><p>長く使うものかどうか。買う前にそれを考えるだけで、無駄な買い物はずいぶん減ると思います。</p>"}, {"t": "h2", "v": "設問"}, {"t": "q", "id": "問1", "text": "「<b>①ある変化</b>」とは何か。", "opts": ["傘を毎年買い替えるようになったこと", "傘をなくさなくなったこと", "安い傘を買わなくなったこと", "傘を持ち歩かなくなったこと"], "tag": "naiyou"}, {"t": "q", "id": "問2", "text": "筆者は、安い傘をなくしていた理由をどう考えているか。", "opts": ["自分の性格に問題があった", "傘の値段が安かったから、気にしていなかった", "傘の数が多すぎた", "置き忘れやすい店に行っていた"], "tag": "naiyou"}, {"t": "q", "id": "問3", "text": "「<b>②ただし、これはどんなものにも当てはまるわけではありません</b>」とあるが、筆者は子どもの服についてどう考えているか。", "opts": ["高いものを買ったほうがよい", "長く使えるので高くてもよい", "すぐに着られなくなるので、安いほうがよい", "買わずに借りたほうがよい"], "tag": "naiyou"}, {"t": "q", "id": "問4", "text": "この文章で筆者が最も言いたいことはどれか。", "opts": ["高いものを買ったほうが、結局は安くなる", "安いものはすぐになくしてしまう", "長く使うものかどうかを考えてから買うべきだ", "子どもの服にお金をかけるべきではない"], "tag": "shucho"}, {"t": "h2", "v": "本文から拾う語彙（10語）"}, {"t": "table", "v": "<table><thead><tr><th></th><th>語</th><th>読み</th><th>意味</th><th>Bahasa Indonesia</th></tr></thead><tbody><tr><td>1</td><td>買い替える</td><td>かいかえる</td><td>古いものをやめて新しく買う</td><td>membeli yang baru sebagai ganti</td></tr><tr><td>2</td><td>実際</td><td>じっさい</td><td>本当に、現実に</td><td>kenyataannya</td></tr><tr><td>3</td><td>思いきって</td><td>おもいきって</td><td>迷いをやめて、決心して</td><td>dengan tekad bulat</td></tr><tr><td>4</td><td>変化</td><td>へんか</td><td>変わること</td><td>perubahan</td></tr><tr><td>5</td><td>置き忘れる</td><td>おきわすれる</td><td>置いたまま忘れて行く</td><td>ketinggalan (barang)</td></tr><tr><td>6</td><td>性格</td><td>せいかく</td><td>その人の心の傾向</td><td>sifat / karakter</td></tr><tr><td>7</td><td>値段</td><td>ねだん</td><td>ものの価格</td><td>harga</td></tr><tr><td>8</td><td>長い目で見る</td><td>ながいめでみる</td><td>短い期間ではなく先まで考える</td><td>melihat jangka panjang</td></tr><tr><td>9</td><td>当てはまる</td><td>あてはまる</td><td>その条件に合う</td><td>berlaku / sesuai</td></tr><tr><td>10</td><td>無駄（な）</td><td>むだ</td><td>役に立たない、もったいない</td><td>sia-sia</td></tr></tbody></table>"}, {"t": "h2", "v": "文法（2項目）"}, {"t": "p", "v": "<b>①〜わけではない</b>（全部がそうだとは言えない／Bukan berarti ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞・い形容詞の普通形 ＋ わけではない</td><td>高いものが必ずいい<b>わけではありません</b>。</td></tr><tr><td>な形容詞 ＋ な／名詞 ＋ の ＋ わけではない</td><td>きらいな<b>わけではない</b>。</td></tr></tbody></table>"}, {"t": "p", "v": "・<b>部分否定</b>です。「全部そうではない」のであって、「まったく違う」ではありません。"}, {"t": "p", "v": "<b>②〜ば〜ほど</b>（Aすればするほど、Bになる／Semakin ~, semakin ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞ば形 ＋ 動詞辞書形 ＋ ほど</td><td>練習すれ<b>ば</b>する<b>ほど</b>上手になります。</td></tr><tr><td>い形容詞（ければ）＋ い形容詞 ＋ ほど</td><td>安けれ<b>ば</b>安い<b>ほど</b>いいわけではない。</td></tr></tbody></table>"}, {"t": "h2", "v": "確認ドリル（6問）"}, {"t": "p", "v": "<b>A 語彙（3問）</b>"}, {"t": "q", "id": "1", "text": "古いパソコンを新しいものに（　　）ました。", "opts": ["買い替え", "置き忘れ", "当てはまり", "思いきり"], "drill": true}, {"t": "q", "id": "2", "text": "電車の中にかさを（　　）てしまいました。", "opts": ["買い替え", "置き忘れ", "当てはめ", "変化し"], "drill": true}, {"t": "q", "id": "3", "text": "使わないものを買うのは（　　）です。", "opts": ["実際", "無駄", "性格", "変化"], "drill": true}, {"t": "p", "v": "<b>B 文法（3問）</b>"}, {"t": "q", "id": "4", "text": "高いものが必ずいい（　　）。安くていいものもあります。", "opts": ["わけではありません", "はずがありません", "ことになりません", "ようになりません"], "drill": true}, {"t": "q", "id": "5", "text": "日本語は、勉強すれ（　　）するほどおもしろくなります。", "opts": ["て", "ば", "たら", "なら"], "drill": true}, {"t": "q", "id": "6", "text": "きらいな（　　）が、あまり食べません。", "opts": ["わけではありません", "はずです", "ことにします", "ようになります"], "drill": true}]}, {"key": "金曜", "title": "情報検索 ── 案内から答えを探す", "blocks": [{"t": "passage", "v": "<p><b>解き方の手順</b>：①設問の条件（何を・いつ・どこで）に線を引く　②表からその行だけを見る　③注意書きの例外を確かめる。本文を全部読んではいけません。</p>"}, {"t": "h2", "v": "本文"}, {"t": "passage", "v": "<p><b>さくら市　ごみの出し方</b></p><table><thead><tr><th>種類</th><th>出す日</th><th>出し方</th></tr></thead><tbody><tr><td>燃やせるごみ</td><td>月・木</td><td>赤い指定袋</td></tr><tr><td>燃やせないごみ</td><td>第2・第4水曜</td><td>青い指定袋</td></tr><tr><td>資源（びん・缶・ペットボトル）</td><td>火</td><td>透明な袋・ラベルをはがす</td></tr><tr><td>古紙・古着</td><td>第1・第3金曜</td><td>ひもでしばる</td></tr><tr><td>粗大ごみ</td><td>申し込みが必要</td><td>シールを貼る</td></tr></tbody></table><p><b>注意</b></p><p>・ごみは、朝<b>8時まで</b>に、住んでいる建物の前のごみ置き場に出してください。</p><p>・古紙・古着は、雨の日は出せません。次の回に出してください。</p><p>・粗大ごみ（家具・自転車など）は、電話で予約し、コンビニでシールを買って貼ってください。<b>有料</b>です。</p><p>・引っ越しで出た大量のごみは収集できません。清掃センターへ直接お持ちください。</p><p>・指定袋は、スーパー・コンビニで買えます。</p>"}, {"t": "h2", "v": "設問"}, {"t": "q", "id": "問1", "text": "こわれた自転車を捨てたい。どうすればよいか。", "opts": ["燃やせないごみの日に、青い袋で出す", "電話で予約し、シールを買って貼る", "清掃センターへ持って行く", "第1金曜にひもでしばって出す"], "tag": "joken"}, {"t": "q", "id": "問2", "text": "第3金曜日の朝、雨が降っている。古い雑誌を出したい。どうすればよいか。", "opts": ["雨の日でもそのまま出す", "赤い指定袋に入れて出す", "次の回（第1金曜）に出す", "清掃センターへ持って行く"], "tag": "joken"}, {"t": "q", "id": "問3", "text": "来月引っ越すため、家具や荷物が大量に出る。この場合どうなるか。", "opts": ["粗大ごみとして予約すれば、全部取りに来てもらえる", "燃やせないごみの日に出せる", "自分で清掃センターへ持って行く", "指定袋に入れれば出せる"], "tag": "joken"}, {"t": "h2", "v": "本文から拾う語彙（10語）"}, {"t": "table", "v": "<table><thead><tr><th></th><th>語</th><th>読み</th><th>意味</th><th>Bahasa Indonesia</th></tr></thead><tbody><tr><td>1</td><td>燃やす</td><td>もやす</td><td>火で燃えるようにする</td><td>membakar</td></tr><tr><td>2</td><td>資源</td><td>しげん</td><td>再び使える材料</td><td>sumber daya / bahan daur ulang</td></tr><tr><td>3</td><td>指定</td><td>してい</td><td>決められていること</td><td>penentuan / yang ditetapkan</td></tr><tr><td>4</td><td>透明（な）</td><td>とうめい</td><td>中が見える</td><td>transparan</td></tr><tr><td>5</td><td>はがす</td><td>―</td><td>はりついたものを取る</td><td>melepas / mengelupas</td></tr><tr><td>6</td><td>しばる</td><td>―</td><td>ひもで結んでまとめる</td><td>mengikat</td></tr><tr><td>7</td><td>粗大ごみ</td><td>そだいごみ</td><td>大きなごみ（家具など）</td><td>sampah besar</td></tr><tr><td>8</td><td>有料</td><td>ゆうりょう</td><td>お金がかかること</td><td>berbayar</td></tr><tr><td>9</td><td>収集</td><td>しゅうしゅう</td><td>集めること</td><td>pengumpulan</td></tr><tr><td>10</td><td>大量</td><td>たいりょう</td><td>とても多い量</td><td>jumlah besar</td></tr></tbody></table>"}, {"t": "h2", "v": "文法（2項目）"}, {"t": "p", "v": "<b>①〜として</b>（立場・資格・種類を示す／Sebagai ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>名詞 ＋ として</td><td>自転車は粗大ごみ<b>として</b>出します。</td></tr><tr><td></td><td>彼は研究者<b>として</b>有名です。</td></tr></tbody></table>"}, {"t": "p", "v": "<b>②〜にとって</b>（その人の立場から見ると／Bagi ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>名詞 ＋ にとって</td><td>外国人<b>にとって</b>、ごみの分け方は難しい。</td></tr></tbody></table>"}, {"t": "passage", "v": "<p><b>注意</b>：「〜として」は<b>資格・立場そのもの</b>。「〜にとって」は<b>その人から見た評価</b>。</p><p>「学生<b>として</b>」＝学生の立場で行動する／「学生<b>にとって</b>」＝学生から見れば。</p>"}, {"t": "h2", "v": "確認ドリル（6問）"}, {"t": "p", "v": "<b>A 語彙（3問）</b>"}, {"t": "q", "id": "1", "text": "びんや缶は（　　）ごみとして出します。", "opts": ["粗大", "資源", "有料", "大量"], "drill": true}, {"t": "q", "id": "2", "text": "ペットボトルは、ラベルを（　　）から出してください。", "opts": ["しばって", "はがして", "燃やして", "集めて"], "drill": true}, {"t": "q", "id": "3", "text": "粗大ごみを出すのは（　　）です。お金がかかります。", "opts": ["無料", "有料", "指定", "収集"], "drill": true}, {"t": "p", "v": "<b>B 文法（3問）</b>"}, {"t": "q", "id": "4", "text": "この部屋は、会議室（　　）使われています。", "opts": ["にとって", "として", "について", "によって"], "drill": true}, {"t": "q", "id": "5", "text": "わたし（　　）、家族がいちばん大切です。", "opts": ["として", "にとって", "によって", "について"], "drill": true}, {"t": "q", "id": "6", "text": "彼は先生（　　）ではなく、友だち（　　）話してくれた。", "opts": ["にとって／にとって", "として／として", "について／として", "として／にとって"], "drill": true}]}, {"key": "土曜", "title": "読解通しテスト（60分）", "blocks": [{"t": "passage", "v": "<p>タイマーを<b>60分</b>にセットしてください。途中で止めないこと。</p><p>時間配分の目安：中文6分／長文12分／情報検索8分。</p>"}, {"t": "h2", "v": "問題1　中文（3問）"}, {"t": "passage", "v": "<p>近所に、いつも同じ時間に開く小さなパン屋があります。朝7時ちょうど。1分の遅れもありません。</p><p>ある日、そのパン屋が7時になっても開きませんでした。心配になって窓から中をのぞくと、店主が一人でパンを並べ直しています。10分後、店が開きました。店主は「すみません、今日は焼き上がりが遅くて」と言いました。</p><p>私は「10分くらい、気にしませんよ」と答えました。すると店主は少し笑って、こう言いました。「お客さんは気にしなくても、私が気にするんです。7時に開くと言ったのは私ですから」</p><p>それから3年たちますが、あの店が遅れたのは、後にも先にもあの一度きりです。<b>約束を守るというのは、相手のためだけではないのだ</b>と、私はあのとき教わりました。</p>"}, {"t": "q", "id": "問1", "text": "パン屋が7時に開かなかったのは、なぜか。", "opts": ["店主が寝坊したから", "パンが焼き上がるのが遅かったから", "客が来なかったから", "店主が体調をくずしたから"], "tag": "naiyou"}, {"t": "q", "id": "問2", "text": "店主の考えに合うものはどれか。", "opts": ["客が気にしないなら、遅れてもかまわない", "自分で決めたことだから、自分が守りたい", "10分の遅れは大きな問題だ", "客に謝れば問題は解決する"], "tag": "naiyou"}, {"t": "q", "id": "問3", "text": "「<b>約束を守るというのは、相手のためだけではないのだ</b>」とあるが、どういう意味か。", "opts": ["約束は相手が決めるものだ", "約束を守ると相手に感謝される", "約束を守ることは、自分自身のためでもある", "約束は守らなくてもよい場合がある"], "tag": "naiyou"}, {"t": "h2", "v": "問題2　中文（3問）"}, {"t": "passage", "v": "<p>高校生の娘が、初めてアルバイトを始めました。週に2回、3時間だけです。</p><p>一か月目の給料日、娘は封筒を持って帰ってきて、中を見せてくれました。金額を見て、娘が言いました。「思ったより少ない」。私は何も言いませんでした。</p><p>次の日、娘はいつもの朝食を食べながら、急にこう言いました。「これ、作るの、大変だよね」。<b>①それまで一度も言ったことのない言葉</b>でした。</p><p>自分で働いてお金を得ると、他人の仕事が見えるようになります。私が何か教えたわけではありません。娘は<b>②三時間分の重さ</b>を、自分の手で量ったのです。</p>"}, {"t": "q", "id": "問4", "text": "娘が給料をもらったとき、どう思ったか。", "opts": ["思っていたより多かった", "思っていたより少なかった", "ちょうど思ったとおりだった", "金額が分からなかった"], "tag": "naiyou"}, {"t": "q", "id": "問5", "text": "「<b>①それまで一度も言ったことのない言葉</b>」とあるが、どんな言葉か。", "opts": ["アルバイトをやめたいという言葉", "給料が少ないという言葉", "朝食を作るのは大変だという言葉", "お金がほしいという言葉"], "tag": "naiyou"}, {"t": "q", "id": "問6", "text": "「<b>②三時間分の重さ</b>」とは、ここではどういう意味か。", "opts": ["三時間で運んだ荷物の重さ", "三時間働いて得られるお金の価値と、その大変さ", "三時間のアルバイトの疲れ", "朝食を作るのにかかる時間"], "tag": "naiyou"}, {"t": "h2", "v": "問題3　長文（4問）"}, {"t": "passage", "v": "<p>私は長い間、「集中力がない人間だ」と思っていました。机に向かっても、10分もすると別のことを考えてしまう。本を読んでも、同じ行を何度も読み返す。まわりには、何時間も座っていられる人がいて、その人たちと自分を比べては、落ち込んでいました。</p><p>変わったきっかけは、ある先輩の一言です。「君、何時に勉強してるの」と聞かれ、「夜、仕事のあとです」と答えると、先輩は言いました。「それ、集中力の問題じゃないと思うよ」</p><p>言われて初めて気づきました。私が机に向かうのは、いつも一日で<b>いちばん疲れている時間</b>だったのです。朝や昼にやってみると、同じ本が半分の時間で読めました。</p><p><b>①能力がないと思っていたことの多くは、条件が悪かっただけ</b>なのかもしれません。暗い部屋で字が読めなくても、その人の目が悪いとは限らない。まず明かりをつけてみるべきです。</p><p>ただし、これは「自分は悪くない」という話ではありません。<b>②条件を整えるのは、自分の仕事</b>です。どの時間帯なら集中できるか、どんな場所なら読めるか。それを知っているのは自分だけで、まわりの人は教えてくれません。</p><p>今も私は、何時間も座っていることはできません。でも、それでいいと思っています。40分やって10分休む。この形が自分に合っていると分かったからです。人と同じやり方でなくてよい、と気づくのに、ずいぶん時間がかかりました。</p>"}, {"t": "q", "id": "問7", "text": "筆者は以前、自分についてどう思っていたか。", "opts": ["勉強する時間が足りない", "集中力がない人間だ", "読む本を間違えている", "まわりの人より努力していない"], "tag": "naiyou"}, {"t": "q", "id": "問8", "text": "先輩の一言のあと、筆者は何に気づいたか。", "opts": ["夜のほうが集中できること", "勉強していたのが一日でいちばん疲れている時間だったこと", "本の選び方が悪かったこと", "先輩も同じ悩みを持っていたこと"], "tag": "naiyou"}, {"t": "q", "id": "問9", "text": "「<b>①能力がないと思っていたことの多くは、条件が悪かっただけ</b>」の例として、筆者は何を挙げているか。", "opts": ["目が悪いので眼鏡が必要だということ", "暗い部屋で字が読めないのは、目のせいとは限らないということ", "明るい部屋では誰でも本が読めるということ", "部屋の明かりは自分でつけるべきだということ"], "tag": "naiyou"}, {"t": "q", "id": "問10", "text": "「<b>②条件を整えるのは、自分の仕事</b>」とあるが、筆者はなぜそう考えるのか。", "opts": ["まわりの人は忙しくて手伝えないから", "自分に合う条件を知っているのは自分だけだから", "人に頼むと時間がかかるから", "条件を整えるのは簡単なことだから"], "tag": "naiyou"}, {"t": "h2", "v": "問題4　情報検索（3問）"}, {"t": "passage", "v": "<p><b>市民プール　利用案内</b></p><table><thead><tr><th></th><th>大人（16歳以上）</th><th>子ども（15歳以下）</th></tr></thead><tbody><tr><td>2時間</td><td>500円</td><td>200円</td></tr><tr><td>1日</td><td>800円</td><td>300円</td></tr><tr><td>回数券（11回分）</td><td>5,000円</td><td>2,000円</td></tr></tbody></table><p><b>利用時間</b></p><p>・平日：10:00〜21:00　／　土日祝：9:00〜18:00</p><p>・毎週火曜は休館（火曜が祝日の場合は開館し、次の水曜が休館）</p><p><b>ご注意</b></p><p>・小学生以下の方は、<b>16歳以上の付き添いが必要</b>です。</p><p>・水泳帽をかぶっていない方は、ご利用いただけません。売店で300円で買えます。</p><p>・回数券は、購入日から1年間有効です。他の方と一緒に使うこともできます。</p><p>・65歳以上の方は、市内にお住まいであれば、<b>1日券が半額</b>になります。</p>"}, {"t": "q", "id": "問11", "text": "市内に住む68歳の男性が、1日プールを利用する。料金はいくらか。", "opts": ["250円", "400円", "500円", "800円"], "tag": "joken"}, {"t": "q", "id": "問12", "text": "小学3年生の子どもがプールに行きたい。正しいものはどれか。", "opts": ["一人で利用できる", "16歳以上の人と一緒でなければ利用できない", "子ども料金では利用できない", "平日しか利用できない"], "tag": "joken"}, {"t": "q", "id": "問13", "text": "火曜日が祝日の週について、正しいものはどれか。", "opts": ["その火曜日は休館になる", "その週は休館日がない", "その火曜日は開館し、水曜日が休館になる", "月曜日が休館になる"], "tag": "joken"}]}, {"key": "日曜", "title": "聴解30分 ＋ 復習30分", "blocks": [{"t": "h2", "v": "Part 1　聴解（20分・7問）"}, {"t": "passage", "v": "<p><b>注意</b>：この紙には会話は書いてありません。音を聞いて答えます。</p><p>会話は<b>1回だけ</b>流れます。メモを取ってもかまいません。</p><p>「問題1・問題2」は下の選択肢から選びます。「問題3」は紙に何も書いてありません。</p>"}, {"t": "h3", "v": "問題1　課題理解（2問）"}, {"t": "q", "id": "問1", "text": "", "opts": ["家にカードを取りに帰る", "運転免許証を見せる", "本をたなに戻す", "新しいカードを作る"]}, {"t": "q", "id": "問2", "text": "", "opts": ["シートと飲み物", "飲み物とお菓子", "お菓子とごみ袋", "シートだけ"]}, {"t": "h3", "v": "問題2　ポイント理解（2問）"}, {"t": "q", "id": "問3", "text": "", "opts": ["給料が高いから", "家から近いから", "失敗してもいいと言われたから", "前から社長を知っていたから"]}, {"t": "q", "id": "問4", "text": "", "opts": ["話がおもしろかったこと", "有名な役者が出ていたこと", "音楽がよかったこと", "長さがちょうどよかったこと"]}, {"t": "h3", "v": "問題3　即時応答（3問）"}, {"t": "q", "id": "問5", "text": "1　　2　　3", "opts": ["1", "2", "3"], "audioOnly": true}, {"t": "q", "id": "問6", "text": "1　　2　　3", "opts": ["1", "2", "3"], "audioOnly": true}, {"t": "q", "id": "問7", "text": "1　　2　　3", "opts": ["1", "2", "3"], "audioOnly": true}, {"t": "h3", "v": "聞き取りメモ欄"}, {"t": "passage", "v": ""}, {"t": "h2", "v": "Part 2　今週の復習テスト（20問）"}, {"t": "h3", "v": "A 語彙（10問）"}, {"t": "q", "id": "1", "text": "この商品は（　　）があったので、店に持って行った。", "opts": ["不明", "不具合", "衛生", "交換"], "drill": true}, {"t": "q", "id": "2", "text": "大事な書類の（　　）をコピーする。", "opts": ["原本", "資料", "方法", "準備"], "drill": true}, {"t": "q", "id": "3", "text": "荷物をロッカーに（　　）。", "opts": ["借りる", "預ける", "返す", "受ける"], "drill": true}, {"t": "q", "id": "4", "text": "一時間探して（　　）見つけた。", "opts": ["やっと", "すぐに", "実際", "途中"], "drill": true}, {"t": "q", "id": "5", "text": "大勢の前で話すには（　　）がいる。", "opts": ["地図", "勇気", "変化", "性格"], "drill": true}, {"t": "q", "id": "6", "text": "古いパソコンを新しいものに（　　）。", "opts": ["買い替える", "置き忘れる", "当てはまる", "しばる"], "drill": true}, {"t": "q", "id": "7", "text": "使わないものを買うのは（　　）だ。", "opts": ["実際", "無駄", "有料", "大量"], "drill": true}, {"t": "q", "id": "8", "text": "ペットボトルはラベルを（　　）出す。", "opts": ["しばって", "はがして", "燃やして", "集めて"], "drill": true}, {"t": "q", "id": "9", "text": "粗大ごみを出すのは（　　）だ。", "opts": ["無料", "有料", "指定", "収集"], "drill": true}, {"t": "q", "id": "10", "text": "駅で知らない人に（　　）られた。", "opts": ["通り過ぎ", "呼び止め", "急ぎ", "預け"], "drill": true}, {"t": "h3", "v": "B 文法（10問）"}, {"t": "q", "id": "11", "text": "さっき食べた（　　）なので、おなかはすいていない。", "opts": ["ところ", "ばかり", "とき", "まま"], "drill": true}, {"t": "q", "id": "12", "text": "今ちょうど駅に着いた（　　）です。", "opts": ["ばかり", "ところ", "まま", "うち"], "drill": true}, {"t": "q", "id": "13", "text": "わたしは友だちに空港まで送っ（　　）。", "opts": ["てくれました", "てもらいました", "てあげました", "ておきました"], "drill": true}, {"t": "q", "id": "14", "text": "部長が資料を貸し（　　）。", "opts": ["てもらいました", "てくださいました", "ていただきました", "てあげました"], "drill": true}, {"t": "q", "id": "15", "text": "あの人は英語（　　）、中国語も話せる。", "opts": ["だけで", "だけでなく", "について", "によって"], "drill": true}, {"t": "q", "id": "16", "text": "昨日出したから、もう届いている（　　）だ。", "opts": ["はず", "つもり", "らしく", "そう"], "drill": true}, {"t": "q", "id": "17", "text": "高いものが必ずいい（　　）。", "opts": ["わけではない", "はずがない", "ことにならない", "ようにならない"], "drill": true}, {"t": "q", "id": "18", "text": "練習すれ（　　）するほど上手になる。", "opts": ["て", "ば", "たら", "なら"], "drill": true}, {"t": "q", "id": "19", "text": "この部屋は会議室（　　）使われている。", "opts": ["にとって", "として", "について", "によって"], "drill": true}, {"t": "q", "id": "20", "text": "わたし（　　）、家族がいちばん大切だ。", "opts": ["として", "にとって", "によって", "について"], "drill": true}]}], "answers": {"月曜": {"問1": [2, "「セール品は交換・返品ともにできません」で切らずに、次の「<b>ただし</b>、不具合があった場合は、セール品でも交換いたします」まで読めるかどうか。"], "問2": [2, "「レシートをお持ちいただければ」。"], "問3": [4, "返金は「不具合があった場合のみ」。1は8日以内なので誤り、2は食品はどんな場合も不可、3は「のみ」に反する。"], "d1": [2, ""], "d2": [1, ""], "d3": [2, ""], "d4": [2, ""], "d5": [2, ""], "d6": [2, ""]}, "火曜": {"問1": [3, "「山田さんにお預けしておきます」。2は「机の上に置いておくのではなく」と否定されている。"], "問2": [2, "「もし別の方法がよろしければ、今日中にご連絡ください」。"], "問3": [3, "「先輩は明日から出張だとうかがいました」。"], "d1": [2, ""], "d2": [1, ""], "d3": [3, ""], "d4": [2, ""], "d5": [2, ""], "d6": [3, ""]}, "水曜": {"問1": [3, "「何人もの前を通り過ぎて、やっと一人に声をかけました」。"], "問2": [2, "「考えが変わったのは、外国へ旅行に行ったとき」＝自分が聞く側になった。"], "問3": [3, "「それは悪いことではないはずです」。"], "問4": [3, "「聞くほうにも勇気がいるのだ」が主張。"], "d1": [2, ""], "d2": [1, ""], "d3": [2, ""], "d4": [2, ""], "d5": [1, ""], "d6": [2, ""]}, "木曜": {"問1": [2, "直後に「なくさなくなったのです」。"], "問2": [2, "「私の性格の問題ではなく、値段の問題だった」。"], "問3": [3, "「すぐに小さくなって着られなくなるものは、安いほうがいい」。"], "問4": [3, "最終段落「長く使うものかどうか。買う前にそれを考える」。"], "d1": [1, ""], "d2": [2, ""], "d3": [2, ""], "d4": [1, ""], "d5": [2, ""], "d6": [1, ""]}, "金曜": {"問1": [2, "「粗大ごみ（家具・自転車など）は、電話で予約し、コンビニでシールを買って貼る」。"], "問2": [3, "「古紙・古着は、雨の日は出せません。次の回に出してください」。第3金曜の次の回は第1金曜。"], "問3": [3, "「引っ越しで出た大量のごみは収集できません。清掃センターへ直接お持ちください」。"], "d1": [2, ""], "d2": [2, ""], "d3": [2, ""], "d4": [2, ""], "d5": [2, ""], "d6": [4, ""]}, "土曜": {"問1": [2, "「今日は焼き上がりが遅くて」。"], "問2": [2, "「7時に開くと言ったのは私ですから」。"], "問3": [3, "直前の店主の言葉「お客さんは気にしなくても、私が気にする」。"], "問4": [2, "「思ったより少ない」。"], "問5": [3, "「これ、作るの、大変だよね」＝朝食のこと。"], "問6": [2, "三時間働いて得た金額と、その大変さを実感したということ。"], "問7": [2, "第1段落。"], "問8": [2, "「私が机に向かうのは、いつも一日でいちばん疲れている時間だった」。"], "問9": [2, "「暗い部屋で字が読めなくても、その人の目が悪いとは限らない」。"], "問10": [2, "「それを知っているのは自分だけで、まわりの人は教えてくれません」。"], "問11": [2, "1日券800円の半額＝400円。市内在住・65歳以上の条件を満たす。"], "問12": [2, "「小学生以下の方は、16歳以上の付き添いが必要」。"], "問13": [3, "「火曜が祝日の場合は開館し、次の水曜が休館」。"]}, "日曜": {"L1": [2, ""], "L2": [3, ""], "L3": [3, ""], "L4": [3, ""], "L5": [3, ""], "L6": [1, ""], "L7": [1, ""], "r1": [2, ""], "r2": [1, ""], "r3": [2, ""], "r4": [1, ""], "r5": [2, ""], "r6": [1, ""], "r7": [2, ""], "r8": [2, ""], "r9": [2, ""], "r10": [2, ""], "r11": [2, ""], "r12": [2, ""], "r13": [2, ""], "r14": [2, ""], "r15": [2, ""], "r16": [1, ""], "r17": [1, ""], "r18": [2, ""], "r19": [2, ""], "r20": [2, ""]}}, "listen": [
+    { group:'問題1　課題理解', hint:'はじめに質問を聞いてください。それから会話を聞いて、問題用紙の1〜4から一つ選びます。',
+      items:[
+        { no:'問1', label:'このあとまず何をしますか', answer:'2　運転免許証を見せる',
+          why:'カードは家に忘れたが、「身分証明書があれば確認できる」と言われ、免許証でよいと確認している。',
+          steps:[
+            {k:'q', v:'女の人は、このあとまず何をしますか。'},
+            {k:'pause', s:2},
+            {k:'line', sp:'女', v:'すみません、この本を借りたいんですが。'},
+            {k:'line', sp:'男', v:'はい、図書館カードをお願いします。'},
+            {k:'line', sp:'女', v:'あ、カードを家に忘れてしまって……。'},
+            {k:'line', sp:'男', v:'それでしたら、身分証明書があれば、こちらで確認できます。'},
+            {k:'line', sp:'女', v:'運転免許証でもいいですか。'},
+            {k:'line', sp:'男', v:'はい、大丈夫です。'},
+            {k:'pause', s:1},
+            {k:'q', v:'女の人は、このあとまず何をしますか。'},
+            {k:'pause', s:12, a:true}
+          ]},
+        { no:'問2', label:'このあと何を買いますか', answer:'3　お菓子とごみ袋',
+          why:'飲み物は田中さんが買う。シートは持って行くもので、買うものではない。',
+          steps:[
+            {k:'q', v:'男の人は、このあと何を買いますか。'},
+            {k:'pause', s:2},
+            {k:'line', sp:'女', v:'明日の花見、シート持ってきてくれる？'},
+            {k:'line', sp:'男', v:'うん。飲み物も買っておこうか。'},
+            {k:'line', sp:'女', v:'飲み物は田中さんがまとめて買うって。'},
+            {k:'line', sp:'男', v:'じゃあ、お菓子は？'},
+            {k:'line', sp:'女', v:'あ、それお願い。あと、ごみ袋も忘れそうだから。'},
+            {k:'line', sp:'男', v:'分かった、二つとも買っておくよ。'},
+            {k:'pause', s:1},
+            {k:'q', v:'男の人は、このあと何を買いますか。'},
+            {k:'pause', s:12, a:true}
+          ]}
+      ]},
+    { group:'問題2　ポイント理解', hint:'質問のあと、選択肢を読む時間があります。それから会話を聞きます。',
+      items:[
+        { no:'問3', label:'どうして今の仕事を選びましたか', answer:'3　失敗してもいいと言われたから',
+          why:'給料は前の会社のほうが高く、家からは遠くなった。「ただね」のあとが答え。',
+          steps:[
+            {k:'q', v:'女の人は、どうして今の仕事を選びましたか。'},
+            {k:'pause', s:15, r:true},
+            {k:'line', sp:'男', v:'今の会社に決めた理由って、何だったの？　やっぱり給料？'},
+            {k:'line', sp:'女', v:'それも考えたけど、正直、前の会社のほうが高かったの。'},
+            {k:'line', sp:'男', v:'じゃあ、場所？'},
+            {k:'line', sp:'女', v:'家からは遠くなったのよ。ただね、面接のとき、社長が「失敗していいから」って言ってくれて。それが一番大きかった。'},
+            {k:'pause', s:1},
+            {k:'q', v:'女の人は、どうして今の仕事を選びましたか。'},
+            {k:'pause', s:12, a:true}
+          ]},
+        { no:'問4', label:'映画のどこがよかったですか', answer:'3　音楽がよかったこと',
+          why:'話は分からず、役者も「特には」。「ただ」のあとの音楽が答え。',
+          steps:[
+            {k:'q', v:'男の人は、この映画のどこがよかったと言っていますか。'},
+            {k:'pause', s:15, r:true},
+            {k:'line', sp:'女', v:'昨日の映画、どうだった？'},
+            {k:'line', sp:'男', v:'うーん、話は正直、よく分からなかったな。'},
+            {k:'line', sp:'女', v:'役者は？'},
+            {k:'line', sp:'男', v:'有名な人が出てたけど、特には。ただ、音楽がすごくてね。あれだけでも見た価値があったよ。'},
+            {k:'pause', s:1},
+            {k:'q', v:'男の人は、この映画のどこがよかったと言っていますか。'},
+            {k:'pause', s:12, a:true}
+          ]}
+      ]},
+    { group:'問題3　即時応答', hint:'問題用紙には何も書いてありません。短い文を聞いて、返事として最もよいものを1〜3から選びます。',
+      items:[
+        { no:'問5', label:'返事を選ぶ', answer:'3　はい、なんとかやってみます',
+          why:'「明日までに出せますか」はこれからの可否を聞く質問。1・2は過去・現在の話。',
+          steps:[
+            {k:'line', sp:'男', v:'この書類、明日までに出せますか。'},
+            {k:'line', sp:'女', v:'1、はい、昨日出しました。'},
+            {k:'line', sp:'女', v:'2、いいえ、まだ出していません。'},
+            {k:'line', sp:'女', v:'3、はい、なんとかやってみます。'},
+            {k:'pause', s:8, a:true}
+          ]},
+        { no:'問6', label:'返事を選ぶ', answer:'1　いいえ、そんなに待っていませんよ',
+          why:'待たせたことへのおわびに対する、決まった返し方。',
+          steps:[
+            {k:'line', sp:'女', v:'お待たせしました。'},
+            {k:'line', sp:'男', v:'1、いいえ、そんなに待っていませんよ。'},
+            {k:'line', sp:'男', v:'2、では、お待ちしています。'},
+            {k:'line', sp:'男', v:'3、お待たせします。'},
+            {k:'pause', s:8, a:true}
+          ]},
+        { no:'問7', label:'返事を選ぶ', answer:'1　うん、天気予報を見たから',
+          why:'「持ってきた」に理由を添えている。2は「持ってきた」と矛盾する。',
+          steps:[
+            {k:'line', sp:'男', v:'今日、傘持ってきた？'},
+            {k:'line', sp:'女', v:'1、うん、天気予報を見たから。'},
+            {k:'line', sp:'女', v:'2、うん、降らないと思うよ。'},
+            {k:'line', sp:'女', v:'3、ううん、貸してあげる。'},
+            {k:'pause', s:8, a:true}
+          ]}
+      ]}
+  ]}, "3": {"days": [{"key": "月曜", "title": "短文読解 ── 不在連絡票を読む", "blocks": [{"t": "h2", "v": "本文"}, {"t": "passage", "v": "<p><b>ご不在連絡票</b></p><p>お届けにまいりましたが、ご不在でしたので持ち帰りました。</p><p>　お届け日時：9月14日（月）午前10時20分</p><p>　品名：クール便（冷蔵）</p><p>再配達のお申し込みは、<b>当日は午後7時まで</b>に受け付けます。それ以降にお申し込みの場合は、翌日以降のご希望日時となります。インターネットまたはお電話でお申し込みください。</p><p><b>クール便のため、お預かりできる期間は3日間です。</b>（通常のお荷物は7日間）期間を過ぎたお荷物は、送り主さまにお返しします。</p><p>営業所でのお受け取りをご希望の場合は、<b>身分証明書とこの連絡票</b>をお持ちください。</p><p>　　さくら運輸　みどり営業所</p>"}, {"t": "h2", "v": "設問"}, {"t": "q", "id": "問1", "text": "このお荷物について、正しいものはどれか。", "opts": ["預かってもらえる期間は7日間である", "預かってもらえる期間は3日間である", "再配達は当日しか申し込めない", "営業所では受け取ることができない"], "tag": "naiyou"}, {"t": "q", "id": "問2", "text": "9月14日の午後8時に再配達を申し込んだ。荷物はいつ届くか。", "opts": ["その日のうちに届く", "翌日以降の希望した日時に届く", "3日後に届く", "送り主に返される"], "tag": "naiyou"}, {"t": "q", "id": "問3", "text": "営業所で受け取るとき、必要なものは何か。", "opts": ["この連絡票だけ", "身分証明書だけ", "身分証明書とこの連絡票", "品物の代金"], "tag": "naiyou"}, {"t": "h2", "v": "本文から拾う語彙（10語）"}, {"t": "table", "v": "<table><thead><tr><th></th><th>語</th><th>読み</th><th>意味</th><th>Bahasa Indonesia</th></tr></thead><tbody><tr><td>1</td><td>不在</td><td>ふざい</td><td>家にいないこと</td><td>tidak ada di rumah</td></tr><tr><td>2</td><td>届ける</td><td>とどける</td><td>持って行って渡す</td><td>mengantarkan</td></tr><tr><td>3</td><td>再配達</td><td>さいはいたつ</td><td>もう一度届けること</td><td>pengantaran ulang</td></tr><tr><td>4</td><td>預かる</td><td>あずかる</td><td>人のものを持っていてあげる</td><td>menyimpankan</td></tr><tr><td>5</td><td>期間</td><td>きかん</td><td>ある時からある時までの間</td><td>jangka waktu</td></tr><tr><td>6</td><td>過ぎる</td><td>すぎる</td><td>ある時を越える</td><td>melewati</td></tr><tr><td>7</td><td>送り主</td><td>おくりぬし</td><td>荷物を送った人</td><td>pengirim</td></tr><tr><td>8</td><td>営業所</td><td>えいぎょうしょ</td><td>会社の窓口となる事務所</td><td>kantor cabang</td></tr><tr><td>9</td><td>身分証明書</td><td>みぶんしょうめいしょ</td><td>本人だと証明する書類</td><td>kartu identitas</td></tr><tr><td>10</td><td>希望</td><td>きぼう</td><td>こうしてほしいという願い</td><td>keinginan / permintaan</td></tr></tbody></table>"}, {"t": "h2", "v": "文法（2項目）"}, {"t": "p", "v": "<b>①〜まま</b>（状態が変わらないで／Dalam keadaan tetap ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞た形 ＋ まま</td><td>電気をつけた<b>まま</b>出かけました。</td></tr><tr><td>名詞 ＋ の ＋ まま</td><td>昔の<b>まま</b>の町です。</td></tr></tbody></table>"}, {"t": "p", "v": "<b>②〜ずに</b>（〜しないで／Tanpa melakukan ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞ない形（ないを取る）＋ ずに</td><td>何も言わ<b>ずに</b>帰りました。</td></tr><tr><td>例外：する → せずに</td><td>連絡<b>せずに</b>休んだ。</td></tr></tbody></table>"}, {"t": "passage", "v": "<p><b>注意</b>：「〜ずに」は「〜ないで」の<b>書き言葉</b>です。意味は同じですが、案内文や記録では「ずに」が使われます。</p>"}, {"t": "h2", "v": "確認ドリル（6問）"}, {"t": "p", "v": "<b>A 語彙（3問）</b>"}, {"t": "q", "id": "1", "text": "留守だったので、荷物を（　　）してもらった。", "opts": ["不在", "再配達", "希望", "期間"], "drill": true}, {"t": "q", "id": "2", "text": "申し込みの（　　）は今月末までです。", "opts": ["期間", "不在", "営業所", "送り主"], "drill": true}, {"t": "q", "id": "3", "text": "受付で（　　）を見せてください。", "opts": ["送り主", "身分証明書", "再配達", "希望"], "drill": true}, {"t": "p", "v": "<b>B 文法（3問）</b>"}, {"t": "q", "id": "4", "text": "靴をはいた（　　）家に上がってはいけません。", "opts": ["まま", "ずに", "ながら", "ように"], "drill": true}, {"t": "q", "id": "5", "text": "朝ごはんを食べ（　　）出かけたので、おなかがすいた。", "opts": ["まま", "ずに", "ながら", "ばかり"], "drill": true}, {"t": "q", "id": "6", "text": "連絡（　　）休むのはよくない。", "opts": ["しまま", "せずに", "しないまま", "しずに"], "drill": true}]}, {"key": "火曜", "title": "短文読解 ── 社内の連絡を読む", "blocks": [{"t": "h2", "v": "本文"}, {"t": "passage", "v": "<p>件名：あすの打ち合わせの場所変更について</p><p>各位</p><p>お疲れさまです。総務課の林です。</p><p>あす15日（火）14時からの打ち合わせですが、第1会議室が工事のため使えなくなりました。<b>3階の第3会議室</b>に変更します。<b>時間は変わりません。</b></p><p>資料はこれまでどおり、各自で印刷してお持ちください。</p><p>プロジェクターは第3会議室にもありますが、パソコンをつなぐケーブルの種類が違います。ノートパソコンで発表する方は、<b>変換アダプターを総務課で借りてから</b>お越しください。</p><p>なお、この変更のお知らせはメールのみです。掲示は出しませんので、同じ課の方にも伝えていただけると助かります。</p><p>林</p>"}, {"t": "h2", "v": "設問"}, {"t": "q", "id": "問1", "text": "あすの打ち合わせについて、変更されたことは何か。", "opts": ["時間だけ", "場所だけ", "時間と場所の両方", "資料の準備の方法"], "tag": "naiyou"}, {"t": "q", "id": "問2", "text": "ノートパソコンで発表する人は、何をしなければならないか。", "opts": ["資料を総務課で印刷する", "第1会議室のプロジェクターを借りる", "総務課で変換アダプターを借りてから行く", "前の日に会議室でテストをする"], "tag": "naiyou"}, {"t": "q", "id": "問3", "text": "このメールの内容に合うものはどれか。", "opts": ["掲示板にも同じお知らせが出る", "資料は総務課が用意する", "第3会議室にはプロジェクターがない", "同じ課の人にも自分から伝えたほうがよい"], "tag": "naiyou"}, {"t": "h2", "v": "本文から拾う語彙（10語）"}, {"t": "table", "v": "<table><thead><tr><th></th><th>語</th><th>読み</th><th>意味</th><th>Bahasa Indonesia</th></tr></thead><tbody><tr><td>1</td><td>打ち合わせ</td><td>うちあわせ</td><td>前もって相談すること</td><td>rapat persiapan</td></tr><tr><td>2</td><td>各位</td><td>かくい</td><td>「みなさま」の書き言葉</td><td>kepada yang bersangkutan</td></tr><tr><td>3</td><td>変更</td><td>へんこう</td><td>決まっていたことを変えること</td><td>perubahan</td></tr><tr><td>4</td><td>各自</td><td>かくじ</td><td>それぞれの人が自分で</td><td>masing-masing</td></tr><tr><td>5</td><td>これまでどおり</td><td>―</td><td>今までと同じように</td><td>seperti biasanya</td></tr><tr><td>6</td><td>つなぐ</td><td>―</td><td>線などで結ぶ</td><td>menyambungkan</td></tr><tr><td>7</td><td>種類</td><td>しゅるい</td><td>タイプ、分け方</td><td>jenis</td></tr><tr><td>8</td><td>伝える</td><td>つたえる</td><td>情報を人に知らせる</td><td>menyampaikan</td></tr><tr><td>9</td><td>助かる</td><td>たすかる</td><td>楽になる、ありがたい</td><td>terbantu</td></tr><tr><td>10</td><td>なお</td><td>―</td><td>それに加えて（補足）</td><td>selain itu</td></tr></tbody></table>"}, {"t": "h2", "v": "文法（2項目）"}, {"t": "p", "v": "<b>①〜始める／〜続ける／〜終わる</b>（動作の始め・途中・終わり／Mulai ~ / terus ~ / selesai ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞ます形（ますを取る）＋ 始める</td><td>3時から会議を<b>し始めます</b>。</td></tr><tr><td>動詞ます形 ＋ 続ける</td><td>2時間<b>話し続けました</b>。</td></tr><tr><td>動詞ます形 ＋ 終わる</td><td>資料を<b>印刷し終わりました</b>。</td></tr></tbody></table>"}, {"t": "p", "v": "<b>②〜てみる</b>（ためしに〜する／Mencoba ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞て形 ＋ みる</td><td>一度使っ<b>てみて</b>ください。</td></tr></tbody></table>"}, {"t": "p", "v": "・「〜てみたい」＝ためしにやりたい。「〜てみたら」＝ためしにやった結果。"}, {"t": "h2", "v": "確認ドリル（6問）"}, {"t": "p", "v": "<b>A 語彙（3問）</b>"}, {"t": "q", "id": "1", "text": "会議の前に、部長と（　　）をします。", "opts": ["打ち合わせ", "変更", "種類", "各位"], "drill": true}, {"t": "q", "id": "2", "text": "資料は（　　）で印刷してください。", "opts": ["各位", "各自", "種類", "なお"], "drill": true}, {"t": "q", "id": "3", "text": "手伝ってくれて（　　）ました。", "opts": ["伝え", "つなぎ", "助かり", "変わり"], "drill": true}, {"t": "p", "v": "<b>B 文法（3問）</b>"}, {"t": "q", "id": "4", "text": "昼から雨が降り（　　）、夜までやみませんでした。", "opts": ["始めて", "続けて", "終わって", "みて"], "drill": true}, {"t": "q", "id": "5", "text": "この本、読み（　　）から貸しますね。", "opts": ["始めて", "続けて", "終わって", "みて"], "drill": true}, {"t": "q", "id": "6", "text": "おいしいかどうか、一口食べ（　　）ください。", "opts": ["ておいて", "てみて", "てしまって", "ておわって"], "drill": true}]}, {"key": "水曜", "title": "中文読解 ── エッセイを読む", "blocks": [{"t": "h2", "v": "本文"}, {"t": "passage", "v": "<p>一人暮らしを始めたころ、私は米の量り方も知りませんでした。毎日コンビニで弁当を買い、それが普通だと思っていました。店に入るたびに、同じ棚の前に立っていました。</p><p>料理を始めたきっかけは、健康でも節約でもありません。ある日、弁当のふたを開けようとした瞬間に、<b>①「今日、自分で選んだものが何もないな」</b>と思ったのです。朝から夜まで、決められたことをして、決められたものを食べる。一日のどこにも自分がいませんでした。</p><p>次の日、スーパーで野菜を買いました。作ったのは、切って炒めただけの、料理と呼べないようなものです。正直、おいしくもありませんでした。<b>②それでも、その日の夕食だけは自分のものでした。</b></p><p>三年たった今も、私の料理は上手になっていません。時間がない日は、やはり弁当を買います。それでいいと思っています。</p><p>毎日でなくていい。週に二回でも自分で選んだ日があれば、一週間の感じ方が変わります。</p>"}, {"t": "h2", "v": "設問"}, {"t": "q", "id": "問1", "text": "「<b>①「今日、自分で選んだものが何もないな」</b>」とあるが、このとき筆者はどう感じていたか。", "opts": ["弁当がおいしくないと感じていた", "一日の中に自分の意思がないと感じていた", "お金を使いすぎていると感じていた", "料理を覚えたいと感じていた"], "tag": "naiyou"}, {"t": "q", "id": "問2", "text": "筆者が料理を始めた理由は何か。", "opts": ["健康によくないと言われたから", "節約したかったから", "自分で選ぶということをしたかったから", "料理が上手になりたかったから"], "tag": "naiyou"}, {"t": "q", "id": "問3", "text": "「<b>②それでも、その日の夕食だけは自分のものでした</b>」とあるが、どういう意味か。", "opts": ["一人で全部食べたということ", "おいしくできたということ", "味は悪くても、自分で選んで作ったものだということ", "だれにも見せなかったということ"], "tag": "naiyou"}, {"t": "q", "id": "問4", "text": "この文章で筆者が最も言いたいことはどれか。", "opts": ["料理は毎日したほうがよい", "コンビニの弁当は体によくない", "料理は続ければ上手になる", "毎日でなくても、自分で選ぶ時間があれば生活の感じ方が変わる"], "tag": "shucho"}, {"t": "h2", "v": "本文から拾う語彙（10語）"}, {"t": "table", "v": "<table><thead><tr><th></th><th>語</th><th>読み</th><th>意味</th><th>Bahasa Indonesia</th></tr></thead><tbody><tr><td>1</td><td>一人暮らし</td><td>ひとりぐらし</td><td>一人で生活すること</td><td>hidup sendiri</td></tr><tr><td>2</td><td>量る</td><td>はかる</td><td>重さや量を調べる</td><td>menakar / menimbang</td></tr><tr><td>3</td><td>節約</td><td>せつやく</td><td>むだをなくしてお金を使わないこと</td><td>penghematan</td></tr><tr><td>4</td><td>瞬間</td><td>しゅんかん</td><td>ほんの短い時</td><td>saat / detik itu</td></tr><tr><td>5</td><td>炒める</td><td>いためる</td><td>油で強い火を使って調理する</td><td>menumis</td></tr><tr><td>6</td><td>ふた</td><td>―</td><td>入れ物の上のおおい</td><td>tutup</td></tr><tr><td>7</td><td>やはり</td><td>―</td><td>思ったとおり／結局は</td><td>tetap saja</td></tr><tr><td>8</td><td>感じ方</td><td>かんじかた</td><td>どう感じるかということ</td><td>cara merasakan</td></tr><tr><td>9</td><td>まったく</td><td>―</td><td>ぜんぜん（否定と一緒に使う）</td><td>sama sekali</td></tr><tr><td>10</td><td>正直</td><td>しょうじき</td><td>本当のことを言うと</td><td>sejujurnya</td></tr></tbody></table>"}, {"t": "h2", "v": "文法（2項目）"}, {"t": "p", "v": "<b>①〜ようとする</b>（〜しようと動きはじめる／Hendak / berusaha ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞意向形 ＋ とする</td><td>ふたを開け<b>ようとした</b>瞬間に、電話が鳴った。</td></tr><tr><td></td><td>何度もやめ<b>ようとした</b>が、できなかった。</td></tr></tbody></table>"}, {"t": "p", "v": "・「〜ようとしたとき／瞬間」＝まさにその直前。"}, {"t": "p", "v": "<b>②〜たびに</b>（〜するときはいつも／Setiap kali ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞辞書形 ＋ たびに</td><td>店に入る<b>たびに</b>、同じ棚の前に立っていた。</td></tr><tr><td>名詞 ＋ の ＋ たびに</td><td>旅行の<b>たびに</b>写真を撮る。</td></tr></tbody></table>"}, {"t": "h2", "v": "確認ドリル（6問）"}, {"t": "p", "v": "<b>A 語彙（3問）</b>"}, {"t": "q", "id": "1", "text": "電気代を（　　）するために、こまめに消しています。", "opts": ["節約", "瞬間", "感じ方", "正直"], "drill": true}, {"t": "q", "id": "2", "text": "フライパンで野菜を（　　）ます。", "opts": ["量り", "炒め", "届け", "預かり"], "drill": true}, {"t": "q", "id": "3", "text": "（　　）に言うと、あまりおいしくなかった。", "opts": ["やはり", "まったく", "正直", "各自"], "drill": true}, {"t": "p", "v": "<b>B 文法（3問）</b>"}, {"t": "q", "id": "4", "text": "家を出（　　）としたとき、雨が降ってきた。", "opts": ["る", "よう", "た", "て"], "drill": true}, {"t": "q", "id": "5", "text": "この写真を見る（　　）、子どものころを思い出す。", "opts": ["うちに", "たびに", "ばかり", "ながら"], "drill": true}, {"t": "q", "id": "6", "text": "何度も立ち上がろう（　　）が、足が動かなかった。", "opts": ["とした", "になった", "とみた", "にした"], "drill": true}]}, {"key": "木曜", "title": "中文読解 ── 意見文を読む", "blocks": [{"t": "h2", "v": "本文"}, {"t": "passage", "v": "<p>旅行に行っても、私はほとんど写真を撮りません。</p><p>以前は違いました。きれいな景色を見つけるたびにカメラを構え、一日に二百枚も撮ることがありました。ところが、家に帰ってその写真を見返すと、不思議なことに、その日のことをあまり思い出せないのです。</p><p>逆に、カメラを忘れて行った旅行のことは、細かいところまで覚えています。海の音、風の冷たさ、隣にいた人の話し方。写真は一枚もありません。</p><p><b>①写真を撮ると、頭が「もう覚えなくていい」と判断するのかもしれません。</b>記録を外に置いた分だけ、中に残らない。メモを取ると忘れられる、というのと同じ仕組みでしょう。</p><p>ただ、<b>②だから写真を撮るな、と言いたいのではありません。</b>十年後に見返して、忘れていたことを思い出せるのも写真の力です。</p><p>私が言いたいのは、順番の話です。まず自分の目で見る。写真はそのあとでいい。カメラを構えたまま景色を見ている人を、旅先でよく見かけます。もったいないと思います。</p>"}, {"t": "h2", "v": "設問"}, {"t": "q", "id": "問1", "text": "以前の筆者は、旅行でどうしていたか。", "opts": ["写真をまったく撮らなかった", "一日に二百枚も撮ることがあった", "カメラをいつも家に忘れていた", "景色より人の写真を撮っていた"], "tag": "naiyou"}, {"t": "q", "id": "問2", "text": "「<b>①写真を撮ると、頭が「もう覚えなくていい」と判断するのかもしれません</b>」とあるが、筆者はこれを何と同じだと言っているか。", "opts": ["日記を書くこと", "人に話すこと", "メモを取ると忘れられること", "何度も見返すこと"], "tag": "naiyou"}, {"t": "q", "id": "問3", "text": "「<b>②だから写真を撮るな、と言いたいのではありません</b>」とあるが、筆者は写真についてどう考えているか。", "opts": ["写真は撮らないほうがよい", "写真には、忘れたことを思い出させる力もある", "写真は十年後に捨てるべきだ", "写真より記憶のほうが正確だ"], "tag": "naiyou"}, {"t": "q", "id": "問4", "text": "この文章で筆者が最も言いたいことはどれか。", "opts": ["旅行にカメラを持って行くべきではない", "写真より記憶のほうが大切だ", "まず自分の目で見て、写真はそのあとにするべきだ", "写真を撮る人はもったいないことをしている"], "tag": "shucho"}, {"t": "h2", "v": "本文から拾う語彙（10語）"}, {"t": "table", "v": "<table><thead><tr><th></th><th>語</th><th>読み</th><th>意味</th><th>Bahasa Indonesia</th></tr></thead><tbody><tr><td>1</td><td>景色</td><td>けしき</td><td>目に見える風景</td><td>pemandangan</td></tr><tr><td>2</td><td>構える</td><td>かまえる</td><td>カメラなどを持って向ける</td><td>mengarahkan / bersiap</td></tr><tr><td>3</td><td>見返す</td><td>みかえす</td><td>もう一度見る</td><td>melihat kembali</td></tr><tr><td>4</td><td>不思議（な）</td><td>ふしぎ</td><td>理由が分からず変な感じ</td><td>aneh / ajaib</td></tr><tr><td>5</td><td>逆に</td><td>ぎゃくに</td><td>反対に</td><td>sebaliknya</td></tr><tr><td>6</td><td>細かい</td><td>こまかい</td><td>小さい部分まで</td><td>detail / kecil</td></tr><tr><td>7</td><td>判断</td><td>はんだん</td><td>考えて決めること</td><td>keputusan / penilaian</td></tr><tr><td>8</td><td>記録</td><td>きろく</td><td>書いたり撮ったりして残すこと</td><td>rekaman / catatan</td></tr><tr><td>9</td><td>仕組み</td><td>しくみ</td><td>どうなっているかという構造</td><td>mekanisme</td></tr><tr><td>10</td><td>もったいない</td><td>―</td><td>むだにして惜しい</td><td>sayang (mubazir)</td></tr></tbody></table>"}, {"t": "h2", "v": "文法（2項目）"}, {"t": "p", "v": "<b>①〜ものだ</b>（一般的にそうだ／当然だ／Memang begitulah ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞辞書形・ない形 ＋ ものだ</td><td>年をとると、忘れっぽくなる<b>ものです</b>。</td></tr><tr><td>い形容詞 ＋ ものだ</td><td>時間がたつのは早い<b>ものだ</b>。</td></tr></tbody></table>"}, {"t": "p", "v": "・<b>世の中の一般的な性質</b>を言うときに使います。個人の一回きりの話には使いません。"}, {"t": "p", "v": "<b>②〜ことがある</b>（ときどきそうする／そういう場合がある／Kadang-kadang ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞辞書形 ＋ ことがある</td><td>一日に二百枚も撮る<b>ことがありました</b>。</td></tr></tbody></table>"}, {"t": "passage", "v": "<p><b>注意</b>：「動詞た形 ＋ ことがある」は<b>経験</b>（〜したことがある）で、意味がまったく違います。</p><p>「京都へ行く<b>ことがある</b>」＝ときどき行く／「京都へ行った<b>ことがある</b>」＝行った経験がある。</p>"}, {"t": "h2", "v": "確認ドリル（6問）"}, {"t": "p", "v": "<b>A 語彙（3問）</b>"}, {"t": "q", "id": "1", "text": "山の上からの（　　）がすばらしかった。", "opts": ["景色", "記録", "判断", "仕組み"], "drill": true}, {"t": "q", "id": "2", "text": "まだ使えるのに捨てるのは（　　）。", "opts": ["不思議だ", "細かい", "もったいない", "逆だ"], "drill": true}, {"t": "q", "id": "3", "text": "この機械の（　　）が分からない。", "opts": ["判断", "仕組み", "記録", "景色"], "drill": true}, {"t": "p", "v": "<b>B 文法（3問）</b>"}, {"t": "q", "id": "4", "text": "子どもは風邪をひきやすい（　　）です。", "opts": ["もの", "こと", "はず", "わけ"], "drill": true}, {"t": "q", "id": "5", "text": "忙しくて、昼ごはんを食べない（　　）。", "opts": ["ことがあります", "ことがありました", "ものです", "はずです"], "drill": true}, {"t": "q", "id": "6", "text": "わたしは富士山に登った（　　）。", "opts": ["ことがあります", "ことがある", "ものです", "ところです"], "drill": true}]}, {"key": "金曜", "title": "情報検索 ── 案内から答えを探す", "blocks": [{"t": "passage", "v": "<p><b>解き方の手順</b>：①設問の条件（だれが・いつ・何回目か）に線を引く　②表からその行だけを見る　③「ご注意」の例外を確かめる。</p>"}, {"t": "h2", "v": "本文"}, {"t": "passage", "v": "<p><b>みどり内科クリニック　受付のご案内</b></p><table><thead><tr><th>曜日</th><th>午前</th><th>午後</th></tr></thead><tbody><tr><td>月・火・木・金</td><td>9:00〜12:30</td><td>15:00〜18:00</td></tr><tr><td>水</td><td>9:00〜12:30</td><td>休診</td></tr><tr><td>土</td><td>9:00〜13:00</td><td>休診</td></tr><tr><td>日・祝</td><td>休診</td><td>休診</td></tr></tbody></table><p><b>ご注意</b></p><p>・受付は、診療終了の<b>30分前</b>までです。</p><p>・<b>初めての方</b>は、保険証をお持ちのうえ、診療終了の<b>1時間前</b>までにお越しください。</p><p>・予約をお取りできるのは、<b>2回目以降の方のみ</b>です。</p><p>・水曜午後と土曜午後は休診ですが、お電話でのご相談は17時まで受け付けます。</p><p>・お薬は院内ではお渡ししません。近くの薬局へ処方せんをお持ちください。</p>"}, {"t": "h2", "v": "設問"}, {"t": "q", "id": "問1", "text": "初めてこのクリニックに行く人が、金曜の午後に受診したい。何時までに行けばよいか。", "opts": ["15時", "17時", "17時30分", "18時"], "tag": "joken"}, {"t": "q", "id": "問2", "text": "予約について、正しいものはどれか。", "opts": ["だれでも予約できる", "初めての人だけ予約できる", "2回目以降の人だけ予約できる", "予約はできない"], "tag": "joken"}, {"t": "q", "id": "問3", "text": "薬について、正しいものはどれか。", "opts": ["クリニックの中でもらう", "近くの薬局へ処方せんを持って行く", "受付で申し込むと家に届く", "初めての人はもらえない"], "tag": "joken"}, {"t": "h2", "v": "本文から拾う語彙（10語）"}, {"t": "table", "v": "<table><thead><tr><th></th><th>語</th><th>読み</th><th>意味</th><th>Bahasa Indonesia</th></tr></thead><tbody><tr><td>1</td><td>診療</td><td>しんりょう</td><td>医者が病気を診ること</td><td>pelayanan medis</td></tr><tr><td>2</td><td>休診</td><td>きゅうしん</td><td>診療を休むこと</td><td>tutup (praktik)</td></tr><tr><td>3</td><td>受付</td><td>うけつけ</td><td>申し込みを受ける場所・こと</td><td>resepsionis</td></tr><tr><td>4</td><td>保険証</td><td>ほけんしょう</td><td>健康保険のカード</td><td>kartu asuransi</td></tr><tr><td>5</td><td>予約</td><td>よやく</td><td>前もって申し込むこと</td><td>reservasi</td></tr><tr><td>6</td><td>〜以降</td><td>いこう</td><td>それから先</td><td>setelah ~</td></tr><tr><td>7</td><td>処方せん</td><td>しょほうせん</td><td>医者が書く薬の指示書</td><td>resep obat</td></tr><tr><td>8</td><td>薬局</td><td>やっきょく</td><td>薬を売る店</td><td>apotek</td></tr><tr><td>9</td><td>院内</td><td>いんない</td><td>病院の中</td><td>di dalam klinik</td></tr><tr><td>10</td><td>相談</td><td>そうだん</td><td>話して意見を聞くこと</td><td>konsultasi</td></tr></tbody></table>"}, {"t": "h2", "v": "文法（2項目）"}, {"t": "p", "v": "<b>①〜ば</b>（条件。そうすれば、そうなる／Kalau ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>動詞ば形</td><td>早く行け<b>ば</b>、待たなくてすみます。</td></tr><tr><td>い形容詞（いを取る）＋ ければ</td><td>安けれ<b>ば</b>買います。</td></tr></tbody></table>"}, {"t": "p", "v": "<b>②〜なら</b>（相手の話を受けて、その場合は／Kalau memang ~）"}, {"t": "table", "v": "<table><thead><tr><th>接続</th><th>例</th></tr></thead><tbody><tr><td>名詞・動詞普通形 ＋ なら</td><td>病院へ行く<b>なら</b>、保険証を持って行ってください。</td></tr></tbody></table>"}, {"t": "passage", "v": "<p><b>見分け方</b>：「〜なら」は<b>相手が言ったこと</b>を受けて話すときに使います。</p><p>「京都へ行く<b>なら</b>、新幹線が早いですよ」＝相手が「京都へ行く」と言ったのを受けている。</p><p>「ば」にはこの使い方がありません。ここが試験で狙われます。</p>"}, {"t": "h2", "v": "確認ドリル（6問）"}, {"t": "p", "v": "<b>A 語彙（3問）</b>"}, {"t": "q", "id": "1", "text": "病院の（　　）で保険証を出します。", "opts": ["受付", "休診", "院内", "以降"], "drill": true}, {"t": "q", "id": "2", "text": "医者に（　　）をもらって、薬局へ行った。", "opts": ["保険証", "処方せん", "予約", "相談"], "drill": true}, {"t": "q", "id": "3", "text": "明日は（　　）なので、あさって来てください。", "opts": ["診療", "休診", "予約", "受付"], "drill": true}, {"t": "p", "v": "<b>B 文法（3問）</b>"}, {"t": "q", "id": "4", "text": "ボタンを押せ（　　）、切符が出ます。", "opts": ["ば", "なら", "たら", "と"], "drill": true}, {"t": "q", "id": "5", "text": "A「駅へ行きたいんですが」　B「駅へ行く（　　）、この道をまっすぐです」", "opts": ["ば", "なら", "ても", "のに"], "drill": true}, {"t": "q", "id": "6", "text": "安けれ（　　）買いますが、高かったらやめます。", "opts": ["なら", "ば", "ても", "のに"], "drill": true}]}, {"key": "土曜", "title": "読解通しテスト（60分）", "blocks": [{"t": "passage", "v": "<p>タイマーを<b>60分</b>にセットしてください。途中で止めないこと。</p><p>時間配分の目安：中文6分／長文12分／情報検索8分。</p>"}, {"t": "h2", "v": "問題1　中文（3問）"}, {"t": "passage", "v": "<p>高校のとき、数学の先生は質問にすぐ答えてくれませんでした。「先生、この問題が分かりません」と言うと、必ず「どこまで分かった？」と聞き返されます。</p><p>最初は不親切だと思いました。答えを教えてくれれば五秒で済むのに、と。ところが、「どこまで分かったか」を説明しようとすると、話しているうちに自分で気づくことがよくあるのです。「あ、ここです」と言って席に戻ることが何度もありました。</p><p>卒業のとき、先生に理由を聞きました。先生は「答えを教えるのは、次に同じ問題が出たときに、また私を呼ばせることだから」と答えました。</p><p>今、私は後輩に教える立場です。忙しいときほど、答えを言ってしまいたくなります。そのたびに、あの「どこまで分かった？」を思い出します。</p>"}, {"t": "q", "id": "問1", "text": "「席に戻ることが何度もありました」とあるが、なぜか。", "opts": ["先生が答えを教えてくれなかったから", "説明しているうちに自分で答えに気づいたから", "先生が忙しそうだったから", "質問の順番を待つように言われたから"], "tag": "naiyou"}, {"t": "q", "id": "問2", "text": "先生が答えを教えなかった理由は何か。", "opts": ["生徒に自分で解けるようになってほしかったから", "答えを知らなかったから", "時間がなかったから", "生徒に考えさせるのが決まりだったから"], "tag": "naiyou"}, {"t": "q", "id": "問3", "text": "今の筆者について、正しいものはどれか。", "opts": ["後輩の質問には必ずすぐ答えている", "後輩に質問させないようにしている", "答えを言いたくなるが、先生の言葉を思い出している", "先生と同じやり方が正しいとは思っていない"], "tag": "naiyou"}, {"t": "h2", "v": "問題2　中文（3問）"}, {"t": "passage", "v": "<p>祖母は手紙を書く人でした。電話もメールも使えたのに、私が進学で家を出てからの四年間、月に一度、必ず手紙が届きました。</p><p>内容はいつも同じです。畑のこと、天気のこと、近所の犬のこと。読んでも五分で終わります。当時の私は、正直、少し面倒に思っていました。返事を書かなければならないからです。</p><p>祖母が亡くなったあと、母がその手紙の下書きを見つけました。同じ内容を、三回も四回も書き直したあとがありました。畑の話を書くのに、祖母は何時間もかけていたのです。</p><p><b>五分で読める手紙の裏に、何時間もあった。</b>私はそれを、手紙が届いているときには知りませんでした。</p>"}, {"t": "q", "id": "問4", "text": "当時、筆者が手紙を少し面倒に思っていたのはなぜか。", "opts": ["内容がいつも同じだったから", "返事を書かなければならなかったから", "字が読みにくかったから", "電話のほうが早いから"], "tag": "naiyou"}, {"t": "q", "id": "問5", "text": "下書きから分かったことは何か。", "opts": ["祖母が同じ手紙を何人にも送っていたこと", "祖母が長い時間をかけて書いていたこと", "祖母が字を練習していたこと", "祖母が返事を待っていたこと"], "tag": "naiyou"}, {"t": "q", "id": "問6", "text": "「<b>五分で読める手紙の裏に、何時間もあった</b>」とは、どういう意味か。", "opts": ["手紙は五分では読めないということ", "短い手紙にも、書くための長い時間がかかっていたということ", "手紙の裏にも字が書いてあったということ", "五分で書ける手紙もあるということ"], "tag": "naiyou"}, {"t": "h2", "v": "問題3　長文（4問）"}, {"t": "passage", "v": "<p>部屋が片づかない、と長い間悩んでいました。収納の本を何冊も読み、箱やケースを買い足しました。ところが、片づけ用品を買うほど、部屋は狭くなっていきました。</p><p>あるとき、友人の部屋に行って驚きました。物がほとんどないのに、収納家具も少ないのです。「どうやって片づけてるの」と聞くと、友人は不思議そうな顔で「片づけてないよ。置くものがないだけ」と答えました。</p><p><b>①その言葉</b>で、自分の間違いが分かりました。私は「どう置くか」ばかり考えて、「置くかどうか」を考えていなかったのです。片づけとは、入れる場所を増やすことではなく、入れるものを減らすことでした。</p><p>それから半年かけて、家具を三つ捨てました。捨てるときは不安でした。あとで必要になったらどうしよう、と。しかし、半年たっても、困ったことは一度もありません。<b>②「必要になるかもしれないもの」の多くは、必要になりませんでした。</b></p><p>ただし、これは物を持つなという話ではありません。減らすこと自体が目的になると、今度は「捨てられない自分」を責めることになります。それでは前より苦しくなります。</p><p>大事なのは、物の数ではなく、自分が管理できる量を知ることだと思います。その量は人によって違います。友人の部屋が正解なのではありません。私にとっての量は、私が見つけるしかないのです。</p>"}, {"t": "q", "id": "問7", "text": "収納の本を読んで箱やケースを買った結果、どうなったか。", "opts": ["部屋が片づいた", "部屋がかえって狭くなった", "物が減った", "収納家具が必要なくなった"], "tag": "naiyou"}, {"t": "q", "id": "問8", "text": "「<b>①その言葉</b>」で、筆者はどんな間違いに気づいたか。", "opts": ["収納の本を読みすぎていたこと", "友人の部屋をまねしていたこと", "「どう置くか」だけを考え、「置くかどうか」を考えていなかったこと", "家具を捨てるのが早すぎたこと"], "tag": "naiyou"}, {"t": "q", "id": "問9", "text": "「<b>②「必要になるかもしれないもの」の多くは、必要になりませんでした</b>」とあるが、これは何を示しているか。", "opts": ["捨てた家具はもともと使えなかった", "心配して取っておいた物の多くは、実際には使わなかった", "半年では判断できない", "必要なものは自然に集まってくる"], "tag": "naiyou"}, {"t": "q", "id": "問10", "text": "この文章で筆者が最も言いたいことはどれか。", "opts": ["物はできるだけ捨てたほうがよい", "収納用品を買うのは無駄である", "友人のような部屋を目指すべきだ", "自分が管理できる量を、自分で知ることが大切だ"], "tag": "shucho"}, {"t": "h2", "v": "問題4　情報検索（3問）"}, {"t": "passage", "v": "<p><b>さくら鉄道　おトクなきっぷ</b></p><table><thead><tr><th>きっぷ名</th><th>料金</th><th>内容</th><th>買える場所</th></tr></thead><tbody><tr><td>一日乗車券</td><td>大人900円・子ども450円</td><td>当日1日、全線乗り放題</td><td>駅の券売機</td></tr><tr><td>二日乗車券</td><td>大人1,500円</td><td>続いた2日間、全線乗り放題</td><td>駅の窓口のみ</td></tr><tr><td>土日エコきっぷ</td><td>大人700円</td><td>土・日・祝の1日、全線乗り放題</td><td>券売機・コンビニ</td></tr><tr><td>回数券（11枚）</td><td>区間によって違う</td><td>3か月有効</td><td>駅の窓口のみ</td></tr></tbody></table><p><b>ご注意</b></p><p>・小学生未満のお子さまは、大人1人につき2人まで無料です。</p><p>・一日乗車券と二日乗車券は、<b>買った日から使います。前もって買うことはできません。</b></p><p>・土日エコきっぷは平日には使えませんが、<b>前の日までに買っておくことができます。</b></p><p>・特急にお乗りの場合は、別に特急券が必要です。</p>"}, {"t": "q", "id": "問11", "text": "大人1人が土曜日に一日中乗る。いちばん安いのはどれか。", "opts": ["一日乗車券", "二日乗車券", "土日エコきっぷ", "回数券"], "tag": "joken"}, {"t": "q", "id": "問12", "text": "来週の日曜の旅行のために、今日きっぷを買っておきたい。買えるものはどれか。", "opts": ["一日乗車券", "二日乗車券", "土日エコきっぷ", "どれも買えない"], "tag": "joken"}, {"t": "q", "id": "問13", "text": "大人1人と4歳の子ども2人で乗る。料金について正しいものはどれか。", "opts": ["子ども2人分の料金がかかる", "子ども1人分の料金がかかる", "子ども2人とも無料になる", "子どもは乗れない"], "tag": "joken"}]}, {"key": "日曜", "title": "聴解30分 ＋ 復習30分", "blocks": [{"t": "h2", "v": "Part 1　聴解（20分・7問）"}, {"t": "passage", "v": "<p><b>注意</b>：この紙には会話は書いてありません。音を聞いて答えます。</p><p>会話は<b>1回だけ</b>流れます。メモを取ってもかまいません。</p>"}, {"t": "h3", "v": "問題1　課題理解（2問）"}, {"t": "q", "id": "問1", "text": "", "opts": ["受付に用紙をもらいに行く", "男の人から用紙をもらって書く", "インターネットで申し込む", "来週まで待つ"]}, {"t": "q", "id": "問2", "text": "", "opts": ["レストラン", "本屋", "傘を売っている店", "映画館"]}, {"t": "h3", "v": "問題2　ポイント理解（2問）"}, {"t": "q", "id": "問3", "text": "", "opts": ["家賃が高かったから", "駅から遠かったから", "部屋が狭かったから", "上の階の音が気になったから"]}, {"t": "q", "id": "問4", "text": "", "opts": ["味がいいから", "値段が安いから", "静かだから", "家から近いから"]}, {"t": "h3", "v": "問題3　即時応答（3問）"}, {"t": "q", "id": "問5", "text": "1　　2　　3", "opts": ["1", "2", "3"], "audioOnly": true}, {"t": "q", "id": "問6", "text": "1　　2　　3", "opts": ["1", "2", "3"], "audioOnly": true}, {"t": "q", "id": "問7", "text": "1　　2　　3", "opts": ["1", "2", "3"], "audioOnly": true}, {"t": "h3", "v": "聞き取りメモ欄"}, {"t": "passage", "v": ""}, {"t": "h2", "v": "Part 2　今週の復習テスト（20問）"}, {"t": "h3", "v": "A 語彙（10問）"}, {"t": "q", "id": "1", "text": "留守だったので荷物を（　　）してもらった。", "opts": ["不在", "再配達", "希望", "期間"], "drill": true}, {"t": "q", "id": "2", "text": "受付で（　　）を見せる。", "opts": ["送り主", "身分証明書", "再配達", "院内"], "drill": true}, {"t": "q", "id": "3", "text": "会議の前に部長と（　　）をする。", "opts": ["打ち合わせ", "変更", "種類", "各位"], "drill": true}, {"t": "q", "id": "4", "text": "資料は（　　）で印刷してください。", "opts": ["各位", "各自", "なお", "種類"], "drill": true}, {"t": "q", "id": "5", "text": "電気代を（　　）する。", "opts": ["節約", "瞬間", "判断", "記録"], "drill": true}, {"t": "q", "id": "6", "text": "フライパンで野菜を（　　）。", "opts": ["量る", "炒める", "預かる", "構える"], "drill": true}, {"t": "q", "id": "7", "text": "まだ使えるのに捨てるのは（　　）。", "opts": ["不思議だ", "細かい", "もったいない", "逆だ"], "drill": true}, {"t": "q", "id": "8", "text": "山の上からの（　　）がすばらしい。", "opts": ["景色", "記録", "仕組み", "判断"], "drill": true}, {"t": "q", "id": "9", "text": "医者に（　　）をもらって薬局へ行く。", "opts": ["保険証", "処方せん", "予約", "相談"], "drill": true}, {"t": "q", "id": "10", "text": "明日は（　　）なので、あさって来てください。", "opts": ["診療", "休診", "受付", "以降"], "drill": true}, {"t": "h3", "v": "B 文法（10問）"}, {"t": "q", "id": "11", "text": "靴をはいた（　　）家に上がってはいけない。", "opts": ["まま", "ずに", "ながら", "ばかり"], "drill": true}, {"t": "q", "id": "12", "text": "朝ごはんを食べ（　　）出かけた。", "opts": ["まま", "ずに", "ながら", "うちに"], "drill": true}, {"t": "q", "id": "13", "text": "昼から雨が降り（　　）、夜までやまなかった。", "opts": ["始めて", "続けて", "終わって", "みて"], "drill": true}, {"t": "q", "id": "14", "text": "おいしいかどうか、一口食べ（　　）ください。", "opts": ["ておいて", "てみて", "てしまって", "ておわって"], "drill": true}, {"t": "q", "id": "15", "text": "家を出（　　）としたとき、電話が鳴った。", "opts": ["る", "よう", "た", "て"], "drill": true}, {"t": "q", "id": "16", "text": "この写真を見る（　　）、昔を思い出す。", "opts": ["うちに", "たびに", "ばかり", "ながら"], "drill": true}, {"t": "q", "id": "17", "text": "子どもは風邪をひきやすい（　　）だ。", "opts": ["もの", "こと", "はず", "わけ"], "drill": true}, {"t": "q", "id": "18", "text": "わたしは富士山に登った（　　）。", "opts": ["ことがあります", "ものです", "ところです", "ばかりです"], "drill": true}, {"t": "q", "id": "19", "text": "ボタンを押せ（　　）、切符が出ます。", "opts": ["ば", "なら", "ても", "のに"], "drill": true}, {"t": "q", "id": "20", "text": "A「駅へ行きたいんですが」B「駅へ行く（　　）、この道をまっすぐです」", "opts": ["ば", "なら", "ても", "のに"], "drill": true}]}], "answers": {"月曜": {"問1": [2, "「クール便のため、お預かりできる期間は3日間です」。かっこの中の「通常のお荷物は7日間」を選んでしまう学習者が出ます。<b>かっこは条件の違う情報</b>だと教えてください。"], "問2": [2, "「当日は午後7時まで」「それ以降は翌日以降」。午後8時は「それ以降」。"], "問3": [3, "「身分証明書とこの連絡票をお持ちください」。"], "d1": [2, ""], "d2": [1, ""], "d3": [2, ""], "d4": [1, ""], "d5": [2, ""], "d6": [2, ""]}, "火曜": {"問1": [2, "「時間は変わりません」と本文にある。"], "問2": [3, "「変換アダプターを総務課で借りてからお越しください」。"], "問3": [4, "「掲示は出しませんので、同じ課の方にも伝えていただけると助かります」。1は「掲示は出しません」に反する。3は「第3会議室にもあります」に反する。"], "d1": [1, ""], "d2": [2, ""], "d3": [3, ""], "d4": [2, ""], "d5": [3, ""], "d6": [2, ""]}, "水曜": {"問1": [2, "直後の「朝から夜まで、決められたことをして、決められたものを食べる。一日のどこにも自分がいませんでした」。"], "問2": [3, "「健康でも節約でもありません」と冒頭で否定してから、①が続く。"], "問3": [3, "「おいしくもありませんでした」＋「それでも」＝味は悪いが、自分で選んだ。"], "問4": [4, "最終段落「毎日でなくていい。週に二回でも……一週間の感じ方が変わります」。"], "d1": [1, ""], "d2": [2, ""], "d3": [3, ""], "d4": [2, ""], "d5": [2, ""], "d6": [1, ""]}, "木曜": {"問1": [2, "「一日に二百枚も撮ることがありました」。"], "問2": [3, "「メモを取ると忘れられる、というのと同じ仕組みでしょう」。"], "問3": [2, "「十年後に見返して、忘れていたことを思い出せるのも写真の力です」。"], "問4": [3, "「私が言いたいのは、順番の話です。まず自分の目で見る。写真はそのあとでいい」。"], "d1": [1, ""], "d2": [3, ""], "d3": [2, ""], "d4": [1, ""], "d5": [1, ""], "d6": [1, ""]}, "金曜": {"問1": [2, "金曜午後の終了は18時。初めての人は「診療終了の1時間前まで」なので17時。3の17時30分は、2回目以降の人（30分前）の条件。"], "問2": [3, "「予約をお取りできるのは、2回目以降の方のみです」。"], "問3": [2, "「お薬は院内ではお渡ししません。近くの薬局へ処方せんをお持ちください」。"], "d1": [1, ""], "d2": [2, ""], "d3": [2, ""], "d4": [1, ""], "d5": [2, ""], "d6": [2, ""]}, "土曜": {"問1": [2, "「話しているうちに自分で気づくことがよくある」。"], "問2": [1, "先生の言葉「また私を呼ばせることだから」＝自分で解けるようにするため。"], "問3": [3, "「答えを言ってしまいたくなります。そのたびに……思い出します」。"], "問4": [2, "「返事を書かなければならないからです」。"], "問5": [2, "「三回も四回も書き直したあと」「何時間もかけていた」。"], "問6": [2, "短い手紙の裏に長い時間があった、という対比。"], "問7": [2, "「片づけ用品を買うほど、部屋は狭くなっていきました」。"], "問8": [3, "直後に明示されている。"], "問9": [2, "「捨てるときは不安でした……しかし、困ったことは一度もありません」。"], "問10": [4, "最終段落「自分が管理できる量を知ること」。"], "問11": [3, "土曜なので土日エコきっぷ700円が使える。一日乗車券900円より安い。"], "問12": [3, "一日乗車券・二日乗車券は前もって買えない。土日エコきっぷは「前の日までに買っておくことができます」。"], "問13": [3, "「小学生未満は大人1人につき2人まで無料」。4歳が2人なので無料。"]}, "日曜": {"L1": [2, ""], "L2": [3, ""], "L3": [4, ""], "L4": [3, ""], "L5": [1, ""], "L6": [2, ""], "L7": [2, ""], "r1": [2, ""], "r2": [2, ""], "r3": [1, ""], "r4": [2, ""], "r5": [1, ""], "r6": [2, ""], "r7": [3, ""], "r8": [1, ""], "r9": [2, ""], "r10": [2, ""], "r11": [1, ""], "r12": [2, ""], "r13": [2, ""], "r14": [2, ""], "r15": [2, ""], "r16": [2, ""], "r17": [1, ""], "r18": [1, ""], "r19": [1, ""], "r20": [2, ""]}}, "listen": [
+    { group:'問題1　課題理解', hint:'はじめに質問を聞いてください。それから会話を聞いて、問題用紙の1〜4から一つ選びます。',
+      items:[
+        { no:'問1', label:'このあとまず何をしますか', answer:'2　男の人から用紙をもらって書く',
+          why:'「受付でもらえる」で終わりではない。男の人が「一枚あげるよ」と言うので、もらいに行く必要がなくなる。',
+          steps:[
+            {k:'q', v:'女の人は、このあとまず何をしますか。'},
+            {k:'pause', s:2},
+            {k:'line', sp:'男', v:'来週の説明会、申し込みはもう済んだ？'},
+            {k:'line', sp:'女', v:'ううん、これから。ネットからでいいんだよね。'},
+            {k:'line', sp:'男', v:'あ、今年から用紙を出す形に変わったんだよ。受付でもらえる。'},
+            {k:'line', sp:'女', v:'えっ、そうなんだ。じゃあ、もらいに行かなきゃ。'},
+            {k:'line', sp:'男', v:'あ、僕、多めにもらってきたから、一枚あげるよ。'},
+            {k:'line', sp:'女', v:'ほんと？　助かる。じゃあ、書いて出してくるね。'},
+            {k:'pause', s:1},
+            {k:'q', v:'女の人は、このあとまず何をしますか。'},
+            {k:'pause', s:12, a:true}
+          ]},
+        { no:'問2', label:'このあとまずどこへ行きますか', answer:'3　傘を売っている店',
+          why:'「本屋でも」と言いかけたが、傘が必要になり「そっち先に行こう」で確定する。',
+          steps:[
+            {k:'q', v:'二人は、このあとまずどこへ行きますか。'},
+            {k:'pause', s:2},
+            {k:'line', sp:'女', v:'映画、七時からだよね。まだ一時間あるね。'},
+            {k:'line', sp:'男', v:'ごはん、先に食べる？'},
+            {k:'line', sp:'女', v:'うーん、映画のあとのほうがゆっくりできない？'},
+            {k:'line', sp:'男', v:'確かに。じゃあ本屋でも……あ、傘買わなきゃ。夜から雨だって。'},
+            {k:'line', sp:'女', v:'そっか。じゃあ、そっち先に行こう。本屋はそのあとで。'},
+            {k:'pause', s:1},
+            {k:'q', v:'二人は、このあとまずどこへ行きますか。'},
+            {k:'pause', s:12, a:true}
+          ]}
+      ]},
+    { group:'問題2　ポイント理解', hint:'質問のあと、選択肢を読む時間があります。それから会話を聞きます。',
+      items:[
+        { no:'問3', label:'どうして引っ越すのをやめましたか', answer:'4　上の階の音が気になったから',
+          why:'広くて駅も近く、家賃も同じくらい。「それがね」以降が答え。',
+          steps:[
+            {k:'q', v:'男の人は、どうして引っ越すのをやめましたか。'},
+            {k:'pause', s:15, r:true},
+            {k:'line', sp:'女', v:'家、探してるって言ってなかった？'},
+            {k:'line', sp:'男', v:'うん、いい部屋があったんだ。広くて、駅も近くて。'},
+            {k:'line', sp:'女', v:'じゃあ、決めたの？'},
+            {k:'line', sp:'男', v:'それがね、家賃は今と同じくらいだったんだけど、下見に行ったら、上の階の足音がすごくて。それでやめた。'},
+            {k:'pause', s:1},
+            {k:'q', v:'男の人は、どうして引っ越すのをやめましたか。'},
+            {k:'pause', s:12, a:true}
+          ]},
+        { no:'問4', label:'どうしてこの店を選びましたか', answer:'3　静かだから',
+          why:'味は「普通」、値段も「安くはない」。最後の一言が答え。',
+          steps:[
+            {k:'q', v:'女の人は、どうしてこの店を選びましたか。'},
+            {k:'pause', s:15, r:true},
+            {k:'line', sp:'男', v:'この店、初めて？'},
+            {k:'line', sp:'女', v:'ううん、三回目。'},
+            {k:'line', sp:'男', v:'味はどう？'},
+            {k:'line', sp:'女', v:'正直、普通かな。値段も安くはないし。'},
+            {k:'line', sp:'男', v:'じゃあ、どうして？'},
+            {k:'line', sp:'女', v:'静かなの。仕事の話をするのに、ここより静かな店を知らないから。'},
+            {k:'pause', s:1},
+            {k:'q', v:'女の人は、どうしてこの店を選びましたか。'},
+            {k:'pause', s:12, a:true}
+          ]}
+      ]},
+    { group:'問題3　即時応答', hint:'問題用紙には何も書いてありません。短い文を聞いて、返事として最もよいものを1〜3から選びます。',
+      items:[
+        { no:'問5', label:'返事を選ぶ', answer:'1　三部お願いします',
+          why:'「何部いりますか」は数を聞く質問。数で答えているのは1だけ。',
+          steps:[
+            {k:'line', sp:'男', v:'この書類、コピー何部いりますか。'},
+            {k:'line', sp:'女', v:'1、三部お願いします。'},
+            {k:'line', sp:'女', v:'2、コピー機は二階です。'},
+            {k:'line', sp:'女', v:'3、はい、コピーしました。'},
+            {k:'pause', s:8, a:true}
+          ]},
+        { no:'問6', label:'返事を選ぶ', answer:'2　すぐお持ちします',
+          why:'「まだ見ていない」＝資料が手元にない。これから持って行く2が自然。',
+          steps:[
+            {k:'line', sp:'女', v:'先週の資料、まだ見ていないんだけど。'},
+            {k:'line', sp:'男', v:'1、もう見ましたよ。'},
+            {k:'line', sp:'男', v:'2、すぐお持ちします。'},
+            {k:'line', sp:'男', v:'3、ありがとうございました。'},
+            {k:'pause', s:8, a:true}
+          ]},
+        { no:'問7', label:'返事を選ぶ', answer:'2　あ、すみません、消します',
+          why:'つけっぱなしを指摘されている。おわびして直す2が自然。',
+          steps:[
+            {k:'line', sp:'男', v:'あれ、電気つけっぱなしだよ。'},
+            {k:'line', sp:'女', v:'1、ええ、つけてください。'},
+            {k:'line', sp:'女', v:'2、あ、すみません、消します。'},
+            {k:'line', sp:'女', v:'3、電気が消えました。'},
+            {k:'pause', s:8, a:true}
+          ]}
+      ]}
+  ]}};
+var WEEK = "1";
+var CONTENT = null, LISTEN = null;
+
+var exam = new Date(2026,11,6), t0 = new Date(); t0.setHours(0,0,0,0);
+document.getElementById('days').textContent = Math.max(0, Math.round((exam-t0)/86400000));
+
+var TAGNAME = { shiji:'指示語', shucho:'筆者の主張', joken:'条件・情報検索', naiyou:'言いかえ・内容一致' };
+var STORE = 'n3-week1';
+var state = { ans:{}, marked:{} };
+function loadState(){
+  state = { ans:{}, marked:{} };
+  try { var raw = localStorage.getItem(STORE); if(raw) state = JSON.parse(raw); } catch(e){}
+  if(!state.ans) state.ans = {};
+  if(!state.marked) state.marked = {};
+}
+function save(){ try{ localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){} }
+
+var days = [], KEYS = {}, cur = 0;
+
+function keyOf(dayKey, q){
+  if(dayKey === '日曜') return q.drill ? ('r'+q.id) : ('L'+q.id.replace('問',''));
+  return q.drill ? ('d'+q.id) : q.id;
+}
+function correctOf(dayKey, q){
+  var d = KEYS[dayKey] || {}; var e = d[keyOf(dayKey,q)];
+  return e ? e[0] : null;
+}
+function explOf(dayKey, q){
+  var d = KEYS[dayKey] || {}; var e = d[keyOf(dayKey,q)];
+  return e ? (e[1]||'') : '';
+}
+function uid(dayKey, q){ return dayKey + '/' + keyOf(dayKey,q); }
+
+/* ---------- tabs ---------- */
+var tabs = document.getElementById('tabs');
+var weeksNav = document.getElementById('weeks');
+
+function buildTabs(){
+  tabs.innerHTML = '';
+  days.forEach(function(d, i){
+    var b = document.createElement('button');
+    b.textContent = d.key.replace('曜','');
+    b.addEventListener('click', function(){ cur = i; render(); window.scrollTo(0,0); });
+    tabs.appendChild(b);
+  });
+  var recBtn = document.createElement('button');
+  recBtn.textContent = '記録';
+  recBtn.addEventListener('click', function(){ cur = -1; render(); window.scrollTo(0,0); });
+  tabs.appendChild(recBtn);
+}
+
+function mount(w){
+  stopSeq();
+  WEEK = w;
+  CONTENT = WEEKS[w];
+  LISTEN = CONTENT.listen;
+  days = CONTENT.days;
+  KEYS = CONTENT.answers;
+  STORE = 'n3-week' + w;
+  loadState();
+  try { localStorage.setItem('n3-lastweek', w); } catch(e){}
+  document.getElementById('h1').textContent = '第' + w + '週　タブレット学習';
+  Array.prototype.forEach.call(weeksNav.children, function(b){
+    b.classList.toggle('on', b.dataset.w === w);
+  });
+  buildTabs();
+  cur = 0;
+  render();
+  window.scrollTo(0,0);
+}
+
+Object.keys(WEEKS).sort().forEach(function(w){
+  var b = document.createElement('button');
+  b.textContent = '第' + w + '週';
+  b.dataset.w = w;
+  b.addEventListener('click', function(){ mount(w); });
+  weeksNav.appendChild(b);
+});
+
+/* ---------- render ---------- */
+var pane = document.getElementById('pane');
+
+function questionEl(dayKey, q){
+  var box = document.createElement('div');
+  box.className = 'q' + (q.drill ? ' drill' : '');
+  var id = uid(dayKey, q);
+
+  var head = document.createElement('div'); head.className = 'qt';
+  var n = document.createElement('span'); n.className = 'qn';
+  n.textContent = q.drill ? q.id : q.id;
+  var tx = document.createElement('span'); tx.innerHTML = q.text || '';
+  head.appendChild(n); head.appendChild(tx); box.appendChild(head);
+
+  var expl = document.createElement('div'); expl.className = 'expl';
+
+  q.opts.forEach(function(o, idx){
+    var num = idx + 1;
+    var row = document.createElement('div'); row.className = 'opt';
+    var c = document.createElement('span'); c.className = 'num'; c.textContent = num;
+    var s = document.createElement('span'); s.innerHTML = o;
+    row.appendChild(c); row.appendChild(s);
+    row.addEventListener('click', function(){
+      if(state.marked[dayKey]) return;
+      state.ans[id] = num; save();
+      Array.prototype.forEach.call(box.querySelectorAll('.opt'), function(x){ x.classList.remove('sel'); });
+      row.classList.add('sel');
+      updateStat();
+    });
+    if(state.ans[id] === num) row.classList.add('sel');
+    box.appendChild(row);
+  });
+
+  box.appendChild(expl);
+
+  if(state.marked[dayKey]) paint(box, dayKey, q, expl);
+  return box;
+}
+
+function paint(box, dayKey, q, expl){
+  var id = uid(dayKey, q), got = state.ans[id], right = correctOf(dayKey, q);
+  var rows = box.querySelectorAll('.opt');
+  Array.prototype.forEach.call(rows, function(r, i){
+    r.classList.remove('sel');
+    if(i+1 === right) r.classList.add('ok');
+    else if(i+1 === got) r.classList.add('ng');
+  });
+  var e = explOf(dayKey, q);
+  expl.innerHTML = (got === right
+      ? '<b class="v">正解</b>'
+      : '<b class="x">不正解</b>　正しい答え：' + right)
+    + (e ? '<br>' + e : '');
+  expl.classList.add('show');
+}
+
+function render(){
+  Array.prototype.forEach.call(tabs.children, function(b, i){
+    b.classList.toggle('on', (cur === -1) ? (i === tabs.children.length-1) : (i === cur));
+  });
+  pane.innerHTML = '';
+  if(cur === -1){ renderRecord(); updateStat(); return; }
+
+  var d = days[cur];
+
+  if(d.key === '土曜') pane.appendChild(timerEl());
+  if(d.key === '日曜') pane.appendChild(playerEl());
+
+  d.blocks.forEach(function(b){
+    var el;
+    if(b.t === 'h2'){ el = document.createElement('h2'); el.className='sec'; el.textContent = b.v; }
+    else if(b.t === 'h3'){ el = document.createElement('h3'); el.className='sub3'; el.textContent = b.v; }
+    else if(b.t === 'passage'){ el = document.createElement('div'); el.className='passage'; el.innerHTML = b.v; }
+    else if(b.t === 'table'){ el = document.createElement('div'); el.className='ref'; el.innerHTML = b.v; }
+    else if(b.t === 'q'){ el = questionEl(d.key, b); }
+    else { el = document.createElement('p'); el.className='body'; el.innerHTML = b.v; }
+    pane.appendChild(el);
+  });
+  updateStat();
+}
+
+/* ---------- 土曜 timer ---------- */
+var tmr = null, left = 3600;
+function timerEl(){
+  var w = document.createElement('div'); w.className = 'timer';
+  var c = document.createElement('span'); c.className = 'clock'; c.id = 'clock';
+  var b1 = document.createElement('button'); b1.className='act'; b1.textContent='60分スタート';
+  var b2 = document.createElement('button'); b2.className='act ghost'; b2.textContent='止める';
+  function show(){
+    var m = Math.floor(left/60), s = left%60;
+    c.textContent = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+    c.classList.toggle('low', left <= 300);
+  }
+  show();
+  b1.addEventListener('click', function(){
+    if(tmr) clearInterval(tmr);
+    left = 3600; show();
+    tmr = setInterval(function(){
+      left--; show();
+      if(left <= 0){ clearInterval(tmr); tmr = null; alert('60分が終わりました。'); }
+    }, 1000);
+  });
+  b2.addEventListener('click', function(){ if(tmr){ clearInterval(tmr); tmr=null; } });
+  w.appendChild(c); w.appendChild(b1); w.appendChild(b2);
+  var note = document.createElement('span');
+  note.style.cssText='font-size:13px;color:var(--ink-soft)';
+  note.textContent = '中文6分／長文12分／情報検索8分';
+  w.appendChild(note);
+  return w;
+}
+
+/* ---------- 日曜 listening player ---------- */
+var synth = window.speechSynthesis, voices = [], vA = null, vB = null, rate = 1;
+var stopped = false, running = false, timers = [];
+function clearTimers(){ timers.forEach(function(t){ clearTimeout(t); clearInterval(t); }); timers = []; }
+function wait(ms){ return new Promise(function(r){ timers.push(setTimeout(r, ms)); }); }
+function speak(text, voice){
+  return new Promise(function(res){
+    if(stopped) return res();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang='ja-JP'; if(voice) u.voice = voice; u.rate = rate;
+    var done=false, keep=0;
+    function fin(){ if(!done){ done=true; if(keep) clearInterval(keep); res(); } }
+    u.onend=fin; u.onerror=fin;
+    if(/Chrome|Chromium|Edg\//.test(navigator.userAgent)){
+      keep = setInterval(function(){ if(synth.speaking && !synth.paused){ synth.pause(); synth.resume(); } }, 9000);
+      timers.push(keep);
+    }
+    timers.push(setTimeout(fin, Math.max(4000, text.length*420/rate)));
+    synth.speak(u);
+  });
+}
+function loadVoices(){ voices = (synth.getVoices()||[]).filter(function(v){ return (v.lang||'').toLowerCase().indexOf('ja')===0; });
+  vA = voices[0]||null; vB = voices[1]||voices[0]||null; }
+loadVoices();
+if(typeof synth.onvoiceschanged !== 'undefined') synth.onvoiceschanged = function(){ loadVoices(); };
+
+function playSeq(items, btn){
+  if(running) return;
+  stopped = false; running = true; clearTimers();
+  try{ synth.cancel(); }catch(e){}
+  if(btn){ btn.classList.add('on'); btn.textContent='再生中…'; }
+  var chain = Promise.resolve();
+  items.forEach(function(it){
+    it.steps.forEach(function(st){
+      chain = chain.then(function(){
+        if(stopped) return;
+        if(st.k === 'pause') return wait(st.s*1000);
+        return speak(st.v, st.sp === '男' ? vB : vA).then(function(){ return wait(200); });
+      });
+    });
+  });
+  chain.then(function(){
+    running = false;
+    if(btn){ btn.classList.remove('on'); btn.textContent = btn.dataset.label; }
+  });
+}
+function stopSeq(){ stopped = true; running = false; clearTimers(); try{ synth.cancel(); }catch(e){}
+  Array.prototype.forEach.call(document.querySelectorAll('.playbtn'), function(b){
+    b.classList.remove('on'); if(b.dataset.label) b.textContent = b.dataset.label; }); }
+
+function playerEl(){
+  var w = document.createElement('div'); w.className='player';
+  var all = []; LISTEN.forEach(function(g){ g.items.forEach(function(it){ all.push(it); }); });
+
+  if(!voices.length){
+    var warn = document.createElement('div'); warn.className='warnbox';
+    warn.innerHTML = '<b>この端末では日本語の音声が見つかりません。</b><br>'
+      + 'iPad：設定 → アクセシビリティ → 読み上げコンテンツ → 声 → 日本語を追加<br>'
+      + 'Android / Windows：設定から日本語の音声データを追加するか、別のブラウザで開いてください。';
+    w.appendChild(warn);
+  }
+
+  var r1 = document.createElement('div'); r1.className='row';
+  var ba = document.createElement('button'); ba.className='playbtn'; ba.textContent='7問を通して再生';
+  ba.dataset.label='7問を通して再生';
+  ba.addEventListener('click', function(){ playSeq(all, ba); });
+  var bs = document.createElement('button'); bs.className='act ghost'; bs.textContent='止める';
+  bs.addEventListener('click', stopSeq);
+  r1.appendChild(ba); r1.appendChild(bs);
+  w.appendChild(r1);
+
+  var r2 = document.createElement('div'); r2.className='row';
+  var lab = document.createElement('span'); lab.style.fontSize='13px'; lab.textContent='速さ';
+  var sl = document.createElement('input'); sl.type='range'; sl.min='0.7'; sl.max='1.2'; sl.step='0.05'; sl.value='1';
+  var vv = document.createElement('span'); vv.style.cssText='font-size:13px;font-weight:700'; vv.textContent='1.00';
+  sl.addEventListener('input', function(){ rate = +sl.value; vv.textContent = rate.toFixed(2); });
+  r2.appendChild(lab); r2.appendChild(sl); r2.appendChild(vv);
+  w.appendChild(r2);
+
+  var r3 = document.createElement('div'); r3.className='row';
+  all.forEach(function(it){
+    var b = document.createElement('button'); b.className='playbtn';
+    b.textContent = it.no; b.dataset.label = it.no;
+    b.style.cssText = 'background:#4A6A7A';
+    b.addEventListener('click', function(){ playSeq([it], b); });
+    r3.appendChild(b);
+  });
+  w.appendChild(r3);
+
+  var note = document.createElement('div'); note.className='note';
+  note.innerHTML = '会話は<b>1回だけ</b>流れます。聞いてから下の選択肢をタップしてください。'
+    + '答え合わせは、7問すべて答えてから「採点する」を押します。';
+  w.appendChild(note);
+  return w;
+}
+
+/* ---------- marking ---------- */
+function dayQuestions(d){ return d.blocks.filter(function(b){ return b.t === 'q'; }); }
+
+function updateStat(){
+  var el = document.getElementById('stat');
+  if(cur === -1){
+    var tot=0, don=0;
+    days.forEach(function(d){ dayQuestions(d).forEach(function(q){ tot++; if(state.ans[uid(d.key,q)]) don++; }); });
+    el.innerHTML = '週全体　<b>'+don+'</b> / '+tot+' 問 解答ずみ';
+    document.getElementById('btnMark').style.display='none';
+    document.getElementById('btnClear').style.display='none';
+    return;
+  }
+  document.getElementById('btnMark').style.display='';
+  document.getElementById('btnClear').style.display='';
+  var d = days[cur], qs = dayQuestions(d), don=0, ok=0;
+  qs.forEach(function(q){ var a = state.ans[uid(d.key,q)]; if(a) don++; if(a && a === correctOf(d.key,q)) ok++; });
+  if(state.marked[d.key]) el.innerHTML = d.key+'　<b>'+ok+'</b> / '+qs.length+' 問 正解';
+  else el.innerHTML = d.key+'　<b>'+don+'</b> / '+qs.length+' 問 解答ずみ';
+  document.getElementById('btnMark').textContent = state.marked[d.key] ? '採点ずみ' : '採点する';
+  document.getElementById('btnMark').disabled = !!state.marked[d.key];
+}
+
+document.getElementById('btnMark').addEventListener('click', function(){
+  if(cur === -1) return;
+  var d = days[cur], qs = dayQuestions(d);
+  var un = qs.filter(function(q){ return !state.ans[uid(d.key,q)]; }).length;
+  if(un > 0 && !confirm(un + '問がまだ答えられていません。このまま採点しますか。')) return;
+  state.marked[d.key] = true; save(); render();
+});
+
+document.getElementById('btnClear').addEventListener('click', function(){
+  if(cur === -1) return;
+  var d = days[cur];
+  if(!confirm(d.key + 'の解答を消して、やり直しますか。')) return;
+  dayQuestions(d).forEach(function(q){ delete state.ans[uid(d.key,q)]; });
+  delete state.marked[d.key]; save(); render();
+});
+
+/* ---------- record tab ---------- */
+function renderRecord(){
+  var h = document.createElement('div'); h.className='rec';
+  var t1 = '<h2 class="sec">曜日ごとの成績</h2><table><tr><th>曜日</th><th>正解</th><th>問題数</th><th>状態</th></tr>';
+  days.forEach(function(d){
+    var qs = dayQuestions(d), ok = 0;
+    qs.forEach(function(q){ if(state.ans[uid(d.key,q)] === correctOf(d.key,q)) ok++; });
+    t1 += '<tr><td>'+d.key+'</td><td class="n">'+(state.marked[d.key]?ok:'—')+'</td><td class="n">'+qs.length+'</td><td>'
+       + (state.marked[d.key]?'採点ずみ':'未採点')+'</td></tr>';
+  });
+  t1 += '</table>';
+
+  var tally = {shiji:0, shucho:0, joken:0, naiyou:0};
+  days.forEach(function(d){
+    if(!state.marked[d.key]) return;
+    dayQuestions(d).forEach(function(q){
+      if(!q.tag) return;
+      if(state.ans[uid(d.key,q)] !== correctOf(d.key,q)) tally[q.tag]++;
+    });
+  });
+  var t2 = '<h2 class="sec">間違えた読解問題のタイプ</h2><table><tr><th>タイプ</th><th>間違えた数</th></tr>';
+  Object.keys(TAGNAME).forEach(function(k){
+    t2 += '<tr><td>'+TAGNAME[k]+'</td><td class="n">'+tally[k]+'</td></tr>';
+  });
+  t2 += '</table><p class="body" style="font-size:14px;color:var(--ink-soft)">'
+     + 'いちばん数が多いタイプが、いまの弱点です。11月の総復習では、このタイプだけを集中的に解きます。</p>';
+
+  var t3 = '<h2 class="sec">目標</h2><table><tr><th>項目</th><th>目標</th></tr>'
+     + '<tr><td>土曜・読解通し</td><td>11 / 13問</td></tr>'
+     + '<tr><td>日曜・復習テスト</td><td>17 / 20問</td></tr>'
+     + '<tr><td>日曜・聴解</td><td>6 / 7問</td></tr></table>';
+
+  var reset = '<p class="body"><button class="act warn" id="btnReset">この週の解答をすべて消す</button></p>';
+  h.innerHTML = t1 + t2 + t3 + reset;
+  pane.appendChild(h);
+  document.getElementById('btnReset').addEventListener('click', function(){
+    if(!confirm('第'+WEEK+'週の解答をすべて消しますか。元に戻せません。')) return;
+    state = {ans:{}, marked:{}}; save(); render();
+  });
+}
+
+window.addEventListener('beforeunload', function(){ try{ synth.cancel(); }catch(e){} });
+
+var last = '1';
+try { last = localStorage.getItem('n3-lastweek') || '1'; } catch(e){}
+if(!WEEKS[last]) last = Object.keys(WEEKS).sort()[0];
+mount(last);
+})();
+</script>
+</body>
+</html>
