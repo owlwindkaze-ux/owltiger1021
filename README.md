@@ -64,7 +64,10 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 | `bunpo/index.html` | 文型（文法）アプリ本体（376項目・例文1,128・練習問題1,128） |
 | `dokkai/index.html` | 読解アプリ本体 |
 | `dokkai/reading-n5/n4/n3.json` | 読解の文章45本・設問98問（すべてオリジナル） |
-| `choukai/index.html` | 聴解アプリ本体（3パート17問。音声は端末の音声合成が読み上げるので音声ファイルなし） |
+| `choukai/index.html` | 聴解アプリ本体（8パート48問。音声は端末の音声合成が読み上げるので音声ファイルなし） |
+| `tegaki.html` | 手書き漢字検索（読めない字を書いて調べる） |
+| `tegaki-data.json` | 手書き検索のデータ（漢字6,412字・部首287） |
+| `n3.html` | N3合格100日コース（試験日から逆算した週ごとの学習） |
 | `kanji-data.json` | 漢字746字のデータ（読み・意味・用例・部首など） |
 | `kanji-strokes.json` | 書き順データ（KanjiVG のパス、746字ぶん） |
 | `vocab.json` | 熟語4,558語（JLPT語彙＋介護・看護201語＋現場125語） |
