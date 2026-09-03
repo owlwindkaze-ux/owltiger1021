@@ -116,6 +116,21 @@ footer{text-align:center;font-size:.72rem;color:var(--muted);padding:1.2rem;line
   background:var(--pur);color:#fff;font-size:1rem;font-weight:700;cursor:pointer}
 #gate .err{color:var(--red);font-size:.8rem;min-height:1.2rem;margin-top:.5rem}
 #app{display:none}
+  .qtbox{margin-top:1.6rem;border-top:1px solid var(--line);padding-top:1.1rem}
+  .qtbox h3{font-size:.95rem;margin:0 0 .7rem}
+  .qtlist{display:grid;gap:.45rem}
+  .qtrow{display:grid;grid-template-columns:minmax(7.5rem,10rem) 1fr auto;
+    gap:.6rem;align-items:center;font-size:.85rem}
+  .qtname{font-weight:700;line-height:1.35}
+  .qtname em{display:block;font-style:normal;font-weight:400;font-size:.72rem;color:var(--muted)}
+  .qtbar{background:var(--line);height:8px;border-radius:999px;overflow:hidden}
+  .qtbar i{display:block;height:100%;background:var(--pur);border-radius:999px}
+  .qtrow.weak .qtbar i{background:var(--red)}
+  .qtrow.weak .qtname{color:var(--red)}
+  .qtnum{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.78rem;white-space:nowrap}
+  .qtnum b{display:inline-block;min-width:2.6rem;text-align:right;color:var(--ink);font-size:.85rem}
+  .qthint{font-size:.85rem;margin:.9rem 0 0;line-height:1.8}
+  .qthint .btn{margin-left:.4rem;padding:.25rem .7rem;font-size:.8rem}
 </style>
 </head>
 <body>
@@ -223,7 +238,7 @@ footer{text-align:center;font-size:.72rem;color:var(--muted);padding:1.2rem;line
 <script>
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
-const VERSION = '2026-08-31';
+const VERSION = '2026-09-03';
 const STORE = 'jlpt-dokkai-progress-v1', RBKEY = 'jlpt-dokkai-ruby';
 const PASS_SHA256 = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
 const GATEKEY = 'jlpt-kanji-gate-v1';
@@ -385,7 +400,8 @@ function openPassage(id) {
       fb.style.display = 'block';
       if (answered.every(a => a !== null)) {
         const ok = answered.filter(Boolean).length;
-        progress[p.id] = { done: true, ok, total: answered.length };
+        /* res：設問ごとの正誤。設問タイプ別の正解率を出すために残す */
+        progress[p.id] = { done: true, ok, total: answered.length, res: answered.slice() };
         save(); renderList(); refreshStats();
       }
     });
@@ -412,7 +428,69 @@ function refreshStats() {
   const all = DATA.length, done = DATA.filter(p => isDone(p.id)).length;
   $('#statWrap').innerHTML =
     `<p class="hint" style="margin-bottom:.8rem">読んだ文章 <b>${done} / ${all}</b> 本</p>` +
-    lvs.map(bar).join('');
+    lvs.map(bar).join('') + qtypeBlock();
+  wireQtypeJump();
+}
+
+/* ---------- 設問タイプ別の正解率（どこが弱いかを見つける） ---------- */
+const QT_ID = {
+  '内容': 'Isi bacaan', '指示語': 'Kata tunjuk', '理由': 'Alasan',
+  '主張': 'Inti pendapat', '情報検索': 'Cari informasi',
+  '内容一致': 'Sesuai isi', '語句の意味': 'Arti ungkapan'
+};
+function qtypeStats() {
+  const acc = {};
+  DATA.forEach(p => {
+    const pr = progress[p.id];
+    if (!pr || !Array.isArray(pr.res)) return;      /* 古い記録は集計に入れない */
+    p.questions.forEach((q, i) => {
+      const t = q.qtype || 'その他';
+      if (pr.res[i] === undefined || pr.res[i] === null) return;
+      acc[t] = acc[t] || { ok: 0, n: 0 };
+      acc[t].n++;
+      if (pr.res[i]) acc[t].ok++;
+    });
+  });
+  return acc;
+}
+function qtypeBlock() {
+  const acc = qtypeStats();
+  const keys = Object.keys(acc);
+  if (!keys.length) {
+    return `<div class="qtbox">
+      <h3>設問タイプ別の正解率 ／ Ketepatan per jenis soal</h3>
+      <p class="hint">文章を最後まで答えると、ここに<b>どの種類の問題が弱いか</b>が出ます。
+      3〜5本ほど答えると傾向が見えます。<br>
+      <span style="font-style:italic">Jawab sampai selesai, lalu jenis soal yang lemah akan tampil di sini.</span></p>
+    </div>`;
+  }
+  const rows = keys
+    .map(t => ({ t, ...acc[t], pct: Math.round(acc[t].ok / acc[t].n * 100) }))
+    .sort((a, b) => a.pct - b.pct || b.n - a.n);
+  const weak = rows.find(r => r.n >= 3 && r.pct < 70);
+  return `<div class="qtbox">
+    <h3>設問タイプ別の正解率 ／ Ketepatan per jenis soal</h3>
+    <div class="qtlist">${rows.map(r => `
+      <div class="qtrow${weak && r.t === weak.t ? ' weak' : ''}">
+        <span class="qtname">${esc(r.t)}<em>${esc(QT_ID[r.t] || '')}</em></span>
+        <span class="qtbar"><i style="width:${r.pct}%"></i></span>
+        <span class="qtnum">${r.ok}/${r.n}<b>${r.pct}%</b></span>
+      </div>`).join('')}</div>
+    ${weak ? `<p class="qthint">いちばん弱いのは <b>${esc(weak.t)}</b>（${weak.pct}%）です。
+      <button class="btn" id="qtJump" data-t="${esc(weak.t)}">このタイプだけ練習する</button></p>`
+      : `<p class="qthint">どのタイプも70%以上です。このまま続けてください。</p>`}
+  </div>`;
+}
+function wireQtypeJump() {
+  const b = $('#qtJump');
+  if (!b) return;
+  b.onclick = () => {
+    $('#qtSel').value = b.dataset.t;
+    $('#doneSel').value = 'all';
+    $$('#lvChips .chip').forEach(c => c.classList.toggle('on', c.dataset.lv === 'all'));
+    $('#genreSel').value = 'all'; $('#typeSel').value = 'all';
+    renderList(); openTab('p-list');
+  };
 }
 $('#resetBtn').onclick = () => {
   if (confirm('読解の記録をすべて消しますか？ ／ Hapus semua catatan membaca?')) {
