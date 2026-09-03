@@ -14,6 +14,7 @@
   --pur:#7c3aed; --pur-d:#5b21b6;
   --amb:#c2410c; --amb-d:#9a3412;
   --tel:#0d9488; --tel-d:#0f766e;
+  --nvy:#2e4a63; --nvy-d:#1d3245;
   --red:#dc2626;
   --bg:#f1f5f9; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
   --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
@@ -42,6 +43,11 @@ main{flex:1;max-width:760px;width:100%;margin:0 auto;padding:1.4rem 1rem 2rem}
 .card-d a.item:hover,.card-d a.item:focus{background:#f5f3ff;border-color:var(--pur)}
 .card-d .item .ar{color:var(--pur-d)}
 .card-d .bar i{background:var(--pur)}
+.card-n{border-top:6px solid var(--nvy)}
+.card-n .icon{color:var(--nvy)}
+.card-n a.item:hover,.card-n a.item:focus{background:#eef2f6;border-color:var(--nvy)}
+.card-n .item .ar{color:var(--nvy-d)}
+.card-n .bar i{background:var(--nvy)}
 .card-t{border-top:6px solid var(--tel)}
 .card-t .icon{color:var(--tel)}
 .card-t a.item:hover,.card-t a.item:focus{background:#f0fdfa;border-color:var(--tel)}
@@ -209,6 +215,22 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
       </div>
     </section>
 
+    <section class="card card-n">
+      <div class="head">
+        <div class="icon">100日</div>
+        <div>
+          <div class="ttl">100 Hari<small>N3合格 100日コース</small></div>
+        </div>
+      </div>
+      <div class="pg" id="pgN">週ごとに進む集中コース</div>
+      <p class="desc">試験日から逆算して、月〜日の毎日やることが決まっています。読解・語彙・文法を1日ずつ。
+        <b>不合格からの再受験</b>や、期限が決まっている人向けです。</p>
+      <div class="sub-menu">
+        <a class="item" href="n3.html"><span class="em">📅</span>
+          <span class="tx"><span class="n">今週の学習</span><span class="r">Minggu ini ／ 曜日ごとに進む</span></span><span class="ar">→</span></a>
+      </div>
+    </section>
+
     <section class="card card-t">
       <div class="head">
         <div class="icon">手書き</div>
@@ -230,8 +252,8 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
 
 <footer>
   <button id="refreshBtn">🔄 最新にする ／ Perbarui</button><br>
-  合言葉は一度入れれば、5つのシステムすべてでそのまま使えます。<br>
-  Kata sandi cukup dimasukkan sekali untuk kelima sistem.<br>
+  合言葉は一度入れれば、6つのシステムすべてでそのまま使えます。<br>
+  Kata sandi cukup dimasukkan sekali untuk keenam sistem.<br>
   <span id="ver"></span> ・ © 2026 owlwindkaze　このシステムは施設内の学習用です。
 </footer>
 
