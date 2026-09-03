@@ -116,6 +116,18 @@ footer{text-align:center;font-size:.72rem;color:var(--muted);padding:1.2rem;line
   background:var(--pur);color:#fff;font-size:1rem;font-weight:700;cursor:pointer}
 #gate .err{color:var(--red);font-size:.8rem;min-height:1.2rem;margin-top:.5rem}
 #app{display:none}
+  .timer{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.6rem;
+    padding:.4rem .7rem;background:var(--pur-l);border-radius:10px;font-size:.85rem}
+  .timer.over{background:var(--red-l)}
+  .timer.done{background:var(--bg)}
+  .timer.off{display:none}
+  .timer .tm{font-weight:800;font-variant-numeric:tabular-nums;font-size:1rem;color:var(--pur-d)}
+  .timer.over .tm{color:var(--red)}
+  .timer .tg{color:var(--muted);font-size:.78rem}
+  .timer .tv{font-size:.8rem;font-weight:700}
+  .timer .tv.ok{color:var(--green)} .timer .tv.ng{color:var(--red)}
+  .timer .tstop{margin-left:auto;border:1px solid var(--line);background:var(--card);
+    color:var(--muted);font-size:.72rem;padding:.15rem .5rem;border-radius:6px;cursor:pointer}
   .qtbox{margin-top:1.6rem;border-top:1px solid var(--line);padding-top:1.1rem}
   .qtbox h3{font-size:.95rem;margin:0 0 .7rem}
   .qtlist{display:grid;gap:.45rem}
@@ -347,6 +359,14 @@ $('#recField').onclick = () => setFilters('N4', '介護', 'all', 'all');
 $('#recExam').onclick = () => setFilters('N3', 'all', 'all', 'all');
 $('#recAll').onclick = () => setFilters('all', 'all', 'all', 'all');
 
+/* ---------- 時間の目安（JLPT本試験の配分から。単位は秒） ---------- */
+const GOAL = { '短文': 180, '中文': 360, '長文': 510, '情報検索': 300 };
+const goalOf = p => GOAL[p.type] || 300;
+const mmss = sec => {
+  const m = Math.floor(sec / 60), s2 = sec % 60;
+  return m + '分' + String(s2).padStart(2, '0') + '秒';
+};
+
 /* ---------- ② 読む ---------- */
 function tableHTML(t) {
   if (!t) return '';
@@ -364,6 +384,9 @@ function openPassage(id) {
       <div class="row1" style="display:flex;gap:.35rem;margin-bottom:.5rem;flex-wrap:wrap">
         <span class="lb">${p.level}</span><span class="lb">${p.type}</span>
         <span class="lb g">${p.genre === '介護' ? '介護の現場' : '一般'}</span></div>
+      <div class="timer" id="timer"><span class="tm" id="tmNow">0分00秒</span>
+        <span class="tg">目安 ${mmss(goalOf(p))}</span>
+        <button type="button" class="tstop" id="tmStop" title="計測をやめる">計測しない</button></div>
       <h2 style="font-size:1.1rem;margin-bottom:.5rem">${ruby(p.title)}</h2>
       ${p.intro ? `<div class="intro">${ruby(p.intro)}</div>` : ''}
       <div class="body ${p.type === '情報検索' ? '' : 'doc'}">${p.text ? ruby(p.text) : ''}</div>
@@ -400,14 +423,55 @@ function openPassage(id) {
       fb.style.display = 'block';
       if (answered.every(a => a !== null)) {
         const ok = answered.filter(Boolean).length;
-        /* res：設問ごとの正誤。設問タイプ別の正解率を出すために残す */
-        progress[p.id] = { done: true, ok, total: answered.length, res: answered.slice() };
+        /* res：設問ごとの正誤。sec：かかった時間（設問タイプ別・時間の集計に使う） */
+        const sec = stopTimer();
+        const prev = progress[p.id] || {};
+        progress[p.id] = { done: true, ok, total: answered.length, res: answered.slice(),
+                           sec: sec > 0 ? sec : prev.sec };
         save(); renderList(); refreshStats();
+        showTimeResult(p, sec);
       }
     });
   });
-  $('#backList').onclick = () => openTab('p-list');
+  startTimer(p);
+  $('#backList').onclick = () => { stopTimer(); openTab('p-list'); };
   openTab('p-read');
+}
+
+/* ---------- 時間を計る ---------- */
+let tmId = null, tmStart = 0, tmOn = false;
+function startTimer(p) {
+  stopTimer();
+  tmStart = Date.now(); tmOn = true;
+  const el = $('#tmNow'), box = $('#timer'), goal = goalOf(p);
+  const tick = () => {
+    if (!tmOn || !el) return;
+    const sec = Math.floor((Date.now() - tmStart) / 1000);
+    el.textContent = mmss(sec);
+    box.classList.toggle('over', sec > goal);
+  };
+  tick();
+  tmId = setInterval(tick, 1000);
+  const stop = $('#tmStop');
+  if (stop) stop.onclick = () => { stopTimer(); $('#timer').classList.add('off'); };
+}
+/* 止めて、かかった秒数を返す（計測していなければ0） */
+function stopTimer() {
+  if (tmId) { clearInterval(tmId); tmId = null; }
+  if (!tmOn) return 0;
+  tmOn = false;
+  return Math.floor((Date.now() - tmStart) / 1000);
+}
+function showTimeResult(p, sec) {
+  const box = $('#timer');
+  if (!box || !sec) return;
+  const goal = goalOf(p), over = sec > goal;
+  box.classList.add('done');
+  box.innerHTML = `<span class="tm">${mmss(sec)}</span>
+    <span class="tg">目安 ${mmss(goal)}</span>
+    <span class="tv ${over ? 'ng' : 'ok'}">${over
+      ? '目安より ' + mmss(sec - goal) + ' 多くかかりました'
+      : '目安の中で読めました'}</span>`;
 }
 
 /* ---------- ③ 学習状況 ---------- */
@@ -428,8 +492,41 @@ function refreshStats() {
   const all = DATA.length, done = DATA.filter(p => isDone(p.id)).length;
   $('#statWrap').innerHTML =
     `<p class="hint" style="margin-bottom:.8rem">読んだ文章 <b>${done} / ${all}</b> 本</p>` +
-    lvs.map(bar).join('') + qtypeBlock();
+    lvs.map(bar).join('') + timeBlock() + qtypeBlock();
   wireQtypeJump();
+}
+
+/* ---------- 読む速さ（目安と比べる） ---------- */
+function timeBlock() {
+  const rows = [];
+  ['短文', '中文', '長文', '情報検索'].forEach(t => {
+    const xs = DATA.filter(p => p.type === t && progress[p.id] && progress[p.id].sec > 0);
+    if (!xs.length) return;
+    const secs = xs.map(p => progress[p.id].sec);
+    const avg = Math.round(secs.reduce((a, b) => a + b, 0) / secs.length);
+    const goal = GOAL[t] || 300;
+    rows.push({ t, avg, goal, n: xs.length, over: xs.filter(p => progress[p.id].sec > goal).length });
+  });
+  if (!rows.length) {
+    return `<div class="qtbox">
+      <h3>読む速さ ／ Kecepatan membaca</h3>
+      <p class="hint">文章を最後まで答えると、<b>かかった時間</b>と本試験の目安との差が出ます。<br>
+      <span style="font-style:italic">Waktu yang Anda perlukan akan ditampilkan di sini.</span></p></div>`;
+  }
+  const slow = rows.filter(r => r.avg > r.goal);
+  return `<div class="qtbox">
+    <h3>読む速さ ／ Kecepatan membaca</h3>
+    <div class="qtlist">${rows.map(r => `
+      <div class="qtrow${r.avg > r.goal ? ' weak' : ''}">
+        <span class="qtname">${esc(r.t)}<em>${r.n}本の平均</em></span>
+        <span class="qtbar"><i style="width:${Math.min(100, Math.round(r.goal / r.avg * 100))}%"></i></span>
+        <span class="qtnum">目安${Math.round(r.goal / 60)}分<b>${mmss(r.avg)}</b></span>
+      </div>`).join('')}</div>
+    <p class="qthint">${slow.length
+      ? '<b>' + slow.map(r => esc(r.t)).join('・') + '</b> が目安より遅めです。'
+        + '先に設問を読んでから本文に入ると速くなります。'
+      : '目安の中で読めています。'}</p>
+  </div>`;
 }
 
 /* ---------- 設問タイプ別の正解率（どこが弱いかを見つける） ---------- */
