@@ -75,6 +75,7 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 | `vocab-extra.csv` | 施設独自の専門用語（Excelで編集して追加・修正） |
 | `MANUAL.md` | 使用説明書 |
 | `SPEC.md` | 仕様書 |
+| `使い方の案内.pdf` | **配布用の1枚もの**（A4・日本語＋インドネシア語併記。URL・合言葉・QRコード・注意点。掲示や配付に使う） |
 
 ### ローカルで動かす場合
 ```bash
