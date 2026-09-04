@@ -389,9 +389,13 @@ const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-grammar-progress-v1', LANGKEY = 'jlpt-kanji-lang';
 /* 版（更新日）。grammar.json の "app_version" と必ず同じ値にすること。
    ずれていると、アプリが「古いHTMLを表示している」と判断して自動で読み込み直します。 */
-const VERSION = '2026-08-31';
+const VERSION = '2026-09-04';
 
 let DATA = [], BYID = {}, LEVELS = [], CATS = [];
+/* レベルごとの読み込み用。IDXFILES=目次、LOADED=読み込みずみのレベル、
+   LOADING=読み込み中の約束（同じファイルを二度読まないため）、COUNTS=レベルごとの総数 */
+let IDXFILES = [], LOADED = new Set(), LOADING = {}, COUNTS = {}, INITLV = 'all';
+const LVKEY = 'jlpt-grammar-lastlv';   /* 最後に見ていたレベル */
 let LANG = localStorage.getItem(LANGKEY) || 'id';
 let progress = {};
 try { progress = JSON.parse(localStorage.getItem(STORE) || '{}'); } catch (e) {}
@@ -419,35 +423,87 @@ function checkAppVersion(dataVer) {
   return true;
 }
 
+/* ---------- レベルごとの読み込み ----------
+   文型データはレベルごとのファイルに分かれている。全部を最初に読むと、
+   N5だけ勉強したい人にもN3のデータが毎回届いてしまうので、
+   「押されたレベルのファイルだけを、そのとき読む」ようにしてある。
+   一度読んだレベルは覚えておくので、行き来しても待たされない。 */
+function addItems(arr) {
+  (arr || []).forEach(g => { if (!BYID[g.id]) { BYID[g.id] = g; DATA.push(g); } });
+}
+/** そのレベルのデータを読み込む（読み込みずみなら何もしない） */
+function ensureLevel(lv) {
+  if (lv === 'all') return ensureAll();
+  if (LOADED.has(lv)) return Promise.resolve();
+  if (LOADING[lv]) return LOADING[lv];
+  const files = IDXFILES.filter(f => f.level === lv);
+  /* 作成中のレベルのファイルがまだ無くても、他のレベルは表示できるようにする */
+  LOADING[lv] = Promise.all(files.map(f =>
+    fetch(f.file, { cache: 'no-cache' }).then(r => r.ok ? r.json() : { grammar: [] })
+      .catch(() => ({ grammar: [] }))))
+    .then(parts => { parts.forEach(p => addItems(p.grammar)); LOADED.add(lv); });
+  return LOADING[lv];
+}
+/** すべてのレベルを読み込む（「すべて」「横断検索」「学習状況」で必要） */
+function ensureAll() { return Promise.all(LEVELS.map(lv => ensureLevel(lv))).then(() => {}); }
+/** 読み込み中の表示。長い待ちのときだけ出す（一瞬で終わるときは何も出さない） */
+async function withBusy(fn) {
+  const grid = $('#grid');
+  const t = setTimeout(() => { if (grid) grid.innerHTML = '<p class="loading">Memuat ／ 読み込み中…</p>'; }, 250);
+  try { return await fn(); } finally { clearTimeout(t); }
+}
+
 async function boot() {
   /* grammar.json は目次。実データはレベルごとのファイル（grammar-n5.json など）に分けてある。
      目次に "grammar" が直接入っている旧形式のデータもそのまま読める。 */
   const json = await (await fetch('grammar.json', { cache: 'no-cache' })).json();
   if (checkAppVersion(json.app_version)) return;   // 読み込み直すので、ここで中断
-  let items = json.grammar || [];
-  if (json.files && json.files.length) {
-    /* 作成中のレベルのファイルがまだ無くても、他のレベルは表示できるようにする */
-    const parts = await Promise.all(json.files.map(f =>
-      fetch(f, { cache: 'no-cache' }).then(r => r.ok ? r.json() : { grammar: [] })
-        .catch(() => ({ grammar: [] }))));
-    parts.forEach(p => { items = items.concat(p.grammar || []); });
-  }
-  DATA = items;
-  DATA.forEach(g => BYID[g.id] = g);
+  addItems(json.grammar);
+  /* 目次の files は {file, level, count} の形。ファイル名だけの旧形式にも対応する。 */
+  IDXFILES = (json.files || []).map(f => (typeof f === 'string' ? { file: f, level: null, count: 0 } : f));
+  const perLevel = IDXFILES.length > 0 && IDXFILES.every(f => f.level);
   /* 並び順は N5 → N4 → N3 → 記録。知らないレベルは最後に回す */
   const LVORDER = ['N5', 'N4', 'N3', '記録'];
   const lvKey = lv => { const i = LVORDER.indexOf(lv); return i < 0 ? 99 : i; };
-  LEVELS = [...new Set(DATA.map(g => g.level))].sort((a, b) => lvKey(a) - lvKey(b) || a.localeCompare(b));
-  CATS = [...new Set(DATA.map(g => g.category))];
+
+  if (perLevel) {
+    LEVELS = [...new Set(IDXFILES.map(f => f.level))].sort((a, b) => lvKey(a) - lvKey(b) || a.localeCompare(b));
+    IDXFILES.forEach(f => { COUNTS[f.level] = (COUNTS[f.level] || 0) + (f.count || 0); });
+    CATS = json.categories || [];
+    /* 前に見ていたレベルを覚えておき、そのファイルだけ読む。初めての人は「すべて」 */
+    let want = 'all';
+    try { want = localStorage.getItem(LVKEY) || 'all'; } catch (e) {}
+    if (want !== 'all' && !LEVELS.includes(want)) want = 'all';
+    await ensureLevel(want);
+    INITLV = want;
+  } else {
+    /* 旧形式（レベル情報のない目次）は、今までどおり全部まとめて読む */
+    const parts = await Promise.all(IDXFILES.map(f =>
+      fetch(f.file, { cache: 'no-cache' }).then(r => r.ok ? r.json() : { grammar: [] })
+        .catch(() => ({ grammar: [] }))));
+    parts.forEach(p => addItems(p.grammar));
+    LEVELS = [...new Set(DATA.map(g => g.level))].sort((a, b) => lvKey(a) - lvKey(b) || a.localeCompare(b));
+    LEVELS.forEach(lv => { LOADED.add(lv); COUNTS[lv] = DATA.filter(g => g.level === lv).length; });
+    INITLV = 'all';
+  }
+  if (!CATS.length) CATS = [...new Set(DATA.map(g => g.category))];
 
   LEVELS.forEach(lv => {
     $('#lvChips').insertAdjacentHTML('beforeend', `<button class="chip" data-lv="${lv}">${lv}</button>`);
     $('#qLv').insertAdjacentHTML('beforeend', `<option value="${lv}">${lv}</option>`);
   });
   CATS.forEach(c => $('#catSel').insertAdjacentHTML('beforeend', `<option value="${esc(c)}">${esc(c)}</option>`));
-  $$('#lvChips .chip').forEach(b => b.onclick = () => {
-    $$('#lvChips .chip').forEach(x => x.classList.remove('on')); b.classList.add('on'); renderList();
+  $$('#lvChips .chip').forEach(b => b.onclick = async () => {
+    const lv = b.dataset.lv;
+    $$('#lvChips .chip').forEach(x => x.classList.remove('on')); b.classList.add('on');
+    await withBusy(() => ensureLevel(lv));
+    try { localStorage.setItem(LVKEY, lv); } catch (e) {}
+    renderList();
   });
+  /* 前に見ていたレベルのチップを選んだ状態にする */
+  const chip = $$('#lvChips .chip').find(b => b.dataset.lv === INITLV) || $$('#lvChips .chip')[0];
+  $$('#lvChips .chip').forEach(x => x.classList.remove('on')); chip.classList.add('on');
+
   renderList(); refreshStats(); openFromHash();
 }
 
@@ -500,7 +556,9 @@ function paintState() {
   $('#mNg').classList.toggle('active', p === 'review');
   $('#mClr').disabled = !p;          /* 記録がないときは押せない */
 }
-function openModal(id) {
+async function openModal(id) {
+  /* 直リンクなどで、まだ読み込んでいないレベルの項目が指定されることがある */
+  if (!BYID[id]) await ensureAll();
   const g = BYID[id]; if (!g) return;
   modalId = id;
   $('#mPt').textContent = g.pattern;
@@ -564,7 +622,12 @@ function startQuiz(list) {
   $('#qSetup').style.display = 'none'; $('#qResult').style.display = 'none'; $('#qArea').style.display = '';
   showQ();
 }
-$('#qStart').onclick = () => {
+$('#qStart').onclick = async () => {
+  /* 出題するレベルのデータがまだなら、ここで読み込む */
+  const btn = $('#qStart'), label = btn.textContent;
+  btn.disabled = true; $('#qMsg').textContent = 'Memuat ／ 読み込み中…';
+  try { await ensureLevel($('#qLv').value); } finally { btn.disabled = false; btn.textContent = label; }
+  $('#qMsg').textContent = '';
   let qs = buildQuestions();
   if (!qs.length) { $('#qMsg').textContent = 'Tidak ada soal untuk pilihan ini ／ この条件では問題がありません'; return; }
   $('#qMsg').textContent = '';
@@ -687,12 +750,15 @@ document.addEventListener('keydown', e => {
 
 /* ========== ③ 学習状況 ========== */
 function refreshStats() {
-  const known = DATA.filter(g => progress[g.id] === 'known').length;
-  $('#hdStat').textContent = `${known} / ${DATA.length} hafal ／ 覚えた`;
+  /* 分母は目次に書いてある総数を使う。まだ読み込んでいないレベルがあっても正しく出る */
+  const total = LEVELS.reduce((s, lv) => s + (COUNTS[lv] || 0), 0) || DATA.length;
+  const known = Object.keys(progress).filter(id => progress[id] === 'known').length;
+  $('#hdStat').textContent = `${known} / ${total} hafal ／ 覚えた`;
   $('#progWrap').innerHTML = LEVELS.map(lv => {
     const all = DATA.filter(g => g.level === lv), k = all.filter(g => progress[g.id] === 'known').length;
-    const pct = all.length ? Math.round(k / all.length * 100) : 0;
-    return `<div class="prog"><div class="lv"><span>${lv}</span><span>${k} / ${all.length}（${pct}%）</span></div>
+    const n = COUNTS[lv] || all.length;
+    const pct = n ? Math.round(k / n * 100) : 0;
+    return `<div class="prog"><div class="lv"><span>${lv}</span><span>${k} / ${n}（${pct}%）</span></div>
       <div class="bar" style="margin-top:.4rem"><i style="width:${pct}%"></i></div></div>`;
   }).join('');
   const rev = DATA.filter(g => progress[g.id] === 'review');
@@ -717,7 +783,8 @@ function openTab(pid, scroll = true) {
   const t = $(`.tab[data-p="${pid}"]`); if (!t) return;
   $$('.tab').forEach(x => x.classList.remove('on')); t.classList.add('on');
   $$('.panel').forEach(p => p.classList.toggle('on', p.id === pid));
-  if (pid === 'p-stat') refreshStats();
+  /* 学習状況は全レベルの記録をまとめて見せる画面なので、ここで残りを読み込む */
+  if (pid === 'p-stat') ensureAll().then(refreshStats);
   if (scroll) window.scrollTo({ top: 0 });
 }
 $$('.tab').forEach(t => t.onclick = () => {
