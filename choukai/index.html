@@ -815,6 +815,7 @@ const DATA = [
 
 /* ---------- speech ---------- */
 const RKEY = 'jlpt-choukai-rate';
+const VKEY = 'jlpt-choukai-voice';   /* 選んだ声を覚えておく（名前で保存） */
 let rate = 1.0, voice = null, jaVoices = [];
 try{ const r = parseFloat(localStorage.getItem(RKEY)); if(r > 0) rate = r; }catch(e){}
 const notice = document.getElementById('notice');
@@ -846,12 +847,17 @@ function loadVoices(){
   }
   notice.classList.remove('on');
   voiceSel.disabled = false;
+  let saved = null;
+  try{ saved = localStorage.getItem(VKEY); }catch(e){}
+  let pick = 0;
   jaVoices.forEach((v,i) => {
     const o = document.createElement('option');
     o.value = i; o.textContent = v.name;
     voiceSel.appendChild(o);
+    if(saved && v.name === saved) pick = i;    /* 前に選んだ声があれば、それを選ぶ */
   });
-  voice = jaVoices[0];
+  voiceSel.value = String(pick);
+  voice = jaVoices[pick];
 }
 if(canSpeak){
   loadVoices();
@@ -866,7 +872,10 @@ if(canSpeak){
   notice.classList.add('on');
   voiceSel.disabled = true;
 }
-voiceSel.addEventListener('change', e => { voice = jaVoices[e.target.value] || null; });
+voiceSel.addEventListener('change', e => {
+  voice = jaVoices[e.target.value] || null;
+  try{ if(voice) localStorage.setItem(VKEY, voice.name); }catch(err){}
+});
 
 const speedsEl = document.getElementById('speeds');
 function markSpeed(){
