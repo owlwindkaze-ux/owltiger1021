@@ -156,7 +156,7 @@ function pickVoice(){
     sel.value=String(pick);
     jaVoice=jaList[pick];
   }
-  $('#vinfo').textContent='声の数：'+vs.length+'（日本語 '+jaList.length+'）'
+  $('#vinfo').textContent='日本語の声：'+jaList.length+'つ（端末全体では '+vs.length+'）'
     + (jaVoice ? '　使う声：'+jaVoice.name : '');
   $('#novoice').style.display = jaList.length ? 'none' : 'block';
 }
@@ -269,7 +269,7 @@ function init(){
   $('#voices').onchange=function(e){
     jaVoice = jaList[Number(e.target.value)] || null;
     try{ if(jaVoice) localStorage.setItem(VKEY, jaVoice.name); }catch(err){}
-    $('#vinfo').textContent='声の数：'+(synth.getVoices()||[]).length+'（日本語 '+jaList.length+'）'
+    $('#vinfo').textContent='日本語の声：'+jaList.length+'つ（端末全体では '+(synth.getVoices()||[]).length+'）'
       + (jaVoice ? '　使う声：'+jaVoice.name : '');
     stopFlag=false; synth.cancel(); say('この声で 読みます。');   /* 選んだらすぐ聞ける */
   };
