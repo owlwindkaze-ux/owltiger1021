@@ -794,6 +794,13 @@ function sortKanji(arr, mode) {
 
 /* ---------- list ---------- */
 let listLimit = 120, curLv = 'all';
+/* 前に見ていたレベルを覚えておく。新人コースなど別のページから
+   「N5で開く」と指定して来ることもできる（同じサイトなので書き込める）。 */
+const KLVKEY = 'jlpt-kanji-lastlv';
+try {
+  const saved = localStorage.getItem(KLVKEY);
+  if (saved) curLv = saved;
+} catch (e) {}
 function renderList() {
   const arr = sortKanji(filterKanji($('#q').value, curLv, $('#mark').value), $('#sort').value);
   $('#cnt').textContent = `${arr.length} kanji`;
@@ -1532,7 +1539,14 @@ $('#mark').onchange = () => { listLimit = 120; renderList(); };
 $$('#lvChips .chip').forEach(c => c.onclick = () => {
   $$('#lvChips .chip').forEach(x => x.classList.toggle('on', x === c));
   curLv = c.dataset.lv; listLimit = 120; renderList();
+  try { localStorage.setItem(KLVKEY, curLv); } catch (e) {}
 });
+/* 覚えているレベルのチップを、選んだ状態にしておく */
+(function () {
+  const c = $$('#lvChips .chip').find(x => x.dataset.lv === curLv);
+  if (c) $$('#lvChips .chip').forEach(x => x.classList.toggle('on', x === c));
+  else curLv = 'all';
+})();
 $$('#sLvChips .chip').forEach(c => c.onclick = () => {
   $$('#sLvChips .chip').forEach(x => x.classList.toggle('on', x === c));
   curSLv = c.dataset.lv; sLimit = 60; renderStroke();

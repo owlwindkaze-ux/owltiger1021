@@ -70,6 +70,16 @@ header .sub{font-size:.82rem;opacity:.92;margin-top:.2rem}
 .item.k .em{color:var(--blue)} .item.g .em{color:var(--green)}
 .item.d .em{color:var(--pur)} .item.c .em{color:var(--amb)}
 .item.n .em{color:var(--nvy)} .item.t .em{color:var(--tel)}
+.item.big{padding:.85rem .9rem;border-width:2px}
+.item.big .n{font-size:1rem}
+.lvtag{display:inline-block;font-size:.72rem;font-weight:800;background:var(--ora);color:#fff;
+  border-radius:999px;padding:.05rem .5rem;vertical-align:.12em}
+.restbox{padding:.8rem 1rem}
+.restbox>summary{cursor:pointer;font-weight:800;font-size:.92rem;color:var(--muted);list-style:none}
+.restbox>summary::-webkit-details-marker{display:none}
+.restbox>summary::before{content:"▶ ";color:var(--ora)}
+.restbox[open]>summary::before{content:"▼ "}
+.restbox>summary i{font-weight:400;font-style:italic}
 
 .staff{border:1px dashed var(--muted);background:#f8fafc}
 .staff h2{color:var(--muted)}
@@ -115,9 +125,16 @@ footer{text-align:center;font-size:.75rem;color:var(--muted);padding:1rem 0 2rem
   </div>
 
   <div class="card">
-    <h2>今日ひらくもの<small>Buka hari ini ／ ここから始めてください</small></h2>
+    <h2>今月 使うもの<small>Dipakai bulan ini ／ この2〜5つだけで だいじょうぶです</small></h2>
+    <p class="desc">上の「今月やること」に合わせて出しています。
+      <b>レベルの札が付いているものは、そのレベルを開いた状態で始まります。</b></p>
     <div class="items" id="today"></div>
   </div>
+
+  <details class="card restbox" id="restBox">
+    <summary>そのほか（いつでも使えます）　／　<i>Lainnya</i></summary>
+    <div class="items" id="rest" style="margin-top:.7rem"></div>
+  </details>
 
   <div class="card">
     <h2>7月までの道すじ<small>Rencana sampai Juli ／ 月ごとにやることが決まっています</small></h2>
@@ -151,62 +168,75 @@ var PLAN = [
   { start:'2026-12-01', mo:'12月', ro:'Des', t:'日本の生活と仕事に慣れる',
     r:'日本語は1日15分だけ。無理に増やさない',
     g:'診断テスト（第1回）を受ける',
-    todo:['毎日15分、漢字・語彙のN4を見直す',
+    todo:['毎日15分、漢字・語彙の N5→N4 を見直す',
           '聴解を「ゆっくり」で1日3問だけ聞く',
-          '仕事で聞こえた言葉を、その日のうちにメモする'] },
+          '仕事で聞こえた言葉を、その日のうちにメモする'],
+    /* 最初の月は、思い出すところから。N5でならしてからN4に上がる */
+    use:[{k:'k',lv:'N5'},{k:'k',lv:'N4'},{k:'g',lv:'N5'},{k:'g',lv:'N4'},{k:'c'}] },
   { start:'2027-01-01', mo:'1月', ro:'Jan', t:'N4の穴をうめる',
     r:'診断テストで低かった部分から',
     g:'N4の語彙662語・文型117項目をひととおり',
     todo:['文型のN4を1日3項目',
           '漢字・語彙のN4を1日10語',
-          '週に1回、読解のN4を1本'] },
+          '週に1回、読解のN4を1本'],
+    use:[{k:'g',lv:'N4'},{k:'k',lv:'N4'},{k:'d'},{k:'c'}] },
   { start:'2027-02-01', mo:'2月', ro:'Feb', t:'N4を仕上げ、N3語彙を始める',
     r:'ここまでで土台ができる',
     g:'N4の文型をすべて「覚えた」にする',
     todo:['文型のN4の残りを終わらせる',
           'N3の語彙を1日10語ずつ始める',
-          '聴解を「ふつう」の速さに上げる'] },
+          '聴解を「ふつう」の速さに上げる'],
+    use:[{k:'g',lv:'N4'},{k:'k',lv:'N3'},{k:'c'}] },
   { start:'2027-03-01', mo:'3月', ro:'Mar', t:'力を測り直して、N3へ切りかえる',
     r:'ここが折り返し地点',
     g:'診断テスト（第2回）を受ける',
+    use:[{k:'k',lv:'N3'},{k:'d'},{k:'g',lv:'N3'},{k:'c'}],
     todo:['診断テスト第2回（3か月の伸びを見る）',
           'N3の漢字367字を始める',
           '読解のN3を週に1本、時間を計って'] },
   { start:'2027-03-29', mo:'3月末〜', ro:'Apr', t:'100日コースを始める',
     r:'ここから毎日やることが決まる',
     g:'100日コース 第1週〜第4週',
+    use:[{k:'n'},{k:'c'}],
     todo:['100日コースを月曜から順に進める',
           '土曜の通しテストは必ず時間を計る',
           '日曜の聴解は1回だけ聞いて答える'] },
   { start:'2027-05-01', mo:'5月', ro:'Mei', t:'読解の速さを上げる',
     r:'落ちる人のほとんどが読解',
     g:'100日コース 第5週〜第9週',
+    use:[{k:'n'},{k:'d'},{k:'g',lv:'N3'}],
     todo:['100日コースを続ける',
           '読解は「解けたか」より「時間内か」を見る',
           '文型のN3を1日3項目'] },
   { start:'2027-06-01', mo:'6月', ro:'Jun', t:'本番の形に体を慣らす',
     r:'新しい教材はもう増やさない',
     g:'100日コース 第10週〜第13週',
+    use:[{k:'n'},{k:'c'}],
     todo:['土曜の通しテストを50分で解ききる',
           '聴解を毎日10分（本番の速さで）',
           'まちがえた問題をもう一度解く'] },
   { start:'2027-06-28', mo:'7月', ro:'Jul', t:'直前。増やさず、取り出しやすくする',
     r:'一度やったものを、もう一度',
     g:'100日コース 第14週　→　受験',
+    use:[{k:'n'}],
     todo:['100日コース第14週（まぎらわしい形の整理）',
           '新しい教材は開かない',
           '前日は早く寝る。持ち物は前の日にそろえる'] }
 ];
 
-/* 今日ひらくもの。lv を書いておくと、そのレベルを開いた状態で始まる */
-var LINKS = [
-  { cls:'k', em:'📚', href:'../kanji.html#list',  n:'漢字・語彙',   r:'Kanji & Kosakata ／ 読み・意味・書き順' },
-  { cls:'g', em:'📐', href:'../bunpo/#list',      n:'文型・文法',   r:'Tata bahasa ／ 例文とインドネシア語の説明', lv:'N4' },
-  { cls:'d', em:'📖', href:'../dokkai/#list',     n:'読解',         r:'Membaca ／ 時間を計って解く' },
-  { cls:'c', em:'🎧', href:'../choukai/#part1',   n:'聴解',         r:'Menyimak ／ 話す速さを変えられる' },
-  { cls:'n', em:'📅', href:'../n3.html',          n:'100日コース',  r:'Kursus 100 hari ／ 3月末から使います' },
-  { cls:'t', em:'✍️', href:'../tegaki.html',      n:'手書きで漢字をさがす', r:'Tulis tangan ／ 読めない字を書いて調べる' }
-];
+/* 各システムの入口。k=漢字・語彙 g=文型 d=読解 c=聴解 n=100日 t=手書き
+   lvkey がある画面は、開く前に localStorage にレベルを書いてから移る。 */
+var APPS = {
+  k:{ em:'📚', href:'../kanji.html#list', n:'漢字・語彙', r:'Kanji & Kosakata ／ 読み・意味・書き順',
+      lvkey:'jlpt-kanji-lastlv' },
+  g:{ em:'📐', href:'../bunpo/#list', n:'文型・文法', r:'Tata bahasa ／ 例文とインドネシア語の説明',
+      lvkey:'jlpt-grammar-lastlv' },
+  d:{ em:'📖', href:'../dokkai/#list', n:'読解', r:'Membaca ／ 時間を計って解く' },
+  c:{ em:'🎧', href:'../choukai/#part1', n:'聴解', r:'Menyimak ／ 話す速さを変えられる' },
+  n:{ em:'📅', href:'../n3.html', n:'100日コース', r:'Kursus 100 hari ／ 3月末から使います' },
+  t:{ em:'✍️', href:'../tegaki.html', n:'手書きで漢字をさがす', r:'Tulis tangan ／ 読めない字を書いて調べる' }
+};
+var ORDER = ['k','g','d','c','n','t'];
 
 function d(s){ var p=String(s).split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
 function nowIndex(today){
@@ -243,18 +273,33 @@ function init(){
       '<div class="g">▸ ' + p.g + '</div></div></div>';
   }).join('');
 
-  /* 今日ひらくもの */
-  document.getElementById('today').innerHTML = LINKS.map(function(L){
-    return '<a class="item ' + L.cls + '" href="' + L.href + '"' +
-      (L.lv ? ' data-lv="' + L.lv + '"' : '') + '>' +
-      '<span class="em">' + L.em + '</span><span class="tx">' +
-      '<span class="n">' + L.n + '</span><span class="r">' + L.r + '</span></span>' +
+  /* 今月使うもの／そのほか */
+  var use = cur.use || [];
+  function itemHtml(key, lv, big){
+    var A = APPS[key]; if(!A) return '';
+    var name = A.n + (lv ? '　<span class="lvtag">' + lv + '</span>' : '');
+    return '<a class="item ' + key + (big ? ' big' : '') + '" href="' + A.href + '"' +
+      (lv && A.lvkey ? ' data-lvkey="' + A.lvkey + '" data-lv="' + lv + '"' : '') + '>' +
+      '<span class="em">' + A.em + '</span><span class="tx">' +
+      '<span class="n">' + name + '</span><span class="r">' + A.r + '</span></span>' +
       '<span class="ar">→</span></a>';
-  }).join('');
-  /* 文型は、押したときに開くレベルをそろえておく（同じサイトなので書き込める） */
-  [].forEach.call(document.querySelectorAll('#today [data-lv]'), function(a){
+  }
+  document.getElementById('today').innerHTML =
+    use.length ? use.map(function(u){ return itemHtml(u.k, u.lv, true); }).join('')
+               : ORDER.map(function(k){ return itemHtml(k, null, true); }).join('');
+
+  /* 今月使わないものは、たたんで下に置く */
+  var rest = ORDER.filter(function(k){
+    return !use.some(function(u){ return u.k === k; });
+  });
+  document.getElementById('rest').innerHTML =
+    rest.map(function(k){ return itemHtml(k, null, false); }).join('');
+  document.getElementById('restBox').style.display = rest.length ? '' : 'none';
+
+  /* レベル指定つきのボタンは、押したときに開く側のレベルをそろえてから移る */
+  [].forEach.call(document.querySelectorAll('[data-lvkey]'), function(a){
     a.addEventListener('click', function(){
-      try { localStorage.setItem('jlpt-grammar-lastlv', a.dataset.lv); } catch(e) {}
+      try { localStorage.setItem(a.dataset.lvkey, a.dataset.lv); } catch(e) {}
     });
   });
 }
