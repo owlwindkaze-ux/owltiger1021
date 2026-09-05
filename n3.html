@@ -680,12 +680,27 @@ document.getElementById('days').textContent = Math.max(0, Math.round((exam-t0)/8
 
 var TAGNAME = { shiji:'指示語', shucho:'筆者の主張', joken:'条件・情報検索', naiyou:'言いかえ・内容一致' };
 var STORE = 'n3-week1';
-var state = { ans:{}, marked:{} };
+/* ans=選んだ番号、mk=その問題を採点したか（問題ごと）、marked=その曜日を全部採点したか */
+var state = { ans:{}, mk:{}, marked:{} };
 function loadState(){
-  state = { ans:{}, marked:{} };
+  state = { ans:{}, mk:{}, marked:{} };
   try { var raw = localStorage.getItem(STORE); if(raw) state = JSON.parse(raw); } catch(e){}
   if(!state.ans) state.ans = {};
+  if(!state.mk) state.mk = {};
   if(!state.marked) state.marked = {};
+}
+/* 古い記録（曜日ごとにしか採点状態を持っていなかったころのもの）を、
+   問題ごとの形に移します。1回だけ動きます。 */
+function migrateMarks(){
+  var changed = false;
+  days.forEach(function(d){
+    if(!state.marked[d.key]) return;
+    dayQuestions(d).forEach(function(q){
+      var id = uid(d.key, q);
+      if(state.ans[id] && !state.mk[id]) { state.mk[id] = true; changed = true; }
+    });
+  });
+  if(changed) save();
 }
 function save(){ try{ localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){} }
 
@@ -732,6 +747,7 @@ function mount(w){
   KEYS = CONTENT.answers;
   STORE = 'n3-week' + w;
   loadState();
+  migrateMarks();     /* 古い記録を、問題ごとの採点状態に移す */
   try { localStorage.setItem('n3-lastweek', w); } catch(e){}
   document.getElementById('h1').textContent = '第' + w + '週　タブレット学習';
   Array.prototype.forEach.call(weeksNav.children, function(b){
@@ -774,7 +790,7 @@ function questionEl(dayKey, q){
     var s = document.createElement('span'); s.innerHTML = o;
     row.appendChild(c); row.appendChild(s);
     row.addEventListener('click', function(){
-      if(state.marked[dayKey]) return;
+      if(state.mk[id]) return;        /* 採点ずみの問題だけ、変えられない */
       state.ans[id] = num; save();
       Array.prototype.forEach.call(box.querySelectorAll('.opt'), function(x){ x.classList.remove('sel'); });
       row.classList.add('sel');
@@ -786,7 +802,7 @@ function questionEl(dayKey, q){
 
   box.appendChild(expl);
 
-  if(state.marked[dayKey]) paint(box, dayKey, q, expl);
+  if(state.mk[id]) paint(box, dayKey, q, expl);   /* 採点していない問題は、答えを出さない */
   return box;
 }
 
@@ -1003,27 +1019,46 @@ function updateStat(){
   }
   document.getElementById('btnMark').style.display='';
   document.getElementById('btnClear').style.display='';
-  var d = days[cur], qs = dayQuestions(d), don=0, ok=0;
-  qs.forEach(function(q){ var a = state.ans[uid(d.key,q)]; if(a) don++; if(a && a === correctOf(d.key,q)) ok++; });
-  if(state.marked[d.key]) el.innerHTML = d.key+'　<b>'+ok+'</b> / '+qs.length+' 問 正解';
+  var d = days[cur], qs = dayQuestions(d), don=0, ok=0, mk=0, waiting=0;
+  qs.forEach(function(q){
+    var id = uid(d.key,q), a = state.ans[id];
+    if(a) don++;
+    if(state.mk[id]) { mk++; if(a === correctOf(d.key,q)) ok++; }
+    else if(a) waiting++;                 /* 答えたが、まだ採点していない */
+  });
+  if(mk) el.innerHTML = d.key+'　正解 <b>'+ok+'</b> / '+mk+' 問（採点ずみ）　'
+    + '解答ずみ '+don+' / '+qs.length+' 問';
   else el.innerHTML = d.key+'　<b>'+don+'</b> / '+qs.length+' 問 解答ずみ';
-  document.getElementById('btnMark').textContent = state.marked[d.key] ? '採点ずみ' : '採点する';
-  document.getElementById('btnMark').disabled = !!state.marked[d.key];
+  var btn = document.getElementById('btnMark');
+  btn.textContent = waiting ? ('採点する（'+waiting+'問）') : (mk ? '採点ずみ' : '採点する');
+  btn.disabled = !waiting;
 }
 
 document.getElementById('btnMark').addEventListener('click', function(){
   if(cur === -1) return;
   var d = days[cur], qs = dayQuestions(d);
+  /* 答えた問題だけを採点します。答えていない問題は、答えを見せずに残します。 */
+  var n = 0;
+  qs.forEach(function(q){
+    var id = uid(d.key, q);
+    if(state.ans[id] && !state.mk[id]) { state.mk[id] = true; n++; }
+  });
+  if(!n){ alert('新しく採点する問題がありません。まず答えをえらんでください。'); return; }
   var un = qs.filter(function(q){ return !state.ans[uid(d.key,q)]; }).length;
-  if(un > 0 && !confirm(un + '問がまだ答えられていません。このまま採点しますか。')) return;
-  state.marked[d.key] = true; save(); render();
+  state.marked[d.key] = (un === 0);
+  save(); render();
+  if(un > 0) alert(n + '問を採点しました。まだ答えていない ' + un + '問は、'
+    + 'このあと答えられます。答えたら、もう一度「採点する」を押してください。');
 });
 
 document.getElementById('btnClear').addEventListener('click', function(){
   if(cur === -1) return;
   var d = days[cur];
   if(!confirm(d.key + 'の解答を消して、やり直しますか。')) return;
-  dayQuestions(d).forEach(function(q){ delete state.ans[uid(d.key,q)]; });
+  dayQuestions(d).forEach(function(q){
+    var id = uid(d.key, q);
+    delete state.ans[id]; delete state.mk[id];
+  });
   delete state.marked[d.key]; save(); render();
 });
 
@@ -1032,19 +1067,24 @@ function renderRecord(){
   var h = document.createElement('div'); h.className='rec';
   var t1 = '<h2 class="sec">曜日ごとの成績</h2><table><tr><th>曜日</th><th>正解</th><th>問題数</th><th>状態</th></tr>';
   days.forEach(function(d){
-    var qs = dayQuestions(d), ok = 0;
-    qs.forEach(function(q){ if(state.ans[uid(d.key,q)] === correctOf(d.key,q)) ok++; });
-    t1 += '<tr><td>'+d.key+'</td><td class="n">'+(state.marked[d.key]?ok:'—')+'</td><td class="n">'+qs.length+'</td><td>'
-       + (state.marked[d.key]?'採点ずみ':'未採点')+'</td></tr>';
+    var qs = dayQuestions(d), ok = 0, mk = 0;
+    qs.forEach(function(q){
+      var id = uid(d.key,q);
+      if(!state.mk[id]) return;
+      mk++; if(state.ans[id] === correctOf(d.key,q)) ok++;
+    });
+    var st = !mk ? '未採点' : (mk === qs.length ? '採点ずみ' : ('途中（'+mk+'問）'));
+    t1 += '<tr><td>'+d.key+'</td><td class="n">'+(mk?ok:'—')+'</td><td class="n">'+(mk?mk:qs.length)+'</td><td>'
+       + st+'</td></tr>';
   });
   t1 += '</table>';
 
   var tally = {shiji:0, shucho:0, joken:0, naiyou:0};
   days.forEach(function(d){
-    if(!state.marked[d.key]) return;
     dayQuestions(d).forEach(function(q){
-      if(!q.tag) return;
-      if(state.ans[uid(d.key,q)] !== correctOf(d.key,q)) tally[q.tag]++;
+      var id = uid(d.key,q);
+      if(!q.tag || !state.mk[id]) return;        /* 採点した問題だけ数える */
+      if(state.ans[id] !== correctOf(d.key,q)) tally[q.tag]++;
     });
   });
   var t2 = '<h2 class="sec">間違えた読解問題のタイプ</h2><table><tr><th>タイプ</th><th>間違えた数</th></tr>';
