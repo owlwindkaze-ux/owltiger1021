@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <!-- 検索エンジンに載せない（URLを直接開く人は今までどおり使えます） -->
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="介護の技能実習生向け 日本語学習システムの入口。漢字・言葉と文型（文法）を選べます。">
+<meta name="description" content="介護の技能実習生向け 日本語学習システムの入口。漢字・言葉、文型、読解、聴解、100日コース、新人コース、手書き検索を選べます。">
 <title>Belajar Bahasa Jepang Kaigo ｜ 介護の日本語</title>
 <style>
 :root{
@@ -15,6 +15,7 @@
   --amb:#c2410c; --amb-d:#9a3412;
   --tel:#0d9488; --tel-d:#0f766e;
   --nvy:#2e4a63; --nvy-d:#1d3245;
+  --ora:#c2410c; --ora-d:#9a3412;
   --red:#dc2626;
   --bg:#f1f5f9; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
   --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
@@ -48,6 +49,10 @@ main{flex:1;max-width:760px;width:100%;margin:0 auto;padding:1.4rem 1rem 2rem}
 .card-n a.item:hover,.card-n a.item:focus{background:#eef2f6;border-color:var(--nvy)}
 .card-n .item .ar{color:var(--nvy-d)}
 .card-n .bar i{background:var(--nvy)}
+.card-s{border-top:6px solid var(--ora)}
+.card-s .icon{color:var(--ora)}
+.card-s a.item:hover,.card-s a.item:focus{background:#fff7ed;border-color:var(--ora)}
+.card-s .item .ar{color:var(--ora-d)}
 .card-t{border-top:6px solid var(--tel)}
 .card-t .icon{color:var(--tel)}
 .card-t a.item:hover,.card-t a.item:focus{background:#f0fdfa;border-color:var(--tel)}
@@ -231,6 +236,25 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
       </div>
     </section>
 
+    <section class="card card-s">
+      <div class="head">
+        <div class="icon">新人</div>
+        <div>
+          <div class="ttl">Staf Baru<small>新人コース（N4 → 7月のN3）</small></div>
+        </div>
+      </div>
+      <div class="pg" id="pgS">12月に入って、7月のN3に合格するまでの道すじ</div>
+      <p class="desc"><b>N4を持って新しく入った人</b>のための入り口です。
+        12月から7月まで、月ごとにやることが決まっています。
+        今月ひらくものだけを見ればよいので、迷いません。</p>
+      <div class="sub-menu">
+        <a class="item" href="shinjin/"><span class="em">🧭</span>
+          <span class="tx"><span class="n">今月やること</span><span class="r">Bulan ini ／ 7月までの道すじ</span></span><span class="ar">→</span></a>
+        <a class="item" href="shindan/"><span class="em">🎧</span>
+          <span class="tx"><span class="n">診断テストの聴解（職員用）</span><span class="r">Untuk staf ／ 実習生は使いません</span></span><span class="ar">→</span></a>
+      </div>
+    </section>
+
     <section class="card card-t">
       <div class="head">
         <div class="icon">手書き</div>
@@ -252,8 +276,8 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
 
 <footer>
   <button id="refreshBtn">🔄 最新にする ／ Perbarui</button><br>
-  合言葉は一度入れれば、6つのシステムすべてでそのまま使えます。<br>
-  Kata sandi cukup dimasukkan sekali untuk keenam sistem.<br>
+  合言葉は一度入れれば、7つのシステムすべてでそのまま使えます。<br>
+  Kata sandi cukup dimasukkan sekali untuk ketujuh sistem.<br>
   <span id="ver"></span> ・ © 2026 owlwindkaze　このシステムは施設内の学習用です。
 </footer>
 

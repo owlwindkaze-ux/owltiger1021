@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="12月に入職した職員が、7月のN3に合格するまでの道すじ。月ごとにやることが決まっています。">
+<title>Rute N3 Juli ｜ 新人コース（7月N3）</title>
+<style>
+:root{
+  --ink:#12212e; --muted:#5b6875; --line:#d8e0e8; --bg:#f2f6fa; --card:#fff;
+  --ora:#c2410c; --ora-d:#9a3412; --ora-l:#fff7ed;
+  --blue:#2563eb; --green:#059669; --pur:#7c3aed; --amb:#c2410c; --nvy:#2e4a63; --tel:#0d9488;
+  --red:#dc2626;
+  --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
+  --sh-l:0 12px 28px -6px rgba(15,23,42,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic",system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;-webkit-text-size-adjust:100%}
+button,select,input{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+
+header{background:linear-gradient(135deg,var(--ora-d),#b45309);color:#fff;padding:1rem}
+header .in{max-width:820px;margin:0 auto}
+.topbar{display:flex;gap:.5rem;align-items:center;margin-bottom:.6rem}
+.menubtn{border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.14);color:#fff;
+  border-radius:999px;padding:.3rem .85rem;font-size:.8rem;font-weight:700}
+header h1{font-size:1.2rem;font-weight:800}
+header .sub{font-size:.82rem;opacity:.92;margin-top:.2rem}
+.count{margin-top:.7rem;background:rgba(255,255,255,.16);border-radius:12px;padding:.55rem .9rem;
+  font-size:.92rem;font-weight:700;text-align:center}
+.count b{font-size:1.35rem}
+
+.wrap{max-width:820px;margin:0 auto;padding:1.1rem 1rem 2.5rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem;margin-bottom:1rem;box-shadow:var(--sh)}
+.card h2{font-size:1rem;font-weight:800;color:var(--ora-d);margin-bottom:.2rem}
+.card h2 small{display:block;font-size:.72rem;font-weight:600;color:var(--muted);letter-spacing:.02em}
+.desc{font-size:.88rem;color:var(--muted);margin:.5rem 0 .8rem}
+
+.now{border:2px solid var(--ora);background:var(--ora-l);border-radius:14px;padding:.9rem 1rem;margin-bottom:1rem}
+.now .lb{font-size:.72rem;font-weight:800;letter-spacing:.08em;color:var(--ora-d)}
+.now .ttl{font-size:1.1rem;font-weight:800;margin:.15rem 0 .4rem}
+.now ul{margin:0 0 0 1.1rem;font-size:.92rem}
+.now li{margin:.15rem 0}
+
+.steps{display:grid;gap:.5rem}
+.step{display:grid;grid-template-columns:5.4rem 1fr;gap:.7rem;border:1px solid var(--line);
+  border-radius:12px;padding:.6rem .75rem;background:#fff;align-items:start}
+.step.on{border-color:var(--ora);background:var(--ora-l);box-shadow:var(--sh)}
+.step.done{opacity:.55}
+.step .mo{font-weight:800;font-size:.9rem;color:var(--ora-d);line-height:1.35}
+.step .mo small{display:block;font-size:.68rem;font-weight:600;color:var(--muted)}
+.step .bd .t{font-weight:800;font-size:.93rem}
+.step .bd .r{font-size:.83rem;color:var(--muted);margin-top:.1rem}
+.step .bd .g{font-size:.8rem;color:var(--ora-d);margin-top:.25rem;font-weight:700}
+
+.items{display:grid;gap:.5rem}
+.item{display:flex;align-items:center;gap:.7rem;border:1px solid var(--line);border-radius:12px;
+  padding:.65rem .8rem;background:#fff;width:100%;text-align:left}
+.item:hover,.item:focus{background:#f8fafc;border-color:var(--ora)}
+.item .em{font-size:1.25rem;width:1.9rem;text-align:center;flex:none}
+.item .tx{flex:1;min-width:0}
+.item .n{display:block;font-weight:800;font-size:.94rem}
+.item .r{display:block;font-size:.78rem;color:var(--muted)}
+.item .ar{color:var(--ora-d);font-weight:800;flex:none}
+.item.k .em{color:var(--blue)} .item.g .em{color:var(--green)}
+.item.d .em{color:var(--pur)} .item.c .em{color:var(--amb)}
+.item.n .em{color:var(--nvy)} .item.t .em{color:var(--tel)}
+
+.staff{border:1px dashed var(--muted);background:#f8fafc}
+.staff h2{color:var(--muted)}
+.pill{display:inline-block;font-size:.68rem;font-weight:800;background:#e2e8f0;color:var(--muted);
+  border-radius:999px;padding:.05rem .5rem;margin-left:.35rem;vertical-align:.1em}
+
+.gate{max-width:340px;margin:14vh auto;background:#fff;border:1px solid var(--line);
+  border-radius:16px;padding:1.5rem;text-align:center;box-shadow:var(--sh-l)}
+.gate h2{font-size:1rem;margin-bottom:.3rem}
+.gate p{font-size:.82rem;color:var(--muted)}
+.gate input{width:100%;padding:.65rem;border:1.5px solid var(--line);border-radius:10px;
+  margin:.8rem 0 .2rem;text-align:center;font-size:1.15rem;letter-spacing:.1em}
+.gate .err{color:var(--red);font-size:.83rem;min-height:1.3em}
+.gate button{width:100%;background:var(--ora-d);color:#fff;border:0;border-radius:10px;
+  padding:.65rem;font-weight:800}
+footer{text-align:center;font-size:.75rem;color:var(--muted);padding:1rem 0 2rem}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <h2>新人コース</h2>
+  <p>合言葉を 入れて ください<br>Masukkan kata sandi</p>
+  <input type="password" id="gatePw" placeholder="••••••••" autocomplete="off" inputmode="text">
+  <div class="err" id="gateErr"></div>
+  <button id="gateGo">入る ／ Masuk</button>
+</div>
+
+<div id="app-root" style="display:none">
+<header><div class="in">
+  <div class="topbar"><a class="menubtn" href="../index.html">☰ メニュー</a></div>
+  <h1>新人コース　N4 → N3</h1>
+  <div class="sub">Rute menuju N3 (ujian Juli)　／　12月に入って、7月のN3に合格するまで</div>
+  <div class="count" id="count">　</div>
+</div></header>
+
+<div class="wrap">
+
+  <div class="now" id="nowBox">
+    <div class="lb">IMASU ／ 今月やること</div>
+    <div class="ttl" id="nowTtl">　</div>
+    <ul id="nowList"></ul>
+  </div>
+
+  <div class="card">
+    <h2>今日ひらくもの<small>Buka hari ini ／ ここから始めてください</small></h2>
+    <div class="items" id="today"></div>
+  </div>
+
+  <div class="card">
+    <h2>7月までの道すじ<small>Rencana sampai Juli ／ 月ごとにやることが決まっています</small></h2>
+    <p class="desc">オレンジ色が今月です。先の月を見て不安になる必要はありません。
+      <b>その月のことだけ</b>やれば間に合います。</p>
+    <div class="steps" id="steps"></div>
+  </div>
+
+  <div class="card staff">
+    <h2>職員用<span class="pill">実習生は使いません</span><small>Untuk staf</small></h2>
+    <p class="desc">診断テストの聴解を流すページです。問題冊子と手引きは、印刷したものを使ってください。</p>
+    <div class="items">
+      <a class="item" href="../shindan/"><span class="em">🎧</span>
+        <span class="tx"><span class="n">診断テスト　聴解の再生</span>
+        <span class="r">第1回（12月）・第2回（3月）／音のテストつき</span></span><span class="ar">→</span></a>
+    </div>
+  </div>
+
+</div>
+<footer>介護の日本語学習システム　／　新人コース</footer>
+</div>
+
+<script>
+/* ================= 本体 ================= */
+/* 2027年7月のJLPT（第1日曜）を目標にしている。日程が決まったらここだけ直す。 */
+var EXAM = new Date(2027, 6, 4);
+
+/* 月ごとの計画。start は「その月に入る日」。
+   ここを直せば、今月の表示・道すじの両方が変わる。 */
+var PLAN = [
+  { start:'2026-12-01', mo:'12月', ro:'Des', t:'日本の生活と仕事に慣れる',
+    r:'日本語は1日15分だけ。無理に増やさない',
+    g:'診断テスト（第1回）を受ける',
+    todo:['毎日15分、漢字・語彙のN4を見直す',
+          '聴解を「ゆっくり」で1日3問だけ聞く',
+          '仕事で聞こえた言葉を、その日のうちにメモする'] },
+  { start:'2027-01-01', mo:'1月', ro:'Jan', t:'N4の穴をうめる',
+    r:'診断テストで低かった部分から',
+    g:'N4の語彙662語・文型117項目をひととおり',
+    todo:['文型のN4を1日3項目',
+          '漢字・語彙のN4を1日10語',
+          '週に1回、読解のN4を1本'] },
+  { start:'2027-02-01', mo:'2月', ro:'Feb', t:'N4を仕上げ、N3語彙を始める',
+    r:'ここまでで土台ができる',
+    g:'N4の文型をすべて「覚えた」にする',
+    todo:['文型のN4の残りを終わらせる',
+          'N3の語彙を1日10語ずつ始める',
+          '聴解を「ふつう」の速さに上げる'] },
+  { start:'2027-03-01', mo:'3月', ro:'Mar', t:'力を測り直して、N3へ切りかえる',
+    r:'ここが折り返し地点',
+    g:'診断テスト（第2回）を受ける',
+    todo:['診断テスト第2回（3か月の伸びを見る）',
+          'N3の漢字367字を始める',
+          '読解のN3を週に1本、時間を計って'] },
+  { start:'2027-03-29', mo:'3月末〜', ro:'Apr', t:'100日コースを始める',
+    r:'ここから毎日やることが決まる',
+    g:'100日コース 第1週〜第4週',
+    todo:['100日コースを月曜から順に進める',
+          '土曜の通しテストは必ず時間を計る',
+          '日曜の聴解は1回だけ聞いて答える'] },
+  { start:'2027-05-01', mo:'5月', ro:'Mei', t:'読解の速さを上げる',
+    r:'落ちる人のほとんどが読解',
+    g:'100日コース 第5週〜第9週',
+    todo:['100日コースを続ける',
+          '読解は「解けたか」より「時間内か」を見る',
+          '文型のN3を1日3項目'] },
+  { start:'2027-06-01', mo:'6月', ro:'Jun', t:'本番の形に体を慣らす',
+    r:'新しい教材はもう増やさない',
+    g:'100日コース 第10週〜第13週',
+    todo:['土曜の通しテストを50分で解ききる',
+          '聴解を毎日10分（本番の速さで）',
+          'まちがえた問題をもう一度解く'] },
+  { start:'2027-06-28', mo:'7月', ro:'Jul', t:'直前。増やさず、取り出しやすくする',
+    r:'一度やったものを、もう一度',
+    g:'100日コース 第14週　→　受験',
+    todo:['100日コース第14週（まぎらわしい形の整理）',
+          '新しい教材は開かない',
+          '前日は早く寝る。持ち物は前の日にそろえる'] }
+];
+
+/* 今日ひらくもの。lv を書いておくと、そのレベルを開いた状態で始まる */
+var LINKS = [
+  { cls:'k', em:'📚', href:'../kanji.html#list',  n:'漢字・語彙',   r:'Kanji & Kosakata ／ 読み・意味・書き順' },
+  { cls:'g', em:'📐', href:'../bunpo/#list',      n:'文型・文法',   r:'Tata bahasa ／ 例文とインドネシア語の説明', lv:'N4' },
+  { cls:'d', em:'📖', href:'../dokkai/#list',     n:'読解',         r:'Membaca ／ 時間を計って解く' },
+  { cls:'c', em:'🎧', href:'../choukai/#part1',   n:'聴解',         r:'Menyimak ／ 話す速さを変えられる' },
+  { cls:'n', em:'📅', href:'../n3.html',          n:'100日コース',  r:'Kursus 100 hari ／ 3月末から使います' },
+  { cls:'t', em:'✍️', href:'../tegaki.html',      n:'手書きで漢字をさがす', r:'Tulis tangan ／ 読めない字を書いて調べる' }
+];
+
+function d(s){ var p=String(s).split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
+function nowIndex(today){
+  var i = 0;
+  for (var k = 0; k < PLAN.length; k++) if (today >= d(PLAN[k].start)) i = k;
+  if (today < d(PLAN[0].start)) return -1;      /* まだ始まっていない */
+  return i;
+}
+
+function init(){
+  var today = new Date(); today.setHours(0,0,0,0);
+
+  /* 残り日数 */
+  var left = Math.ceil((EXAM - today) / 86400000);
+  document.getElementById('count').innerHTML = left > 0
+    ? '7月のN3まで　<b>' + left + '</b> 日　／　Sisa <b>' + left + '</b> hari'
+    : 'おつかれさまでした ／ Selamat!';
+
+  /* 今月やること */
+  var i = nowIndex(today);
+  var cur = i < 0 ? PLAN[0] : PLAN[i];
+  document.getElementById('nowTtl').textContent =
+    (i < 0 ? '（コースが始まる前です）' : cur.mo + '　') + cur.t;
+  document.getElementById('nowList').innerHTML =
+    cur.todo.map(function(x){ return '<li>' + x + '</li>'; }).join('');
+
+  /* 道すじ */
+  document.getElementById('steps').innerHTML = PLAN.map(function(p, k){
+    var cls = k === i ? ' on' : (k < i ? ' done' : '');
+    return '<div class="step' + cls + '">' +
+      '<div class="mo">' + p.mo + '<small>' + p.ro + '</small></div>' +
+      '<div class="bd"><div class="t">' + p.t + '</div>' +
+      '<div class="r">' + p.r + '</div>' +
+      '<div class="g">▸ ' + p.g + '</div></div></div>';
+  }).join('');
+
+  /* 今日ひらくもの */
+  document.getElementById('today').innerHTML = LINKS.map(function(L){
+    return '<a class="item ' + L.cls + '" href="' + L.href + '"' +
+      (L.lv ? ' data-lv="' + L.lv + '"' : '') + '>' +
+      '<span class="em">' + L.em + '</span><span class="tx">' +
+      '<span class="n">' + L.n + '</span><span class="r">' + L.r + '</span></span>' +
+      '<span class="ar">→</span></a>';
+  }).join('');
+  /* 文型は、押したときに開くレベルをそろえておく（同じサイトなので書き込める） */
+  [].forEach.call(document.querySelectorAll('#today [data-lv]'), function(a){
+    a.addEventListener('click', function(){
+      try { localStorage.setItem('jlpt-grammar-lastlv', a.dataset.lv); } catch(e) {}
+    });
+  });
+}
+
+/* ================= 合言葉（ほかの画面と共通） ================= */
+(function(){
+  var KEY='jlpt-kanji-gate-v1';
+  var HASH='ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
+  var gate=document.getElementById('gate'), root=document.getElementById('app-root');
+  function unlock(){ gate.style.display='none'; root.style.display='block'; init(); }
+  function sha(t){
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)).then(function(b){
+      return [].map.call(new Uint8Array(b), function(x){ return x.toString(16).padStart(2,'0'); }).join('');
+    });
+  }
+  function go(){
+    sha(document.getElementById('gatePw').value.trim()).then(function(h){
+      if(h===HASH){ try{ localStorage.setItem(KEY,HASH); }catch(e){} unlock(); }
+      else document.getElementById('gateErr').textContent='合言葉が ちがいます ／ Kata sandi salah';
+    });
+  }
+  document.getElementById('gateGo').onclick=go;
+  document.getElementById('gatePw').addEventListener('keydown',function(e){ if(e.key==='Enter') go(); });
+  try{ if(localStorage.getItem(KEY)===HASH) unlock(); }catch(e){}
+})();
+
+</script>
+</body>
+</html>
