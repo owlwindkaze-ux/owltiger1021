@@ -80,10 +80,23 @@ a{color:var(--blue)}
       <button class="btn" data-rate="0.9">すこし ゆっくり</button>
       <button class="btn on" data-rate="1">ふつう（本番と同じ）</button>
     </div>
+    <div class="lb" style="margin-top:1rem">声</div>
+    <div class="row">
+      <select id="voices" style="flex:1;min-width:12rem;padding:.5rem;border:1.5px solid var(--line);border-radius:10px;background:#fff"></select>
+    </div>
+    <p class="hint" style="margin-top:.35rem">端末に入っている日本語の声から選べます。
+      聞き取りやすいものを選んでください。選んだ声は次に開いたときも覚えています。</p>
+
     <div class="row" style="margin-top:1rem">
       <button class="btn" id="test">🔊 音のテスト</button>
       <span class="hint" id="vinfo"></span>
     </div>
+    <p class="hint" style="margin-top:.4rem">
+      <b>試験を始める前に1回押してください。</b>
+      「音の テストです。聞こえますか。」と1文だけ読みます。<br>
+      ① 音が出るか確かめる　② 受ける人の席で聞いて音量を合わせる　
+      ③ iPhone・iPadは画面を1回さわるまで音が鳴らないので、その1回目にする<br>
+      何度押してもかまいません。押さずに再生すると、機種によっては<b>問1が無音</b>になることがあります。</p>
   </div>
 
   <div class="card">
@@ -112,12 +125,40 @@ var esc=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').
 
 function inApp(){ return /Line\/|FBAN|FBAV|Instagram|; wv\)|GSA\/|Twitter|MicroMessenger/i.test(navigator.userAgent); }
 
+/* 声の質は端末によってちがう。よく聞き取れるものを先に出す */
+var GOOD=['google 日本語','google japanese','kyoko','o-ren','otoya','nanami','ayumi','haruka','ichiro','sayaka','microsoft'];
+function vScore(v){
+  var n=(v.name||'').toLowerCase();
+  for(var i=0;i<GOOD.length;i++) if(n.indexOf(GOOD[i])>=0) return GOOD.length-i;
+  return 0;
+}
+var VKEY='jlpt-shindan-voice';       /* 選んだ声を覚えておく */
+var jaList=[];
 function pickVoice(){
   var vs=synth.getVoices()||[];
-  var ja=vs.filter(function(v){return /^ja/i.test(v.lang||'')});
-  jaVoice = ja[0] || null;
-  $('#vinfo').textContent='声の数：'+vs.length+'（日本語 '+ja.length+'）';
-  $('#novoice').style.display = ja.length ? 'none' : 'block';
+  jaList=vs.filter(function(v){return /^ja/i.test((v.lang||'').replace('_','-'))});
+  jaList.sort(function(a,b){ return vScore(b)-vScore(a) || (a.name||'').localeCompare(b.name||''); });
+  var sel=$('#voices');
+  sel.innerHTML='';
+  if(!jaList.length){
+    sel.innerHTML='<option>（この端末の 標準の 声）</option>';
+    sel.disabled=true; jaVoice=null;
+  }else{
+    sel.disabled=false;
+    var saved=null; try{ saved=localStorage.getItem(VKEY); }catch(e){}
+    var pick=0;
+    jaList.forEach(function(v,i){
+      var o=document.createElement('option');
+      o.value=i; o.textContent=v.name;
+      sel.appendChild(o);
+      if(saved && v.name===saved) pick=i;
+    });
+    sel.value=String(pick);
+    jaVoice=jaList[pick];
+  }
+  $('#vinfo').textContent='声の数：'+vs.length+'（日本語 '+jaList.length+'）'
+    + (jaVoice ? '　使う声：'+jaVoice.name : '');
+  $('#novoice').style.display = jaList.length ? 'none' : 'block';
 }
 
 /* 長い文は句点で切って読ませる（途中で止まる端末があるため） */
@@ -225,6 +266,13 @@ function init(){
     $$('[data-rate]').forEach(function(x){x.classList.remove('on')}); b.classList.add('on');
     RATE=Number(b.dataset.rate);
   };});
+  $('#voices').onchange=function(e){
+    jaVoice = jaList[Number(e.target.value)] || null;
+    try{ if(jaVoice) localStorage.setItem(VKEY, jaVoice.name); }catch(err){}
+    $('#vinfo').textContent='声の数：'+(synth.getVoices()||[]).length+'（日本語 '+jaList.length+'）'
+      + (jaVoice ? '　使う声：'+jaVoice.name : '');
+    stopFlag=false; synth.cancel(); say('この声で 読みます。');   /* 選んだらすぐ聞ける */
+  };
   $('#test').onclick=function(){ stopFlag=false; synth.cancel(); say('音の テストです。聞こえますか。'); };
   $('#playAll').onclick=function(){ playFrom(0, false); };
   $('#stop').onclick=function(){ stopFlag=true; synth.cancel(); };
