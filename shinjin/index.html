@@ -278,7 +278,8 @@ function init(){
   }
   document.getElementById('gateGo').onclick=go;
   document.getElementById('gatePw').addEventListener('keydown',function(e){ if(e.key==='Enter') go(); });
-  try{ if(localStorage.getItem(KEY)===HASH) unlock(); }catch(e){}
+  var saved=null; try{ saved=localStorage.getItem(KEY); }catch(e){}
+  if(saved===HASH) unlock();   /* ここで例外を握りつぶすと、不具合が黙って隠れる */
 })();
 
 </script>
