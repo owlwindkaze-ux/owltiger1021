@@ -102,22 +102,6 @@ a{color:var(--blue)}
 </div>
 
 <script>
-/* ---------- 合言葉 ---------- */
-(function(){
-  var KEY='jlpt-kanji-gate-v1';
-  var HASH='ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
-  var gate=document.getElementById('gate'), root=document.getElementById('app-root');
-  function unlock(){ gate.style.display='none'; root.style.display='block'; init(); }
-  function sha(t){ return crypto.subtle.digest('SHA-256',new TextEncoder().encode(t))
-    .then(function(b){ return [].map.call(new Uint8Array(b),function(x){return x.toString(16).padStart(2,'0');}).join(''); }); }
-  function go(){ sha(document.getElementById('gatePw').value.trim()).then(function(h){
-    if(h===HASH){ try{localStorage.setItem(KEY,HASH);}catch(e){} unlock(); }
-    else document.getElementById('gateErr').textContent='合言葉が ちがいます'; }); }
-  document.getElementById('gateGo').onclick=go;
-  document.getElementById('gatePw').addEventListener('keydown',function(e){ if(e.key==='Enter') go(); });
-  try{ if(localStorage.getItem(KEY)===HASH) unlock(); }catch(e){}
-})();
-
 /* ---------- 本体 ---------- */
 var DATA = {"1":{"when":"12月（入職直後）","groups":[{"group":"問題1　課題理解","items":[{"no":"問1","answer":"3　お茶を持って行く","why":"「先にお茶を」と言われている。","steps":[{"k":"q","v":"女の人は、このあとまず何をしますか。"},{"k":"pause","s":2},{"k":"line","sp":"男","v":"田中さんの部屋に、車いすを持って行ってもらえますか。"},{"k":"line","sp":"女","v":"はい。今すぐですか。"},{"k":"line","sp":"男","v":"あ、その前に、お茶を出してください。車いすはそのあとで。"},{"k":"line","sp":"女","v":"わかりました。"},{"k":"pause","s":8,"a":true}]},{"no":"問2","answer":"2　9時半","why":"「30分早く」と言い直されている。","steps":[{"k":"q","v":"あしたの朝、何時に集まりますか。"},{"k":"pause","s":2},{"k":"line","sp":"女","v":"あしたの会議は10時からですよね。"},{"k":"line","sp":"男","v":"ええ。でも、準備があるので30分早く集まってください。"},{"k":"line","sp":"女","v":"では、9時半ですね。"},{"k":"line","sp":"男","v":"はい、お願いします。"},{"k":"pause","s":8,"a":true}]},{"no":"問3","answer":"1　タオル","why":"エプロンは「もうある」と否定されている。","steps":[{"k":"q","v":"男の人は、何を持って行きますか。"},{"k":"pause","s":2},{"k":"line","sp":"女","v":"お風呂の用意、お願いします。エプロンとタオルを。"},{"k":"line","sp":"男","v":"エプロンは、もう向こうにありますよ。"},{"k":"line","sp":"女","v":"あ、そうでしたね。じゃあ、タオルだけお願いします。"},{"k":"line","sp":"男","v":"はい。"},{"k":"pause","s":8,"a":true}]},{"no":"問4","answer":"3　1階の面会室","why":"場所が2回言い直される。","steps":[{"k":"q","v":"家族は、どこで待ちますか。"},{"k":"pause","s":2},{"k":"line","sp":"男","v":"ご家族は2階の食堂でお待ちですか。"},{"k":"line","sp":"女","v":"いえ、食堂は今、掃除中なんです。"},{"k":"line","sp":"男","v":"では、どちらに。"},{"k":"line","sp":"女","v":"1階の面会室にご案内しました。"},{"k":"pause","s":8,"a":true}]}]},{"group":"問題2　ポイント理解","items":[{"no":"問5","answer":"4　熱があるから","why":"「あし」「おなか」は否定されている。","steps":[{"k":"q","v":"この人が休む理由は、何ですか。"},{"k":"pause","s":3},{"k":"line","sp":"男","v":"今日はお休みだそうですね。あしが痛いんですか。"},{"k":"line","sp":"女","v":"いえ、あしは大丈夫です。"},{"k":"line","sp":"男","v":"おなかですか。"},{"k":"line","sp":"女","v":"いいえ。朝から熱が38度あって。"},{"k":"pause","s":8,"a":true}]},{"no":"問6","answer":"3　木曜日","why":"「水曜」から「木曜」に変わる。","steps":[{"k":"q","v":"面会は、何曜日になりましたか。"},{"k":"pause","s":3},{"k":"line","sp":"女","v":"ご家族の面会、水曜日でしたよね。"},{"k":"line","sp":"男","v":"そうだったんですが、変わりました。"},{"k":"line","sp":"女","v":"いつになりましたか。"},{"k":"line","sp":"男","v":"木曜日の午後です。"},{"k":"pause","s":8,"a":true}]},{"no":"問7","answer":"1　300円","why":"500円から200円引き。","steps":[{"k":"q","v":"この人は、いくらはらいますか。"},{"k":"pause","s":3},{"k":"line","sp":"男","v":"こちらのお弁当、500円です。"},{"k":"line","sp":"女","v":"職員です。"},{"k":"line","sp":"男","v":"あ、職員の方は200円引きになります。"},{"k":"line","sp":"女","v":"ありがとうございます。"},{"k":"pause","s":8,"a":true}]}]},{"group":"問題3　即時応答","items":[{"no":"問8","answer":"1","why":"指示を受けたときの返事。","steps":[{"k":"line","sp":"男","v":"これ、あとで事務所に持って行ってください。"},{"k":"line","sp":"女","v":"1、はい、持って行きました。"},{"k":"line","sp":"女","v":"2、はい、わかりました。"},{"k":"line","sp":"女","v":"3、いいえ、事務所です。"},{"k":"pause","s":8,"a":true}]},{"no":"問9","answer":"2","why":"聞き取れなかったときの言い方。","steps":[{"k":"q","v":"相手の言ったことが、聞き取れませんでした。"},{"k":"pause","s":1},{"k":"line","sp":"女","v":"1、すみません、もう一度お願いします。"},{"k":"line","sp":"女","v":"2、すみません、もう一度言いました。"},{"k":"line","sp":"女","v":"3、すみません、聞こえました。"},{"k":"pause","s":8,"a":true}]},{"no":"問10","answer":"2","why":"「もう〜ましたか」に、していないと答える形。","steps":[{"k":"line","sp":"男","v":"記録は、もう書きましたか。"},{"k":"line","sp":"女","v":"1、はい、書きます。"},{"k":"line","sp":"女","v":"2、いいえ、書きました。"},{"k":"line","sp":"女","v":"3、いいえ、まだです。"},{"k":"pause","s":8,"a":true}]}]}]},"2":{"when":"3月（3か月後）","groups":[{"group":"問題1　課題理解","items":[{"no":"問1","answer":"2　窓を閉める","why":"雨が降ってきたので、先に窓。","steps":[{"k":"q","v":"男の人は、このあとまず何をしますか。"},{"k":"pause","s":2},{"k":"line","sp":"女","v":"帰る前に、ごみを出して、かぎをかけてくださいね。"},{"k":"line","sp":"男","v":"はい。あ、雨が降ってきましたね。"},{"k":"line","sp":"女","v":"ほんとだ。先に窓を閉めてください。ごみはそのあとで。"},{"k":"line","sp":"男","v":"わかりました。"},{"k":"pause","s":8,"a":true}]},{"no":"問2","answer":"4　2時","why":"「30分おくれる」で1時半→2時。","steps":[{"k":"q","v":"面会は、何時からになりましたか。"},{"k":"pause","s":2},{"k":"line","sp":"男","v":"ご家族の面会、1時半からでしたよね。"},{"k":"line","sp":"女","v":"ええ。でも、30分おくれるとご連絡がありました。"},{"k":"line","sp":"男","v":"では、2時ですね。"},{"k":"line","sp":"女","v":"はい。"},{"k":"pause","s":8,"a":true}]},{"no":"問3","answer":"2　おしぼり","why":"スプーンとコップは「もうある」。","steps":[{"k":"q","v":"女の人は、何を持って行きますか。"},{"k":"pause","s":2},{"k":"line","sp":"男","v":"食事の用意、お願いします。スプーンとコップを。"},{"k":"line","sp":"女","v":"それは、もうテーブルにありますよ。"},{"k":"line","sp":"男","v":"あ、そうでしたか。じゃあ、おしぼりだけお願いします。"},{"k":"line","sp":"女","v":"はい。"},{"k":"pause","s":8,"a":true}]},{"no":"問4","answer":"4　2階の研修室","why":"場所が言い直される。","steps":[{"k":"q","v":"説明会は、どこでありますか。"},{"k":"pause","s":2},{"k":"line","sp":"女","v":"あしたの説明会、1階の会議室ですか。"},{"k":"line","sp":"男","v":"いえ、会議室は工事中なんです。"},{"k":"line","sp":"女","v":"では、どちらに。"},{"k":"line","sp":"男","v":"2階の研修室に変わりました。"},{"k":"pause","s":8,"a":true}]}]},{"group":"問題2　ポイント理解","items":[{"no":"問5","answer":"2　電車が遅れたから","why":"「道」「ねぼう」は否定される。","steps":[{"k":"q","v":"この人がおくれた理由は、何ですか。"},{"k":"pause","s":3},{"k":"line","sp":"男","v":"おそかったですね。道がこんでいましたか。"},{"k":"line","sp":"女","v":"いえ、今日は電車で来ました。"},{"k":"line","sp":"男","v":"ねぼうですか。"},{"k":"line","sp":"女","v":"いいえ。事故で電車が20分止まってしまって。"},{"k":"pause","s":8,"a":true}]},{"no":"問6","answer":"1　土曜日","why":"「金曜」から「土曜」に変わる。","steps":[{"k":"q","v":"研修は、何曜日になりましたか。"},{"k":"pause","s":3},{"k":"line","sp":"女","v":"来週の研修、金曜日でしたよね。"},{"k":"line","sp":"男","v":"それが、変わったんです。"},{"k":"line","sp":"女","v":"いつになりましたか。"},{"k":"line","sp":"男","v":"土曜日の午前です。"},{"k":"pause","s":8,"a":true}]},{"no":"問7","answer":"1　600円","why":"800円から200円引き。","steps":[{"k":"q","v":"この人は、いくらはらいますか。"},{"k":"pause","s":3},{"k":"line","sp":"男","v":"こちらのお弁当、800円です。"},{"k":"line","sp":"女","v":"職員なんですが。"},{"k":"line","sp":"男","v":"でしたら、200円お引きします。"},{"k":"line","sp":"女","v":"ありがとうございます。"},{"k":"pause","s":8,"a":true}]}]},{"group":"問題3　即時応答","items":[{"no":"問8","answer":"3","why":"指示を受けたときの返事。","steps":[{"k":"line","sp":"女","v":"この書類、事務所に出しておいてください。"},{"k":"line","sp":"男","v":"1、はい、出しておきました。"},{"k":"line","sp":"男","v":"2、いいえ、事務所です。"},{"k":"line","sp":"男","v":"3、はい、承知しました。"},{"k":"pause","s":8,"a":true}]},{"no":"問9","answer":"2","why":"速くて聞き取れないときの頼み方。","steps":[{"k":"q","v":"相手の話が速くて、聞き取れません。"},{"k":"pause","s":1},{"k":"line","sp":"男","v":"1、ゆっくり話しました。"},{"k":"line","sp":"男","v":"2、ゆっくりお願いできますか。"},{"k":"line","sp":"男","v":"3、ゆっくりですね。"},{"k":"pause","s":8,"a":true}]},{"no":"問10","answer":"2","why":"「もう〜ましたか」に、していないと答える形。","steps":[{"k":"line","sp":"女","v":"記録は、もう書きましたか。"},{"k":"line","sp":"男","v":"1、いいえ、まだ書いていません。"},{"k":"line","sp":"男","v":"2、はい、これから書きます。"},{"k":"line","sp":"男","v":"3、いいえ、書きました。"},{"k":"pause","s":8,"a":true}]}]}]}};
 var SET='1', RATE=1, jaVoice=null, running=false, stopFlag=false;
@@ -152,7 +136,8 @@ function say(text){
       if(stopFlag || i>=parts.length) return res();
       var u=new SpeechSynthesisUtterance(parts[i++]);
       u.lang='ja-JP'; u.rate=RATE; u.pitch=1;
-      if(jaVoice) u.voice=jaVoice;
+      /* 端末によっては voice の代入で例外が出る。ここで止まると無音になるので必ず受け止める */
+      try{ if(jaVoice) u.voice=jaVoice; }catch(e){}
       u.onend=next; u.onerror=next;
       synth.speak(u);
     })();
@@ -177,7 +162,9 @@ async function playItem(x, showNow){
     else await say(st.v);
   }
 }
-async function playFrom(idx){
+/* one=true なら その1問だけ、false なら 最後まで通して流す。
+   「問1」を押したときも1問だけで止まるように、番号ではなく引数で分ける。 */
+async function playFrom(idx, one){
   if(running) return;
   running=true; stopFlag=false;
   $('#stop').disabled=false; $('#playAll').disabled=true;
@@ -185,7 +172,7 @@ async function playFrom(idx){
   for(var i=idx;i<list.length;i++){
     if(stopFlag) break;
     await playItem(list[i], true);
-    if(idx!==0) break;                 /* 1問だけのとき */
+    if(one) break;
   }
   synth.cancel();
   $('#now').textContent = stopFlag ? '止めました' : '終わりました';
@@ -219,7 +206,7 @@ function render(){
   $$('#list .qs .btn').forEach(function(b){
     b.onclick=function(){
       var list=itemsOf();
-      for(var i=0;i<list.length;i++) if(list[i].it.no===b.dataset.no){ playFrom(i); return; }
+      for(var i=0;i<list.length;i++) if(list[i].it.no===b.dataset.no){ playFrom(i, true); return; }
     };
   });
 }
@@ -239,7 +226,7 @@ function init(){
     RATE=Number(b.dataset.rate);
   };});
   $('#test').onclick=function(){ stopFlag=false; synth.cancel(); say('音の テストです。聞こえますか。'); };
-  $('#playAll').onclick=function(){ playFrom(0); };
+  $('#playAll').onclick=function(){ playFrom(0, false); };
   $('#stop').onclick=function(){ stopFlag=true; synth.cancel(); };
   $('#toggleSc').onclick=function(){
     var sc=$('#sc'); sc.classList.toggle('on');
@@ -248,6 +235,23 @@ function init(){
   render();
 }
 window.addEventListener('beforeunload',function(){ try{synth.cancel();}catch(e){} });
+
+/* ---------- 合言葉 ---------- */
+(function(){
+  var KEY='jlpt-kanji-gate-v1';
+  var HASH='ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
+  var gate=document.getElementById('gate'), root=document.getElementById('app-root');
+  function unlock(){ gate.style.display='none'; root.style.display='block'; init(); }
+  function sha(t){ return crypto.subtle.digest('SHA-256',new TextEncoder().encode(t))
+    .then(function(b){ return [].map.call(new Uint8Array(b),function(x){return x.toString(16).padStart(2,'0');}).join(''); }); }
+  function go(){ sha(document.getElementById('gatePw').value.trim()).then(function(h){
+    if(h===HASH){ try{localStorage.setItem(KEY,HASH);}catch(e){} unlock(); }
+    else document.getElementById('gateErr').textContent='合言葉が ちがいます'; }); }
+  document.getElementById('gateGo').onclick=go;
+  document.getElementById('gatePw').addEventListener('keydown',function(e){ if(e.key==='Enter') go(); });
+  var saved=null; try{ saved=localStorage.getItem(KEY); }catch(e){}
+  if(saved===HASH) unlock();   /* ここで例外を握りつぶすと、不具合が黙って隠れる */
+})();
 </script>
 </body>
 </html>
