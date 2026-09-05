@@ -52,6 +52,25 @@
   }
   .ctl-row{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
   .ctl-label{font-size:12px;color:var(--muted);letter-spacing:.1em;min-width:74px}
+  .ctl-label .id-lb{display:block;font-size:10px;font-style:italic;letter-spacing:0;opacity:.85}
+  .ctl-note{font-size:12px;line-height:1.75;color:var(--muted);margin:10px 0 0;
+    border-left:3px solid var(--amber);padding-left:10px}
+  .ctl-note i{font-style:italic;opacity:.9}
+  /* はじめての人への使い方（日本語＋インドネシア語） */
+  .howto{border:2px solid var(--amber);border-radius:10px;background:#fffdf6;margin:0 0 14px}
+  .howto>summary{cursor:pointer;padding:12px 14px;font-weight:700;font-size:14px;list-style:none}
+  .howto>summary::-webkit-details-marker{display:none}
+  .howto>summary::before{content:"▶ ";color:var(--amber)}
+  .howto[open]>summary::before{content:"▼ "}
+  .howto>summary i{font-style:italic;font-weight:400;opacity:.85}
+  .howto-body{padding:0 14px 12px;font-size:13.5px;line-height:1.85}
+  .howto-body ol{margin:0;padding-left:1.3em}
+  .howto-body li{margin:0 0 9px}
+  .howto-body .id{display:block;font-size:12px;font-style:italic;color:var(--muted);margin-top:1px}
+  .howto-body .warn-in{color:#b45309;font-weight:700}
+  .howto-tip{margin:8px 0 0;font-size:12.5px;color:var(--muted)}
+  .play small{display:block;font-size:9.5px;font-weight:400;letter-spacing:0;opacity:.85;margin-top:1px}
+  .count i{font-style:italic;opacity:.8}
   #testBtn{font-family:inherit;font-size:13px;padding:7px 12px;cursor:pointer;
     border:1px solid var(--ink);background:var(--ink);color:var(--paper)}
   .speeds{display:flex;gap:0;border:1px solid var(--line)}
@@ -222,7 +241,7 @@
   <div class="header-inner">
     <div class="navrow">
       <a class="navbtn" href="../index.html">☰ メニュー</a>
-      <span class="hdstat" id="hdStat">— / 48</span>
+      <span class="hdstat" id="hdStat">正解 — / 48</span>
     </div>
     <p class="eyebrow">KAIGO NO NIHONGO ／ CHOUKAI</p>
     <h1>介護の日本語　聴解練習</h1>
@@ -234,21 +253,52 @@
 
 <div class="wrap">
 
+  <details class="howto" id="howto">
+    <summary>はじめての人へ　／　<i>Cara pakai</i>　（タップで ひらく・とじる）</summary>
+    <div class="howto-body">
+      <ol>
+        <li><b>「🔊 音のテスト」を おします。</b>音が 聞こえるか たしかめます。
+          <span class="id">Tekan "Tes suara" dulu. Pastikan suaranya terdengar.</span>
+          <span class="id">iPhone・iPad：これを おさないと 音が 出ない ことが あります。</span></li>
+        <li><b>「話す速さ」を えらびます。</b>はじめは「ゆっくり」で いいです。
+          <span class="id">Pilih kecepatan. Untuk pemula, pakai "ゆっくり" (pelan).</span></li>
+        <li><b>まるい「聞く」ボタンを おします。</b>会話が 流れます。
+          <b>何回 おしても かまいません。</b>
+          <span class="id">Tekan tombol bulat "聞く" (dengar). Boleh diulang berapa kali pun.</span></li>
+        <li><b>答えの 番号を おします。</b>
+          <span class="warn-in">おした 瞬間に ○×が 出ます。あとから 変えられません。</span>
+          <span class="id">Tekan nomor jawaban. Langsung dinilai dan <b>tidak bisa diubah</b>.</span></li>
+        <li>答えの あと、<b>「スクリプトを見る」</b>を ひらいて、文を 見ながら もう一度 聞きます。
+          <span class="id">Setelah menjawab, buka "skrip" lalu dengarkan lagi sambil membaca.</span></li>
+      </ol>
+      <p class="howto-tip">音が 出ない ときは、下の「音が 出ませんか？」を 見て ください。<br>
+        <i>Kalau tidak ada suara, lihat bagian "Tidak ada suara?" di bawah.</i></p>
+    </div>
+  </details>
+
   <div class="controls">
     <div class="ctl-row">
-      <span class="ctl-label">話す速さ</span>
+      <span class="ctl-label">話す速さ<small class="id-lb">Kecepatan</small></span>
       <div class="speeds" id="speeds" role="group" aria-label="話す速さ">
-        <button type="button" data-rate="0.7" aria-pressed="false">ゆっくり<small>はじめて</small></button>
-        <button type="button" data-rate="0.85" aria-pressed="false">すこし速く<small>れんしゅう</small></button>
-        <button type="button" data-rate="1.0" aria-pressed="true">ふつう<small>現場の速さ</small></button>
-        <button type="button" data-rate="1.15" aria-pressed="false">速い<small>試験の速さ</small></button>
+        <button type="button" data-rate="0.7" aria-pressed="false">ゆっくり<small>はじめて<i>pelan</i></small></button>
+        <button type="button" data-rate="0.85" aria-pressed="false">すこし速く<small>れんしゅう<i>agak cepat</i></small></button>
+        <button type="button" data-rate="1.0" aria-pressed="true">ふつう<small>現場の速さ<i>normal</i></small></button>
+        <button type="button" data-rate="1.15" aria-pressed="false">速い<small>試験の速さ<i>ujian</i></small></button>
       </div>
     </div>
     <div class="ctl-row" style="margin-top:12px">
-      <span class="ctl-label">声</span>
+      <span class="ctl-label">声<small class="id-lb">Suara</small></span>
       <select id="voices" aria-label="読み上げの声"></select>
       <button type="button" id="testBtn">🔊 音のテスト</button>
     </div>
+    <p class="ctl-note">
+      <b>音のテスト</b>＝「音の テストです。聞こえますか。」と 1文だけ 読みます。
+      はじめに 1回 おして、音量を 合わせて ください。
+      iPhone・iPadは <b>これを おさないと 最初の 音が 出ない</b> ことが あります。<br>
+      <b>声</b>＝この端末の 日本語の 声から えらべます。えらぶと すぐ 聞こえます。
+      次に ひらいた ときも 覚えて います。<br>
+      <i>Tes suara: dibaca 1 kalimat untuk mengecek suara dan volume.
+        Suara: pilih suara bahasa Jepang yang paling jelas. Pilihan Anda diingat.</i></p>
     <div id="diag" style="margin-top:8px;font-size:11px;color:var(--muted);word-break:break-all"></div>
     <div class="notice" id="notice">
       この端末に 日本語の 声が 見つかりませんでした。「聞く」を おしても 音が 出ない ときは、
@@ -905,7 +955,8 @@ function chunks(text){
 function mkUtter(t){
   const u = new SpeechSynthesisUtterance(t);
   u.lang = 'ja-JP'; u.rate = rate; u.pitch = 1; u.volume = 1;
-  if(voice) u.voice = voice;
+  /* 端末によっては voice の代入で例外が出る。ここで止まると無音になるので必ず受け止める */
+  try{ if(voice) u.voice = voice; }catch(e){}
   return u;
 }
 /* スマホは 最初の タップで 音を「開ける」必要が あります */
@@ -970,8 +1021,8 @@ function showInApp(){
 function diagText(){
   const all = canSpeak ? speechSynthesis.getVoices() : [];
   return '読み上げ機能：' + (canSpeak ? 'あり' : 'なし') +
-    ' ／ 声の数：' + all.length + '（日本語 ' + jaVoices.length + '）' +
-    (jaVoices.length ? ' ／ 使う声：' + jaVoices[0].name : '') +
+    ' ／ 日本語の声：' + jaVoices.length + 'つ（この端末に入っている声は全部で ' + all.length + '）' +
+    (voice ? ' ／ 使う声：' + voice.name : '') +
     ' ／ 端末：' + navigator.userAgent;
 }
 const testBtn = document.getElementById('testBtn');
@@ -1015,10 +1066,20 @@ const state = DATA.map((p, pi) => p.items.map((it, qi) => {
 }));
 const QTOTAL = DATA.reduce((n, p) => n + p.items.length, 0);
 const hdStat = document.getElementById('hdStat');
+/* 使い方パネル：初めての人には開いて見せ、閉じたら次から閉じたままにする */
+(function(){
+  const HKEY = 'jlpt-choukai-howto', el = document.getElementById('howto');
+  if(!el) return;
+  let v = null; try{ v = localStorage.getItem(HKEY); }catch(e){}
+  el.open = (v !== 'closed');
+  el.addEventListener('toggle', () => {
+    try{ localStorage.setItem(HKEY, el.open ? 'open' : 'closed'); }catch(e){}
+  });
+})();
 function updateHead(){
   const got = state.flat().filter(v => v === true).length;
   const ans = state.flat().filter(v => v !== null).length;
-  hdStat.textContent = ans ? ('正解 ' + got + ' / ' + QTOTAL) : ('— / ' + QTOTAL);
+  hdStat.textContent = ans ? ('正解 ' + got + ' / ' + QTOTAL) : ('正解 — / ' + QTOTAL);
   DATA.forEach((p, pi) => {
     const sec = app.querySelectorAll('.part')[pi];
     if(sec) sec.classList.toggle('done', state[pi].every(v => v !== null));
@@ -1046,8 +1107,8 @@ DATA.forEach((part, pi) => {
     q.innerHTML =
       '<div class="q-top">' +
         '<div class="listen">' +
-          '<button type="button" class="play">聞く</button>' +
-          '<div class="count">0回</div>' +
+          '<button type="button" class="play">聞く<small>Dengar</small></button>' +
+          '<div class="count">聞いた回数 0<i>／ 0×</i></div>' +
         '</div>' +
         '<div class="q-body">' +
           '<span class="q-num">問 ' + (qi+1) + '</span>' +
@@ -1067,7 +1128,7 @@ DATA.forEach((part, pi) => {
     const countEl = q.querySelector('.count');
     let n = 0;
     playBtn.addEventListener('click', () => {
-      n++; countEl.textContent = n + '回';
+      n++; countEl.innerHTML = '聞いた回数 ' + n + '<i>／ ' + n + '×</i>';
       speak(src.script, playBtn);
     });
 

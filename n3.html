@@ -923,6 +923,34 @@ function playerEl(){
     w.appendChild(warn);
   }
 
+  /* 使い方（日本語＋インドネシア語）。iPadは「音のテスト」を先に押さないと
+     最初の音が出ないことがあるので、いちばん上に置いている。 */
+  var how = document.createElement('div'); how.className='note';
+  how.innerHTML = '<b>使い方 ／ Cara pakai</b><br>'
+    + '① <b>「🔊 音のテスト」</b>を おす（音が 出るか たしかめる）<br>'
+    + '<span style="opacity:.75">　Tekan "Tes suara" dulu. iPhone・iPadは これを おさないと 音が 出ない ことが あります。</span><br>'
+    + '② <b>「7問を通して再生」</b>を おす。会話は <b>1回だけ</b> 流れます<br>'
+    + '<span style="opacity:.75">　Tekan "putar semua". Percakapan diputar <b>satu kali saja</b>.</span><br>'
+    + '③ 聞きながら、下の 選択肢を タップする<br>'
+    + '<span style="opacity:.75">　Pilih jawaban sambil mendengarkan.</span><br>'
+    + '④ 7問 すべて 答えてから <b>「採点する」</b>を おす<br>'
+    + '<span style="opacity:.75">　Setelah menjawab semua, tekan tombol penilaian.</span><br>'
+    + '※ 1問だけ 聞き直したい ときは、下の「問1」などを おします。'
+    + '本番の 練習なので、ふだんは <b>1回だけ</b> にしましょう。';
+  w.appendChild(how);
+
+  var r0 = document.createElement('div'); r0.className='row';
+  var bt = document.createElement('button'); bt.className='act ghost'; bt.textContent='🔊 音のテスト';
+  bt.addEventListener('click', function(){
+    try{ synth.cancel(); }catch(e){}
+    var u = new SpeechSynthesisUtterance('音の テストです。聞こえますか。');
+    u.lang='ja-JP'; u.rate=rate; u.pitch=1;
+    try{ if(voices.length) u.voice = voices[0]; }catch(e){}
+    synth.speak(u);
+  });
+  r0.appendChild(bt);
+  w.appendChild(r0);
+
   var r1 = document.createElement('div'); r1.className='row';
   var ba = document.createElement('button'); ba.className='playbtn'; ba.textContent='7問を通して再生';
   ba.dataset.label='7問を通して再生';
@@ -933,7 +961,8 @@ function playerEl(){
   w.appendChild(r1);
 
   var r2 = document.createElement('div'); r2.className='row';
-  var lab = document.createElement('span'); lab.style.fontSize='13px'; lab.textContent='速さ';
+  var lab = document.createElement('span'); lab.style.fontSize='13px';
+  lab.innerHTML = '速さ<span style="opacity:.7">／Kecepatan</span>';
   var sl = document.createElement('input'); sl.type='range'; sl.min='0.7'; sl.max='1.2'; sl.step='0.05'; sl.value='1';
   var vv = document.createElement('span'); vv.style.cssText='font-size:13px;font-weight:700'; vv.textContent='1.00';
   sl.addEventListener('input', function(){ rate = +sl.value; vv.textContent = rate.toFixed(2); });
@@ -952,7 +981,9 @@ function playerEl(){
 
   var note = document.createElement('div'); note.className='note';
   note.innerHTML = '会話は<b>1回だけ</b>流れます。聞いてから下の選択肢をタップしてください。'
-    + '答え合わせは、7問すべて答えてから「採点する」を押します。';
+    + '答え合わせは、7問すべて答えてから「採点する」を押します。<br>'
+    + '<span style="opacity:.75">Percakapan diputar satu kali. Pilih jawaban, '
+    + 'lalu tekan tombol penilaian setelah semua terjawab.</span>';
   w.appendChild(note);
   return w;
 }
