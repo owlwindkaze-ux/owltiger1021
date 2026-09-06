@@ -71,6 +71,8 @@
   .howto-tip{margin:8px 0 0;font-size:12.5px;color:var(--muted)}
   .play small{display:block;font-size:9.5px;font-weight:400;letter-spacing:0;opacity:.85;margin-top:1px}
   .count i{font-style:italic;opacity:.8}
+  /* 読み上げている問題を目立たせる（どこを答えるか分かるように） */
+  .q.playing{box-shadow:0 0 0 3px rgba(185,133,47,.28);border-radius:6px}
   #testBtn{font-family:inherit;font-size:13px;padding:7px 12px;cursor:pointer;
     border:1px solid var(--ink);background:var(--ink);color:var(--paper)}
   .speeds{display:flex;gap:0;border:1px solid var(--line)}
@@ -977,7 +979,12 @@ function speak(text, btn){
   if(currentBtn) currentBtn.classList.remove('speaking');
   currentBtn = btn;
   btn.classList.add('speaking');
-  const done = () => { if(currentBtn === btn) btn.classList.remove('speaking'); };
+  const done = () => {
+    if(currentBtn === btn) btn.classList.remove('speaking');
+    /* 読み終わったら、目立たせるのをやめる */
+    const box = btn.closest('.q');
+    if(box) box.classList.remove('playing');
+  };
   /* iPhone は 分けて 入れると 止まる ことが あるので、まとめて 読ませます */
   const parts = IOS ? [String(text).replace(/\n/g,'')] : chunks(text);
   const go = () => parts.forEach((t, i) => {
@@ -1130,6 +1137,12 @@ DATA.forEach((part, pi) => {
     playBtn.addEventListener('click', () => {
       n++; countEl.innerHTML = '聞いた回数 ' + n + '<i>／ ' + n + '×</i>';
       speak(src.script, playBtn);
+      /* 聞いている間、その問題と選択肢が画面に入るように動かす。
+         「聞く」を押したあと、下の選択肢を自分でさがさなくてよくする。 */
+      [...document.querySelectorAll('.q.playing')].forEach(x => x.classList.remove('playing'));
+      q.classList.add('playing');
+      try { q.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+      catch (e) { q.scrollIntoView(); }
     });
 
     const after = q.querySelector('.after');

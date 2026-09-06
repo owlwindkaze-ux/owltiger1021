@@ -194,8 +194,15 @@ function itemsOf(){
   DATA[SET].groups.forEach(function(g){ g.items.forEach(function(it){ out.push({g:g.group,it:it}); }); });
   return out;
 }
+function markNow(no){
+  $$('#list .qs .btn').forEach(function(b){
+    var on = b.dataset.no === no;
+    b.classList.toggle('on', on);
+    if(on){ try{ b.scrollIntoView({behavior:'smooth',block:'center'}); }catch(e){} }
+  });
+}
 async function playItem(x, showNow){
-  if(showNow) $('#now').textContent=x.g+'　'+x.it.no;
+  if(showNow){ $('#now').textContent=x.g+'　'+x.it.no; markNow(x.it.no); }
   for(var i=0;i<x.it.steps.length;i++){
     if(stopFlag) return;
     var st=x.it.steps[i];
@@ -216,6 +223,7 @@ async function playFrom(idx, one){
     if(one) break;
   }
   synth.cancel();
+  $$('#list .qs .btn').forEach(function(b){ b.classList.remove('on'); });
   $('#now').textContent = stopFlag ? '止めました' : '終わりました';
   running=false; stopFlag=false;
   $('#stop').disabled=true; $('#playAll').disabled=false;
