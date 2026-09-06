@@ -72,6 +72,12 @@
 
   .q{background:var(--card);border:1px solid var(--rule);border-radius:8px;
      padding:14px 15px;margin:12px 0;box-shadow:0 1px 2px rgba(22,33,43,.05)}
+
+  /* 聴解を再生している間、いま流れている問題を目立たせる */
+  .q.playing{border-color:var(--accent,#B9852F);box-shadow:0 0 0 3px rgba(185,133,47,.25);
+    background:#FFFDF6}
+  .q.playing .qn::after{content:" ◀ いま この問題";font-size:12px;font-weight:700;
+    color:#8A5A12;margin-left:6px}
   .q .qt{font-weight:700;margin:0 0 10px;display:flex;gap:9px;align-items:baseline}
   .q .qn{color:#fff;background:var(--navy);border-radius:4px;padding:1px 9px;font-size:13px;flex:none}
   .q.drill .qn{background:#6B7C8C}
@@ -774,6 +780,7 @@ function questionEl(dayKey, q){
   var box = document.createElement('div');
   box.className = 'q' + (q.drill ? ' drill' : '');
   var id = uid(dayKey, q);
+  box.dataset.qid = q.id;        /* 聴解の再生中に、その問題まで画面を動かすため */
 
   var head = document.createElement('div'); head.className = 'qt';
   var n = document.createElement('span'); n.className = 'qn';
@@ -886,7 +893,9 @@ function speak(text, voice){
   return new Promise(function(res){
     if(stopped) return res();
     var u = new SpeechSynthesisUtterance(text);
-    u.lang='ja-JP'; if(voice) u.voice = voice; u.rate = rate;
+    u.lang='ja-JP'; u.rate = rate;
+    /* 端末によっては voice の代入で例外が出る。ここで止まると無音になるので受け止める */
+    try{ if(voice) u.voice = voice; }catch(e){}
     var done=false, keep=0;
     function fin(){ if(!done){ done=true; if(keep) clearInterval(keep); res(); } }
     u.onend=fin; u.onerror=fin;
@@ -903,6 +912,23 @@ function loadVoices(){ voices = (synth.getVoices()||[]).filter(function(v){ retu
 loadVoices();
 if(typeof synth.onvoiceschanged !== 'undefined') synth.onvoiceschanged = function(){ loadVoices(); };
 
+/* いま流れている問題の選択肢まで、画面を動かす。
+   通しで再生すると、どの問題を答えればよいか分からなくなるため。 */
+function focusQ(no){
+  Array.prototype.forEach.call(document.querySelectorAll('.q.playing'), function(x){
+    x.classList.remove('playing');
+  });
+  var box = document.querySelector('#pane .q[data-qid="' + no + '"]');
+  if(!box) return;
+  box.classList.add('playing');
+  try { box.scrollIntoView({ behavior:'smooth', block:'center' }); }
+  catch(e) { box.scrollIntoView(); }
+}
+function clearFocus(){
+  Array.prototype.forEach.call(document.querySelectorAll('.q.playing'), function(x){
+    x.classList.remove('playing');
+  });
+}
 function playSeq(items, btn){
   if(running) return;
   stopped = false; running = true; clearTimers();
@@ -910,6 +936,7 @@ function playSeq(items, btn){
   if(btn){ btn.classList.add('on'); btn.textContent='再生中…'; }
   var chain = Promise.resolve();
   items.forEach(function(it){
+    chain = chain.then(function(){ if(!stopped) focusQ(it.no); });
     it.steps.forEach(function(st){
       chain = chain.then(function(){
         if(stopped) return;
@@ -920,10 +947,12 @@ function playSeq(items, btn){
   });
   chain.then(function(){
     running = false;
+    clearFocus();
     if(btn){ btn.classList.remove('on'); btn.textContent = btn.dataset.label; }
   });
 }
 function stopSeq(){ stopped = true; running = false; clearTimers(); try{ synth.cancel(); }catch(e){}
+  clearFocus();
   Array.prototype.forEach.call(document.querySelectorAll('.playbtn'), function(b){
     b.classList.remove('on'); if(b.dataset.label) b.textContent = b.dataset.label; }); }
 
