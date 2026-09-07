@@ -56,6 +56,7 @@ ul.chk input{margin-top:.28rem;width:1.05rem;height:1.05rem;flex:none;accent-col
 ul.chk .t{font-weight:700;font-size:.92rem;line-height:1.5}
 ul.chk .n{display:block;font-weight:400;font-size:.78rem;color:var(--muted)}
 ul.chk input:checked + .t{text-decoration:line-through;opacity:.55}
+ul.chk li.tw label{border-color:var(--ora);border-width:2px;background:#fff7ed}
 .staffnote{border:1px dashed var(--muted);background:#f8fafc;border-radius:10px;
   padding:.6rem .8rem;font-size:.85rem;color:var(--muted);margin-top:.6rem}
 .staffnote b{color:var(--ink)}
@@ -174,6 +175,12 @@ footer{text-align:center;font-size:.75rem;color:var(--muted);padding:1rem 0 2rem
       <a class="item" href="../新人研修プログラム.pdf"><span class="em">📋</span>
         <span class="tx"><span class="n">新人研修プログラム（PDF）</span>
         <span class="r">30週の予定表・面談シート・記録表・つまずいたときの手当て</span></span><span class="ar">→</span></a>
+      <a class="item" href="../週ごとの学習範囲表.pdf"><span class="em">📖</span>
+        <span class="tx"><span class="n">週ごとの学習範囲表（PDF）</span>
+        <span class="r">30週分。今週どの漢字・語彙・文型をやるかの一覧</span></span><span class="ar">→</span></a>
+      <a class="item" href="../月次確認テスト.pdf"><span class="em">📝</span>
+        <span class="tx"><span class="n">月次確認テスト（PDF）</span>
+        <span class="r">4回分の問題・正解・聴解スクリプト・記録表</span></span><span class="ar">→</span></a>
     </div>
   </div>
 
@@ -232,6 +239,17 @@ var PHASES = [
 
 /* 職員がすること（週番号 → やること）。毎週の分は STAFF_EVERY。 */
 var STAFF_EVERY = '金曜10分：学習状況タブを見て、先週の記録を確認する';
+/* テストのある週。実習生の週リストにも1行足す */
+var TEST_WEEK = {
+  1:{t:'📝 診断テスト 第1回（筆記50分＋聴解15分＋口頭5分）', n:'いまの力を見るためのものです。点数で評価しません'},
+  4:{t:'📝 月次確認テスト①（15分・20問）', n:'範囲は第1〜4週。学習範囲表のとおり'},
+  8:{t:'📝 月次確認テスト②（15分・20問）', n:'範囲は第5〜8週'},
+  12:{t:'📝 月次確認テスト③（15分・20問）', n:'範囲は第9〜12週'},
+  16:{t:'📝 診断テスト 第2回（第1回と同じ形）', n:'3か月の伸びを見ます'},
+  20:{t:'📝 月次確認テスト④（15分・20問）', n:'範囲は第13〜20週'},
+  24:{t:'📝 模試①（土曜の通しテストを本番と同じ時間で）', n:'50分。途中で止めない'},
+  28:{t:'📝 模試②（読解＋聴解を続けて）', n:'本番と同じ順で'}
+};
 var STAFF_WEEK = {
   1:'診断テスト 第1回（筆記50分＋聴解15分＋口頭5分）。結果から1月以降を調整する',
   4:'月末面談30分：12月をふりかえる。生活の困りごとも聞く',
@@ -359,10 +377,12 @@ function renderWeek(today){
   var done = {};
   try { done = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
 
-  document.getElementById('weekList').innerHTML = ph.task.map(function (t, i) {
+  var tasks = ph.task.slice();
+  if (w && TEST_WEEK[w]) tasks.push({ k:'', t:TEST_WEEK[w].t, n:TEST_WEEK[w].n, test:true });
+  document.getElementById('weekList').innerHTML = tasks.map(function (t, i) {
     var A = t.k ? APPS[t.k] : null;
     var lvtag = t.lv ? '<span class="lvtag">' + t.lv + '</span> ' : '';
-    return '<li><label><input type="checkbox" data-i="' + i + '"' +
+    return '<li' + (t.test ? ' class="tw"' : '') + '><label><input type="checkbox" data-i="' + i + '"' +
       (done[i] ? ' checked' : '') + '>' +
       '<span class="t">' + (A ? A.em + ' ' : '') + lvtag + t.t +
       '<span class="n">' + t.n + '</span></span></label></li>';
