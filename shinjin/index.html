@@ -57,6 +57,19 @@ ul.chk .t{font-weight:700;font-size:.92rem;line-height:1.5}
 ul.chk .n{display:block;font-weight:400;font-size:.78rem;color:var(--muted)}
 ul.chk input:checked + .t{text-decoration:line-through;opacity:.55}
 ul.chk li.tw label{border-color:var(--ora);border-width:2px;background:#fff7ed}
+/* 日ごとのチェック（月〜日） */
+ul.chk li.dly{background:#fff;border:1px solid #e8d3c2;border-radius:10px;padding:.5rem .6rem}
+ul.chk li.dly .t{display:block}
+ul.chk li.dly.fin .t{text-decoration:line-through;opacity:.55}
+.dcnt{float:right;font-size:.75rem;font-weight:800;color:var(--ora-d);margin-left:.4rem}
+.days{display:flex;gap:.28rem;margin-top:.5rem}
+.days label{flex:1;display:flex;flex-direction:column;align-items:center;gap:.12rem;
+  border:1px solid #e8d3c2;border-radius:8px;padding:.32rem .1rem;background:#fff;
+  cursor:pointer;font-size:.74rem;font-weight:800;color:var(--muted)}
+.days input{width:1rem;height:1rem;margin:0;accent-color:var(--ora)}
+.days label.on{background:var(--ora);border-color:var(--ora);color:#fff}
+.days label.td{box-shadow:0 0 0 2px var(--ora-d)}
+.wprog{font-size:.83rem;font-weight:800;color:var(--ora-d);margin:.5rem 0 .1rem}
 .staffnote{border:1px dashed var(--muted);background:#f8fafc;border-radius:10px;
   padding:.6rem .8rem;font-size:.85rem;color:var(--muted);margin-top:.6rem}
 .staffnote b{color:var(--ink)}
@@ -136,6 +149,7 @@ footer{text-align:center;font-size:.75rem;color:var(--muted);padding:1rem 0 2rem
     <div class="lb">MINGGU INI ／ 今週やること</div>
     <div class="ttl" id="weekTtl">　</div>
     <div class="wsub" id="weekSub"></div>
+    <div class="wprog" id="weekProg"></div>
     <ul class="chk" id="weekList"></ul>
     <p class="wnote" id="weekNote"></p>
   </div>
@@ -205,34 +219,34 @@ var PHASES = [
   { from:1, to:4, name:'ならし', min:'1日15分',
     aim:'日本の生活と仕事に慣れる。日本語は「毎日ふれる」ことだけを守る',
     task:[
-      {k:'k', lv:'N5', t:'漢字 N5　平日 1日5字（週25字）', n:'102字を4週で一周'},
-      {k:'k', lv:'N5', t:'語彙 N5　平日 1日10語（週50語）', n:'よく使う語から'},
+      {k:'k', lv:'N5', dw:5, t:'漢字 N5　平日 1日5字（週25字）', n:'102字を4週で一周'},
+      {k:'k', lv:'N5', dw:5, t:'語彙 N5　平日 1日10語（週50語）', n:'よく使う語から'},
       {k:'c', t:'聴解　週3問（「ゆっくり」）', n:'答えが合わなくてよい。音に慣れる'},
-      {k:'', t:'仕事で聞こえた言葉を 1日1つ メモ', n:'翌日、先輩に読み方を聞く'}
+      {k:'', dw:7, t:'仕事で聞こえた言葉を 1日1つ メモ', n:'翌日、先輩に読み方を聞く'}
     ]},
   { from:5, to:12, name:'N4を仕上げる', min:'1日30分',
     aim:'N4の漢字・語彙・文型を、ひととおり「覚えた」にする',
     task:[
-      {k:'g', lv:'N4', t:'文型 N4　平日 1日3項目（週15項目）', n:'117項目を8週で'},
-      {k:'k', lv:'N4', t:'漢字 N4　平日 1日4字（週18字）', n:'144字を8週で'},
-      {k:'k', lv:'N4', t:'語彙 N4　平日 1日17語（週83語）', n:'662語を8週で'},
+      {k:'g', lv:'N4', dw:5, t:'文型 N4　平日 1日3項目（週15項目）', n:'117項目を8週で'},
+      {k:'k', lv:'N4', dw:5, t:'漢字 N4　平日 1日4字（週18字）', n:'144字を8週で'},
+      {k:'k', lv:'N4', dw:5, t:'語彙 N4　平日 1日17語（週83語）', n:'662語を8週で'},
       {k:'d', t:'読解 N4　週2本', n:'18本を8週で。時間は計らない'},
       {k:'c', t:'聴解　週6問（「すこし速く」）', n:'48問を8週で一周'}
     ]},
   { from:13, to:16, name:'N3へ切りかえる', min:'1日40分',
     aim:'N3の漢字と文型を始める。読解は時間を計り始める',
     task:[
-      {k:'k', lv:'N3', t:'漢字 N3　平日 1日4字（週21字）', n:'367字を18週で'},
-      {k:'g', lv:'N3', t:'文型 N3　平日 1日2項目（週8項目）', n:'150項目を18週で'},
+      {k:'k', lv:'N3', dw:5, t:'漢字 N3　平日 1日4字（週21字）', n:'367字を18週で'},
+      {k:'g', lv:'N3', dw:5, t:'文型 N3　平日 1日2項目（週8項目）', n:'150項目を18週で'},
       {k:'d', t:'読解 N3　週1本（時間を計る）', n:'短文3分・中文4分30秒が目安'},
       {k:'c', t:'聴解　週6問（「ふつう」）', n:'2周目。1回だけ聞いて答える'}
     ]},
   { from:17, to:30, name:'100日コース', min:'1日45〜60分',
     aim:'月〜日の日課をそのまま進める。土曜は必ず時間を計る',
     task:[
-      {k:'n', t:'100日コース　月〜日を順番に', n:'1週88問'},
-      {k:'k', lv:'N3', t:'漢字 N3　平日 1日4字（週21字）', n:'続ける'},
-      {k:'g', lv:'N3', t:'文型 N3　平日 1日2項目（週8項目）', n:'続ける'},
+      {k:'n', dw:7, t:'100日コース　月〜日を順番に', n:'1週88問'},
+      {k:'k', lv:'N3', dw:5, t:'漢字 N3　平日 1日4字（週21字）', n:'続ける'},
+      {k:'g', lv:'N3', dw:5, t:'文型 N3　平日 1日2項目（週8項目）', n:'続ける'},
       {k:'c', t:'土曜の通しテストは 50分で解ききる', n:'本番と同じ時間'}
     ]}
 ];
@@ -379,19 +393,66 @@ function renderWeek(today){
 
   var tasks = ph.task.slice();
   if (w && TEST_WEEK[w]) tasks.push({ k:'', t:TEST_WEEK[w].t, n:TEST_WEEK[w].n, test:true });
+
+  /* 今日が月曜から何日目か。週の外（まだ始まっていない等）なら -1 */
+  var DN = ['月','火','水','木','金','土','日'];
+  var ti = Math.floor((today - mondayOf(w || 1)) / 86400000);
+  if (ti < 0 || ti > 6) ti = -1;
+
+  /* dw があるものは日ごと（5＝月〜金、7＝月〜日）。ないものは週に1回のチェック。 */
+  function dayRow(t, i){
+    var n = t.dw, on = 0, h = '';
+    for (var k = 0; k < n; k++) if (done[i + '-' + k]) on++;
+    for (var j = 0; j < n; j++){
+      var c = !!done[i + '-' + j];
+      h += '<label class="' + (c ? 'on' : '') + (j === ti ? ' td' : '') + '">' +
+        '<input type="checkbox" data-i="' + i + '" data-d="' + j + '"' + (c ? ' checked' : '') + '>' +
+        '<span>' + DN[j] + '</span></label>';
+    }
+    return { html:'<div class="days">' + h + '</div>', on:on };
+  }
+
   document.getElementById('weekList').innerHTML = tasks.map(function (t, i) {
     var A = t.k ? APPS[t.k] : null;
     var lvtag = t.lv ? '<span class="lvtag">' + t.lv + '</span> ' : '';
+    var head = (A ? A.em + ' ' : '') + lvtag + t.t + '<span class="n">' + t.n + '</span>';
+    if (t.dw){
+      var r = dayRow(t, i);
+      return '<li class="dly' + (r.on === t.dw ? ' fin' : '') + '" data-i="' + i + '">' +
+        '<span class="t"><span class="dcnt">' + r.on + '／' + t.dw + '</span>' + head + '</span>' +
+        r.html + '</li>';
+    }
     return '<li' + (t.test ? ' class="tw"' : '') + '><label><input type="checkbox" data-i="' + i + '"' +
-      (done[i] ? ' checked' : '') + '>' +
-      '<span class="t">' + (A ? A.em + ' ' : '') + lvtag + t.t +
-      '<span class="n">' + t.n + '</span></span></label></li>';
+      (done[i] ? ' checked' : '') + '><span class="t">' + head + '</span></label></li>';
   }).join('');
+
+  /* 今週ぜんぶで何日分できたか */
+  function progress(){
+    var got = 0, all = 0;
+    tasks.forEach(function (t, i){
+      if (t.dw){ all += t.dw; for (var k = 0; k < t.dw; k++) if (done[i + '-' + k]) got++; }
+      else { all += 1; if (done[i]) got++; }
+    });
+    document.getElementById('weekProg').textContent =
+      '今週できた分：' + got + '／' + all + '　（Minggu ini ' + got + '/' + all + '）';
+  }
+  progress();
 
   [].forEach.call(document.querySelectorAll('#weekList input'), function (c) {
     c.addEventListener('change', function () {
-      done[c.dataset.i] = c.checked;
+      var i = c.dataset.i;
+      if (c.dataset.d === undefined) done[i] = c.checked;
+      else done[i + '-' + c.dataset.d] = c.checked;
       try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {}
+      /* その場で見た目を直す（作り直すと押した場所が動いてしまう） */
+      if (c.dataset.d !== undefined){
+        c.parentNode.classList.toggle('on', c.checked);
+        var li = c.closest('li'), t = tasks[+i], on = 0;
+        for (var k = 0; k < t.dw; k++) if (done[i + '-' + k]) on++;
+        li.querySelector('.dcnt').textContent = on + '／' + t.dw;
+        li.classList.toggle('fin', on === t.dw);
+      }
+      progress();
     });
   });
 

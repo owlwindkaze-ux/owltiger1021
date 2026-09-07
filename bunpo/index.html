@@ -53,6 +53,11 @@ select.sel{padding:.55rem .6rem;border:1.5px solid var(--line);border-radius:10p
 .chips{display:flex;gap:.3rem;flex-wrap:wrap}
 .chip{padding:.45rem .75rem;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-size:.82rem;font-weight:700;color:var(--muted)}
 .chip.on{background:var(--green);border-color:var(--green);color:#fff}
+/* 新人コースの「今週の分だけ」。ふつうのレベル絞りと見分けがつくよう色を変える */
+.chip.wkchip{border-color:#f0b090;color:#9a3412}
+.chip.wkchip.on{background:#c2410c;border-color:#c2410c;color:#fff}
+.wkmsg{margin:.5rem 0 0;font-size:.85rem;font-weight:700;color:#9a3412;
+  background:#fff7ed;border:1px solid #f0b090;border-radius:10px;padding:.5rem .7rem}
 .hint{font-size:.8rem;color:var(--muted)}
 
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.7rem}
@@ -237,8 +242,10 @@ footer a{color:var(--green)}
       <option value="review">Perlu ulang ／ 要復習</option>
       <option value="known">Sudah hafal ／ 覚えた</option>
     </select>
+    <button class="chip wkchip" id="wkBtn" hidden>📅 今週の分だけ ／ Minggu ini</button>
     <span class="hint" id="listCnt"></span>
   </div>
+  <p class="wkmsg" id="wkMsg" hidden></p>
   <div class="grid" id="grid"><p class="loading">Memuat… ／ 読み込み中…</p></div>
 </section>
 
@@ -453,6 +460,51 @@ async function withBusy(fn) {
   try { return await fn(); } finally { clearTimeout(t); }
 }
 
+/* ---------- 新人コースの「今週の分だけ」 ----------
+   weeks.json に、第何週にどの文型をやるかが入っている（週ごとの学習範囲表と同じ割り当て）。
+   押されたときだけ読む。押していない人には何も届かない。 */
+let WK = null, wkOn = false, wkIds = null;
+async function loadWeeks() {
+  if (WK) return WK;
+  try { WK = await (await fetch('weeks.json', { cache: 'no-cache' })).json(); }
+  catch (e) { WK = { start: null, weeks: {} }; }
+  return WK;
+}
+/** 今日が第何週か、と画面に出す一言を返す */
+function weekState() {
+  const p = String(WK.start || '').split('-');
+  if (p.length !== 3) return { msg: '週の予定が 読めませんでした ／ Data minggu tidak terbaca' };
+  const m1 = new Date(+p[0], +p[1] - 1, +p[2]);
+  const t = new Date(); t.setHours(0, 0, 0, 0);
+  const d = Math.floor((t - m1) / 86400000), total = WK.total || 30;
+  if (d < 0) return { msg: '新人コースは ' + (m1.getMonth() + 1) + '月' + m1.getDate() +
+    '日 からです。それまでは「すべて」で つかってください' };
+  const n = Math.floor(d / 7) + 1;
+  if (n > total) return { msg: '新人コースの' + total + '週は 終わりました。「すべて」で つかってください' };
+  const ids = WK.weeks[String(n)];
+  if (!ids || !ids.length) return { msg: '第' + n + '週は 文型の 予定が ありません。' +
+    'この時期は 漢字・語彙 が 中心です ／ Minggu ' + n + ': belum ada tata bahasa' };
+  return { ids: ids, msg: '第' + n + '週の 文型 ' + ids.length + '項目だけを 出しています' +
+    '（レベルの ボタンは 効きません）／ Minggu ' + n + '：' + ids.length + ' pola' };
+}
+function setupWeekBtn() {
+  const btn = $('#wkBtn'), msg = $('#wkMsg');
+  btn.hidden = false;
+  btn.onclick = async () => {
+    if (wkOn) {                          /* もう一度押したら もとに戻す */
+      wkOn = false; wkIds = null;
+      btn.classList.remove('on'); msg.hidden = true; renderList(); return;
+    }
+    /* 今週の分は レベルをまたぐので、ここで全部そろえる */
+    await withBusy(async () => { await loadWeeks(); await ensureAll(); });
+    const st = weekState();
+    msg.textContent = st.msg; msg.hidden = false;
+    if (!st.ids) { renderList(); return; }   /* 出す分が無いときは 押されていない扱い */
+    wkOn = true; wkIds = new Set(st.ids); btn.classList.add('on');
+    renderList();
+  };
+}
+
 async function boot() {
   /* grammar.json は目次。実データはレベルごとのファイル（grammar-n5.json など）に分けてある。
      目次に "grammar" が直接入っている旧形式のデータもそのまま読める。 */
@@ -495,6 +547,8 @@ async function boot() {
   CATS.forEach(c => $('#catSel').insertAdjacentHTML('beforeend', `<option value="${esc(c)}">${esc(c)}</option>`));
   $$('#lvChips .chip').forEach(b => b.onclick = async () => {
     const lv = b.dataset.lv;
+    /* レベルを選び直したら「今週の分だけ」はやめる（両方は効かないため） */
+    if (wkOn) { wkOn = false; wkIds = null; $('#wkBtn').classList.remove('on'); $('#wkMsg').hidden = true; }
     $$('#lvChips .chip').forEach(x => x.classList.remove('on')); b.classList.add('on');
     await withBusy(() => ensureLevel(lv));
     try { localStorage.setItem(LVKEY, lv); } catch (e) {}
@@ -504,6 +558,7 @@ async function boot() {
   const chip = $$('#lvChips .chip').find(b => b.dataset.lv === INITLV) || $$('#lvChips .chip')[0];
   $$('#lvChips .chip').forEach(x => x.classList.remove('on')); chip.classList.add('on');
 
+  setupWeekBtn();
   renderList(); refreshStats(); openFromHash();
 }
 
@@ -583,7 +638,9 @@ function scoreOne(g, q) {
 function filtered() {
   const q = normQ($('#q').value), lv = curLv(), cat = $('#catSel').value, st = $('#stSel').value;
   return DATA.filter(g => {
-    if (lv !== 'all' && g.level !== lv) return false;
+    /* 「今週の分だけ」のときは、レベルをまたぐのでレベル絞りは使わない */
+    if (wkOn && wkIds) { if (!wkIds.has(g.id)) return false; }
+    else if (lv !== 'all' && g.level !== lv) return false;
     if (cat !== 'all' && g.category !== cat) return false;
     const p = progress[g.id];
     if (st === 'new' && p) return false;
