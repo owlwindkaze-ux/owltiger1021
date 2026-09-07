@@ -507,11 +507,81 @@ async function boot() {
   renderList(); refreshStats(); openFromHash();
 }
 
+/* 波ダッシュは 〜(U+301C) と ～(U+FF5E) の2種類があり、端末やIMEでどちらが
+   入力されるか決まっていない。検索では同じものとして扱う。長音符やスペースもそろえる。 */
+function normQ(s){
+  return String(s == null ? '' : s)
+    .replace(/[〜～~﹏]/g, '〜')
+    .replace(/[ 　]+/g, ' ').trim()      /* スペースは1つにまとめるだけ。
+                                            消すと「saat ini」のような意味検索が当たらなくなる */
+    .toLowerCase();
+}
+
 /* ========== ① 一覧 ========== */
 const curLv = () => $('#lvChips .chip.on').dataset.lv;
 
+/* 検索の当たり方に重みをつける。「たら」と打ったとき、例文に「たら」が
+   入っているだけの項目より、文型名そのものが「〜たら」の項目を先に出す。 */
+/* 同じ意味なのに書き方が違うもの。実習生は辞書形で覚えていることが多く、
+   「ている」と打っても「〜ています」に当たらなかった。両方で探す。 */
+var ALT = [
+  ['ています','ている'], ['ません','ない'], ['ましょう','よう'],
+  ['ませんか','ないか'], ['ました','た'],
+  ['なければなりません','なければならない'], ['なくてはいけません','なくてはいけない'],
+  ['ことができます','ことができる'], ['ことがあります','ことがある'],
+  ['たいです','たい'], ['ほうがいいです','ほうがいい'],
+  ['てもいいです','てもいい'], ['てはいけません','てはいけない'],
+  ['でしょう','だろう'], ['ようです','ようだ'], ['そうです','そうだ'],
+  ['つもりです','つもりだ'], ['はずです','はずだ'], ['みたいです','みたいだ'],
+  ['ていきます','ていく'], ['てきます','てくる'], ['ておきます','ておく'],
+  ['てあります','てある'], ['ています','てる'], ['できます','できる']
+];
+/* 検索語から、探すべき形をぜんぶ作る */
+function variants(q) {
+  var out = [q];
+  ALT.forEach(function (pair) {
+    [[0,1],[1,0]].forEach(function (d) {
+      if (q.indexOf(pair[d[0]]) >= 0) {
+        var v = q.split(pair[d[0]]).join(pair[d[1]]);
+        if (out.indexOf(v) < 0) out.push(v);
+      }
+    });
+  });
+  return out;
+}
+
+function scoreG(g, q) {
+  if (!q) return 1;
+  var vs = variants(q);
+  if (vs.length > 1) {
+    var best = 0;
+    vs.forEach(function (v) { best = Math.max(best, scoreOne(g, v)); });
+    return best;
+  }
+  return scoreOne(g, q);
+}
+/* 実習生は「〜」を打たないことが多い。
+   「〜たり〜たりします」を「たりたりします」と打っても当たるように、
+   データ側からも「〜」を抜いた形をつくって、両方で照合する。 */
+const bare = s => String(s || '').split('〜').join('').split(' ').join('');
+function scoreOne(g, q) {
+  const pt = normQ(g.pattern), ptB = bare(pt), qB = bare(q);
+  if (pt === q || ptB === qB) return 100;                  /* ぴったり */
+  /* 「〜ね／〜よ」のように2つ書いてある項目は、片方だけで打たれても当てる */
+  const halves = pt.split(/[／/]/);
+  if (halves.length > 1 && halves.some(h => h === q || bare(h) === qB)) return 95;
+  if (pt.startsWith(q) || ptB.startsWith(qB)) return 90;
+  if (pt.includes(q) || ptB.includes(qB)) return 80;       /* 文型名に含む */
+  const meta = normQ([g.form, tx(g, 'meaning'), g.category, g.note_ja].join(' '));
+  if (meta.includes(q) || bare(meta).includes(qB)) return 50;   /* 形・意味・分類 */
+  const ex = normQ(g.examples.map(e =>
+    e.ja + e.reading + (e.id || '') + (e.en || '') + (e.scene || '')).join(' '));
+  if (ex.includes(q) || bare(ex).includes(qB)) return 20;       /* 例文の中だけ */
+  return 0;
+}
+
 function filtered() {
-  const q = $('#q').value.trim().toLowerCase(), lv = curLv(), cat = $('#catSel').value, st = $('#stSel').value;
+  const q = normQ($('#q').value), lv = curLv(), cat = $('#catSel').value, st = $('#stSel').value;
   return DATA.filter(g => {
     if (lv !== 'all' && g.level !== lv) return false;
     if (cat !== 'all' && g.category !== cat) return false;
@@ -520,10 +590,10 @@ function filtered() {
     if (st === 'known' && p !== 'known') return false;
     if (st === 'review' && p !== 'review') return false;
     if (!q) return true;
-    const hay = [g.pattern, g.form, g.meaning_id, g.meaning_en, g.category,
-      ...g.examples.map(e => e.ja + e.reading + e.id + (e.en || '') + (e.scene || ''))].join(' ').toLowerCase();
-    return hay.includes(q);
-  });
+    return scoreG(g, q) > 0;
+  })
+  /* 当たり方の強い順に並べる。同じ強さなら もとの並び（レベル→分類）のまま */
+  .sort((a, b) => q ? (scoreG(b, q) - scoreG(a, q)) : 0);
 }
 function cardHTML(g) {
   const p = progress[g.id];

@@ -765,7 +765,7 @@ function scoreByWords(k, q) {
     wordHead((e.meaning_id || '').toLowerCase(), q) || wordHead(e.meaning.toLowerCase(), q)) ? 20 : 0;
 }
 function filterKanji(q, lv, mk) {
-  q = (q || '').trim().toLowerCase();
+  q = normQ(q);
   const qk = (q.match(KANJI_RE0) || []).join('') || null;   // 検索語に含まれる漢字
   const base = DATA.filter(k => {
     if (lv !== 'all' && k.level !== lv) return false;
@@ -793,6 +793,16 @@ function sortKanji(arr, mode) {
 }
 
 /* ---------- list ---------- */
+/* 波ダッシュは 〜(U+301C) と ～(U+FF5E) の2種類があり、端末やIMEでどちらが
+   入力されるか決まっていない。検索では同じものとして扱う。長音符やスペースもそろえる。 */
+function normQ(s){
+  return String(s == null ? '' : s)
+    .replace(/[〜～~﹏]/g, '〜')
+    .replace(/[ 　]+/g, ' ').trim()      /* スペースは1つにまとめるだけ。
+                                            消すと「saat ini」のような意味検索が当たらなくなる */
+    .toLowerCase();
+}
+
 let listLimit = 120, curLv = 'all';
 /* 前に見ていたレベルを覚えておく。新人コースなど別のページから
    「N5で開く」と指定して来ることもできる（同じサイトなので書き込める）。 */
@@ -826,16 +836,18 @@ let vLimit = 120, vLv = 'all';
 const LVORD = { N5: 0, N4: 1, N3: 2, '介護': 3, '記録': 4, '現場': 5, '施設': 6, '追加': 7 };
 /** 熟語の検索：ぴったり＞先頭一致＞途中に含む。意味（ローマ字）は語頭だけ見る */
 function scoreVocab(w, q) {
-  const mi = (w.meaning_id || '').toLowerCase(), me = (w.meaning || '').toLowerCase();
-  if (w.word === q || w.reading === q) return 100;
+  const mi = normQ(w.meaning_id), me = normQ(w.meaning);
+  /* 語と読みも、検索語と同じ形にそろえてから比べる（波ダッシュの種類ちがい対策） */
+  const wd = normQ(w.word), rd = normQ(w.reading);
+  if (wd === q || rd === q) return 100;
   if (mi === q || me === q) return 90;
-  if (w.word.startsWith(q) || w.reading.startsWith(q)) return 80;
+  if (wd.startsWith(q) || rd.startsWith(q)) return 80;
   if (wordHead(mi, q) || wordHead(me, q)) return 70;
-  if (w.word.includes(q) || w.reading.includes(q)) return 50;
+  if (wd.includes(q) || rd.includes(q)) return 50;
   return 0;
 }
 function filterVocab() {
-  const q = ($('#vq').value || '').trim().toLowerCase(), cat = $('#vCat').value, sub = $('#vSub').value;
+  const q = normQ($('#vq').value), cat = $('#vCat').value, sub = $('#vSub').value;
   const mk = $('#vMark') ? $('#vMark').value : 'all';
   return VOCAB.filter(w => {
     if (vLv !== 'all' && w.level !== vLv) return false;
