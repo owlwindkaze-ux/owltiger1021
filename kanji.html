@@ -50,6 +50,11 @@ select.sel{padding:.55rem .6rem;border:1.5px solid var(--line);border-radius:10p
 .chips{display:flex;gap:.3rem}
 .chip{padding:.45rem .75rem;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-size:.82rem;font-weight:700;color:var(--muted)}
 .chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+/* 新人コースの「今週の分だけ」。ふつうのレベル絞りと見分けがつくよう色を変える */
+.chip.wkchip{border-color:#f0b090;color:#9a3412}
+.chip.wkchip.on{background:#c2410c;border-color:#c2410c;color:#fff}
+.wkmsg{margin:0 0 .7rem;font-size:.85rem;font-weight:700;color:#9a3412;
+  background:#fff7ed;border:1px solid #f0b090;border-radius:10px;padding:.5rem .7rem}
 .hint{font-size:.8rem;color:var(--muted);white-space:nowrap}
 
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.7rem}
@@ -238,8 +243,10 @@ footer a{color:var(--blue)}
         <option value="review">Perlu diulang ／ 要復習</option>
         <option value="known">Sudah hafal ／ 覚えた</option>
       </select>
+      <button class="chip wkchip" id="wkBtn" hidden>📅 今週の分だけ ／ Minggu ini</button>
       <span class="hint" id="cnt"></span>
     </div>
+    <p class="wkmsg" id="wkMsg" hidden></p>
     <div class="grid" id="grid"><div class="loading">Memuat data… 読み込み中…</div></div>
   </section>
 
@@ -284,8 +291,10 @@ footer a{color:var(--blue)}
         <option value="カタカナ語">カタカナ語 ／ Kata serapan</option>
       </select>
       <select class="sel" id="vSub"><option value="all">小分類すべて ／ Semua sub-bidang</option></select>
+      <button class="chip wkchip" id="vWkBtn" hidden>📅 今週の分だけ ／ Minggu ini</button>
       <span class="hint" id="vCnt"></span>
     </div>
+    <p class="wkmsg" id="vWkMsg" hidden></p>
     <p class="hint" style="margin-bottom:.7rem">Ketuk kata untuk melihat kanji penyusunnya ／ 熟語をタップすると、使われている漢字の書き順を確認できます<br>
       <span style="color:var(--green);font-weight:800">■ hijau = sudah hafal ／ 緑＝覚えた</span>　
       <span style="color:var(--red);font-weight:800">■ merah = perlu diulang ／ 赤＝要復習</span></p>
@@ -768,7 +777,9 @@ function filterKanji(q, lv, mk) {
   q = normQ(q);
   const qk = (q.match(KANJI_RE0) || []).join('') || null;   // 検索語に含まれる漢字
   const base = DATA.filter(k => {
-    if (lv !== 'all' && k.level !== lv) return false;
+    /* 「今週の分だけ」のときは、レベルをまたぐのでレベル絞りは使わない */
+    if (wkOn && wkSet) { if (!wkSet.has(k.character)) return false; }
+    else if (lv !== 'all' && k.level !== lv) return false;
     if (mk === 'known' && progress[k.character] !== 'known') return false;
     if (mk === 'review' && progress[k.character] !== 'review') return false;
     if (mk === 'unseen' && progress[k.character]) return false;
@@ -811,6 +822,68 @@ try {
   const saved = localStorage.getItem(KLVKEY);
   if (saved) curLv = saved;
 } catch (e) {}
+/* ---------- 新人コースの「今週の分だけ」 ----------
+   kanji-weeks.json に、第何週にどの漢字・どの語をやるかが入っている
+   （週ごとの学習範囲表と同じ割り当て）。押されたときだけ読む。 */
+let WK = null, wkOn = false, wkSet = null, vWkOn = false, vWkSet = null;
+async function loadWeeks() {
+  if (WK) return WK;
+  try { WK = await (await fetch('kanji-weeks.json', { cache: 'no-cache' })).json(); }
+  catch (e) { WK = { start: null, kanji: {}, vocab: {} }; }
+  return WK;
+}
+/** 今日が第何週か、と画面に出す一言を返す。kind は 'kanji' か 'vocab' */
+function weekState(kind) {
+  const p = String(WK.start || '').split('-');
+  if (p.length !== 3) return { msg: '週の予定が 読めませんでした ／ Data minggu tidak terbaca' };
+  const m1 = new Date(+p[0], +p[1] - 1, +p[2]);
+  const t = new Date(); t.setHours(0, 0, 0, 0);
+  const d = Math.floor((t - m1) / 86400000), total = WK.total || 30;
+  if (d < 0) return { msg: '新人コースは ' + (m1.getMonth() + 1) + '月' + m1.getDate() +
+    '日 からです。それまでは「すべて」で つかってください' };
+  const n = Math.floor(d / 7) + 1;
+  if (n > total) return { msg: '新人コースの' + total + '週は 終わりました。「すべて」で つかってください' };
+  const list = (WK[kind] || {})[String(n)];
+  const name = kind === 'kanji' ? '漢字' : '語彙';
+  if (!list || !list.length) return { msg: '第' + n + '週は ' + name + 'の 予定が ありません' };
+  return { list: list, msg: '第' + n + '週の ' + name + ' ' + list.length +
+    (kind === 'kanji' ? '字' : '語') + 'だけを 出しています（レベルの ボタンは 効きません）' +
+    '／ Minggu ' + n + '：' + list.length };
+}
+/** 2つのタブに同じ仕組みを付ける。off() は絞りを解除するときに呼ぶ */
+function makeWeekBtn(btnId, msgId, kind, on, off) {
+  const btn = $('#' + btnId), msg = $('#' + msgId);
+  if (!btn) return;
+  btn.hidden = false;
+  btn.onclick = async () => {
+    if (btn.classList.contains('on')) { off(); return; }
+    await loadWeeks();
+    const st = weekState(kind);
+    msg.textContent = st.msg; msg.hidden = false;
+    if (!st.list) return;                 /* 出す分が無いときは 押されていない扱い */
+    btn.classList.add('on');
+    on(new Set(st.list));
+  };
+}
+function wkOff() {
+  wkOn = false; wkSet = null;
+  const b = $('#wkBtn'); if (b) b.classList.remove('on');
+  const m = $('#wkMsg'); if (m) m.hidden = true;
+}
+function vWkOff() {
+  vWkOn = false; vWkSet = null;
+  const b = $('#vWkBtn'); if (b) b.classList.remove('on');
+  const m = $('#vWkMsg'); if (m) m.hidden = true;
+}
+function setupWeekBtns() {
+  makeWeekBtn('wkBtn', 'wkMsg', 'kanji',
+    set => { wkOn = true; wkSet = set; listLimit = 120; renderList(); },
+    () => { wkOff(); listLimit = 120; renderList(); });
+  makeWeekBtn('vWkBtn', 'vWkMsg', 'vocab',
+    set => { vWkOn = true; vWkSet = set; vLimit = 120; renderVocab(); },
+    () => { vWkOff(); vLimit = 120; renderVocab(); });
+}
+
 function renderList() {
   const arr = sortKanji(filterKanji($('#q').value, curLv, $('#mark').value), $('#sort').value);
   $('#cnt').textContent = `${arr.length} kanji`;
@@ -850,7 +923,8 @@ function filterVocab() {
   const q = normQ($('#vq').value), cat = $('#vCat').value, sub = $('#vSub').value;
   const mk = $('#vMark') ? $('#vMark').value : 'all';
   return VOCAB.filter(w => {
-    if (vLv !== 'all' && w.level !== vLv) return false;
+    if (vWkOn && vWkSet) { if (!vWkSet.has(w.word)) return false; }
+    else if (vLv !== 'all' && w.level !== vLv) return false;
     if (mk === 'known' && vprogress[w.word] !== 'known') return false;
     if (mk === 'review' && vprogress[w.word] !== 'review') return false;
     if (mk === 'unseen' && vprogress[w.word]) return false;
@@ -1549,6 +1623,7 @@ $('#q').oninput = () => { listLimit = 120; renderList(); };
 $('#sort').onchange = renderList;
 $('#mark').onchange = () => { listLimit = 120; renderList(); };
 $$('#lvChips .chip').forEach(c => c.onclick = () => {
+  wkOff();                       /* レベルを選び直したら「今週の分だけ」はやめる */
   $$('#lvChips .chip').forEach(x => x.classList.toggle('on', x === c));
   curLv = c.dataset.lv; listLimit = 120; renderList();
   try { localStorage.setItem(KLVKEY, curLv); } catch (e) {}
@@ -1604,9 +1679,11 @@ $('#vMark').onchange = () => { vLimit = 120; renderVocab(); };
 $('#vCat').onchange = () => { $('#vSub').value = 'all'; vLimit = 120; renderVocab(); };
 $('#vSub').onchange = () => { vLimit = 120; renderVocab(); };
 $$('#vLvChips .chip').forEach(c => c.onclick = () => {
+  vWkOff();
   $$('#vLvChips .chip').forEach(x => x.classList.toggle('on', x === c));
   vLv = c.dataset.lv; vLimit = 120; renderVocab();
 });
+setupWeekBtns();
 $('#vmX').onclick = () => closeVocabModal();
 $('#vmBack').onclick = goBack;
 $('#mBack').onclick = goBack;
