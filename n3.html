@@ -3,9 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="JLPT N3 合格に向けた100日の集中学習。読解・語彙・文法を日ごとに進めます。">
 <title>JLPT N3 合格100日学習｜タブレット学習</title>
+<script>
+/* 古いHTMLが端末に残っていると、あとから足した週が出てこない（第5週までしか見えない等）。
+   version.json は毎回サーバーに取りに行くので、そこに書いてある版と
+   このHTMLの版がちがえば、1度だけ読み込み直す。 */
+(function(){
+  var PAGE_VER = '2026-09-09';
+  var KEY = 'reloaded-for-n3';
+  try {
+    fetch('version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
+      .then(function(j){
+        if (!j || !j.version || j.version === PAGE_VER) return;
+        if (sessionStorage.getItem(KEY) === j.version) return;   /* 一度試してだめなら諦める */
+        sessionStorage.setItem(KEY, j.version);
+        location.replace(location.pathname + '?v=' + encodeURIComponent(j.version));
+      })['catch'](function(){});
+  } catch (e) {}
+})();
+</script>
 <style>
   /* ---- 入口と共通の合言葉・メニュー導線 ---- */
   #gate{position:fixed;inset:0;background:#EDF0F3;display:grid;place-items:center;z-index:9999;padding:1rem}
