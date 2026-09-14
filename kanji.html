@@ -260,6 +260,7 @@ footer a{color:var(--blue)}
         <button class="chip" data-lv="N5">N5</button>
         <button class="chip" data-lv="N4">N4</button>
         <button class="chip" data-lv="N3">N3</button>
+        <button class="chip" data-lv="N2">N2</button>
         <button class="chip" data-lv="介護">介護 / Kaigo</button>
         <button class="chip" data-lv="記録">記録 / Rekaman</button>
         <button class="chip" data-lv="施設">施設独自 / Fasilitas</button>
@@ -290,6 +291,7 @@ footer a{color:var(--blue)}
         <option value="品質">品質・管理 ／ Kualitas</option>
         <option value="基本語">基本語（かな） ／ Kata dasar</option>
         <option value="カタカナ語">カタカナ語 ／ Kata serapan</option>
+        <option value="語形成">語形成（〜化・高〜） ／ Imbuhan (N2)</option>
       </select>
       <select class="sel" id="vSub"><option value="all">小分類すべて ／ Semua sub-bidang</option></select>
       <button class="chip wkchip" id="vWkBtn" hidden>📅 今週の分だけ ／ Minggu ini</button>
@@ -1671,7 +1673,7 @@ function refreshStats() {
     ['N5', 'N4', 'N3', 'N2', '介護'].filter(lv => DATA.some(k => hasLv(k, lv)))
       .map(lv => bar(lv, DATA.filter(k => hasLv(k, lv)), progress, x => x.character)).join('') +
     (VOCAB.length ? '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted);margin-top:.5rem">KOSAKATA ／ 熟語</div>' +
-      ['N5', 'N4', 'N3', '介護', '現場', '施設', '追加'].filter(lv => VOCAB.some(w => w.level === lv)).map(lv => bar(lv, VOCAB.filter(w => w.level === lv), vprogress, x => x.word)).join('') : '');
+      ['N5', 'N4', 'N3', 'N2', '介護', '記録', '現場', '施設', '追加'].filter(lv => VOCAB.some(w => w.level === lv)).map(lv => bar(lv, VOCAB.filter(w => w.level === lv), vprogress, x => x.word)).join('') : '');
   /* 要復習の一覧：漢字も熟語も全部出す。多いときは少しずつ表示して画面を軽く保つ */
   const rev = DATA.filter(k => progress[k.character] === 'review');
   const vrev = VOCAB.filter(w => vprogress[w.word] === 'review');
