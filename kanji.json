@@ -7,7 +7,7 @@
   "N2",
   "介護"
  ],
- "count": 776,
+ "count": 836,
  "sources": [
   {
    "name": "KANJIDIC2 / kanji-data",
@@ -69,7 +69,7 @@
   {
    "file": "kanji-n2.json",
    "level": "N2",
-   "count": 30
+   "count": 90
   },
   {
    "file": "kanji-kaigo.json",
@@ -83,12 +83,12 @@
    }
   }
  ],
- "total": 776,
+ "total": 836,
  "level_totals": {
   "N5": 102,
   "N4": 144,
   "N3": 367,
-  "N2": 77,
+  "N2": 137,
   "介護": 133
  },
  "app_version": "2026-09-14b",
