@@ -229,6 +229,7 @@ footer a{color:var(--blue)}
         <button class="chip" data-lv="N5">N5</button>
         <button class="chip" data-lv="N4">N4</button>
         <button class="chip" data-lv="N3">N3</button>
+        <button class="chip" data-lv="N2">N2</button>
         <button class="chip" data-lv="介護">介護 / Kaigo</button>
       </div>
       <select class="sel" id="sort">
@@ -343,7 +344,7 @@ footer a{color:var(--blue)}
         </select>
         <select class="sel" id="fcLv">
           <option value="all">Semua level</option><option value="N5">N5</option>
-          <option value="N4">N4</option><option value="N3">N3</option>
+          <option value="N4">N4</option><option value="N3">N3</option><option value="N2">N2</option>
           <option value="介護">介護 / Kaigo</option><option value="現場">現場 / Kerja</option>
         </select>
         <select class="sel" id="fcPick">
@@ -403,7 +404,7 @@ footer a{color:var(--blue)}
         </select>
         <select class="sel" id="qzLv">
           <option value="all">Semua level</option><option value="N5">N5</option>
-          <option value="N4">N4</option><option value="N3">N3</option>
+          <option value="N4">N4</option><option value="N3">N3</option><option value="N2">N2</option>
           <option value="介護">介護 / Kaigo</option>
           <option value="現場">現場・生活 / Tempat kerja</option>
         </select>
@@ -459,6 +460,7 @@ footer a{color:var(--blue)}
         <button class="chip" data-lv="N5">N5</button>
         <button class="chip" data-lv="N4">N4</button>
         <button class="chip" data-lv="N3">N3</button>
+        <button class="chip" data-lv="N2">N2</button>
         <button class="chip" data-lv="介護">介護 / Kaigo</button>
       </div>
       <select class="sel" id="sSort">
@@ -688,7 +690,9 @@ function ensureKanjiLevel(lv) {
   if (lv === 'all') return ensureAllKanji();
   if (KLOADED.has(lv)) return Promise.resolve();
   if (KLOADING[lv]) return KLOADING[lv];
-  const files = KIDX.filter(f => f.level === lv);
+  /* その札のファイルだけでなく、「よその札」でその札を含むファイルも読む
+     （例：N2 を押したら、介護のファイルに混ざっている46字も要る） */
+  const files = KIDX.filter(f => f.level === lv || (f.extra || []).includes(lv));
   KLOADING[lv] = Promise.all(files.map(f =>
     fetch(f.file, { cache: 'no-cache' }).then(r => r.ok ? r.json() : { kanji: [] })
       .catch(() => ({ kanji: [] }))))
@@ -742,7 +746,9 @@ async function boot() {
   const json = await (await fetch('kanji.json', { cache: 'no-cache' })).json();
   KIDX = (json.files || []).map(f => (typeof f === 'string' ? { file: f, level: null } : f));
   const perLevel = KIDX.length > 0 && KIDX.every(f => f.level);
+  /* 見出しの字数は、よその札で入ってくる字も足した本当の数を使う */
   KIDX.forEach(f => { KCOUNT[f.level] = (KCOUNT[f.level] || 0) + (f.count || 0); });
+  if (json.level_totals) Object.assign(KCOUNT, json.level_totals);
   KTOTAL = json.total || KIDX.reduce((n, f) => n + (f.count || 0), 0);
 
   if (perLevel) {
@@ -840,7 +846,7 @@ function mergeMyWords() {
   });
 }
 const vMean = w => (LANG === 'id' && w.meaning_id) ? w.meaning_id : (w.meaning || w.meaning_ja || w.meaning_id);
-const cnt = lv => DATA.filter(k => k.level === lv).length;
+const cnt = lv => DATA.filter(k => hasLv(k, lv)).length;
 const loadStrokes = () => strokePromise || (strokePromise =
   fetch('kanji-strokes.json', { cache: 'no-cache' }).then(r => r.json()).then(j => (STROKES = j.strokes)));
 
@@ -867,13 +873,17 @@ function scoreByWords(k, q) {
   return k.examples.some(e => e.word.includes(q) || rdClean(e.reading).startsWith(q) ||
     wordHead((e.meaning_id || '').toLowerCase(), q) || wordHead(e.meaning.toLowerCase(), q)) ? 20 : 0;
 }
+/* 1つの字が2つの札を持てる。たとえば「浴」は 介護 でもあり N2 でもある。
+   level が本来の札、also が「こちらでも出す」札。どちらで絞っても出るようにする。 */
+const hasLv = (k, lv) => lv === 'all' || k.level === lv || (k.also || []).includes(lv);
+
 function filterKanji(q, lv, mk) {
   q = normQ(q);
   const qk = (q.match(KANJI_RE0) || []).join('') || null;   // 検索語に含まれる漢字
   const base = DATA.filter(k => {
     /* 「今週の分だけ」のときは、レベルをまたぐのでレベル絞りは使わない */
     if (wkOn && wkSet) { if (!wkSet.has(k.character)) return false; }
-    else if (lv !== 'all' && k.level !== lv) return false;
+    else if (!hasLv(k, lv)) return false;
     if (mk === 'known' && progress[k.character] !== 'known') return false;
     if (mk === 'review' && progress[k.character] !== 'review') return false;
     if (mk === 'unseen' && progress[k.character]) return false;
@@ -993,7 +1003,7 @@ const cardHTML = k => `<button class="kcard ${progress[k.character] ? 'is-' + pr
 
 /* ---------- 熟語タブ ---------- */
 let vLimit = 120, vLv = 'all';
-const LVORD = { N5: 0, N4: 1, N3: 2, '介護': 3, '記録': 4, '現場': 5, '施設': 6, '追加': 7 };
+const LVORD = { N5: 0, N4: 1, N3: 2, N2: 3, '介護': 4, '記録': 5, '現場': 6, '施設': 7, '追加': 8 };
 /** 熟語の検索：ぴったり＞先頭一致＞途中に含む。意味（ローマ字）は語頭だけ見る */
 function scoreVocab(w, q) {
   const mi = normQ(w.meaning_id), me = normQ(w.meaning);
@@ -1229,7 +1239,7 @@ function buildDeck() {
   const lv = $('#fcLv').value, pick = $('#fcPick').value, P = cardProg();
   let arr = (fcIsVocab() ? VOCAB : DATA).filter(x => {
     const key = fcIsVocab() ? x.word : x.character;
-    if (lv !== 'all' && x.level !== lv) return false;
+    if (!hasLv(x, lv)) return false;
     if (pick === 'unseen' && P[key]) return false;
     if (pick === 'review' && P[key] !== 'review') return false;
     return true;
@@ -1568,7 +1578,7 @@ function makeQuestion(type, pool, kpool) {
 function buildQuiz() {
   const lv = $('#qzLv').value, type = $('#qzType').value, n = +$('#qzNum').value;
   const pool = quizPool(lv);
-  const kpool = DATA.filter(k => lv === 'all' || k.level === lv);
+  const kpool = DATA.filter(k => hasLv(k, lv));
   if (pool.length < 8) { alert('この範囲は語が少なすぎます。レベルを変えてください。'); return; }
   const types = type === 'mix' ? ['reading', 'orth', 'context', 'para', 'usage'] : [type];
   const list = []; let guard = 0;
@@ -1653,7 +1663,8 @@ function refreshStats() {
   };
   $('#progWrap').innerHTML =
     '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted)">KANJI ／ 漢字</div>' +
-    ['N5', 'N4', 'N3', '介護'].map(lv => bar(lv, DATA.filter(k => k.level === lv), progress, x => x.character)).join('') +
+    ['N5', 'N4', 'N3', 'N2', '介護'].filter(lv => DATA.some(k => hasLv(k, lv)))
+      .map(lv => bar(lv, DATA.filter(k => hasLv(k, lv)), progress, x => x.character)).join('') +
     (VOCAB.length ? '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted);margin-top:.5rem">KOSAKATA ／ 熟語</div>' +
       ['N5', 'N4', 'N3', '介護', '現場', '施設', '追加'].filter(lv => VOCAB.some(w => w.level === lv)).map(lv => bar(lv, VOCAB.filter(w => w.level === lv), vprogress, x => x.word)).join('') : '');
   /* 要復習の一覧：漢字も熟語も全部出す。多いときは少しずつ表示して画面を軽く保つ */
