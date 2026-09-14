@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <!-- 検索エンジンに載せない（URLを直接開く人は今までどおり使えます） -->
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="介護の技能実習生向け 日本語学習システムの入口。漢字・言葉、文型、読解、聴解、100日コース、新人コース、手書き検索を選べます。">
+<meta name="description" content="介護の技能実習生向け 日本語学習システムの入口。漢字・言葉、文型、読解、聴解、100日コース、新人コース、N2コース、手書き検索を選べます。">
 <title>Belajar Bahasa Jepang Kaigo ｜ 介護の日本語</title>
 <style>
 :root{
@@ -16,6 +16,7 @@
   --tel:#0d9488; --tel-d:#0f766e;
   --nvy:#2e4a63; --nvy-d:#1d3245;
   --ora:#c2410c; --ora-d:#9a3412;
+  --ind:#4338ca; --ind-d:#332e91;
   --red:#dc2626;
   --bg:#f1f5f9; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
   --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
@@ -62,6 +63,11 @@ main{flex:1;max-width:760px;width:100%;margin:0 auto;padding:1.4rem 1rem 2rem}
 .card-c a.item:hover,.card-c a.item:focus{background:#fff7ed;border-color:var(--amb)}
 .card-c .item .ar{color:var(--amb-d)}
 .card-c .bar i{background:var(--amb)}
+.card-i{border-top:6px solid var(--ind)}
+.card-i .icon{color:var(--ind)}
+.card-i a.item:hover,.card-i a.item:focus{background:#eef2ff;border-color:var(--ind)}
+.card-i .item .ar{color:var(--ind-d)}
+.card-i .bar i{background:var(--ind)}
 .head{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.15rem}
 .icon{font-family:var(--kfont);font-size:1.75rem;line-height:1.2;letter-spacing:.03em;flex:none;white-space:nowrap}
 .card-k .icon{color:var(--blue)}
@@ -255,6 +261,25 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
       </div>
     </section>
 
+    <section class="card card-i">
+      <div class="head">
+        <div class="icon">N2</div>
+        <div>
+          <div class="ttl">Menuju N2<small>N2コース（N3合格者の次のステップ）</small></div>
+        </div>
+      </div>
+      <div class="pg" id="pgI">2026年9月〜2027年12月・16か月ロードマップ</div>
+      <p class="desc"><b>N3に合格した人</b>のための入り口です。
+        勤務シフト（公休・早出・日勤・夜勤）に合わせた週間学習リズムと、
+        今の実力を確かめる診断テストがあります。</p>
+      <div class="sub-menu">
+        <a class="item" href="n2/index.html#road"><span class="em">🗺️</span>
+          <span class="tx"><span class="n">ロードマップ</span><span class="r">Roadmap ／ フェーズ・週間リズム・模試計画</span></span><span class="ar">→</span></a>
+        <a class="item" href="n2/index.html#shindan"><span class="em">📝</span>
+          <span class="tx"><span class="n">診断テスト</span><span class="r">Tes diagnostik ／ 文字語彙文法・読解・聴解</span></span><span class="ar">→</span></a>
+      </div>
+    </section>
+
     <section class="card card-t">
       <div class="head">
         <div class="icon">手書き</div>
@@ -305,7 +330,7 @@ if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock();
 else document.getElementById('gatePw').focus();
 
 /* ---- それぞれの進み具合を出す（記録はこの端末の localStorage にある） ---- */
-const VERSION = '2026-09-01';
+const VERSION = '2026-09-14';
 const KTOTAL = 746, VTOTAL = 4559, GTOTAL = 376, DTOTAL = 45, CTOTAL = 48;
 const nKnown = (key, want) => {
   try {
