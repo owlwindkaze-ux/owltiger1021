@@ -71,7 +71,7 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 | `kanji-data.json` | 漢字1,066字の**まとめ役**（読み・意味・用例・部首など）。**編集するのはこのファイル** |
 | `kanji.json` ＋ `kanji-n5/n4/n3/kaigo.json` | 上をレベルごとに分けたもの。画面はこちらを読む（`tools/split-data.py` が作ります） |
 | `kanji-strokes.json` | 書き順データ（KanjiVG のパス、1,066字ぶん） |
-| `vocab-data.json` | 熟語4,558語の**まとめ役**（JLPT語彙＋介護・看護201語＋現場125語）。**編集するのはこのファイル** |
+| `vocab-data.json` | 熟語6,296語の**まとめ役**（JLPT語彙＋介護・看護201語＋現場125語）。**編集するのはこのファイル** |
 | `vocab.json` ＋ `vocab-n5/n4/n3/kaigo/genba/kiroku.json` | 上をレベルごとに分けたもの。画面はこちらを読む |
 | `tools/split-data.py` | まとめ役のファイルを、レベルごとに分け直すスクリプト |
 | `sentences.json` | 練習問題（JLPT形式）用の例文4,338件（収録語彙4,558語の95%をカバー） |
