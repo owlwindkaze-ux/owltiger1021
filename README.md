@@ -68,9 +68,9 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 | `tegaki.html` | 手書き漢字検索（読めない字を書いて調べる） |
 | `tegaki-data.json` | 手書き検索のデータ（漢字6,412字・部首287） |
 | `n3.html` | N3合格100日コース（試験日から逆算した週ごとの学習） |
-| `kanji-data.json` | 漢字746字の**まとめ役**（読み・意味・用例・部首など）。**編集するのはこのファイル** |
+| `kanji-data.json` | 漢字1,066字の**まとめ役**（読み・意味・用例・部首など）。**編集するのはこのファイル** |
 | `kanji.json` ＋ `kanji-n5/n4/n3/kaigo.json` | 上をレベルごとに分けたもの。画面はこちらを読む（`tools/split-data.py` が作ります） |
-| `kanji-strokes.json` | 書き順データ（KanjiVG のパス、746字ぶん） |
+| `kanji-strokes.json` | 書き順データ（KanjiVG のパス、1,066字ぶん） |
 | `vocab-data.json` | 熟語4,558語の**まとめ役**（JLPT語彙＋介護・看護201語＋現場125語）。**編集するのはこのファイル** |
 | `vocab.json` ＋ `vocab-n5/n4/n3/kaigo/genba/kiroku.json` | 上をレベルごとに分けたもの。画面はこちらを読む |
 | `tools/split-data.py` | まとめ役のファイルを、レベルごとに分け直すスクリプト |

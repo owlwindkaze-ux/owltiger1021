@@ -683,6 +683,13 @@ try {
 let KIDX = [], KLOADED = new Set(), KLOADING = {}, KTOTAL = 0, KCOUNT = {};
 let VIDX = [], VLOADED = new Set(), VLOADING = {}, VTOTAL = 0, VCOUNT = {};
 
+/* 1つのファイルが2つの札に使われることがある（介護のファイルにN2の字が混ざる等）。
+   ファイル名で覚えておかないと、同じファイルを二度取りに行ってしまう。 */
+const KFILE = {};
+function fetchKanjiFile(name) {
+  return KFILE[name] || (KFILE[name] = fetch(name, { cache: 'no-cache' })
+    .then(r => r.ok ? r.json() : { kanji: [] }).catch(() => ({ kanji: [] })));
+}
 function addKanji(arr) {
   (arr || []).forEach(k => { if (!BYCH[k.character]) { BYCH[k.character] = k; DATA.push(k); } });
 }
@@ -693,9 +700,7 @@ function ensureKanjiLevel(lv) {
   /* その札のファイルだけでなく、「よその札」でその札を含むファイルも読む
      （例：N2 を押したら、介護のファイルに混ざっている46字も要る） */
   const files = KIDX.filter(f => f.level === lv || (f.extra || []).includes(lv));
-  KLOADING[lv] = Promise.all(files.map(f =>
-    fetch(f.file, { cache: 'no-cache' }).then(r => r.ok ? r.json() : { kanji: [] })
-      .catch(() => ({ kanji: [] }))))
+  KLOADING[lv] = Promise.all(files.map(f => fetchKanjiFile(f.file)))
     .then(parts => { parts.forEach(p => addKanji(p.kanji)); KLOADED.add(lv); });
   return KLOADING[lv];
 }
