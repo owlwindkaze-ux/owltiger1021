@@ -68,9 +68,12 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 | `tegaki.html` | 手書き漢字検索（読めない字を書いて調べる） |
 | `tegaki-data.json` | 手書き検索のデータ（漢字6,412字・部首287） |
 | `n3.html` | N3合格100日コース（試験日から逆算した週ごとの学習） |
-| `kanji-data.json` | 漢字746字のデータ（読み・意味・用例・部首など） |
+| `kanji-data.json` | 漢字746字の**まとめ役**（読み・意味・用例・部首など）。**編集するのはこのファイル** |
+| `kanji.json` ＋ `kanji-n5/n4/n3/kaigo.json` | 上をレベルごとに分けたもの。画面はこちらを読む（`tools/split-data.py` が作ります） |
 | `kanji-strokes.json` | 書き順データ（KanjiVG のパス、746字ぶん） |
-| `vocab.json` | 熟語4,558語（JLPT語彙＋介護・看護201語＋現場125語） |
+| `vocab-data.json` | 熟語4,558語の**まとめ役**（JLPT語彙＋介護・看護201語＋現場125語）。**編集するのはこのファイル** |
+| `vocab.json` ＋ `vocab-n5/n4/n3/kaigo/genba/kiroku.json` | 上をレベルごとに分けたもの。画面はこちらを読む |
+| `tools/split-data.py` | まとめ役のファイルを、レベルごとに分け直すスクリプト |
 | `sentences.json` | 練習問題（JLPT形式）用の例文4,338件（収録語彙4,558語の95%をカバー） |
 | `vocab-extra.csv` | 施設独自の専門用語（Excelで編集して追加・修正） |
 | `MANUAL.md` | 使用説明書 |
@@ -92,7 +95,7 @@ python -m http.server 8000     # → ブラウザで http://localhost:8000
 ※ JSONを読み込むため、ファイルを直接ダブルクリックで開くのではなく、上のようにローカルサーバー経由で開いてください。
 
 ### 漢字を追加・修正するには
-`kanji-data.json` の `kanji` 配列を編集します（1字ぶんの形）：
+`kanji-data.json` の `kanji` 配列を編集し、**そのあと `python3 tools/split-data.py` を走らせます**（1字ぶんの形）：
 ```json
 {
   "character": "新", "level": "N4", "strokes": 13,
@@ -114,7 +117,7 @@ python -m http.server 8000     # → ブラウザで http://localhost:8000
 - ブラウザ実機テスト（Chromium）**30項目に合格**：合言葉・表示・検索・絞り込み・アニメーション・言語切替・記録保存・スマホ表示
 - インドネシア語訳は、漢字・読み・用例の**日本語の文脈ごと**に作成（英語だけを見て訳すと「権利→kanan（右）」のような同形異義語の誤訳が起きるため）
 - 独立した第三者レビューで **175字・866文字列を抽出検査 → 正確度 約99.3%、重大な誤り0件**。指摘された箇所は修正済み
-- 誤訳を見つけた場合は `kanji-data.json` の該当箇所（`meanings_id` / `meaning_id`）を修正してください
+- 誤訳を見つけた場合は `kanji-data.json` / `vocab-data.json` の該当箇所（`meanings_id` / `meaning_id`）を修正し、`python3 tools/split-data.py` を走らせてください
 
 ---
 
