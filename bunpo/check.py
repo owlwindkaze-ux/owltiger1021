@@ -4,8 +4,15 @@ import io, json, sys
 man = json.load(io.open('grammar.json', encoding='utf-8'))
 items, bad = [], []
 for f in man.get('files', []):
-    try: items += json.load(io.open(f, encoding='utf-8')).get('grammar', [])
-    except IOError: bad.append((f, 'ファイルが無い'))
+    name = f['file'] if isinstance(f, dict) else f   # 目次は {file,level,count} の形になった
+    try: items += json.load(io.open(name, encoding='utf-8')).get('grammar', [])
+    except IOError: bad.append((name, 'ファイルが無い'))
+# 目次に書いてある件数と、実データの件数が合っているか
+for f in man.get('files', []):
+    if not isinstance(f, dict): continue
+    try: n = len(json.load(io.open(f['file'], encoding='utf-8')).get('grammar', []))
+    except IOError: continue
+    if n != f.get('count'): bad.append((f['file'], '目次の count が %s、実データは %d' % (f.get('count'), n)))
 seen = set()
 for g in items:
     i = g.get('id', '?')
