@@ -37,12 +37,28 @@ def split(master, key, prefix, index_name):
         name = '%s-%s.json' % (prefix, SLUG[lv])
         with open(os.path.join(ROOT, name), 'w', encoding='utf-8') as f:
             json.dump({'level': lv, 'count': len(group), key: group}, f, ensure_ascii=False)
-        files.append({'file': name, 'level': lv, 'count': len(group)})
+        # 1つの字が2つの札を持つことがある（例：「浴」＝介護でもありN2でもある）。
+        # その字は level のファイルに入るので、どのファイルに「よその札」が混ざって
+        # いるかを目次に書いておく。画面はこれを見て、必要なファイルも読む。
+        extra = sorted({a for x in group for a in x.get('also', [])})
+        rec = {'file': name, 'level': lv, 'count': len(group)}
+        if extra:
+            rec['extra'] = extra
+            rec['extra_count'] = {a: sum(1 for x in group if a in x.get('also', [])) for a in extra}
+        files.append(rec)
         print('  %-18s %5d件  %5.0f KB' % (name, len(group), os.path.getsize(os.path.join(ROOT, name)) / 1024))
 
     index = {k: v for k, v in src.items() if k != key}
     index['files'] = files
     index['total'] = len(items)
+    # 札ごとの本当の数（よその札で入ってくる字も足したもの）
+    totals = {}
+    for lv in levels:
+        totals[lv] = sum(1 for x in items if x['level'] == lv or lv in x.get('also', []))
+    for x in items:
+        for a in x.get('also', []):
+            totals.setdefault(a, sum(1 for y in items if y['level'] == a or a in y.get('also', [])))
+    index['level_totals'] = totals
     index['app_version'] = VER
     index['note'] = (index.get('note', '') +
                      ' レベルごとのファイルに分けてあり、使うレベルから順に読み込みます。'

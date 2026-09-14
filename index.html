@@ -144,9 +144,9 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
           <div class="ttl">Kanji &amp; Kosakata<small>漢字・言葉（語彙）</small></div>
         </div>
       </div>
-      <div class="pg" id="pgK">覚えた 0 / 746字 ・ 0 / 4,559語</div>
+      <div class="pg" id="pgK">　</div>
       <div class="bar"><i id="barK" style="width:0"></i></div>
-      <p class="desc">漢字746字と言葉4,559語。書き順・カード・JLPT形式の練習問題。</p>
+      <p class="desc" id="descK">漢字776字と言葉4,558語。書き順・カード・JLPT形式の練習問題。</p>
       <div class="sub-menu">
         <a class="item" href="kanji.html#list"><span class="em">📖</span>
           <span class="tx"><span class="n">漢字一覧</span><span class="r">Kanji ／ 読み・意味・部首を見る</span></span><span class="ar">→</span></a>
@@ -331,7 +331,21 @@ else document.getElementById('gatePw').focus();
 
 /* ---- それぞれの進み具合を出す（記録はこの端末の localStorage にある） ---- */
 const VERSION = '2026-09-14';
-const KTOTAL = 746, VTOTAL = 4559, GTOTAL = 376, DTOTAL = 45, CTOTAL = 48;
+/* 字数・語数は目次から取る。N2を足していくと数が増えるので、
+   ここに書き込んでおくと古い数のままになってしまう。
+   目次が読めなかったときのために、いまの数を控えにしておく。 */
+let KTOTAL = 776, VTOTAL = 4558;
+const GTOTAL = 376, DTOTAL = 45, CTOTAL = 48;
+Promise.all([
+  fetch('kanji.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => null),
+  fetch('vocab.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => null)
+]).then(([k, v]) => {
+  if (k && k.total) KTOTAL = k.total;
+  if (v && v.total) VTOTAL = v.total;
+  showProgress();
+  const d = document.getElementById('descK');
+  if (d) d.textContent = `漢字${KTOTAL.toLocaleString()}字と言葉${VTOTAL.toLocaleString()}語。書き順・カード・JLPT形式の練習問題。`;
+});
 const nKnown = (key, want) => {
   try {
     const o = JSON.parse(localStorage.getItem(key) || '{}');
