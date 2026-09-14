@@ -1,6 +1,6 @@
 {
  "name": "JLPT N5–N3 熟語＋現場用語",
- "count": 4718,
+ "count": 5018,
  "levels": [
   "N5",
   "N4",
@@ -100,7 +100,7 @@
   {
    "file": "vocab-n2.json",
    "level": "N2",
-   "count": 160
+   "count": 460
   },
   {
    "file": "vocab-kaigo.json",
@@ -118,12 +118,12 @@
    "count": 757
   }
  ],
- "total": 4718,
+ "total": 5018,
  "level_totals": {
   "N5": 709,
   "N4": 662,
   "N3": 2078,
-  "N2": 160,
+  "N2": 460,
   "介護": 227,
   "現場": 125,
   "記録": 757
