@@ -278,6 +278,29 @@ N4取得を前提に入職する職員の**実際の力**を確かめ、研修�
 | 全体配布 | 「CSVを書き出す」で `vocab-extra.csv` 形式を出力 → GitHub の同ファイルに貼れば全員に反映 |
 
 
+### 2.6-y データの読み込み方（レベルごと）
+
+あとからレベル（N2など）を足しても、**最初に待つ時間が増えない**ようにしてある。
+
+| システム | 読み方 |
+|---|---|
+| 文型（`bunpo/`） | 目次 `grammar.json` → 選ばれたレベルのファイルだけ。「すべて」「学習状況」「横断検索」のときだけ `ensureAll()` |
+| 漢字・語彙（`kanji.html`） | 目次 `kanji.json` / `vocab.json` → ①いま見るレベルを先に読んで画面を出す ②残りは画面が動き出したあと `requestIdleCallback` でうしろから読む。書き順・手書き・練習問題・学習状況・「今週の分だけ」は全レベルが要るので `ensureAllKanji()` / `ensureAllVocab()` で待つ |
+| 読解（`dokkai/`） | 目次 `reading.json` → 選ばれたレベルだけ。学習状況と「おすすめ」で `ensureAll()` |
+| 聴解（`choukai/`） | HTMLに直書き（48問・70KB）。**レベル分けはまだしていない** |
+
+**見出しの件数は目次から出す。** データを全部読まなくても「746 kanji ・ 4,558 kosakata」と本当の合計が出せる。
+
+**最後に見ていたレベルを覚える**（`jlpt-kanji-lastlv` / `jlpt-grammar-lastlv` / `jlpt-dokkai-lastlv`）。N5だけ見ている人は、次に開いたときも N5 のファイルしか届かない。
+
+実測（N5を覚えている端末で、一覧が出るまでに読む量）：
+
+| | 直す前 | 直したあと |
+|---|---|---|
+| 漢字・語彙 | 543 KB（全レベル） | **81 KB**（目次2つ＋N5のみ） |
+
+**スクリプトの並び順に注意**：`kanji.html` の合言葉の自動解錠は**ファイルの一番下**で行う。上で呼ぶと、下のほうで `let` 宣言している変数（`curLv` など）に触れて落ちる。
+
 ### 2.6-x 文型・文法システム（`bunpo/`）の収録数
 
 | レベル | 項目数 | 内訳の考え方 |
@@ -478,7 +501,7 @@ python3 -c "import hashlib;print(hashlib.sha256('新しい合言葉'.encode()).h
 | 項目 | 仕様 |
 |---|---|
 | 配信方式 | 静的サイト（GitHub Pages）。**アプリストアの更新は不要**で、次回アクセス時に自動で新版を取得 |
-| データ取得 | `kanji-data.json` `kanji-strokes.json` `vocab.json` `vocab-extra.csv` を `cache: 'no-cache'` で取得（毎回サーバーに更新確認、未更新なら304で軽量） |
+| データ取得 | `kanji.json`（目次）→ 使うレベルの `kanji-<lv>.json`、`vocab.json`（目次）→ `vocab-<lv>.json`、ほかに `kanji-strokes.json` `vocab-extra.csv`。すべて `cache: 'no-cache'`（毎回サーバーに更新確認、未更新なら304で軽量） |
 | 版の表示 | フッターに `VERSION`（更新日）を表示。`kanji.html` の `const VERSION = 'YYYY-MM-DD'` を更新時に書き換える |
 | 手動更新 | フッターの「🔄 最新に更新」ボタン。Cache Storage を破棄して再読み込み |
 | HTML自体のキャッシュ | GitHub Pages の既定（約10分）。上記ボタンまたはブラウザ再読み込みで即時取得 |
@@ -566,9 +589,14 @@ python3 -c "import hashlib;print(hashlib.sha256('新しい合言葉'.encode()).h
 |---|---|---|---|
 | `index.html` | 約12 KB | 入口メニュー（3システムの全メニューを一覧表示＋進み具合＋合言葉＋更新ボタン） | 最新 |
 | `kanji.html` | 約40 KB | 漢字・言葉アプリ本体（HTML＋CSS＋JavaScript 単一ファイル） | 最新 |
-| `kanji-data.json` | 約458 KB | 漢字612字のデータ | 最新 |
+| `kanji-data.json` | 543 KB | 漢字746字の**まとめ役**（編集用。画面は読まない） | 最新 |
+| `kanji.json` | 2 KB | 漢字の**目次**（どのレベルがどのファイルに何字あるか） | 最新 |
+| `kanji-n5/n4/n3/kaigo.json` | 78／114／310／92 KB | レベルごとの漢字。**使うレベルだけ読む** | 最新 |
 | `kanji-strokes.json` | 約460 KB | 書き順データ612字ぶん | 最新 |
-| `vocab.json` | 約700 KB | 語彙4,558語（JLPT漢字語・かな語・カタカナ語＋介護＋現場） | 最新 |
+| `vocab-data.json` | 756 KB | 語彙4,558語の**まとめ役**（編集用。画面は読まない） | 最新 |
+| `vocab.json` | 2 KB | 語彙の**目次** | 最新 |
+| `vocab-n5/n4/n3/kaigo/genba/kiroku.json` | 102／101／316／48／23／228 KB | レベルごとの語彙 | 最新 |
+| `tools/split-data.py` | 3 KB | まとめ役のファイルをレベルごとに分け直す | 最新 |
 | `vocab-extra.csv` | 1 KB未満 | 施設独自の語（Excelで編集して差し替え） | 雛形 |
 | `README.md` | 約6 KB | 概要・使い方・出典 | 最新 |
 | `SPEC.md` | 約21 KB | 仕様書（本書） | 最新 |

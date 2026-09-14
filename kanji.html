@@ -635,8 +635,14 @@ async function tryUnlock() {
 }
 document.getElementById('gateBtn').onclick = tryUnlock;
 document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
-if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock();   // 一度入れた端末は次回から省略
-else document.getElementById('gatePw').focus();
+/* 合言葉が保存ずみの端末の自動解錠は、このファイルの一番下で行う。
+   ここで呼ぶと、下のほうで宣言している変数より先に読み込みが始まってしまう。
+   まだの端末は、ここで入力欄にカーソルを置くだけにする。 */
+(function(){
+  var saved = null;
+  try { saved = localStorage.getItem(GATEKEY); } catch (e) {}
+  if (saved !== PASS_SHA256) document.getElementById('gatePw').focus();
+})();
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
@@ -657,27 +663,115 @@ const setVMark = (w, v) => { v ? vprogress[w] = v : delete vprogress[w]; save();
 const meanOf = k => (LANG === 'id' && k.meanings_id && k.meanings_id.length ? k.meanings_id : k.meanings);
 const exMean = e => (LANG === 'id' && e.meaning_id) ? e.meaning_id : e.meaning;
 
-async function boot() {
-  const json = await (await fetch('kanji-data.json', { cache: 'no-cache' })).json();
-  DATA = json.kanji; DATA.forEach(k => BYCH[k.character] = k);
-  $('#langBtn').textContent = LANG === 'id' ? '🌐 ID' : '🌐 EN';
-  renderList(); refreshStats(); openFromHash();
-  loadVocab().then(() => {                       // 熟語は後から読み込み（表示を待たせない）
-    $('#hdStat').textContent = `${DATA.length} kanji ・ ${VOCAB.length} kosakata`;
-    if ($('#p-vocab').classList.contains('on')) renderVocab();
-    refreshStats();
-  }).catch(() => {});
-  $('#hdStat').textContent = `${DATA.length} kanji（N5 ${cnt('N5')}・N4 ${cnt('N4')}・N3 ${cnt('N3')}・介護 ${cnt('介護')}）`;
+let listLimit = 120, curLv = 'all';
+/* 前に見ていたレベルを覚えておく。新人コースなど別のページから
+   「N5で開く」と指定して来ることもできる（同じサイトなので書き込める）。 */
+const KLVKEY = 'jlpt-kanji-lastlv';
+try {
+  const saved = localStorage.getItem(KLVKEY);
+  if (saved) curLv = saved;
+} catch (e) {}
+
+/* ---------- レベルごとの読み込み ----------
+   漢字も熟語も、レベルごとのファイルに分けてある。
+   ① いま見るレベルだけを先に読んで、すぐ使えるようにする
+   ② 残りのレベルは、画面が動き出したあと、うしろで静かに読む
+   こうすると、あとからレベルを増やしても、最初に待つ時間は増えない。
+   「書き順」「手書き」「学習状況」など全レベルが要る所は ensureAllKanji() で待つ。 */
+let KIDX = [], KLOADED = new Set(), KLOADING = {}, KTOTAL = 0, KCOUNT = {};
+let VIDX = [], VLOADED = new Set(), VLOADING = {}, VTOTAL = 0, VCOUNT = {};
+
+function addKanji(arr) {
+  (arr || []).forEach(k => { if (!BYCH[k.character]) { BYCH[k.character] = k; DATA.push(k); } });
 }
-let vocabPromise = null;
-function loadVocab() {
-  return vocabPromise || (vocabPromise = fetch('vocab.json', { cache: 'no-cache' }).then(r => r.json()).then(async j => {
-    VOCAB = j.words;
-    await mergeExtraCsv();                       // 施設独自の語（vocab-extra.csv）
-    mergeMyWords();                              // この端末で追加した語
-    reindexVocab();
-    return VOCAB;
-  }));
+function ensureKanjiLevel(lv) {
+  if (lv === 'all') return ensureAllKanji();
+  if (KLOADED.has(lv)) return Promise.resolve();
+  if (KLOADING[lv]) return KLOADING[lv];
+  const files = KIDX.filter(f => f.level === lv);
+  KLOADING[lv] = Promise.all(files.map(f =>
+    fetch(f.file, { cache: 'no-cache' }).then(r => r.ok ? r.json() : { kanji: [] })
+      .catch(() => ({ kanji: [] }))))
+    .then(parts => { parts.forEach(p => addKanji(p.kanji)); KLOADED.add(lv); });
+  return KLOADING[lv];
+}
+function ensureAllKanji() {
+  return Promise.all(KIDX.map(f => ensureKanjiLevel(f.level))).then(() => {});
+}
+
+let vocabExtraDone = null;
+/** 熟語のレベルを1つ読む。施設独自の語と、この端末で足した語は、読んだあと毎回入れ直す */
+function ensureVocabLevel(lv) {
+  if (lv === 'all') return ensureAllVocab();
+  if (VLOADED.has(lv)) return Promise.resolve(VOCAB);
+  if (VLOADING[lv]) return VLOADING[lv];
+  const files = VIDX.filter(f => f.level === lv);
+  VLOADING[lv] = Promise.all(files.map(f =>
+    fetch(f.file, { cache: 'no-cache' }).then(r => r.ok ? r.json() : { words: [] })
+      .catch(() => ({ words: [] }))))
+    .then(async parts => {
+      const have = new Set(VOCAB.map(w => w.word));
+      parts.forEach(p => (p.words || []).forEach(w => { if (!have.has(w.word)) { VOCAB.push(w); have.add(w.word); } }));
+      VLOADED.add(lv);
+      vocabExtraDone = vocabExtraDone || mergeExtraCsv();   /* 施設独自の語（vocab-extra.csv）は一度だけ */
+      await vocabExtraDone;
+      mergeMyWords();                                       /* この端末で追加した語 */
+      reindexVocab();
+      return VOCAB;
+    });
+  return VLOADING[lv];
+}
+function ensureAllVocab() {
+  return Promise.all(VIDX.map(f => ensureVocabLevel(f.level))).then(() => VOCAB);
+}
+/** 古い呼び出し名。全レベルそろえる意味で残してある */
+function loadVocab() { return ensureAllVocab(); }
+
+/** 見出しの件数は目次から出す。データを全部読まなくても本当の合計が出せる */
+function headStat() {
+  const parts = ['N5', 'N4', 'N3', 'N2', '介護'].filter(lv => KCOUNT[lv])
+    .map(lv => `${lv} ${KCOUNT[lv]}`).join('・');
+  $('#hdStat').textContent = VTOTAL
+    ? `${KTOTAL} kanji ・ ${VTOTAL} kosakata`
+    : `${KTOTAL} kanji（${parts}）`;
+}
+
+async function boot() {
+  /* kanji.json / vocab.json は目次。中身はレベルごとのファイルに分かれている。
+     目次に kanji / words が直接入っている旧形式のデータでも、今までどおり動く。 */
+  const json = await (await fetch('kanji.json', { cache: 'no-cache' })).json();
+  KIDX = (json.files || []).map(f => (typeof f === 'string' ? { file: f, level: null } : f));
+  const perLevel = KIDX.length > 0 && KIDX.every(f => f.level);
+  KIDX.forEach(f => { KCOUNT[f.level] = (KCOUNT[f.level] || 0) + (f.count || 0); });
+  KTOTAL = json.total || KIDX.reduce((n, f) => n + (f.count || 0), 0);
+
+  if (perLevel) {
+    if (!KIDX.some(f => f.level === curLv)) curLv = 'all';
+    await ensureKanjiLevel(curLv === 'all' ? KIDX[0].level : curLv);   /* まず1レベルだけ */
+  } else {
+    addKanji(json.kanji); KTOTAL = DATA.length;                        /* 旧形式 */
+    KIDX.forEach(f => KLOADED.add(f.level));
+  }
+  $('#langBtn').textContent = LANG === 'id' ? '🌐 ID' : '🌐 EN';
+  headStat();
+  renderList(); openFromHash();
+
+  /* ここから先は、画面が出たあとで静かに読む */
+  const vjson = await (await fetch('vocab.json', { cache: 'no-cache' })).json().catch(() => ({}));
+  VIDX = (vjson.files || []).map(f => (typeof f === 'string' ? { file: f, level: null } : f));
+  VIDX.forEach(f => { VCOUNT[f.level] = (VCOUNT[f.level] || 0) + (f.count || 0); });
+  VTOTAL = vjson.total || VIDX.reduce((n, f) => n + (f.count || 0), 0);
+  if (!VIDX.length && vjson.words) { VOCAB = vjson.words; VTOTAL = VOCAB.length;
+    await mergeExtraCsv(); mergeMyWords(); reindexVocab(); }
+  headStat();
+
+  /* 残りは、あとまわしで全部そろえる（書き順・手書き・学習状況のため） */
+  const rest = () => ensureAllKanji()
+    .then(() => { renderList(); return ensureAllVocab(); })
+    .then(() => { if ($('#p-vocab').classList.contains('on')) renderVocab(); refreshStats(); })
+    .catch(() => {});
+  if (window.requestIdleCallback) requestIdleCallback(rest, { timeout: 3000 }); else setTimeout(rest, 800);
+  refreshStats();
 }
 function reindexVocab() {
   VBYW = {}; WORDS_OF = {};
@@ -814,14 +908,6 @@ function normQ(s){
     .toLowerCase();
 }
 
-let listLimit = 120, curLv = 'all';
-/* 前に見ていたレベルを覚えておく。新人コースなど別のページから
-   「N5で開く」と指定して来ることもできる（同じサイトなので書き込める）。 */
-const KLVKEY = 'jlpt-kanji-lastlv';
-try {
-  const saved = localStorage.getItem(KLVKEY);
-  if (saved) curLv = saved;
-} catch (e) {}
 /* ---------- 新人コースの「今週の分だけ」 ----------
    kanji-weeks.json に、第何週にどの漢字・どの語をやるかが入っている
    （週ごとの学習範囲表と同じ割り当て）。押されたときだけ読む。 */
@@ -858,6 +944,7 @@ function makeWeekBtn(btnId, msgId, kind, on, off) {
   btn.onclick = async () => {
     if (btn.classList.contains('on')) { off(); return; }
     await loadWeeks();
+    await (kind === 'kanji' ? ensureAllKanji() : ensureAllVocab());   /* 週はレベルをまたぐ */
     const st = weekState(kind);
     msg.textContent = st.msg; msg.hidden = false;
     if (!st.list) return;                 /* 出す分が無いときは 押されていない扱い */
@@ -1598,10 +1685,11 @@ function openTab(name, scroll = true) {
   $$('.tab').forEach(x => x.classList.toggle('on', x === t));
   $$('.panel').forEach(p => p.classList.remove('on'));
   $('#p-' + name).classList.add('on');
-  if (name === 'stroke') renderStroke();
-  if (name === 'vocab') loadVocab().then(renderVocab);
-  if (name === 'quiz') { loadVocab(); loadSentences(); }
-  if (name === 'stats') refreshStats();
+  /* 書き順・練習問題・学習状況は、どのレベルの字も出てくるので全部そろえてから */
+  if (name === 'stroke') ensureAllKanji().then(renderStroke);
+  if (name === 'vocab') ensureVocabLevel(vLv).then(renderVocab);
+  if (name === 'quiz') { ensureAllVocab(); loadSentences(); }
+  if (name === 'stats') ensureAllKanji().then(ensureAllVocab).then(refreshStats);
   if (scroll) window.scrollTo({ top: 0 });
 }
 $$('.tab').forEach(t => t.onclick = () => {
@@ -1622,10 +1710,12 @@ $('#langBtn').onclick = () => {
 $('#q').oninput = () => { listLimit = 120; renderList(); };
 $('#sort').onchange = renderList;
 $('#mark').onchange = () => { listLimit = 120; renderList(); };
-$$('#lvChips .chip').forEach(c => c.onclick = () => {
+$$('#lvChips .chip').forEach(c => c.onclick = async () => {
   wkOff();                       /* レベルを選び直したら「今週の分だけ」はやめる */
   $$('#lvChips .chip').forEach(x => x.classList.toggle('on', x === c));
-  curLv = c.dataset.lv; listLimit = 120; renderList();
+  curLv = c.dataset.lv; listLimit = 120;
+  await ensureKanjiLevel(curLv);               /* まだ読んでいないレベルなら、ここで読む */
+  renderList();
   try { localStorage.setItem(KLVKEY, curLv); } catch (e) {}
 });
 /* 覚えているレベルのチップを、選んだ状態にしておく */
@@ -1678,10 +1768,12 @@ $('#vq').oninput = () => { vLimit = 120; renderVocab(); };
 $('#vMark').onchange = () => { vLimit = 120; renderVocab(); };
 $('#vCat').onchange = () => { $('#vSub').value = 'all'; vLimit = 120; renderVocab(); };
 $('#vSub').onchange = () => { vLimit = 120; renderVocab(); };
-$$('#vLvChips .chip').forEach(c => c.onclick = () => {
+$$('#vLvChips .chip').forEach(c => c.onclick = async () => {
   vWkOff();
   $$('#vLvChips .chip').forEach(x => x.classList.toggle('on', x === c));
-  vLv = c.dataset.lv; vLimit = 120; renderVocab();
+  vLv = c.dataset.lv; vLimit = 120;
+  await ensureVocabLevel(vLv);
+  renderVocab();
 });
 setupWeekBtns();
 $('#vmX').onclick = () => closeVocabModal();
@@ -1825,6 +1917,14 @@ function showLoadError(err) {
   $('#grid').innerHTML = `<p style="color:var(--red)">Gagal memuat data ／ 読み込み失敗：${err}</p>`;
 }
 /* データの読み込みは合言葉を入れたあと（unlock 内）で行います */
+
+/* 合言葉が保存ずみの端末は、ここで自動的に解錠して読み込みを始める。
+   かならず一番下に置くこと（上で呼ぶと、まだ宣言していない変数に触れてしまう）。 */
+(function(){
+  var saved = null;
+  try { saved = localStorage.getItem(GATEKEY); } catch (e) {}
+  if (saved === PASS_SHA256) unlock();
+})();
 </script>
 </body>
 </html>

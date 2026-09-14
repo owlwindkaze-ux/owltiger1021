@@ -300,17 +300,73 @@ $('#rbBtn').onclick = () => {
 };
 applyRuby();
 
+/* ---------- レベルごとの読み込み ----------
+   文章はレベルごとのファイルに分かれている。全部を最初に読むと、
+   N5だけ読みたい人にもN3・N2のデータが毎回届いてしまうので、
+   「選ばれたレベルのファイルだけを、そのとき読む」ようにしてある。
+   一度読んだレベルは覚えておくので、行き来しても待たされない。 */
+let IDXFILES = [], LOADED = new Set(), LOADING = {}, LEVELS = [];
+const DLVKEY = 'jlpt-dokkai-lastlv';   /* 最後に見ていたレベル */
+
+function addPassages(arr) {
+  (arr || []).forEach(p => { if (!BYID[p.id]) { BYID[p.id] = p; DATA.push(p); } });
+}
+/** そのレベルを読み込む（読み込みずみなら何もしない） */
+function ensureLevel(lv) {
+  if (lv === 'all') return ensureAll();
+  if (LOADED.has(lv)) return Promise.resolve();
+  if (LOADING[lv]) return LOADING[lv];
+  const files = IDXFILES.filter(f => f.level === lv);
+  LOADING[lv] = Promise.all(files.map(f =>
+    fetch(f.file, { cache: 'no-cache' }).then(r => r.ok ? r.json() : { passages: [] })
+      .catch(() => ({ passages: [] }))))
+    .then(parts => { parts.forEach(p => addPassages(p.passages)); LOADED.add(lv); });
+  return LOADING[lv];
+}
+/** すべてのレベル（「すべて」「学習状況」「おすすめ」で必要） */
+function ensureAll() { return Promise.all(LEVELS.map(lv => ensureLevel(lv))).then(() => {}); }
+/** 待ちが長いときだけ「読み込み中」を出す（一瞬で終わるときは何も出さない） */
+async function withBusy(fn) {
+  const box = $('#plist');
+  const t = setTimeout(() => { if (box) box.innerHTML = '<div class="loading">読み込み中…</div>'; }, 250);
+  try { return await fn(); } finally { clearTimeout(t); }
+}
+
 /* ---------- 読み込み ---------- */
 async function boot() {
   const idx = await (await fetch('reading.json', { cache: 'no-cache' })).json();
-  const parts = await Promise.all((idx.files || []).map(f =>
-    fetch(f, { cache: 'no-cache' }).then(r => r.ok ? r.json() : { passages: [] }).catch(() => ({ passages: [] }))));
-  DATA = parts.flatMap(p => p.passages || []);
-  DATA.forEach(p => BYID[p.id] = p);
-  const nq = DATA.reduce((s, p) => s + p.questions.length, 0);
-  $('#hdStat').textContent = `${DATA.length} teks ・ ${nq} soal`;
+  /* 目次の files は {file, level, count, questions} の形。
+     ファイル名だけの旧形式のデータでも、今までどおり全部読んで動く。 */
+  IDXFILES = (idx.files || []).map(f => (typeof f === 'string' ? { file: f, level: null } : f));
+  const perLevel = IDXFILES.length > 0 && IDXFILES.every(f => f.level);
+
+  if (perLevel) {
+    const ORD = ['N5', 'N4', 'N3', 'N2', 'N1'];
+    LEVELS = [...new Set(IDXFILES.map(f => f.level))]
+      .sort((a, b) => (ORD.indexOf(a) < 0 ? 99 : ORD.indexOf(a)) - (ORD.indexOf(b) < 0 ? 99 : ORD.indexOf(b)));
+    /* 見出しの件数は目次から出す。データを全部読まなくても本当の合計が出せる */
+    const tp = (idx.totals && idx.totals.passages) || IDXFILES.reduce((n, f) => n + (f.count || 0), 0);
+    const tq = (idx.totals && idx.totals.questions) || IDXFILES.reduce((n, f) => n + (f.questions || 0), 0);
+    $('#hdStat').textContent = `${tp} teks ・ ${tq} soal`;
+    /* 前に見ていたレベルを覚えておき、そのファイルだけ読む。初めての人は「すべて」 */
+    let want = 'all';
+    try { want = localStorage.getItem(DLVKEY) || 'all'; } catch (e) {}
+    if (want !== 'all' && !LEVELS.includes(want)) want = 'all';
+    await ensureLevel(want);
+    const chip = $$('#lvChips .chip').find(c => c.dataset.lv === want);
+    if (chip) { $$('#lvChips .chip').forEach(x => x.classList.remove('on')); chip.classList.add('on'); }
+  } else {
+    const parts = await Promise.all(IDXFILES.map(f =>
+      fetch(f.file, { cache: 'no-cache' }).then(r => r.ok ? r.json() : { passages: [] })
+        .catch(() => ({ passages: [] }))));
+    parts.forEach(p => addPassages(p.passages));
+    LEVELS = [...new Set(DATA.map(p => p.level))];
+    LEVELS.forEach(lv => LOADED.add(lv));
+    const nq = DATA.reduce((s, p) => s + p.questions.length, 0);
+    $('#hdStat').textContent = `${DATA.length} teks ・ ${nq} soal`;
+  }
   $('#verLabel').textContent = '版 ' + VERSION;
-  renderList(); refreshStats(); openFromHash();
+  renderList(); openFromHash();
 }
 
 /* ---------- ① 一覧 ---------- */
@@ -340,13 +396,18 @@ function renderList() {
   }).join('') : '<div class="loading">この条件の文章はありません。</div>';
   $$('#plist .pcard').forEach(b => b.onclick = () => openPassage(b.dataset.id));
 }
-$$('#lvChips .chip').forEach(c => c.onclick = () => {
-  $$('#lvChips .chip').forEach(x => x.classList.remove('on')); c.classList.add('on'); renderList();
+$$('#lvChips .chip').forEach(c => c.onclick = async () => {
+  $$('#lvChips .chip').forEach(x => x.classList.remove('on')); c.classList.add('on');
+  await withBusy(() => ensureLevel(c.dataset.lv));
+  try { localStorage.setItem(DLVKEY, c.dataset.lv); } catch (e) {}
+  renderList();
 });
 ['#genreSel', '#typeSel', '#qtSel', '#doneSel'].forEach(s => $(s).onchange = renderList);
 
 /* おすすめ：ボタン1つで、その人に合う文章だけを出す */
-function setFilters(lv, genre, type, qt) {
+async function setFilters(lv, genre, type, qt) {
+  await withBusy(() => ensureLevel(lv));
+  try { localStorage.setItem(DLVKEY, lv); } catch (e) {}
   $$('#lvChips .chip').forEach(c => c.classList.toggle('on', c.dataset.lv === lv));
   $('#genreSel').value = genre; $('#typeSel').value = type;
   $('#qtSel').value = qt; $('#doneSel').value = 'all';
@@ -600,7 +661,7 @@ function openTab(pid, scroll = true) {
   const t = $(`.tab[data-p="${pid}"]`); if (!t) return;
   $$('.tab').forEach(x => x.classList.toggle('on', x === t));
   $$('.panel').forEach(p => p.classList.toggle('on', p.id === pid));
-  if (pid === 'p-stat') refreshStats();
+  if (pid === 'p-stat') ensureAll().then(refreshStats);   /* 全レベルの数を出すので、そろえてから */
   if (scroll) window.scrollTo({ top: 0 });
 }
 $$('.tab').forEach(t => t.onclick = () => {
