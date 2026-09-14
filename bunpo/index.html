@@ -515,7 +515,7 @@ async function boot() {
   IDXFILES = (json.files || []).map(f => (typeof f === 'string' ? { file: f, level: null, count: 0 } : f));
   const perLevel = IDXFILES.length > 0 && IDXFILES.every(f => f.level);
   /* 並び順は N5 → N4 → N3 → 記録。知らないレベルは最後に回す */
-  const LVORDER = ['N5', 'N4', 'N3', '記録'];
+  const LVORDER = ['N5', 'N4', 'N3', 'N2', '記録'];
   const lvKey = lv => { const i = LVORDER.indexOf(lv); return i < 0 ? 99 : i; };
 
   if (perLevel) {

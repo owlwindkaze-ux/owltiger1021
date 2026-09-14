@@ -1,7 +1,7 @@
 {
- "name": "JLPT N5–N3 文型データ（介護版）— 目次",
- "version": "2026-09-04",
- "app_version": "2026-09-04",
+ "name": "JLPT N5–N2 文型データ（介護版）— 目次",
+ "version": "2026-09-14r",
+ "app_version": "2026-09-14r",
  "languages": [
   "ja",
   "id",
@@ -12,6 +12,7 @@
   "N5",
   "N4",
   "N3",
+  "N2",
   "記録"
  ],
  "files": [
@@ -29,6 +30,11 @@
    "file": "grammar-n3.json",
    "level": "N3",
    "count": 150
+  },
+  {
+   "file": "grammar-n2.json",
+   "level": "N2",
+   "count": 18
   },
   {
    "file": "grammar-kiroku.json",
