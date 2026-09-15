@@ -466,10 +466,18 @@ async function withBusy(fn) {
    weeks.json に、第何週にどの文型をやるかが入っている（週ごとの学習範囲表と同じ割り当て）。
    押されたときだけ読む。押していない人には何も届かない。 */
 let WK = null, wkOn = false, wkIds = null;
+/* 週割りはコースごとに分けてある。どちらを使うかは
+   localStorage の jlpt-course で決まる（新人コース＝shinjin／N2＝n2）。 */
+const COURSEKEY = 'jlpt-course';
 async function loadWeeks() {
   if (WK) return WK;
-  try { WK = await (await fetch('weeks.json', { cache: 'no-cache' })).json(); }
-  catch (e) { WK = { start: null, weeks: {} }; }
+  let j = null;
+  try { j = await (await fetch('weeks.json', { cache: 'no-cache' })).json(); }
+  catch (e) { j = null; }
+  let course = 'shinjin';
+  try { course = localStorage.getItem(COURSEKEY) || 'shinjin'; } catch (e) {}
+  if (j && j.courses) WK = j.courses[course] || j.courses.shinjin;
+  else WK = j || { start: null, weeks: {} };
   return WK;
 }
 /** 今日が第何週か、と画面に出す一言を返す */
@@ -484,9 +492,11 @@ function weekState() {
   const n = Math.floor(d / 7) + 1;
   if (n > total) return { msg: '新人コースの' + total + '週は 終わりました。「すべて」で つかってください' };
   const ids = WK.weeks[String(n)];
-  if (!ids || !ids.length) return { msg: '第' + n + '週は 文型の 予定が ありません。' +
-    'この時期は 漢字・語彙 が 中心です ／ Minggu ' + n + ': belum ada tata bahasa' };
-  return { ids: ids, msg: '第' + n + '週の 文型 ' + ids.length + '項目だけを 出しています' +
+  /* 「この時期は漢字・語彙が中心」と決めつけない。コースによって理由がちがう。 */
+  if (!ids || !ids.length) return { msg: (WK.name ? '【' + WK.name + '】' : '') +
+    '第' + n + '週は、新しい 文型の 予定が ありません ／ Minggu ' + n + ': tidak ada pola baru' };
+  const cn = WK.name ? '【' + WK.name + '】' : '';
+  return { ids: ids, msg: cn + '第' + n + '週の 文型 ' + ids.length + '項目だけを 出しています' +
     '（レベルの ボタンは 効きません）／ Minggu ' + n + '：' + ids.length + ' pola' };
 }
 function setupWeekBtn() {
