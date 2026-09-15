@@ -185,6 +185,12 @@
     padding:4px 12px;border-radius:999px;color:var(--paper);
   }
   .part.done .part-no::after{content:" ✓";color:var(--teal)}
+  .lvrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:16px 0 6px}
+  .lvchip{font-size:12.5px;font-weight:700;border:1.5px solid var(--line);background:#fff;
+    color:var(--muted);border-radius:999px;padding:5px 12px;cursor:pointer;font-family:inherit}
+  .lvchip.on{background:var(--teal);border-color:var(--teal);color:#fff}
+  .lvnote{font-size:12px;color:var(--muted);line-height:1.8;margin:0 0 4px}
+  .part.hide{display:none}
   .partnav{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 4px}
   .partnav a{font-size:12.5px;text-decoration:none;color:var(--ink);
     border:1px solid var(--line);padding:5px 9px;background:var(--card)}
@@ -331,6 +337,15 @@
     <span style="font-style:italic">Naikkan volume, matikan mode senyap (iPhone), buka dengan Chrome/Safari, dan pastikan suara bahasa Jepang terpasang.</span>
   </div>
 
+  <div class="lvrow" id="lvChips" aria-label="レベルを えらぶ">
+    <span class="lb">レベル ／ Level：</span>
+    <button type="button" class="lvchip on" data-lv="all">すべて</button>
+    <button type="button" class="lvchip" data-lv="N3">N3</button>
+    <button type="button" class="lvchip" data-lv="N2">N2</button>
+  </div>
+  <p class="lvnote" id="lvNote">N2では「発話表現」が 出ません。かわりに「統合理解」が 出ます。<br>
+    <span style="font-style:italic">Pada N2, soal ekspresi lisan tidak keluar; sebagai gantinya muncul soal pemahaman terpadu.</span></p>
+
   <nav class="partnav" id="partNav" aria-label="パートへ とぶ"></nav>
 
   <div id="app"></div>
@@ -376,6 +391,7 @@ try{ if(localStorage.getItem(GATEKEY) === PASS_SHA256) unlock(); }catch(e){}
 const DATA = [
   {
     no: "PART 1",
+    level: "N3",
     title: "申し送りを聞く",
     task: "申し送りを 聞いて、質問に 答えてください。まず 3回 聞いてから、答えを えらびましょう。",
     taskId: "Dengarkan laporan serah terima, lalu jawab pertanyaannya. Dengarkan 3 kali sebelum menjawab.",
@@ -434,6 +450,7 @@ const DATA = [
   },
   {
     no: "PART 2",
+    level: "N3",
     title: "声かけを聞いて、よいか よくないか 考える",
     task: "介護職員の 声かけを 聞いて、よい声かけか どうか えらんでください。",
     taskId: "Dengarkan sapaan staf, lalu tentukan apakah sapaan itu baik atau tidak.",
@@ -496,6 +513,7 @@ const DATA = [
   },
   {
     no: "PART 3",
+    level: "N3",
     title: "利用者さんの ことばを 聞いて、次の 行動を えらぶ",
     task: "利用者さんの ことばを 聞いて、あなたが 次に する ことを えらんでください。",
     taskId: "Dengarkan ucapan penghuni, lalu pilih tindakan yang harus Anda lakukan berikutnya.",
@@ -549,6 +567,7 @@ const DATA = [
   },
   {
     no: "PART 4",
+    level: "N3",
     title: "課題理解 ― このあと 何を しますか",
     task: "会話を 聞いて、「このあと 何を するか」を えらんでください。JLPT聴解の 問題1と 同じ形です。",
     taskId: "Dengarkan percakapan, lalu pilih apa yang harus dilakukan setelah itu. Sama seperti soal 1 JLPT.",
@@ -611,6 +630,7 @@ const DATA = [
   },
   {
     no: "PART 5",
+    level: "N3",
     title: "ポイント理解 ― 質問を 先に 読む",
     task: "先に 質問を 読んでから 音声を 聞き、必要な ところだけ 聞き取ってください。JLPT聴解の 問題2と 同じ形です。",
     taskId: "Baca pertanyaan dulu, lalu dengarkan dan tangkap hanya informasi yang diperlukan. Sama seperti soal 2 JLPT.",
@@ -670,6 +690,7 @@ const DATA = [
   },
   {
     no: "PART 6",
+    level: "N3",
     title: "概要理解 ― 何の 話ですか",
     task: "全体を 聞いて、「何を いちばん 伝えたいか」を えらんでください。細かい ことばは 覚えなくて だいじょうぶです。JLPT聴解の 問題3と 同じ形です。",
     taskId: "Dengarkan keseluruhan, lalu pilih inti yang ingin disampaikan. Sama seperti soal 3 JLPT.",
@@ -723,6 +744,7 @@ const DATA = [
   },
   {
     no: "PART 7",
+    level: "N3",
     title: "発話表現 ― こんなとき 何と 言いますか",
     task: "場面を 聞いて、その とき あなたが 言う ことばを えらんでください。JLPT聴解の 問題4と 同じ形です。",
     taskId: "Dengarkan situasinya, lalu pilih ucapan yang tepat. Sama seperti soal 4 JLPT.",
@@ -785,6 +807,7 @@ const DATA = [
   },
   {
     no: "PART 8",
+    level: "N3",
     title: "即時応答 ― すぐに 答える",
     task: "短い ことばを 聞いて、すぐに 合う 返事を えらんでください。JLPT聴解の 問題5と 同じ形です。",
     taskId: "Dengarkan ucapan pendek, lalu pilih jawaban yang tepat. Sama seperti soal 5 JLPT.",
@@ -863,6 +886,141 @@ const DATA = [
       },
     ]
   },
+  {
+    "no": "PART 9",
+    "level": "N2",
+    "title": "統合理解 ― 長めの 話を 聞いて 答える",
+    "task": "少し 長い 話を 一度だけ 聞いて、最後の 質問に 答えます。JLPT聴解の 問題5と 同じ形で、N2から 出ます。本番では 選択肢も 音で 流れます（ここでは 画面にも 出しています）。",
+    "taskId": "Dengarkan pembicaraan yang agak panjang satu kali, lalu jawab pertanyaan di akhir. Sama seperti soal 5 JLPT, mulai muncul di N2. Pada ujian asli pilihan jawabannya pun dibacakan.",
+    "items": [
+      {
+        "script": "施設の 会議です。来月から 始める 取り組みに ついて 話しています。\n主任：来月から 水分の 記録を 見直したいと 思います。今は 一日の 合計だけを 書いていますが、これだと いつ 足りなく なったのかが 分かりません。\n職員A：時間ごとに 書くと いうことですか。\n主任：はい。朝・昼・夕・夜の 四回に 分けて 書いていただきます。手間は 増えますが、その分 早く 気づけます。\n職員B：用紙は 新しく なりますか。\n主任：新しい 用紙を 配ります。合計の 欄も 残しますので、今までの 書き方が 分からなく なる ことは ありません。\n質問。来月から 記録は どう 変わりますか。",
+        "q": "来月から 記録は どう 変わりますか。",
+        "opts": [
+          "一日の 合計だけを 書くように なる。",
+          "朝・昼・夕・夜の 四回に 分けて 書くように なる。",
+          "記録を 書かなく なる。",
+          "看護師だけが 書くように なる。"
+        ],
+        "ans": 1,
+        "exp": "「朝・昼・夕・夜の四回に分けて書いていただきます」と言っています。合計の欄も残るので、合計だけになるのではありません。",
+        "expId": "Dikatakan akan ditulis empat kali: pagi, siang, sore, malam. Kolom totalnya tetap ada."
+      },
+      {
+        "script": "家族と 職員が 話しています。\n家族：母は 最近、夜に よく 起きると 聞きました。何か できることは ありますか。\n職員：はい。夕方の 過ごし方を 少し 変えてみたいと 思っています。今は 夕食のあと すぐに お部屋に 戻られるので、その時間に 少し 体を 動かしていただこうかと。\n家族：散歩ですか。\n職員：外は 暗いので、廊下を ゆっくり 歩く くらいです。それと、夕方の お茶の 時間を 三十分 早めます。夜中に トイレに 起きる 回数が 減るかもしれません。\n家族：分かりました。お願いします。\n質問。職員は 何を しようと していますか。",
+        "q": "職員は 何を しようと していますか。",
+        "opts": [
+          "夜に 薬を 増やす。",
+          "夕方の 過ごし方を 変える。",
+          "部屋を 変える。",
+          "家族に 泊まって もらう。"
+        ],
+        "ans": 1,
+        "exp": "「夕方の過ごし方を少し変えてみたい」と言い、廊下を歩くこととお茶の時間を早めることを挙げています。",
+        "expId": "Petugas mengatakan ingin mengubah cara menghabiskan sore hari: berjalan di koridor dan memajukan waktu minum teh."
+      },
+      {
+        "script": "新人研修の 説明です。\n講師：記録の 書き方で いちばん 多い まちがいは、見たことと 思ったことが 混ざることです。たとえば「元気が なかった」。これは 思ったことです。読む人に よって 受け取り方が 変わります。\n　「朝食を 三分の一しか 召し上がらなかった」。これは 見たことです。だれが 読んでも 同じです。\n　両方 書いては いけない という ことでは ありません。順番が 大事です。まず 見たことを 書き、そのあとに 思ったことを 足してください。逆に すると、読む人の 見方が 先に 決まって しまいます。\n質問。講師は 何が 大事だと 言っていますか。",
+        "q": "講師は 何が 大事だと 言っていますか。",
+        "opts": [
+          "思ったことは 書かない こと。",
+          "見たことを 先に 書く こと。",
+          "記録を 短く する こと。",
+          "毎日 書く こと。"
+        ],
+        "ans": 1,
+        "exp": "「まず見たことを書き、そのあとに思ったことを足してください」と順番の大切さを話しています。思ったことを書くなとは言っていません。",
+        "expId": "Yang penting adalah urutannya: tulis dulu apa yang dilihat, baru tambahkan apa yang dipikirkan."
+      },
+      {
+        "script": "職員が 二人で 話しています。\n職員A：田中さんの 入浴、今日は どうしますか。熱は ないんですが、朝から あまり 元気が なくて。\n職員B：血圧は 測りましたか。\n職員A：はい、いつもと 同じくらいです。\n職員B：そうですか。それなら 無理に 中止しなくても いいと 思いますが、湯船に つかる 時間を 短くしては どうでしょう。体を 洗うだけでも いいですし。\n職員A：分かりました。ご本人に 聞いてみます。\n職員B：そうですね。ご本人が 嫌がられたら、今日は やめましょう。\n質問。二人は どうする ことに しましたか。",
+        "q": "二人は どうする ことに しましたか。",
+        "opts": [
+          "入浴を 中止する。",
+          "本人に 聞いてから 決める。",
+          "いつもどおり 入浴する。",
+          "看護師を 呼ぶ。"
+        ],
+        "ans": 1,
+        "exp": "「ご本人に聞いてみます」「ご本人が嫌がられたら、今日はやめましょう」と、本人に聞いてから決めることにしています。",
+        "expId": "Mereka memutuskan menanyakan dulu kepada yang bersangkutan, baru menentukan."
+      },
+      {
+        "script": "施設の お知らせです。\n　来週の 火曜日、午前中に 断水が あります。九時から 十二時までの 予定です。\n　この 時間は 水が 出ませんので、朝の 洗面は 八時半までに 済ませてください。飲み水は 前の日に 用意しておきます。\n　入浴は 午後に 変更します。いつもは 午前の 方も、午後に なりますので ご注意ください。\n　なお、工事が 早く 終わった 場合は、放送で お知らせします。\n質問。火曜日は 何が いつもと ちがいますか。",
+        "q": "火曜日は 何が いつもと ちがいますか。",
+        "opts": [
+          "入浴が 午後に なる。",
+          "食事が 出ない。",
+          "面会が できない。",
+          "朝の 放送が ない。"
+        ],
+        "ans": 0,
+        "exp": "「入浴は午後に変更します。いつもは午前の方も、午後になります」と言っています。",
+        "expId": "Mandi dipindah ke sore hari. Yang biasanya pagi pun menjadi sore."
+      }
+    ]
+  },
+  {
+    "no": "PART 10",
+    "level": "N2",
+    "title": "統合理解 ― 二つ 答える（質問が 二つ）",
+    "task": "三人の 話を 一度だけ 聞いて、二つの 質問に 答えます。選択肢は 画面に 出ています。先に 選択肢を 読んでから 聞くと 答えやすく なります。",
+    "taskId": "Dengarkan percakapan tiga orang satu kali, lalu jawab dua pertanyaan. Pilihan jawaban tertera di layar; membacanya lebih dulu akan memudahkan.",
+    "items": [
+      {
+        "script": "職員が 三人で、来月の 行事に ついて 話しています。\n主任：来月の 行事、三つの 案が 出ています。一つ目は 音楽会、二つ目は お花見、三つ目は 料理教室です。\n職員A：お花見は 天気に 左右されますね。中止に なると がっかりされる 方が 多いと 思います。\n職員B：料理教室は 火を 使うので、見守りの 人数が 要ります。今の 人数では 難しいかもしれません。\n主任：では 音楽会に しましょうか。室内で できますし、車いすの 方も 参加しやすいです。\n職員A：私は それが いいと 思います。\n職員B：私も 賛成です。ただ、当日は 座る 場所を 先に 決めておいたほうが いいですね。\n主任：そうしましょう。",
+        "q": "問1　三人は 来月の 行事を 何に しましたか。",
+        "opts": [
+          "音楽会",
+          "お花見",
+          "料理教室",
+          "まだ 決まって いない"
+        ],
+        "ans": 0,
+        "exp": "主任が「では音楽会にしましょうか」と言い、二人とも賛成しています。",
+        "expId": "Ketua mengusulkan konser musik dan keduanya setuju."
+      },
+      {
+        "sameAudioAs": 0,
+        "q": "問2　料理教室が 選ばれなかった 理由は 何ですか。",
+        "opts": [
+          "天気に 左右されるから。",
+          "見守りの 人数が 足りないから。",
+          "場所が ないから。",
+          "費用が 高いから。"
+        ],
+        "ans": 1,
+        "exp": "職員Bが「火を使うので、見守りの人数が要ります。今の人数では難しい」と言っています。天気の話はお花見のほうです。",
+        "expId": "Karena memakai api sehingga perlu banyak pengawas, dan jumlah orang saat ini tidak cukup."
+      },
+      {
+        "script": "ご家族と 職員 二人が 面談を しています。\n家族：最近、母の 食事が 進んで いないと 聞きました。\n職員A：はい。先月に 比べて 二割ほど 減っています。ただ、水分は しっかり とれて おられます。\n家族：歯の せいでしょうか。\n職員B：歯科の 先生には 見て いただきました。特に 問題は ないとの ことです。それより、食事の 時間が 早いのかもしれません。朝食が 七時半で、起きられるのが 七時ですから。\n家族：それは 早いですね。家では 九時ごろに 食べて いました。\n職員A：では、朝食だけ 三十分 遅く してみましょうか。ご本人が 起きられる 時間に 合わせて。\n家族：お願いします。\n職員B：一か月 様子を 見て、また ご連絡します。",
+        "q": "問1　食事が 進まない 原因として、職員が 考えて いるのは 何ですか。",
+        "opts": [
+          "歯の 問題",
+          "食事の 時間が 早いこと",
+          "水分の とりすぎ",
+          "部屋が 寒いこと"
+        ],
+        "ans": 1,
+        "exp": "歯科では問題がないと言われ、「それより、食事の時間が早いのかもしれません」と続いています。",
+        "expId": "Dokter gigi menyatakan tidak ada masalah; kemungkinan waktu makannya terlalu pagi."
+      },
+      {
+        "sameAudioAs": 2,
+        "q": "問2　これから どうする ことに しましたか。",
+        "opts": [
+          "朝食を 三十分 遅く する。",
+          "朝食を 三十分 早く する。",
+          "歯科に もう一度 行く。",
+          "水分を 増やす。"
+        ],
+        "ans": 0,
+        "exp": "「朝食だけ三十分遅くしてみましょうか」と提案し、ご家族が「お願いします」と答えています。",
+        "expId": "Diputuskan memundurkan sarapan tiga puluh menit."
+      }
+    ]
+  }
 ];
 
 /* ---------- speech ---------- */
@@ -1083,10 +1241,24 @@ const hdStat = document.getElementById('hdStat');
     try{ localStorage.setItem(HKEY, el.open ? 'open' : 'closed'); }catch(e){}
   });
 })();
+/* レベルの札。押されたレベルのパートだけを出す。
+   N3の人にN2の統合理解まで見せると、出ない形まで練習させてしまう。 */
+let curLv = 'all';
+try { curLv = localStorage.getItem('jlpt-choukai-lastlv') || 'all'; } catch (e) {}
+const inLv = pi => curLv === 'all' || (DATA[pi].level || 'N3') === curLv;
+function applyLevel(){
+  app.querySelectorAll('.part').forEach((sec, pi) => sec.classList.toggle('hide', !inLv(pi)));
+  buildNav();
+  updateHead();
+}
 function updateHead(){
-  const got = state.flat().filter(v => v === true).length;
-  const ans = state.flat().filter(v => v !== null).length;
-  hdStat.textContent = ans ? ('正解 ' + got + ' / ' + QTOTAL) : ('正解 — / ' + QTOTAL);
+  let got = 0, ans = 0, total = 0;
+  state.forEach((arr, pi) => {
+    if (!inLv(pi)) return;
+    total += arr.length;
+    arr.forEach(v => { if (v !== null) { ans++; if (v === true) got++; } });
+  });
+  hdStat.textContent = ans ? ('正解 ' + got + ' / ' + total) : ('正解 — / ' + total);
   DATA.forEach((p, pi) => {
     const sec = app.querySelectorAll('.part')[pi];
     if(sec) sec.classList.toggle('done', state[pi].every(v => v !== null));
@@ -1206,12 +1378,27 @@ function updateScore(pi){
 
 /* ---------- 上の パート一覧（押すと その パートへ とぶ） ---------- */
 const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-(function buildNav(){
+function buildNav(){
   const nav = document.getElementById('partNav');
   if(!nav) return;
   nav.innerHTML = '<span class="lb">パート：</span>' + DATA.map((p, i) =>
-    '<a href="#part' + (i+1) + '">' + esc(p.no.replace('PART ','')) + '　' + esc(p.title.split(' ―')[0]) + '</a>'
+    inLv(i) ? '<a href="#part' + (i+1) + '">' + esc(p.no.replace('PART ','')) + '　' +
+      esc(p.title.split(' ―')[0]) + '</a>' : ''
   ).join('');
+}
+buildNav();
+[...document.querySelectorAll('#lvChips .lvchip')].forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#lvChips .lvchip').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  curLv = b.dataset.lv;
+  try { localStorage.setItem('jlpt-choukai-lastlv', curLv); } catch (e) {}
+  applyLevel();
+}));
+(function(){
+  const b = document.querySelector('#lvChips .lvchip[data-lv="' + curLv + '"]');
+  if (b) { document.querySelectorAll('#lvChips .lvchip').forEach(x => x.classList.remove('on')); b.classList.add('on'); }
+  else curLv = 'all';
+  applyLevel();
 })();
 
 /* ---------- ハッシュで パートへ とぶ ---------- */
