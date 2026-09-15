@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-09-15h';
+  var PAGE_VER = '2026-09-15j';
   var KEY = 'reloaded-for-n2';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -25,6 +25,44 @@
 })();
 </script>
 <style>
+/* 今週やること */
+.wkbox{border:2px solid #4338ca;background:#eef2ff;border-radius:14px;padding:.9rem 1rem;margin-bottom:1rem}
+.wklb{font-size:.72rem;font-weight:800;letter-spacing:.08em;color:#332e91}
+.wkttl{font-size:1.15rem;font-weight:800;margin:.15rem 0 .3rem}
+.wksub{font-size:.82rem;color:#332e91;font-weight:700;margin-bottom:.4rem}
+.wkprog{font-size:.85rem;font-weight:800;color:#332e91;margin:.4rem 0 .2rem}
+.wknote{font-size:.83rem;color:#55606c;margin-top:.6rem;border-top:1px dashed #c7c9e8;padding-top:.5rem}
+ul.chk{list-style:none;margin:0;padding:0}
+ul.chk li{margin:.35rem 0;background:#fff;border:1px solid #c7c9e8;border-radius:10px;padding:.55rem .65rem}
+ul.chk li.fin .t{text-decoration:line-through;opacity:.55}
+ul.chk .t{display:block;font-weight:700;font-size:.93rem;line-height:1.5}
+ul.chk .n{display:block;font-weight:400;font-size:.78rem;color:#64748b}
+.dcnt{float:right;font-size:.75rem;font-weight:800;color:#332e91;margin-left:.4rem}
+.days{display:flex;gap:.28rem;margin-top:.5rem}
+.days label{flex:1;display:flex;flex-direction:column;align-items:center;gap:.12rem;
+  border:1px solid #c7c9e8;border-radius:8px;padding:.32rem .1rem;background:#fff;
+  cursor:pointer;font-size:.74rem;font-weight:800;color:#64748b}
+.days input{width:1rem;height:1rem;margin:0;accent-color:#4338ca}
+.days label.on{background:#4338ca;border-color:#4338ca;color:#fff}
+.days label.td{box-shadow:0 0 0 2px #332e91}
+.items{display:grid;gap:.5rem}
+.items a{display:flex;align-items:center;gap:.7rem;border:1.5px solid #c7c9e8;border-radius:12px;
+  padding:.7rem .8rem;background:#fff;text-decoration:none;color:inherit}
+.items a:hover{background:#eef2ff;border-color:#4338ca}
+.items .em{font-size:1.25rem;width:1.9rem;text-align:center;flex:none}
+.items .n{display:block;font-weight:800;font-size:.95rem}
+.items .r{display:block;font-size:.78rem;color:#64748b}
+.items .ar{margin-left:auto;color:#332e91;font-weight:800}
+.hint2{font-size:.8rem;color:#64748b;margin:.3rem 0 .7rem}
+.s2{display:block;font-size:.72rem;font-weight:600;color:#64748b}
+#wkRest>summary{cursor:pointer;font-weight:800;font-size:.92rem;color:#64748b;list-style:none}
+#wkRest>summary::-webkit-details-marker{display:none}
+#wkRest>summary::before{content:"▶ ";color:#4338ca}
+#wkRest[open]>summary::before{content:"▼ "}
+.wl{margin:.5rem 0 .8rem}
+.wl h4{font-size:.85rem;color:#332e91;margin:0 0 .25rem}
+.wl .row{font-size:.85rem;line-height:1.9;word-break:break-all}
+
 :root{
   --ink:#16212B; --ink-soft:#4A5B6B; --paper:#EDF0F3; --card:#FFFFFF;
   --acc:#4338ca; --acc-d:#332e91; --acc-l:#eef2ff;
@@ -160,7 +198,8 @@ button.act.ghost{background:#fff;color:var(--acc)}
     <h1>JLPT N2 合格ロードマップ</h1>
     <p class="sub">2026年9月〜2027年12月（16か月間）／ Peta jalan menuju N2</p>
     <nav class="tabs" id="tabs">
-      <button class="tab on" data-tab="road">ロードマップ<br><small>Roadmap</small></button>
+      <button class="tab on" data-tab="week">今週やること<br><small>Minggu ini</small></button>
+      <button class="tab" data-tab="road">ロードマップ<br><small>Roadmap</small></button>
       <button class="tab" data-tab="shindan">診断テスト<br><small>Tes diagnostik</small></button>
     </nav>
   </div>
@@ -169,7 +208,29 @@ button.act.ghost{background:#fff;color:var(--acc)}
 <div class="wrap"><main id="pane">
 
   <!-- ========================= ロードマップ ========================= -->
-  <section id="panel-road" class="panel on">
+  <!-- ========================= 今週やること ========================= -->
+  <section id="panel-week" class="panel on">
+    <div class="wkbox">
+      <div class="wklb">MINGGU INI ／ 今週やること</div>
+      <div class="wkttl" id="wkTtl">　</div>
+      <div class="wksub" id="wkSub"></div>
+      <div class="wkprog" id="wkProg"></div>
+      <ul class="chk" id="wkList"></ul>
+      <p class="wknote" id="wkNote"></p>
+    </div>
+    <div class="card">
+      <h2 class="sec" style="margin-top:0">今週ひらくもの<span class="s2">Dipakai minggu ini</span></h2>
+      <p class="hint2">押すと、そのレベルと「今週の分だけ」が すぐ出る ところまで 開きます。</p>
+      <div class="items" id="wkApps"></div>
+    </div>
+    <details class="card" id="wkRest">
+      <summary>今週の 漢字・語彙・文型の 一覧　／　<i>Daftar minggu ini</i></summary>
+      <div id="wkLists" style="margin-top:.7rem"></div>
+    </details>
+  </section>
+
+  <!-- ========================= ロードマップ ========================= -->
+  <section id="panel-road" class="panel">
 
     <h2 class="sec">1. 目的とゴール</h2>
     <ul class="bl">
@@ -324,7 +385,188 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
 /* メニューからのリンク（n2/index.html#shindan など）で直接そのタブを開く */
 (function(){
   var h = (location.hash || '').replace('#','');
-  if(h === 'road' || h === 'shindan') openTab(h);
+  if(h === 'week' || h === 'road' || h === 'shindan') openTab(h);
+})();
+
+/* ================= 今週やること ================= */
+(function(){
+  "use strict";
+  var W = null, DAYN = ['月','火','水','木','金','土','日'];
+  var KEYP = 'n2-week-';                 /* チェックの保存キー */
+  var COURSEKEY = 'jlpt-course';
+
+  function mondayOf(start, w){
+    var p = String(start).split('-');
+    var m1 = new Date(+p[0], +p[1]-1, +p[2]);
+    return new Date(m1.getTime() + (w-1)*7*86400000);
+  }
+  function md(d){ return (d.getMonth()+1) + '/' + d.getDate(); }
+  function weekNo(){
+    var p = String(W.start).split('-');
+    var m1 = new Date(+p[0], +p[1]-1, +p[2]);
+    var t = new Date(); t.setHours(0,0,0,0);
+    var d = Math.floor((t - m1) / 86400000);
+    if (d < 0) return 0;                       /* まだ始まっていない */
+    var n = Math.floor(d/7) + 1;
+    return n > W.total ? -1 : n;               /* -1 は終わったあと */
+  }
+  function phaseOf(w){
+    for (var i=0;i<W.phases.length;i++) if (w >= W.phases[i].from && w <= W.phases[i].to) return W.phases[i];
+    return W.phases[0];
+  }
+  /* その週にやること。漢字・語彙・文型は数から作り、そのほかは task から */
+  function tasksOf(w){
+    var c = W.counts[String(w)] || {k:0,v:0,g:0}, out = [];
+    /* 第0期はN3の見直し。第1期からがN2。札の名前も変える。 */
+    var ph = phaseOf(w), lv = ph.no === 0 ? 'N3' : 'N2';
+    var mi = ph.no === 0 ? '見直しなので、覚えた印のあるものは飛ばしてよい' : null;
+    if (c.k) out.push({k:'k', lv:lv, dw:5, t:'漢字 '+lv+'　平日 1日'+Math.round(c.k/5)+'字（週'+c.k+'字）',
+                       n: mi || '書き順を見て、読みを声に出す'});
+    if (c.v) out.push({k:'k', lv:lv, dw:5, t:'語彙 '+lv+'　平日 1日'+Math.round(c.v/5)+'語（週'+c.v+'語）',
+                       n: mi || '覚えた／要復習の印を必ず押す'});
+    if (c.g) out.push({k:'g', lv:lv, dw:5, t:'文型 '+lv+'　平日 1日'+Math.round(c.g/5)+'項目（週'+c.g+'項目）',
+                       n: mi || '例文3つを声に出して読む'});
+    (W.task[String(w)] || []).forEach(function(t){
+      var kk = /読解/.test(t) ? 'd' : /聴解/.test(t) ? 'c' : /100日/.test(t) ? 'n' : '';
+      out.push({k:kk, t:t.replace(/《.+?》/g,''), n:''});
+    });
+    return out;
+  }
+  var APPS = {
+    k:{em:'📚', href:'../kanji.html#list', n:'漢字・語彙', r:'Kanji & Kosakata', lv:'N2', lvkey:'jlpt-kanji-lastlv'},
+    g:{em:'📐', href:'../bunpo/#list',     n:'文型・文法', r:'Tata bahasa',      lv:'N2', lvkey:'jlpt-grammar-lastlv'},
+    d:{em:'📖', href:'../dokkai/#list',    n:'読解',       r:'Membaca',          lv:'N2', lvkey:'jlpt-dokkai-lastlv'},
+    c:{em:'🎧', href:'../choukai/#part9',  n:'聴解',       r:'Menyimak',         lv:'N2', lvkey:'jlpt-choukai-lastlv'},
+    n:{em:'📅', href:'../n3.html',         n:'100日コース', r:'Kursus 100 hari'}
+  };
+
+  function render(){
+    var w = weekNo(), box = document.getElementById('wkTtl');
+    if (!box) return;
+    if (w === 0){
+      var m1 = mondayOf(W.start, 1);
+      document.getElementById('wkTtl').textContent = '（まだ始まっていません）';
+      document.getElementById('wkSub').textContent = (m1.getMonth()+1)+'月'+m1.getDate()+'日（月）から始まります';
+      return;
+    }
+    if (w === -1){
+      document.getElementById('wkTtl').textContent = '（全'+W.total+'週が終わりました）';
+      document.getElementById('wkSub').textContent = 'おつかれさまでした';
+      return;
+    }
+    var ph = phaseOf(w), mo = mondayOf(W.start, w), su = new Date(mo.getTime()+6*86400000);
+    document.getElementById('wkTtl').textContent = '第'+w+'週　第'+ph.no+'期　'+ph.name;
+    document.getElementById('wkSub').textContent = md(mo)+'（月）〜 '+md(su)+'（日）';
+    document.getElementById('wkNote').textContent = 'この期のねらい：' + ph.aim;
+
+    var KEY = KEYP + w, done = {};
+    try { done = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){}
+    var tasks = tasksOf(w);
+    var ti = Math.floor((new Date().setHours(0,0,0,0) - mo) / 86400000);
+    if (ti < 0 || ti > 6) ti = -1;
+
+    document.getElementById('wkList').innerHTML = tasks.map(function(t,i){
+      var A = t.k ? APPS[t.k] : null;
+      var head = (A ? A.em+' ' : '') + t.t + (t.n ? '<span class="n">'+t.n+'</span>' : '');
+      if (t.dw){
+        var on = 0, h = '';
+        for (var k=0;k<t.dw;k++) if (done[i+'-'+k]) on++;
+        for (var j=0;j<t.dw;j++){
+          var c = !!done[i+'-'+j];
+          h += '<label class="'+(c?'on':'')+(j===ti?' td':'')+'">'
+             + '<input type="checkbox" data-i="'+i+'" data-d="'+j+'"'+(c?' checked':'')+'>'
+             + '<span>'+DAYN[j]+'</span></label>';
+        }
+        return '<li class="'+(on===t.dw?'fin':'')+'" data-i="'+i+'">'
+             + '<span class="t"><span class="dcnt">'+on+'／'+t.dw+'</span>'+head+'</span>'
+             + '<div class="days">'+h+'</div></li>';
+      }
+      return '<li'+(done[i]?' class="fin"':'')+' data-i="'+i+'"><label style="display:flex;gap:.55rem;align-items:flex-start;cursor:pointer">'
+           + '<input type="checkbox" data-i="'+i+'"'+(done[i]?' checked':'')+' style="margin-top:.3rem;width:1.05rem;height:1.05rem;accent-color:#4338ca">'
+           + '<span class="t">'+head+'</span></label></li>';
+    }).join('');
+
+    function progress(){
+      var got = 0, all = 0;
+      tasks.forEach(function(t,i){
+        if (t.dw){ all += t.dw; for (var k=0;k<t.dw;k++) if (done[i+'-'+k]) got++; }
+        else { all += 1; if (done[i]) got++; }
+      });
+      document.getElementById('wkProg').textContent = '今週できた分：'+got+'／'+all+'　（Minggu ini '+got+'/'+all+'）';
+    }
+    progress();
+    [].forEach.call(document.querySelectorAll('#wkList input'), function(c){
+      c.addEventListener('change', function(){
+        var i = c.dataset.i;
+        if (c.dataset.d === undefined) done[i] = c.checked;
+        else done[i+'-'+c.dataset.d] = c.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(done)); } catch(e){}
+        var li = c.closest('li');
+        if (c.dataset.d !== undefined){
+          c.parentNode.classList.toggle('on', c.checked);
+          var t = tasks[+i], on = 0;
+          for (var k=0;k<t.dw;k++) if (done[i+'-'+k]) on++;
+          li.querySelector('.dcnt').textContent = on+'／'+t.dw;
+          li.classList.toggle('fin', on === t.dw);
+        } else li.classList.toggle('fin', c.checked);
+        progress();
+      });
+    });
+
+    /* 今週ひらくもの */
+    var use = [], lvOf = {};
+    tasks.forEach(function(t){
+      if (!t.k) return;
+      if (use.indexOf(t.k) < 0) use.push(t.k);
+      if (t.lv) lvOf[t.k] = t.lv;
+    });
+    document.getElementById('wkApps').innerHTML = use.map(function(k){
+      var A = APPS[k], lv = lvOf[k] || A.lv;
+      return '<a href="'+A.href+'" data-course="n2"'+(A.lvkey&&lv?' data-lvkey="'+A.lvkey+'" data-lv="'+lv+'"':'')+'>'
+           + '<span class="em">'+A.em+'</span><span><span class="n">'+A.n+(lv?'　<b style="color:#4338ca">'+lv+'</b>':'')+'</span>'
+           + '<span class="r">'+A.r+'</span></span><span class="ar">→</span></a>';
+    }).join('');
+    /* 押したときに、開く側のレベルと「どのコースの週か」を先に書いてから移る */
+    [].forEach.call(document.querySelectorAll('#wkApps a'), function(a){
+      a.addEventListener('click', function(){
+        try {
+          localStorage.setItem(COURSEKEY, 'n2');
+          if (a.dataset.lvkey) localStorage.setItem(a.dataset.lvkey, a.dataset.lv);
+        } catch(e){}
+      });
+    });
+
+    /* 今週の一覧（漢字・語彙・文型） */
+    loadLists(w);
+  }
+
+  function loadLists(w){
+    var box = document.getElementById('wkLists');
+    if (!box) return;
+    Promise.all([
+      fetch('../kanji-weeks.json', {cache:'no-cache'}).then(function(r){return r.json();}).catch(function(){return null;}),
+      fetch('../bunpo/weeks.json', {cache:'no-cache'}).then(function(r){return r.json();}).catch(function(){return null;}),
+      fetch('../bunpo/grammar-n2.json', {cache:'no-cache'}).then(function(r){return r.json();}).catch(function(){return null;}),
+      fetch('../bunpo/grammar-n3.json', {cache:'no-cache'}).then(function(r){return r.json();}).catch(function(){return null;})
+    ]).then(function(a){
+      var kw = a[0] && a[0].courses && a[0].courses.n2, gw = a[1] && a[1].courses && a[1].courses.n2;
+      var byId = {};
+      [a[2],a[3]].forEach(function(f){ if (f) f.grammar.forEach(function(g){ byId[g.id] = g.pattern; }); });
+      var h = '';
+      if (kw && kw.kanji[String(w)]) h += '<div class="wl"><h4>漢字 '+kw.kanji[String(w)].length+'字</h4><div class="row">'+kw.kanji[String(w)].join('　')+'</div></div>';
+      if (kw && kw.vocab[String(w)]) h += '<div class="wl"><h4>語彙 '+kw.vocab[String(w)].length+'語</h4><div class="row">'+kw.vocab[String(w)].join('・')+'</div></div>';
+      if (gw && gw.weeks[String(w)]) h += '<div class="wl"><h4>文型 '+gw.weeks[String(w)].length+'項目</h4><div class="row">'
+        + gw.weeks[String(w)].map(function(id){ return byId[id] || id; }).join('・') + '</div></div>';
+      box.innerHTML = h || '<p class="hint2">この週は 漢字・語彙・文型の 割り当てが ありません。</p>';
+    });
+  }
+
+  fetch('weeks.json', {cache:'no-cache'}).then(function(r){ return r.json(); })
+    .then(function(j){ W = j; render(); })
+    .catch(function(){
+      var t = document.getElementById('wkTtl');
+      if (t) t.textContent = '週の予定が 読めませんでした';
+    });
 })();
 
 /* ================= 診断テスト本体 ================= */
