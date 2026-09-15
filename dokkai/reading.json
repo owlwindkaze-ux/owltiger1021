@@ -1,0 +1,36 @@
+{
+ "name": "読解データ（オリジナル）",
+ "version": "2026-08-07",
+ "note": "JLPT本試験と同じ形式（短文・中文・長文・情報検索）に合わせて書いたオリジナルの文章です。過去問の転載ではありません。ふりがなは 漢字《かんじ》 の形で書きます。 レベルごとのファイルに分けてあり、開いたレベルだけを読み込みます。",
+ "files": [
+  {
+   "file": "reading-n5.json",
+   "level": "N5",
+   "count": 10,
+   "questions": 14
+  },
+  {
+   "file": "reading-n4.json",
+   "level": "N4",
+   "count": 18,
+   "questions": 32
+  },
+  {
+   "file": "reading-n3.json",
+   "level": "N3",
+   "count": 17,
+   "questions": 52
+  },
+  {
+   "file": "reading-n2.json",
+   "level": "N2",
+   "count": 5,
+   "questions": 18
+  }
+ ],
+ "app_version": "2026-09-15c",
+ "totals": {
+  "passages": 50,
+  "questions": 116
+ }
+}
