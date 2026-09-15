@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="介護の技能実習生向け 手書き漢字検索。読めない漢字を書いて、読み方・意味・画数・部首を調べます。">
+<title>Cari Kanji Tulis Tangan ｜ 手書き漢字検索</title>
+<style>
+
+  /* owltiger1021 の他ページと同じ配色。手書き検索は 5 枚目のカードなので、
+     既存の青・緑・紫・橙とぶつからない teal を割り当てている。 */
+  :root {
+    color-scheme: light;
+    --bg: #f1f5f9;
+    --panel: #ffffff;
+    --panel-2: #f1f5f9;
+    --ink: #0f172a;
+    --ink-2: #475569;
+    --ink-3: #64748b;
+    --line: #e2e8f0;
+    --accent: #0d9488;
+    --accent-soft: #f0fdfa;
+    --on-accent: #ffffff;
+    --pad: #ffffff;
+    --grid: #cbd5e1;
+    --stroke: #0f172a;
+    --radius: 20px;
+    --shadow: 0 1px 2px rgba(15,23,42,.06), 0 1px 3px rgba(15,23,42,.1);
+    --tel-d: #0f766e;
+    --red: #dc2626;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Noto Sans JP",
+                 "Meiryo", system-ui, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 16px 16px 48px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  .sub { font-size: .78rem; color: var(--ink-3); }
+  /* サービスワーカーが有効になったときだけ出す */
+  .badge {
+    display: none; font-size: .68rem; padding: 2px 8px; border-radius: 999px;
+    background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent);
+  }
+
+  .cols { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 16px; align-items: start; }
+  /* canvas の固有幅（ピクセルバッファ）が grid トラックの最小幅に漏れないようにする */
+  .cols > div { min-width: 0; }
+  @media (max-width: 760px) { .cols { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+  }
+  .card + .card { margin-top: 14px; }
+  .card-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: 10px 14px; border-bottom: 1px solid var(--line);
+    font-size: .78rem; color: var(--ink-3); letter-spacing: .08em;
+  }
+  .card-body { padding: 14px; }
+
+  /* --- 手書きパッド --- */
+  .padbox { position: relative; max-width: 360px; margin: 0 auto; }
+  canvas#pad { display: block; width: 100%; aspect-ratio: 1 / 1; touch-action: none; cursor: crosshair;
+               background: var(--pad); border-radius: 6px; border: 1px solid var(--line); }
+  /* iPad Safari では、これがないと指でなぞったときに選択や長押しメニューが割り込み、
+     描画が始まらないことがある。 */
+  .padbox, canvas#pad {
+    -webkit-user-select: none; user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .padhint {
+    position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none;
+    color: var(--ink-3); font-size: .9rem; opacity: .75; transition: opacity .2s;
+  }
+  .padhint.hide { opacity: 0; }
+
+  /* 日本語とインドネシア語の併記。日本語を上、インドネシア語を下の小さい字で。 */
+  .bi { display: inline-flex; flex-direction: column; align-items: flex-start; line-height: 1.25; }
+  .bi > b { font-weight: inherit; }
+  .bi > i, .empty i, .sendnote i { font-style: normal; color: var(--ink-3); font-size: .82em; }
+  button.bi { align-items: center; padding-top: 5px; padding-bottom: 5px; }
+  /* アクセント地の上では、明暗どちらのテーマでも文字色に追従させる */
+  button.primary.bi > i { color: var(--on-accent); opacity: .72; }
+  .h1sub { display: block; font-size: .68rem; font-weight: 400; color: var(--ink-3); letter-spacing: .02em; }
+
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .row.mt { margin-top: 10px; }
+  button, .seg {
+    font: inherit; font-size: .85rem; color: var(--ink); background: var(--panel-2);
+    border: 1px solid var(--line); border-radius: 7px; padding: 7px 12px; cursor: pointer;
+    transition: background .12s, border-color .12s, transform .06s;
+  }
+  button:hover { border-color: var(--ink-3); }
+  button:active { transform: translateY(1px); }
+  button.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  button.primary:hover { filter: brightness(1.08); }
+  button:disabled { opacity: .45; cursor: default; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  .seg { display: inline-flex; padding: 3px; gap: 2px; }
+  .seg button { border: none; background: transparent; padding: 5px 11px; border-radius: 5px; font-size: .8rem; color: var(--ink-2); }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+
+  .sendnote {
+    display: none; margin-top: 8px; padding: 6px 10px; border-radius: 6px;
+    background: var(--panel-2); border-left: 3px solid var(--accent);
+    font-size: .73rem; color: var(--ink-2); line-height: 1.5;
+  }
+  .status { font-size: .75rem; color: var(--ink-3); min-height: 1.4em; }
+  .status .warn { color: var(--accent); }
+
+  /* --- 候補 --- */
+  .cands { display: flex; flex-wrap: wrap; gap: 7px; min-height: 56px; }
+  .cand {
+    font-size: 1.7rem; line-height: 1; padding: 9px 6px; width: 54px; text-align: center;
+    background: var(--panel-2); border: 1px solid var(--line); border-radius: 6px;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+  }
+  .cand[aria-pressed="true"] {
+    background: var(--accent-soft); border-color: var(--accent); color: var(--accent);
+    box-shadow: inset 0 0 0 1px var(--accent);
+  }
+  .empty { color: var(--ink-3); font-size: .85rem; }
+
+  /* --- 詳細 --- */
+  .detail { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 16px; }
+  @media (max-width: 460px) { .detail { grid-template-columns: 1fr; } }
+  .glyphbox { text-align: center; }
+  .glyph {
+    font-size: 5.2rem; line-height: 1.1; width: 132px; height: 132px; display: grid; place-items: center;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+    background: var(--pad); border: 1px solid var(--line); border-radius: 6px;
+  }
+  canvas#order { width: 132px; height: 132px; display: none; background: var(--pad);
+                 border: 1px solid var(--line); border-radius: 6px; }
+  .glyphbox button { margin-top: 8px; font-size: .75rem; padding: 4px 9px; }
+
+  /* 併記でラベルが2行になるぶん、見出し列を広めに取る */
+  dl.meta { margin: 0; display: grid; grid-template-columns: 7em minmax(0,1fr); gap: 8px 12px; font-size: .9rem; }
+  dl.meta dt { color: var(--ink-2); font-size: .8rem; padding-top: .18em; }
+  dl.meta dd { margin: 0; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: .74rem; padding: 2px 8px; border-radius: 4px; background: var(--panel-2);
+         border: 1px solid var(--line); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .tag.hi { background: var(--ink); border-color: var(--ink); color: var(--panel); font-weight: 600; }
+  .rd { font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif; }
+  /* 読みは詳細パネルの主役。表の一項目ではなく見出し扱いにする。 */
+  .readings { margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .rdline { display: flex; align-items: baseline; gap: 8px; }
+  .rdmark {
+    flex: none; width: 1.5em; height: 1.5em; display: grid; place-items: center; border-radius: 4px;
+    background: var(--accent); color: var(--on-accent); font-size: .7rem;
+  }
+  .rdtext {
+    font-size: 1.25rem; font-weight: 600; letter-spacing: .03em;
+    font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+  }
+  .rdnote { margin-top: 6px; font-size: .7rem; color: var(--ink-3); }
+
+  .juku-item { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 6px; }
+  .juku-item b { font-weight: 600; }
+  a.jlink {
+    font-weight: 600; color: var(--accent); text-decoration: underline;
+    text-decoration-style: dotted; text-underline-offset: 3px;
+  }
+  a.jlink:hover { text-decoration-style: solid; }
+  .juku-item .rd { font-size: .82rem; color: var(--ink-2); }
+  .juku-item .gl { font-size: .76rem; color: var(--ink-3); }
+  .parts { display: flex; flex-wrap: wrap; gap: 5px; }
+  .parts button { font-size: 1.05rem; padding: 2px 9px; border-radius: 7px;
+                  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; }
+
+  /* --- 入力バッファ --- */
+  .buf { display: flex; gap: 8px; align-items: stretch; }
+  .buf input {
+    flex: 1; min-width: 0; font: inherit; font-size: 1.35rem; padding: 6px 10px;
+    background: var(--pad); color: var(--ink); border: 1px solid var(--line); border-radius: 7px;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  }
+  footer { margin-top: 22px; font-size: .72rem; color: var(--ink-3); line-height: 1.8; }
+  footer a { color: var(--ink-2); }
+
+  /* --- 他ページと揃えたヘッダーと合言葉 --- */
+  body { font-family: "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif; }
+  header.site {
+    background: linear-gradient(135deg, var(--tel-d), var(--accent)); color: #fff; padding: .9rem 1rem;
+  }
+  header.site .hd { max-width: 1040px; margin: 0 auto; display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; }
+  header.site h1 { font-size: 1.15rem; font-weight: 800; margin: 0; }
+  header.site .sub { font-size: .78rem; opacity: .92; line-height: 1.5; }
+  header.site .spacer { flex: 1; }
+  a.langbtn {
+    border: 1px solid rgba(255,255,255,.5); background: rgba(255,255,255,.12); color: #fff;
+    border-radius: 999px; padding: .35rem .85rem; font-size: .8rem; font-weight: 700; text-decoration: none;
+  }
+  a.langbtn:hover { background: rgba(255,255,255,.22); }
+  .wrap { padding-top: 18px; }
+  .card { border-radius: var(--radius); }
+
+  #gate { position: fixed; inset: 0; z-index: 200; background: linear-gradient(135deg, var(--tel-d), var(--accent));
+    display: flex; align-items: center; justify-content: center; padding: 1.2rem; }
+  #gate .gbox { background: #fff; border-radius: 18px; padding: 1.8rem 1.5rem; max-width: 390px; width: 100%;
+    box-shadow: 0 20px 40px rgba(0,0,0,.25); text-align: center; }
+  #gate h2 { font-size: 1.15rem; margin-bottom: .2rem; }
+  #gate p { font-size: .8rem; color: var(--ink-3); margin-bottom: 1.1rem; line-height: 1.6; }
+  #gate input { width: 100%; padding: .7rem .9rem; border: 1.5px solid var(--line); border-radius: 10px;
+    font-size: 1rem; text-align: center; letter-spacing: .1em; }
+  #gate input:focus { border-color: var(--accent); outline: none; }
+  #gate button { width: 100%; margin-top: .8rem; padding: .7rem; border: 0; border-radius: 10px;
+    background: var(--accent); color: #fff; font-size: 1rem; font-weight: 700; cursor: pointer; }
+  #gate .err { color: var(--red); font-size: .8rem; min-height: 1.2rem; margin-top: .5rem; }
+  #loading { text-align: center; color: var(--ink-3); font-size: .9rem; padding: 3rem 1rem; }
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gbox">
+    <div style="font-size:2rem">🔒</div>
+    <h2>Kata sandi ／ 合言葉</h2>
+    <p>Masukkan kata sandi untuk masuk.<br>合言葉を入れてください。</p>
+    <input id="gatePw" type="password" inputmode="text" autocomplete="current-password" placeholder="••••••••">
+    <button id="gateBtn">Masuk ／ 入る</button>
+    <div class="err" id="gateErr"></div>
+  </div>
+</div>
+
+<header class="site"><div class="hd">
+  <div>
+    <h1>Cari Kanji Tulis Tangan</h1>
+    <div class="sub">手書き漢字検索 ／ 読めない漢字を書いて調べる</div>
+  </div>
+  <div class="spacer"></div>
+  <a class="langbtn" href="index.html">☰ メニュー</a>
+</div></header>
+
+<div id="loading">辞書を読み込んでいます… ／ Memuat kamus…</div>
+
+<div class="wrap">
+
+  <div class="cols">
+    <!-- 左：手書きパッド -->
+    <div>
+      <section class="card">
+        <div class="card-head">
+          <span class="bi"><b>手書き入力</b><i>Tulis tangan</i></span>
+          <span id="strokecount">0 画</span>
+        </div>
+        <div class="card-body">
+          <div class="padbox">
+            <canvas id="pad"></canvas>
+            <div class="padhint" id="padhint">
+              <span class="bi"><b>ここに指・ペン・マウスで書く</b><i>Tulis di sini (jari, pena, atau mouse)</i></span>
+            </div>
+          </div>
+          <div class="row mt">
+            <button type="button" id="undo" class="bi"><b>一画もどす</b><i>Hapus 1 coretan</i></button>
+            <button type="button" id="clear" class="bi"><b>全消去</b><i>Hapus semua</i></button>
+            <button type="button" id="recog" class="primary bi"><b>さがす</b><i>Cari</i></button>
+          </div>
+          <div class="row mt" id="moderow">
+            <span class="sub">認識方式 / Metode</span>
+            <div class="seg" role="group" aria-label="認識方式 / Metode">
+              <button type="button" data-mode="auto" aria-pressed="true">自動 Otomatis</button>
+              <button type="button" data-mode="online" aria-pressed="false">オンライン Online</button>
+              <button type="button" data-mode="offline" aria-pressed="false">オフライン Offline</button>
+            </div>
+          </div>
+          <div class="sendnote" id="sendnote">
+            オンライン認識では、書いた線の座標が Google に送信されます。送信したくないときは「オフライン」を選んでください。
+            <br><i>Mode online mengirim coretan Anda ke Google. Pilih “Offline” jika tidak ingin mengirim.</i>
+          </div>
+          <div class="status mt" id="status">&nbsp;</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-head"><span class="bi"><b>集めた漢字</b><i>Kanji terkumpul</i></span></div>
+        <div class="card-body">
+          <div class="buf">
+            <input id="buffer" type="text" placeholder="選んだ漢字がここに入ります / Kanji pilihan muncul di sini" spellcheck="false">
+            <button type="button" id="copy" class="bi"><b>コピー</b><i>Salin</i></button>
+            <button type="button" id="bufclear" aria-label="消す / Hapus">×</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 右：候補と詳細 -->
+    <div>
+      <section class="card">
+        <div class="card-head">
+          <span class="bi"><b>候補</b><i>Pilihan kanji</i></span><span id="candsrc"></span>
+        </div>
+        <div class="card-body">
+          <div class="cands" id="cands">
+            <span class="empty">まだ何も書かれていません。<br><i>Belum ada tulisan.</i></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="bi"><b>詳細</b><i>Detail</i></span><span id="detailhint"></span>
+        </div>
+        <div class="card-body" id="detail">
+          <span class="empty">候補を選ぶと、読み方などを表示します。<br><i>Pilih kanji untuk melihat cara bacanya.</i></span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer id="footer"></footer>
+</div>
+
+<!-- 本体より前に置く独立したブロック。本体が構文エラーで丸ごと止まっても、
+     これだけは生き残って画面に理由を出せるよう、あえて古い書き方にしてある。 -->
+<script>
+(function () {
+  function show(kind, msg, src, line) {
+    var box = document.getElementById("fatalerror");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "fatalerror";
+      box.setAttribute("style",
+        "position:fixed;left:0;right:0;bottom:0;z-index:9999;max-height:52%;overflow:auto;" +
+        "background:#fdecea;color:#7a1c12;border-top:3px solid #b03a2e;padding:10px 12px;" +
+        "font:12px/1.5 Consolas,monospace;white-space:pre-wrap;word-break:break-all");
+      (document.body || document.documentElement).appendChild(box);
+    }
+    box.appendChild(document.createTextNode(
+      "【" + kind + "】" + msg + (src ? "\n  " + src + (line ? " : " + line + " 行" : "") : "") + "\n"));
+  }
+  window.addEventListener("error", function (e) {
+    show("エラー", e.message || String(e.error), e.filename, e.lineno);
+  });
+  window.addEventListener("unhandledrejection", function (e) {
+    show("未処理の失敗", (e.reason && (e.reason.message || e.reason)) || "不明", "", 0);
+  });
+  window.addEventListener("load", function () {
+    // 辞書（約 2.3MB）の取得を待つ。それでも起動しなければ理由を出す。
+    setTimeout(function () {
+    if (!window.__kanjiReady) {
+      show("起動できませんでした",
+        "辞書を読み込めませんでした。通信状況を確かめて、開き直してください。\n  " + navigator.userAgent, "", 0);
+    }
+    }, 20000);
+  });
+})();
+</script>
+<script type="module">
+
+/* ============================================================
+   合言葉。他の4システムと同じ鍵・同じ保存先なので、
+   どれかで一度入れれば、このページもそのまま開く。
+   ============================================================ */
+const GATEKEY = 'jlpt-kanji-gate-v1';
+const PASS_SHA256 = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
+async function sha256(t) {
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
+  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
+}
+function unlock() { document.getElementById('gate').style.display = 'none'; }
+async function tryUnlock() {
+  const pw = document.getElementById('gatePw').value.trim();
+  const err = document.getElementById('gateErr');
+  if (!pw) { err.textContent = 'Kata sandi kosong ／ 未入力です'; return; }
+  const h = await sha256(pw);
+  if (h === PASS_SHA256) { localStorage.setItem(GATEKEY, h); unlock(); }
+  else { err.textContent = 'Kata sandi salah ／ 合言葉が違います';
+         document.getElementById('gatePw').select(); }
+}
+document.getElementById('gateBtn').onclick = tryUnlock;
+document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock();
+else document.getElementById('gatePw').focus();
+
+"use strict";
+const ONLINE_ENABLED = true;
+const DEFAULT_MODE = "auto";   // auto / online / offline
+
+/** 認識方式は端末ごとに覚える。localStorage が使えない環境でも落ちないようにする。 */
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch { /* 無視 */ } },
+};
+
+/* ============================================================
+   1. 辞書・筆画テンプレートの読み込み
+   ============================================================ */
+const DB = await (await fetch("./tegaki-data.json")).json();
+document.getElementById("loading").remove();
+const CHARS = DB.chars;
+const NPTS = DB.npts;
+const DICT = DB.dict;
+const RADCHARS = DB.radchars;    // 康熙部首 214 個（部首番号 → 字）
+const RADNAMES = DB.radnames;    // 部首の字 → 日本語の部首名
+
+/* 筆画データは「画数(1B) + 各画 NPTS 点 ×(x,y) 1B」の連結。
+   照合はこの Uint8Array を直接読むので、点オブジェクトは一切作らない。 */
+const STROKE_BYTES = (() => {
+  const bin = atob(DB.strokes);
+  const a = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i);
+  return a;
+})();
+const NCHAR = CHARS.length;
+const OFF = new Int32Array(NCHAR);   // 各字の「先頭点」の位置（画数バイトの次）
+const CNT = new Uint8Array(NCHAR);
+const BY_COUNT = [];                 // 画数 → 字インデックス配列
+{
+  let p = 0;
+  for (let i = 0; i < NCHAR; i++) {
+    const n = STROKE_BYTES[p++];
+    CNT[i] = n; OFF[i] = p;
+    p += n * NPTS * 2;
+    (BY_COUNT[n] || (BY_COUNT[n] = [])).push(i);
+  }
+}
+
+/* ============================================================
+   2. オフライン認識エンジン
+   ============================================================ */
+const DIR_W = 0.35;          // 方向差の重み
+const SKIP = 0.55;           // 画の過不足ペナルティ
+const CNT_W = 0.06;          // 画数差ペナルティ
+const UNORDERED_PEN = 0.10;  // 書き順を無視したマッチに課す下駄
+const TOL = 2;               // 許容する画数のズレ
+
+/** 折れ線を等間隔 NPTS 点にリサンプルする */
+function resample(pts) {
+  if (pts.length < 2) {
+    const p = pts[0] || { x: 0, y: 0 };
+    return Array.from({ length: NPTS }, () => ({ x: p.x, y: p.y }));
+  }
+  const seg = [];
+  let total = 0;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const d = Math.hypot(pts[i + 1].x - pts[i].x, pts[i + 1].y - pts[i].y);
+    seg.push(d); total += d;
+  }
+  if (total < 1e-9) return Array.from({ length: NPTS }, () => ({ x: pts[0].x, y: pts[0].y }));
+  const out = [{ x: pts[0].x, y: pts[0].y }];
+  const step = total / (NPTS - 1);
+  let acc = 0, i = 0;
+  for (let k = 1; k < NPTS - 1; k++) {
+    const target = k * step;
+    while (i < seg.length && acc + seg[i] < target) { acc += seg[i]; i++; }
+    if (i >= seg.length) { out.push({ x: pts[pts.length - 1].x, y: pts[pts.length - 1].y }); continue; }
+    const t = seg[i] > 1e-9 ? (target - acc) / seg[i] : 0;
+    out.push({ x: pts[i].x + (pts[i + 1].x - pts[i].x) * t, y: pts[i].y + (pts[i + 1].y - pts[i].y) * t });
+  }
+  out.push({ x: pts[pts.length - 1].x, y: pts[pts.length - 1].y });
+  return out;
+}
+
+/** 全画をまとめて、縦横比を保ったまま単位正方形の中央へ。テンプレート側と同じ正規化。 */
+function normalizeStrokes(strokes) {
+  let minx = Infinity, maxx = -Infinity, miny = Infinity, maxy = -Infinity;
+  for (const s of strokes) for (const p of s) {
+    if (p.x < minx) minx = p.x; if (p.x > maxx) maxx = p.x;
+    if (p.y < miny) miny = p.y; if (p.y > maxy) maxy = p.y;
+  }
+  const w = maxx - minx, h = maxy - miny;
+  const scale = Math.max(w, h, 1e-6);
+  const ox = (1 - w / scale) / 2 - minx / scale;
+  const oy = (1 - h / scale) / 2 - miny / scale;
+  const out = new Float32Array(strokes.length * NPTS * 2);
+  let k = 0;
+  for (const s of strokes) for (const p of s) {
+    out[k++] = p.x / scale + ox;
+    out[k++] = p.y / scale + oy;
+  }
+  return out;
+}
+
+/** 入力1画 (u の uo 番目) とテンプレート1画 (バイト位置 to) の距離 */
+function strokeDist(u, uo, to) {
+  let d = 0;
+  for (let i = 0; i < NPTS; i++) {
+    const dx = u[uo + i * 2] - STROKE_BYTES[to + i * 2] / 255;
+    const dy = u[uo + i * 2 + 1] - STROKE_BYTES[to + i * 2 + 1] / 255;
+    d += Math.sqrt(dx * dx + dy * dy);
+  }
+  d /= NPTS;
+  const ax = u[uo + (NPTS - 1) * 2] - u[uo], ay = u[uo + (NPTS - 1) * 2 + 1] - u[uo + 1];
+  const bx = (STROKE_BYTES[to + (NPTS - 1) * 2] - STROKE_BYTES[to]) / 255;
+  const by = (STROKE_BYTES[to + (NPTS - 1) * 2 + 1] - STROKE_BYTES[to + 1]) / 255;
+  const la = Math.hypot(ax, ay), lb = Math.hypot(bx, by);
+  if (la > 1e-6 && lb > 1e-6) {
+    let cos = (ax * bx + ay * by) / (la * lb);
+    if (cos > 1) cos = 1; else if (cos < -1) cos = -1;
+    d += DIR_W * (1 - cos) * 0.5;
+  }
+  return d;
+}
+
+const _rowA = new Float64Array(64), _rowB = new Float64Array(64), _used = new Uint8Array(64);
+
+/** 書き順を尊重した DP（画の抜け・増えは SKIP で吸収） */
+function orderedScore(u, nu, ci) {
+  const nt = CNT[ci], base = OFF[ci];
+  let prev = _rowA, cur = _rowB;
+  for (let j = 0; j <= nt; j++) prev[j] = j * SKIP;
+  for (let i = 1; i <= nu; i++) {
+    cur[0] = i * SKIP;
+    const uo = (i - 1) * NPTS * 2;
+    for (let j = 1; j <= nt; j++) {
+      const m = prev[j - 1] + strokeDist(u, uo, base + (j - 1) * NPTS * 2);
+      const a = prev[j] + SKIP;
+      const b = cur[j - 1] + SKIP;
+      cur[j] = m < a ? (m < b ? m : b) : (a < b ? a : b);
+    }
+    const t = prev; prev = cur; cur = t;
+  }
+  return prev[nt] / Math.max(nu, nt);
+}
+
+/** 書き順を無視した貪欲マッチ（順序がめちゃくちゃでも拾えるように） */
+function unorderedScore(u, nu, ci) {
+  const nt = CNT[ci], base = OFF[ci];
+  for (let j = 0; j < nt; j++) _used[j] = 0;
+  let total = 0, matched = 0;
+  for (let i = 0; i < nu; i++) {
+    const uo = i * NPTS * 2;
+    let best = Infinity, bi = -1;
+    for (let j = 0; j < nt; j++) {
+      if (_used[j]) continue;
+      const d = strokeDist(u, uo, base + j * NPTS * 2);
+      if (d < best) { best = d; bi = j; }
+    }
+    if (bi < 0) { total += SKIP; }
+    else { _used[bi] = 1; total += best; matched++; }
+  }
+  total += SKIP * (nt - matched);
+  return total / Math.max(nu, nt);
+}
+
+/** オフライン認識。strokes は canvas 座標の生ストローク配列。
+ *  1段目は書き順ありの DP だけで全候補をふるいにかけ、2段目で上位だけ
+ *  書き順無視のマッチも試す（全件で両方やると 14 画で 200ms 近くかかるため）。 */
+function recognizeOffline(strokes, limit = 24) {
+  const nu = strokes.length;
+  if (!nu) return [];
+  const u = normalizeStrokes(strokes.map(resample));
+  const scores = [];
+  for (let n = Math.max(1, nu - TOL); n <= nu + TOL; n++) {
+    const list = BY_COUNT[n];
+    if (!list) continue;
+    const penalty = CNT_W * Math.abs(n - nu);
+    for (const ci of list) scores.push([orderedScore(u, nu, ci) + penalty, ci]);
+  }
+  scores.sort((a, b) => a[0] - b[0]);
+  const rescore = scores.slice(0, Math.max(limit * 8, 160));
+  for (const e of rescore) {
+    const s2 = unorderedScore(u, nu, e[1]) + UNORDERED_PEN + CNT_W * Math.abs(CNT[e[1]] - nu);
+    if (s2 < e[0]) e[0] = s2;
+  }
+  rescore.sort((a, b) => a[0] - b[0]);
+  return rescore.slice(0, limit).map(([, ci]) => CHARS[ci]);
+}
+
+/* ============================================================
+   3. オンライン認識（Google 手書き入力 API）
+   ============================================================ */
+const IME_URL = "https://inputtools.google.com/request"
+  + "?itc=ja-t-i0-handwrit&num=24&cp=0&cs=1&ie=utf-8&oe=utf-8&app=demopage";
+
+async function recognizeOnline(strokes, w, h, signal) {
+  const ink = strokes.map(s => [s.map(p => Math.round(p.x)), s.map(p => Math.round(p.y)), s.map(p => p.t | 0)]);
+  const res = await fetch(IME_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      options: "enable_pre_space",
+      requests: [{ writing_guide: { writing_area_width: Math.round(w), writing_area_height: Math.round(h) }, ink, language: "ja" }]
+    }),
+    signal,
+  });
+  if (!res.ok) throw new Error("HTTP " + res.status);
+  const j = await res.json();
+  if (j[0] !== "SUCCESS") throw new Error(String(j[0]));
+  const raw = (j[1] && j[1][0] && j[1][0][1]) || [];
+  // 漢字1字の候補だけを残す（このアプリは漢字検索用）
+  const seen = new Set(), out = [];
+  for (const cand of raw) {
+    if ([...cand].length !== 1) continue;
+    const c = cand.codePointAt(0);
+    if (!((c >= 0x4e00 && c <= 0x9fff) || (c >= 0x3400 && c <= 0x4dbf))) continue;
+    if (seen.has(cand)) continue;
+    seen.add(cand); out.push(cand);
+  }
+  return out;
+}
+
+/* ============================================================
+   4. 手書きパッド
+   ============================================================ */
+const pad = document.getElementById("pad");
+const ctx = pad.getContext("2d");
+const padhint = document.getElementById("padhint");
+let strokes = [];       // [[{x,y,t}, ...], ...] canvas CSS px
+let drawing = null;
+let padW = 0, padH = 0;
+const t0 = performance.now();
+
+function fitPad() {
+  const r = pad.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 3);
+  padW = r.width; padH = r.height;
+  pad.width = Math.round(r.width * dpr);
+  pad.height = Math.round(r.height * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  drawPad();
+}
+
+function drawPad() {
+  const cs = getComputedStyle(document.documentElement);
+  ctx.clearRect(0, 0, padW, padH);
+  // 田字格のガイド
+  ctx.save();
+  ctx.strokeStyle = cs.getPropertyValue("--grid").trim() || "#ddd";
+  ctx.lineWidth = 1;
+  ctx.setLineDash([5, 5]);
+  ctx.beginPath();
+  ctx.moveTo(padW / 2, 0); ctx.lineTo(padW / 2, padH);
+  ctx.moveTo(0, padH / 2); ctx.lineTo(padW, padH / 2);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.globalAlpha = .6;
+  ctx.strokeRect(padW * .08, padH * .08, padW * .84, padH * .84);
+  ctx.restore();
+
+  ctx.strokeStyle = cs.getPropertyValue("--stroke").trim() || "#000";
+  ctx.lineWidth = Math.max(4, padW * 0.032);
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  for (const s of strokes) {
+    if (s.length === 1) {
+      ctx.beginPath();
+      ctx.arc(s[0].x, s[0].y, ctx.lineWidth / 2, 0, Math.PI * 2);
+      ctx.fillStyle = ctx.strokeStyle; ctx.fill();
+      continue;
+    }
+    ctx.beginPath();
+    ctx.moveTo(s[0].x, s[0].y);
+    for (let i = 1; i < s.length; i++) ctx.lineTo(s[i].x, s[i].y);
+    ctx.stroke();
+  }
+  padhint.classList.toggle("hide", strokes.length > 0);
+  document.getElementById("strokecount").textContent = strokes.length + " 画";
+}
+
+function padPoint(ev) {
+  const r = pad.getBoundingClientRect();
+  return { x: ev.clientX - r.left, y: ev.clientY - r.top, t: Math.round(performance.now() - t0) };
+}
+
+/* --- パームリジェクション ---
+   方針: 指の入力を止めないことを最優先にする。手のひらが乗るのはペンで書いている
+   最中だけなので、その間に限ってタッチを無視すれば足りる。
+   接地面の大きさによる判定はしない。端末ごとに値の意味が違い、普通の指を
+   手のひらと誤判定して「指で書けない」状態を作ってしまうため。
+   (1) 同時に触れた2本目以降は無視する
+   (2) ペンを使っている間だけタッチを無視する（最後のペン操作から PEN_GRACE ミリ秒） */
+const PEN_GRACE = 1500;
+let activeId = null, activeType = null, lastPenAt = 0;
+
+function ignoreTouch(ev) {
+  return ev.pointerType === "touch" && (Date.now() - lastPenAt) < PEN_GRACE;
+}
+
+function dropCurrentStroke() {
+  const i = strokes.indexOf(drawing);
+  if (i >= 0) strokes.splice(i, 1);
+  drawing = null; activeId = null; activeType = null;
+}
+
+pad.addEventListener("pointerdown", ev => {
+  // 直前のポインタが取り残されていたら復帰させる。ペンが範囲外に出るなどで
+  // pointerup が来ないと activeId が居座り、以降マウスも効かなくなるため。
+  if (activeId !== null && !pad.hasPointerCapture(activeId)) {
+    activeId = null; activeType = null; drawing = null;
+  }
+  if (ev.pointerType === "pen") {
+    lastPenAt = Date.now();
+    // 手のひらが先に着いていたら、その画を捨ててペンに持ち替える
+    if (activeId !== null && activeType === "touch") { dropCurrentStroke(); drawPad(); }
+  }
+  if (activeId !== null || ignoreTouch(ev)) return;
+  ev.preventDefault();
+  activeId = ev.pointerId; activeType = ev.pointerType;
+  try { pad.setPointerCapture(ev.pointerId); } catch { /* 捕捉できなくても描画は続ける */ }
+  drawing = [padPoint(ev)];
+  strokes.push(drawing);
+  cancelPending();
+  drawPad();
+});
+pad.addEventListener("pointermove", ev => {
+  if (ev.pointerId !== activeId || !drawing) return;
+  if (ev.pointerType === "pen") lastPenAt = Date.now();   // 書いている間は猶予を延ばす
+  ev.preventDefault();
+  const p = padPoint(ev);
+  const last = drawing[drawing.length - 1];
+  if (Math.hypot(p.x - last.x, p.y - last.y) < 1.6) return;
+  drawing.push(p);
+  drawPad();
+});
+function endStroke(ev) {
+  if (ev.pointerId !== activeId) return;
+  if (ev.pointerType === "pen") lastPenAt = Date.now();
+  activeId = null; activeType = null;
+  if (!drawing) return;
+  drawing = null;
+  drawPad();
+  scheduleRecognize();
+}
+pad.addEventListener("pointerup", endStroke);
+pad.addEventListener("pointercancel", endStroke);
+// pointerleave は使わない。キャプチャ中に誤発火するブラウザがあり、
+// 線が最初の1点で切れてしまう。捕捉が外れたことは lostpointercapture で確実に拾える。
+pad.addEventListener("lostpointercapture", endStroke);
+
+new ResizeObserver(fitPad).observe(pad);
+window.addEventListener("load", fitPad);
+fitPad();
+
+/* ============================================================
+   5. 認識の実行と候補表示
+   ============================================================ */
+let mode = "auto";
+if (ONLINE_ENABLED) {
+  const saved = store.get("kanji-mode");
+  mode = ["auto", "online", "offline"].includes(saved) ? saved : DEFAULT_MODE;
+} else {
+  mode = "offline";
+}
+let timer = null, abort = null, seq = 0;
+let onlineBroken = false;   // 一度でも通信に失敗したら以降は自動でオフラインへ
+
+const statusEl = document.getElementById("status");
+const candsEl = document.getElementById("cands");
+const candSrcEl = document.getElementById("candsrc");
+
+function setStatus(text, warn) {
+  statusEl.innerHTML = "";
+  const span = document.createElement("span");
+  if (warn) span.className = "warn";
+  span.textContent = text || " ";
+  statusEl.appendChild(span);
+}
+
+function cancelPending() {
+  if (timer) { clearTimeout(timer); timer = null; }
+  if (abort) { abort.abort(); abort = null; }
+}
+
+function scheduleRecognize(delay = 380) {
+  cancelPending();
+  if (!strokes.length) { showCandidates([], ""); return; }
+  timer = setTimeout(runRecognize, delay);
+}
+
+async function runRecognize() {
+  timer = null;
+  if (!strokes.length) return;
+  const my = ++seq;
+  const useOnline = ONLINE_ENABLED && !onlineBroken && (mode === "online" || mode === "auto");
+
+  if (useOnline) {
+    setStatus("オンライン認識中… / Mencari online…");
+    abort = new AbortController();
+    const ac = abort;
+    try {
+      let list = await recognizeOnline(strokes, padW, padH, ac.signal);
+      if (my !== seq) return;
+      abort = null;
+      // Google の候補は仮名や英字を落とすと数個しか残らないことがあるので、
+      // 足りない分はオフライン側の候補で埋める。
+      let src = "オンライン";
+      if (list.length < 10) {
+        const seen = new Set(list);
+        const extra = recognizeOffline(strokes, 24).filter(c => !seen.has(c));
+        if (extra.length) {
+          list = list.concat(extra.slice(0, 16 - list.length));
+          src = list.length ? "オンライン＋オフライン" : src;
+        }
+      }
+      showCandidates(list, src);
+      setStatus(list.length ? "" : "候補が見つかりません。もう一度書いてください。 / Tidak ditemukan. Coba tulis lagi.");
+      return;
+    } catch (e) {
+      if (ac.signal.aborted || my !== seq) return;
+      abort = null;
+      if (mode === "online") {
+        setStatus("オンライン認識に失敗しました（" + e.message + "）。オフラインで検索します。 / Mode online gagal, memakai offline.", true);
+      } else {
+        onlineBroken = true;
+        setStatus("インターネットにつながらないので、オフラインに切り替えました。 / Tidak ada internet, beralih ke offline.", true);
+        syncModeButtons();
+      }
+    }
+  } else if (mode === "auto" && ONLINE_ENABLED && onlineBroken) {
+    setStatus("オフラインで検索しています / Mencari secara offline");
+  } else {
+    setStatus("");
+  }
+
+  const list = recognizeOffline(strokes);
+  if (my !== seq) return;
+  showCandidates(list, "オフライン");
+}
+
+function showCandidates(list, src) {
+  candsEl.innerHTML = "";
+  candSrcEl.textContent = list.length ? src : "";
+  if (!list.length) {
+    const s = document.createElement("span");
+    s.className = "empty";
+    s.textContent = strokes.length
+      ? "候補なし / Tidak ada"
+      : "まだ何も書かれていません。 / Belum ada tulisan.";
+    candsEl.appendChild(s);
+    return;
+  }
+  list.forEach((ch, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "cand";
+    b.textContent = ch;
+    b.setAttribute("aria-pressed", "false");
+    b.title = (DICT[ch] && DICT[ch].m ? DICT[ch].m.slice(0, 3).join(", ") : "") || ch;
+    b.addEventListener("click", () => selectKanji(ch, b));
+    candsEl.appendChild(b);
+    if (i === 0) selectKanji(ch, b);
+  });
+}
+
+/* ============================================================
+   6. 詳細表示
+   ============================================================ */
+const detailEl = document.getElementById("detail");
+const GRADE = { 1: "小1 (SD1)", 2: "小2 (SD2)", 3: "小3 (SD3)", 4: "小4 (SD4)", 5: "小5 (SD5)",
+                6: "小6 (SD6)", 8: "中学以上 (SMP+)", 9: "人名用", 10: "人名用" };
+let orderChar = null, orderTimer = null;
+
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text != null) e.textContent = text;
+  return e;
+}
+
+/** 併記ボタンのラベルを差し替える（textContent で書くと子要素が消えるため） */
+function setBtnLabel(btn, ja, id) {
+  btn.innerHTML = "";
+  btn.classList.add("bi");
+  btn.appendChild(el("b", null, ja));
+  btn.appendChild(el("i", null, id));
+}
+
+function selectKanji(ch, btn) {
+  for (const b of candsEl.querySelectorAll(".cand")) b.setAttribute("aria-pressed", String(b === btn));
+  renderDetail(ch);
+}
+
+candsEl.addEventListener("dblclick", ev => {
+  const b = ev.target.closest(".cand");
+  if (b) appendToBuffer(b.textContent);
+});
+
+function renderDetail(ch) {
+  const d = DICT[ch];
+  detailEl.innerHTML = "";
+  document.getElementById("detailhint").textContent = "ダブルクリックで集める / Klik 2x untuk menyimpan";
+
+  const wrap = el("div", "detail");
+
+  // 左：字と筆順
+  const gb = el("div", "glyphbox");
+  const glyph = el("div", "glyph", ch);
+  glyph.id = "glyph";
+  gb.appendChild(glyph);
+  const oc = document.createElement("canvas");
+  oc.id = "order"; oc.width = 264; oc.height = 264;
+  gb.appendChild(oc);
+  const ob = el("button", "bi");
+  ob.type = "button";
+  setBtnLabel(ob, "筆順を見る", "Urutan tulis");
+  ob.addEventListener("click", () => toggleOrder(ch, ob));
+  gb.appendChild(ob);
+  wrap.appendChild(gb);
+
+  // 右：情報
+  const info = document.createElement("div");
+  const dl = el("dl", "meta");
+
+  /** dt に日本語とインドネシア語を並べる */
+  const add = (ja, id, node) => {
+    const dt = el("dt", "bi");
+    dt.appendChild(el("b", null, ja));
+    dt.appendChild(el("i", null, id));
+    dl.appendChild(dt);
+    const dd = document.createElement("dd");
+    if (typeof node === "string") dd.textContent = node; else dd.appendChild(node);
+    dl.appendChild(dd);
+  };
+
+  if (!d) {
+    info.appendChild(el("p", "empty", "この字の辞書データはありません。 / Data tidak tersedia."));
+  } else {
+    // 読みを最優先。実習生がまず知りたいのは「何と読むか」なので、
+    // 表の一項目ではなく見出しとして大きく出す。
+    const rd = el("div", "readings");
+    for (const [mark, list] of [["音", d.on], ["訓", d.kun]]) {
+      if (!list || !list.length) continue;
+      const line = el("div", "rdline");
+      line.appendChild(el("span", "rdmark", mark));
+      line.appendChild(el("span", "rdtext", list.join("・")));
+      rd.appendChild(line);
+    }
+    if (!rd.childElementCount) rd.appendChild(el("div", "rdline", "読みの記録がありません"));
+    rd.appendChild(el("div", "rdnote", "音 = on'yomi、訓 = kun'yomi"));
+    info.appendChild(rd);
+
+    add("意味", "Arti (Inggris)", d.m ? d.m.join(", ") : "—");
+
+    const rc = d.rc || RADCHARS[d.r - 1] || "";
+    if (rc) {
+      const rn = RADNAMES[d.rv] || RADNAMES[rc] || "";
+      add("部首", "Radikal", (d.rv ? d.rv + "（" + rc + "）" : rc) + (rn ? "　" + rn : ""));
+    }
+
+    const tags = el("div", "tags");
+    tags.appendChild(el("span", "tag hi", d.s + " 画 / coretan"));
+    if (d.j) tags.appendChild(el("span", "tag", "JLPT N" + d.j));
+    else if (d.jo) tags.appendChild(el("span", "tag", "JLPT 旧" + d.jo + "級"));
+    else tags.appendChild(el("span", "tag", "JLPT 範囲外 / di luar JLPT"));
+    if (GRADE[d.g]) tags.appendChild(el("span", "tag", GRADE[d.g]));
+    if (d.kk) tags.appendChild(el("span", "tag", "漢検 " + d.kk));
+    if (d.ty) tags.appendChild(el("span", "tag", d.ty + "文字"));
+    if (d.f) tags.appendChild(el("span", "tag", "頻度 " + d.f + " 位 / 2500"));
+    add("分類", "Info", tags);
+
+    if (d.ju) {
+      const ul = el("div", "juku");
+      for (const [w, r, g] of d.ju) {
+        const line = el("div", "juku-item");
+        // 熟語そのものを Google 翻訳（日本語→インドネシア語）へのリンクにする
+        const a = document.createElement("a");
+        a.className = "jlink";
+        a.href = "https://translate.google.com/?sl=ja&tl=id&op=translate&text=" + encodeURIComponent(w);
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = w;
+        a.title = "Google 翻訳で見る / Buka di Google Translate";
+        line.appendChild(a);
+        line.appendChild(el("span", "rd", "（" + r + "）"));
+        if (g) line.appendChild(el("span", "gl", g));
+        ul.appendChild(line);
+      }
+      ul.appendChild(el("div", "rdnote", "語をタップすると Google 翻訳が開きます / Ketuk kata untuk membukanya di Google Translate"));
+      add("熟語例", "Contoh kata", ul);
+    }
+
+    if (d.k) {
+      const parts = el("div", "parts");
+      for (const p of d.k) {
+        const b = el("button", null, p);
+        b.type = "button";
+        b.title = DICT[p] ? "「" + p + "」を調べる / Cari " + p : p;
+        b.addEventListener("click", () => { if (DICT[p]) renderDetail(p); });
+        parts.appendChild(b);
+      }
+      add("部品", "Bagian", parts);
+    }
+  }
+
+  const act = el("div", "row mt");
+  const addBtn = el("button", "primary bi");
+  addBtn.type = "button";
+  addBtn.appendChild(el("b", null, "「" + ch + "」を集める"));
+  addBtn.appendChild(el("i", null, "Simpan " + ch));
+  addBtn.addEventListener("click", () => appendToBuffer(ch));
+  act.appendChild(addBtn);
+  const cp = el("button", "bi");
+  cp.type = "button";
+  cp.appendChild(el("b", null, "この字をコピー"));
+  cp.appendChild(el("i", null, "Salin huruf ini"));
+  cp.addEventListener("click", () => copyText(ch, cp, "コピーしました / Tersalin"));
+  act.appendChild(cp);
+  info.appendChild(dl);
+  info.appendChild(act);
+  wrap.appendChild(info);
+  detailEl.appendChild(wrap);
+}
+
+/* 筆順プレビュー：保存してある 5 点/画のテンプレートを滑らかにつないで順に描く */
+function toggleOrder(ch, btn) {
+  const glyph = document.getElementById("glyph");
+  const oc = document.getElementById("order");
+  if (orderChar === ch && oc.style.display === "block") {
+    clearInterval(orderTimer); orderChar = null;
+    oc.style.display = "none"; glyph.style.display = "grid";
+    setBtnLabel(btn, "筆順を見る", "Urutan tulis");
+    return;
+  }
+  const ci = CHARS.indexOf(ch);
+  if (ci < 0) return;
+  orderChar = ch;
+  oc.style.display = "block"; glyph.style.display = "none";
+  setBtnLabel(btn, "字にもどす", "Kembali");
+
+  const n = CNT[ci], base = OFF[ci];
+  const pts = [];
+  for (let j = 0; j < n; j++) {
+    const s = [];
+    for (let k = 0; k < NPTS; k++) {
+      s.push({ x: STROKE_BYTES[base + (j * NPTS + k) * 2] / 255, y: STROKE_BYTES[base + (j * NPTS + k) * 2 + 1] / 255 });
+    }
+    pts.push(s);
+  }
+  const g = oc.getContext("2d");
+  const S = oc.width, M = S * 0.1, L = S - M * 2;
+  const cs = getComputedStyle(document.documentElement);
+  let shown = 0;
+  const paint = () => {
+    g.clearRect(0, 0, S, S);
+    g.strokeStyle = cs.getPropertyValue("--grid").trim();
+    g.lineWidth = 2; g.setLineDash([6, 6]);
+    g.beginPath(); g.moveTo(S / 2, 0); g.lineTo(S / 2, S); g.moveTo(0, S / 2); g.lineTo(S, S / 2); g.stroke();
+    g.setLineDash([]);
+    g.lineCap = "round"; g.lineJoin = "round";
+    for (let j = 0; j < n; j++) {
+      const done = j < shown;
+      g.strokeStyle = done ? cs.getPropertyValue("--ink-3").trim() : cs.getPropertyValue("--accent").trim();
+      if (j > shown) continue;
+      g.lineWidth = done ? 7 : 9;
+      g.beginPath();
+      const P = pts[j].map(p => ({ x: M + p.x * L, y: M + p.y * L }));
+      g.moveTo(P[0].x, P[0].y);
+      for (let k = 0; k < P.length - 1; k++) {
+        const p0 = P[k - 1] || P[k], p1 = P[k], p2 = P[k + 1], p3 = P[k + 2] || P[k + 1];
+        g.bezierCurveTo(p1.x + (p2.x - p0.x) / 6, p1.y + (p2.y - p0.y) / 6,
+                        p2.x - (p3.x - p1.x) / 6, p2.y - (p3.y - p1.y) / 6, p2.x, p2.y);
+      }
+      g.stroke();
+      if (j === shown) {
+        g.fillStyle = cs.getPropertyValue("--accent").trim();
+        g.font = "bold " + Math.round(S * 0.075) + "px sans-serif";
+        g.textAlign = "center"; g.textBaseline = "middle";
+        g.beginPath(); g.arc(P[0].x, P[0].y, S * 0.055, 0, Math.PI * 2); g.fill();
+        g.fillStyle = cs.getPropertyValue("--on-accent").trim();
+        g.fillText(String(j + 1), P[0].x, P[0].y + 1);
+      }
+    }
+  };
+  clearInterval(orderTimer);
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // アニメを止め、全画に番号を振った静止画で見せる
+    shown = n; paint();
+    const g2 = oc.getContext("2d");
+    g2.textAlign = "center"; g2.textBaseline = "middle";
+    for (let j = 0; j < n; j++) {
+      const x = M + pts[j][0].x * L, y = M + pts[j][0].y * L;
+      g2.fillStyle = cs.getPropertyValue("--accent").trim();
+      g2.beginPath(); g2.arc(x, y, S * 0.05, 0, Math.PI * 2); g2.fill();
+      g2.fillStyle = cs.getPropertyValue("--on-accent").trim();
+      g2.font = "bold " + Math.round(S * 0.07) + "px sans-serif";
+      g2.fillText(String(j + 1), x, y + 1);
+    }
+    return;
+  }
+  paint();
+  orderTimer = setInterval(() => {
+    shown++;
+    if (shown > n) shown = 0;
+    paint();
+  }, 520);
+}
+
+/* ============================================================
+   7. 入力バッファ・各種操作
+   ============================================================ */
+const bufEl = document.getElementById("buffer");
+function appendToBuffer(ch) { bufEl.value += ch; }
+async function copyText(text, btn, msg) {
+  const old = btn.innerHTML;   // 併記ボタンの中身を保存しておく
+  let ok = false;
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      ok = true;
+    }
+  } catch { /* 下のフォールバックに回す */ }
+  if (!ok) {
+    // http 配信（施設 LAN など）では clipboard API が使えないので textarea 経由で写す
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.cssText = "position:fixed;top:0;left:0;opacity:0";
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, text.length);
+    try { ok = document.execCommand("copy"); } catch { ok = false; }
+    ta.remove();
+  }
+  btn.textContent = ok ? (msg || "コピーしました / Tersalin") : "コピーできません / Gagal";
+  setTimeout(() => { btn.innerHTML = old; }, 1400);
+}
+document.getElementById("copy").addEventListener("click", ev => {
+  if (bufEl.value) copyText(bufEl.value, ev.currentTarget);
+});
+document.getElementById("bufclear").addEventListener("click", () => { bufEl.value = ""; });
+
+document.getElementById("undo").addEventListener("click", () => {
+  strokes.pop(); drawPad(); scheduleRecognize(120);
+});
+document.getElementById("clear").addEventListener("click", () => {
+  strokes = []; drawPad(); cancelPending(); seq++; showCandidates([], ""); setStatus("");
+});
+document.getElementById("recog").addEventListener("click", () => scheduleRecognize(0));
+
+const sendNote = document.getElementById("sendnote");
+function syncModeButtons() {
+  for (const b of document.querySelectorAll("[data-mode]")) {
+    b.setAttribute("aria-pressed", String(b.dataset.mode === mode));
+  }
+  // 外部送信が起きうる状態のときだけ、その旨をはっきり出しておく
+  const sends = ONLINE_ENABLED && !onlineBroken && mode !== "offline";
+  sendNote.style.display = sends ? "block" : "none";
+}
+for (const b of document.querySelectorAll("[data-mode]")) {
+  b.addEventListener("click", () => {
+    mode = b.dataset.mode;
+    if (mode !== "offline") onlineBroken = false;
+    store.set("kanji-mode", mode);
+    syncModeButtons();
+    scheduleRecognize(0);
+  });
+}
+if (!ONLINE_ENABLED) document.getElementById("moderow").style.display = "none";
+syncModeButtons();
+
+for (const b of document.querySelectorAll("[data-theme-set]")) {
+  b.addEventListener("click", () => {
+    const v = b.dataset.themeSet;
+    if (v === "auto") document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.setAttribute("data-theme", v);
+    for (const o of document.querySelectorAll("[data-theme-set]")) o.setAttribute("aria-pressed", String(o === b));
+    drawPad();
+    if (orderChar) { const btn = document.querySelector(".glyphbox button"); if (btn) { toggleOrder(orderChar, btn); toggleOrder(orderChar, btn); } }
+  });
+}
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawPad);
+
+document.getElementById("footer").innerHTML =
+  "収録 " + NCHAR.toLocaleString() + " 字。"
+  + (ONLINE_ENABLED
+      ? "オンライン認識は Google 手書き入力 API を利用します（書いた筆跡が Google に送信されます）。通信できないときは自動でオフライン認識に切り替わります。"
+      : "外部通信なしで動作します（オフライン認識のみ）。")
+  + "<br>意味は英語です（公開されている漢字辞書データに日本語・インドネシア語の語義がないため）。"
+  + "熟語をタップすると Google 翻訳（日本語→インドネシア語）が開きます。"
+  + "<br><i>Arti ditampilkan dalam bahasa Inggris. Ketuk contoh kata untuk membukanya di Google Translate.</i>"
+  + "<br>字形テンプレート: KanjiVG (CC BY-SA 3.0, Ulrich Apel) ／ "
+  + "読み・意味・画数・部首番号: KANJIDIC2、構成部品: KRADFILE（電子辞書研究開発グループ, CC BY-SA 4.0）／ "
+  + "部首名・漢検級・成り立ち・熟語例: kanjium (CC BY-SA 4.0) ／ JLPT レベル: kanji-data。";
+
+setStatus("");
+window.__kanjiReady = true;   // ここまで来たら本体は正常に起動している
+
+
+window.__kanji = { recognizeOffline, get strokes() { return strokes; }, NCHAR };
+</script>
+</body>
+</html>
