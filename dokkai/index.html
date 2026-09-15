@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="介護の技能実習生向け 日本語の読解練習。JLPT N5〜N2の形式（短文・中文・長文・統合理解・主張理解・情報検索）でオリジナルの文章を読みます。">
+<title>Membaca Kaigo ｜ 介護の読解</title>
+<style>
+:root{
+  --pur:#7c3aed; --pur-d:#5b21b6; --pur-l:#f5f3ff;
+  --green:#059669; --green-l:#ecfdf5; --red:#dc2626; --red-l:#fee2e2;
+  --bg:#f1f5f9; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
+  --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
+  --sh-l:0 10px 25px -5px rgba(15,23,42,.15);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic",system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);-webkit-text-size-adjust:100%}
+header{background:linear-gradient(135deg,var(--pur-d),var(--pur));color:#fff;padding:.9rem 1rem}
+.hd{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.hd h1{font-size:1.1rem;font-weight:800}
+.hd .sub{font-size:.75rem;opacity:.9}
+.hd .stat{margin-left:auto;font-size:.75rem;background:rgba(255,255,255,.18);padding:.25rem .7rem;border-radius:999px}
+.langbtn{border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.12);color:#fff;
+  border-radius:999px;padding:.3rem .8rem;font-size:.78rem;font-weight:700;text-decoration:none;cursor:pointer}
+nav.tabs{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40}
+.tabs-in{max-width:1000px;margin:0 auto;display:flex;gap:.2rem;padding:0 .4rem;overflow-x:auto}
+.tab{padding:.6rem .9rem;border:0;background:none;color:var(--muted);font-size:.9rem;font-weight:700;
+  border-bottom:3px solid transparent;white-space:nowrap;line-height:1.25;text-align:center;cursor:pointer}
+.tab.on{color:var(--pur);border-bottom-color:var(--pur)}
+.tab .sub{display:block;font-size:.65rem;font-weight:600}
+.wrap{max-width:1000px;margin:0 auto;padding:1rem}
+.panel{display:none}.panel.on{display:block}
+.toolbar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:.9rem}
+.sel,.btn{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:.45rem .8rem;
+  font-size:.88rem;font-weight:700;color:var(--ink);cursor:pointer;font-family:inherit}
+.btn.pri{background:var(--pur);color:#fff;border-color:var(--pur)}
+.btn:disabled{opacity:.5;cursor:default}
+.chips{display:flex;gap:.3rem;flex-wrap:wrap}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:.3rem .8rem;
+  font-size:.8rem;font-weight:700;color:var(--muted);cursor:pointer}
+.chip.on{background:var(--pur);color:#fff;border-color:var(--pur)}
+.hint{font-size:.78rem;color:var(--muted);line-height:1.7}
+
+/* 文章カード */
+.plist{display:grid;gap:.7rem}
+@media(min-width:700px){.plist{grid-template-columns:1fr 1fr}}
+.pcard{background:var(--card);border:1.5px solid var(--line);border-left:5px solid var(--pur);
+  border-radius:14px;padding:.8rem .9rem;cursor:pointer;box-shadow:var(--sh);text-align:left;width:100%;
+  font-family:inherit;color:inherit}
+.pcard:hover{box-shadow:var(--sh-l)}
+.pcard.done{border-left-color:var(--green);background:var(--green-l)}
+.pcard .row1{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap;margin-bottom:.3rem}
+.lb{font-size:.68rem;font-weight:800;border-radius:999px;padding:.12rem .5rem;background:var(--pur-l);color:var(--pur-d)}
+.lb.g{background:#fff7ed;color:#c2410c}
+.lb.ok{background:var(--green-l);color:#047857}
+.pcard .ttl{font-size:1rem;font-weight:800;line-height:1.4}
+.pcard .meta{font-size:.75rem;color:var(--muted);margin-top:.25rem}
+
+/* 読む画面 */
+.reading{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:1rem 1.1rem;
+  box-shadow:var(--sh);margin-bottom:1rem}
+.intro{font-size:.9rem;color:var(--muted);margin-bottom:.7rem;line-height:1.8}
+.body{font-size:1.05rem;line-height:2.15;white-space:pre-wrap}
+.body.doc{border:1.5px solid var(--line);border-radius:10px;padding:.9rem 1rem;background:#fcfcfd}
+ruby rt{font-size:.5em;color:var(--muted);font-weight:400}
+body.norb ruby rt{visibility:hidden}
+table.info{width:100%;border-collapse:collapse;font-size:.9rem;margin:.3rem 0}
+table.info th,table.info td{border:1px solid var(--line);padding:.45rem .55rem;text-align:center;line-height:1.6}
+table.info th{background:var(--pur-l);font-weight:800}
+table.info caption{font-weight:800;padding:.4rem;font-size:.95rem}
+.tnote{font-size:.82rem;color:var(--muted);margin-top:.4rem;line-height:1.8}
+.ab{border:1px solid var(--line);border-radius:10px;padding:.6rem .7rem;margin-bottom:.6rem;background:#fff}
+.ab .ablb{display:inline-block;font-weight:800;font-size:.78rem;background:#eff6ff;color:#2563eb;
+  border-radius:6px;padding:.05rem .5rem;margin-bottom:.3rem}
+.ab .abttl{font-weight:800;font-size:.95rem;margin-bottom:.25rem}
+.ab .body{margin:0}
+.notes{margin-top:.8rem;border-top:1px dashed var(--line);padding-top:.6rem}
+.notes .t{font-size:.75rem;font-weight:800;color:var(--muted);margin-bottom:.3rem}
+.notes ul{list-style:none;display:grid;gap:.2rem}
+.notes li{font-size:.83rem;line-height:1.6}
+.notes .w{font-weight:800}
+.notes .r{color:var(--muted)}
+
+/* 設問 */
+.qbox{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:1rem 1.1rem;
+  box-shadow:var(--sh);margin-bottom:.8rem}
+.qno{font-size:.72rem;font-weight:800;color:var(--pur-d);background:var(--pur-l);
+  border-radius:6px;padding:.15rem .5rem;display:inline-block;margin-bottom:.4rem}
+.qq{font-size:1.02rem;font-weight:700;line-height:1.8;margin-bottom:.7rem}
+.chs{display:grid;gap:.45rem}
+.ch{border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:.6rem .8rem;
+  font-size:.98rem;line-height:1.7;text-align:left;cursor:pointer;font-family:inherit;color:inherit;
+  display:flex;gap:.55rem;align-items:flex-start}
+.ch .num{color:var(--muted);font-weight:800;flex:none}
+.ch:hover{border-color:var(--pur)}
+.ch.right{background:var(--green);color:#fff;border-color:var(--green)}
+.ch.right .num{color:#fff}
+.ch.wrong{background:var(--red-l);color:var(--red);border-color:var(--red)}
+.fb{margin-top:.6rem;font-size:.9rem;line-height:1.8;border-radius:10px;padding:.6rem .75rem;display:none}
+.fb.ok{background:var(--green-l);color:#047857}
+.fb.ng{background:var(--red-l);color:var(--red)}
+.state{display:inline-block;font-size:.75rem;font-weight:800;border-radius:999px;padding:.15rem .6rem}
+.state.known{background:var(--green-l);color:#047857}
+.state.review{background:var(--red-l);color:var(--red)}
+.bar{height:9px;border-radius:999px;background:#e2e8f0;overflow:hidden;margin:.3rem 0 .8rem}
+.bar i{display:block;height:100%;background:var(--pur);border-radius:999px}
+.loading{padding:2rem;text-align:center;color:var(--muted)}
+footer{text-align:center;font-size:.72rem;color:var(--muted);padding:1.2rem;line-height:1.9}
+/* 合言葉 */
+#gate{position:fixed;inset:0;z-index:200;background:linear-gradient(135deg,var(--pur-d),var(--pur));
+  display:flex;align-items:center;justify-content:center;padding:1.2rem}
+#gate .gbox{background:#fff;border-radius:18px;padding:1.8rem 1.5rem;max-width:390px;width:100%;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);text-align:center}
+#gate h2{font-size:1.15rem;margin-bottom:.2rem}
+#gate p{font-size:.8rem;color:var(--muted);margin-bottom:1.1rem;line-height:1.6}
+#gate input{width:100%;padding:.7rem .9rem;border:1.5px solid var(--line);border-radius:10px;
+  font-size:1rem;text-align:center;letter-spacing:.1em}
+#gate button{width:100%;margin-top:.8rem;padding:.7rem;border:0;border-radius:10px;
+  background:var(--pur);color:#fff;font-size:1rem;font-weight:700;cursor:pointer}
+#gate .err{color:var(--red);font-size:.8rem;min-height:1.2rem;margin-top:.5rem}
+#app{display:none}
+  .timer{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.6rem;
+    padding:.4rem .7rem;background:var(--pur-l);border-radius:10px;font-size:.85rem}
+  .timer.over{background:var(--red-l)}
+  .timer.done{background:var(--bg)}
+  .timer.off{display:none}
+  .timer .tm{font-weight:800;font-variant-numeric:tabular-nums;font-size:1rem;color:var(--pur-d)}
+  .timer.over .tm{color:var(--red)}
+  .timer .tg{color:var(--muted);font-size:.78rem}
+  .timer .tv{font-size:.8rem;font-weight:700}
+  .timer .tv.ok{color:var(--green)} .timer .tv.ng{color:var(--red)}
+  .timer .tstop{margin-left:auto;border:1px solid var(--line);background:var(--card);
+    color:var(--muted);font-size:.72rem;padding:.15rem .5rem;border-radius:6px;cursor:pointer}
+  .qtbox{margin-top:1.6rem;border-top:1px solid var(--line);padding-top:1.1rem}
+  .qtbox h3{font-size:.95rem;margin:0 0 .7rem}
+  .qtlist{display:grid;gap:.45rem}
+  .qtrow{display:grid;grid-template-columns:minmax(7.5rem,10rem) 1fr auto;
+    gap:.6rem;align-items:center;font-size:.85rem}
+  .qtname{font-weight:700;line-height:1.35}
+  .qtname em{display:block;font-style:normal;font-weight:400;font-size:.72rem;color:var(--muted)}
+  .qtbar{background:var(--line);height:8px;border-radius:999px;overflow:hidden}
+  .qtbar i{display:block;height:100%;background:var(--pur);border-radius:999px}
+  .qtrow.weak .qtbar i{background:var(--red)}
+  .qtrow.weak .qtname{color:var(--red)}
+  .qtnum{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.78rem;white-space:nowrap}
+  .qtnum b{display:inline-block;min-width:2.6rem;text-align:right;color:var(--ink);font-size:.85rem}
+  .qthint{font-size:.85rem;margin:.9rem 0 0;line-height:1.8}
+  .qthint .btn{margin-left:.4rem;padding:.25rem .7rem;font-size:.8rem}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gbox">
+    <div style="font-size:2rem">🔒</div>
+    <h2>Kata sandi ／ 合言葉</h2>
+    <p>Masukkan kata sandi untuk masuk.<br>合言葉を入れてください。</p>
+    <input id="gatePw" type="password" autocomplete="current-password" placeholder="••••••••">
+    <button id="gateBtn">Masuk ／ 入る</button>
+    <div class="err" id="gateErr"></div>
+  </div>
+</div>
+
+<div id="app">
+<header><div class="hd">
+  <div>
+    <h1>Membaca Kaigo</h1>
+    <div class="sub">Latihan membaca JLPT N5–N3 ／ 介護の現場で読む日本語</div>
+  </div>
+  <a class="langbtn" href="../index.html">☰ メニュー</a>
+  <button class="langbtn" id="rbBtn">ふりがな ON</button>
+  <div class="stat" id="hdStat">…</div>
+</div></header>
+
+<nav class="tabs"><div class="tabs-in">
+  <button class="tab on" data-p="p-list">Daftar Teks<span class="sub">①文章一覧</span></button>
+  <button class="tab" data-p="p-read">Baca<span class="sub">②読む</span></button>
+  <button class="tab" data-p="p-stat">Progres<span class="sub">③学習状況</span></button>
+</div></nav>
+
+<div class="wrap">
+
+<!-- ① 一覧 -->
+<section class="panel on" id="p-list">
+  <div class="toolbar" style="margin-bottom:.4rem">
+    <span style="font-size:.8rem;color:var(--muted);font-weight:700">おすすめ ／ Pilihan：</span>
+    <button class="chip" id="recField">🏥 現場で読む（N4）</button>
+    <button class="chip" id="recExam">📝 N3試験の練習</button>
+    <button class="chip" id="recAll">すべて見る ／ Semua</button>
+  </div>
+  <div class="toolbar">
+    <div class="chips" id="lvChips">
+      <button class="chip on" data-lv="all">Semua</button>
+      <button class="chip" data-lv="N5">N5</button>
+      <button class="chip" data-lv="N4">N4</button>
+      <button class="chip" data-lv="N3">N3</button>
+      <button class="chip" data-lv="N2">N2</button>
+    </div>
+    <select class="sel" id="genreSel">
+      <option value="all">分野すべて ／ Semua bidang</option>
+      <option value="介護">介護の現場 ／ Tempat kerja</option>
+      <option value="一般">一般（試験） ／ Umum</option>
+    </select>
+    <select class="sel" id="typeSel">
+      <option value="all">形式すべて ／ Semua bentuk</option>
+      <option value="短文">短文 ／ Teks pendek</option>
+      <option value="中文">中文 ／ Teks sedang</option>
+      <option value="長文">長文 ／ Teks panjang</option>
+      <option value="統合理解">統合理解（読み比べ） ／ Bandingkan dua teks</option>
+      <option value="主張理解">主張理解（長文） ／ Pendapat penulis</option>
+      <option value="情報検索">情報検索 ／ Cari informasi</option>
+    </select>
+    <select class="sel" id="qtSel">
+      <option value="all">設問すべて ／ Semua jenis soal</option>
+      <option value="内容">内容理解 ／ Isi bacaan</option>
+      <option value="指示語">指示語（これ・それ） ／ Kata tunjuk</option>
+      <option value="理由">理由（なぜか） ／ Alasan</option>
+      <option value="主張">主張（言いたいこと） ／ Inti pendapat</option>
+      <option value="内容一致">内容一致（合っているもの） ／ Sesuai isi</option>
+      <option value="語句の意味">語句の意味（どういう意味か） ／ Arti ungkapan</option>
+      <option value="情報検索">情報検索 ／ Cari informasi</option>
+    </select>
+    <select class="sel" id="doneSel">
+      <option value="all">すべて</option>
+      <option value="yet">まだ ／ Belum</option>
+      <option value="done">済み ／ Selesai</option>
+    </select>
+    <span class="hint" id="cnt"></span>
+  </div>
+  <div class="plist" id="plist"><div class="loading">Memuat… 読み込み中…</div></div>
+  <p class="hint" style="margin-top:1rem;white-space:normal">
+    文章はすべてこのシステムのために書いた<b>オリジナル</b>です。JLPT本試験と同じ形式（短文・中文・長文・情報検索、N2は統合理解・主張理解）に合わせています。<br>
+    Semua teks ditulis khusus untuk sistem ini, mengikuti bentuk ujian JLPT.</p>
+</section>
+
+<!-- ② 読む -->
+<section class="panel" id="p-read">
+  <div id="readArea"><p class="hint">「①文章一覧」から文章を選んでください。<br>Pilih teks dari daftar.</p></div>
+</section>
+
+<!-- ③ 学習状況 -->
+<section class="panel" id="p-stat">
+  <div id="statWrap"><div class="loading">…</div></div>
+  <div class="toolbar" style="margin-top:1rem">
+    <button class="btn" id="resetBtn">記録を消す ／ Hapus catatan</button>
+  </div>
+</section>
+
+</div>
+<footer>
+  <span id="verLabel"></span> ・ © 2026 owlwindkaze　このシステムは施設内の学習用です。<br>
+  文章はオリジナルです（JLPT過去問の転載ではありません）。
+</footer>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const VERSION = '2026-09-03';
+const STORE = 'jlpt-dokkai-progress-v1', RBKEY = 'jlpt-dokkai-ruby';
+const PASS_SHA256 = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
+const GATEKEY = 'jlpt-kanji-gate-v1';
+
+let DATA = [], BYID = {}, curId = null;
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(STORE) || '{}'); } catch (e) {}
+const save = () => { try { localStorage.setItem(STORE, JSON.stringify(progress)); } catch (e) {} };
+
+/* ---------- 合言葉 ---------- */
+async function sha256(t) {
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
+  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
+}
+function unlock() {
+  $('#gate').style.display = 'none'; $('#app').style.display = 'block';
+  if (!window.__booted) { window.__booted = true; boot().catch(showErr); }
+}
+async function tryUnlock() {
+  const pw = $('#gatePw').value.trim();
+  if (!pw) { $('#gateErr').textContent = 'Kata sandi kosong ／ 未入力です'; return; }
+  const h = await sha256(pw);
+  if (h === PASS_SHA256) { localStorage.setItem(GATEKEY, h); unlock(); }
+  else { $('#gateErr').textContent = 'Kata sandi salah ／ 合言葉が違います'; $('#gatePw').select(); }
+}
+$('#gateBtn').onclick = tryUnlock;
+$('#gatePw').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock(); else $('#gatePw').focus();
+
+function showErr(e) {
+  $('#plist').innerHTML = `<div class="loading">読み込めませんでした。<br>${e}</div>`;
+}
+
+/* ---------- ふりがな ---------- */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+/** 「漢字《かんじ》」を <ruby> にする */
+const ruby = s => esc(s).replace(/([一-鿿々]+)《([^》]+)》/g, (m, a, b) => `<ruby>${a}<rt>${b}</rt></ruby>`);
+const plain = s => String(s).replace(/《.+?》/g, '');
+function applyRuby() {
+  const on = localStorage.getItem(RBKEY) !== 'off';
+  document.body.classList.toggle('norb', !on);
+  $('#rbBtn').textContent = on ? 'ふりがな ON' : 'ふりがな OFF';
+}
+$('#rbBtn').onclick = () => {
+  localStorage.setItem(RBKEY, localStorage.getItem(RBKEY) === 'off' ? 'on' : 'off');
+  applyRuby();
+};
+applyRuby();
+
+/* ---------- レベルごとの読み込み ----------
+   文章はレベルごとのファイルに分かれている。全部を最初に読むと、
+   N5だけ読みたい人にもN3・N2のデータが毎回届いてしまうので、
+   「選ばれたレベルのファイルだけを、そのとき読む」ようにしてある。
+   一度読んだレベルは覚えておくので、行き来しても待たされない。 */
+let IDXFILES = [], LOADED = new Set(), LOADING = {}, LEVELS = [];
+const DLVKEY = 'jlpt-dokkai-lastlv';   /* 最後に見ていたレベル */
+
+function addPassages(arr) {
+  (arr || []).forEach(p => { if (!BYID[p.id]) { BYID[p.id] = p; DATA.push(p); } });
+}
+/** そのレベルを読み込む（読み込みずみなら何もしない） */
+function ensureLevel(lv) {
+  if (lv === 'all') return ensureAll();
+  if (LOADED.has(lv)) return Promise.resolve();
+  if (LOADING[lv]) return LOADING[lv];
+  const files = IDXFILES.filter(f => f.level === lv);
+  LOADING[lv] = Promise.all(files.map(f =>
+    fetch(f.file, { cache: 'no-cache' }).then(r => r.ok ? r.json() : { passages: [] })
+      .catch(() => ({ passages: [] }))))
+    .then(parts => { parts.forEach(p => addPassages(p.passages)); LOADED.add(lv); });
+  return LOADING[lv];
+}
+/** すべてのレベル（「すべて」「学習状況」「おすすめ」で必要） */
+function ensureAll() { return Promise.all(LEVELS.map(lv => ensureLevel(lv))).then(() => {}); }
+/** 待ちが長いときだけ「読み込み中」を出す（一瞬で終わるときは何も出さない） */
+async function withBusy(fn) {
+  const box = $('#plist');
+  const t = setTimeout(() => { if (box) box.innerHTML = '<div class="loading">読み込み中…</div>'; }, 250);
+  try { return await fn(); } finally { clearTimeout(t); }
+}
+
+/* ---------- 読み込み ---------- */
+async function boot() {
+  const idx = await (await fetch('reading.json', { cache: 'no-cache' })).json();
+  /* 目次の files は {file, level, count, questions} の形。
+     ファイル名だけの旧形式のデータでも、今までどおり全部読んで動く。 */
+  IDXFILES = (idx.files || []).map(f => (typeof f === 'string' ? { file: f, level: null } : f));
+  const perLevel = IDXFILES.length > 0 && IDXFILES.every(f => f.level);
+
+  if (perLevel) {
+    const ORD = ['N5', 'N4', 'N3', 'N2', 'N1'];
+    LEVELS = [...new Set(IDXFILES.map(f => f.level))]
+      .sort((a, b) => (ORD.indexOf(a) < 0 ? 99 : ORD.indexOf(a)) - (ORD.indexOf(b) < 0 ? 99 : ORD.indexOf(b)));
+    /* 見出しの件数は目次から出す。データを全部読まなくても本当の合計が出せる */
+    const tp = (idx.totals && idx.totals.passages) || IDXFILES.reduce((n, f) => n + (f.count || 0), 0);
+    const tq = (idx.totals && idx.totals.questions) || IDXFILES.reduce((n, f) => n + (f.questions || 0), 0);
+    $('#hdStat').textContent = `${tp} teks ・ ${tq} soal`;
+    /* 前に見ていたレベルを覚えておき、そのファイルだけ読む。初めての人は「すべて」 */
+    let want = 'all';
+    try { want = localStorage.getItem(DLVKEY) || 'all'; } catch (e) {}
+    if (want !== 'all' && !LEVELS.includes(want)) want = 'all';
+    await ensureLevel(want);
+    const chip = $$('#lvChips .chip').find(c => c.dataset.lv === want);
+    if (chip) { $$('#lvChips .chip').forEach(x => x.classList.remove('on')); chip.classList.add('on'); }
+  } else {
+    const parts = await Promise.all(IDXFILES.map(f =>
+      fetch(f.file, { cache: 'no-cache' }).then(r => r.ok ? r.json() : { passages: [] })
+        .catch(() => ({ passages: [] }))));
+    parts.forEach(p => addPassages(p.passages));
+    LEVELS = [...new Set(DATA.map(p => p.level))];
+    LEVELS.forEach(lv => LOADED.add(lv));
+    const nq = DATA.reduce((s, p) => s + p.questions.length, 0);
+    $('#hdStat').textContent = `${DATA.length} teks ・ ${nq} soal`;
+  }
+  $('#verLabel').textContent = '版 ' + VERSION;
+  renderList(); openFromHash();
+}
+
+/* ---------- ① 一覧 ---------- */
+const curLv = () => $('#lvChips .chip.on').dataset.lv;
+const isDone = id => !!(progress[id] && progress[id].done);
+function filtered() {
+  const lv = curLv(), g = $('#genreSel').value, t = $('#typeSel').value, d = $('#doneSel').value;
+  const qt = $('#qtSel').value;
+  return DATA.filter(p =>
+    (lv === 'all' || p.level === lv) && (g === 'all' || p.genre === g) &&
+    (t === 'all' || p.type === t) &&
+    (qt === 'all' || p.questions.some(q => q.qtype === qt)) &&
+    (d === 'all' || (d === 'done' ? isDone(p.id) : !isDone(p.id))));
+}
+function renderList() {
+  const arr = filtered();
+  $('#cnt').textContent = `${arr.length} 本 ／ teks`;
+  $('#plist').innerHTML = arr.length ? arr.map(p => {
+    const pr = progress[p.id];
+    return `<button class="pcard ${isDone(p.id) ? 'done' : ''}" data-id="${p.id}">
+      <div class="row1"><span class="lb">${p.level}</span><span class="lb">${p.type}</span>
+        <span class="lb g">${p.genre === '介護' ? '介護の現場' : '一般'}</span>
+        ${pr ? `<span class="lb ok">${pr.ok}/${pr.total} 正解</span>` : ''}</div>
+      <div class="ttl">${ruby(p.title)}</div>
+      <div class="meta">${p.questions.length}問 ・ ${charCount(p)}字くらい</div>
+    </button>`;
+  }).join('') : '<div class="loading">この条件の文章はありません。</div>';
+  $$('#plist .pcard').forEach(b => b.onclick = () => openPassage(b.dataset.id));
+}
+$$('#lvChips .chip').forEach(c => c.onclick = async () => {
+  $$('#lvChips .chip').forEach(x => x.classList.remove('on')); c.classList.add('on');
+  await withBusy(() => ensureLevel(c.dataset.lv));
+  try { localStorage.setItem(DLVKEY, c.dataset.lv); } catch (e) {}
+  renderList();
+});
+['#genreSel', '#typeSel', '#qtSel', '#doneSel'].forEach(s => $(s).onchange = renderList);
+
+/* おすすめ：ボタン1つで、その人に合う文章だけを出す */
+async function setFilters(lv, genre, type, qt) {
+  await withBusy(() => ensureLevel(lv));
+  try { localStorage.setItem(DLVKEY, lv); } catch (e) {}
+  $$('#lvChips .chip').forEach(c => c.classList.toggle('on', c.dataset.lv === lv));
+  $('#genreSel').value = genre; $('#typeSel').value = type;
+  $('#qtSel').value = qt; $('#doneSel').value = 'all';
+  renderList();
+  $('#plist').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+/* これから現場に入る人：お知らせ・表を読む練習 */
+$('#recField').onclick = () => setFilters('N4', '介護', 'all', 'all');
+/* 合格が近い人：長めの文章を読む練習 */
+$('#recExam').onclick = () => setFilters('N3', 'all', 'all', 'all');
+$('#recAll').onclick = () => setFilters('all', 'all', 'all', 'all');
+
+/* ---------- 時間の目安（JLPT本試験の配分から。単位は秒） ---------- */
+const GOAL = { '短文': 180, '中文': 360, '長文': 510, '情報検索': 300, '統合理解': 420, '主張理解': 600 };
+const goalOf = p => GOAL[p.type] || 300;
+const mmss = sec => {
+  const m = Math.floor(sec / 60), s2 = sec % 60;
+  return m + '分' + String(s2).padStart(2, '0') + '秒';
+};
+
+/* 統合理解（N2）は、AとBの二つの文章を読み比べる形。
+   texts があればそれを並べて出し、無ければ今までどおり text を1つ出す。 */
+function textsHTML(p) {
+  const cls = p.type === '情報検索' ? '' : 'doc';
+  if (p.texts && p.texts.length) {
+    return p.texts.map(t => `<div class="ab">
+      <div class="ablb">${esc(t.label)}</div>
+      ${t.title ? `<div class="abttl">${ruby(t.title)}</div>` : ''}
+      <div class="body ${cls}">${ruby(t.text)}</div></div>`).join('');
+  }
+  return `<div class="body ${cls}">${p.text ? ruby(p.text) : ''}</div>`;
+}
+/** 一覧に出す字数。統合理解は二つの文章を合わせて数える */
+function charCount(p) {
+  let n = plain(p.text || '').length;
+  (p.texts || []).forEach(t => { n += plain(t.text || '').length; });
+  return n + (p.table ? 60 : 0);
+}
+
+/* ---------- ② 読む ---------- */
+function tableHTML(t) {
+  if (!t) return '';
+  return `<table class="info">${t.caption ? `<caption>${ruby(t.caption)}</caption>` : ''}
+    <tr>${t.headers.map(h => `<th>${ruby(h)}</th>`).join('')}</tr>
+    ${t.rows.map(r => `<tr>${r.map(c => `<td>${ruby(c)}</td>`).join('')}</tr>`).join('')}</table>
+    ${t.note ? `<div class="tnote">${ruby(t.note)}</div>` : ''}`;
+}
+function openPassage(id) {
+  const p = BYID[id]; if (!p) return;
+  curId = id;
+  const answered = new Array(p.questions.length).fill(null);
+  $('#readArea').innerHTML = `
+    <div class="reading">
+      <div class="row1" style="display:flex;gap:.35rem;margin-bottom:.5rem;flex-wrap:wrap">
+        <span class="lb">${p.level}</span><span class="lb">${p.type}</span>
+        <span class="lb g">${p.genre === '介護' ? '介護の現場' : '一般'}</span></div>
+      <div class="timer" id="timer"><span class="tm" id="tmNow">0分00秒</span>
+        <span class="tg">目安 ${mmss(goalOf(p))}</span>
+        <button type="button" class="tstop" id="tmStop" title="計測をやめる">計測しない</button></div>
+      <h2 style="font-size:1.1rem;margin-bottom:.5rem">${ruby(p.title)}</h2>
+      ${p.intro ? `<div class="intro">${ruby(p.intro)}</div>` : ''}
+      ${textsHTML(p)}
+      ${tableHTML(p.table)}
+      ${p.notes && p.notes.length ? `<div class="notes"><div class="t">言葉 ／ Kosakata</div><ul>${
+        p.notes.map(n => `<li><span class="w">${esc(n.w)}</span>${n.r ? `<span class="r">（${esc(n.r)}）</span>` : ''} … ${esc(n.id)}</li>`).join('')}</ul></div>` : ''}
+    </div>
+    <div id="qs"></div>
+    <div class="toolbar"><button class="btn" id="backList">← 一覧へもどる ／ Kembali</button></div>`;
+  $('#qs').innerHTML = p.questions.map((q, i) => `
+    <div class="qbox" data-i="${i}">
+      <span class="qno">問題 ${i + 1}</span>${q.qtype ? ` <span class="qno" style="background:#fff7ed;color:#c2410c">${q.qtype}</span>` : ''}
+      <div class="qq">${ruby(q.q)}</div>
+      <div class="chs">${q.choices.map((c, j) =>
+        `<button class="ch" data-j="${j}"><span class="num">${j + 1}</span><span>${ruby(c)}</span></button>`).join('')}</div>
+      <div class="fb"></div>
+    </div>`).join('');
+  $$('#qs .qbox').forEach(box => {
+    const i = +box.dataset.i, q = p.questions[i];
+    box.querySelectorAll('.ch').forEach(btn => btn.onclick = () => {
+      if (answered[i] !== null) return;
+      const j = +btn.dataset.j, right = j === q.answer;
+      answered[i] = right;
+      box.querySelectorAll('.ch').forEach(b => {
+        const bj = +b.dataset.j;
+        if (bj === q.answer) b.classList.add('right');
+        else if (bj === j) b.classList.add('wrong');
+        b.disabled = true;
+      });
+      const fb = box.querySelector('.fb');
+      fb.className = 'fb ' + (right ? 'ok' : 'ng');
+      fb.innerHTML = `<b>${right ? '✓ 正解 ／ Benar' : '✗ 不正解 ／ Salah'}</b>` +
+        (q.explain ? `<br>${ruby(q.explain)}` : '');
+      fb.style.display = 'block';
+      if (answered.every(a => a !== null)) {
+        const ok = answered.filter(Boolean).length;
+        /* res：設問ごとの正誤。sec：かかった時間（設問タイプ別・時間の集計に使う） */
+        const sec = stopTimer();
+        const prev = progress[p.id] || {};
+        progress[p.id] = { done: true, ok, total: answered.length, res: answered.slice(),
+                           sec: sec > 0 ? sec : prev.sec };
+        save(); renderList(); refreshStats();
+        showTimeResult(p, sec);
+      }
+    });
+  });
+  startTimer(p);
+  $('#backList').onclick = () => { stopTimer(); openTab('p-list'); };
+  openTab('p-read');
+}
+
+/* ---------- 時間を計る ---------- */
+let tmId = null, tmStart = 0, tmOn = false;
+function startTimer(p) {
+  stopTimer();
+  tmStart = Date.now(); tmOn = true;
+  const el = $('#tmNow'), box = $('#timer'), goal = goalOf(p);
+  const tick = () => {
+    if (!tmOn || !el) return;
+    const sec = Math.floor((Date.now() - tmStart) / 1000);
+    el.textContent = mmss(sec);
+    box.classList.toggle('over', sec > goal);
+  };
+  tick();
+  tmId = setInterval(tick, 1000);
+  const stop = $('#tmStop');
+  if (stop) stop.onclick = () => { stopTimer(); $('#timer').classList.add('off'); };
+}
+/* 止めて、かかった秒数を返す（計測していなければ0） */
+function stopTimer() {
+  if (tmId) { clearInterval(tmId); tmId = null; }
+  if (!tmOn) return 0;
+  tmOn = false;
+  return Math.floor((Date.now() - tmStart) / 1000);
+}
+function showTimeResult(p, sec) {
+  const box = $('#timer');
+  if (!box || !sec) return;
+  const goal = goalOf(p), over = sec > goal;
+  box.classList.add('done');
+  box.innerHTML = `<span class="tm">${mmss(sec)}</span>
+    <span class="tg">目安 ${mmss(goal)}</span>
+    <span class="tv ${over ? 'ng' : 'ok'}">${over
+      ? '目安より ' + mmss(sec - goal) + ' 多くかかりました'
+      : '目安の中で読めました'}</span>`;
+}
+
+/* ---------- ③ 学習状況 ---------- */
+function refreshStats() {
+  const lvs = ['N5', 'N4', 'N3'];
+  const bar = lv => {
+    const all = DATA.filter(p => p.level === lv);
+    if (!all.length) return '';
+    const done = all.filter(p => isDone(p.id));
+    const ok = done.reduce((s, p) => s + progress[p.id].ok, 0);
+    const tot = done.reduce((s, p) => s + progress[p.id].total, 0);
+    const pct = Math.round(done.length / all.length * 100);
+    return `<div style="margin-bottom:.9rem">
+      <div style="display:flex;justify-content:space-between;font-size:.85rem;font-weight:700">
+        <span>${lv}</span><span>${done.length} / ${all.length} 本（${pct}%）${tot ? ` ・ 正解 ${ok}/${tot}` : ''}</span></div>
+      <div class="bar"><i style="width:${pct}%"></i></div></div>`;
+  };
+  const all = DATA.length, done = DATA.filter(p => isDone(p.id)).length;
+  $('#statWrap').innerHTML =
+    `<p class="hint" style="margin-bottom:.8rem">読んだ文章 <b>${done} / ${all}</b> 本</p>` +
+    lvs.map(bar).join('') + timeBlock() + qtypeBlock();
+  wireQtypeJump();
+}
+
+/* ---------- 読む速さ（目安と比べる） ---------- */
+function timeBlock() {
+  const rows = [];
+  ['短文', '中文', '長文', '情報検索'].forEach(t => {
+    const xs = DATA.filter(p => p.type === t && progress[p.id] && progress[p.id].sec > 0);
+    if (!xs.length) return;
+    const secs = xs.map(p => progress[p.id].sec);
+    const avg = Math.round(secs.reduce((a, b) => a + b, 0) / secs.length);
+    const goal = GOAL[t] || 300;
+    rows.push({ t, avg, goal, n: xs.length, over: xs.filter(p => progress[p.id].sec > goal).length });
+  });
+  if (!rows.length) {
+    return `<div class="qtbox">
+      <h3>読む速さ ／ Kecepatan membaca</h3>
+      <p class="hint">文章を最後まで答えると、<b>かかった時間</b>と本試験の目安との差が出ます。<br>
+      <span style="font-style:italic">Waktu yang Anda perlukan akan ditampilkan di sini.</span></p></div>`;
+  }
+  const slow = rows.filter(r => r.avg > r.goal);
+  return `<div class="qtbox">
+    <h3>読む速さ ／ Kecepatan membaca</h3>
+    <div class="qtlist">${rows.map(r => `
+      <div class="qtrow${r.avg > r.goal ? ' weak' : ''}">
+        <span class="qtname">${esc(r.t)}<em>${r.n}本の平均</em></span>
+        <span class="qtbar"><i style="width:${Math.min(100, Math.round(r.goal / r.avg * 100))}%"></i></span>
+        <span class="qtnum">目安${Math.round(r.goal / 60)}分<b>${mmss(r.avg)}</b></span>
+      </div>`).join('')}</div>
+    <p class="qthint">${slow.length
+      ? '<b>' + slow.map(r => esc(r.t)).join('・') + '</b> が目安より遅めです。'
+        + '先に設問を読んでから本文に入ると速くなります。'
+      : '目安の中で読めています。'}</p>
+  </div>`;
+}
+
+/* ---------- 設問タイプ別の正解率（どこが弱いかを見つける） ---------- */
+const QT_ID = {
+  '内容': 'Isi bacaan', '指示語': 'Kata tunjuk', '理由': 'Alasan',
+  '主張': 'Inti pendapat', '情報検索': 'Cari informasi',
+  '内容一致': 'Sesuai isi', '語句の意味': 'Arti ungkapan'
+};
+function qtypeStats() {
+  const acc = {};
+  DATA.forEach(p => {
+    const pr = progress[p.id];
+    if (!pr || !Array.isArray(pr.res)) return;      /* 古い記録は集計に入れない */
+    p.questions.forEach((q, i) => {
+      const t = q.qtype || 'その他';
+      if (pr.res[i] === undefined || pr.res[i] === null) return;
+      acc[t] = acc[t] || { ok: 0, n: 0 };
+      acc[t].n++;
+      if (pr.res[i]) acc[t].ok++;
+    });
+  });
+  return acc;
+}
+function qtypeBlock() {
+  const acc = qtypeStats();
+  const keys = Object.keys(acc);
+  if (!keys.length) {
+    return `<div class="qtbox">
+      <h3>設問タイプ別の正解率 ／ Ketepatan per jenis soal</h3>
+      <p class="hint">文章を最後まで答えると、ここに<b>どの種類の問題が弱いか</b>が出ます。
+      3〜5本ほど答えると傾向が見えます。<br>
+      <span style="font-style:italic">Jawab sampai selesai, lalu jenis soal yang lemah akan tampil di sini.</span></p>
+    </div>`;
+  }
+  const rows = keys
+    .map(t => ({ t, ...acc[t], pct: Math.round(acc[t].ok / acc[t].n * 100) }))
+    .sort((a, b) => a.pct - b.pct || b.n - a.n);
+  const weak = rows.find(r => r.n >= 3 && r.pct < 70);
+  return `<div class="qtbox">
+    <h3>設問タイプ別の正解率 ／ Ketepatan per jenis soal</h3>
+    <div class="qtlist">${rows.map(r => `
+      <div class="qtrow${weak && r.t === weak.t ? ' weak' : ''}">
+        <span class="qtname">${esc(r.t)}<em>${esc(QT_ID[r.t] || '')}</em></span>
+        <span class="qtbar"><i style="width:${r.pct}%"></i></span>
+        <span class="qtnum">${r.ok}/${r.n}<b>${r.pct}%</b></span>
+      </div>`).join('')}</div>
+    ${weak ? `<p class="qthint">いちばん弱いのは <b>${esc(weak.t)}</b>（${weak.pct}%）です。
+      <button class="btn" id="qtJump" data-t="${esc(weak.t)}">このタイプだけ練習する</button></p>`
+      : `<p class="qthint">どのタイプも70%以上です。このまま続けてください。</p>`}
+  </div>`;
+}
+function wireQtypeJump() {
+  const b = $('#qtJump');
+  if (!b) return;
+  b.onclick = () => {
+    $('#qtSel').value = b.dataset.t;
+    $('#doneSel').value = 'all';
+    $$('#lvChips .chip').forEach(c => c.classList.toggle('on', c.dataset.lv === 'all'));
+    $('#genreSel').value = 'all'; $('#typeSel').value = 'all';
+    renderList(); openTab('p-list');
+  };
+}
+$('#resetBtn').onclick = () => {
+  if (confirm('読解の記録をすべて消しますか？ ／ Hapus semua catatan membaca?')) {
+    progress = {}; save(); renderList(); refreshStats();
+  }
+};
+
+/* ---------- タブ ---------- */
+function openTab(pid, scroll = true) {
+  const t = $(`.tab[data-p="${pid}"]`); if (!t) return;
+  $$('.tab').forEach(x => x.classList.toggle('on', x === t));
+  $$('.panel').forEach(p => p.classList.toggle('on', p.id === pid));
+  if (pid === 'p-stat') ensureAll().then(refreshStats);   /* 全レベルの数を出すので、そろえてから */
+  if (scroll) window.scrollTo({ top: 0 });
+}
+$$('.tab').forEach(t => t.onclick = () => {
+  openTab(t.dataset.p);
+  history.replaceState(null, '', '#' + t.dataset.p.replace('p-', ''));
+});
+function openFromHash() {
+  const h = (location.hash || '').replace('#', '');
+  if (['list', 'read', 'stat'].includes(h)) openTab('p-' + h, false);
+}
+window.addEventListener('hashchange', openFromHash);
+</script>
+</body>
+</html>

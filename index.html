@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- 検索エンジンに載せない（URLを直接開く人は今までどおり使えます） -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="介護の技能実習生向け 日本語学習システムの入口。漢字・言葉、文型、読解、聴解、100日コース、新人コース、N2コース、手書き検索を選べます。">
+<title>Belajar Bahasa Jepang Kaigo ｜ 介護の日本語</title>
+<style>
+:root{
+  --blue:#2563eb; --blue-d:#1d4ed8;
+  --green:#059669; --green-d:#047857;
+  --pur:#7c3aed; --pur-d:#5b21b6;
+  --amb:#c2410c; --amb-d:#9a3412;
+  --tel:#0d9488; --tel-d:#0f766e;
+  --nvy:#2e4a63; --nvy-d:#1d3245;
+  --ora:#c2410c; --ora-d:#9a3412;
+  --ind:#4338ca; --ind-d:#332e91;
+  --red:#dc2626;
+  --bg:#f1f5f9; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
+  --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
+  --sh-l:0 12px 28px -6px rgba(15,23,42,.18);
+  --kfont:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic",system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);-webkit-text-size-adjust:100%;
+  min-height:100dvh;display:flex;flex-direction:column}
+header{background:linear-gradient(135deg,var(--blue-d),var(--green-d));color:#fff;
+  padding:1.4rem 1rem 1.6rem;text-align:center}
+header h1{font-size:1.35rem;font-weight:800;letter-spacing:.01em}
+header .sub{font-size:.82rem;opacity:.92;margin-top:.35rem;line-height:1.5}
+main{flex:1;max-width:760px;width:100%;margin:0 auto;padding:1.4rem 1rem 2rem}
+.lead{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:1.1rem;line-height:1.7}
+.menu{display:grid;gap:1rem}
+@media(min-width:640px){.menu{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.menu{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--card);border:2px solid var(--line);border-radius:20px;
+  padding:1.1rem 1.1rem 1.2rem;box-shadow:var(--sh)}
+.card-k{border-top:6px solid var(--blue)}
+.card-g{border-top:6px solid var(--green)}
+.card-d{border-top:6px solid var(--pur)}
+.card-d .icon{color:var(--pur)}
+.card-d a.item:hover,.card-d a.item:focus{background:#f5f3ff;border-color:var(--pur)}
+.card-d .item .ar{color:var(--pur-d)}
+.card-d .bar i{background:var(--pur)}
+.card-n{border-top:6px solid var(--nvy)}
+.card-n .icon{color:var(--nvy)}
+.card-n a.item:hover,.card-n a.item:focus{background:#eef2f6;border-color:var(--nvy)}
+.card-n .item .ar{color:var(--nvy-d)}
+.card-n .bar i{background:var(--nvy)}
+.card-s{border-top:6px solid var(--ora)}
+.card-s .icon{color:var(--ora)}
+.card-s a.item:hover,.card-s a.item:focus{background:#fff7ed;border-color:var(--ora)}
+.card-s .item .ar{color:var(--ora-d)}
+.card-t{border-top:6px solid var(--tel)}
+.card-t .icon{color:var(--tel)}
+.card-t a.item:hover,.card-t a.item:focus{background:#f0fdfa;border-color:var(--tel)}
+.card-t .item .ar{color:var(--tel-d)}
+.card-c{border-top:6px solid var(--amb)}
+.card-c .icon{color:var(--amb)}
+.card-c a.item:hover,.card-c a.item:focus{background:#fff7ed;border-color:var(--amb)}
+.card-c .item .ar{color:var(--amb-d)}
+.card-c .bar i{background:var(--amb)}
+.card-i{border-top:6px solid var(--ind)}
+.card-i .icon{color:var(--ind)}
+.card-i a.item:hover,.card-i a.item:focus{background:#eef2ff;border-color:var(--ind)}
+.card-i .item .ar{color:var(--ind-d)}
+.card-i .bar i{background:var(--ind)}
+.head{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.15rem}
+.icon{font-family:var(--kfont);font-size:1.75rem;line-height:1.2;letter-spacing:.03em;flex:none;white-space:nowrap}
+.card-k .icon{color:var(--blue)}
+.card-g .icon{color:var(--green)}
+.ttl{font-size:1.08rem;font-weight:800;line-height:1.35}
+.ttl small{display:block;font-size:.76rem;font-weight:600;color:var(--muted);margin-top:.1rem}
+.bar{height:7px;border-radius:999px;background:#e2e8f0;overflow:hidden;margin:.15rem 0 .5rem}
+.bar i{display:block;height:100%;border-radius:999px}
+.card-k .bar i{background:var(--blue)}
+.card-g .bar i{background:var(--green)}
+.pg{font-size:.75rem;color:var(--muted);font-weight:700;margin-bottom:.2rem}
+.desc{font-size:.84rem;color:var(--muted);line-height:1.6;margin:.45rem 0 .8rem}
+/* 中のメニュー（各システムのタブへ直接とぶ） */
+.sub-menu{display:grid;gap:.4rem}
+a.item{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:inherit;
+  border:1.5px solid var(--line);border-radius:12px;padding:.55rem .7rem;background:#fff;
+  transition:background .12s,border-color .12s,transform .12s}
+a.item:hover,a.item:focus{transform:translateX(3px);outline:none}
+.card-k a.item:hover,.card-k a.item:focus{background:#eff6ff;border-color:var(--blue)}
+.card-g a.item:hover,.card-g a.item:focus{background:#ecfdf5;border-color:var(--green)}
+.item .em{font-size:1.15rem;width:1.6rem;text-align:center;flex:none}
+.item .tx{flex:1;min-width:0}
+.item .n{display:block;font-size:.9rem;font-weight:800;line-height:1.3}
+.item .r{display:block;font-size:.72rem;color:var(--muted);line-height:1.35;margin-top:.1rem}
+.item .ar{font-weight:800;flex:none}
+.card-k .item .ar{color:var(--blue-d)}
+.card-g .item .ar{color:var(--green-d)}
+footer{text-align:center;font-size:.72rem;color:var(--muted);padding:1rem;line-height:1.8}
+footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px;
+  padding:.35rem .9rem;font-size:.78rem;font-weight:700;color:var(--ink);cursor:pointer;margin-bottom:.5rem}
+/* ---- 合言葉 ---- */
+#gate{position:fixed;inset:0;z-index:200;background:linear-gradient(135deg,#1d4ed8,#047857);
+  display:flex;align-items:center;justify-content:center;padding:1.2rem}
+#gate .gbox{background:#fff;border-radius:18px;padding:1.8rem 1.5rem;max-width:390px;width:100%;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);text-align:center}
+#gate h2{font-size:1.15rem;margin-bottom:.2rem}
+#gate p{font-size:.8rem;color:var(--muted);margin-bottom:1.1rem;line-height:1.6}
+#gate input{width:100%;padding:.7rem .9rem;border:1.5px solid var(--line);border-radius:10px;
+  font-size:1rem;text-align:center;letter-spacing:.1em}
+#gate input:focus{border-color:var(--blue);outline:none}
+#gate button{width:100%;margin-top:.8rem;padding:.7rem;border:0;border-radius:10px;
+  background:var(--blue);color:#fff;font-size:1rem;font-weight:700;cursor:pointer}
+#gate .err{color:var(--red);font-size:.8rem;min-height:1.2rem;margin-top:.5rem}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gbox">
+    <div style="font-size:2rem">🔒</div>
+    <h2>Kata sandi ／ 合言葉</h2>
+    <p>Masukkan kata sandi untuk masuk.<br>合言葉を入れてください。</p>
+    <input id="gatePw" type="password" inputmode="text" autocomplete="current-password" placeholder="••••••••">
+    <button id="gateBtn">Masuk ／ 入る</button>
+    <div class="err" id="gateErr"></div>
+  </div>
+</div>
+
+<header>
+  <h1>Belajar Bahasa Jepang Kaigo</h1>
+  <div class="sub">介護の現場で働く人のための日本語学習システム<br>
+    Untuk pemagang &amp; pekerja kaigo di Jepang</div>
+</header>
+
+<main>
+  <p class="lead">勉強したいものを選んでください。<br>Pilih yang ingin Anda pelajari.</p>
+
+  <div class="menu">
+
+    <section class="card card-k">
+      <div class="head">
+        <div class="icon">漢字・語彙</div>
+        <div>
+          <div class="ttl">Kanji &amp; Kosakata<small>漢字・言葉（語彙）</small></div>
+        </div>
+      </div>
+      <div class="pg" id="pgK">　</div>
+      <div class="bar"><i id="barK" style="width:0"></i></div>
+      <p class="desc" id="descK">漢字1,066字と言葉6,296語。書き順・カード・JLPT形式の練習問題。</p>
+      <div class="sub-menu">
+        <a class="item" href="kanji.html#list"><span class="em">📖</span>
+          <span class="tx"><span class="n">漢字一覧</span><span class="r">Kanji ／ 読み・意味・部首を見る</span></span><span class="ar">→</span></a>
+        <a class="item" href="kanji.html#vocab"><span class="em">📝</span>
+          <span class="tx"><span class="n">熟語（言葉）</span><span class="r">Kosakata ／ 介護の言葉・分野でしぼる</span></span><span class="ar">→</span></a>
+        <a class="item" href="kanji.html#card"><span class="em">🃏</span>
+          <span class="tx"><span class="n">フラッシュカード</span><span class="r">Kartu ／ めくって覚える</span></span><span class="ar">→</span></a>
+        <a class="item" href="kanji.html#quiz"><span class="em">✏️</span>
+          <span class="tx"><span class="n">練習問題</span><span class="r">Latihan ／ JLPTと同じ5つの形式</span></span><span class="ar">→</span></a>
+        <a class="item" href="kanji.html#stroke"><span class="em">🖌️</span>
+          <span class="tx"><span class="n">書き順</span><span class="r">Urutan coretan ／ 一画ずつ動く</span></span><span class="ar">→</span></a>
+        <a class="item" href="kanji.html#stats"><span class="em">📊</span>
+          <span class="tx"><span class="n">学習状況</span><span class="r">Progres ／ どこまで覚えたか</span></span><span class="ar">→</span></a>
+      </div>
+    </section>
+
+    <section class="card card-g">
+      <div class="head">
+        <div class="icon">文型・文法</div>
+        <div>
+          <div class="ttl">Pola Kalimat<small>文型（文法）</small></div>
+        </div>
+      </div>
+      <div class="pg" id="pgG">　</div>
+      <div class="bar"><i id="barG" style="width:0"></i></div>
+      <p class="desc">「〜てもいいです」など話すときの文の形。457文型・現場の例文つき。</p>
+      <div class="sub-menu">
+        <a class="item" href="bunpo/index.html#list"><span class="em">📘</span>
+          <span class="tx"><span class="n">文型一覧</span><span class="r">Daftar pola ／ 意味・作り方・例文</span></span><span class="ar">→</span></a>
+        <a class="item" href="bunpo/index.html#quiz"><span class="em">✏️</span>
+          <span class="tx"><span class="n">練習問題</span><span class="r">Latihan ／ 文型を選ぶ4択</span></span><span class="ar">→</span></a>
+        <a class="item" href="bunpo/index.html#stat"><span class="em">📊</span>
+          <span class="tx"><span class="n">学習状況</span><span class="r">Progres ／ どこまで覚えたか</span></span><span class="ar">→</span></a>
+      </div>
+    </section>
+
+
+    <section class="card card-d">
+      <div class="head">
+        <div class="icon">読解</div>
+        <div>
+          <div class="ttl">Membaca<small>読解（文章を読む）</small></div>
+        </div>
+      </div>
+      <div class="pg" id="pgD">読んだ文章 0 / 45 本</div>
+      <div class="bar"><i id="barD" style="width:0"></i></div>
+      <p class="desc">お知らせ・シフト表・申し送りなどを読んで答える。45本・98問。</p>
+      <div class="sub-menu">
+        <a class="item" href="dokkai/index.html#list"><span class="em">📄</span>
+          <span class="tx"><span class="n">文章一覧</span><span class="r">Daftar teks ／ レベル・分野・設問で選ぶ</span></span><span class="ar">→</span></a>
+        <a class="item" href="dokkai/index.html#read"><span class="em">🔍</span>
+          <span class="tx"><span class="n">読む・答える</span><span class="r">Baca ／ 読んで4択で答える</span></span><span class="ar">→</span></a>
+        <a class="item" href="dokkai/index.html#stat"><span class="em">📊</span>
+          <span class="tx"><span class="n">学習状況</span><span class="r">Progres ／ どこまで読んだか</span></span><span class="ar">→</span></a>
+      </div>
+    </section>
+
+    <section class="card card-c">
+      <div class="head">
+        <div class="icon">聴解</div>
+        <div>
+          <div class="ttl">Menyimak<small>聴解（聞いて答える）</small></div>
+        </div>
+      </div>
+      <div class="pg" id="pgC">答えた問題 0 / 48 問</div>
+      <div class="bar"><i id="barC" style="width:0"></i></div>
+      <p class="desc">申し送り・声かけ・JLPT形式（課題理解・即時応答など）。48問。音声はこの端末が読み上げます。</p>
+      <div class="sub-menu">
+        <a class="item" href="choukai/index.html#part1"><span class="em">📣</span>
+          <span class="tx"><span class="n">申し送りを聞く</span><span class="r">Serah terima ／ 夜勤からの申し送り</span></span><span class="ar">→</span></a>
+        <a class="item" href="choukai/index.html#part2"><span class="em">🗣️</span>
+          <span class="tx"><span class="n">職員どうしの会話</span><span class="r">Percakapan staf ／ 指示・報告を聞く</span></span><span class="ar">→</span></a>
+        <a class="item" href="choukai/index.html#part3"><span class="em">👵</span>
+          <span class="tx"><span class="n">利用者さんの言葉</span><span class="r">Kata penghuni ／ 訴えを聞いて対応を選ぶ</span></span><span class="ar">→</span></a>
+        <a class="item" href="choukai/index.html#part4"><span class="em">📝</span>
+          <span class="tx"><span class="n">JLPT形式の練習</span><span class="r">Format JLPT ／ 課題理解・即時応答など5形式31問</span></span><span class="ar">→</span></a>
+      </div>
+    </section>
+
+    <section class="card card-n">
+      <div class="head">
+        <div class="icon">100日</div>
+        <div>
+          <div class="ttl">100 Hari<small>N3合格 100日コース</small></div>
+        </div>
+      </div>
+      <div class="pg" id="pgN">週ごとに進む集中コース（第1〜14週・1,226問）</div>
+      <p class="desc">試験日から逆算して、月〜日の毎日やることが決まっています。読解・語彙・文法を1日ずつ。
+        <b>不合格からの再受験</b>や、期限が決まっている人向けです。</p>
+      <div class="sub-menu">
+        <a class="item" href="n3.html"><span class="em">📅</span>
+          <span class="tx"><span class="n">今週の学習</span><span class="r">Minggu ini ／ 曜日ごとに進む</span></span><span class="ar">→</span></a>
+      </div>
+    </section>
+
+    <section class="card card-s">
+      <div class="head">
+        <div class="icon">新人</div>
+        <div>
+          <div class="ttl">Staf Baru<small>新人コース（N4 → 7月のN3）</small></div>
+        </div>
+      </div>
+      <div class="pg" id="pgS">12月に入って、7月のN3に合格するまでの道すじ</div>
+      <p class="desc"><b>N4を持って新しく入った人</b>のための入り口です。
+        12月から7月まで、月ごとにやることが決まっています。
+        今月ひらくものだけを見ればよいので、迷いません。</p>
+      <div class="sub-menu">
+        <a class="item" href="shinjin/"><span class="em">🧭</span>
+          <span class="tx"><span class="n">今月やること</span><span class="r">Bulan ini ／ 7月までの道すじ</span></span><span class="ar">→</span></a>
+        <a class="item" href="shindan/"><span class="em">🎧</span>
+          <span class="tx"><span class="n">診断テストの聴解（職員用）</span><span class="r">Untuk staf ／ 実習生は使いません</span></span><span class="ar">→</span></a>
+      </div>
+    </section>
+
+    <section class="card card-i">
+      <div class="head">
+        <div class="icon">N2</div>
+        <div>
+          <div class="ttl">Menuju N2<small>N2コース（N3合格者の次のステップ）</small></div>
+        </div>
+      </div>
+      <div class="pg" id="pgI">2026年9月〜2027年12月・16か月ロードマップ</div>
+      <p class="desc"><b>N3に合格した人</b>のための入り口です。
+        勤務シフト（公休・早出・日勤・夜勤）に合わせた週間学習リズムと、
+        今の実力を確かめる診断テストがあります。</p>
+      <div class="sub-menu">
+        <a class="item" href="n2/index.html#road"><span class="em">🗺️</span>
+          <span class="tx"><span class="n">ロードマップ</span><span class="r">Roadmap ／ フェーズ・週間リズム・模試計画</span></span><span class="ar">→</span></a>
+        <a class="item" href="n2/index.html#shindan"><span class="em">📝</span>
+          <span class="tx"><span class="n">診断テスト</span><span class="r">Tes diagnostik ／ 文字語彙文法・読解・聴解</span></span><span class="ar">→</span></a>
+      </div>
+    </section>
+
+    <section class="card card-t">
+      <div class="head">
+        <div class="icon">手書き</div>
+        <div>
+          <div class="ttl">Tulis Tangan<small>手書きで漢字をさがす</small></div>
+        </div>
+      </div>
+      <div class="pg">収録 6,412字 ・ 読み方がすぐ出ます</div>
+      <p class="desc">読めない漢字を枠に書くと、候補が出ます。書き順が違っても見つかります。
+        覚えるためではなく、その場で調べるための道具です。</p>
+      <div class="sub-menu">
+        <a class="item" href="tegaki.html"><span class="em">✍️</span>
+          <span class="tx"><span class="n">手書きで調べる</span><span class="r">Tulis dan cari ／ 読み・意味・画数・部首</span></span><span class="ar">→</span></a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <button id="refreshBtn">🔄 最新にする ／ Perbarui</button><br>
+  合言葉は一度入れれば、7つのシステムすべてでそのまま使えます。<br>
+  Kata sandi cukup dimasukkan sekali untuk ketujuh sistem.<br>
+  <span id="ver"></span> ・ © 2026 owlwindkaze　このシステムは施設内の学習用です。
+</footer>
+
+<script>
+const GATEKEY = 'jlpt-kanji-gate-v1';
+const PASS_SHA256 = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
+async function sha256(t) {
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
+  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
+}
+function unlock() { document.getElementById('gate').style.display = 'none'; }
+async function tryUnlock() {
+  const pw = document.getElementById('gatePw').value.trim();
+  const err = document.getElementById('gateErr');
+  if (!pw) { err.textContent = 'Kata sandi kosong ／ 未入力です'; return; }
+  const h = await sha256(pw);
+  /* 保存する値は2つのシステムと同じにする（片方で入れれば両方開く） */
+  if (h === PASS_SHA256) { localStorage.setItem(GATEKEY, h); unlock(); }
+  else { err.textContent = 'Kata sandi salah ／ 合言葉が違います';
+         document.getElementById('gatePw').select(); }
+}
+document.getElementById('gateBtn').onclick = tryUnlock;
+document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock();
+else document.getElementById('gatePw').focus();
+
+/* ---- それぞれの進み具合を出す（記録はこの端末の localStorage にある） ---- */
+const VERSION = '2026-09-14';
+/* 字数・語数は目次から取る。N2を足していくと数が増えるので、
+   ここに書き込んでおくと古い数のままになってしまう。
+   目次が読めなかったときのために、いまの数を控えにしておく。 */
+let KTOTAL = 1066, VTOTAL = 6296;
+const GTOTAL = 457, DTOTAL = 60, CTOTAL = 48;
+Promise.all([
+  fetch('kanji.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => null),
+  fetch('vocab.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => null)
+]).then(([k, v]) => {
+  if (k && k.total) KTOTAL = k.total;
+  if (v && v.total) VTOTAL = v.total;
+  showProgress();
+  const d = document.getElementById('descK');
+  if (d) d.textContent = `漢字${KTOTAL.toLocaleString()}字と言葉${VTOTAL.toLocaleString()}語。書き順・カード・JLPT形式の練習問題。`;
+});
+const nKnown = (key, want) => {
+  try {
+    const o = JSON.parse(localStorage.getItem(key) || '{}');
+    return Object.values(o).filter(v => v === want).length;
+  } catch (e) { return 0; }
+};
+function showProgress() {
+  const k = nKnown('jlpt-kanji-progress-v1', 'known');
+  const v = nKnown('jlpt-kanji-progress-v1-vocab', 'known');
+  const g = nKnown('jlpt-grammar-progress-v1', 'known');
+  let d = 0;
+  try { d = Object.values(JSON.parse(localStorage.getItem('jlpt-dokkai-progress-v1') || '{}'))
+    .filter(v => v && v.done).length; } catch (e) {}
+  document.getElementById('pgK').textContent =
+    `覚えた ${k} / ${KTOTAL}字 ・ ${v.toLocaleString()} / ${VTOTAL.toLocaleString()}語`;
+  document.getElementById('pgG').textContent = `覚えた ${g} / ${GTOTAL}文型`;
+  document.getElementById('barK').style.width =
+    Math.round((k + v) / (KTOTAL + VTOTAL) * 100) + '%';
+  document.getElementById('barG').style.width = Math.round(g / GTOTAL * 100) + '%';
+  document.getElementById('pgD').textContent = `読んだ文章 ${d} / ${DTOTAL} 本`;
+  document.getElementById('barD').style.width = Math.round(d / DTOTAL * 100) + '%';
+  let c = 0, cok = 0;
+  try {
+    const o = JSON.parse(localStorage.getItem('jlpt-choukai-progress-v1') || '{}');
+    Object.keys(o).forEach(k => { if (k !== 'sel' && typeof o[k] === 'boolean') { c++; if (o[k]) cok++; } });
+  } catch (e) {}
+  document.getElementById('pgC').textContent =
+    c ? `答えた ${c} / ${CTOTAL} 問（正解 ${cok}）` : `答えた問題 0 / ${CTOTAL} 問`;
+  document.getElementById('barC').style.width = Math.round(c / CTOTAL * 100) + '%';
+  document.getElementById('ver').textContent = '版 ' + VERSION;
+}
+showProgress();
+
+/* ---- 「最新にする」：キャッシュを消して読み込み直す ---- */
+document.getElementById('refreshBtn').onclick = async () => {
+  try { if (window.caches) for (const n of await caches.keys()) await caches.delete(n); } catch (e) {}
+  location.reload(true);
+};
+</script>
+</body>
+</html>

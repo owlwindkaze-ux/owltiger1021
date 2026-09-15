@@ -1,0 +1,96 @@
+{
+ "name": "JLPT N5–N3 漢字データ",
+ "levels": [
+  "N5",
+  "N4",
+  "N3",
+  "N2",
+  "介護"
+ ],
+ "count": 1066,
+ "sources": [
+  {
+   "name": "KANJIDIC2 / kanji-data",
+   "use": "読み・意味・画数・JLPTレベル",
+   "url": "https://github.com/davidluzgouveia/kanji-data",
+   "license": "CC BY-SA 4.0 (EDRDG)"
+  },
+  {
+   "name": "Kanji alive (University of Chicago)",
+   "use": "用例・部首",
+   "url": "https://github.com/kanjialive/kanji-data-media",
+   "license": "CC BY 4.0"
+  },
+  {
+   "name": "KanjiVG",
+   "use": "書き順（筆画データ）",
+   "url": "https://kanjivg.tagaini.net",
+   "license": "CC BY-SA 3.0"
+  },
+  {
+   "name": "open-anki-jlpt-decks (tanos.co.uk)",
+   "use": "語彙のJLPTレベル判定",
+   "url": "https://github.com/jamsinclair/open-anki-jlpt-decks",
+   "license": "CC BY 4.0"
+  },
+  {
+   "name": "Terjemahan Indonesia (AI)",
+   "use": "インドネシア語訳",
+   "license": "—"
+  }
+ ],
+ "languages": [
+  "ja",
+  "id",
+  "en"
+ ],
+ "files": [
+  {
+   "file": "kanji-n5.json",
+   "level": "N5",
+   "count": 102
+  },
+  {
+   "file": "kanji-n4.json",
+   "level": "N4",
+   "count": 144
+  },
+  {
+   "file": "kanji-n3.json",
+   "level": "N3",
+   "count": 367,
+   "extra": [
+    "N2"
+   ],
+   "extra_count": {
+    "N2": 1
+   }
+  },
+  {
+   "file": "kanji-n2.json",
+   "level": "N2",
+   "count": 320
+  },
+  {
+   "file": "kanji-kaigo.json",
+   "level": "介護",
+   "count": 133,
+   "extra": [
+    "N2"
+   ],
+   "extra_count": {
+    "N2": 46
+   }
+  }
+ ],
+ "total": 1066,
+ "level_totals": {
+  "N5": 102,
+  "N4": 144,
+  "N3": 367,
+  "N2": 367,
+  "介護": 133
+ },
+ "app_version": "2026-09-14b",
+ "note": "レベルごとのファイルに分けてあり、使うレベルから順に読み込みます。 中身を直すときは kanji-data.json を直して tools/split-data.py を走らせてください。"
+}
