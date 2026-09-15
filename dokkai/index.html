@@ -71,6 +71,11 @@ table.info th,table.info td{border:1px solid var(--line);padding:.45rem .55rem;t
 table.info th{background:var(--pur-l);font-weight:800}
 table.info caption{font-weight:800;padding:.4rem;font-size:.95rem}
 .tnote{font-size:.82rem;color:var(--muted);margin-top:.4rem;line-height:1.8}
+.ab{border:1px solid var(--line);border-radius:10px;padding:.6rem .7rem;margin-bottom:.6rem;background:#fff}
+.ab .ablb{display:inline-block;font-weight:800;font-size:.78rem;background:#eff6ff;color:#2563eb;
+  border-radius:6px;padding:.05rem .5rem;margin-bottom:.3rem}
+.ab .abttl{font-weight:800;font-size:.95rem;margin-bottom:.25rem}
+.ab .body{margin:0}
 .notes{margin-top:.8rem;border-top:1px dashed var(--line);padding-top:.6rem}
 .notes .t{font-size:.75rem;font-weight:800;color:var(--muted);margin-bottom:.3rem}
 .notes ul{list-style:none;display:grid;gap:.2rem}
@@ -191,6 +196,7 @@ footer{text-align:center;font-size:.72rem;color:var(--muted);padding:1.2rem;line
       <button class="chip" data-lv="N5">N5</button>
       <button class="chip" data-lv="N4">N4</button>
       <button class="chip" data-lv="N3">N3</button>
+      <button class="chip" data-lv="N2">N2</button>
     </div>
     <select class="sel" id="genreSel">
       <option value="all">分野すべて ／ Semua bidang</option>
@@ -202,6 +208,8 @@ footer{text-align:center;font-size:.72rem;color:var(--muted);padding:1.2rem;line
       <option value="短文">短文 ／ Teks pendek</option>
       <option value="中文">中文 ／ Teks sedang</option>
       <option value="長文">長文 ／ Teks panjang</option>
+      <option value="統合理解">統合理解（読み比べ） ／ Bandingkan dua teks</option>
+      <option value="主張理解">主張理解（長文） ／ Pendapat penulis</option>
       <option value="情報検索">情報検索 ／ Cari informasi</option>
     </select>
     <select class="sel" id="qtSel">
@@ -223,7 +231,7 @@ footer{text-align:center;font-size:.72rem;color:var(--muted);padding:1.2rem;line
   </div>
   <div class="plist" id="plist"><div class="loading">Memuat… 読み込み中…</div></div>
   <p class="hint" style="margin-top:1rem;white-space:normal">
-    文章はすべてこのシステムのために書いた<b>オリジナル</b>です。JLPT本試験と同じ形式（短文・中文・長文・情報検索）に合わせています。<br>
+    文章はすべてこのシステムのために書いた<b>オリジナル</b>です。JLPT本試験と同じ形式（短文・中文・長文・情報検索、N2は統合理解・主張理解）に合わせています。<br>
     Semua teks ditulis khusus untuk sistem ini, mengikuti bentuk ujian JLPT.</p>
 </section>
 
@@ -391,7 +399,7 @@ function renderList() {
         <span class="lb g">${p.genre === '介護' ? '介護の現場' : '一般'}</span>
         ${pr ? `<span class="lb ok">${pr.ok}/${pr.total} 正解</span>` : ''}</div>
       <div class="ttl">${ruby(p.title)}</div>
-      <div class="meta">${p.questions.length}問 ・ ${plain(p.text || '').length + (p.table ? 60 : 0)}字くらい</div>
+      <div class="meta">${p.questions.length}問 ・ ${charCount(p)}字くらい</div>
     </button>`;
   }).join('') : '<div class="loading">この条件の文章はありません。</div>';
   $$('#plist .pcard').forEach(b => b.onclick = () => openPassage(b.dataset.id));
@@ -421,12 +429,31 @@ $('#recExam').onclick = () => setFilters('N3', 'all', 'all', 'all');
 $('#recAll').onclick = () => setFilters('all', 'all', 'all', 'all');
 
 /* ---------- 時間の目安（JLPT本試験の配分から。単位は秒） ---------- */
-const GOAL = { '短文': 180, '中文': 360, '長文': 510, '情報検索': 300 };
+const GOAL = { '短文': 180, '中文': 360, '長文': 510, '情報検索': 300, '統合理解': 420, '主張理解': 600 };
 const goalOf = p => GOAL[p.type] || 300;
 const mmss = sec => {
   const m = Math.floor(sec / 60), s2 = sec % 60;
   return m + '分' + String(s2).padStart(2, '0') + '秒';
 };
+
+/* 統合理解（N2）は、AとBの二つの文章を読み比べる形。
+   texts があればそれを並べて出し、無ければ今までどおり text を1つ出す。 */
+function textsHTML(p) {
+  const cls = p.type === '情報検索' ? '' : 'doc';
+  if (p.texts && p.texts.length) {
+    return p.texts.map(t => `<div class="ab">
+      <div class="ablb">${esc(t.label)}</div>
+      ${t.title ? `<div class="abttl">${ruby(t.title)}</div>` : ''}
+      <div class="body ${cls}">${ruby(t.text)}</div></div>`).join('');
+  }
+  return `<div class="body ${cls}">${p.text ? ruby(p.text) : ''}</div>`;
+}
+/** 一覧に出す字数。統合理解は二つの文章を合わせて数える */
+function charCount(p) {
+  let n = plain(p.text || '').length;
+  (p.texts || []).forEach(t => { n += plain(t.text || '').length; });
+  return n + (p.table ? 60 : 0);
+}
 
 /* ---------- ② 読む ---------- */
 function tableHTML(t) {
@@ -450,7 +477,7 @@ function openPassage(id) {
         <button type="button" class="tstop" id="tmStop" title="計測をやめる">計測しない</button></div>
       <h2 style="font-size:1.1rem;margin-bottom:.5rem">${ruby(p.title)}</h2>
       ${p.intro ? `<div class="intro">${ruby(p.intro)}</div>` : ''}
-      <div class="body ${p.type === '情報検索' ? '' : 'doc'}">${p.text ? ruby(p.text) : ''}</div>
+      ${textsHTML(p)}
       ${tableHTML(p.table)}
       ${p.notes && p.notes.length ? `<div class="notes"><div class="t">言葉 ／ Kosakata</div><ul>${
         p.notes.map(n => `<li><span class="w">${esc(n.w)}</span>${n.r ? `<span class="r">（${esc(n.r)}）</span>` : ''} … ${esc(n.id)}</li>`).join('')}</ul></div>` : ''}

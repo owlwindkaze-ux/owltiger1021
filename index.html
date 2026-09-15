@@ -335,7 +335,7 @@ const VERSION = '2026-09-14';
    ここに書き込んでおくと古い数のままになってしまう。
    目次が読めなかったときのために、いまの数を控えにしておく。 */
 let KTOTAL = 1066, VTOTAL = 6296;
-const GTOTAL = 457, DTOTAL = 45, CTOTAL = 48;
+const GTOTAL = 457, DTOTAL = 50, CTOTAL = 48;
 Promise.all([
   fetch('kanji.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => null),
   fetch('vocab.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => null)
