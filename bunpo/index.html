@@ -401,7 +401,7 @@ const VERSION = '2026-09-04';
 let DATA = [], BYID = {}, LEVELS = [], CATS = [];
 /* レベルごとの読み込み用。IDXFILES=目次、LOADED=読み込みずみのレベル、
    LOADING=読み込み中の約束（同じファイルを二度読まないため）、COUNTS=レベルごとの総数 */
-let IDXFILES = [], LOADED = new Set(), LOADING = {}, COUNTS = {}, INITLV = 'all';
+let IDXFILES = [], LOADED = new Set(), LOADING = {}, COUNTS = {}, INITLV = 'all', TOTAL = 0;
 const LVKEY = 'jlpt-grammar-lastlv';   /* 最後に見ていたレベル */
 let LANG = localStorage.getItem(LANGKEY) || 'id';
 let progress = {};
@@ -443,7 +443,9 @@ function ensureLevel(lv) {
   if (lv === 'all') return ensureAll();
   if (LOADED.has(lv)) return Promise.resolve();
   if (LOADING[lv]) return LOADING[lv];
-  const files = IDXFILES.filter(f => f.level === lv);
+  /* 1つの項目が2つの札を持つことがある（N3のファイルにN2級の89項目が混ざる）。
+     その札を含むファイルも読まないと、絞ったときに出てこない。 */
+  const files = IDXFILES.filter(f => f.level === lv || (f.extra || []).includes(lv));
   /* 作成中のレベルのファイルがまだ無くても、他のレベルは表示できるようにする */
   LOADING[lv] = Promise.all(files.map(f =>
     fetch(f.file, { cache: 'no-cache' }).then(r => r.ok ? r.json() : { grammar: [] })
@@ -521,6 +523,12 @@ async function boot() {
   if (perLevel) {
     LEVELS = [...new Set(IDXFILES.map(f => f.level))].sort((a, b) => lvKey(a) - lvKey(b) || a.localeCompare(b));
     IDXFILES.forEach(f => { COUNTS[f.level] = (COUNTS[f.level] || 0) + (f.count || 0); });
+    /* 札ごとの本当の数（よその札で入ってくる項目も足したもの） */
+    if (json.level_totals) Object.assign(COUNTS, json.level_totals);
+    TOTAL = json.total || IDXFILES.reduce((n, f) => n + (f.count || 0), 0);
+    /* 「よその札」でしか出てこないレベルも、札として出す */
+    IDXFILES.forEach(f => (f.extra || []).forEach(x => { if (!LEVELS.includes(x)) LEVELS.push(x); }));
+    LEVELS.sort((a, b) => lvKey(a) - lvKey(b) || a.localeCompare(b));
     CATS = json.categories || [];
     /* 前に見ていたレベルを覚えておき、そのファイルだけ読む。初めての人は「すべて」 */
     let want = 'all';
@@ -635,12 +643,16 @@ function scoreOne(g, q) {
   return 0;
 }
 
+/* 1つの項目が2つの札を持てる。N3の文型のうち、市販教材でN2として扱われる
+   89項目には also:["N2"] が付いている。どちらで絞っても出るようにする。 */
+const hasLv = (g, lv) => lv === 'all' || g.level === lv || (g.also || []).includes(lv);
+
 function filtered() {
   const q = normQ($('#q').value), lv = curLv(), cat = $('#catSel').value, st = $('#stSel').value;
   return DATA.filter(g => {
     /* 「今週の分だけ」のときは、レベルをまたぐのでレベル絞りは使わない */
     if (wkOn && wkIds) { if (!wkIds.has(g.id)) return false; }
-    else if (lv !== 'all' && g.level !== lv) return false;
+    else if (!hasLv(g, lv)) return false;
     if (cat !== 'all' && g.category !== cat) return false;
     const p = progress[g.id];
     if (st === 'new' && p) return false;
@@ -728,7 +740,7 @@ function buildQuestions() {
   const lv = $('#qLv').value, st = $('#qSt').value;
   const types = $$('#qTypes .chip.on').map(b => b.dataset.t);
   let pooled = DATA.filter(g => {
-    if (lv !== 'all' && g.level !== lv) return false;
+    if (!hasLv(g, lv)) return false;
     const p = progress[g.id];
     if (st === 'new' && p) return false;
     if (st === 'review' && p !== 'review') return false;
@@ -878,11 +890,13 @@ document.addEventListener('keydown', e => {
 /* ========== ③ 学習状況 ========== */
 function refreshStats() {
   /* 分母は目次に書いてある総数を使う。まだ読み込んでいないレベルがあっても正しく出る */
-  const total = LEVELS.reduce((s, lv) => s + (COUNTS[lv] || 0), 0) || DATA.length;
+  /* 1つの項目が2つの札を持つことがあるので、札ごとの数を足すと二重に数えてしまう。
+     全体の数は目次の total を使う。 */
+  const total = TOTAL || DATA.length;
   const known = Object.keys(progress).filter(id => progress[id] === 'known').length;
   $('#hdStat').textContent = `${known} / ${total} hafal ／ 覚えた`;
   $('#progWrap').innerHTML = LEVELS.map(lv => {
-    const all = DATA.filter(g => g.level === lv), k = all.filter(g => progress[g.id] === 'known').length;
+    const all = DATA.filter(g => hasLv(g, lv)), k = all.filter(g => progress[g.id] === 'known').length;
     const n = COUNTS[lv] || all.length;
     const pct = n ? Math.round(k / n * 100) : 0;
     return `<div class="prog"><div class="lv"><span>${lv}</span><span>${k} / ${n}（${pct}%）</span></div>
