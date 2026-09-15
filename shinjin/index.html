@@ -518,9 +518,14 @@ function init(){
   document.getElementById('restBox').style.display = rest.length ? '' : 'none';
 
   /* レベル指定つきのボタンは、押したときに開く側のレベルをそろえてから移る */
-  [].forEach.call(document.querySelectorAll('[data-lvkey]'), function(a){
+  /* 押したときに、開く側のレベルと「どのコースの週か」を書いてから移る。
+     「今週の分だけ」は、この印を見て新人コースの週割りを使う。 */
+  [].forEach.call(document.querySelectorAll('#today a, #rest a'), function(a){
     a.addEventListener('click', function(){
-      try { localStorage.setItem(a.dataset.lvkey, a.dataset.lv); } catch(e) {}
+      try {
+        localStorage.setItem('jlpt-course', 'shinjin');
+        if (a.dataset.lvkey) localStorage.setItem(a.dataset.lvkey, a.dataset.lv);
+      } catch(e) {}
     });
   });
 }
