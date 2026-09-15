@@ -20,11 +20,17 @@
    "level": "N3",
    "count": 17,
    "questions": 52
+  },
+  {
+   "file": "reading-n2.json",
+   "level": "N2",
+   "count": 5,
+   "questions": 18
   }
  ],
- "app_version": "2026-09-14b",
+ "app_version": "2026-09-15c",
  "totals": {
-  "passages": 45,
-  "questions": 98
+  "passages": 50,
+  "questions": 116
  }
 }
