@@ -213,7 +213,7 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
       </div>
       <div class="pg" id="pgC">答えた問題 0 / 48 問</div>
       <div class="bar"><i id="barC" style="width:0"></i></div>
-      <p class="desc">申し送り・声かけ・JLPT形式（課題理解・即時応答など）。48問。音声はこの端末が読み上げます。</p>
+      <p class="desc">申し送り・声かけ・JLPT形式（課題理解・即時応答など）。57問。音声はこの端末が読み上げます。</p>
       <div class="sub-menu">
         <a class="item" href="choukai/index.html#part1"><span class="em">📣</span>
           <span class="tx"><span class="n">申し送りを聞く</span><span class="r">Serah terima ／ 夜勤からの申し送り</span></span><span class="ar">→</span></a>
@@ -335,7 +335,7 @@ const VERSION = '2026-09-14';
    ここに書き込んでおくと古い数のままになってしまう。
    目次が読めなかったときのために、いまの数を控えにしておく。 */
 let KTOTAL = 1066, VTOTAL = 6296;
-const GTOTAL = 457, DTOTAL = 60, CTOTAL = 48;
+const GTOTAL = 457, DTOTAL = 60, CTOTAL = 57;
 Promise.all([
   fetch('kanji.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => null),
   fetch('vocab.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => null)
