@@ -29,12 +29,18 @@
   {
    "file": "grammar-n3.json",
    "level": "N3",
-   "count": 150
+   "count": 150,
+   "extra": [
+    "N2"
+   ],
+   "extra_count": {
+    "N2": 89
+   }
   },
   {
    "file": "grammar-n2.json",
    "level": "N2",
-   "count": 7
+   "count": 25
   },
   {
    "file": "grammar-kiroku.json",
@@ -67,5 +73,13 @@
   "敬語・授受",
   "補助動詞",
   "感情・気持ち"
- ]
+ ],
+ "level_totals": {
+  "N5": 76,
+  "N4": 117,
+  "N3": 150,
+  "N2": 114,
+  "記録": 33
+ },
+ "total": 401
 }
