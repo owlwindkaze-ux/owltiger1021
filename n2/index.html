@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-09-16b';
+  var PAGE_VER = '2026-09-16d';
   var KEY = 'reloaded-for-n2';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -427,7 +427,10 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
     if (c.g) out.push({k:'g', lv:lv, dw:5, t:'文型 '+lv+'　平日 1日'+Math.round(c.g/5)+'項目（週'+c.g+'項目）',
                        n: mi || '例文3つを声に出して読む'});
     (W.task[String(w)] || []).forEach(function(t){
-      var kk = /読解/.test(t) ? 'd' : /聴解/.test(t) ? 'c' : /100日/.test(t) ? 'n' : '';
+      /* 行のあたまで 決める。「模試で解いた文章の二周目」は 読解の行、
+         「区分ごとの点（…読解…）を記録する」は どこへも つながない。 */
+      var kk = /^読解/.test(t) ? 'd' : /^聴解/.test(t) ? 'c'
+             : /模試/.test(t) ? 'm' : /100日/.test(t) ? 'n' : '';
       out.push({k:kk, t:t.replace(/《.+?》/g,''), n:''});
     });
     return out;
@@ -437,7 +440,8 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
     g:{em:'📐', href:'../bunpo/#list',     n:'文型・文法', r:'Tata bahasa',      lv:'N2', lvkey:'jlpt-grammar-lastlv'},
     d:{em:'📖', href:'../dokkai/#list',    n:'読解',       r:'Membaca',          lv:'N2', lvkey:'jlpt-dokkai-lastlv'},
     c:{em:'🎧', href:'../choukai/#part9',  n:'聴解',       r:'Menyimak',         lv:'N2', lvkey:'jlpt-choukai-lastlv'},
-    n:{em:'📅', href:'../n3.html',         n:'100日コース', r:'Kursus 100 hari'}
+    n:{em:'📅', href:'../n3.html',         n:'100日コース', r:'Kursus 100 hari'},
+    m:{em:'📝', href:'../moshi/',          n:'模試（155分）', r:'Simulasi ujian'}
   };
 
   function render(){
