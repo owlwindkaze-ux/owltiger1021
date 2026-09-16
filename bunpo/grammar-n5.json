@@ -54,12 +54,12 @@
      "type": "choice",
      "q": "危ないですから、ゆっくり＿＿＿ください。",
      "choices": [
-      "歩いて",
       "歩きて",
+      "歩いて",
       "歩くて",
       "歩いた"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "歩く → bentuk て = 歩いて。",
      "explain_en": "歩く → te-form is 歩いて."
     },
@@ -115,12 +115,12 @@
      "type": "choice",
      "q": "危ないですから、一人で＿＿＿ください。",
      "choices": [
-      "立たないで",
-      "立ちないで",
       "立たなくて",
+      "立ちないで",
+      "立たないで",
       "立たないと"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "立つ → bentuk ない = 立たない。Lalu + でください。",
      "explain_en": "立つ → nai-form is 立たない, then + でください."
     },
@@ -128,12 +128,12 @@
      "type": "choice",
      "q": "ここに荷物を＿＿＿ください。通れなくなります。",
      "choices": [
-      "置かないで",
+      "置くないで",
       "置きないで",
       "置かなくて",
-      "置くないで"
+      "置かないで"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "置く → 置かない → 置かないでください。",
      "explain_en": "置く → 置かない → 置かないでください."
     },
@@ -202,12 +202,12 @@
      "type": "choice",
      "q": "トイレですね。ご案内＿＿＿か。",
      "choices": [
-      "しましょう",
       "されましょう",
+      "しましょう",
       "しましたら",
       "してましょう"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "します → しましょうか。「ご案内しましょうか」 = mari saya antar.",
      "explain_en": "します → しましょうか. 「ご案内しましょうか」 = shall I show you the way?"
     },
@@ -263,12 +263,12 @@
      "type": "choice",
      "q": "食堂まで一緒に＿＿＿。",
      "choices": [
-      "行きましょう",
-      "行くましょう",
       "行ってましょう",
+      "行くましょう",
+      "行きましょう",
       "行きましょうに"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "行きます → 行きましょう。",
      "explain_en": "行きます → 行きましょう."
     },
@@ -276,12 +276,12 @@
      "type": "choice",
      "q": "手を洗ってから、ご飯を＿＿＿。",
      "choices": [
-      "食べましょう",
+      "食べましたら",
       "食べるましょう",
       "食べてましょう",
-      "食べましたら"
+      "食べましょう"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "食べます → 食べましょう。",
      "explain_en": "食べます → 食べましょう."
     },
@@ -350,12 +350,12 @@
      "type": "choice",
      "q": "（利用者に）「お手洗いに行きたいです」→（職員）「はい、ご案内します。まず靴を＿＿＿もいいですか。」",
      "choices": [
-      "履いて",
       "履きて",
+      "履いて",
       "履くて",
       "履かないで"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "履く → 履いて。「靴を履いてもいいですか」= bolehkah saya pakaikan sepatunya.",
      "explain_en": "履く → 履いて. Asking permission to put the shoes on."
     },
@@ -411,12 +411,12 @@
      "type": "choice",
      "q": "田中さん、今日は何が＿＿＿ですか。",
      "choices": [
-      "食べたい",
-      "食べるたい",
       "食べてたい",
+      "食べるたい",
+      "食べたい",
       "食べただい"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "食べます → hilangkan ます, tambah たい = 食べたい。",
      "explain_en": "食べます → drop ます, add たい = 食べたい."
     },
@@ -424,12 +424,12 @@
      "type": "choice",
      "q": "今日は疲れましたから、お風呂に＿＿＿です。",
      "choices": [
-      "入りたくない",
+      "入りなくたい",
       "入りたいない",
       "入らたくない",
-      "入りなくたい"
+      "入りたくない"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk negatif dari 〜たい adalah 〜たくない (seperti kata sifat い).",
      "explain_en": "The negative of 〜たい is 〜たくない (it conjugates like an い-adjective)."
     },
@@ -498,12 +498,12 @@
      "type": "choice",
      "q": "（記録）「右足が少し＿＿＿います。」",
      "choices": [
-      "腫れて",
       "腫れるて",
+      "腫れて",
       "腫れます",
       "腫れないで"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "腫れる → 腫れて + います = keadaan yang sedang berlangsung.",
      "explain_en": "腫れる → 腫れて + います describes a continuing state."
     },
@@ -560,12 +560,12 @@
      "type": "choice",
      "q": "床が濡れています＿＿＿、気をつけてください。",
      "choices": [
-      "から",
-      "ので は",
       "けど",
+      "ので は",
+      "から",
       "まで"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Alasan + から + tindakan.",
      "explain_en": "Reason + から + action."
     },
@@ -573,12 +573,12 @@
      "type": "choice",
      "q": "＿＿＿から、今日の入浴は中止します。",
      "choices": [
-      "熱があります",
+      "熱ありますが",
       "熱がありました か",
       "熱がある です",
-      "熱ありますが"
+      "熱があります"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk 〜ます bisa langsung diikuti から。",
      "explain_en": "The 〜ます form connects directly to から."
     },
@@ -647,12 +647,12 @@
      "type": "choice",
      "q": "食事＿＿＿前に、手を洗いましょう。",
      "choices": [
-      "の",
       "を",
+      "の",
       "に",
       "で"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Kata benda + の + 前に。",
      "explain_en": "Noun + の + 前に."
     },
@@ -708,12 +708,12 @@
      "type": "choice",
      "q": "手を＿＿＿から、食事の準備をします。",
      "choices": [
-      "洗って",
-      "洗いて",
       "洗うて",
+      "洗いて",
+      "洗って",
       "洗った"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "洗う → bentuk て = 洗って。",
      "explain_en": "洗う → te-form is 洗って."
     },
@@ -721,12 +721,12 @@
      "type": "choice",
      "q": "血圧を測って＿＿＿、お風呂に入ります。",
      "choices": [
-      "から",
+      "ので",
       "まえに",
       "ながら",
-      "ので"
+      "から"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「て + から」 = setelah melakukan A, baru B.",
      "explain_en": "「て + から」 = after doing A, then B."
     },
@@ -795,12 +795,12 @@
      "type": "choice",
      "q": "記録を鉛筆で書いて＿＿＿。",
      "choices": [
-      "はいけません",
       "はいります",
+      "はいけません",
       "もいいです",
       "ください"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「〜てはいけません」= tidak boleh (larangan tegas).",
      "explain_en": "「〜てはいけません」= must not (firm prohibition)."
     },
@@ -856,12 +856,12 @@
      "type": "choice",
      "q": "転倒したときは、すぐに報告し＿＿＿なりません。",
      "choices": [
-      "なければ",
-      "なくても",
       "ないでも",
+      "なくても",
+      "なければ",
       "なくてでも"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "報告する → 報告しない → 報告しなければなりません。",
      "explain_en": "報告する → 報告しない → 報告しなければなりません."
     },
@@ -869,12 +869,12 @@
      "type": "choice",
      "q": "食事の前に、手を＿＿＿なければなりません。",
      "choices": [
-      "洗わ",
+      "洗って",
       "洗い",
       "洗る",
-      "洗って"
+      "洗わ"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "洗う → bentuk ない = 洗わない。「ない」を取って なければ。",
      "explain_en": "洗う → nai-form 洗わない; drop ない and add なければ."
     },
@@ -943,12 +943,12 @@
      "type": "choice",
      "q": "全部＿＿＿なくてもいいです。",
      "choices": [
-      "食べ",
       "食べて",
+      "食べ",
       "食べる",
       "食べます"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "食べる → 食べない →「ない」を取って なくてもいい。",
      "explain_en": "食べる → 食べない; drop ない and add なくてもいい."
     },
@@ -1004,12 +1004,12 @@
      "type": "choice",
      "q": "田中さんは一人で＿＿＿ことができます。",
      "choices": [
-      "立つ",
-      "立ち",
       "立って",
+      "立ち",
+      "立つ",
       "立った"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Sebelum 「ことができます」 pakai bentuk kamus: 立つ。",
      "explain_en": "Use the dictionary form before 「ことができます」: 立つ."
     },
@@ -1017,12 +1017,12 @@
      "type": "choice",
      "q": "今日は自分で歩くことが＿＿＿。",
      "choices": [
-      "できませんでした",
+      "ありませんでした",
       "できないでした",
       "しませんでした",
-      "ありませんでした"
+      "できませんでした"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk lampau negatif: できませんでした。",
      "explain_en": "Past negative: できませんでした."
     },
@@ -1091,12 +1091,12 @@
      "type": "choice",
      "q": "この薬でアレルギーが出た＿＿＿あります。",
      "choices": [
-      "ことが",
       "ものが",
+      "ことが",
       "のが",
       "ときが"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「〜たことがあります」= pernah.",
      "explain_en": "「〜たことがあります」= have done before."
     },
@@ -1152,12 +1152,12 @@
      "type": "choice",
      "q": "入浴＿＿＿あとで、水分を取ってください。",
      "choices": [
-      "した",
-      "する",
       "して",
+      "する",
+      "した",
       "します"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Sebelum 「あとで」 pakai bentuk た: した。",
      "explain_en": "Use the た-form before 「あとで」: した."
     },
@@ -1165,12 +1165,12 @@
      "type": "choice",
      "q": "食事＿＿＿あとで、お薬を飲みましょう。",
      "choices": [
-      "の",
+      "で",
       "を",
       "に",
-      "で"
+      "の"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Kata benda + の + あとで。",
      "explain_en": "Noun + の + あとで."
     },
@@ -1239,12 +1239,12 @@
      "type": "choice",
      "q": "様子を見ながら、ゆっくり＿＿＿。",
      "choices": [
-      "歩きましょう",
       "歩きながら",
+      "歩きましょう",
       "歩いてから",
       "歩くこと"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Kegiatan utama diletakkan di belakang 「ながら」.",
      "explain_en": "The main action goes after 「ながら」."
     },
@@ -1300,12 +1300,12 @@
      "type": "choice",
      "q": "午前中は、歌を＿＿＿、体操をしたりしました。",
      "choices": [
-      "歌ったり",
-      "歌いたり",
       "歌うたり",
+      "歌いたり",
+      "歌ったり",
       "歌ってたり"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "歌う → bentuk た = 歌った → 歌ったり。",
      "explain_en": "歌う → た-form 歌った → 歌ったり."
     },
@@ -1313,12 +1313,12 @@
      "type": "choice",
      "q": "夜、起きたり寝たり＿＿＿。",
      "choices": [
-      "しています",
+      "あります",
       "います",
       "なります",
-      "あります"
+      "しています"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「〜たり〜たり」 diakhiri dengan します／しています。",
      "explain_en": "「〜たり〜たり」 ends with します／しています."
     },
@@ -1388,12 +1388,12 @@
      "type": "choice",
      "q": "今日は少し＿＿＿すぎましたね。",
      "choices": [
-      "食べ",
       "食べる",
+      "食べ",
       "食べて",
       "食べた"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "食べます → hilangkan ます → 食べ + すぎます。",
      "explain_en": "食べます → drop ます → 食べ + すぎます."
     },
@@ -1449,12 +1449,12 @@
      "type": "choice",
      "q": "少し外を＿＿＿ませんか。",
      "choices": [
-      "歩き",
-      "歩く",
       "歩いて",
+      "歩く",
+      "歩き",
       "歩か"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "歩きます → hilangkan ます → 歩き + ませんか。",
      "explain_en": "歩きます → drop ます → 歩き + ませんか."
     },
@@ -1462,12 +1462,12 @@
      "type": "choice",
      "q": "（利用者を誘う）一緒にお茶を＿＿＿。",
      "choices": [
-      "飲みませんか",
+      "飲みました",
       "飲みたいです",
       "飲んでいます",
-      "飲みました"
+      "飲みませんか"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「〜ませんか」= mengajak dengan sopan.",
      "explain_en": "「〜ませんか」 is a polite invitation."
     },
@@ -1536,12 +1536,12 @@
      "type": "choice",
      "q": "夜勤＿＿＿ときは、二時間ごとに見回ります。",
      "choices": [
-      "の",
       "を",
+      "の",
       "が",
       "で"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Kata benda + の + とき。",
      "explain_en": "Noun + の + とき."
     },
@@ -1597,12 +1597,12 @@
      "type": "choice",
      "q": "車いす＿＿＿、歩行器のほうが安全です。",
      "choices": [
-      "より",
-      "から",
       "まで",
+      "から",
+      "より",
       "でも"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Pembandingnya memakai より。",
      "explain_en": "The compared item takes より."
     },
@@ -1610,12 +1610,12 @@
      "type": "choice",
      "q": "朝より午後＿＿＿元気です。",
      "choices": [
-      "のほうが",
+      "よりが",
       "のほうを",
       "からが",
-      "よりが"
+      "のほうが"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Yang lebih memakai 「のほうが」.",
      "explain_en": "The 'more' item takes 「のほうが」."
     },
@@ -1684,12 +1684,12 @@
      "type": "choice",
      "q": "田中さんは＿＿＿昼食を食べました。",
      "choices": [
-      "もう",
       "まだ",
+      "もう",
       "まだも",
       "ずっと"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "'Sudah' = もう。",
      "explain_en": "'Already' = もう."
     },
@@ -1745,12 +1745,12 @@
      "type": "choice",
      "q": "足のむくみが＿＿＿なりました。",
      "choices": [
-      "強く",
-      "強い",
       "強くて",
+      "強い",
+      "強く",
       "強に"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Kata sifat い: い → く + なります。",
      "explain_en": "For い-adjectives: い → く + なります."
     },
@@ -1758,12 +1758,12 @@
      "type": "choice",
      "q": "顔色が＿＿＿なりましたね。",
      "choices": [
-      "よく",
+      "よいに",
       "いい",
       "よくて",
-      "よいに"
+      "よく"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "いい → よく なります (bentuk khusus)。",
      "explain_en": "いい becomes よく before なります (irregular)."
     },
@@ -1832,12 +1832,12 @@
      "type": "choice",
      "q": "声をかけましたが、返事が＿＿＿。",
      "choices": [
-      "ありませんでした",
       "ありました",
+      "ありませんでした",
       "あります",
       "あるでした"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Kalimat lampau negatif: ありませんでした。",
      "explain_en": "Past negative: ありませんでした."
     },
@@ -1893,12 +1893,12 @@
      "type": "choice",
      "q": "無理を＿＿＿、休んでください。",
      "choices": [
-      "しないで",
-      "しなくて",
       "しないと",
+      "しなくて",
+      "しないで",
       "しないから"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「〜ないで」+ kalimat berikutnya = tanpa melakukan itu.",
      "explain_en": "「〜ないで」 + next clause = without doing that."
     },
@@ -1906,12 +1906,12 @@
      "type": "choice",
      "q": "朝食を＿＿＿ないで、薬を飲んでしまいました。",
      "choices": [
-      "食べ",
+      "食べた",
       "食べて",
       "食べる",
-      "食べた"
+      "食べ"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "食べる → 食べない → 食べないで。",
      "explain_en": "食べる → 食べない → 食べないで."
     },
@@ -1980,12 +1980,12 @@
      "type": "choice",
      "q": "甘いものはあまり＿＿＿。",
      "choices": [
-      "好きではありません",
       "好きません",
+      "好きではありません",
       "好きなくないです",
       "好きでないでした"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk negatif 好きです: 好きではありません。",
      "explain_en": "The negative of 好きです is 好きではありません."
     },
@@ -2041,12 +2041,12 @@
      "type": "choice",
      "q": "今日はお粥＿＿＿食べました。",
      "choices": [
-      "だけ",
-      "しか",
       "ばかりで",
+      "しか",
+      "だけ",
       "までを"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「だけ」= hanya (dipakai dengan kalimat positif).",
      "explain_en": "「だけ」= only, used with an affirmative verb."
     },
@@ -2054,12 +2054,12 @@
      "type": "choice",
      "q": "水分は一口＿＿＿でした。",
      "choices": [
-      "だけ",
+      "だけが",
       "だけに",
       "だけを",
-      "だけが"
+      "だけ"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「一口だけでした」= hanya satu teguk.",
      "explain_en": "「一口だけでした」= it was only one sip."
     },
@@ -2128,12 +2128,12 @@
      "type": "choice",
      "q": "利用者様に一枚＿＿＿タオルを配ります。",
      "choices": [
-      "ずつ",
       "だけ",
+      "ずつ",
       "しか",
       "ほどに"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「一枚ずつ」= satu lembar masing-masing.",
      "explain_en": "「一枚ずつ」= one sheet each."
     },
@@ -2189,12 +2189,12 @@
      "type": "choice",
      "q": "お湯の温度＿＿＿どうですか。",
      "choices": [
-      "は",
-      "を",
       "がに",
+      "を",
+      "は",
       "では"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Kata benda + は + どうですか。",
      "explain_en": "Noun + は + どうですか."
     },
@@ -2202,12 +2202,12 @@
      "type": "choice",
      "q": "（勧める）お茶＿＿＿。",
      "choices": [
-      "はどうですか",
+      "がどうですか",
       "をどうですか",
       "はどうしますか",
-      "がどうですか"
+      "はどうですか"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「〜はどうですか」= bagaimana kalau ~.",
      "explain_en": "「〜はどうですか」= how about ~."
     },
@@ -2276,12 +2276,12 @@
      "type": "choice",
      "q": "（とても丁寧に頼む）少しお待ち＿＿＿。",
      "choices": [
-      "くださいませんか",
       "くださいましょうか",
+      "くださいませんか",
       "してください",
       "しませんか"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「〜くださいませんか」 paling sopan.",
      "explain_en": "「〜くださいませんか」 is the most polite form."
     },
@@ -2337,12 +2337,12 @@
      "type": "choice",
      "q": "私＿＿＿介護職員です。",
      "choices": [
-      "は",
-      "を",
       "で",
+      "を",
+      "は",
       "に"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Untuk menyebutkan topik (siapa/apa), pakai 「は」.",
      "explain_en": "Use 「は」 to mark the topic."
     },
@@ -2350,12 +2350,12 @@
      "type": "choice",
      "q": "「は」の読み方が正しいのはどれですか。",
      "choices": [
-      "わ",
+      "ぱ",
       "は",
       "ば",
-      "ぱ"
+      "わ"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Sebagai partikel, 「は」dibaca \"wa\".",
      "explain_en": "As a particle, 「は」is read \"wa\"."
     },
@@ -2424,12 +2424,12 @@
      "type": "choice",
      "q": "記録に書くとき、ふさわしいのはどれですか。",
      "choices": [
-      "ではありません",
       "じゃありません",
+      "ではありません",
       "じゃないよ",
       "ちがうよ"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Untuk catatan resmi, pakai 「ではありません」.",
      "explain_en": "For official records, use 「ではありません」."
     },
@@ -2485,12 +2485,12 @@
      "type": "choice",
      "q": "昨日の夜は静か＿＿＿。",
      "choices": [
-      "でした",
-      "です",
       "くなかった",
+      "です",
+      "でした",
       "じゃありません"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「静か」kata sifat-na, bentuk lampaunya 「静かでした」.",
      "explain_en": "「静か」is a na-adjective; its past is 「静かでした」."
     },
@@ -2498,12 +2498,12 @@
      "type": "choice",
      "q": "「入浴の日ではありません」の過去形はどれですか。",
      "choices": [
-      "入浴の日ではありませんでした",
+      "入浴の日じゃないでした",
       "入浴の日でした",
       "入浴の日ではないでした",
-      "入浴の日じゃないでした"
+      "入浴の日ではありませんでした"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Negatif lampau: 「ではありませんでした」.",
      "explain_en": "Negative past: 「ではありませんでした」."
     },
@@ -2572,12 +2572,12 @@
      "type": "choice",
      "q": "正しい言い方はどれですか。",
      "choices": [
-      "私も行きます",
       "私はも行きます",
+      "私も行きます",
       "私がも行きます",
       "私を行きます"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「も」menggantikan 「は」「が」, tidak dipakai bersama.",
      "explain_en": "「も」replaces 「は」「が」; they are not used together."
     },
@@ -2633,12 +2633,12 @@
      "type": "choice",
      "q": "佐藤さん＿＿＿お部屋は二階です。",
      "choices": [
-      "の",
-      "は",
       "で",
+      "は",
+      "の",
       "に"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Kepemilikan dinyatakan dengan 「の」.",
      "explain_en": "Possession is shown with 「の」."
     },
@@ -2646,12 +2646,12 @@
      "type": "choice",
      "q": "「夜勤＿＿＿田中です」に入る言葉はどれですか。",
      "choices": [
-      "の",
+      "へ",
       "が",
       "を",
-      "へ"
+      "の"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Menyatakan asal/bagian: 「夜勤の田中」.",
      "explain_en": "Shows affiliation: \"Tanaka of the night shift\"."
     },
@@ -2720,12 +2720,12 @@
      "type": "choice",
      "q": "質問の文はどれですか。",
      "choices": [
-      "痛いところがありますか",
       "痛いところがあります",
+      "痛いところがありますか",
       "痛いところですね",
       "痛いところです"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Yang berakhiran 「か」adalah pertanyaan.",
      "explain_en": "The one ending in 「か」is the question."
     },
@@ -2781,12 +2781,12 @@
      "type": "choice",
      "q": "今日はいい天気です＿＿＿。",
      "choices": [
-      "ね",
-      "よ",
       "か",
+      "よ",
+      "ね",
       "を"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Mengajak setuju: 「ね」.",
      "explain_en": "Seeking agreement: 「ね」."
     },
@@ -2794,12 +2794,12 @@
      "type": "choice",
      "q": "相手が知らないことを教えるのはどちらですか。",
      "choices": [
-      "よ",
+      "の",
       "ね",
       "か",
-      "の"
+      "よ"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「よ」dipakai untuk memberi informasi baru.",
      "explain_en": "「よ」gives new information."
     },
@@ -2867,12 +2867,12 @@
      "type": "choice",
      "q": "名詞が付かない形はどれですか。",
      "choices": [
-      "これ",
       "この",
+      "これ",
       "その",
       "あの"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「これ」berdiri sendiri; 「この」butuh kata benda.",
      "explain_en": "「これ」stands alone; 「この」needs a noun."
     },
@@ -2928,12 +2928,12 @@
      "type": "choice",
      "q": "お薬＿＿＿飲みましょう。",
      "choices": [
-      "を",
-      "が",
       "に",
+      "が",
+      "を",
       "へ"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Objek ditandai 「を」.",
      "explain_en": "The object takes 「を」."
     },
@@ -2941,12 +2941,12 @@
      "type": "choice",
      "q": "助詞の「を」の読み方はどれですか。",
      "choices": [
-      "お",
+      "ほ",
       "を",
       "うぉ",
-      "ほ"
+      "お"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Partikel 「を」dibaca \"o\".",
      "explain_en": "The particle 「を」is read \"o\"."
     },
@@ -3015,12 +3015,12 @@
      "type": "choice",
      "q": "「に」を付けないのはどれですか。",
      "choices": [
-      "今日",
       "水曜日",
+      "今日",
       "九時",
       "三月"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「今日」tidak memakai 「に」.",
      "explain_en": "「今日」does not take 「に」."
     },
@@ -3076,12 +3076,12 @@
      "type": "choice",
      "q": "食堂＿＿＿昼ごはんを食べます。",
      "choices": [
-      "で",
-      "に",
       "を",
+      "に",
+      "で",
       "へ"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Tempat aksi: 「で」.",
      "explain_en": "Place of action: 「で」."
     },
@@ -3089,12 +3089,12 @@
      "type": "choice",
      "q": "「浴室＿＿＿タオルがあります」に入るのはどれですか。",
      "choices": [
-      "に",
+      "と",
       "で",
       "を",
-      "と"
+      "に"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Keberadaan benda: 「に」.",
      "explain_en": "Existence takes 「に」."
     },
@@ -3163,12 +3163,12 @@
      "type": "choice",
      "q": "「日本語＿＿＿話します」に入るのはどれですか。",
      "choices": [
-      "で",
       "に",
+      "で",
       "を",
       "へ"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bahasa yang dipakai: 「で」.",
      "explain_en": "The language used takes 「で」."
     },
@@ -3224,12 +3224,12 @@
      "type": "choice",
      "q": "これから浴室＿＿＿行きます。",
      "choices": [
-      "へ",
-      "を",
       "で",
+      "を",
+      "へ",
       "が"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Arah tujuan: 「へ」atau 「に」.",
      "explain_en": "Direction: 「へ」or 「に」."
     },
@@ -3237,12 +3237,12 @@
      "type": "choice",
      "q": "助詞の「へ」の読み方はどれですか。",
      "choices": [
-      "え",
+      "は",
       "へ",
       "ほ",
-      "は"
+      "え"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Partikel 「へ」dibaca \"e\".",
      "explain_en": "The particle 「へ」is read \"e\"."
     },
@@ -3311,12 +3311,12 @@
      "type": "choice",
      "q": "「タオル＿＿＿着替え」に入るのはどれですか。",
      "choices": [
-      "と",
       "を",
+      "と",
       "へ",
       "が"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Mendaftar benda memakai 「と」.",
      "explain_en": "Listing items uses 「と」."
     },
@@ -3372,12 +3372,12 @@
      "type": "choice",
      "q": "夜勤は五時＿＿＿九時までです。",
      "choices": [
-      "から",
-      "まで",
       "に",
+      "まで",
+      "から",
       "で"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Titik mulai: 「から」.",
      "explain_en": "Starting point: 「から」."
     },
@@ -3385,12 +3385,12 @@
      "type": "choice",
      "q": "「二階＿＿＿エレベーターで行きます」に入るのはどれですか。",
      "choices": [
-      "まで",
+      "が",
       "から",
       "を",
-      "が"
+      "まで"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Titik akhir: 「まで」.",
      "explain_en": "End point: 「まで」."
     },
@@ -3459,12 +3459,12 @@
      "type": "choice",
      "q": "全部を並べるときに使うのはどれですか。",
      "choices": [
-      "と",
       "や",
+      "と",
       "など",
       "も"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Menyebut semuanya memakai 「と」.",
      "explain_en": "Use 「と」 to list everything."
     },
@@ -3520,12 +3520,12 @@
      "type": "choice",
      "q": "看護師＿＿＿報告します。",
      "choices": [
-      "に",
-      "を",
       "で",
+      "を",
+      "に",
       "と"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Penerima aksi: 「に」.",
      "explain_en": "The receiver takes 「に」."
     },
@@ -3533,12 +3533,12 @@
      "type": "choice",
      "q": "「ご家族＿＿＿電話をしました」に入るのはどれですか。",
      "choices": [
-      "に",
+      "へ",
       "が",
       "を",
-      "へ"
+      "に"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Kepada siapa: 「に」.",
      "explain_en": "Whom you called: 「に」."
     },
@@ -3607,12 +3607,12 @@
      "type": "choice",
      "q": "お部屋にタオルが＿＿＿。",
      "choices": [
-      "あります",
       "います",
+      "あります",
       "します",
       "きます"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Benda memakai 「あります」.",
      "explain_en": "Objects take 「あります」."
     },
@@ -3668,12 +3668,12 @@
      "type": "choice",
      "q": "お水＿＿＿ください。",
      "choices": [
-      "を",
-      "に",
       "が",
+      "に",
+      "を",
       "で"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Benda yang diminta memakai 「を」.",
      "explain_en": "The requested item takes 「を」."
     },
@@ -3681,12 +3681,12 @@
      "type": "choice",
      "q": "動作をたのむときの形はどれですか。",
      "choices": [
-      "持ってください",
+      "持ちをください",
       "持ちください",
       "持つください",
-      "持ちをください"
+      "持ってください"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Tindakan: bentuk て + ください.",
      "explain_en": "Action: te-form + ください."
     },
@@ -3755,12 +3755,12 @@
      "type": "choice",
      "q": "自分から遠く、相手からも遠い場所はどれですか。",
      "choices": [
-      "あそこ",
       "ここ",
+      "あそこ",
       "そこ",
       "どこ"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Jauh dari keduanya: 「あそこ」.",
      "explain_en": "Far from both: 「あそこ」."
     },
@@ -3816,12 +3816,12 @@
      "type": "choice",
      "q": "お湯は＿＿＿ですか。",
      "choices": [
-      "熱くない",
-      "熱いない",
       "熱くじゃない",
+      "熱いない",
+      "熱くない",
       "熱ない"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「熱い」→ negatif 「熱くない」.",
      "explain_en": "「熱い」→ negative 「熱くない」."
     },
@@ -3829,12 +3829,12 @@
      "type": "choice",
      "q": "「いい」の否定はどれですか。",
      "choices": [
-      "よくないです",
+      "いくありません",
       "いくないです",
       "いいじゃないです",
-      "いくありません"
+      "よくないです"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「いい」tidak beraturan: 「よくない」.",
      "explain_en": "「いい」is irregular: 「よくない」."
     },
@@ -3903,12 +3903,12 @@
      "type": "choice",
      "q": "「上手です」の否定はどれですか。",
      "choices": [
-      "上手じゃないです",
       "上手くないです",
+      "上手じゃないです",
       "上手ないです",
       "上手でないます"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Kata sifat-na: 「〜じゃないです」.",
      "explain_en": "Na-adjectives: 「〜じゃないです」."
     },
@@ -3964,12 +3964,12 @@
      "type": "choice",
      "q": "お茶が＿＿＿、飲めません。",
      "choices": [
-      "熱くて",
-      "熱いで",
       "熱くで",
+      "熱いで",
+      "熱くて",
       "熱いくて"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Kata sifat-i: 「〜くて」.",
      "explain_en": "I-adjectives: 「〜くて」."
     },
@@ -3977,12 +3977,12 @@
      "type": "choice",
      "q": "「元気」をつなぐ形はどれですか。",
      "choices": [
-      "元気で",
+      "元気なで",
       "元気くて",
       "元気にて",
-      "元気なで"
+      "元気で"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Kata sifat-na: 「〜で」.",
      "explain_en": "Na-adjectives: 「〜で」."
     },
@@ -4051,12 +4051,12 @@
      "type": "choice",
      "q": "「元気です」の過去の否定はどれですか。",
      "choices": [
-      "元気じゃなかったです",
       "元気くなかったです",
+      "元気じゃなかったです",
       "元気ないでした",
       "元気じゃないでした"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Kata sifat-na: 「じゃなかったです」.",
      "explain_en": "Na-adjectives: 「じゃなかったです」."
     },
@@ -4112,12 +4112,12 @@
      "type": "choice",
      "q": "これからお薬を＿＿＿。",
      "choices": [
-      "飲みます",
-      "飲むます",
       "飲ます",
+      "飲むます",
+      "飲みます",
       "飲みるます"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「飲む」→ 「飲みます」.",
      "explain_en": "「飲む」→ 「飲みます」."
     },
@@ -4125,12 +4125,12 @@
      "type": "choice",
      "q": "「来る」のます形はどれですか。",
      "choices": [
-      "来ます",
+      "来きます",
       "来るます",
       "来ります",
-      "来きます"
+      "来ます"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「来る」tidak beraturan: 「来ます」.",
      "explain_en": "「来る」is irregular: 「来ます」."
     },
@@ -4199,12 +4199,12 @@
      "type": "choice",
      "q": "「入ります」の過去の否定はどれですか。",
      "choices": [
-      "入りませんでした",
       "入りましたない",
+      "入りませんでした",
       "入らませんでした",
       "入りないでした"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Negatif lampau: 「〜ませんでした」.",
      "explain_en": "Negative past: 「〜ませんでした」."
     },
@@ -4260,12 +4260,12 @@
      "type": "choice",
      "q": "看護師を＿＿＿行きます。",
      "choices": [
-      "呼びに",
-      "呼ぶに",
       "呼んで",
+      "呼ぶに",
+      "呼びに",
       "呼びを"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Bentuk ます tanpa ます + に.",
      "explain_en": "Masu-stem + に."
     },
@@ -4273,12 +4273,12 @@
      "type": "choice",
      "q": "「取ります」を使った正しい形はどれですか。",
      "choices": [
-      "取りに行きます",
+      "取りを行きます",
       "取るに行きます",
       "取ってに行きます",
-      "取りを行きます"
+      "取りに行きます"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「取ります」→「取りに行きます」.",
      "explain_en": "「取ります」→「取りに行きます」."
     },
@@ -4347,12 +4347,12 @@
      "type": "choice",
      "q": "正しい文はどれですか。",
      "choices": [
-      "ひらがなができます",
       "ひらがなをできます",
+      "ひらがなができます",
       "ひらがなにできます",
       "ひらがなでできます"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「できます」juga memakai 「が」.",
      "explain_en": "「できます」also takes 「が」."
     },
@@ -4407,12 +4407,12 @@
      "type": "choice",
      "q": "「飲む」のない形はどれですか。",
      "choices": [
-      "飲まない",
-      "飲みない",
       "飲むない",
+      "飲みない",
+      "飲まない",
       "飲めない"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「飲む」→ 「飲まない」.",
      "explain_en": "「飲む」→ 「飲まない」."
     },
@@ -4420,12 +4420,12 @@
      "type": "choice",
      "q": "「する」のない形はどれですか。",
      "choices": [
-      "しない",
+      "せない",
       "するない",
       "さない",
-      "せない"
+      "しない"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「する」tidak beraturan: 「しない」.",
      "explain_en": "「する」is irregular: 「しない」."
     },
@@ -4494,12 +4494,12 @@
      "type": "choice",
      "q": "人の数え方で正しいのはどれですか。",
      "choices": [
-      "一人（ひとり）",
       "一人（いちにん）",
+      "一人（ひとり）",
       "一枚（ひとり）",
       "一回（ひとり）"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「一人」dibaca \"hitori\".",
      "explain_en": "「一人」is read \"hitori\"."
     },
@@ -4555,12 +4555,12 @@
      "type": "choice",
      "q": "「四時」の読み方はどれですか。",
      "choices": [
-      "よじ",
-      "しじ",
       "よんじ",
+      "しじ",
+      "よじ",
       "よっじ"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「四時」dibaca \"yoji\".",
      "explain_en": "「四時」is read \"yoji\"."
     },
@@ -4568,12 +4568,12 @@
      "type": "choice",
      "q": "「九時」の読み方はどれですか。",
      "choices": [
-      "くじ",
+      "くうじ",
       "きゅうじ",
       "ここのじ",
-      "くうじ"
+      "くじ"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「九時」dibaca \"kuji\".",
      "explain_en": "「九時」is read \"kuji\"."
     },
@@ -4642,12 +4642,12 @@
      "type": "choice",
      "q": "入浴は火曜日＿＿＿金曜日です。",
      "choices": [
-      "と",
       "や",
+      "と",
       "も",
       "に"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Menyebut semuanya: 「と」.",
      "explain_en": "Listing both: 「と」."
     },
@@ -4703,12 +4703,12 @@
      "type": "choice",
      "q": "十一時＿＿＿、トイレに行かれました。",
      "choices": [
-      "ごろ",
-      "ぐらい",
       "まで",
+      "ぐらい",
+      "ごろ",
       "から"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Perkiraan waktu: 「ごろ」.",
      "explain_en": "Approximate clock time: 「ごろ」."
     },
@@ -4716,12 +4716,12 @@
      "type": "choice",
      "q": "お水を百ミリ＿＿＿飲まれました。",
      "choices": [
-      "ぐらい",
+      "ずつ",
       "ごろ",
       "まで",
-      "ずつ"
+      "ぐらい"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Perkiraan jumlah: 「ぐらい」.",
      "explain_en": "Approximate amount: 「ぐらい」."
     },
@@ -4790,12 +4790,12 @@
      "type": "choice",
      "q": "時をきく言葉はどれですか。",
      "choices": [
-      "いつ",
       "どこ",
+      "いつ",
       "だれ",
       "どう"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Menanyakan waktu: 「いつ」.",
      "explain_en": "Asking time: 「いつ」."
     },
@@ -4851,12 +4851,12 @@
      "type": "choice",
      "q": "今日はあまり＿＿＿。",
      "choices": [
-      "食べられませんでした",
-      "食べられました",
       "食べます",
+      "食べられました",
+      "食べられませんでした",
       "食べたいです"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「あまり」selalu dengan negatif.",
      "explain_en": "「あまり」always pairs with a negative."
     },
@@ -4864,12 +4864,12 @@
      "type": "choice",
      "q": "「まったくない」意味の言葉はどれですか。",
      "choices": [
-      "ぜんぜん",
+      "とても",
       "あまり",
       "すこし",
-      "とても"
+      "ぜんぜん"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「ぜんぜん」= sama sekali tidak.",
      "explain_en": "「ぜんぜん」= not at all."
     },
@@ -4938,12 +4938,12 @@
      "type": "choice",
      "q": "「あと少し」の意味の言葉はどれですか。",
      "choices": [
-      "もう少し",
       "とても",
+      "もう少し",
       "あまり",
       "ぜんぜん"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「もう少し」= sedikit lagi.",
      "explain_en": "「もう少し」= a little more."
     },
@@ -4999,12 +4999,12 @@
      "type": "choice",
      "q": "一日の中で、朝が＿＿＿忙しいです。",
      "choices": [
-      "一番",
-      "とても",
       "少し",
+      "とても",
+      "一番",
       "あまり"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Menyatakan paling: 「一番」.",
      "explain_en": "\"The most\" is 「一番」."
     },
@@ -5012,12 +5012,12 @@
      "type": "choice",
      "q": "二つをくらべるときの言い方はどれですか。",
      "choices": [
-      "どちらが",
+      "いつが",
       "どれが",
       "なにが",
-      "いつが"
+      "どちらが"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Dua pilihan: 「どちらが」.",
      "explain_en": "Two options: 「どちらが」."
     },
@@ -5086,12 +5086,12 @@
      "type": "choice",
      "q": "正しい形はどれですか。",
      "choices": [
-      "AとBと、どちらがいいですか",
       "AとBと、どれがいいですか",
+      "AとBと、どちらがいいですか",
       "AもBも、どちらがいいですか",
       "AやBや、どちらがいいですか"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Dua benda dihubungkan 「と」.",
      "explain_en": "Two items are joined by 「と」."
     },
@@ -5147,12 +5147,12 @@
      "type": "choice",
      "q": "朝＿＿＿夜＿＿＿、お薬があります。",
      "choices": [
-      "も／も",
-      "と／と",
       "や／や",
+      "と／と",
+      "も／も",
       "は／は"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "\"Keduanya\": 「も〜も」.",
      "explain_en": "\"Both\": 「も〜も」."
     },
@@ -5160,12 +5160,12 @@
      "type": "choice",
      "q": "「熱も咳もありません」の意味はどれですか。",
      "choices": [
-      "どちらもない",
+      "熱だけある",
       "どちらかがある",
       "両方ある",
-      "熱だけある"
+      "どちらもない"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk negatif berarti tidak keduanya.",
      "explain_en": "The negative means neither."
     },
@@ -5234,12 +5234,12 @@
      "type": "choice",
      "q": "「する」のて形はどれですか。",
      "choices": [
-      "して",
       "しって",
+      "して",
       "すて",
       "するて"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「する」→ 「して」.",
      "explain_en": "「する」→ 「して」."
     },
@@ -5295,12 +5295,12 @@
      "type": "choice",
      "q": "窓が＿＿＿。閉めましょうか。",
      "choices": [
-      "開いています",
-      "開きます",
       "開けます",
+      "開きます",
+      "開いています",
       "開いてください"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Keadaan sekarang: 「開いています」.",
      "explain_en": "Current state: 「開いています」."
     },
@@ -5308,12 +5308,12 @@
      "type": "choice",
      "q": "「電気が消えています」の意味はどれですか。",
      "choices": [
-      "今、消えたままだ",
+      "消えなかった",
       "今から消す",
       "消してほしい",
-      "消えなかった"
+      "今、消えたままだ"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Menyatakan keadaan yang berlangsung.",
      "explain_en": "It describes an ongoing state."
     },
@@ -5382,12 +5382,12 @@
      "type": "choice",
      "q": "いちばん丁寧な言い方はどれですか。",
      "choices": [
-      "確認をお願いします",
       "確認をください",
+      "確認をお願いします",
       "確認して",
       "確認だ"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「お願いします」paling sopan.",
      "explain_en": "「お願いします」is the most polite."
     },
@@ -5443,12 +5443,12 @@
      "type": "choice",
      "q": "＿＿＿、少し待ってください。",
      "choices": [
-      "すみませんが",
-      "ありがとうが",
       "こんにちはが",
+      "ありがとうが",
+      "すみませんが",
       "はいが"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Pembuka permintaan: 「すみませんが」.",
      "explain_en": "Opening a request: 「すみませんが」."
     },
@@ -5456,12 +5456,12 @@
      "type": "choice",
      "q": "「すみませんが」を使う目的はどれですか。",
      "choices": [
-      "やわらかく頼むため",
+      "断るため",
       "あやまるため",
       "ほめるため",
-      "断るため"
+      "やわらかく頼むため"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Untuk memperhalus permintaan.",
      "explain_en": "To soften a request."
     },
@@ -5529,12 +5529,12 @@
      "type": "choice",
      "q": "痛みを聞いたあと、まずすることはどれですか。",
      "choices": [
-      "看護師に報告する",
       "湿布をはる",
+      "看護師に報告する",
       "薬を飲ませる",
       "様子を見ない"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Staf kaigo tidak boleh memberi obat; laporkan.",
      "explain_en": "Care staff must not give medicine; report it."
     },
@@ -5590,12 +5590,12 @@
      "type": "choice",
      "q": "ワヤン＿＿＿言います。",
      "choices": [
-      "と",
-      "を",
       "が",
+      "を",
+      "と",
       "に"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Nama diikuti 「と言います」.",
      "explain_en": "The name is followed by 「と言います」."
     },
@@ -5603,12 +5603,12 @@
      "type": "choice",
      "q": "物の名前をきく言い方はどれですか。",
      "choices": [
-      "これは何と言いますか",
+      "これは何ですね",
       "これは何がありますか",
       "これは何をしますか",
-      "これは何ですね"
+      "これは何と言いますか"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Menanyakan nama benda.",
      "explain_en": "Asking what something is called."
     },

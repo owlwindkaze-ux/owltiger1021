@@ -54,12 +54,12 @@
      "type": "choice",
      "q": "食事が＿＿＿ら、口の中を確認します。",
      "choices": [
-      "終わった",
       "終わる",
+      "終わった",
       "終わって",
       "終わり"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk た + ら = たら。",
      "explain_en": "た-form + ら = たら."
     },
@@ -115,12 +115,12 @@
      "type": "choice",
      "q": "急に＿＿＿と、めまいがします。",
      "choices": [
-      "立つ",
-      "立ち",
       "立って",
+      "立ち",
+      "立つ",
       "立った"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Sebelum 「と」 pakai bentuk kamus: 立つ。",
      "explain_en": "Use the dictionary form before 「と」: 立つ."
     },
@@ -128,12 +128,12 @@
      "type": "choice",
      "q": "水分が足り＿＿＿と、脱水になります。",
      "choices": [
-      "ない",
+      "ません",
       "ないで",
       "なくて",
-      "ません"
+      "ない"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk ない + と juga bisa dipakai.",
      "explain_en": "The ない-form + と is also possible."
     },
@@ -202,12 +202,12 @@
      "type": "choice",
      "q": "痛みが＿＿＿ば、看護師に報告してください。",
      "choices": [
-      "強けれ",
       "強い",
+      "強けれ",
       "強く",
       "強かった"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Kata sifat い: 強い → 強ければ。",
      "explain_en": "い-adjective: 強い → 強ければ."
     },
@@ -263,12 +263,12 @@
      "type": "choice",
      "q": "水分をもっと＿＿＿ほうがいいですよ。",
      "choices": [
-      "取った",
-      "取る",
       "取って",
+      "取る",
+      "取った",
       "取り"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Pakai bentuk た: 取った + ほうがいい。",
      "explain_en": "Use the た-form: 取った + ほうがいい."
     },
@@ -276,12 +276,12 @@
      "type": "choice",
      "q": "今日は無理を＿＿＿ほうがいいですね。",
      "choices": [
-      "しない",
+      "しないで",
       "しなかった",
       "しなくて",
-      "しないで"
+      "しない"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk negatif: 〜ないほうがいい (bukan なかった)。",
      "explain_en": "The negative is 〜ないほうがいい (not なかった)."
     },
@@ -350,12 +350,12 @@
      "type": "choice",
      "q": "少し痛みが＿＿＿かもしれません。",
      "choices": [
-      "ある",
       "あります",
+      "ある",
       "あって",
       "あった です"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "あります → bentuk biasa = ある。",
      "explain_en": "あります → plain form is ある."
     },
@@ -411,12 +411,12 @@
      "type": "choice",
      "q": "少し疲れて＿＿＿と思います。",
      "choices": [
-      "いる",
-      "います",
       "いて",
+      "います",
+      "いる",
       "いた です"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Sebelum と思います pakai bentuk biasa: いる。",
      "explain_en": "Use the plain form before と思います: いる."
     },
@@ -424,12 +424,12 @@
      "type": "choice",
      "q": "この方法のほうが安全＿＿＿と思います。",
      "choices": [
-      "だ",
+      "な",
       "です",
       "である です",
-      "な"
+      "だ"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Kata sifat な / kata benda + だ + と思います。",
      "explain_en": "な-adjectives and nouns take だ before と思います."
     },
@@ -498,12 +498,12 @@
      "type": "choice",
      "q": "ご家族が、明日面会に＿＿＿と言っていました。",
      "choices": [
-      "来る",
       "来ます",
+      "来る",
       "来て",
       "来た です"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "来ます → bentuk biasa = 来る。",
      "explain_en": "来ます → plain form is 来る."
     },
@@ -559,12 +559,12 @@
      "type": "choice",
      "q": "田中さんは＿＿＿そうです。",
      "choices": [
-      "眠",
-      "眠い",
       "眠くて",
+      "眠い",
+      "眠",
       "眠る"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Kata sifat い: hilangkan い → 眠 + そうです。",
      "explain_en": "For い-adjectives, drop the い: 眠 + そうです."
     },
@@ -572,12 +572,12 @@
      "type": "choice",
      "q": "今にも＿＿＿そうでした。",
      "choices": [
-      "転び",
+      "転んだ",
       "転ぶ",
       "転んで",
-      "転んだ"
+      "転び"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "転びます → hilangkan ます → 転び + そう。",
      "explain_en": "転びます → drop ます → 転び + そう."
     },
@@ -646,12 +646,12 @@
      "type": "choice",
      "q": "山田さんは食欲が＿＿＿そうです。",
      "choices": [
-      "ない",
       "なさ",
+      "ない",
       "なく",
       "ありません"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk biasa dari ありません = ない。",
      "explain_en": "The plain form of ありません is ない."
     },
@@ -707,12 +707,12 @@
      "type": "choice",
      "q": "少し熱が＿＿＿ようです。",
      "choices": [
-      "ある",
-      "あり",
       "あって",
+      "あり",
+      "ある",
       "あります"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Bentuk biasa + ようです。",
      "explain_en": "Plain form + ようです."
     },
@@ -720,12 +720,12 @@
      "type": "choice",
      "q": "昨夜はよく＿＿＿ようです。",
      "choices": [
-      "眠れなかった",
+      "眠れないでした",
       "眠れません",
       "眠れなくて",
-      "眠れないでした"
+      "眠れなかった"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk biasa lampau negatif: 眠れなかった。",
      "explain_en": "Plain past negative: 眠れなかった."
     },
@@ -793,12 +793,12 @@
      "type": "choice",
      "q": "利用者様にお茶を出すとき、正しいのはどれですか。",
      "choices": [
-      "お入れしましょうか",
       "入れてあげましょうか",
+      "お入れしましょうか",
       "入れてやりましょうか",
       "入れてあげますね"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Kepada penerima layanan pakai bentuk merendah 「お〜します」.",
      "explain_en": "Use the humble 「お〜します」 with residents."
     },
@@ -854,12 +854,12 @@
      "type": "choice",
      "q": "先輩が、やり方を教えて＿＿＿。",
      "choices": [
-      "くれました",
-      "あげました",
       "もらいました",
+      "あげました",
+      "くれました",
       "いきました"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Orang lain melakukan untuk SAYA = 〜てくれました。",
      "explain_en": "Someone did it for ME = 〜てくれました."
     },
@@ -867,12 +867,12 @@
      "type": "choice",
      "q": "ご家族が、着替えを持ってきて＿＿＿。",
      "choices": [
-      "くれました",
+      "おきました",
       "あげました",
       "させました",
-      "おきました"
+      "くれました"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Pihak lain berbuat baik kepada kita = くれます。",
      "explain_en": "The other party did something for us = くれます."
     },
@@ -941,12 +941,12 @@
      "type": "choice",
      "q": "利用者様に使う丁寧な言い方はどれですか。",
      "choices": [
-      "待っていただきました",
       "待ってもらいました",
+      "待っていただきました",
       "待たせました",
       "待ってあげました"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk sopan dari もらう adalah いただく。",
      "explain_en": "The polite form of もらう is いただく."
     },
@@ -1002,12 +1002,12 @@
      "type": "choice",
      "q": "すみません、少し＿＿＿いただけませんか。",
      "choices": [
-      "手伝って",
-      "手伝いて",
       "手伝うて",
+      "手伝いて",
+      "手伝って",
       "手伝った"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "手伝う → bentuk て = 手伝って。",
      "explain_en": "手伝う → te-form is 手伝って."
     },
@@ -1015,12 +1015,12 @@
      "type": "choice",
      "q": "上司に頼むとき、最も丁寧なのはどれですか。",
      "choices": [
-      "説明していただけませんか",
+      "説明して",
       "説明してください",
       "説明してくれませんか",
-      "説明して"
+      "説明していただけませんか"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "いただけませんか paling sopan.",
      "explain_en": "いただけませんか is the most polite."
     },
@@ -1089,12 +1089,12 @@
      "type": "choice",
      "q": "タオルを準備して＿＿＿ください。",
      "choices": [
-      "おいて",
       "おき",
+      "おいて",
       "おく",
       "おいた"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "おきます → bentuk て = おいて。",
      "explain_en": "おきます → te-form is おいて."
     },
@@ -1150,12 +1150,12 @@
      "type": "choice",
      "q": "ベッドの柵は＿＿＿あります。",
      "choices": [
-      "上げて",
-      "上がって",
       "上げ",
+      "上がって",
+      "上げて",
       "上げる"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Kata kerja transitif (上げる) + てあります。",
      "explain_en": "Transitive verb (上げる) + てあります."
     },
@@ -1163,12 +1163,12 @@
      "type": "choice",
      "q": "誰かが用意した結果が残っているのはどちらですか。",
      "choices": [
-      "用意してあります",
+      "用意しました か",
       "用意しています",
       "用意します",
-      "用意しました か"
+      "用意してあります"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「〜てあります」= hasil perbuatan yang tetap ada.",
      "explain_en": "「〜てあります」= the lasting result of an action."
     },
@@ -1237,12 +1237,12 @@
      "type": "choice",
      "q": "「立ち上がってしまいました」の意味に近いのはどれですか。",
      "choices": [
-      "よくないことが起きた",
       "わざとした",
+      "よくないことが起きた",
       "ゆっくり立った",
       "立つ練習をした"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「〜てしまう」 menunjukkan hal yang tidak diinginkan.",
      "explain_en": "「〜てしまう」 marks an unintended, unwanted event."
     },
@@ -1298,12 +1298,12 @@
      "type": "choice",
      "q": "少し＿＿＿みましょうか。",
      "choices": [
-      "歩いて",
-      "歩き",
       "歩く",
+      "歩き",
+      "歩いて",
       "歩いた"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "歩く → bentuk て = 歩いて + みます。",
      "explain_en": "歩く → te-form 歩いて + みます."
     },
@@ -1311,12 +1311,12 @@
      "type": "choice",
      "q": "一口食べて＿＿＿ください。",
      "choices": [
-      "みて",
+      "みた",
       "み",
       "みる",
-      "みた"
+      "みて"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "みます → bentuk て = みて。",
      "explain_en": "みます → te-form is みて."
     },
@@ -1385,12 +1385,12 @@
      "type": "choice",
      "q": "かたい物は飲み込み＿＿＿ようです。",
      "choices": [
-      "にくい",
       "やすい",
+      "にくい",
       "ないで",
       "ながら"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "'Sulit' = にくい。",
      "explain_en": "'Hard to do' = にくい."
     },
@@ -1446,12 +1446,12 @@
      "type": "choice",
      "q": "転ば＿＿＿ように、手すりを付けました。",
      "choices": [
-      "ない",
-      "なくて",
       "ないで",
+      "なくて",
+      "ない",
       "ず に"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Bentuk ない + ように = supaya tidak.",
      "explain_en": "ない-form + ように = so that ... not."
     },
@@ -1459,12 +1459,12 @@
      "type": "choice",
      "q": "よく＿＿＿ように、電気をつけましょう。",
      "choices": [
-      "見える",
+      "見た",
       "見る",
       "見て",
-      "見た"
+      "見える"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Kata kerja tanpa kehendak (見える) + ように。",
      "explain_en": "Non-volitional verb (見える) + ように."
     },
@@ -1533,12 +1533,12 @@
      "type": "choice",
      "q": "安全＿＿＿ために、二人で介助します。",
      "choices": [
-      "の",
       "を",
+      "の",
       "が",
       "に"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Kata benda + の + ために。",
      "explain_en": "Noun + の + ために."
     },
@@ -1594,12 +1594,12 @@
      "type": "choice",
      "q": "熱が＿＿＿ので、入浴は中止しました。",
      "choices": [
-      "高い",
-      "高いです",
       "高く",
+      "高いです",
+      "高い",
       "高くて"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Bentuk biasa + ので。",
      "explain_en": "Plain form + ので."
     },
@@ -1607,12 +1607,12 @@
      "type": "choice",
      "q": "雨＿＿＿ので、散歩は中止です。",
      "choices": [
-      "な",
+      "が",
       "だ",
       "の",
-      "が"
+      "な"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Kata benda + な + ので。",
      "explain_en": "Noun + な + ので."
     },
@@ -1681,12 +1681,12 @@
      "type": "choice",
      "q": "「〜のに」に一番近い気持ちはどれですか。",
      "choices": [
-      "予想と違って意外だ",
       "理由を説明する",
+      "予想と違って意外だ",
       "順番を表す",
       "方法を表す"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「のに」 mengandung rasa heran/kecewa.",
      "explain_en": "「のに」 carries surprise or disappointment."
     },
@@ -1742,12 +1742,12 @@
      "type": "choice",
      "q": "田中さんが外に＿＿＿たがっています。",
      "choices": [
-      "出",
-      "出る",
       "出て",
+      "出る",
+      "出",
       "出た"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "出ます → hilangkan ます → 出 + たがる。",
      "explain_en": "出ます → drop ます → 出 + たがる."
     },
@@ -1755,12 +1755,12 @@
      "type": "choice",
      "q": "利用者様の希望を記録するとき、正しいのはどれですか。",
      "choices": [
-      "帰りたがっています",
+      "帰るそうです か",
       "帰りたいです",
       "帰りましょう",
-      "帰るそうです か"
+      "帰りたがっています"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Keinginan orang ketiga = たがっています。",
      "explain_en": "A third person's desire = たがっています."
     },
@@ -1829,12 +1829,12 @@
      "type": "choice",
      "q": "「必要ではない」ことを表すのはどれですか。",
      "choices": [
-      "必要はありません",
       "必要があります",
+      "必要はありません",
       "必要でした",
       "必要にします"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk negatifnya: 必要はありません。",
      "explain_en": "The negative is 必要はありません."
     },
@@ -1890,12 +1890,12 @@
      "type": "choice",
      "q": "田中さんは手すりがあれば＿＿＿。",
      "choices": [
-      "歩けます",
-      "歩けれます",
       "歩かれます",
+      "歩けれます",
+      "歩けます",
       "歩きられます"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "歩く (kelompok 1): う段 → え段 = 歩け + ます。",
      "explain_en": "歩く (group 1): change the final vowel to え = 歩け + ます."
     },
@@ -1903,12 +1903,12 @@
      "type": "choice",
      "q": "今日はスプーンで＿＿＿ました。",
      "choices": [
-      "食べられ",
+      "食べえ",
       "食べれられ",
       "食べられれ",
-      "食べえ"
+      "食べられ"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "食べる (kelompok 2): る → られます。",
      "explain_en": "食べる (group 2): る → られます."
     },
@@ -1984,12 +1984,12 @@
      "type": "choice",
      "q": "「山田さんが言われました」の意味として正しいのはどれですか。",
      "choices": [
-      "山田さんがおっしゃった（尊敬）",
       "山田さんが叱られた",
+      "山田さんがおっしゃった（尊敬）",
       "山田さんが言えなかった",
       "山田さんに言わせた"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk られる juga berfungsi sebagai bahasa hormat.",
      "explain_en": "The られる form also functions as honorific language."
     },
@@ -2008,12 +2008,12 @@
      "type": "choice",
      "q": "「ご家族に手紙を読まれました」の意味として正しいのはどれですか。",
      "choices": [
-      "手紙を勝手に見られてしまった",
-      "ご家族が読んでくださった",
       "自分で手紙を読んだ",
+      "ご家族が読んでくださった",
+      "手紙を勝手に見られてしまった",
       "手紙を書いてもらった"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Pola ini bernuansa \"dilakukan tanpa izin\". Untuk maksud sopan, tulis 「ご家族からの手紙を読まれていました」.",
      "explain_en": "This pattern carries an adverse nuance. For the polite meaning, write 「ご家族からの手紙を読まれていました」."
     }
@@ -2058,12 +2058,12 @@
      "type": "choice",
      "q": "新人に記録を＿＿＿ています。",
      "choices": [
-      "書かせ",
+      "書きさせ",
       "書かれ",
       "書けさせ",
-      "書きさせ"
+      "書かせ"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "書く (kelompok 1): あ段 + せます = 書かせます。",
      "explain_en": "書く (group 1): あ-row + せます = 書かせます."
     },
@@ -2132,12 +2132,12 @@
      "type": "choice",
      "q": "血圧を＿＿＿ていただきます。",
      "choices": [
-      "測らせ",
       "測られ",
+      "測らせ",
       "測りさせ",
       "測れさせ"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "測る → bentuk menyuruh = 測らせる → 測らせていただきます。",
      "explain_en": "測る → causative 測らせる → 測らせていただきます."
     },
@@ -2145,12 +2145,12 @@
      "type": "choice",
      "q": "ケアを始める前の声かけとして最も丁寧なのはどれですか。",
      "choices": [
-      "入らせていただきます",
-      "入ります",
       "入りますね",
+      "入ります",
+      "入らせていただきます",
       "入ってもいいです"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「させていただきます」 paling merendah dan sopan.",
      "explain_en": "「させていただきます」 is the most humble and polite."
     },
@@ -2206,12 +2206,12 @@
      "type": "choice",
      "q": "来月、試験を＿＿＿つもりです。",
      "choices": [
-      "受ける",
+      "受けた",
       "受け",
       "受けて",
-      "受けた"
+      "受ける"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Sebelum 「つもり」 pakai bentuk kamus.",
      "explain_en": "Use the dictionary form before 「つもり」."
     },
@@ -2280,12 +2280,12 @@
      "type": "choice",
      "q": "体位を＿＿＿と思います。",
      "choices": [
-      "変えよう",
       "変える",
+      "変えよう",
       "変えて",
       "変えた"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "変える → bentuk kehendak = 変えよう。",
      "explain_en": "変える → volitional form is 変えよう."
     },
@@ -2293,12 +2293,12 @@
      "type": "choice",
      "q": "看護師に＿＿＿と思います。",
      "choices": [
-      "相談しよう",
-      "相談する",
       "相談して",
+      "相談する",
+      "相談しよう",
       "相談した"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "する → しよう。",
      "explain_en": "する → volitional form is しよう."
     },
@@ -2354,12 +2354,12 @@
      "type": "choice",
      "q": "様子を＿＿＿ことにしました。",
      "choices": [
-      "見る",
+      "見た",
       "見",
       "見て",
-      "見た"
+      "見る"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Sebelum 「ことにします」 pakai bentuk kamus.",
      "explain_en": "Use the dictionary form before 「ことにします」."
     },
@@ -2428,12 +2428,12 @@
      "type": "choice",
      "q": "明日、病院を＿＿＿ことになっています。",
      "choices": [
-      "受診する",
       "受診し",
+      "受診する",
       "受診して",
       "受診した"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk kamus + ことになっています。",
      "explain_en": "Dictionary form + ことになっています."
     },
@@ -2441,12 +2441,12 @@
      "type": "choice",
      "q": "施設が決めた予定を伝えるのはどちらですか。",
      "choices": [
-      "ことになっています",
-      "ことにしています",
       "ことができます",
+      "ことにしています",
+      "ことになっています",
       "ことがあります"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「ことになっている」= sudah ditetapkan pihak lain.",
      "explain_en": "「ことになっている」= established by others."
     },
@@ -2502,12 +2502,12 @@
      "type": "choice",
      "q": "二時間ごとに声を＿＿＿ようにします。",
      "choices": [
-      "かける",
+      "かけた",
       "かけ",
       "かけて",
-      "かけた"
+      "かける"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk kamus + ようにします。",
      "explain_en": "Dictionary form + ようにします."
     },
@@ -2576,12 +2576,12 @@
      "type": "choice",
      "q": "一人で＿＿＿ようになりました。",
      "choices": [
-      "歩ける",
       "歩く",
+      "歩ける",
       "歩き",
       "歩いて"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk potensial + ようになりました = menjadi bisa.",
      "explain_en": "Potential form + ようになりました = became able to."
     },
@@ -2589,12 +2589,12 @@
      "type": "choice",
      "q": "リハビリの成果を書くのに合うのはどれですか。",
      "choices": [
-      "立てるようになりました",
-      "立つことにしました",
       "立たれました",
+      "立つことにしました",
+      "立てるようになりました",
       "立たせました"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Perubahan kemampuan = ようになりました。",
      "explain_en": "A change in ability = ようになりました."
     },
@@ -2650,12 +2650,12 @@
      "type": "choice",
      "q": "薬は朝に＿＿＿はずです。",
      "choices": [
-      "飲んだ",
+      "飲み",
       "飲みました",
       "飲んで",
-      "飲み"
+      "飲んだ"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk biasa + はずです。",
      "explain_en": "Plain form + はずです."
     },
@@ -2724,12 +2724,12 @@
      "type": "choice",
      "q": "目を離して＿＿＿あいだに、立ち上がっていました。",
      "choices": [
-      "いる",
       "います",
+      "いる",
       "いた です",
       "おく"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk ている + あいだに。",
      "explain_en": "The ている form + あいだに."
     },
@@ -2737,12 +2737,12 @@
      "type": "choice",
      "q": "入浴＿＿＿あいだに、ベッドを整えます。",
      "choices": [
-      "の",
-      "を",
       "が",
+      "を",
+      "の",
       "に"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Kata benda + の + あいだに。",
      "explain_en": "Noun + の + あいだに."
     },
@@ -2798,12 +2798,12 @@
      "type": "choice",
      "q": "温かい＿＿＿、召し上がってください。",
      "choices": [
-      "うちに",
+      "までに",
       "あいだに",
       "ときに",
-      "までに"
+      "うちに"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「うちに」= selagi keadaan masih begitu.",
      "explain_en": "「うちに」= while the state still holds."
     },
@@ -2872,12 +2872,12 @@
      "type": "choice",
      "q": "九時＿＿＿記録を書いてください。",
      "choices": [
-      "までに",
       "まで",
+      "までに",
       "からに",
       "ごろまで が"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Batas waktu memakai までに。",
      "explain_en": "A deadline uses までに."
     },
@@ -2885,12 +2885,12 @@
      "type": "choice",
      "q": "食事が＿＿＿までに、席の準備をします。",
      "choices": [
-      "始まる",
-      "始まり",
       "始まって",
+      "始まり",
+      "始まる",
       "始まった"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Bentuk kamus + までに。",
      "explain_en": "Dictionary form + までに."
     },
@@ -2946,12 +2946,12 @@
      "type": "choice",
      "q": "熱も＿＿＿し、食欲もないので、受診しました。",
      "choices": [
-      "ある",
+      "あります",
       "あり",
       "あって",
-      "あります"
+      "ある"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk biasa + し。",
      "explain_en": "Plain form + し."
     },
@@ -3020,12 +3020,12 @@
      "type": "choice",
      "q": "薬を＿＿＿かどうか、確認してください。",
      "choices": [
-      "飲んだ",
       "飲みました",
+      "飲んだ",
       "飲んで",
       "飲み"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk biasa + かどうか。",
      "explain_en": "Plain form + かどうか."
     },
@@ -3033,12 +3033,12 @@
      "type": "choice",
      "q": "確認できていないことを報告するのに合うのはどれですか。",
      "choices": [
-      "痛みがあるかどうか分かりません",
-      "痛みがあります",
       "痛みがありました",
+      "痛みがあります",
+      "痛みがあるかどうか分かりません",
       "痛みをがまんしています"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「かどうか分かりません」= belum dipastikan.",
      "explain_en": "「かどうか分かりません」= not yet confirmed."
     },
@@ -3094,12 +3094,12 @@
      "type": "choice",
      "q": "少し元気が＿＿＿みたいです。",
      "choices": [
-      "ない",
+      "ありません",
       "ないです",
       "なくて",
-      "ありません"
+      "ない"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk biasa + みたいです。",
      "explain_en": "Plain form + みたいです."
     },
@@ -3168,12 +3168,12 @@
      "type": "choice",
      "q": "記録の＿＿＿方を教えてください。",
      "choices": [
-      "書き",
       "書く",
+      "書き",
       "書いて",
       "書いた"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "書きます → hilangkan ます → 書き + 方。",
      "explain_en": "書きます → drop ます → 書き + 方."
     },
@@ -3181,12 +3181,12 @@
      "type": "choice",
      "q": "車いすの＿＿＿方に気をつけてください。",
      "choices": [
-      "押し",
-      "押す",
       "押して",
+      "押す",
+      "押し",
       "押した"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "押します → 押し + 方。",
      "explain_en": "押します → 押し + 方."
     },
@@ -3242,12 +3242,12 @@
      "type": "choice",
      "q": "さっき食事が＿＿＿ばかりです。",
      "choices": [
-      "終わった",
+      "終わり",
       "終わる",
       "終わって",
-      "終わり"
+      "終わった"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "'Baru saja' = bentuk た + ばかり。",
      "explain_en": "'Just did' = た-form + ばかり."
     },
@@ -3316,12 +3316,12 @@
      "type": "choice",
      "q": "田中さん＿＿＿、食堂にいらっしゃいますよ。",
      "choices": [
-      "なら",
       "たら",
+      "なら",
       "ば",
       "と"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Kata benda + なら, menanggapi topik lawan bicara.",
      "explain_en": "Noun + なら, responding to the other person's topic."
     },
@@ -3329,12 +3329,12 @@
      "type": "choice",
      "q": "痛みが＿＿＿なら、看護師を呼びます。",
      "choices": [
-      "ある",
-      "あり",
       "あって",
+      "あり",
+      "ある",
       "あります"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Bentuk biasa + なら。",
      "explain_en": "Plain form + なら."
     },
@@ -3390,12 +3390,12 @@
      "type": "choice",
      "q": "食欲が落ちて＿＿＿。",
      "choices": [
-      "きました",
+      "ありました",
       "いきました",
       "おきました",
-      "ありました"
+      "きました"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Perubahan sampai sekarang = てきました。",
      "explain_en": "Change up to now = てきました."
     },
@@ -3464,12 +3464,12 @@
      "type": "choice",
      "q": "面会に来る＿＿＿連絡がありました。",
      "choices": [
-      "という",
       "とゆう",
+      "という",
       "ということ",
       "といって の"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Isi kabar + という + kata benda.",
      "explain_en": "Content + という + noun."
     },
@@ -3477,12 +3477,12 @@
      "type": "choice",
      "q": "痛みが強い＿＿＿訴えがありました。",
      "choices": [
-      "という",
-      "といって",
       "となる",
+      "といって",
+      "という",
       "とある の"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「〜という訴え」= keluhan yang isinya begitu.",
      "explain_en": "「〜という訴え」= a complaint to that effect."
     },
@@ -3538,12 +3538,12 @@
      "type": "choice",
      "q": "一人で立つ＿＿＿難しいです。",
      "choices": [
-      "のが",
+      "ことを が",
       "のを",
       "のに は",
-      "ことを が"
+      "のが"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Kata kerja + の + が, menjadi subjek.",
      "explain_en": "Verb + の + が makes it the subject."
     },
@@ -3612,12 +3612,12 @@
      "type": "choice",
      "q": "十分＿＿＿歩かれました。",
      "choices": [
-      "くらい",
       "ずつ",
+      "くらい",
       "だけに",
       "までに は"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Perkiraan jumlah memakai くらい。",
      "explain_en": "An approximate amount takes くらい."
     },
@@ -3625,12 +3625,12 @@
      "type": "choice",
      "q": "記録として最も望ましいのはどれですか。",
      "choices": [
-      "水分を200ml飲まれました",
-      "水分をたくさん飲まれました",
       "水分をちょっと飲まれました",
+      "水分をたくさん飲まれました",
+      "水分を200ml飲まれました",
       "水分をまあまあ飲まれました"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Catatan sebaiknya memakai angka yang pasti.",
      "explain_en": "Records should use exact figures where possible."
     },
@@ -3686,12 +3686,12 @@
      "type": "choice",
      "q": "＿＿＿痛いところはありますか。",
      "choices": [
-      "どこか",
+      "どこでも が",
       "どこ",
       "どこに は",
-      "どこでも が"
+      "どこか"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「どこか」= di suatu tempat (tidak spesifik).",
      "explain_en": "「どこか」= somewhere (unspecified)."
     },
@@ -3760,12 +3760,12 @@
      "type": "choice",
      "q": "声を＿＿＿も、返事がありません。",
      "choices": [
-      "かけて",
       "かけ",
+      "かけて",
       "かける",
       "かけた"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk て + も = walaupun.",
      "explain_en": "Te-form + も = even if."
     },
@@ -3773,12 +3773,12 @@
      "type": "choice",
      "q": "＿＿＿ても、上着を着たがりません。",
      "choices": [
-      "寒く",
-      "寒い",
       "寒くて",
+      "寒い",
+      "寒く",
       "寒かった"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Kata sifat い: 寒い → 寒くても。",
      "explain_en": "い-adjective: 寒い → 寒くても."
     },
@@ -3834,12 +3834,12 @@
      "type": "choice",
      "q": "残して＿＿＿かまいませんよ。",
      "choices": [
-      "も",
+      "が",
       "は",
       "を",
-      "が"
+      "も"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk て + も + かまいません。",
      "explain_en": "Te-form + も + かまいません."
     },
@@ -3908,12 +3908,12 @@
      "type": "choice",
      "q": "少し＿＿＿らどうですか。",
      "choices": [
-      "休んだ",
       "休む",
+      "休んだ",
       "休んで",
       "休み"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk た + ら + どうですか。",
      "explain_en": "た-form + ら + どうですか."
     },
@@ -3921,12 +3921,12 @@
      "type": "choice",
      "q": "押しつけない助言はどれですか。",
      "choices": [
-      "休んだらどうですか",
-      "休みなさい",
       "休まなければなりません",
+      "休みなさい",
+      "休んだらどうですか",
       "休んではいけません"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「〜たらどうですか」 adalah saran yang lembut.",
      "explain_en": "「〜たらどうですか」 is a soft suggestion."
     },
@@ -3982,12 +3982,12 @@
      "type": "choice",
      "q": "十二時に＿＿＿始めました。",
      "choices": [
-      "食べ",
+      "食べた",
       "食べる",
       "食べて",
-      "食べた"
+      "食べ"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "食べます → hilangkan ます → 食べ + 始めます。",
      "explain_en": "食べます → drop ます → 食べ + 始めます."
     },
@@ -4056,12 +4056,12 @@
      "type": "choice",
      "q": "朝から咳が＿＿＿続けています。",
      "choices": [
-      "出",
       "出る",
+      "出",
       "出て",
       "出た"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "出ます → 出 + 続けます。",
      "explain_en": "出ます → 出 + 続けます."
     },
@@ -4069,12 +4069,12 @@
      "type": "choice",
      "q": "同じことを＿＿＿続けています。",
      "choices": [
-      "言い",
-      "言う",
       "言って",
+      "言う",
+      "言い",
       "言った"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "言います → 言い + 続けます。",
      "explain_en": "言います → 言い + 続けます."
     },
@@ -4130,12 +4130,12 @@
      "type": "choice",
      "q": "転倒した＿＿＿は、すぐに看護師を呼んでください。",
      "choices": [
-      "場合",
+      "うち",
       "ため",
       "ところ",
-      "うち"
+      "場合"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Aturan tertulis memakai 「場合は」.",
      "explain_en": "Written rules use 「場合は」."
     },
@@ -4204,12 +4204,12 @@
      "type": "choice",
      "q": "教わった＿＿＿にやってみます。",
      "choices": [
-      "とおり",
       "ため",
+      "とおり",
       "ところ",
       "うち"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「〜たとおりに」= persis seperti itu.",
      "explain_en": "「〜たとおりに」= exactly like that."
     },
@@ -4217,12 +4217,12 @@
      "type": "choice",
      "q": "医師の指示＿＿＿とおりに、薬を出してください。",
      "choices": [
-      "の",
-      "を",
       "が",
+      "を",
+      "の",
       "に"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Kata benda + の + とおりに。",
      "explain_en": "Noun + の + とおりに."
     },
@@ -4278,12 +4278,12 @@
      "type": "choice",
      "q": "靴を＿＿＿まま、ベッドに寝ていました。",
      "choices": [
-      "履いた",
+      "履き",
       "履く",
       "履いて",
-      "履き"
+      "履いた"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk た + まま = keadaan yang dibiarkan.",
      "explain_en": "た-form + まま = a state left as is."
     },
@@ -4352,12 +4352,12 @@
      "type": "choice",
      "q": "朝食を＿＿＿ずに、薬を飲まれました。",
      "choices": [
-      "取ら",
       "取り",
+      "取ら",
       "取る",
       "取って"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "取る → 取らない →「ない」を取って ずに。",
      "explain_en": "取る → 取らない; drop ない and add ずに."
     },
@@ -4365,12 +4365,12 @@
      "type": "choice",
      "q": "無理を＿＿＿ずに、様子を見ます。",
      "choices": [
-      "せ",
-      "し",
       "する",
+      "し",
+      "せ",
       "しな"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "する → せずに (bentuk khusus)。",
      "explain_en": "する becomes せずに (irregular)."
     },
@@ -4426,12 +4426,12 @@
      "type": "choice",
      "q": "水分を百ミリしか取って＿＿＿。",
      "choices": [
-      "いません",
+      "いるです",
       "います",
       "いました",
-      "いるです"
+      "いません"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「しか」 selalu dengan bentuk negatif.",
      "explain_en": "「しか」 always pairs with a negative."
     },
@@ -4500,12 +4500,12 @@
      "type": "choice",
      "q": "明日には熱が＿＿＿でしょう。",
      "choices": [
-      "下がる",
       "下がり",
+      "下がる",
       "下がって",
       "下がります"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk biasa + でしょう。",
      "explain_en": "Plain form + でしょう."
     },
@@ -4513,12 +4513,12 @@
      "type": "choice",
      "q": "「寒いでしょう」と声をかける気持ちに近いのはどれですか。",
      "choices": [
-      "相手に同意を求めている",
-      "命令している",
       "禁止している",
+      "命令している",
+      "相手に同意を求めている",
       "許可している"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Nada naik = meminta persetujuan.",
      "explain_en": "Rising intonation = seeking agreement."
     },
@@ -4574,12 +4574,12 @@
      "type": "choice",
      "q": "もう少し＿＿＿ほしいそうです。",
      "choices": [
-      "待って",
+      "待った",
       "待ち",
       "待つ",
-      "待った"
+      "待って"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk て + ほしい。",
      "explain_en": "Te-form + ほしい."
     },
@@ -4648,12 +4648,12 @@
      "type": "choice",
      "q": "水分を多めに＿＿＿ように言っていました。",
      "choices": [
-      "取る",
       "取り",
+      "取る",
       "取って",
       "取った"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk kamus + ように言う。",
      "explain_en": "Dictionary form + ように言う."
     },
@@ -4661,12 +4661,12 @@
      "type": "choice",
      "q": "無理を＿＿＿ようにお伝えください。",
      "choices": [
-      "しない",
-      "しなくて",
       "しないで",
+      "しなくて",
+      "しない",
       "しません"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Larangan tidak langsung: ない形 + ように。",
      "explain_en": "Indirect prohibition: ない-form + ように."
     },
@@ -4722,12 +4722,12 @@
      "type": "choice",
      "q": "窓＿＿＿開いています。（自然にそうなっている）",
      "choices": [
-      "が",
+      "で",
       "を",
       "に",
-      "で"
+      "が"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Kata kerja intransitif memakai が。",
      "explain_en": "Intransitive verbs take が."
     },
@@ -4796,12 +4796,12 @@
      "type": "choice",
      "q": "今、記録を＿＿＿ところです。",
      "choices": [
-      "書いている",
       "書く",
+      "書いている",
       "書いた",
       "書き"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "'Sedang' = ている + ところです。",
      "explain_en": "'In the middle of' = ている + ところです."
     },
@@ -4809,12 +4809,12 @@
      "type": "choice",
      "q": "「入浴が終わったところです」の意味はどれですか。",
      "choices": [
-      "たった今終わった",
-      "これから終わる",
       "まだ終わらない",
+      "これから終わる",
+      "たった今終わった",
       "終わる予定がない"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Bentuk た + ところ = baru saja selesai.",
      "explain_en": "た-form + ところ = just finished."
     },
@@ -4870,12 +4870,12 @@
      "type": "choice",
      "q": "部屋から物音＿＿＿聞こえました。",
      "choices": [
-      "が",
+      "で",
       "を",
       "に",
-      "で"
+      "が"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "聞こえます memakai partikel が。",
      "explain_en": "聞こえます takes the particle が."
     },
@@ -4943,12 +4943,12 @@
      "type": "choice",
      "q": "今日は三回＿＿＿転びそうになりました。",
      "choices": [
-      "も",
       "だけ",
+      "も",
       "しか",
       "ずつ"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "数量 + も menekankan jumlah yang banyak.",
      "explain_en": "Number + も emphasizes a large amount."
     },
@@ -4956,12 +4956,12 @@
      "type": "choice",
      "q": "「二時間も座っておられます」に近い気持ちはどれですか。",
      "choices": [
-      "長いと感じている",
-      "短いと感じている",
       "ちょうどいいと思っている",
+      "短いと感じている",
+      "長いと感じている",
       "気にしていない"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「も」 menunjukkan penilaian 'banyak/lama'.",
      "explain_en": "「も」 signals the speaker finds it a lot."
     },
@@ -5017,12 +5017,12 @@
      "type": "choice",
      "q": "血圧や体温＿＿＿を記録します。",
      "choices": [
-      "など",
+      "ずつ",
       "だけ",
       "しか",
-      "ずつ"
+      "など"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「など」= dan lain-lain.",
      "explain_en": "「など」= and so on."
     },
@@ -5091,12 +5091,12 @@
      "type": "choice",
      "q": "お茶＿＿＿いかがですか。",
      "choices": [
-      "でも",
       "だけ",
+      "でも",
       "しか",
       "ばかり"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「でも」 menawarkan satu contoh dengan ringan.",
      "explain_en": "「でも」 lightly offers one example."
     },
@@ -5104,12 +5104,12 @@
      "type": "choice",
      "q": "押しつけない誘い方はどれですか。",
      "choices": [
-      "散歩でもしませんか",
-      "散歩しなさい",
       "散歩しなければなりません",
+      "散歩しなさい",
+      "散歩でもしませんか",
       "散歩してはいけません"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「でも」+「ませんか」 paling lembut.",
      "explain_en": "「でも」+「ませんか」 is the gentlest."
     },
@@ -5165,12 +5165,12 @@
      "type": "choice",
      "q": "利用者様に避難を促すとき、正しいのはどれですか。",
      "choices": [
-      "こちらへ逃げましょう",
+      "来い",
       "逃げろ",
       "早くしろ",
-      "来い"
+      "こちらへ逃げましょう"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Kepada penerima layanan selalu pakai bentuk sopan.",
      "explain_en": "Always use polite forms with residents."
     },
@@ -5239,12 +5239,12 @@
      "type": "choice",
      "q": "次の質問に＿＿＿なさい。",
      "choices": [
-      "答え",
       "答える",
+      "答え",
       "答えて",
       "答えた"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "答えます → 答え + なさい。",
      "explain_en": "答えます → 答え + なさい."
     },
@@ -5252,12 +5252,12 @@
      "type": "choice",
      "q": "利用者様に手洗いを促すとき、正しいのはどれですか。",
      "choices": [
-      "手を洗いましょう",
-      "手を洗いなさい",
       "手を洗え",
+      "手を洗いなさい",
+      "手を洗いましょう",
       "手を洗うな"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「なさい」 tidak dipakai kepada penerima layanan.",
      "explain_en": "「なさい」 is not used with residents."
     },
@@ -5313,12 +5313,12 @@
      "type": "choice",
      "q": "この用紙は、記録を＿＿＿のに使います。",
      "choices": [
-      "書く",
+      "書いた",
       "書き",
       "書いて",
-      "書いた"
+      "書く"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk kamus + のに + 使います。",
      "explain_en": "Dictionary form + のに + 使います."
     },
@@ -5387,12 +5387,12 @@
      "type": "choice",
      "q": "夜間、一度も＿＿＿。",
      "choices": [
-      "起きられませんでした",
       "起きられました",
+      "起きられませんでした",
       "起きます",
       "起きるでした"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「一度も」 selalu dengan bentuk negatif.",
      "explain_en": "「一度も」 always takes a negative."
     },
@@ -5400,12 +5400,12 @@
      "type": "choice",
      "q": "今日は＿＿＿召し上がっていません。",
      "choices": [
-      "何も",
-      "何か",
       "何が",
+      "何か",
+      "何も",
       "何を も"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「何も」+ negatif = tidak ada apa pun.",
      "explain_en": "「何も」+ negative = nothing at all."
     },
@@ -5461,12 +5461,12 @@
      "type": "choice",
      "q": "歩けない＿＿＿痛むそうです。",
      "choices": [
-      "ほど",
+      "ずつ",
       "だけ",
       "しか",
-      "ずつ"
+      "ほど"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「ほど」 menunjukkan tingkat keparahan.",
      "explain_en": "「ほど」 shows the degree."
     },
@@ -5535,12 +5535,12 @@
      "type": "choice",
      "q": "体温を＿＿＿ところ、三十八度五分でした。",
      "choices": [
-      "測った",
       "測る",
+      "測った",
       "測って",
       "測り"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk た + ところ。",
      "explain_en": "た-form + ところ."
     },
@@ -5548,12 +5548,12 @@
      "type": "choice",
      "q": "報告書に書くのに適しているのはどれですか。",
      "choices": [
-      "訪室したところ、床に座っておられました",
-      "訪室したら、床に座ってた",
       "訪室して、床に座ってる",
+      "訪室したら、床に座ってた",
+      "訪室したところ、床に座っておられました",
       "訪室したけど、床にいた"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「〜たところ」 adalah bentuk tulis yang baku.",
      "explain_en": "「〜たところ」 is the standard written form."
     },
@@ -5609,12 +5609,12 @@
      "type": "choice",
      "q": "ベッドの＿＿＿を調整します。",
      "choices": [
-      "高さ",
+      "高くて",
       "高い",
       "高く",
-      "高くて"
+      "高さ"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "高い → hilangkan い → 高 + さ。",
      "explain_en": "高い → drop い → 高 + さ."
     },
@@ -5683,12 +5683,12 @@
      "type": "choice",
      "q": "右肩を＿＿＿がっておられます。",
      "choices": [
-      "痛",
       "痛い",
+      "痛",
       "痛く",
       "痛くて"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "痛い → hilangkan い → 痛 + がる。",
      "explain_en": "痛い → drop い → 痛 + がる."
     },
@@ -5696,12 +5696,12 @@
      "type": "choice",
      "q": "利用者様の様子を書くとき、正しいのはどれですか。",
      "choices": [
-      "寒がっています",
-      "寒いです",
       "寒がります か",
+      "寒いです",
+      "寒がっています",
       "寒くなります"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Perasaan orang lain memakai 〜がる。",
      "explain_en": "Another person's feeling uses 〜がる."
     },
@@ -5757,12 +5757,12 @@
      "type": "choice",
      "q": "今日は横に＿＿＿ばかりいます。",
      "choices": [
-      "なって",
+      "なった",
       "なり",
       "なる",
-      "なった"
+      "なって"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk て + ばかり + います。",
      "explain_en": "Te-form + ばかり + います."
     },
@@ -5831,12 +5831,12 @@
      "type": "choice",
      "q": "明日退院＿＿＿ということです。",
      "choices": [
-      "できる",
       "できます",
+      "できる",
       "できて",
       "できた です"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk biasa + ということです。",
      "explain_en": "Plain form + ということです."
     },
@@ -5844,12 +5844,12 @@
      "type": "choice",
      "q": "公式な報告として硬いのはどちらですか。",
      "choices": [
-      "変更になったということです",
-      "変更になったみたいです",
       "変更になったっぽいです",
+      "変更になったみたいです",
+      "変更になったということです",
       "変更かな"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「ということです」 paling formal.",
      "explain_en": "「ということです」 is the most formal."
     },
@@ -5905,12 +5905,12 @@
      "type": "choice",
      "q": "食べて＿＿＿あいだ、そばにいます。",
      "choices": [
-      "いる",
+      "おく",
       "います",
       "いた",
-      "おく"
+      "いる"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk ている + あいだ。",
      "explain_en": "The ている form + あいだ."
     },
@@ -5979,12 +5979,12 @@
      "type": "choice",
      "q": "記録は当日中に＿＿＿こと。",
      "choices": [
-      "書く",
       "書き",
+      "書く",
       "書いて",
       "書いた"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk kamus + こと (aturan tertulis)。",
      "explain_en": "Dictionary form + こと for written rules."
     },
@@ -5992,12 +5992,12 @@
      "type": "choice",
      "q": "手順書に書く指示として自然なのはどれですか。",
      "choices": [
-      "一人で介助しないこと",
-      "一人で介助しないでね",
       "一人で介助しないだろう",
+      "一人で介助しないでね",
+      "一人で介助しないこと",
       "一人で介助したい"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Manual memakai 「〜ないこと」.",
      "explain_en": "Manuals use 「〜ないこと」."
     },
@@ -6053,12 +6053,12 @@
      "type": "choice",
      "q": "田中さんの食事＿＿＿ご報告します。",
      "choices": [
-      "について",
+      "にたいして",
       "にとって",
       "によって",
-      "にたいして"
+      "について"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Topik laporan memakai について。",
      "explain_en": "The topic of a report takes について."
     },
@@ -6127,12 +6127,12 @@
      "type": "choice",
      "q": "昨夜は＿＿＿らしいです。",
      "choices": [
-      "眠れなかった",
       "眠れません",
+      "眠れなかった",
       "眠れなくて",
       "眠れないでした"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk biasa + らしいです。",
      "explain_en": "Plain form + らしいです."
     },
@@ -6140,12 +6140,12 @@
      "type": "choice",
      "q": "自分で見て判断したことを書くのはどちらですか。",
      "choices": [
-      "痛そうです",
-      "痛いらしいです",
       "痛いということです",
+      "痛いらしいです",
+      "痛そうです",
       "痛いそうです"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Pengamatan sendiri = 「そうです」(様子)。",
      "explain_en": "Your own observation = the 'looks' 「そうです」."
     },
@@ -6201,12 +6201,12 @@
      "type": "choice",
      "q": "ちょっと＿＿＿もらえませんか。",
      "choices": [
-      "手伝って",
+      "手伝った",
       "手伝い",
       "手伝う",
-      "手伝った"
+      "手伝って"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk て + もらえませんか。",
      "explain_en": "Te-form + もらえませんか."
     },
@@ -6275,12 +6275,12 @@
      "type": "choice",
      "q": "少し＿＿＿ください。",
      "choices": [
-      "確認させて",
       "確認されて",
+      "確認させて",
       "確認して もらって",
       "確認しれて"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "確認する → 確認させる → 確認させてください。",
      "explain_en": "確認する → causative 確認させる → 確認させてください."
     },
@@ -6288,12 +6288,12 @@
      "type": "choice",
      "q": "自分がすることの許可を求めるのはどれですか。",
      "choices": [
-      "拭かせてください",
-      "拭いてください",
       "拭かないでください",
+      "拭いてください",
+      "拭かせてください",
       "拭かれてください"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「させてください」= izinkan saya melakukannya.",
      "explain_en": "「させてください」= let me do it."
     },
@@ -6348,12 +6348,12 @@
      "type": "choice",
      "q": "もっと早く＿＿＿ばよかったです。",
      "choices": [
-      "気づけ",
+      "気づいて",
       "気づき",
       "気づく",
-      "気づいて"
+      "気づけ"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "気づく → bentuk ば = 気づけば。",
      "explain_en": "気づく → ba-form is 気づけば."
     },
@@ -6422,12 +6422,12 @@
      "type": "choice",
      "q": "今日は熱が＿＿＿そうもありません。",
      "choices": [
-      "下がり",
       "下がる",
+      "下がり",
       "下がって",
       "下がった"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "下がります → 下がり + そうもありません。",
      "explain_en": "下がります → 下がり + そうもありません."
     },
@@ -6435,12 +6435,12 @@
      "type": "choice",
      "q": "痛みは＿＿＿なさそうです。",
      "choices": [
-      "強く",
-      "強い",
       "強",
+      "強い",
+      "強く",
       "強くて"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "強い → 強く + なさそうです。",
      "explain_en": "強い → 強く + なさそうです."
     },
@@ -6496,12 +6496,12 @@
      "type": "choice",
      "q": "すみません、頭が痛い＿＿＿。",
      "choices": [
-      "んです",
+      "なんです",
       "んます",
       "のます",
-      "なんです"
+      "んです"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Kata sifat-i + 「んです」.",
      "explain_en": "I-adjective + 「んです」."
     },
@@ -6570,12 +6570,12 @@
      "type": "choice",
      "q": "今、お薬を＿＿＿ばかりです。",
      "choices": [
-      "飲んだ",
       "飲む",
+      "飲んだ",
       "飲みます",
       "飲んで"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk た + ばかり.",
      "explain_en": "Ta-form + ばかり."
     },
@@ -6583,12 +6583,12 @@
      "type": "choice",
      "q": "「食べたばかり」のあと、気をつけることはどれですか。",
      "choices": [
-      "すぐに横にならない",
-      "すぐに横になる",
       "すぐに入浴する",
+      "すぐに横になる",
+      "すぐに横にならない",
       "すぐに歩かせない"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Berbaring setelah makan berisiko tersedak.",
      "explain_en": "Lying down right after eating risks choking."
     },
@@ -6644,12 +6644,12 @@
      "type": "choice",
      "q": "明日、ご家族が＿＿＿予定です。",
      "choices": [
-      "来る",
+      "来て",
       "来ます",
       "来た",
-      "来て"
+      "来る"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Sebelum 「予定です」pakai bentuk kamus.",
      "explain_en": "Use the dictionary form before 「予定です」."
     },
@@ -6718,12 +6718,12 @@
      "type": "choice",
      "q": "一人で＿＿＿とされます。",
      "choices": [
-      "立とう",
       "立ち",
+      "立とう",
       "立つ",
       "立って"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk kehendak: 「立とう」.",
      "explain_en": "Volitional form: 「立とう」."
     },
@@ -6731,12 +6731,12 @@
      "type": "choice",
      "q": "「降りる」の意向形はどれですか。",
      "choices": [
-      "降りよう",
-      "降ろう",
       "降りるう",
+      "降ろう",
+      "降りよう",
       "降りお"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Kata kerja kelompok 2: 「降りよう」.",
      "explain_en": "Group 2 verb: 「降りよう」."
     },
@@ -6792,12 +6792,12 @@
      "type": "choice",
      "q": "夜中に＿＿＿ことがあります。",
      "choices": [
-      "起きる",
+      "起きます",
       "起きた",
       "起きて",
-      "起きます"
+      "起きる"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Kejadian yang kadang terjadi: bentuk kamus.",
      "explain_en": "For \"sometimes\", use the dictionary form."
     },
@@ -6866,12 +6866,12 @@
      "type": "choice",
      "q": "二時間＿＿＿体位を変えます。",
      "choices": [
-      "ごとに",
       "おきに",
+      "ごとに",
       "までに",
       "ずつに"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Tiap 2 jam: 「ごとに」.",
      "explain_en": "Every two hours: 「ごとに」."
     },
@@ -6879,12 +6879,12 @@
      "type": "choice",
      "q": "「一日おきに」の意味はどれですか。",
      "choices": [
-      "一日あけて行う",
-      "毎日行う",
       "一日に何回も行う",
+      "毎日行う",
+      "一日あけて行う",
       "一日だけ行う"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「おきに」= dengan selang.",
      "explain_en": "「おきに」= skipping one interval."
     },
@@ -6940,12 +6940,12 @@
      "type": "choice",
      "q": "プリン＿＿＿やわらかい物なら食べられます。",
      "choices": [
-      "のような",
+      "のようだ",
       "のように",
       "のようで",
-      "のようだ"
+      "のような"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Sebelum kata benda: 「のような」.",
      "explain_en": "Before a noun: 「のような」."
     },
@@ -7014,12 +7014,12 @@
      "type": "choice",
      "q": "私＿＿＿代わりに、見守りをお願いします。",
      "choices": [
-      "の",
       "を",
+      "の",
       "に",
       "が"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Kata benda + 「の代わりに」.",
      "explain_en": "Noun + 「の代わりに」."
     },
@@ -7027,12 +7027,12 @@
      "type": "choice",
      "q": "「清拭」を選んだ理由として正しいのはどれですか。",
      "choices": [
-      "入浴の代わりに体をふいた",
-      "入浴の前に体をふいた",
       "入浴のあとに体をふいた",
+      "入浴の前に体をふいた",
+      "入浴の代わりに体をふいた",
       "入浴と一緒にふいた"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「代わりに」= sebagai pengganti.",
      "explain_en": "「代わりに」= as a substitute."
     },
@@ -7088,12 +7088,12 @@
      "type": "choice",
      "q": "佐藤さんは朝食を全部＿＿＿。",
      "choices": [
-      "食べられました",
+      "食べておきました",
       "食べてあげました",
       "食べさせました",
-      "食べておきました"
+      "食べられました"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk hormat: 「食べられました」.",
      "explain_en": "Honorific: 「食べられました」."
     },
@@ -7162,12 +7162,12 @@
      "type": "choice",
      "q": "少々＿＿＿ください。",
      "choices": [
-      "お待ち",
       "待って",
+      "お待ち",
       "お待って",
       "待ちお"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "お + bentuk ます + ください.",
      "explain_en": "お + masu-stem + ください."
     },
@@ -7175,12 +7175,12 @@
      "type": "choice",
      "q": "漢語に付けるときの形はどれですか。",
      "choices": [
-      "ご確認ください",
-      "お確認ください",
       "ご確認してください",
+      "お確認ください",
+      "ご確認ください",
       "お確認してください"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Kata Sino-Jepang memakai 「ご」.",
      "explain_en": "Sino-Japanese words take 「ご」."
     },
@@ -7236,12 +7236,12 @@
      "type": "choice",
      "q": "待って＿＿＿、ありがとうございます。",
      "choices": [
-      "いただいて",
+      "あげて",
       "くださって",
       "もらって",
-      "あげて"
+      "いただいて"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk sopan: 「いただいて」.",
      "explain_en": "The humble form is 「いただいて」."
     },
@@ -7310,12 +7310,12 @@
      "type": "choice",
      "q": "一人で＿＿＿ようにお願いします。",
      "choices": [
-      "立たない",
       "立たなく",
+      "立たない",
       "立つない",
       "立ちない"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Larangan halus: bentuk ない.",
      "explain_en": "A soft prohibition uses the nai-form."
     },
@@ -7323,12 +7323,12 @@
      "type": "choice",
      "q": "お願いをやわらかくする言い方はどれですか。",
      "choices": [
-      "〜ようにお願いします",
-      "〜なさい",
       "〜てはいけません",
+      "〜なさい",
+      "〜ようにお願いします",
       "〜しろ"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「〜ようにお願いします」paling halus.",
      "explain_en": "「〜ようにお願いします」is the softest."
     },
@@ -7384,12 +7384,12 @@
      "type": "choice",
      "q": "どう＿＿＿いいですか。",
      "choices": [
-      "したら",
+      "します",
       "して",
       "する",
-      "します"
+      "したら"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Bentuk た + ら.",
      "explain_en": "Ta-form + ら."
     },
@@ -7458,12 +7458,12 @@
      "type": "choice",
      "q": "少し＿＿＿もらってもいいですか。",
      "choices": [
-      "手伝って",
       "手伝い",
+      "手伝って",
       "手伝う",
       "手伝った"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk て + もらってもいいですか.",
      "explain_en": "Te-form + もらってもいいですか."
     },
@@ -7471,12 +7471,12 @@
      "type": "choice",
      "q": "利用者さんへの依頼で、より丁寧なのはどれですか。",
      "choices": [
-      "〜ていただけますか",
-      "〜てもらってもいい",
       "〜てくれる",
+      "〜てもらってもいい",
+      "〜ていただけますか",
       "〜てね"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「〜ていただけますか」paling sopan.",
      "explain_en": "「〜ていただけますか」is the politest."
     },
@@ -7532,12 +7532,12 @@
      "type": "choice",
      "q": "心配する＿＿＿ありませんよ。",
      "choices": [
-      "ことは",
+      "はずは",
       "ものは",
       "のは",
-      "はずは"
+      "ことは"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "\"Tidak perlu\": 「ことはありません」.",
      "explain_en": "\"No need\": 「ことはありません」."
     },
@@ -7605,12 +7605,12 @@
      "type": "choice",
      "q": "看護師が＿＿＿まで、そばにいてください。",
      "choices": [
-      "来る",
       "来た",
+      "来る",
       "来て",
       "来ます"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Sebelum 「まで」pakai bentuk kamus.",
      "explain_en": "Use the dictionary form before 「まで」."
     },
@@ -7618,12 +7618,12 @@
      "type": "choice",
      "q": "「五時までに終わらせます」の意味はどれですか。",
      "choices": [
-      "五時が期限だ",
-      "五時までずっと続ける",
       "五時から始める",
+      "五時までずっと続ける",
+      "五時が期限だ",
       "五時に終わる"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「までに」= batas waktu.",
      "explain_en": "「までに」= a deadline."
     },
@@ -7679,12 +7679,12 @@
      "type": "choice",
      "q": "褥瘡＿＿＿何ですか。",
      "choices": [
-      "って",
+      "へは",
       "では",
       "にも",
-      "へは"
+      "って"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Menanyakan arti kata: 「〜って何ですか」.",
      "explain_en": "Asking a word's meaning: 「〜って何ですか」."
     },
@@ -7753,12 +7753,12 @@
      "type": "choice",
      "q": "お加減はいかが＿＿＿。",
      "choices": [
-      "でしょうか",
       "ですか",
+      "でしょうか",
       "ますか",
       "でしたか"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk paling halus: 「でしょうか」.",
      "explain_en": "The softest form: 「でしょうか」."
     },
@@ -7766,12 +7766,12 @@
      "type": "choice",
      "q": "ご家族への連絡でふさわしいのはどれですか。",
      "choices": [
-      "よろしいでしょうか",
-      "いい？",
       "いいですか？",
+      "いい？",
+      "よろしいでしょうか",
       "いいだろう"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Kepada keluarga pakai bahasa sopan.",
      "explain_en": "Use polite language with families."
     },
@@ -7827,12 +7827,12 @@
      "type": "choice",
      "q": "試験を受けたい＿＿＿思っています。",
      "choices": [
-      "と",
+      "に",
       "を",
       "が",
-      "に"
+      "と"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Isi pikiran ditandai 「と」.",
      "explain_en": "The thought is marked by 「と」."
     },
@@ -7901,12 +7901,12 @@
      "type": "choice",
      "q": "顔色が悪い＿＿＿見えました。",
      "choices": [
-      "ように",
       "そうに",
+      "ように",
       "みたいに",
       "のように"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Kata sifat + 「ように見えます」.",
      "explain_en": "Adjective + 「ように見えます」."
     },
@@ -7914,12 +7914,12 @@
      "type": "choice",
      "q": "記録で断定を避ける書き方はどれですか。",
      "choices": [
-      "ように見えます",
-      "です",
       "に決まっています",
+      "です",
+      "ように見えます",
       "にちがいありません"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Menghindari kepastian: 「ように見えます」.",
      "explain_en": "Avoids asserting: \"appears to be\"."
     },
@@ -7974,12 +7974,12 @@
      "type": "choice",
      "q": "変なにおい＿＿＿します。",
      "choices": [
-      "が",
+      "で",
       "を",
       "に",
-      "で"
+      "が"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Indra memakai 「が」.",
      "explain_en": "Sensations take 「が」."
     },
@@ -8048,12 +8048,12 @@
      "type": "choice",
      "q": "急に＿＿＿出されました。",
      "choices": [
-      "歩き",
       "歩く",
+      "歩き",
       "歩いて",
       "歩いた"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk ます tanpa ます + 出す.",
      "explain_en": "Masu-stem + 出す."
     },
@@ -8061,12 +8061,12 @@
      "type": "choice",
      "q": "「降り出す」の意味はどれですか。",
      "choices": [
-      "急に降り始める",
-      "降り終わる",
       "少し降る",
+      "降り終わる",
+      "急に降り始める",
       "降り続ける"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Tiba-tiba mulai turun.",
      "explain_en": "It suddenly starts to fall."
     },
@@ -8122,12 +8122,12 @@
      "type": "choice",
      "q": "足元＿＿＿気をつけてください。",
      "choices": [
-      "に",
+      "で",
       "を",
       "が",
-      "で"
+      "に"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Objek kewaspadaan memakai 「に」.",
      "explain_en": "What to watch for takes 「に」."
     },
@@ -8196,12 +8196,12 @@
      "type": "choice",
      "q": "一人で＿＿＿でほしいです。",
      "choices": [
-      "立たない",
       "立たなく",
+      "立たない",
       "立ちない",
       "立つない"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk ない + でほしい.",
      "explain_en": "Nai-form + でほしい."
     },
@@ -8209,12 +8209,12 @@
      "type": "choice",
      "q": "目上の人に頼むとき、ふさわしいのはどれですか。",
      "choices": [
-      "〜ないようにお願いします",
-      "〜ないでほしい",
       "〜ないで",
+      "〜ないでほしい",
+      "〜ないようにお願いします",
       "〜するな"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Kepada atasan pakai bentuk paling sopan.",
      "explain_en": "Use the politest form with superiors."
     },
@@ -8269,12 +8269,12 @@
      "type": "choice",
      "q": "一人で＿＿＿なりました。",
      "choices": [
-      "歩けなく",
+      "歩けなくて",
       "歩けない",
       "歩かなく",
-      "歩けなくて"
+      "歩けなく"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "「歩けない」→「歩けなく」+ なりました.",
      "explain_en": "「歩けない」→「歩けなく」+ なりました."
     },
@@ -8343,12 +8343,12 @@
      "type": "choice",
      "q": "記録をその日のうちに＿＿＿ようにしています。",
      "choices": [
-      "書く",
       "書いて",
+      "書く",
       "書いた",
       "書きます"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Sebelum 「ように」pakai bentuk kamus.",
      "explain_en": "Use the dictionary form before 「ように」."
     },
@@ -8356,12 +8356,12 @@
      "type": "choice",
      "q": "習慣を表す形はどれですか。",
      "choices": [
-      "ようにしています",
-      "ようになりました",
       "ようです",
+      "ようになりました",
+      "ようにしています",
       "ように見えます"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Kebiasaan: 「ようにしています」.",
      "explain_en": "A habit: 「ようにしています」."
     },
@@ -8417,12 +8417,12 @@
      "type": "choice",
      "q": "仕事を＿＿＿つもりはありません。",
      "choices": [
-      "辞める",
+      "辞めた",
       "辞め",
       "辞めて",
-      "辞めた"
+      "辞める"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Sebelum 「つもり」pakai bentuk kamus.",
      "explain_en": "Use the dictionary form before 「つもり」."
     },
@@ -8491,12 +8491,12 @@
      "type": "choice",
      "q": "今日の様子は昨日＿＿＿同じです。",
      "choices": [
-      "と",
       "を",
+      "と",
       "に",
       "が"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Perbandingan memakai 「と」.",
      "explain_en": "Comparison uses 「と」."
     },
@@ -8504,12 +8504,12 @@
      "type": "choice",
      "q": "「いつもと違う」ときにすることはどれですか。",
      "choices": [
-      "看護師に報告する",
-      "そのままにする",
       "記録に書かない",
+      "そのままにする",
+      "看護師に報告する",
       "本人に聞かない"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Perubahan harus dilaporkan.",
      "explain_en": "Any change must be reported."
     },
@@ -8565,12 +8565,12 @@
      "type": "choice",
      "q": "薬は看護師が＿＿＿ことになっています。",
      "choices": [
-      "渡す",
+      "渡します",
       "渡して",
       "渡した",
-      "渡します"
+      "渡す"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Sebelum 「ことになっています」pakai bentuk kamus.",
      "explain_en": "Use the dictionary form before it."
     },
@@ -8639,12 +8639,12 @@
      "type": "choice",
      "q": "転ば＿＿＿ように、手すりを持ちましょう。",
      "choices": [
-      "ない",
       "なく",
+      "ない",
       "ず",
       "ぬ"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Bentuk ない + ように.",
      "explain_en": "Nai-form + ように."
     },
@@ -8652,12 +8652,12 @@
      "type": "choice",
      "q": "「褥瘡ができないように」の目的はどれですか。",
      "choices": [
-      "予防のため",
-      "治療のため",
       "記録のため",
+      "治療のため",
+      "予防のため",
       "報告のため"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Untuk pencegahan.",
      "explain_en": "For prevention."
     },
