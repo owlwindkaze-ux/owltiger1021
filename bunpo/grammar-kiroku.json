@@ -54,12 +54,12 @@
      "type": "choice",
      "q": "「熱なし」の意味はどれですか。",
      "choices": [
-      "熱がありません",
       "熱があります",
+      "熱がありません",
       "熱が下がりました",
       "熱を測りません"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "「なし」= tidak ada.",
      "explain_en": "「なし」= there is none."
     },
@@ -114,12 +114,12 @@
      "type": "choice",
      "q": "右肘に皮下出血＿＿＿見られた。",
      "choices": [
-      "が",
-      "を",
       "に",
+      "を",
+      "が",
       "で"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「見られる」memakai 「が」.",
      "explain_en": "「見られる」takes 「が」."
     },
@@ -127,12 +127,12 @@
      "type": "choice",
      "q": "自分の目で確認したことを書く形はどれですか。",
      "choices": [
-      "が見られた",
+      "だろう",
       "と言っていた",
       "かもしれない",
-      "だろう"
+      "が見られた"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Yang dilihat sendiri: 「が見られた」.",
      "explain_en": "What you saw: 「が見られた」."
     },
@@ -201,12 +201,12 @@
      "type": "choice",
      "q": "目で見たことを書くときはどれですか。",
      "choices": [
-      "が見られた",
       "が聞かれた",
+      "が見られた",
       "と聞いた",
       "と思う"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Yang dilihat: 「見られた」.",
      "explain_en": "What was seen: 「見られた」."
     },
@@ -261,12 +261,12 @@
      "type": "choice",
      "q": "水分不足が原因＿＿＿思われる。",
      "choices": [
-      "と",
-      "を",
       "に",
+      "を",
+      "と",
       "が"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Isi dugaan ditandai 「と」.",
      "explain_en": "The supposition is marked by 「と」."
     },
@@ -274,12 +274,12 @@
      "type": "choice",
      "q": "断定を避ける書き方はどれですか。",
      "choices": [
-      "と思われる",
+      "である",
       "に決まっている",
       "にちがいない",
-      "である"
+      "と思われる"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Menghindari kepastian: 「と思われる」.",
      "explain_en": "Avoids asserting: 「と思われる」."
     },
@@ -348,12 +348,12 @@
      "type": "choice",
      "q": "可能性を記録に書いたあと、することはどれですか。",
      "choices": [
-      "看護師にも口頭で伝える",
       "様子を見るだけ",
+      "看護師にも口頭で伝える",
       "家族に電話する",
       "何もしない"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Risiko harus dilaporkan juga secara lisan.",
      "explain_en": "A risk must also be reported verbally."
     },
@@ -409,12 +409,12 @@
      "type": "choice",
      "q": "ご家族より、来週受診する＿＿＿。",
      "choices": [
-      "とのこと",
-      "と思われる",
       "が見られる",
+      "と思われる",
+      "とのこと",
       "のこと"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Informasi dari orang lain: 「とのこと」.",
      "explain_en": "Information from others: 「とのこと」."
     },
@@ -422,12 +422,12 @@
      "type": "choice",
      "q": "自分が見たことを書くのはどれですか。",
      "choices": [
-      "が見られた",
+      "そうだ",
       "とのこと",
       "と聞いた",
-      "そうだ"
+      "が見られた"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Yang dilihat sendiri: 「が見られた」.",
      "explain_en": "What you saw: 「が見られた」."
     },
@@ -495,12 +495,12 @@
      "type": "choice",
      "q": "話すときに使う言い方はどれですか。",
      "choices": [
-      "体調がよくなったので",
       "回復に伴い",
+      "体調がよくなったので",
       "回復に際し",
       "回復をもって"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Saat bicara pakai bahasa sehari-hari.",
      "explain_en": "In speech, use plain wording."
     },
@@ -556,12 +556,12 @@
      "type": "choice",
      "q": "医師の指示＿＿＿、軟膏を変更した。",
      "choices": [
-      "により",
-      "によって",
       "による",
+      "によって",
+      "により",
       "にとって"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Sebelum kata kerja: 「により」.",
      "explain_en": "Before a verb: 「により」."
     },
@@ -569,12 +569,12 @@
      "type": "choice",
      "q": "名詞の前に来る形はどれですか。",
      "choices": [
-      "による",
+      "にて",
       "により",
       "によって",
-      "にて"
+      "による"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Sebelum kata benda: 「による」.",
      "explain_en": "Before a noun: 「による」."
     },
@@ -643,12 +643,12 @@
      "type": "choice",
      "q": "「傾向がある」が表すのはどれですか。",
      "choices": [
-      "何度もそうなりやすい",
       "一度だけ起きた",
+      "何度もそうなりやすい",
       "これから必ず起きる",
       "もう起きない"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Sering terjadi, bukan sekali.",
      "explain_en": "It happens repeatedly, not once."
     },
@@ -704,12 +704,12 @@
      "type": "choice",
      "q": "皮下出血は＿＿＿とする。",
      "choices": [
-      "経過観察",
-      "経過良好",
       "経過不良",
+      "経過良好",
+      "経過観察",
       "観察経過"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Terus diamati: 「経過観察」.",
      "explain_en": "Keep watching: 「経過観察」."
     },
@@ -717,12 +717,12 @@
      "type": "choice",
      "q": "「経過良好」の意味はどれですか。",
      "choices": [
-      "よくなってきている",
+      "終わった",
       "悪くなっている",
       "変わらない",
-      "終わった"
+      "よくなってきている"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Perkembangan baik.",
      "explain_en": "Progress is good."
     },
@@ -791,12 +791,12 @@
      "type": "choice",
      "q": "薬を続けるか止めるかを決めるのはだれですか。",
      "choices": [
-      "医師・看護師",
       "介護職員",
+      "医師・看護師",
       "本人",
       "家族"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Keputusan ada pada dokter/perawat.",
      "explain_en": "The doctor or nurse decides."
     },
@@ -852,12 +852,12 @@
      "type": "choice",
      "q": "食事量は昨日と＿＿＿。",
      "choices": [
-      "変わりなし",
-      "変わりあり",
       "変わる",
+      "変わりあり",
+      "変わりなし",
       "変わった"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Tidak berubah: 「変わりなし」.",
      "explain_en": "Unchanged: 「変わりなし」."
     },
@@ -865,12 +865,12 @@
      "type": "choice",
      "q": "よりよい記録はどれですか。",
      "choices": [
-      "食事量は昨日と変わりなし",
+      "いつもどおり",
       "変わりなし",
       "同じ",
-      "いつもどおり"
+      "食事量は昨日と変わりなし"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Sebutkan apa yang tidak berubah.",
      "explain_en": "Say what has not changed."
     },
@@ -939,12 +939,12 @@
      "type": "choice",
      "q": "話すときの言い方はどれですか。",
      "choices": [
-      "二人介助で",
       "二人介助にて",
+      "二人介助で",
       "二人介助をて",
       "二人介助のて"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Saat bicara: 「で」.",
      "explain_en": "In speech: 「で」."
     },
@@ -1000,12 +1000,12 @@
      "type": "choice",
      "q": "昼食は五割＿＿＿摂取された。",
      "choices": [
-      "程度",
-      "ごろ",
       "ずつ",
+      "ごろ",
+      "程度",
       "ばかり"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Perkiraan jumlah: 「程度」.",
      "explain_en": "Approximate amount: 「程度」."
     },
@@ -1013,12 +1013,12 @@
      "type": "choice",
      "q": "時こくに使うのはどれですか。",
      "choices": [
-      "ごろ",
+      "のみ",
       "程度",
       "ずつ",
-      "のみ"
+      "ごろ"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Perkiraan waktu: 「ごろ」.",
      "explain_en": "Approximate time: 「ごろ」."
     },
@@ -1087,12 +1087,12 @@
      "type": "choice",
      "q": "「傾眠状態」の意味はどれですか。",
      "choices": [
-      "うとうとして眠りがちな様子",
       "よく眠れている様子",
+      "うとうとして眠りがちな様子",
       "眠れない様子",
       "起きている様子"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Mengantuk berat, mudah tertidur.",
      "explain_en": "Drowsy, easily falling asleep."
     },
@@ -1147,12 +1147,12 @@
      "type": "choice",
      "q": "「訪室時」の読み方はどれですか。",
      "choices": [
-      "ほうしつじ",
-      "ほうしつとき",
       "ほうしつどき",
+      "ほうしつとき",
+      "ほうしつじ",
       "ほうしつじかん"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Dibaca \"ji\".",
      "explain_en": "It is read \"ji\"."
     },
@@ -1160,12 +1160,12 @@
      "type": "choice",
      "q": "移乗＿＿＿に右肘をぶつけられた。",
      "choices": [
-      "時",
+      "後",
       "中",
       "前",
-      "後"
+      "時"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Saat melakukan: 「時」.",
      "explain_en": "At the moment of: 「時」."
     },
@@ -1233,12 +1233,12 @@
      "type": "choice",
      "q": "入浴＿＿＿に皮膚の状態を確認した。",
      "choices": [
-      "後",
       "前",
+      "後",
       "時",
       "中"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Setelah mandi: 「後」.",
      "explain_en": "After the bath: 「後」."
     },
@@ -1294,12 +1294,12 @@
      "type": "choice",
      "q": "十時に酸素投与を＿＿＿した。",
      "choices": [
-      "開始",
-      "終了",
       "中止",
+      "終了",
+      "開始",
       "継続"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Mulai: 「開始」.",
      "explain_en": "Start: 「開始」."
     },
@@ -1307,12 +1307,12 @@
      "type": "choice",
      "q": "よりよい記録はどれですか。",
      "choices": [
-      "十時に開始した",
+      "始めた",
       "開始した",
       "開始",
-      "始めた"
+      "十時に開始した"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Tulis bersama waktunya.",
      "explain_en": "Include the time."
     },
@@ -1381,12 +1381,12 @@
      "type": "choice",
      "q": "話すときの言い方はどれですか。",
      "choices": [
-      "吸引をしました",
       "吸引実施",
+      "吸引をしました",
       "吸引を実施",
       "吸引実施した"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Saat bicara pakai bahasa biasa.",
      "explain_en": "Use plain wording in speech."
     },
@@ -1441,12 +1441,12 @@
      "type": "choice",
      "q": "発熱があり、クーリング＿＿＿対応した。",
      "choices": [
-      "で",
-      "を",
       "に",
+      "を",
+      "で",
       "が"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Cara penanganan: 「で」.",
      "explain_en": "The means takes 「で」."
     },
@@ -1454,12 +1454,12 @@
      "type": "choice",
      "q": "よい記録はどれですか。",
      "choices": [
-      "清拭対応とした",
+      "対応済み",
       "対応した",
       "対応",
-      "対応済み"
+      "清拭対応とした"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Tulis apa yang dilakukan.",
      "explain_en": "State what was actually done."
     },
@@ -1528,12 +1528,12 @@
      "type": "choice",
      "q": "拒否されたとき、まずどうしますか。",
      "choices": [
-      "無理にさせず理由を確認する",
       "無理にさせる",
+      "無理にさせず理由を確認する",
       "記録しない",
       "家族に電話する"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Jangan memaksa; cari tahu alasannya.",
      "explain_en": "Do not force; find out why."
     },
@@ -1588,12 +1588,12 @@
      "type": "choice",
      "q": "耳の痛み＿＿＿訴えあり。",
      "choices": [
-      "の",
-      "が",
       "を",
+      "が",
+      "の",
       "に"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「痛み」+「の訴え」.",
      "explain_en": "「痛み」+「の訴え」."
     },
@@ -1601,12 +1601,12 @@
      "type": "choice",
      "q": "訴えを聞いたあと、必ずすることはどれですか。",
      "choices": [
-      "看護師に報告する",
+      "様子を見ない",
       "薬を渡す",
       "湿布をはる",
-      "様子を見ない"
+      "看護師に報告する"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Nyeri selalu dilaporkan ke perawat.",
      "explain_en": "Pain is always reported to the nurse."
     },
@@ -1675,12 +1675,12 @@
      "type": "choice",
      "q": "「見守り」の意味はどれですか。",
      "choices": [
-      "そばで見ているが手は出さない",
       "全部手伝う",
+      "そばで見ているが手は出さない",
       "半分手伝う",
       "何もしない"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Mengawasi tanpa membantu langsung.",
      "explain_en": "Watching without physically helping."
     },
@@ -1735,12 +1735,12 @@
      "type": "choice",
      "q": "笑顔があり、顔色も＿＿＿である。",
      "choices": [
-      "良好",
-      "不良",
       "不足",
+      "不良",
+      "良好",
       "不明"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Kondisi baik: 「良好」.",
      "explain_en": "Good condition: 「良好」."
     },
@@ -1748,12 +1748,12 @@
      "type": "choice",
      "q": "「酸素化不良」の意味はどれですか。",
      "choices": [
-      "酸素が体に十分行き渡っていない",
+      "酸素をやめた",
       "酸素が十分ある",
       "酸素を使っていない",
-      "酸素をやめた"
+      "酸素が体に十分行き渡っていない"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Oksigen tidak cukup sampai ke tubuh.",
      "explain_en": "Oxygen is not reaching the body well."
     },
@@ -1822,12 +1822,12 @@
      "type": "choice",
      "q": "よい記録はどれですか。",
      "choices": [
-      "昨日同様、全量摂取された",
       "同様に摂取された",
+      "昨日同様、全量摂取された",
       "同様",
       "いつもと同じ"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Sebutkan apa yang dibandingkan.",
      "explain_en": "Say what it is compared with."
     },
@@ -1883,12 +1883,12 @@
      "type": "choice",
      "q": "十四時に＿＿＿、水分をすすめた。",
      "choices": [
-      "再度",
-      "初回",
       "最後",
+      "初回",
+      "再度",
       "中止"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Sekali lagi: 「再度」.",
      "explain_en": "Once more: 「再度」."
     },
@@ -1896,12 +1896,12 @@
      "type": "choice",
      "q": "よりよい記録はどれですか。",
      "choices": [
-      "十四時に再度すすめた",
+      "再度",
       "再度すすめた",
       "すすめた",
-      "再度"
+      "十四時に再度すすめた"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Tambahkan jamnya.",
      "explain_en": "Add the time."
     },
@@ -1969,12 +1969,12 @@
      "type": "choice",
      "q": "「必要時」の意味はどれですか。",
      "choices": [
-      "必要になったとき",
       "必ず毎回",
+      "必要になったとき",
       "決まった時間に",
       "一度だけ"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Saat diperlukan saja.",
      "explain_en": "Only when it becomes necessary."
     },
@@ -2029,12 +2029,12 @@
      "type": "choice",
      "q": "尿バッグ内の尿量＿＿＿確認した。",
      "choices": [
-      "を",
-      "が",
       "に",
+      "が",
+      "を",
       "で"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "「確認した」memakai 「を」.",
      "explain_en": "「確認した」takes 「を」."
     },
@@ -2042,12 +2042,12 @@
      "type": "choice",
      "q": "薬を渡す前に必ずすることはどれですか。",
      "choices": [
-      "名前の確認",
+      "記録の記入",
       "時間の確認",
       "家族への連絡",
-      "記録の記入"
+      "名前の確認"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Pastikan identitas sebelum memberi obat.",
      "explain_en": "Confirm identity before giving medicine."
     },
@@ -2116,12 +2116,12 @@
      "type": "choice",
      "q": "この書き方を使う理由はどれですか。",
      "choices": [
-      "断定できないから",
       "確実だから",
+      "断定できないから",
       "早く書けるから",
       "短いから"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Karena belum bisa dipastikan.",
      "explain_en": "Because it cannot be asserted yet."
     },
@@ -2177,12 +2177,12 @@
      "type": "choice",
      "q": "ズボン＿＿＿更衣を行った。",
      "choices": [
-      "のみ",
-      "だけの",
       "しか",
+      "だけの",
+      "のみ",
       "ばかり"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Bentuk tulis dari 「だけ」: 「のみ」.",
      "explain_en": "The written form of 「だけ」: 「のみ」."
     },
@@ -2190,12 +2190,12 @@
      "type": "choice",
      "q": "「一口しか摂取されなかった」の意味はどれですか。",
      "choices": [
-      "とても少ない",
+      "多い",
       "十分だ",
       "ちょうどよい",
-      "多い"
+      "とても少ない"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Menekankan jumlah yang sangat sedikit.",
      "explain_en": "Stresses that it was very little."
     },
@@ -2264,12 +2264,12 @@
      "type": "choice",
      "q": "この表現が示すのはどれですか。",
      "choices": [
-      "変化が始まった時点",
       "変化が終わった時点",
+      "変化が始まった時点",
       "変化がない",
       "原因が不明"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Titik awal perubahan.",
      "explain_en": "The point where a change began."
     },
@@ -2325,12 +2325,12 @@
      "type": "choice",
      "q": "水分をすすめる＿＿＿お願いします。",
      "choices": [
-      "よう",
-      "ように",
       "ような",
+      "ように",
+      "よう",
       "ようで"
      ],
-     "answer": 0,
+     "answer": 2,
      "explain_id": "Dalam catatan: 「〜ようお願いします」.",
      "explain_en": "In records: 「〜ようお願いします」."
     },
@@ -2338,12 +2338,12 @@
      "type": "choice",
      "q": "申し送りで大切なことはどれですか。",
      "choices": [
-      "次の人が何をすればよいか分かる",
+      "自分の意見を書く",
       "短ければよい",
       "漢字が多ければよい",
-      "自分の意見を書く"
+      "次の人が何をすればよいか分かる"
      ],
-     "answer": 0,
+     "answer": 3,
      "explain_id": "Yang penting: jelas apa yang harus dilakukan.",
      "explain_en": "What matters is that the next person knows what to do."
     },
@@ -2412,12 +2412,12 @@
      "type": "choice",
      "q": "分からないことを記録するとき、正しいのはどれですか。",
      "choices": [
-      "不明と書く",
       "たぶんと書く",
+      "不明と書く",
       "書かない",
       "分かったことにする"
      ],
-     "answer": 0,
+     "answer": 1,
      "explain_id": "Tulis apa adanya: 「不明」.",
      "explain_en": "Write it honestly as unknown."
     },

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>N2模試（155分） ／ Simulasi Ujian N2</title>
+<script>
+/* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
+(function () {
+  var PAGE_VER = '2026-09-16d';
+  try {
+    if (sessionStorage.getItem('vchk-moshi')) return;
+    fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j.version && j.version !== PAGE_VER) {
+          sessionStorage.setItem('vchk-moshi', '1');
+          location.replace(location.pathname + '?v=' + j.version);
+        }
+      }).catch(function () {});
+  } catch (e) {}
+})();
+</script>
+<style>
+:root{--ink:#1b2733;--sub:#6b7784;--line:#e3e8ee;--bg:#f6f8fb;--card:#fff;
+      --navy:#332e91;--indigo:#4338ca;--teal:#0e7a52;--red:#c0392b;--amber:#b45309}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+     font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+     line-height:1.75;font-size:15px}
+header{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;padding:10px 14px;
+       display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+header h1{font-size:15px;margin:0;font-weight:700}
+header .sp{flex:1}
+a.menu{color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.5);
+       border-radius:8px;padding:4px 9px;font-size:12px}
+.timer{font-variant-numeric:tabular-nums;background:rgba(255,255,255,.14);
+       border-radius:8px;padding:4px 10px;font-size:13px;font-weight:700}
+.timer.over{background:var(--red)}
+main{max-width:760px;margin:0 auto;padding:14px 14px 80px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 14px}
+h2{font-size:16px;margin:0 0 8px;color:var(--navy)}
+h3{font-size:14px;margin:18px 0 6px;color:var(--indigo);
+   border-left:4px solid var(--indigo);padding-left:8px}
+p.lead{color:var(--sub);font-size:13px;margin:4px 0}
+.btn{appearance:none;border:1px solid var(--line);background:#fff;border-radius:10px;
+     padding:9px 14px;font-size:14px;cursor:pointer;color:var(--ink)}
+.btn.main{background:var(--indigo);color:#fff;border-color:var(--indigo);font-weight:700}
+.btn:disabled{opacity:.5;cursor:default}
+.pick{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.q{border-top:1px solid var(--line);padding:12px 0}
+.q:first-of-type{border-top:0}
+.qno{display:inline-block;background:#eef2ff;color:var(--indigo);border-radius:6px;
+     padding:1px 8px;font-size:12px;font-weight:700;margin-right:6px}
+.qt{margin:6px 0 8px;white-space:pre-wrap}
+.opts{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.opt{display:flex;gap:8px;align-items:flex-start;width:100%;text-align:left;
+     border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 11px;
+     font-size:14px;cursor:pointer;color:var(--ink);line-height:1.6}
+.opt .n{flex:0 0 22px;height:22px;border-radius:50%;background:#eef2ff;color:var(--indigo);
+        font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.opt.sel{border-color:var(--indigo);background:#eef2ff}
+.opt.right{border-color:var(--teal);background:#eafaf2}
+.opt.wrong{border-color:var(--red);background:#fdeeec}
+.fb{display:none;margin-top:8px;border-radius:8px;padding:8px 10px;font-size:13px}
+.fb.ok{display:block;background:#eafaf2;color:var(--teal)}
+.fb.ng{display:block;background:#fdeeec;color:var(--red)}
+.fb .id{display:block;color:var(--sub);font-size:12px;margin-top:3px}
+.psg{background:#fbfcfe;border:1px solid var(--line);border-radius:10px;padding:12px;margin:8px 0}
+.psg .t{font-weight:700;margin-bottom:6px}
+.psg .body{white-space:pre-wrap}
+.psg table{border-collapse:collapse;width:100%;font-size:13px;margin-top:8px}
+.psg th,.psg td{border:1px solid var(--line);padding:5px 7px;text-align:left}
+.psg th{background:#eef2ff}
+.ab{border:1px solid var(--line);border-radius:8px;padding:10px;margin:8px 0;background:#fff}
+.ab .lb{display:inline-block;background:var(--indigo);color:#fff;border-radius:6px;
+        padding:0 8px;font-size:12px;font-weight:700;margin-right:6px}
+.play{appearance:none;border:0;background:var(--teal);color:#fff;border-radius:999px;
+      padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer}
+.cnt{color:var(--sub);font-size:12px;margin-left:8px}
+details{margin-top:8px}
+summary{cursor:pointer;color:var(--indigo);font-size:13px}
+.score{display:grid;gap:8px;margin-top:10px}
+.row{display:flex;align-items:center;gap:10px;font-size:14px}
+.row .nm{flex:0 0 130px;color:var(--sub)}
+.bar{flex:1;height:10px;background:#eef2ff;border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--indigo)}
+.row.ng .bar i{background:var(--red)}
+.big{font-size:22px;font-weight:700}
+.warn{background:#fff7ed;border:1px solid #fed7aa;color:var(--amber);
+      border-radius:10px;padding:10px;font-size:13px;margin:10px 0}
+#gate{max-width:420px;margin:70px auto;padding:22px;background:#fff;border-radius:14px;
+      border:1px solid var(--line)}
+#gate input{width:100%;padding:11px;font-size:16px;border:1px solid var(--line);border-radius:10px}
+ruby rt{font-size:.5em;color:var(--indigo)}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <h2>合言葉を 入れてください</h2>
+  <p class="lead">Masukkan kata sandi</p>
+  <input id="gatePw" type="password" autocomplete="off" placeholder="合言葉 ／ Kata sandi">
+  <p><button class="btn main" id="gateBtn" style="width:100%">入る ／ Masuk</button></p>
+  <p class="lead" id="gateErr" style="color:#c0392b"></p>
+</div>
+
+<div id="app" style="display:none">
+<header>
+  <h1>N2模試</h1>
+  <span class="timer" id="timer" hidden>--:--</span>
+  <span class="sp"></span>
+  <a class="menu" href="../n2/index.html">← N2ロードマップ</a>
+</header>
+<main id="main"></main>
+</div>
+
+<script>
+"use strict";
+const PASS_SHA256 = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
+const GATEKEY = 'jlpt-kanji-gate-v1';
+const KEY = 'jlpt-moshi-v1';
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? '' : s)
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+/* 漢字《かんじ》 を ふりがなに変える */
+const ruby = s => esc(s).replace(/([一-鿿々]+)《(.+?)》/g,
+  (m, k, r) => '<ruby>' + k + '<rt>' + r + '</rt></ruby>');
+
+let PAPER = null, ANS = {}, REV = false;
+let store = {};
+try { store = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { store = {}; }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} };
+
+/* ========== 時間 ========== */
+let tId = null, tEnd = 0;
+function startTimer(min) {
+  stopTimer();
+  tEnd = Date.now() + min * 60000;
+  $('#timer').hidden = false;
+  const tick = () => {
+    let left = Math.round((tEnd - Date.now()) / 1000);
+    const over = left < 0; if (over) left = -left;
+    const m = Math.floor(left / 60), s = left % 60;
+    $('#timer').textContent = (over ? '超過 +' : '') + m + ':' + String(s).padStart(2, '0');
+    $('#timer').classList.toggle('over', over);
+  };
+  tick(); tId = setInterval(tick, 1000);
+}
+function stopTimer() { if (tId) clearInterval(tId); tId = null; $('#timer').hidden = true; }
+
+/* ========== 音声（聴解） ========== */
+let VOICE = null;
+function pickVoice() {
+  const vs = speechSynthesis.getVoices().filter(v => /ja/i.test(v.lang));
+  const good = ['Google 日本語', 'Kyoko', 'O-ren', 'Nanami', 'Otoya'];
+  VOICE = vs.find(v => good.some(g => v.name.includes(g))) || vs[0] || null;
+}
+if ('speechSynthesis' in window) {
+  pickVoice(); speechSynthesis.onvoiceschanged = pickVoice;
+}
+function speak(text, btn) {
+  if (!('speechSynthesis' in window)) { alert('この端末では音声が使えません。スクリプトを読んでください。'); return; }
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text.replace(/\n/g, '。'));
+  u.lang = 'ja-JP'; u.rate = 1.0; if (VOICE) u.voice = VOICE;
+  if (btn) {
+    const c = btn.parentElement.querySelector('.cnt');
+    if (c) c.textContent = '聞いた回数 ' + ((+c.dataset.n || 0) + 1);
+    if (c) c.dataset.n = (+c.dataset.n || 0) + 1;
+  }
+  speechSynthesis.speak(u);
+}
+
+/* ========== 画面 ========== */
+function home() {
+  stopTimer();
+  const done = n => {
+    const d = store['m' + n];
+    return d ? '　<b style="color:var(--teal)">受けた（' + d.total + '点／180点）</b>' : '';
+  };
+  $('#main').innerHTML =
+    '<div class="card"><h2>N2模試（本番と同じ155分）</h2>' +
+    '<p class="lead">言語知識（文字・語彙・文法）＋読解 105分 ／ 聴解 50分。3回分あります。</p>' +
+    '<div class="warn">本番は約106問ですが、この模試は<b>103問</b>です。読解は、まだ読んでいない文章だけを使うため、1回18問（本番21問）にしてあります。形式と順番は本番どおりです。</div>' +
+    '<div class="pick">' +
+      [1, 2, 3].map(n => '<button class="btn main" data-no="' + n + '">第' + n + '回を 受ける</button>').join('') +
+    '</div>' +
+    [1, 2, 3].map(n => '<p class="lead">第' + n + '回' + done(n) + '</p>').join('') +
+    '<details><summary>この模試の中身 ／ Isi simulasi</summary>' +
+    '<p class="lead">文字・語彙32問（漢字読み5・表記5・語形成5・文脈規定7・言い換え類義5・用法5）／' +
+    '文法22問（文法形式12・文の組み立て5・文章の文法5）／読解18問／聴解31問。</p>' +
+    '<p class="lead">点数は、区分ごとに60点へ直して出します。合格の目安は、合計90点以上で、どの区分も19点以上です。</p>' +
+    '</details></div>';
+  $('#main').querySelectorAll('[data-no]').forEach(b =>
+    b.onclick = () => load(+b.dataset.no));
+}
+
+function load(no) {
+  $('#main').innerHTML = '<div class="card">読み込んでいます…</div>';
+  fetch('moshi-' + no + '.json', { cache: 'no-cache' }).then(r => r.json()).then(j => {
+    PAPER = j; ANS = {}; REV = false; part1();
+  }).catch(() => { $('#main').innerHTML = '<div class="card">読み込めませんでした。</div>'; });
+}
+
+const MOJI = ['問題1', '問題2', '問題3', '問題4', '問題5', '問題6'];
+const BUNPO = ['問題7', '問題8', '問題9'];
+const DOKKAI = ['問題10', '問題11', '問題12', '問題13', '問題14'];
+const CHOU = ['聴解1', '聴解2', '聴解3', '聴解4', '聴解5'];
+
+function optsHTML(id, choices) {
+  return '<ul class="opts">' + choices.map((c, i) =>
+    '<li><button type="button" class="opt" data-id="' + id + '" data-i="' + i + '">' +
+    '<span class="n">' + (i + 1) + '</span><span>' + ruby(c) + '</span></button></li>').join('') + '</ul>';
+}
+function qBlock(id, no, text, choices, extra) {
+  return '<div class="q" data-qid="' + id + '">' +
+    '<span class="qno">問' + no + '</span>' + (extra || '') +
+    '<div class="qt">' + ruby(text) + '</div>' + optsHTML(id, choices) +
+    '<div class="fb"></div></div>';
+}
+
+function sectionHTML(key, startNo) {
+  const s = PAPER.sections[key];
+  let h = '<h3>' + key.replace('聴解', '聴解 問題') + '　' + esc(s.name) + '</h3>' +
+          '<p class="lead">' + ruby(s.inst) + '</p>';
+  let n = startNo;
+  if (s.passage) {
+    h += '<div class="psg"><div class="t">' + ruby(s.passage.title) + '</div>' +
+         '<div class="body">' + ruby(s.passage.text) + '</div></div>';
+  }
+  if (s.read) {
+    s.read.forEach((r, ri) => {
+      const p = r.passage;
+      h += '<div class="psg"><div class="t">' + ruby(p.title) + '</div>';
+      if (p.intro) h += '<p class="lead">' + ruby(p.intro) + '</p>';
+      if (p.texts) p.texts.forEach(t => {
+        h += '<div class="ab"><span class="lb">' + esc(t.label) + '</span>' +
+             (t.title ? '<b>' + ruby(t.title) + '</b>' : '') +
+             '<div class="body">' + ruby(t.text) + '</div></div>';
+      });
+      if (p.text) h += '<div class="body">' + ruby(p.text) + '</div>';
+      if (p.table) {
+        const t = p.table;
+        h += '<table><thead><tr>' + t.headers.map(x => '<th>' + ruby(x) + '</th>').join('') +
+             '</tr></thead><tbody>' + t.rows.map(row =>
+             '<tr>' + row.map(x => '<td>' + ruby(x) + '</td>').join('') + '</tr>').join('') +
+             '</tbody></table>' + (t.note ? '<p class="lead">' + ruby(t.note) + '</p>' : '');
+      }
+      h += '</div>';
+      r.qi.forEach(qi => {
+        const q = p.questions[qi];
+        h += qBlock(key + '/' + ri + '/' + qi, n++, q.q, q.choices);
+      });
+    });
+    return { html: h, n: n };
+  }
+  if (CHOU.indexOf(key) >= 0) {
+    s.items.forEach((it, i) => {
+      const listen = '<div><button type="button" class="play" data-say="' + esc(it.script) + '">▶ 聞く</button>' +
+                     '<span class="cnt">聞いた回数 0</span></div>';
+      h += qBlock(key + '/' + i, n++, it.q, it.opts, listen);
+    });
+    return { html: h, n: n };
+  }
+  s.items.forEach((it, i) => {
+    const extra = it.sentence ? '' : '';
+    h += qBlock(key + '/' + i, n++, it.q, it.choices, extra);
+  });
+  return { html: h, n: n };
+}
+
+function bindOpts(root) {
+  root.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+    const id = b.dataset.id, i = +b.dataset.i;
+    if (REV) return;
+    ANS[id] = i;
+    b.closest('.opts').querySelectorAll('.opt').forEach(x => x.classList.remove('sel'));
+    b.classList.add('sel');
+  });
+  root.querySelectorAll('.play').forEach(b => b.onclick = () => speak(b.dataset.say, b));
+}
+
+function part1() {
+  let h = '<div class="card"><h2>' + esc(PAPER.title) + '　言語知識・読解</h2>' +
+          '<p class="lead">105分です。最後まで答えてから「聴解へ進む」を押してください。' +
+          '途中で答えは出ません（本番と同じ）。</p></div><div class="card">';
+  let n = 1;
+  MOJI.concat(BUNPO, DOKKAI).forEach(k => { const r = sectionHTML(k, n); h += r.html; n = r.n; });
+  h += '</div><div class="card"><button class="btn main" id="toChou" style="width:100%">聴解へ進む（50分）</button></div>';
+  $('#main').innerHTML = h;
+  bindOpts($('#main'));
+  $('#toChou').onclick = part2;
+  startTimer(105);
+  window.scrollTo(0, 0);
+}
+
+function part2() {
+  let h = '<div class="card"><h2>' + esc(PAPER.title) + '　聴解</h2>' +
+          '<p class="lead">50分です。本番は一度しか流れません。まずは1回で答えてみてください。</p></div><div class="card">';
+  let n = 1;
+  CHOU.forEach(k => { const r = sectionHTML(k, n); h += r.html; n = r.n; });
+  h += '</div><div class="card"><button class="btn main" id="fin" style="width:100%">答え合わせ</button></div>';
+  $('#main').innerHTML = h;
+  bindOpts($('#main'));
+  $('#fin').onclick = finish;
+  startTimer(50);
+  window.scrollTo(0, 0);
+}
+
+function correctOf(id) {
+  const [key, a, b] = id.split('/');
+  const s = PAPER.sections[key];
+  if (s.read) return s.read[+a].passage.questions[+b].answer;
+  if (CHOU.indexOf(key) >= 0) return s.items[+a].ans;
+  return s.items[+a].answer;
+}
+function explainOf(id) {
+  const [key, a, b] = id.split('/');
+  const s = PAPER.sections[key];
+  if (s.read) return { ja: s.read[+a].passage.questions[+b].explain || '', id: '' };
+  if (CHOU.indexOf(key) >= 0) return { ja: s.items[+a].exp || '', id: s.items[+a].expId || '' };
+  const it = s.items[+a];
+  return { ja: it.explain || '', id: it.explain_id || '' };
+}
+
+function finish() {
+  stopTimer(); REV = true;
+  const all = [];
+  ['問題1','問題2','問題3','問題4','問題5','問題6','問題7','問題8','問題9',
+   '問題10','問題11','問題12','問題13','問題14','聴解1','聴解2','聴解3','聴解4','聴解5'].forEach(key => {
+    const s = PAPER.sections[key];
+    if (s.read) s.read.forEach((r, ri) => r.qi.forEach(qi => all.push(key + '/' + ri + '/' + qi)));
+    else s.items.forEach((_, i) => all.push(key + '/' + i));
+  });
+  const grp = id => {
+    const k = id.split('/')[0];
+    if (CHOU.indexOf(k) >= 0) return '聴解';
+    if (DOKKAI.indexOf(k) >= 0) return '読解';
+    return '言語知識';
+  };
+  const got = { 言語知識: 0, 読解: 0, 聴解: 0 }, tot = { 言語知識: 0, 読解: 0, 聴解: 0 };
+  all.forEach(id => {
+    const g = grp(id); tot[g]++;
+    if (ANS[id] === correctOf(id)) got[g]++;
+  });
+  const pt = g => tot[g] ? Math.round(got[g] / tot[g] * 60) : 0;
+  const total = pt('言語知識') + pt('読解') + pt('聴解');
+  const low = ['言語知識', '読解', '聴解'].filter(g => pt(g) < 19);
+  const pass = total >= 90 && low.length === 0;
+
+  store['m' + PAPER.no] = { total: total, at: new Date().toISOString().slice(0, 10),
+                            got: got, tot: tot };
+  save();
+
+  let h = '<div class="card"><h2>結果　' + esc(PAPER.title) + '</h2>' +
+    '<p class="big" style="color:' + (pass ? 'var(--teal)' : 'var(--red)') + '">' +
+    total + ' 点 ／ 180点　' + (pass ? '合格の目安に とどいています' : 'まだ とどいていません') + '</p>' +
+    '<div class="score">' +
+    ['言語知識', '読解', '聴解'].map(g =>
+      '<div class="row' + (pt(g) < 19 ? ' ng' : '') + '"><span class="nm">' + g +
+      '（' + got[g] + '/' + tot[g] + '問）</span>' +
+      '<span class="bar"><i style="width:' + Math.round(pt(g) / 60 * 100) + '%"></i></span>' +
+      '<b>' + pt(g) + '点</b></div>').join('') +
+    '</div>' +
+    (low.length ? '<div class="warn">' + low.join('・') + ' が 19点に とどいていません。' +
+      '合計が 90点を 超えても、区分が 一つでも 19点未満だと 不合格に なります。</div>' : '') +
+    '<p class="lead">点数は、正解の数を 区分ごとに 60点へ 直したものです。本番は 配点が ちがうので、目安として 見てください。</p>' +
+    '<p><button class="btn" id="back">はじめに もどる</button></p></div>';
+
+  /* まちがえた問題だけ 出す */
+  const wrong = all.filter(id => ANS[id] !== correctOf(id));
+  h += '<div class="card"><h2>まちがえた問題（' + wrong.length + '問）</h2>';
+  if (!wrong.length) h += '<p class="lead">ありません。</p>';
+  wrong.forEach((id, i) => {
+    const [key, a, b] = id.split('/');
+    const s = PAPER.sections[key];
+    let qt, ch;
+    if (s.read) { const q = s.read[+a].passage.questions[+b]; qt = q.q; ch = q.choices; }
+    else if (CHOU.indexOf(key) >= 0) { qt = s.items[+a].q; ch = s.items[+a].opts; }
+    else { qt = s.items[+a].q; ch = s.items[+a].choices; }
+    const c = correctOf(id), ex = explainOf(id);
+    h += '<div class="q"><span class="qno">' + key + '</span>' +
+      '<div class="qt">' + ruby(qt) + '</div><ul class="opts">' +
+      ch.map((x, j) => '<li><span class="opt ' + (j === c ? 'right' : (j === ANS[id] ? 'wrong' : '')) + '">' +
+        '<span class="n">' + (j + 1) + '</span><span>' + ruby(x) + '</span></span></li>').join('') +
+      '</ul><div class="fb ok">' + ruby(ex.ja) +
+      (ex.id ? '<span class="id">' + esc(ex.id) + '</span>' : '') + '</div></div>';
+  });
+  h += '</div>';
+  $('#main').innerHTML = h;
+  $('#back').onclick = home;
+  window.scrollTo(0, 0);
+}
+
+/* ========== 合言葉 ========== */
+async function sha256(t) {
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
+  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
+}
+function unlock() { $('#gate').style.display = 'none'; $('#app').style.display = 'block'; home(); }
+async function tryUnlock() {
+  const h = await sha256($('#gatePw').value.trim());
+  if (h === PASS_SHA256) { try { localStorage.setItem(GATEKEY, h); } catch (e) {} unlock(); }
+  else $('#gateErr').textContent = '合言葉が ちがいます ／ Kata sandi salah';
+}
+$('#gateBtn').onclick = tryUnlock;
+$('#gatePw').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+/* 合言葉が保存ずみの端末は そのまま開く。かならず一番下に置くこと。 */
+try { if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock(); } catch (e) {}
+</script>
+</body>
+</html>
