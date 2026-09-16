@@ -499,6 +499,17 @@ function weekState() {
   return { ids: ids, msg: cn + '第' + n + '週の 文型 ' + ids.length + '項目だけを 出しています' +
     '（レベルの ボタンは 効きません）／ Minggu ' + n + '：' + ids.length + ' pola' };
 }
+/* コースの「今週ひらくもの」から来たときは、自分で📅を押さなくても
+   「今週の分だけ」が入った状態で開く。印は一度使ったら消す。 */
+const WKAUTO = 'jlpt-week-open';
+function autoWeek() {
+  let f = null;
+  try { f = localStorage.getItem(WKAUTO); localStorage.removeItem(WKAUTO); } catch (e) {}
+  if (f !== '1') return;
+  const b = $('#wkBtn');
+  if (b) b.click();
+}
+
 function setupWeekBtn() {
   const btn = $('#wkBtn'), msg = $('#wkMsg');
   btn.hidden = false;
@@ -578,6 +589,7 @@ async function boot() {
 
   setupWeekBtn();
   renderList(); refreshStats(); openFromHash();
+  autoWeek();
 }
 
 /* 波ダッシュは 〜(U+301C) と ～(U+FF5E) の2種類があり、端末やIMEでどちらが
