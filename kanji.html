@@ -996,6 +996,19 @@ function setupWeekBtns() {
   makeWeekBtn('vWkBtn', 'vWkMsg', 'vocab',
     set => { vWkOn = true; vWkSet = set; vLimit = 120; renderVocab(); },
     () => { vWkOff(); vLimit = 120; renderVocab(); });
+  autoWeek();
+}
+/* 新人コース・N2コースの「今週ひらくもの」から来たときは、
+   自分で📅を押さなくても「今週の分だけ」が入った状態で開く。
+   印は一度使ったら消す（あとでふつうに開いたときは全部出る）。 */
+const WKAUTO = 'jlpt-week-open';
+function autoWeek() {
+  let f = null;
+  try { f = localStorage.getItem(WKAUTO); localStorage.removeItem(WKAUTO); } catch (e) {}
+  if (f !== '1') return;
+  const b = $('#wkBtn'), vb = $('#vWkBtn');
+  if (b) b.click();
+  if (vb) vb.click();
 }
 
 function renderList() {
