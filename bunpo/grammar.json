@@ -24,7 +24,7 @@
   {
    "file": "grammar-n4.json",
    "level": "N4",
-   "count": 117
+   "count": 120
   },
   {
    "file": "grammar-n3.json",
@@ -81,5 +81,5 @@
   "N2": 170,
   "記録": 33
  },
- "total": 457
+ "total": 460
 }
