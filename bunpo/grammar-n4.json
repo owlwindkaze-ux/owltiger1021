@@ -1,6 +1,6 @@
 {
  "level": "N4",
- "count": 117,
+ "count": 120,
  "grammar": [
   {
    "id": "n4-tara",
@@ -8671,6 +8671,231 @@
      ],
      "hint_id": "Agar tidak tersedak, minum pelan-pelan.",
      "hint_en": "So they don't choke, they drink slowly."
+    }
+   ]
+  },
+  {
+   "id": "n4-te-shimau",
+   "pattern": "〜(て) しまう",
+   "level": "N4",
+   "category": "完了・残念",
+   "form": "動詞て形 ＋ しまう（話し言葉では「〜ちゃう」）",
+   "meaning_id": "terlanjur ~; ~ sampai selesai",
+   "meaning_en": "end up ~ing; finish ~ing",
+   "note_id": "Dua arti: (1) selesai seluruhnya, (2) terjadi hal yang tidak diinginkan. Dalam catatan kerja, arti (2) lebih sering dipakai.",
+   "note_en": "Two senses: (1) complete an action, (2) something regrettable happened. In care records, sense (2) is more common.",
+   "note_ja": "①最後までやってしまう ②してはいけないことが起きてしまう、の二つ。記録では②で使うことが多い。",
+   "examples": [
+    {
+     "ja": "薬を落としてしまいました。",
+     "reading": "くすりをおとしてしまいました。",
+     "id": "Saya terlanjur menjatuhkan obatnya.",
+     "en": "I ended up dropping the medicine.",
+     "scene": "記録"
+    },
+    {
+     "ja": "昼食を全部召し上がってしまいました。",
+     "reading": "ちゅうしょくをぜんぶめしあがってしまいました。",
+     "id": "Beliau menghabiskan seluruh makan siangnya.",
+     "en": "They finished the whole lunch.",
+     "scene": "食事介助"
+    },
+    {
+     "ja": "急いで手順を飛ばしてしまった。",
+     "reading": "いそいでてじゅんをとばしてしまった。",
+     "id": "Karena terburu-buru, saya sampai melewatkan langkahnya.",
+     "en": "In a hurry, I ended up skipping a step.",
+     "scene": "記録"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "薬を落と＿＿＿しまいました。",
+     "choices": [
+      "して",
+      "した",
+      "し",
+      "すて"
+     ],
+     "answer": 0,
+     "explain_id": "「〜てしまう」は動詞のて形につく。落とす → 落として。",
+     "explain_en": "「〜てしまう」attaches to the te-form: 落とす → 落として."
+    },
+    {
+     "type": "choice",
+     "q": "昼食を全部召し上がって＿＿＿。",
+     "choices": [
+      "しまいました",
+      "しました",
+      "おきました",
+      "みました"
+     ],
+     "answer": 0,
+     "explain_id": "「全部〜し終えた」ことを表すので「しまいました」。",
+     "explain_en": "It expresses completing the whole thing, so 「しまいました」."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "急いで",
+      "手順を",
+      "飛ばして",
+      "しまった。"
+     ],
+     "answer": "急いで手順を飛ばしてしまった。",
+     "hint_id": "「〜てしまった」を最後に置く。",
+     "hint_en": "Put 「〜てしまった」 at the end."
+    }
+   ]
+  },
+  {
+   "id": "n4-ni-yoruto",
+   "pattern": "〜(に) よると",
+   "level": "N4",
+   "category": "伝聞・引用",
+   "form": "名詞 ＋ によると（文末は「〜そうだ」「〜とのことだ」）",
+   "meaning_id": "menurut ~",
+   "meaning_en": "according to ~",
+   "note_id": "Menyebutkan sumber informasi. Akhir kalimat biasanya 「〜そうです」atau「〜とのことです」.",
+   "note_en": "Gives the source of information. The sentence usually ends with 「〜そうです」or「〜とのことです」.",
+   "note_ja": "情報のもとを示す。文の終わりは「〜そうです」「〜とのことです」になる。",
+   "examples": [
+    {
+     "ja": "看護師によると、熱は下がったそうです。",
+     "reading": "かんごしによると、ねつはさがったそうです。",
+     "id": "Menurut perawat, demamnya sudah turun.",
+     "en": "According to the nurse, the fever has gone down.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "ご家族によると、昔は先生をされていたとのことです。",
+     "reading": "ごかぞくによると、むかしはせんせいをされていたとのことです。",
+     "id": "Menurut keluarga, dulu beliau seorang guru.",
+     "en": "According to the family, they used to be a teacher.",
+     "scene": "生活歴"
+    },
+    {
+     "ja": "天気予報によると、明日は雨だそうだ。",
+     "reading": "てんきよほうによると、あしたはあめだそうだ。",
+     "id": "Menurut ramalan cuaca, besok akan hujan.",
+     "en": "According to the forecast, it will rain tomorrow.",
+     "scene": "行事"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "看護師＿＿＿、熱は下がったそうです。",
+     "choices": [
+      "によると",
+      "にとって",
+      "について",
+      "によって"
+     ],
+     "answer": 0,
+     "explain_id": "情報のもとを示すのは「によると」。",
+     "explain_en": "「によると」marks the source of information."
+    },
+    {
+     "type": "choice",
+     "q": "天気予報によると、明日は雨だ＿＿＿。",
+     "choices": [
+      "そうだ",
+      "ようだ",
+      "らしくない",
+      "だろうか"
+     ],
+     "answer": 0,
+     "explain_id": "「によると」は「〜そうだ」と対になって使う。",
+     "explain_en": "「によると」pairs with 「〜そうだ」."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "ご家族に",
+      "よると、",
+      "昔は先生を",
+      "されていたとのことです。"
+     ],
+     "answer": "ご家族によると、昔は先生をされていたとのことです。",
+     "hint_id": "もとを先に示し、聞いた内容をあとに置く。",
+     "hint_en": "Give the source first, then what you heard."
+    }
+   ]
+  },
+  {
+   "id": "n4-dasu",
+   "pattern": "〜だす",
+   "level": "N4",
+   "category": "継続",
+   "form": "動詞ます形（ます を取る）＋ だす（出す）",
+   "meaning_id": "tiba-tiba mulai ~",
+   "meaning_en": "suddenly start ~ing",
+   "note_id": "Berbeda dari 〜始める: 〜だす menekankan bahwa tindakan mulai secara tiba-tiba dan tak terduga.",
+   "note_en": "Unlike 〜始める, 〜だす stresses that the action began suddenly and unexpectedly.",
+   "note_ja": "「〜始める」との違いは、急に・思いがけず始まること。記録では様子の急変に使う。",
+   "examples": [
+    {
+     "ja": "急に泣きだされたので、そばにいました。",
+     "reading": "きゅうになきだされたので、そばにいました。",
+     "id": "Beliau tiba-tiba menangis, jadi saya menemani.",
+     "en": "They suddenly started crying, so I stayed beside them.",
+     "scene": "記録"
+    },
+    {
+     "ja": "外に出たとたん、雨が降りだした。",
+     "reading": "そとにでたとたん、あめがふりだした。",
+     "id": "Begitu keluar, hujan tiba-tiba turun.",
+     "en": "The moment we went out, it started to rain.",
+     "scene": "行事"
+    },
+    {
+     "ja": "話しだすと止まらないほど、楽しそうだった。",
+     "reading": "はなしだすととまらないほど、たのしそうだった。",
+     "id": "Begitu mulai bicara, beliau tampak senang sekali sampai tak berhenti.",
+     "en": "Once they started talking, they looked so happy they couldn't stop.",
+     "scene": "会話"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "急に泣き＿＿＿れたので、そばにいました。",
+     "choices": [
+      "ださ",
+      "でさ",
+      "だし",
+      "だす"
+     ],
+     "answer": 0,
+     "explain_id": "「泣きだす」の尊敬「泣きだされる」。ます形「泣き」＋だす。",
+     "explain_en": "「泣きだす」in respectful form 「泣きだされる」; masu-stem 泣き ＋ だす."
+    },
+    {
+     "type": "choice",
+     "q": "外に出たとたん、雨が降り＿＿＿。",
+     "choices": [
+      "だした",
+      "はじめた",
+      "つづけた",
+      "おわった"
+     ],
+     "answer": 0,
+     "explain_id": "「とたん」は急な変化。急に始まる「だした」が合う。",
+     "explain_en": "「とたん」marks a sudden change, so 「だした」fits."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "外に出た",
+      "とたん、",
+      "雨が",
+      "降りだした。"
+     ],
+     "answer": "外に出たとたん、雨が降りだした。",
+     "hint_id": "「〜たとたん」のあとに急な出来事を置く。",
+     "hint_en": "Put the sudden event after 「〜たとたん」."
     }
    ]
   }
