@@ -1,6 +1,6 @@
 {
  "name": "JLPT N5–N3 熟語＋現場用語",
- "count": 6281,
+ "count": 6275,
  "levels": [
   "N5",
   "N4",
@@ -35528,15 +35528,6 @@
    "kanji": []
   },
   {
-   "word": "～がる",
-   "reading": "～がる",
-   "meaning": "feel",
-   "meaning_id": "menunjukkan perasaan (akhiran)",
-   "level": "N5",
-   "category": "基本語",
-   "kanji": []
-  },
-  {
    "word": "カレー",
    "reading": "カレー",
    "meaning": "curry (abbr. for curry and rice)",
@@ -35741,15 +35732,6 @@
    "meaning_id": "rok",
    "level": "N5",
    "category": "カタカナ語",
-   "kanji": []
-  },
-  {
-   "word": "～すぎ",
-   "reading": "～すぎ",
-   "meaning": "past; to exceed, ~ too much",
-   "meaning_id": "lewat, terlalu ~",
-   "level": "N5",
-   "category": "基本語",
    "kanji": []
   },
   {
@@ -36878,15 +36860,6 @@
    "kanji": []
   },
   {
-   "word": "いくら～ても",
-   "reading": "いくら～ても",
-   "meaning": "however much one may ~",
-   "meaning_id": "sebanyak apa pun ~",
-   "level": "N4",
-   "category": "基本語",
-   "kanji": []
-  },
-  {
    "word": "ビル",
    "reading": "ビル",
    "meaning": "(abbr.) building",
@@ -37229,15 +37202,6 @@
    "kanji": []
   },
   {
-   "word": "～やすい",
-   "reading": "～やすい",
-   "meaning": "easy to do ~",
-   "meaning_id": "mudah untuk ~",
-   "level": "N4",
-   "category": "基本語",
-   "kanji": []
-  },
-  {
    "word": "サンダル",
    "reading": "サンダル",
    "meaning": "sandal",
@@ -37445,15 +37409,6 @@
    "kanji": []
   },
   {
-   "word": "～おき",
-   "reading": "～おき",
-   "meaning": "after every ~",
-   "meaning_id": "setiap ~ sekali",
-   "level": "N4",
-   "category": "基本語",
-   "kanji": []
-  },
-  {
    "word": "かまう",
    "reading": "かまう",
    "meaning": "to mind, to care about, to be concerned about",
@@ -37577,15 +37532,6 @@
    "meaning_id": "tenis",
    "level": "N4",
    "category": "カタカナ語",
-   "kanji": []
-  },
-  {
-   "word": "～にくい",
-   "reading": "～にくい",
-   "meaning": "difficult to do ~",
-   "meaning_id": "sulit untuk ~",
-   "level": "N4",
-   "category": "基本語",
    "kanji": []
   },
   {
@@ -42259,7 +42205,7 @@
    "reading": "ぴったりくっつく",
    "meaning": "melekat dengan kuat",
    "meaning_ja": "melekat dengan kuat",
-   "meaning_id": "上義歯を上へ押すと吸着した。",
+   "meaning_id": "menempel rapat (gigi palsu); melekat kuat",
    "level": "記録",
    "category": "記録",
    "sub": "記録の言い回し",
@@ -44977,7 +44923,7 @@
    "reading": "メサデルムクリーム",
    "meaning": "メサデルムクリーム",
    "meaning_ja": "メサデルムクリーム",
-   "meaning_id": "原文に記載された皮膚用の塗り薬",
+   "meaning_id": "krim kortikosteroid Mesaderm (obat oles kulit)",
    "level": "記録",
    "category": "医療",
    "sub": "薬・衛生材料",
@@ -48354,7 +48300,7 @@
    "reading": "ギャザパン",
    "meaning": "参考・要確認",
    "meaning_ja": "参考・要確認",
-   "meaning_id": "施設で使用しているパンツ類の略称と考えられる",
+   "meaning_id": "singkatan untuk celana popok berlipit yang dipakai di panti",
    "level": "記録",
    "category": "記録",
    "sub": "記録の言葉",
@@ -50695,7 +50641,7 @@
    "reading": "バルーンカテーテル",
    "meaning": "ばるーんかてーてる",
    "meaning_ja": "ばるーんかてーてる",
-   "meaning_id": "尿を外へ出すため膀胱に入れる管",
+   "meaning_id": "kateter balon; selang yang dimasukkan ke kandung kemih untuk mengeluarkan urine",
    "level": "記録",
    "category": "医療",
    "sub": "薬・衛生材料",
