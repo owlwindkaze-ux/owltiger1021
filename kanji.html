@@ -1292,7 +1292,18 @@ function buildDeck() {
   $('#fcDone').style.display = 'none'; $('#fcCard').style.display = ''; showCard();
 }
 function showCard() {
-  if (!deck.length) { $('#fcQ').textContent = '—'; $('#fcCount').textContent = '0 / 0'; return; }
+  if (!deck.length) {
+    /* 出すものが 0枚のとき、「—」だけだと 何が起きたか 分からない。
+       どの絞りで 0枚に なったのかを 書く。 */
+    const lvn = $('#fcLv').options[$('#fcLv').selectedIndex].textContent.trim();
+    const pk = $('#fcPick').value;
+    const pkn = pk === 'unseen' ? '未学習' : pk === 'review' ? '要復習' : '全部';
+    $('#fcQ').textContent = '0枚';
+    $('#fcCount').textContent = '0 / 0';
+    $('#fcTip').textContent = lvn + ' × ' + pkn + ' に あてはまるものが ありません ／ Tidak ada kartu';
+    $('#fcA').style.display = 'none'; $('#fcJudge').style.display = 'none';
+    return;
+  }
   if (di >= deck.length) return finish();
   const k = deck[di], mode = $('#fcMode').value, voc = fcIsVocab(); flipped = false;
   $('#fcA').style.display = 'none'; $('#fcQ').style.display = '';
@@ -1882,6 +1893,11 @@ $('#mNg').onclick = () => toggleK('review');
 $('#mClr').onclick = () => toggleK(null);   /* 記録を消して「まだ記録なし」に戻す */
 
 $('#fcStart').onclick = buildDeck;
+/* レベル・範囲を変えたら、その場で作り直す。
+   種類（漢字／熟語）だけが作り直されていて、レベルを変えても
+   前の束が残ったままだった（画面に「N5」と出ているのに N2の語が出る）。 */
+$('#fcLv').onchange = () => { if (fcIsVocab()) loadVocab().then(buildDeck); else buildDeck(); };
+$('#fcPick').onchange = () => { if (fcIsVocab()) loadVocab().then(buildDeck); else buildDeck(); };
 $('#fcMode').onchange = showCard;
 $('#fcCard').onclick = flip; $('#fcFlip').onclick = flip;
 $('#fcPrev').onclick = () => { if (di > 0) { di--; showCard(); } };
