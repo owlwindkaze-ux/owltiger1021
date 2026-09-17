@@ -1,6 +1,6 @@
 {
  "level": "N4",
- "count": 652,
+ "count": 648,
  "words": [
   {
    "word": "踏む",
@@ -5958,15 +5958,6 @@
    "kanji": []
   },
   {
-   "word": "いくら～ても",
-   "reading": "いくら～ても",
-   "meaning": "however much one may ~",
-   "meaning_id": "sebanyak apa pun ~",
-   "level": "N4",
-   "category": "基本語",
-   "kanji": []
-  },
-  {
    "word": "ビル",
    "reading": "ビル",
    "meaning": "(abbr.) building",
@@ -6309,15 +6300,6 @@
    "kanji": []
   },
   {
-   "word": "～やすい",
-   "reading": "～やすい",
-   "meaning": "easy to do ~",
-   "meaning_id": "mudah untuk ~",
-   "level": "N4",
-   "category": "基本語",
-   "kanji": []
-  },
-  {
    "word": "サンダル",
    "reading": "サンダル",
    "meaning": "sandal",
@@ -6525,15 +6507,6 @@
    "kanji": []
   },
   {
-   "word": "～おき",
-   "reading": "～おき",
-   "meaning": "after every ~",
-   "meaning_id": "setiap ~ sekali",
-   "level": "N4",
-   "category": "基本語",
-   "kanji": []
-  },
-  {
    "word": "かまう",
    "reading": "かまう",
    "meaning": "to mind, to care about, to be concerned about",
@@ -6657,15 +6630,6 @@
    "meaning_id": "tenis",
    "level": "N4",
    "category": "カタカナ語",
-   "kanji": []
-  },
-  {
-   "word": "～にくい",
-   "reading": "～にくい",
-   "meaning": "difficult to do ~",
-   "meaning_id": "sulit untuk ~",
-   "level": "N4",
-   "category": "基本語",
    "kanji": []
   },
   {
