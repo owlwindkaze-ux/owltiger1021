@@ -997,10 +997,22 @@ function setupWeekBtns() {
     set => { vWkOn = true; vWkSet = set; vLimit = 120; renderVocab(); },
     () => { vWkOff(); vLimit = 120; renderVocab(); });
   autoWeek();
+  autoReview();
 }
 /* 新人コース・N2コースの「今週ひらくもの」から来たときは、
    自分で📅を押さなくても「今週の分だけ」が入った状態で開く。
    印は一度使ったら消す（あとでふつうに開いたときは全部出る）。 */
+/* 第2期のように「今週の分」が無い時期は、要復習だけを開く。
+   新人コース・N2コースの導線が印を付ける。印は一度使ったら消す。 */
+const RVAUTO = 'jlpt-review-open';
+function autoReview() {
+  let f = null;
+  try { f = localStorage.getItem(RVAUTO); localStorage.removeItem(RVAUTO); } catch (e) {}
+  if (f !== '1') return;
+  const m = $('#mark'), vm = $('#vMark');
+  if (m) { m.value = 'review'; listLimit = 120; renderList(); }
+  if (vm) { vm.value = 'review'; vLimit = 120; renderVocab(); }
+}
 const WKAUTO = 'jlpt-week-open';
 function autoWeek() {
   let f = null;
