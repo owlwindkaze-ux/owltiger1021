@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-09-16e';
+  var PAGE_VER = '2026-09-17a';
   var KEY = 'reloaded-for-n2';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -430,8 +430,14 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
       /* 行のあたまで 決める。「模試で解いた文章の二周目」は 読解の行、
          「区分ごとの点（…読解…）を記録する」は どこへも つながない。 */
       var kk = /^読解/.test(t) ? 'd' : /^聴解/.test(t) ? 'c'
+             : /^語彙/.test(t) ? 'k' : /^文型/.test(t) ? 'g'
              : /模試/.test(t) ? 'm' : /100日/.test(t) ? 'n' : '';
-      out.push({k:kk, t:t.replace(/《.+?》/g,''), n:''});
+      /* 「1日60語」「1日10項目」のように 1日の数が書いてある行は、
+         月〜金のマスにする。「1日15分」は時間なので ふつうの1回のチェック。 */
+      var day = /1日\d+(語|項目|字)/.test(t);
+      var o = {k:kk, t:t.replace(/《.+?》/g,''), n:''};
+      if (day) { o.dw = 5; o.lv = 'N2'; }
+      out.push(o);
     });
     return out;
   }
@@ -526,8 +532,17 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
     });
     document.getElementById('wkApps').innerHTML = use.map(function(k){
       var A = APPS[k], lv = lvOf[k] || A.lv;
-      var wk = (k === 'k' || k === 'g') ? ' data-wk="1"' : '';
-      var note = wk ? '<span class="r" style="color:#4338ca;font-weight:700">今週の分だけが 出ます</span>' : '<span class="r">'+A.r+'</span>';
+      /* その週に 漢字・語彙・文型の割り当てがある期（第0・1期）は「今週の分だけ」。
+         割り当てが無い期（第2期以降）は「要復習だけ」を開く。 */
+      var cc = W.counts[String(w)] || {k:0,v:0,g:0};
+      var has = (k === 'k') ? (cc.k || cc.v) : (k === 'g') ? cc.g : 0;
+      var wk = '', note = '<span class="r">'+A.r+'</span>';
+      if (k === 'k' || k === 'g') {
+        if (has) { wk = ' data-open="week"';
+          note = '<span class="r" style="color:#4338ca;font-weight:700">今週の分だけが 出ます</span>'; }
+        else { wk = ' data-open="review"';
+          note = '<span class="r" style="color:#4338ca;font-weight:700">「要復習」だけが 出ます</span>'; }
+      }
       return '<a href="'+A.href+'" data-course="n2"'+wk+(A.lvkey&&lv?' data-lvkey="'+A.lvkey+'" data-lv="'+lv+'"':'')+'>'
            + '<span class="em">'+A.em+'</span><span><span class="n">'+A.n+(lv?'　<b style="color:#4338ca">'+lv+'</b>':'')+'</span>'
            + note + '</span><span class="ar">→</span></a>';
@@ -538,7 +553,8 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
         try {
           localStorage.setItem(COURSEKEY, 'n2');
           /* 漢字・語彙・文型は「今週の分だけ」を入れた状態で開く */
-          if (a.dataset.wk === '1') localStorage.setItem('jlpt-week-open', '1');
+          if (a.dataset.open === 'week')   localStorage.setItem('jlpt-week-open', '1');
+          if (a.dataset.open === 'review') localStorage.setItem('jlpt-review-open', '1');
           if (a.dataset.lvkey) localStorage.setItem(a.dataset.lvkey, a.dataset.lv);
         } catch(e){}
       });
