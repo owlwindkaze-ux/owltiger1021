@@ -1,6 +1,6 @@
 {
  "level": "N5",
- "count": 704,
+ "count": 702,
  "words": [
   {
    "word": "会う",
@@ -6083,15 +6083,6 @@
    "kanji": []
   },
   {
-   "word": "～がる",
-   "reading": "～がる",
-   "meaning": "feel",
-   "meaning_id": "menunjukkan perasaan (akhiran)",
-   "level": "N5",
-   "category": "基本語",
-   "kanji": []
-  },
-  {
    "word": "カレー",
    "reading": "カレー",
    "meaning": "curry (abbr. for curry and rice)",
@@ -6296,15 +6287,6 @@
    "meaning_id": "rok",
    "level": "N5",
    "category": "カタカナ語",
-   "kanji": []
-  },
-  {
-   "word": "～すぎ",
-   "reading": "～すぎ",
-   "meaning": "past; to exceed, ~ too much",
-   "meaning_id": "lewat, terlalu ~",
-   "level": "N5",
-   "category": "基本語",
    "kanji": []
   },
   {
