@@ -1,6 +1,6 @@
 {
  "level": "N4",
- "count": 120,
+ "count": 121,
  "grammar": [
   {
    "id": "n4-tara",
@@ -8896,6 +8896,81 @@
      "answer": "外に出たとたん、雨が降りだした。",
      "hint_id": "「〜たとたん」のあとに急な出来事を置く。",
      "hint_en": "Put the sudden event after 「〜たとたん」."
+    }
+   ]
+  },
+  {
+   "id": "n4-ikura-temo",
+   "pattern": "いくら〜ても",
+   "level": "N4",
+   "category": "逆接・対比",
+   "form": "いくら ＋ 動詞て形／い形容詞くて／名詞・な形容詞でも",
+   "meaning_id": "sebanyak apa pun ~; bagaimanapun ~",
+   "meaning_en": "no matter how much ~",
+   "note_id": "Menekankan bahwa hasilnya tetap sama meski usahanya besar. Sering dipakai saat melaporkan bahwa suatu cara tidak berhasil.",
+   "note_en": "Stresses that the result is unchanged no matter how much is done. Common when reporting that an approach did not work.",
+   "note_ja": "どれだけしても結果が変わらないことを表す。うまくいかなかったことを報告するときによく使う。",
+   "examples": [
+    {
+     "ja": "いくら声をかけても、返事がありませんでした。",
+     "reading": "いくらこえをかけても、へんじがありませんでした。",
+     "id": "Sudah berkali-kali dipanggil, tetapi tidak ada jawaban.",
+     "en": "No matter how much I called out, there was no response.",
+     "scene": "記録"
+    },
+    {
+     "ja": "いくら忙しくても、手順は省きません。",
+     "reading": "いくらいそがしくても、てじゅんははぶきません。",
+     "id": "Sesibuk apa pun, langkah kerja tidak dilewati.",
+     "en": "No matter how busy we are, we do not skip steps.",
+     "scene": "研修"
+    },
+    {
+     "ja": "いくら説明しても、伝わらないことがあります。",
+     "reading": "いくらせつめいしても、つたわらないことがあります。",
+     "id": "Sebanyak apa pun dijelaskan, kadang tetap tidak tersampaikan.",
+     "en": "No matter how much you explain, sometimes it does not get through.",
+     "scene": "家族対応"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "いくら声を＿＿＿も、返事がありませんでした。",
+     "choices": [
+      "かけて",
+      "かけ",
+      "かける",
+      "かけた"
+     ],
+     "answer": 0,
+     "explain_id": "「いくら〜ても」の前は動詞のて形。かけます → かけて。",
+     "explain_en": "Use the te-form before 「〜ても」: かけます → かけて."
+    },
+    {
+     "type": "choice",
+     "q": "いくら忙し＿＿＿、手順は省きません。",
+     "choices": [
+      "くても",
+      "いても",
+      "くて",
+      "かっても"
+     ],
+     "answer": 0,
+     "explain_id": "い形容詞は「忙しい → 忙しくても」。",
+     "explain_en": "い-adjective: 忙しい → 忙しくても."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "いくら",
+      "説明しても、",
+      "伝わらないことが",
+      "あります。"
+     ],
+     "answer": "いくら説明しても、伝わらないことがあります。",
+     "hint_id": "Awali dengan 「いくら」, lalu bentuk 〜ても.",
+     "hint_en": "Start with 「いくら」, then the 〜ても form."
     }
    ]
   }
