@@ -85,12 +85,12 @@
   {
    "file": "vocab-n5.json",
    "level": "N5",
-   "count": 704
+   "count": 702
   },
   {
    "file": "vocab-n4.json",
    "level": "N4",
-   "count": 652
+   "count": 648
   },
   {
    "file": "vocab-n3.json",
@@ -118,7 +118,7 @@
    "count": 757
   }
  ],
- "total": 6281,
+ "total": 6275,
  "level_totals": {
   "N5": 709,
   "N4": 662,

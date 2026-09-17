@@ -21,10 +21,10 @@
      "n4-te-kuremasu",
      "n4-te-moraimasu",
      "n4-te-itadakemasenka",
-     "n4-te-okimasu"
+     "n4-te-okimasu",
+     "n4-te-arimasu"
     ],
     "6": [
-     "n4-te-arimasu",
      "n4-te-shimaimasu",
      "n4-te-mimasu",
      "n4-yasui-nikui",
@@ -38,10 +38,10 @@
      "n4-ukemi",
      "n4-shieki",
      "n4-sasete-itadakimasu",
-     "n4-tsumori"
+     "n4-tsumori",
+     "n4-you-to-omoimasu"
     ],
     "7": [
-     "n4-you-to-omoimasu",
      "n4-koto-ni-shimasu",
      "n4-koto-ni-narimasu",
      "n4-you-ni-shimasu",
@@ -55,10 +55,10 @@
      "n4-mitai",
      "n4-kata",
      "n4-bakari",
-     "n4-nara"
+     "n4-nara",
+     "n4-te-iku-kuru"
     ],
     "8": [
-     "n4-te-iku-kuru",
      "n4-to-iu",
      "n4-no-meishika",
      "n4-gurai",
@@ -72,10 +72,10 @@
      "n4-toori-ni",
      "n4-mama",
      "n4-zuni",
-     "n4-shika-nai"
+     "n4-shika-nai",
+     "n4-deshou"
     ],
     "9": [
-     "n4-deshou",
      "n4-te-hoshii",
      "n4-you-ni-iimasu",
      "n4-jidoushi-tadoushi",
@@ -89,10 +89,10 @@
      "n4-noni-youto",
      "n4-ichido-mo",
      "n4-hodo",
-     "n4-ta-tokoro"
+     "n4-ta-tokoro",
+     "n4-sa-meishika"
     ],
     "10": [
-     "n4-sa-meishika",
      "n4-garu",
      "n4-te-bakari-imasu",
      "n4-to-iu-koto-desu",
@@ -106,10 +106,10 @@
      "n4-sou-mo-nai",
      "n4-ndesu",
      "n4-ta-bakari",
-     "n4-yotei"
+     "n4-yotei",
+     "n4-you-to-shimasu"
     ],
     "11": [
-     "n4-you-to-shimasu",
      "n4-koto-ga-arimasu",
      "n4-oki-goto",
      "n4-you-na",
@@ -123,10 +123,10 @@
      "n4-koto-wa-arimasen",
      "n4-made-zutto",
      "n4-tte",
-     "n4-deshou-ka"
+     "n4-deshou-ka",
+     "n4-to-omotte-imasu"
     ],
     "12": [
-     "n4-to-omotte-imasu",
      "n4-you-ni-miemasu",
      "n4-ga-shimasu",
      "n4-dashimasu",
@@ -140,7 +140,8 @@
      "n4-nai-you-ni",
      "n4-te-shimau",
      "n4-ni-yoruto",
-     "n4-dasu"
+     "n4-dasu",
+     "n4-ikura-temo"
     ],
     "13": [
      "n3-ni-chigainai",
