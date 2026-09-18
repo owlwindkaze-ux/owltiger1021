@@ -121,12 +121,34 @@ const b = await chromium.launch({ executablePath: CHROME });
   await checkSelect(p, 'sort', '#cnt', '#grid', '漢字一覧', ['mark']);
   await checkSelect(p, 'mark', '#cnt', '#grid', '漢字一覧', ['sort']);
 
-  say('  ② 熟語');
+  say('  ② 語彙');
   await p.evaluate(() => openTab('vocab'));
   await p.waitForSelector('#vgrid .kcard', { timeout: 15000 }).catch(() => {});
   await p.waitForTimeout(1200);
-  await checkSelect(p, 'vMark', '#vCnt', '#vgrid', '熟語', ['vCat', 'vSub']);
-  await checkSelect(p, 'vCat', '#vCnt', '#vgrid', '熟語', ['vMark', 'vSub']);
+  await checkSelect(p, 'vMark', '#vCnt', '#vgrid', '語彙', ['vCat', 'vSub', 'vForm']);
+  await checkSelect(p, 'vCat', '#vCnt', '#vgrid', '語彙', ['vMark', 'vSub', 'vForm']);
+  await checkSelect(p, 'vForm', '#vCnt', '#vgrid', '語彙', ['vMark', 'vCat', 'vSub']);
+  /* 「形でしぼる」は7つに分けるので、7つの合計が 全部の数と 合うはず。
+     合わなければ、どこにも入らない語か、二重に数えている語がある。 */
+  {
+    await p.evaluate(() => window.ensureAllVocab && window.ensureAllVocab());
+    await p.waitForTimeout(2500);
+    const num = async () => {
+      await p.waitForTimeout(250);
+      const t = await p.textContent('#vCnt');
+      return parseInt(String(t).replace(/[^0-9]/g, ''), 10) || 0;
+    };
+    for (const id of ['vMark', 'vCat', 'vSub']) await p.selectOption('#' + id, 'all');
+    await p.selectOption('#vForm', 'all');
+    const all = await num();
+    let sum = 0;
+    for (const f of ['juku', 'mix', 'ichiji', 'kana', 'kata', 'gokei', 'phrase']) {
+      await p.selectOption('#vForm', f); sum += await num();
+    }
+    await p.selectOption('#vForm', 'all');
+    if (sum !== all) bad(`語彙：形でしぼるの合計 ${sum} が 全部の数 ${all} と 合わない`);
+    else say(`     形でしぼる：7区分の合計 ${sum} ＝ 全部 ${all}　一致`);
+  }
 
   say('  ③ カード');
   await p.evaluate(() => openTab('card')); await p.waitForTimeout(800);

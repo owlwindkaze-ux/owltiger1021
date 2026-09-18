@@ -211,7 +211,7 @@ footer a{color:var(--blue)}
 
 <nav class="tabs"><div class="tabs-in">
   <button class="tab on" data-tab="list">Kanji<span class="sub">漢字一覧</span></button>
-  <button class="tab" data-tab="vocab">Kosakata<span class="sub">熟語</span></button>
+  <button class="tab" data-tab="vocab">Kosakata<span class="sub">語彙</span></button>
   <button class="tab" data-tab="card">Kartu<span class="sub">フラッシュカード</span></button>
   <button class="tab" data-tab="quiz">Latihan<span class="sub">練習問題</span></button>
   <button class="tab" data-tab="stroke">Urutan Coretan<span class="sub">書き順</span></button>
@@ -251,10 +251,10 @@ footer a{color:var(--blue)}
     <div class="grid" id="grid"><div class="loading">Memuat data… 読み込み中…</div></div>
   </section>
 
-  <!-- ===== Kosakata / 熟語 ===== -->
+  <!-- ===== Kosakata / 語彙 ===== -->
   <section class="panel" id="p-vocab">
     <div class="toolbar">
-      <input class="search" id="vq" placeholder="Cari kosakata / cara baca / arti … 熟語・読み・意味で検索">
+      <input class="search" id="vq" placeholder="Cari kosakata / cara baca / arti … 言葉・読み・意味で検索">
       <div class="chips" id="vLvChips">
         <button class="chip on" data-lv="all">Semua</button>
         <button class="chip" data-lv="N5">N5</button>
@@ -294,11 +294,21 @@ footer a{color:var(--blue)}
         <option value="語形成">語形成（〜化・高〜） ／ Imbuhan (N2)</option>
       </select>
       <select class="sel" id="vSub"><option value="all">小分類すべて ／ Semua sub-bidang</option></select>
+      <select class="sel" id="vForm">
+        <option value="all">形すべて ／ Semua bentuk</option>
+        <option value="juku">熟語（漢字2字以上） ／ Kata majemuk kanji</option>
+        <option value="mix">動詞・形容詞（漢字＋かな） ／ Verba &amp; adjektiva</option>
+        <option value="ichiji">漢字1字 ／ Satu kanji</option>
+        <option value="kana">かなの言葉 ／ Kata hiragana</option>
+        <option value="kata">カタカナ語 ／ Kata katakana</option>
+        <option value="gokei">語形成（～回・高～） ／ Imbuhan</option>
+        <option value="phrase">声かけの言葉 ／ Kalimat sapaan</option>
+      </select>
       <button class="chip wkchip" id="vWkBtn" hidden>📅 今週の分だけ ／ Minggu ini</button>
       <span class="hint" id="vCnt"></span>
     </div>
     <p class="wkmsg" id="vWkMsg" hidden></p>
-    <p class="hint" style="margin-bottom:.7rem">Ketuk kata untuk melihat kanji penyusunnya ／ 熟語をタップすると、使われている漢字の書き順を確認できます<br>
+    <p class="hint" style="margin-bottom:.7rem">Ketuk kata untuk melihat kanji penyusunnya ／ 言葉をタップすると、使われている漢字の書き順を確認できます<br>
       <span style="color:var(--green);font-weight:800">■ hijau = sudah hafal ／ 緑＝覚えた</span>　
       <span style="color:var(--red);font-weight:800">■ merah = perlu diulang ／ 赤＝要復習</span></p>
 
@@ -336,13 +346,13 @@ footer a{color:var(--blue)}
       <div class="toolbar" style="justify-content:center;margin:0">
         <select class="sel" id="fcType">
           <option value="kanji">Kanji ／ 漢字</option>
-          <option value="vocab">Kosakata ／ 熟語</option>
+          <option value="vocab">Kosakata ／ 語彙</option>
         </select>
         <select class="sel" id="fcMode">
           <option value="k2r">問題 → Cara baca ／ 読み</option>
           <option value="k2m">問題 → Arti ／ 意味</option>
-          <option value="r2k">Cara baca → 問題 ／ 読み→漢字・熟語</option>
-          <option value="m2k">Arti → 問題 ／ 意味→漢字・熟語</option>
+          <option value="r2k">Cara baca → 問題 ／ 読み→漢字・語彙</option>
+          <option value="m2k">Arti → 問題 ／ 意味→漢字・語彙</option>
         </select>
         <select class="sel" id="fcLv">
           <option value="all">Semua level</option><option value="N5">N5</option>
@@ -492,8 +502,8 @@ footer a{color:var(--blue)}
       <button class="btn ng" id="resetBtn">Hapus semua catatan ／ 記録を消す</button>
     </div>
     <p class="hint" style="white-space:normal;margin-top:.6rem">
-      <b>CSV</b>＝Excelで開ける一覧表です（漢字・熟語の一つずつの状態）。<br>
-      <b>バックアップ</b>＝漢字・熟語・文型・読解の記録をまとめて保存するファイルです。
+      <b>CSV</b>＝Excelで開ける一覧表です（漢字・語彙の一つずつの状態）。<br>
+      <b>バックアップ</b>＝漢字・語彙・文型・読解の記録をまとめて保存するファイルです。
       機種変更のときは、新しい端末で「読み込む」を押してこのファイルを選んでください。
     </div>
   </section>
@@ -520,7 +530,7 @@ footer a{color:var(--blue)}
   </footer>
 </div>
 
-<!-- ===== 熟語モーダル ===== -->
+<!-- ===== 語彙モーダル ===== -->
 <div class="ov" id="vov"><div class="modal">
   <div class="m-head">
     <div style="flex:1;min-width:0">
@@ -994,7 +1004,13 @@ function setupWeekBtns() {
     set => { wkOn = true; wkSet = set; listLimit = 120; renderList(); },
     () => { wkOff(); listLimit = 120; renderList(); });
   makeWeekBtn('vWkBtn', 'vWkMsg', 'vocab',
-    set => { vWkOn = true; vWkSet = set; vLimit = 120; renderVocab(); },
+    /* 「今週の分だけ」を押したら、分野・小分類・形の絞りは解く。
+       解かないと、前に押した絞りが残っていて 今週の分が出てこないことがある。 */
+    set => {
+      vWkOn = true; vWkSet = set; vLimit = 120;
+      ['#vCat', '#vSub', '#vForm'].forEach(id => { const e = $(id); if (e) e.value = 'all'; });
+      renderVocab();
+    },
     () => { vWkOff(); vLimit = 120; renderVocab(); });
   autoWeek();
   autoReview();
@@ -1043,7 +1059,7 @@ const cardHTML = k => `<button class="kcard ${progress[k.character] ? 'is-' + pr
     <div class="st">${k.strokes} coretan／画</div>
   </div></button>`;
 
-/* ---------- 熟語タブ ---------- */
+/* ---------- 語彙タブ ---------- */
 let vLimit = 120, vLv = 'all';
 const LVORD = { N5: 0, N4: 1, N3: 2, N2: 3, '介護': 4, '記録': 5, '現場': 6, '施設': 7, '追加': 8 };
 /** 熟語の検索：ぴったり＞先頭一致＞途中に含む。意味（ローマ字）は語頭だけ見る */
@@ -1058,8 +1074,24 @@ function scoreVocab(w, q) {
   if (wd.includes(q) || rd.includes(q)) return 50;
   return 0;
 }
+/* 語の「形」でしぼるための判定。
+   この画面には熟語だけでなく、動詞・かなの言葉・カタカナ語・接尾語も入っている
+   （JLPTの「文字・語彙」はそのすべてを出すため）。データに札を足すのではなく、
+   語そのものから毎回決める。「足; 脚」のように別形が付くものは、前の形だけ見る。 */
+const KJ = '\\u4e00-\\u9fff';
+function wordForm(word, cat) {
+  const s = String(word || '').split(';')[0].replace(/[（(].*?[）)]/g, '').trim();
+  if (/[～〜]/.test(s)) return 'gokei';                          // ～回・高～
+  if (cat === '声かけ' || /[。！？]/.test(s)) return 'phrase';    // おはようございます
+  if (new RegExp('^[' + KJ + ']{2,}$').test(s)) return 'juku';   // 体位交換
+  if (new RegExp('^[' + KJ + ']$').test(s)) return 'ichiji';     // 朝
+  if (new RegExp('[' + KJ + ']').test(s)) return 'mix';          // 起き上がる
+  if (/[ァ-ヴ]/.test(s)) return 'kata';                          // ナースコール
+  return 'kana';                                                 // とろみ
+}
 function filterVocab() {
   const q = normQ($('#vq').value), cat = $('#vCat').value, sub = $('#vSub').value;
+  const fm = $('#vForm') ? $('#vForm').value : 'all';
   const mk = $('#vMark') ? $('#vMark').value : 'all';
   return VOCAB.filter(w => {
     if (vWkOn && vWkSet) { if (!vWkSet.has(w.word)) return false; }
@@ -1070,6 +1102,7 @@ function filterVocab() {
     if (mk === 'notrans' && (w.meaning_id || '').trim()) return false;
     if (cat !== 'all' && w.category !== cat) return false;
     if (sub !== 'all' && w.sub !== sub) return false;
+    if (fm !== 'all' && wordForm(w.word, w.category) !== fm) return false;
     if (!q) { w._s = 0; return true; }
     const s = scoreVocab(w, q);
     if (s) { w._s = s; return true; }
@@ -1718,7 +1751,7 @@ function refreshStats() {
     '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted)">KANJI ／ 漢字</div>' +
     ['N5', 'N4', 'N3', 'N2', '介護'].filter(lv => DATA.some(k => hasLv(k, lv)))
       .map(lv => bar(lv, DATA.filter(k => hasLv(k, lv)), progress, x => x.character)).join('') +
-    (VOCAB.length ? '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted);margin-top:.5rem">KOSAKATA ／ 熟語</div>' +
+    (VOCAB.length ? '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted);margin-top:.5rem">KOSAKATA ／ 語彙</div>' +
       ['N5', 'N4', 'N3', 'N2', '介護', '記録', '現場', '施設', '追加'].filter(lv => VOCAB.some(w => w.level === lv)).map(lv => bar(lv, VOCAB.filter(w => w.level === lv), vprogress, x => x.word)).join('') : '');
   /* 要復習の一覧：漢字も熟語も全部出す。多いときは少しずつ表示して画面を軽く保つ */
   const rev = DATA.filter(k => progress[k.character] === 'review');
@@ -1730,7 +1763,7 @@ function refreshStats() {
   $('#reviewGrid').innerHTML =
     (rev.length ? `<div class="lb" style="grid-column:1/-1">漢字 ${rev.length}字</div>` +
       kShow.map(cardHTML).join('') + moreBtn('revMoreK', kShow.length, rev.length, '字') : '') +
-    (vrev.length ? `<div class="lb" style="grid-column:1/-1;margin-top:.6rem">熟語 ${vrev.length}語</div>` +
+    (vrev.length ? `<div class="lb" style="grid-column:1/-1;margin-top:.6rem">語彙 ${vrev.length}語</div>` +
       vShow.map(w => `<button class="kcard is-review" data-w="${h(w.word)}">
         <div class="ch" style="font-size:1.15rem;line-height:1.5">${h(w.word)}</div>
         <div class="rd">${h(w.reading)}</div>
@@ -1820,7 +1853,7 @@ $('#nwAdd').onclick = () => {
 };
 $('#nwExport').onclick = () => {
   const esc = s => /[",]/.test(s || '') ? `"${String(s).replace(/"/g, '""')}"` : (s || '');
-  const csv = '﻿熟語,ふりがな,意味（インドネシア語）,分野,小分類,意味（英語）,削除\n' +
+  const csv = '﻿語彙,ふりがな,意味（インドネシア語）,分野,小分類,意味（英語）,削除\n' +
     myWords.map(m => [m.word, m.reading, m.meaning_id, m.category, m.sub || '', '', ''].map(esc).join(',')).join('\n') + '\n';
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
@@ -1832,6 +1865,7 @@ $('#vq').oninput = () => { vLimit = 120; renderVocab(); };
 $('#vMark').onchange = () => { vLimit = 120; renderVocab(); };
 $('#vCat').onchange = () => { $('#vSub').value = 'all'; vLimit = 120; renderVocab(); };
 $('#vSub').onchange = () => { vLimit = 120; renderVocab(); };
+$('#vForm').onchange = () => { vLimit = 120; renderVocab(); };
 $$('#vLvChips .chip').forEach(c => c.onclick = async () => {
   vWkOff();
   $$('#vLvChips .chip').forEach(x => x.classList.toggle('on', x === c));
@@ -1855,10 +1889,10 @@ $('#vmNg').onclick = () => toggleV('review');
 $('#vmClr').onclick = () => toggleV(null);   /* 記録を消して「まだ記録なし」に戻す */
 $('#fcType').onchange = () => {
   const voc = fcIsVocab();
-  $$('#fcMode option')[0].textContent = voc ? '熟語 → Cara baca ／ 読み' : '漢字 → Cara baca ／ 読み';
-  $$('#fcMode option')[1].textContent = voc ? '熟語 → Arti ／ 意味' : '漢字 → Arti ／ 意味';
-  $$('#fcMode option')[2].textContent = voc ? 'Cara baca → 熟語 ／ 読み→熟語' : 'Cara baca → 漢字 ／ 読み→漢字';
-  $$('#fcMode option')[3].textContent = voc ? 'Arti → 熟語 ／ 意味→熟語' : 'Arti → 漢字 ／ 意味→漢字';
+  $$('#fcMode option')[0].textContent = voc ? '語彙 → Cara baca ／ 読み' : '漢字 → Cara baca ／ 読み';
+  $$('#fcMode option')[1].textContent = voc ? '語彙 → Arti ／ 意味' : '漢字 → Arti ／ 意味';
+  $$('#fcMode option')[2].textContent = voc ? 'Cara baca → 語彙 ／ 読み→語彙' : 'Cara baca → 漢字 ／ 読み→漢字';
+  $$('#fcMode option')[3].textContent = voc ? 'Arti → 語彙 ／ 意味→語彙' : 'Arti → 漢字 ／ 意味→漢字';
   if (voc) loadVocab().then(buildDeck); else buildDeck();
 };
 
@@ -1924,7 +1958,7 @@ $('#expCsv').onclick = () => {
   const rows = [['種類', 'レベル', '言葉・漢字', '読み', '意味', '状態']];
   DATA.forEach(k => rows.push(['漢字', k.level, k.character,
     k.on.concat(k.kun).slice(0, 3).join('・'), meanOf(k).slice(0, 3).join(', '), st(progress[k.character])]));
-  VOCAB.forEach(w => rows.push(['熟語', w.level, w.word, w.reading, vMean(w), st(vprogress[w.word])]));
+  VOCAB.forEach(w => rows.push(['語彙', w.level, w.word, w.reading, vMean(w), st(vprogress[w.word])]));
   const d = new Date(), p2 = n => String(n).padStart(2, '0');
   dl(`学習記録_${d.getFullYear()}${p2(d.getMonth() + 1)}${p2(d.getDate())}.csv`,
      '\ufeff' + rows.map(r => r.map(esc2).join(',')).join('\r\n'), 'text/csv;charset=utf-8');
