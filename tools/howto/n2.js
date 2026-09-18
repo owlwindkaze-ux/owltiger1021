@@ -2,7 +2,11 @@
 const fs = require('fs');
 const { withRuby } = require(__dirname + '/ruby.js');
 const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const R = s => withRuby(esc(s));
+/* esc() が <b> まで文字に変えてしまい、紙に「<b>」がそのまま出ていた。
+   ふりがなを付けたあとで、太字と改行のタグだけ 元に戻す。 */
+const R = s => withRuby(esc(s))
+  .replace(/&lt;(\/?)b&gt;/g, '<$1b>')
+  .replace(/&lt;br\s*\/?&gt;/g, '<br>');
 const ID = s => `<span class="id">${esc(s)}</span>`;
 
 const css = `
