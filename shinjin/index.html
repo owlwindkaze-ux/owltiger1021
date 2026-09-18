@@ -8,6 +8,22 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="12月に入職した職員が、7月のN3に合格するまでの道すじ。月ごとにやることが決まっています。">
 <title>Rute N3 Juli ｜ 新人コース（7月N3）</title>
+<script>
+/* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
+(function(){
+  var PAGE_VER = '2026-09-18b';
+  var KEY = 'reloaded-for-shinjin';
+  try {
+    fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
+      .then(function(j){
+        if (!j || !j.version || j.version === PAGE_VER) return;
+        if (sessionStorage.getItem(KEY) === j.version) return;
+        sessionStorage.setItem(KEY, j.version);
+        location.replace(location.pathname + '?v=' + encodeURIComponent(j.version) + location.hash);
+      })['catch'](function(){});
+  } catch (e) {}
+})();
+</script>
 <style>
 :root{
   --ink:#12212e; --muted:#5b6875; --line:#d8e0e8; --bg:#f2f6fa; --card:#fff;
@@ -152,6 +168,14 @@ footer{text-align:center;font-size:.75rem;color:var(--muted);padding:1rem 0 2rem
     <div class="wprog" id="weekProg"></div>
     <ul class="chk" id="weekList"></ul>
     <p class="wnote" id="weekNote"></p>
+  </div>
+
+  <div class="card">
+    <h2>職場の 勉強会<small>Sesi belajar di tempat kerja ／ 仕事の日は この時間に みんなで ひらきます</small></h2>
+    <p class="desc"><b>日勤の日　8:45 〜 9:25（40分）</b>　出勤の前です。<br>
+      <b>早出の日　16:45 〜 17:30（45分）</b>　仕事のあとです。早出は3月からです。<br>
+      勉強会に出たら、その日のマスを押してください。それで今日の分はおわりです。
+      仕事の日は、家で長くやらなくてだいじょうぶです。</p>
   </div>
 
   <details class="card restbox" id="monthBox">
