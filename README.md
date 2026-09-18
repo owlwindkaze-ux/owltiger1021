@@ -22,7 +22,7 @@ Cukup buka link di atas. Tanpa instalasi, bisa di HP maupun komputer.
 | タブ | Tab | できること |
 |---|---|---|
 | 漢字一覧 | Kanji | 612字をカード表示。検索（漢字・読み・意味・用例）、レベル/画数/頻度で並べ替え。カードをタップで詳細 |
-| 熟語 | Kosakata | 3,254語（JLPT語彙＋**介護・看護201語**＋現場125語）。分野で絞り込み、タップで構成漢字の書き順へ |
+| 語彙 | Kosakata | 6,272語（JLPT語彙＋**介護227語**＋現場125語＋記録757語）。レベル・分野・**形**（熟語／動詞／かな語／カタカナ語／語形成）で絞り込み、タップで構成漢字の書き順へ |
 | フラッシュカード | Kartu | 「漢字→読み」「漢字→意味」「読み→漢字」「意味→漢字」の4モード。覚えた／要復習で仕分け |
 | 書き順 | Urutan Coretan | 1画ずつの連続図（新しい画は赤）。文字をタップすると1画ずつアニメーションで書きます |
 | 学習状況 | Progres | レベル別の到達率、要復習リスト、記録の書き出し |
@@ -71,7 +71,7 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 | `kanji-data.json` | 漢字1,066字の**まとめ役**（読み・意味・用例・部首など）。**編集するのはこのファイル** |
 | `kanji.json` ＋ `kanji-n5/n4/n3/kaigo.json` | 上をレベルごとに分けたもの。画面はこちらを読む（`tools/split-data.py` が作ります） |
 | `kanji-strokes.json` | 書き順データ（KanjiVG のパス、1,066字ぶん） |
-| `vocab-data.json` | 熟語6,296語の**まとめ役**（JLPT語彙＋介護・看護201語＋現場125語）。**編集するのはこのファイル** |
+| `vocab-data.json` | 語彙6,272語の**まとめ役**（JLPT語彙＋介護・看護201語＋現場125語）。**編集するのはこのファイル** |
 | `vocab.json` ＋ `vocab-n5/n4/n3/kaigo/genba/kiroku.json` | 上をレベルごとに分けたもの。画面はこちらを読む |
 | `tools/split-data.py` | まとめ役のファイルを、レベルごとに分け直すスクリプト |
 | `sentences.json` | 練習問題（JLPT形式）用の例文4,338件（収録語彙4,558語の95%をカバー） |

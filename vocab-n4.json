@@ -20,7 +20,9 @@
    "kanji": [
     "区"
    ],
-   "meaning_id": "distrik, kecamatan (akhiran)"
+   "meaning_id": "distrik, kecamatan (akhiran)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "盗む",
@@ -134,7 +136,9 @@
    "kanji": [
     "会"
    ],
-   "meaning_id": "pertemuan, rapat (akhiran)"
+   "meaning_id": "pertemuan, rapat (akhiran)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "聞こえる",
@@ -560,7 +564,9 @@
    "kanji": [
     "製"
    ],
-   "meaning_id": "buatan, produksi (akhiran)"
+   "meaning_id": "buatan, produksi (akhiran)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "注意",
@@ -604,7 +610,9 @@
    "kanji": [
     "軒"
    ],
-   "meaning_id": "(satuan penghitung rumah)"
+   "meaning_id": "(satuan penghitung rumah)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "通る",
@@ -688,7 +696,9 @@
     "学",
     "部"
    ],
-   "meaning_id": "fakultas"
+   "meaning_id": "fakultas",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "厳しい",
@@ -945,7 +955,9 @@
    "kanji": [
     "式"
    ],
-   "meaning_id": "upacara, gaya (akhiran)"
+   "meaning_id": "upacara, gaya (akhiran)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "出席",
@@ -966,7 +978,9 @@
    "kanji": [
     "家"
    ],
-   "meaning_id": "ahli, pakar (akhiran)"
+   "meaning_id": "ahli, pakar (akhiran)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "迎える",
@@ -1921,7 +1935,9 @@
    "kanji": [
     "員"
    ],
-   "meaning_id": "anggota (akhiran)"
+   "meaning_id": "anggota (akhiran)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "原因",
@@ -4245,7 +4261,9 @@
    "kanji": [
     "様"
    ],
-   "meaning_id": "Bapak/Ibu/Saudara (sebutan hormat)"
+   "meaning_id": "Bapak/Ibu/Saudara (sebutan hormat)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "ご存じ",
@@ -4315,7 +4333,9 @@
    "kanji": [
     "代"
    ],
-   "meaning_id": "periode ~, zaman ~"
+   "meaning_id": "periode ~, zaman ~",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "最後",
@@ -4467,7 +4487,9 @@
    "kanji": [
     "御"
    ],
-   "meaning_id": "yang terhormat ~ (awalan hormat)"
+   "meaning_id": "yang terhormat ~ (awalan hormat)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "安心",
@@ -4786,7 +4808,9 @@
    "kanji": [
     "君"
    ],
-   "meaning_id": "sebutan untuk laki-laki muda/junior"
+   "meaning_id": "sebutan untuk laki-laki muda/junior",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "眠い",
@@ -5324,7 +5348,9 @@
    "kanji": [
     "町"
    ],
-   "meaning_id": "kota/distrik ~"
+   "meaning_id": "kota/distrik ~",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "安全",
@@ -5527,7 +5553,9 @@
    "kanji": [
     "目"
    ],
-   "meaning_id": "ke- (penunjuk urutan)"
+   "meaning_id": "ke- (penunjuk urutan)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "番組",
