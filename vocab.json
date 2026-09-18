@@ -1,6 +1,6 @@
 {
  "name": "JLPT N5–N3 熟語＋現場用語",
- "count": 6296,
+ "count": 6272,
  "levels": [
   "N5",
   "N4",
@@ -95,7 +95,7 @@
   {
    "file": "vocab-n3.json",
    "level": "N3",
-   "count": 2081
+   "count": 2078
   },
   {
    "file": "vocab-n2.json",
@@ -118,7 +118,7 @@
    "count": 757
   }
  ],
- "total": 6275,
+ "total": 6272,
  "level_totals": {
   "N5": 709,
   "N4": 662,
