@@ -1,6 +1,6 @@
 {
  "name": "JLPT N5–N3 熟語＋現場用語",
- "count": 6275,
+ "count": 6272,
  "levels": [
   "N5",
   "N4",
@@ -813,7 +813,9 @@
    "kanji": [
     "円"
    ],
-   "meaning_id": "yen (mata uang Jepang)"
+   "meaning_id": "yen (mata uang Jepang)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "鉛筆",
@@ -1263,7 +1265,9 @@
    "kanji": [
     "回"
    ],
-   "meaning_id": "kali (hitungan)"
+   "meaning_id": "kali (hitungan)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "～階",
@@ -1273,7 +1277,9 @@
    "kanji": [
     "階"
    ],
-   "meaning_id": "lantai (tingkat bangunan)"
+   "meaning_id": "lantai (tingkat bangunan)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "外国",
@@ -1410,7 +1416,9 @@
    "kanji": [
     "月"
    ],
-   "meaning_id": "bulan (hitungan)"
+   "meaning_id": "bulan (hitungan)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "掛ける",
@@ -1504,7 +1512,9 @@
    "kanji": [
     "月"
    ],
-   "meaning_id": "bulan (nama bulan)"
+   "meaning_id": "bulan (nama bulan)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "学校",
@@ -1630,7 +1640,9 @@
    "kanji": [
     "側"
    ],
-   "meaning_id": "sisi, pihak"
+   "meaning_id": "sisi, pihak",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "可愛い",
@@ -2149,7 +2161,9 @@
    "kanji": [
     "個"
    ],
-   "meaning_id": "buah (hitungan benda kecil)"
+   "meaning_id": "buah (hitungan benda kecil)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "五",
@@ -2169,7 +2183,9 @@
    "kanji": [
     "語"
    ],
-   "meaning_id": "bahasa"
+   "meaning_id": "bahasa",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "公園",
@@ -2374,7 +2390,9 @@
    "kanji": [
     "歳"
    ],
-   "meaning_id": "tahun (usia)"
+   "meaning_id": "tahun (usia)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "財布",
@@ -2446,7 +2464,9 @@
    "kanji": [
     "冊"
    ],
-   "meaning_id": "buku (hitungan)"
+   "meaning_id": "buku (hitungan)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "雑誌",
@@ -2530,7 +2550,9 @@
    "kanji": [
     "時"
    ],
-   "meaning_id": "jam (pukul)"
+   "meaning_id": "jam (pukul)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "塩",
@@ -2562,7 +2584,9 @@
     "時",
     "間"
    ],
-   "meaning_id": "jam (durasi)"
+   "meaning_id": "jam (durasi)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "仕事",
@@ -2742,7 +2766,9 @@
    "kanji": [
     "中"
    ],
-   "meaning_id": "selama, sepanjang"
+   "meaning_id": "selama, sepanjang",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "～週間",
@@ -2753,7 +2779,9 @@
     "週",
     "間"
    ],
-   "meaning_id": "~minggu (lamanya)"
+   "meaning_id": "~minggu (lamanya)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "授業",
@@ -2862,7 +2890,9 @@
    "kanji": [
     "人"
    ],
-   "meaning_id": "orang (kebangsaan)"
+   "meaning_id": "orang (kebangsaan)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "新聞",
@@ -3114,7 +3144,9 @@
    "kanji": [
     "台"
    ],
-   "meaning_id": "unit (penghitung kendaraan/mesin)"
+   "meaning_id": "unit (penghitung kendaraan/mesin)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "大学",
@@ -3671,7 +3703,9 @@
    "kanji": [
     "度"
    ],
-   "meaning_id": "kali, derajat"
+   "meaning_id": "kali, derajat",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "動物",
@@ -3993,7 +4027,9 @@
    "kanji": [
     "何"
    ],
-   "meaning_id": "jenis apa~"
+   "meaning_id": "jenis apa~",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "二",
@@ -4033,7 +4069,9 @@
    "kanji": [
     "日"
    ],
-   "meaning_id": "tanggal ~, selama ~ hari"
+   "meaning_id": "tanggal ~, selama ~ hari",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "日曜日",
@@ -4116,7 +4154,9 @@
    "kanji": [
     "年"
    ],
-   "meaning_id": "~tahun"
+   "meaning_id": "~tahun",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "登る",
@@ -4177,7 +4217,9 @@
    "kanji": [
     "杯"
    ],
-   "meaning_id": "cangkir, gelas (penghitung)"
+   "meaning_id": "cangkir, gelas (penghitung)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "灰皿",
@@ -4464,7 +4506,9 @@
    "kanji": [
     "番"
    ],
-   "meaning_id": "urutan ke~, nomor~"
+   "meaning_id": "urutan ke~, nomor~",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "番号",
@@ -4518,7 +4562,9 @@
    "kanji": [
     "匹"
    ],
-   "meaning_id": "ekor (penghitung hewan kecil)"
+   "meaning_id": "ekor (penghitung hewan kecil)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "引く",
@@ -4824,7 +4870,9 @@
    "kanji": [
     "分"
    ],
-   "meaning_id": "~menit"
+   "meaning_id": "~menit",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "文章",
@@ -4940,7 +4988,9 @@
    "kanji": [
     "本"
    ],
-   "meaning_id": "batang (penghitung benda panjang)"
+   "meaning_id": "batang (penghitung benda panjang)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "本棚",
@@ -4972,7 +5022,9 @@
    "kanji": [
     "枚"
    ],
-   "meaning_id": "lembar (penghitung benda tipis)"
+   "meaning_id": "lembar (penghitung benda tipis)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "毎朝",
@@ -5058,7 +5110,9 @@
    "kanji": [
     "前"
    ],
-   "meaning_id": "di depan ~"
+   "meaning_id": "di depan ~",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "曲る",
@@ -5407,7 +5461,9 @@
    "kanji": [
     "屋"
    ],
-   "meaning_id": "toko, warung (akhiran)"
+   "meaning_id": "toko, warung (akhiran)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "八百屋",
@@ -5871,7 +5927,9 @@
    "kanji": [
     "区"
    ],
-   "meaning_id": "distrik, kecamatan (akhiran)"
+   "meaning_id": "distrik, kecamatan (akhiran)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "盗む",
@@ -5985,7 +6043,9 @@
    "kanji": [
     "会"
    ],
-   "meaning_id": "pertemuan, rapat (akhiran)"
+   "meaning_id": "pertemuan, rapat (akhiran)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "聞こえる",
@@ -6411,7 +6471,9 @@
    "kanji": [
     "製"
    ],
-   "meaning_id": "buatan, produksi (akhiran)"
+   "meaning_id": "buatan, produksi (akhiran)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "注意",
@@ -6455,7 +6517,9 @@
    "kanji": [
     "軒"
    ],
-   "meaning_id": "(satuan penghitung rumah)"
+   "meaning_id": "(satuan penghitung rumah)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "通る",
@@ -6539,7 +6603,9 @@
     "学",
     "部"
    ],
-   "meaning_id": "fakultas"
+   "meaning_id": "fakultas",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "厳しい",
@@ -6796,7 +6862,9 @@
    "kanji": [
     "式"
    ],
-   "meaning_id": "upacara, gaya (akhiran)"
+   "meaning_id": "upacara, gaya (akhiran)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "出席",
@@ -6817,7 +6885,9 @@
    "kanji": [
     "家"
    ],
-   "meaning_id": "ahli, pakar (akhiran)"
+   "meaning_id": "ahli, pakar (akhiran)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "迎える",
@@ -7772,7 +7842,9 @@
    "kanji": [
     "員"
    ],
-   "meaning_id": "anggota (akhiran)"
+   "meaning_id": "anggota (akhiran)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "原因",
@@ -10096,7 +10168,9 @@
    "kanji": [
     "様"
    ],
-   "meaning_id": "Bapak/Ibu/Saudara (sebutan hormat)"
+   "meaning_id": "Bapak/Ibu/Saudara (sebutan hormat)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "ご存じ",
@@ -10166,7 +10240,9 @@
    "kanji": [
     "代"
    ],
-   "meaning_id": "periode ~, zaman ~"
+   "meaning_id": "periode ~, zaman ~",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "最後",
@@ -10318,7 +10394,9 @@
    "kanji": [
     "御"
    ],
-   "meaning_id": "yang terhormat ~ (awalan hormat)"
+   "meaning_id": "yang terhormat ~ (awalan hormat)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "安心",
@@ -10637,7 +10715,9 @@
    "kanji": [
     "君"
    ],
-   "meaning_id": "sebutan untuk laki-laki muda/junior"
+   "meaning_id": "sebutan untuk laki-laki muda/junior",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "眠い",
@@ -11175,7 +11255,9 @@
    "kanji": [
     "町"
    ],
-   "meaning_id": "kota/distrik ~"
+   "meaning_id": "kota/distrik ~",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "安全",
@@ -11378,7 +11460,9 @@
    "kanji": [
     "目"
    ],
-   "meaning_id": "ke- (penunjuk urutan)"
+   "meaning_id": "ke- (penunjuk urutan)",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "番組",
@@ -22396,14 +22480,16 @@
    "meaning_id": "kegembiraan, kebahagiaan"
   },
   {
-   "word": "来",
-   "reading": "らい～",
+   "word": "来〜",
+   "reading": "らい〜",
    "meaning": "next ~",
    "level": "N3",
    "kanji": [
     "来"
    ],
-   "meaning_id": "depan, mendatang"
+   "meaning_id": "depan, mendatang",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "楽",
@@ -23238,7 +23324,9 @@
    "kanji": [
     "観"
    ],
-   "meaning_id": "pandangan, perasaan terhadap"
+   "meaning_id": "pandangan, perasaan terhadap",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "癌",
@@ -30694,7 +30782,9 @@
    "kanji": [
     "敗"
    ],
-   "meaning_id": "(satuan hitung) kekalahan"
+   "meaning_id": "(satuan hitung) kekalahan",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "映える",
@@ -50976,16 +51066,6 @@
    "meaning_id": "sulit untuk ~"
   },
   {
-   "word": "〜がち",
-   "reading": "〜がち",
-   "meaning": "tend to do ~",
-   "level": "N3",
-   "kanji": [],
-   "category": "語形成",
-   "sub": "接頭語・接尾語",
-   "meaning_id": "cenderung ~; sering ~"
-  },
-  {
    "word": "〜期",
    "reading": "〜き",
    "meaning": "~age, ~period",
@@ -51054,19 +51134,6 @@
    "category": "語形成",
    "sub": "接頭語・接尾語",
    "meaning_id": "kehabisan ~"
-  },
-  {
-   "word": "〜気味",
-   "reading": "〜ぎみ",
-   "meaning": "slightly ~",
-   "level": "N3",
-   "kanji": [
-    "気",
-    "味"
-   ],
-   "category": "語形成",
-   "sub": "接頭語・接尾語",
-   "meaning_id": "agak ~; sedikit ~"
   },
   {
    "word": "〜行",
@@ -51607,16 +51674,6 @@
    "category": "語形成",
    "sub": "接頭語・接尾語",
    "meaning_id": "~ pasang alas kaki"
-  },
-  {
-   "word": "〜だらけ",
-   "reading": "〜だらけ",
-   "meaning": "be full of ~, be filled with ~",
-   "level": "N3",
-   "kanji": [],
-   "category": "語形成",
-   "sub": "接頭語・接尾語",
-   "meaning_id": "penuh dengan ~"
   },
   {
    "word": "〜団",
