@@ -94,21 +94,37 @@ ${ID('Tekan "Kursus Staf Baru" pada menu.')}</div></div>
 <h2>${R('③ 毎日の 進め方')}</h2>
 <p class="lead">${R('新人コースに 夜勤は ありません。12月から 日勤で 始めて、早出に 入るのは 3月からです。')}
 ${ID('Pada Kursus Staf Baru tidak ada shift malam. Mulai Desember dengan shift siang; shift pagi (hayade) baru mulai Maret.')}</p>
+<div class="box">
+<p class="big">${R('勉強は、職場の 勉強会が 中心です。')}</p>
+<p>${R('一人で がんばる 時間では ありません。仕事の 日は、<b>職場の 勉強会</b>の 時間に、みんなで 画面を ひらきます。')}<br>
+${R('日勤の 日 … <b>8時45分〜9時25分</b>（40分）　／　早出の 日 … <b>16時45分〜17時30分</b>（45分）')}</p>
+${ID('Belajar dipusatkan pada sesi belajar di tempat kerja. Shift siang: 08.45–09.25 (40 menit). Shift pagi: 16.45–17.30 (45 menit).')}
+</div>
 <table>
-<tr><th style="width:24%">${R('いつ')}</th><th style="width:20%">${R('勤務')}</th><th>${R('勉強する 時間')}</th></tr>
+<tr><th style="width:20%">${R('いつ')}</th><th style="width:18%">${R('勤務')}</th><th style="width:30%">${R('職場の 勉強会')}</th><th>${R('家で する こと')}</th></tr>
 <tr><td>${R('12月〜2月')}</td><td>${R('日勤')}</td>
-<td>${R('出勤の 前に <b>30分</b>。むずかしければ 帰ってから 15分でも よいです。')}</td></tr>
+<td>${R('<b>8時45分〜9時25分</b><br>（出勤の 前、40分）')}</td>
+<td>${R('<b>しなくて よいです</b>。その日の 分は 勉強会で おわります。')}</td></tr>
 <tr><td>${R('3月〜7月')}</td><td>${R('日勤')}</td>
-<td>${R('同じく 出勤の 前に <b>30分</b>。')}</td></tr>
-<tr><td>${R('3月〜7月')}</td><td>${R('早出（7時30分〜）')}</td>
-<td>${R('出勤の 前は <b>10分</b>だけ。帰ってから <b>30分</b>。')}</td></tr>
+<td>${R('<b>8時45分〜9時25分</b><br>（出勤の 前、40分）')}</td>
+<td>${R('寝る前に <b>15分</b>。語彙の カードを 回します。')}</td></tr>
+<tr><td>${R('3月〜7月')}</td><td>${R('早出（7時30分〜16時30分）')}</td>
+<td>${R('<b>16時45分〜17時30分</b><br>（仕事の あと、45分）')}</td>
+<td>${R('朝は <b>何も しなくて よいです</b>。夜は <b>15分</b>。ねむければ しなくても よいです。')}</td></tr>
 <tr><td>${R('いつでも')}</td><td>${R('休みの日')}</td>
+<td>${R('ありません。')}</td>
 <td>${R('<b>90分</b>。読解45分 ＋ 文型・語彙30分 ＋ 聴解15分。')}</td></tr>
 </table>
 <div class="tip">
-<b>${R('早出の 日は、朝に たくさん やろうと しないで ください。')}</b>
-${R('7時30分からの 出勤は 早いので、朝は 語彙を 見るだけに して、帰ってから 進めます。')}
-${ID('Pada hari shift pagi, jangan memaksakan belajar banyak di pagi hari. Cukup lihat kosakata, sisanya kerjakan setelah pulang.')}
+<b>${R('勉強会で する ことは、いつも 同じです。')}</b>
+${R('①「今週 使うもの」を おす　②出てきた 分だけ やる　③わからない ところは、その場で 職員に 聞く。')}<br>
+${R('勉強会に 出られたら、その日の マスを おして ください。それで 今日の 分は おわりです。')}
+${ID('Isi sesi selalu sama: tekan "alat minggu ini", kerjakan yang muncul, lalu tanyakan yang tidak dimengerti di tempat. Kalau sudah ikut sesi, tekan kotak hari itu — tugas hari itu selesai.')}
+</div>
+<div class="tip">
+<b>${R('早出の 日は、朝に 勉強しないで ください。')}</b>
+${R('7時30分からの 出勤は 早いです。勉強会は 仕事の あとの 16時45分からです。朝は ねむって ください。')}
+${ID('Pada hari shift pagi, jangan belajar di pagi hari. Sesi belajar diadakan setelah kerja, mulai pukul 16.45. Tidurlah di pagi hari.')}
 </div>
 <div class="warn">
 <b>${R('できない日が あっても だいじょうぶです。')}</b>
