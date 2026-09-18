@@ -1,6 +1,6 @@
 {
  "level": "N3",
- "count": 2081,
+ "count": 2078,
  "words": [
   {
    "word": "作法",
@@ -10869,14 +10869,16 @@
    "meaning_id": "kegembiraan, kebahagiaan"
   },
   {
-   "word": "来",
-   "reading": "らい～",
+   "word": "来〜",
+   "reading": "らい〜",
    "meaning": "next ~",
    "level": "N3",
    "kanji": [
     "来"
    ],
-   "meaning_id": "depan, mendatang"
+   "meaning_id": "depan, mendatang",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "楽",
@@ -11711,7 +11713,9 @@
    "kanji": [
     "観"
    ],
-   "meaning_id": "pandangan, perasaan terhadap"
+   "meaning_id": "pandangan, perasaan terhadap",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "癌",
@@ -19167,7 +19171,9 @@
    "kanji": [
     "敗"
    ],
-   "meaning_id": "(satuan hitung) kekalahan"
+   "meaning_id": "(satuan hitung) kekalahan",
+   "category": "語形成",
+   "sub": "接頭語・接尾語"
   },
   {
    "word": "映える",
@@ -21685,39 +21691,6 @@
    "level": "N3",
    "category": "カタカナ語",
    "kanji": []
-  },
-  {
-   "word": "〜がち",
-   "reading": "〜がち",
-   "meaning": "tend to do ~",
-   "level": "N3",
-   "kanji": [],
-   "category": "語形成",
-   "sub": "接頭語・接尾語",
-   "meaning_id": "cenderung ~; sering ~"
-  },
-  {
-   "word": "〜気味",
-   "reading": "〜ぎみ",
-   "meaning": "slightly ~",
-   "level": "N3",
-   "kanji": [
-    "気",
-    "味"
-   ],
-   "category": "語形成",
-   "sub": "接頭語・接尾語",
-   "meaning_id": "agak ~; sedikit ~"
-  },
-  {
-   "word": "〜だらけ",
-   "reading": "〜だらけ",
-   "meaning": "be full of ~, be filled with ~",
-   "level": "N3",
-   "kanji": [],
-   "category": "語形成",
-   "sub": "接頭語・接尾語",
-   "meaning_id": "penuh dengan ~"
   }
  ]
 }
