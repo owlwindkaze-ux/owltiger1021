@@ -2,7 +2,11 @@
 const fs = require('fs');
 const { withRuby } = require(__dirname + '/ruby.js');
 const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const R = s => withRuby(esc(s));
+/* esc() が <b> まで文字に変えてしまい、紙に「<b>」がそのまま出ていた。
+   ふりがなを付けたあとで、太字と改行のタグだけ 元に戻す。 */
+const R = s => withRuby(esc(s))
+  .replace(/&lt;(\/?)b&gt;/g, '<$1b>')
+  .replace(/&lt;br\s*\/?&gt;/g, '<br>');
 const ID = s => `<span class="id">${esc(s)}</span>`;
 
 const css = `
@@ -88,10 +92,23 @@ ${ID('Tekan "Kursus Staf Baru" pada menu.')}</div></div>
 </table>
 
 <h2>${R('③ 毎日の 進め方')}</h2>
-<div class="scr">
-<b>${R('平日（仕事の日）')}</b> … ${R('出勤の 前に <b>30分</b>。むずかしければ 帰ってから 15分でも よいです。')}<br>
-<b>${R('休みの日')}</b> … ${R('<b>90分</b>。読解45分 ＋ 文型・語彙30分 ＋ 聴解15分。')}<br>
-<b>${R('夜勤の日')}</b> … ${R('昼の あいだに 60分。<b>夜勤明けは 休んで ください。</b>')}
+<p class="lead">${R('新人コースに 夜勤は ありません。12月から 日勤で 始めて、早出に 入るのは 3月からです。')}
+${ID('Pada Kursus Staf Baru tidak ada shift malam. Mulai Desember dengan shift siang; shift pagi (hayade) baru mulai Maret.')}</p>
+<table>
+<tr><th style="width:24%">${R('いつ')}</th><th style="width:20%">${R('勤務')}</th><th>${R('勉強する 時間')}</th></tr>
+<tr><td>${R('12月〜2月')}</td><td>${R('日勤')}</td>
+<td>${R('出勤の 前に <b>30分</b>。むずかしければ 帰ってから 15分でも よいです。')}</td></tr>
+<tr><td>${R('3月〜7月')}</td><td>${R('日勤')}</td>
+<td>${R('同じく 出勤の 前に <b>30分</b>。')}</td></tr>
+<tr><td>${R('3月〜7月')}</td><td>${R('早出（7時30分〜）')}</td>
+<td>${R('出勤の 前は <b>10分</b>だけ。帰ってから <b>30分</b>。')}</td></tr>
+<tr><td>${R('いつでも')}</td><td>${R('休みの日')}</td>
+<td>${R('<b>90分</b>。読解45分 ＋ 文型・語彙30分 ＋ 聴解15分。')}</td></tr>
+</table>
+<div class="tip">
+<b>${R('早出の 日は、朝に たくさん やろうと しないで ください。')}</b>
+${R('7時30分からの 出勤は 早いので、朝は 語彙を 見るだけに して、帰ってから 進めます。')}
+${ID('Pada hari shift pagi, jangan memaksakan belajar banyak di pagi hari. Cukup lihat kosakata, sisanya kerjakan setelah pulang.')}
 </div>
 <div class="warn">
 <b>${R('できない日が あっても だいじょうぶです。')}</b>
@@ -135,7 +152,7 @@ ${ID('Tulis kanji yang tidak terbaca dengan jari untuk mencarinya.')}</td></tr>
 <tr><td>12月</td><td>${R('日本の 生活と 仕事に 慣れる。日本語は 1日15分だけ。')}</td><td>${R('診断テスト（第1回）')}</td></tr>
 <tr><td>1月</td><td>${R('N4の 弱いところを うめる。')}</td><td>${R('N4の 語彙648語・文型121項目')}</td></tr>
 <tr><td>2月</td><td>${R('N4を 仕上げる。ここまでで 土台が できます。')}</td><td>${R('N4を すべて「覚えた」に')}</td></tr>
-<tr><td>3月</td><td>${R('力を 測り直して、N3に 切りかえる。折り返しです。')}</td><td>${R('診断テスト（第2回）')}</td></tr>
+<tr><td>3月</td><td>${R('力を 測り直して、N3に 切りかえる。折り返しです。<b>この月から 早出に 入ります。</b>')}</td><td>${R('診断テスト（第2回）')}</td></tr>
 <tr><td>${R('3月末〜')}</td><td>${R('100日コースを 始める。ここから 毎日 やることが 決まります。')}</td><td>${R('100日コース 第1〜4週')}</td></tr>
 <tr><td>5月</td><td>${R('読解の 速さを 上げる。落ちる人の ほとんどが 読解です。')}</td><td>${R('100日コース 第5〜9週')}</td></tr>
 <tr><td>6月</td><td>${R('本番の 形に 体を 慣らす。新しい 教材は もう 増やしません。')}</td><td>${R('100日コース 第10〜13週')}</td></tr>
