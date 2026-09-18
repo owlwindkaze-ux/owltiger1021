@@ -7,7 +7,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-09-18a';
+  var PAGE_VER = '2026-09-18b';
   try {
     if (sessionStorage.getItem('vchk-moshi')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
