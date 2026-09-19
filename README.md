@@ -63,8 +63,8 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 | `kanji.html` | 漢字・言葉アプリ本体（HTML/CSS/JS 単一ファイル、外部ライブラリなし） |
 | `bunpo/index.html` | 文型（文法）アプリ本体（376項目・例文1,128・練習問題1,128） |
 | `dokkai/index.html` | 読解アプリ本体 |
-| `dokkai/reading-n5/n4/n3.json` | 読解の文章45本・設問98問（すべてオリジナル） |
-| `choukai/index.html` | 聴解アプリ本体（8パート48問。音声は端末の音声合成が読み上げるので音声ファイルなし） |
+| `dokkai/reading-n5/n4/n3/n2.json` | 読解の文章80本・設問224問（すべてオリジナル） |
+| `choukai/index.html` | 聴解アプリ本体（15パート143問。音声は端末の音声合成が読み上げるので音声ファイルなし） |
 | `tegaki.html` | 手書き漢字検索（読めない字を書いて調べる） |
 | `tegaki-data.json` | 手書き検索のデータ（漢字6,412字・部首287） |
 | `n3.html` | N3合格100日コース（試験日から逆算した週ごとの学習） |
