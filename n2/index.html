@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-09-19a';
+  var PAGE_VER = '2026-09-19b';
   var KEY = 'reloaded-for-n2';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -447,7 +447,8 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
     d:{em:'📖', href:'../dokkai/#list',    n:'読解',       r:'Membaca',          lv:'N2', lvkey:'jlpt-dokkai-lastlv'},
     c:{em:'🎧', href:'../choukai/#part9',  n:'聴解',       r:'Menyimak',         lv:'N2', lvkey:'jlpt-choukai-lastlv'},
     n:{em:'📅', href:'../n3.html',         n:'100日コース', r:'Kursus 100 hari'},
-    m:{em:'📝', href:'../moshi/',          n:'模試（155分）', r:'Simulasi ujian'}
+    m:{em:'📝', href:'../moshi/',          n:'模試（155分）', r:'Simulasi ujian'},
+    w:{em:'📕', href:'../fukushu/',        n:'まちがえたところ', r:'Yang masih salah'}
   };
 
   function render(){
@@ -530,6 +531,8 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
       if (use.indexOf(t.k) < 0) use.push(t.k);
       if (t.lv) lvOf[t.k] = t.lv;
     });
+    /* 「まちがえたところ」は どの週でも使うので、いつも最後に出す */
+    if (use.indexOf('w') < 0) use.push('w');
     document.getElementById('wkApps').innerHTML = use.map(function(k){
       var A = APPS[k], lv = lvOf[k] || A.lv;
       /* その週に 漢字・語彙・文型の割り当てがある期（第0・1期）は「今週の分だけ」。
