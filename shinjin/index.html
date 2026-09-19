@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-09-19a';
+  var PAGE_VER = '2026-09-19b';
   var KEY = 'reloaded-for-shinjin';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -374,9 +374,10 @@ var APPS = {
   d:{ em:'📖', href:'../dokkai/#list', n:'読解', r:'Membaca ／ 時間を計って解く' },
   c:{ em:'🎧', href:'../choukai/#part1', n:'聴解', r:'Menyimak ／ 話す速さを変えられる' },
   n:{ em:'📅', href:'../n3.html', n:'100日コース', r:'Kursus 100 hari ／ 3月末から使います' },
-  t:{ em:'✍️', href:'../tegaki.html', n:'手書きで漢字をさがす', r:'Tulis tangan ／ 読めない字を書いて調べる' }
+  t:{ em:'✍️', href:'../tegaki.html', n:'手書きで漢字をさがす', r:'Tulis tangan ／ 読めない字を書いて調べる' },
+  w:{ em:'📕', href:'../fukushu/', n:'まちがえたところ', r:'Yang masih salah ／ 職員に聞かれたら ここを見せる' }
 };
-var ORDER = ['k','g','d','c','n','t'];
+var ORDER = ['k','g','d','c','n','t','w'];
 
 function d(s){ var p=String(s).split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
 function nowIndex(today){
