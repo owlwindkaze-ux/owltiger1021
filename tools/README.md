@@ -18,6 +18,7 @@
 | `hani/ruby.js` | 範囲表・テスト用のふりがな辞書 |
 | `howto/` | 実習生向けの使い方説明書（`howto/README.md` を見てください） |
 | `build-weeks.py` | plan.json から `kanji-weeks.json`・`bunpo/weeks.json`・`n2/weeks.json` を作り直し、**割り当てた語が本当にデータにあるかを点検する** |
+| `check-numbers.py` | **画面に書いてある数が、データの数と合っているかを点検する**。教材を足したら必ず通す |
 | `check-ui.mjs` | 全画面の絞り込み・タブを実ブラウザで動かして点検する |
 | `check-n2.py` | N2の期・問題・模試・レベル・週の負荷を点検する |
 | `balance-answers.py` | 正解の番号のかたよりを直す（選択肢の並べかえだけ。文と正解は変えない） |
@@ -31,6 +32,7 @@
     python3 tools/build-weeks.py          # 週のファイルを作り直し、点検する
     node tools/hani/gen.js && node tools/n2plan/gen.js   # 範囲表のHTML
     # → mkpdf で PDF にする
+    python3 tools/check-numbers.py        # 画面の数とデータの数を突き合わせる
     node tools/check-ui.mjs               # 実ブラウザで点検（先にサーバを立てる）
 
 **注意**：`alloc.js` を走らせ直すと、**週の割り当てが最初から計算し直されます**。
