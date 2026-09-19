@@ -191,9 +191,9 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
           <div class="ttl">Membaca<small>読解（文章を読む）</small></div>
         </div>
       </div>
-      <div class="pg" id="pgD">読んだ文章 0 / 45 本</div>
+      <div class="pg" id="pgD">読んだ文章 0 / 80 本</div>
       <div class="bar"><i id="barD" style="width:0"></i></div>
-      <p class="desc">お知らせ・シフト表・申し送りなどを読んで答える。45本・98問。</p>
+      <p class="desc">お知らせ・シフト表・申し送りなどを読んで答える。80本・224問。</p>
       <div class="sub-menu">
         <a class="item" href="dokkai/index.html#list"><span class="em">📄</span>
           <span class="tx"><span class="n">文章一覧</span><span class="r">Daftar teks ／ レベル・分野・設問で選ぶ</span></span><span class="ar">→</span></a>
@@ -211,9 +211,9 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
           <div class="ttl">Menyimak<small>聴解（聞いて答える）</small></div>
         </div>
       </div>
-      <div class="pg" id="pgC">答えた問題 0 / 48 問</div>
+      <div class="pg" id="pgC">答えた問題 0 / 143 問</div>
       <div class="bar"><i id="barC" style="width:0"></i></div>
-      <p class="desc">申し送り・声かけ・JLPT形式（課題理解・即時応答など）。57問。音声はこの端末が読み上げます。</p>
+      <p class="desc">申し送り・声かけ・JLPT形式（課題理解・即時応答など）。143問。音声はこの端末が読み上げます。</p>
       <div class="sub-menu">
         <a class="item" href="choukai/index.html#part1"><span class="em">📣</span>
           <span class="tx"><span class="n">申し送りを聞く</span><span class="r">Serah terima ／ 夜勤からの申し送り</span></span><span class="ar">→</span></a>
@@ -222,7 +222,7 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
         <a class="item" href="choukai/index.html#part3"><span class="em">👵</span>
           <span class="tx"><span class="n">利用者さんの言葉</span><span class="r">Kata penghuni ／ 訴えを聞いて対応を選ぶ</span></span><span class="ar">→</span></a>
         <a class="item" href="choukai/index.html#part4"><span class="em">📝</span>
-          <span class="tx"><span class="n">JLPT形式の練習</span><span class="r">Format JLPT ／ 課題理解・即時応答など5形式31問</span></span><span class="ar">→</span></a>
+          <span class="tx"><span class="n">JLPT形式の練習</span><span class="r">Format JLPT ／ 課題理解・即時応答など5形式126問</span></span><span class="ar">→</span></a>
       </div>
     </section>
 
@@ -330,12 +330,14 @@ if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock();
 else document.getElementById('gatePw').focus();
 
 /* ---- それぞれの進み具合を出す（記録はこの端末の localStorage にある） ---- */
-const VERSION = '2026-09-14';
+/* 版は version.json から取る。ここに書き込むと、直すのを忘れて
+   古い日付のまま出てしまう（実際に 2026-09-14 のまま残っていた）。 */
+let VERSION = '2026-09-18c';
 /* 字数・語数は目次から取る。N2を足していくと数が増えるので、
    ここに書き込んでおくと古い数のままになってしまう。
    目次が読めなかったときのために、いまの数を控えにしておく。 */
-let KTOTAL = 1066, VTOTAL = 6296;
-const GTOTAL = 457, DTOTAL = 60, CTOTAL = 57;
+let KTOTAL = 1066, VTOTAL = 6272;
+const GTOTAL = 461, DTOTAL = 80, CTOTAL = 143;
 Promise.all([
   fetch('kanji.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => null),
   fetch('vocab.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => null)
@@ -343,6 +345,9 @@ Promise.all([
   if (k && k.total) KTOTAL = k.total;
   if (v && v.total) VTOTAL = v.total;
   showProgress();
+  fetch('version.json', { cache: 'no-store' }).then(r => r.json())
+    .then(j => { if (j && j.version) { VERSION = j.version; showProgress(); } })
+    .catch(() => {});
   const d = document.getElementById('descK');
   if (d) d.textContent = `漢字${KTOTAL.toLocaleString()}字と言葉${VTOTAL.toLocaleString()}語。書き順・カード・JLPT形式の練習問題。`;
 });
