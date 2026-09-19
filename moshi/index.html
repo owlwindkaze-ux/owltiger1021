@@ -7,7 +7,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-09-19a';
+  var PAGE_VER = '2026-09-19b';
   try {
     if (sessionStorage.getItem('vchk-moshi')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -348,8 +348,23 @@ function finish() {
   const low = ['言語知識', '読解', '聴解'].filter(g => pt(g) < 19);
   const pass = total >= 90 && low.length === 0;
 
+  /* まちがえた問題を、あとから見られるように 残しておく。
+     「まちがえたところ」の画面（../fukushu/）が これを読む。
+     問題文をそのまま入れるのは、模試のファイルを読み直さなくても出せるようにするため。 */
+  const wrongSave = all.filter(id => ANS[id] !== correctOf(id)).map(id => {
+    const [key, a2, b2] = id.split('/');
+    const s2 = PAPER.sections[key];
+    let qt, ch;
+    if (s2.read) { const q = s2.read[+a2].passage.questions[+b2]; qt = q.q; ch = q.choices; }
+    else if (CHOU.indexOf(key) >= 0) { qt = s2.items[+a2].q; ch = s2.items[+a2].opts; }
+    else { qt = s2.items[+a2].q; ch = s2.items[+a2].choices; }
+    const c = correctOf(id), ex = explainOf(id);
+    return { id: id, sec: (s2.name || key), q: qt,
+             mine: (ANS[id] != null && ch[ANS[id]] != null) ? ch[ANS[id]] : '',
+             right: ch[c] != null ? ch[c] : '', exp: ex.ja || '' };
+  });
   store['m' + PAPER.no] = { total: total, at: new Date().toISOString().slice(0, 10),
-                            got: got, tot: tot };
+                            got: got, tot: tot, wrong: wrongSave };
   save();
 
   let h = '<div class="card"><h2>結果　' + esc(PAPER.title) + '</h2>' +
