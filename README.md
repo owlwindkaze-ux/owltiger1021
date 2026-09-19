@@ -65,6 +65,7 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 | `dokkai/index.html` | 読解アプリ本体 |
 | `dokkai/reading-n5/n4/n3/n2.json` | 読解の文章80本・設問224問（すべてオリジナル） |
 | `choukai/index.html` | 聴解アプリ本体（15パート143問。音声は端末の音声合成が読み上げるので音声ファイルなし） |
+| `fukushu/index.html` | **まちがえたところ**。7区分（漢字・語彙・文型・読解・聴解・100日・模試）から、まちがえた問だけを集めて出す。職員に見せるための画面 |
 | `tegaki.html` | 手書き漢字検索（読めない字を書いて調べる） |
 | `tegaki-data.json` | 手書き検索のデータ（漢字6,412字・部首287） |
 | `n3.html` | N3合格100日コース（試験日から逆算した週ごとの学習） |

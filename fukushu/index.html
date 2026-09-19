@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="まちがえた問題だけを、6つのシステムから集めて一つの画面に出します。職員に見せるとき、探さなくて済みます。">
+<title>Salah ｜ まちがえたところ</title>
+<script>
+/* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
+(function(){
+  var PAGE_VER = '2026-09-19b';
+  var KEY = 'reloaded-for-fukushu';
+  try {
+    fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
+      .then(function(j){
+        if (!j || !j.version || j.version === PAGE_VER) return;
+        if (sessionStorage.getItem(KEY) === j.version) return;
+        sessionStorage.setItem(KEY, j.version);
+        location.replace(location.pathname + '?v=' + encodeURIComponent(j.version) + location.hash);
+      })['catch'](function(){});
+  } catch (e) {}
+})();
+</script>
+<style>
+:root{
+  --ind:#4338ca; --ind-d:#312e81; --ind-l:#eef2ff;
+  --green:#059669; --red:#dc2626; --red-l:#fee2e2; --amb:#c2410c; --amb-l:#fff7ed;
+  --bg:#f1f5f9; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
+  --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
+  --sh-l:0 10px 25px -5px rgba(15,23,42,.15);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic",system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);-webkit-text-size-adjust:100%;line-height:1.7}
+button,select{font-family:inherit;font-size:inherit;color:inherit}
+a{color:inherit}
+
+header{background:linear-gradient(135deg,var(--ind-d),var(--ind));color:#fff;padding:.9rem 1rem}
+.hd{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.hd h1{font-size:1.1rem;font-weight:800}
+.hd .sub{font-size:.75rem;opacity:.92}
+.menubtn{border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.14);color:#fff;
+  border-radius:999px;padding:.3rem .85rem;font-size:.8rem;font-weight:700;text-decoration:none}
+.hdstat{margin-left:auto;font-size:.8rem;background:rgba(255,255,255,.18);padding:.3rem .8rem;border-radius:999px;font-weight:700}
+
+.wrap{max-width:1000px;margin:0 auto;padding:1rem 1rem 3rem}
+.lead{background:var(--ind-l);border:1.5px solid #c7d2fe;border-radius:14px;padding:.8rem 1rem;margin-bottom:1rem;font-size:.9rem}
+.lead b{color:var(--ind-d)}
+.lead .id{display:block;font-size:.78rem;color:var(--muted);margin-top:.3rem}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:.9rem}
+.btn{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:.45rem .85rem;
+  font-size:.88rem;font-weight:700;cursor:pointer}
+.btn.on{background:var(--ind);color:#fff;border-color:var(--ind)}
+.btn.pri{background:var(--ind);color:#fff;border-color:var(--ind)}
+
+.sec{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:.9rem;box-shadow:var(--sh);overflow:hidden}
+.sec>summary{cursor:pointer;list-style:none;padding:.85rem 1rem;font-weight:800;display:flex;align-items:center;gap:.6rem}
+.sec>summary::-webkit-details-marker{display:none}
+.sec>summary::before{content:"▶";color:var(--ind);font-size:.8rem}
+.sec[open]>summary::before{content:"▼"}
+.sec .num{margin-left:auto;background:var(--red-l);color:var(--red);border-radius:999px;
+  padding:.1rem .7rem;font-size:.85rem;font-weight:800}
+.sec .num.zero{background:#ecfdf5;color:var(--green)}
+.sec .bd{padding:0 1rem 1rem}
+
+.item{border:1px solid var(--line);border-left:4px solid var(--red);border-radius:10px;
+  padding:.7rem .85rem;margin:.55rem 0;background:#fff}
+.item .where{font-size:.75rem;font-weight:800;color:var(--ind);margin-bottom:.25rem}
+.item .q{font-weight:700;font-size:.95rem;white-space:pre-wrap}
+.item .line{font-size:.88rem;margin-top:.3rem}
+.item .mine{color:var(--red);font-weight:700}
+.item .right{color:var(--green);font-weight:700}
+.item .exp{font-size:.85rem;color:var(--muted);margin-top:.3rem;white-space:pre-wrap}
+.item .go{display:inline-block;margin-top:.45rem;font-size:.8rem;font-weight:700;color:var(--ind);text-decoration:none}
+.word{display:inline-flex;align-items:baseline;gap:.45rem;flex-wrap:wrap}
+.word .w{font-size:1.15rem;font-weight:800}
+.word .r{font-size:.82rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.4rem}
+.chip{border:1px solid var(--line);border-radius:999px;padding:.15rem .6rem;font-size:.85rem;background:#fff}
+.hint{font-size:.83rem;color:var(--muted)}
+.loading{padding:1.2rem;text-align:center;color:var(--muted);font-size:.9rem}
+ruby rt{font-size:.55em;color:var(--ind)}
+
+#gate{position:fixed;inset:0;z-index:200;background:linear-gradient(135deg,var(--ind-d),var(--ind));
+  display:flex;align-items:center;justify-content:center;padding:1.2rem}
+#gate .gbox{background:#fff;border-radius:18px;padding:1.8rem 1.5rem;max-width:390px;width:100%;
+  text-align:center;box-shadow:var(--sh-l)}
+#gate h2{font-size:1.15rem;margin-bottom:.2rem}
+#gate p{font-size:.8rem;color:var(--muted);margin-bottom:1.1rem}
+#gate input{width:100%;padding:.7rem .9rem;border:1.5px solid var(--line);border-radius:10px;
+  font-size:1.1rem;text-align:center;letter-spacing:.1em}
+#gate button{width:100%;margin-top:.8rem;padding:.7rem;border:0;border-radius:10px;
+  background:var(--ind);color:#fff;font-weight:800;font-size:1rem;cursor:pointer}
+#gate .err{color:var(--red);font-size:.8rem;min-height:1.2rem;margin-top:.5rem}
+#app{display:none}
+
+@media print{
+  header,.toolbar,.lead .id,.item .go{display:none}
+  body{background:#fff}
+  .sec{box-shadow:none;break-inside:auto}
+  .sec>summary::before{content:""}
+  .item{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gbox">
+    <h2>まちがえたところ</h2>
+    <p>Masukkan kata sandi ／ 合言葉を入れてください</p>
+    <input id="gatePw" type="password" autocomplete="current-password" placeholder="••••••••">
+    <button id="gateBtn">Masuk ／ 入る</button>
+    <div class="err" id="gateErr"></div>
+  </div>
+</div>
+
+<div id="app">
+<header><div class="hd">
+  <a class="menubtn" href="../index.html">☰ メニュー</a>
+  <div>
+    <h1>まちがえたところ</h1>
+    <div class="sub">Yang masih salah ／ 6つの画面から まとめて出します</div>
+  </div>
+  <div class="hdstat" id="hdStat">　</div>
+</div></header>
+
+<div class="wrap">
+  <div class="lead">
+    <b>職員に「まちがえた問題は？」と聞かれたら、この画面を見せてください。</b>
+    さがさなくても、いままでにまちがえたところが ここに ぜんぶ 出ます。
+    <span class="id">Kalau staf bertanya "yang mana yang salah?", cukup tunjukkan layar ini. Semua yang pernah salah terkumpul di sini.</span>
+  </div>
+
+  <div class="toolbar">
+    <button class="btn pri" id="reload">🔄 いまの記録を読む</button>
+    <button class="btn" id="printBtn">🖨️ 印刷する</button>
+    <span class="hint" id="note"></span>
+  </div>
+
+  <div id="secs"><div class="loading">読み込み中…</div></div>
+</div>
+</div>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+
+/* ---------- 合言葉（ほかの画面と同じ） ---------- */
+const GATEKEY = 'jlpt-kanji-gate-v1';
+const PASS_SHA256 = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
+async function sha256(t) {
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
+  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
+}
+function unlock() {
+  $('#gate').style.display = 'none'; $('#app').style.display = 'block';
+  if (!window.__booted) { window.__booted = true; build(); }
+}
+async function tryUnlock() {
+  const pw = $('#gatePw').value.trim();
+  if (!pw) { $('#gateErr').textContent = 'Kata sandi kosong ／ 未入力です'; return; }
+  const h = await sha256(pw);
+  if (h === PASS_SHA256) { try { localStorage.setItem(GATEKEY, h); } catch (e) {} unlock(); }
+  else { $('#gateErr').textContent = 'Kata sandi salah ／ 合言葉が違います'; $('#gatePw').select(); }
+}
+$('#gateBtn').onclick = tryUnlock;
+$('#gatePw').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+
+/* ---------- 共通 ---------- */
+const esc = s => String(s == null ? '' : s)
+  .replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
+/** 「漢字《かんじ》」を ふりがなにする */
+const ruby = s => esc(s).replace(/([一-鿿々]+)《([^》]+)》/g, (m,a,b) => `<ruby>${a}<rt>${b}</rt></ruby>`);
+const ls = k => { try { return JSON.parse(localStorage.getItem(k) || '{}'); } catch (e) { return {}; } };
+const getJSON = p => fetch(p, { cache:'no-cache' }).then(r => r.ok ? r.json() : null).catch(() => null);
+const getText = p => fetch(p, { cache:'no-cache' }).then(r => r.ok ? r.text() : '').catch(() => '');
+
+/* ---------- ① 漢字・語彙・文型：「要復習」の印が付いているもの ---------- */
+async function secKanji() {
+  const pr = ls('jlpt-kanji-progress-v1');
+  const chars = Object.keys(pr).filter(k => pr[k] === 'review');
+  if (!chars.length) return { title:'漢字', n:0, html:'' };
+  const idx = await getJSON('../kanji.json');
+  const files = (idx && idx.files) ? idx.files : [];
+  const all = [];
+  for (const f of files) {
+    const j = await getJSON('../' + f.file);
+    if (j) all.push(...(j.kanji || j));
+  }
+  const by = {}; all.forEach(k => { by[k.character] = k; });
+  const chips = chars.map(c => {
+    const k = by[c];
+    const yomi = k ? (k.on || []).concat(k.kun || []).slice(0, 2).join('・') : '';
+    return `<span class="chip"><b style="font-size:1.1rem">${esc(c)}</b>` +
+           (yomi ? ` <span class="r" style="color:var(--muted);font-size:.8rem">${esc(yomi)}</span>` : '') +
+           `</span>`;
+  }).join('');
+  return { title:'漢字', n:chars.length,
+    html:`<p class="hint">練習問題でまちがえた字には、自動で「要復習」が付きます。</p>
+          <div class="chips">${chips}</div>
+          <a class="go" href="../kanji.html">→ 漢字の画面でこの字だけ出す（「要復習」をえらぶ）</a>` };
+}
+
+async function secVocab() {
+  const pr = ls('jlpt-kanji-progress-v1-vocab');
+  const words = Object.keys(pr).filter(k => pr[k] === 'review');
+  if (!words.length) return { title:'語彙（ことば）', n:0, html:'' };
+  const idx = await getJSON('../vocab.json');
+  const files = (idx && idx.files) ? idx.files : [];
+  const by = {};
+  for (const f of files) {
+    const j = await getJSON('../' + f.file);
+    (j && (j.words || j) || []).forEach(w => { by[w.word] = w; });
+  }
+  const chips = words.map(w => {
+    const v = by[w];
+    return `<span class="chip"><b>${esc(w)}</b>` +
+      (v && v.reading && v.reading !== w ? ` <span style="color:var(--muted);font-size:.8rem">${esc(v.reading)}</span>` : '') +
+      (v && v.meaning_id ? ` <span style="color:var(--muted);font-size:.8rem">${esc(v.meaning_id)}</span>` : '') +
+      `</span>`;
+  }).join('');
+  return { title:'語彙（ことば）', n:words.length,
+    html:`<p class="hint">練習問題でまちがえた語には、自動で「要復習」が付きます。</p>
+          <div class="chips">${chips}</div>
+          <a class="go" href="../kanji.html">→ 語彙の画面でこの語だけ出す（「要復習」をえらぶ）</a>` };
+}
+
+async function secGrammar() {
+  const pr = ls('jlpt-grammar-progress-v1');
+  const ids = Object.keys(pr).filter(k => pr[k] === 'review');
+  if (!ids.length) return { title:'文型・文法', n:0, html:'' };
+  const idx = await getJSON('../bunpo/grammar.json');
+  const files = (idx && idx.files) ? idx.files.map(f => f.file) : [];
+  const by = {};
+  for (const f of files) {
+    const j = await getJSON('../bunpo/' + f);
+    (j && j.grammar || []).forEach(g => { by[g.id] = g; });
+  }
+  const items = ids.map(id => {
+    const g = by[id];
+    if (!g) return `<span class="chip">${esc(id)}</span>`;
+    return `<span class="chip"><b>${esc(g.pattern)}</b> <span style="color:var(--muted);font-size:.8rem">${esc(g.meaning_id || '')}</span></span>`;
+  }).join('');
+  return { title:'文型・文法', n:ids.length,
+    html:`<div class="chips">${items}</div>
+          <a class="go" href="../bunpo/index.html">→ 文型の画面でこの項目だけ出す（「要復習」をえらぶ）</a>` };
+}
+
+/* ---------- ② 読解：設問ごとの正誤が残っている ---------- */
+async function secDokkai() {
+  const pr = ls('jlpt-dokkai-progress-v1');
+  const ids = Object.keys(pr).filter(id => pr[id] && Array.isArray(pr[id].res) && pr[id].res.some(x => x === false));
+  if (!ids.length) return { title:'読解', n:0, html:'' };
+  const idx = await getJSON('../dokkai/reading.json');
+  const files = (idx && idx.files) ? idx.files.map(f => f.file) : [];
+  const by = {};
+  for (const f of files) {
+    const j = await getJSON('../dokkai/' + f);
+    ((j && (j.passages || j)) || []).forEach(p => { by[p.id] = p; });
+  }
+  let n = 0, html = '';
+  ids.forEach(id => {
+    const p = by[id]; if (!p) return;
+    pr[id].res.forEach((ok, i) => {
+      if (ok !== false) return;
+      const q = (p.questions || [])[i]; if (!q) return;
+      n++;
+      const right = (q.choices || q.options || q.opts || [])[q.answer != null ? q.answer : q.ans];
+      html += `<div class="item">
+        <div class="where">読解 ${esc(p.level)}「${ruby(p.title)}」　問${i + 1}</div>
+        <div class="q">${ruby(q.q || q.question || '')}</div>
+        ${right ? `<div class="line"><span class="right">正解</span>　${ruby(right)}</div>` : ''}
+        ${q.explain ? `<div class="exp">${ruby(q.explain)}</div>` : ''}
+        <a class="go" href="../dokkai/index.html">→ この文章をもう一度読む</a>
+      </div>`;
+    });
+  });
+  return { title:'読解', n, html };
+}
+
+/* ---------- ③ 聴解：問ごとの正誤が残っている ---------- */
+async function secChoukai() {
+  const pr = ls('jlpt-choukai-progress-v1');
+  const keys = Object.keys(pr).filter(k => pr[k] === false);
+  if (!keys.length) return { title:'聴解', n:0, html:'' };
+  /* 聴解のデータは HTML の中にある。同じ場所のファイルなので読み出せる。 */
+  const html0 = await getText('../choukai/index.html');
+  const m = html0.match(/DATA\s*=\s*(\[[\s\S]*?\n\]);/);
+  let D = [];
+  try { D = m ? JSON.parse(m[1]) : []; } catch (e) { D = []; }
+  let n = 0, html = '';
+  keys.forEach(k => {
+    const [pi, qi] = k.split('-').map(Number);
+    const part = D[pi]; if (!part) return;
+    const it = (part.items || [])[qi]; if (!it) return;
+    n++;
+    const right = (it.opts || [])[it.ans];
+    html += `<div class="item">
+      <div class="where">聴解 PART ${pi + 1}「${ruby(part.title)}」　問${qi + 1}</div>
+      <div class="q">${ruby(it.q || '')}</div>
+      ${right ? `<div class="line"><span class="right">正解</span>　${ruby(right)}</div>` : ''}
+      ${it.exp ? `<div class="exp">${ruby(it.exp)}</div>` : ''}
+      <a class="go" href="../choukai/index.html#part${pi + 1}">→ もう一度聞く</a>
+    </div>`;
+  });
+  return { title:'聴解', n, html };
+}
+
+/* ---------- ④ 100日コース：選んだ答えまで残っている ---------- */
+async function secN3() {
+  /* 先に「まちがえた記録があるか」だけ見る。無ければ重いHTMLを読まない。 */
+  const weeks = [];
+  for (let w = 1; w <= 14; w++) {
+    const st = ls('n3-week' + w);
+    if (st && st.ans && Object.keys(st.ans).length) weeks.push([w, st]);
+  }
+  if (!weeks.length) return { title:'100日コース', n:0, html:'' };
+  const src = await getText('../n3.html');
+  const i = src.indexOf('var WEEKS = ');
+  const j = src.indexOf(';\n', i);
+  let W = {};
+  try { W = (new Function('return ' + src.slice(i + 12, j)))(); } catch (e) { W = {}; }
+  let n = 0, html = '';
+  weeks.forEach(([w, st]) => {
+    const CON = W[String(w)]; if (!CON) return;
+    const ANSW = CON.answers || {};          /* ANSW[曜日][問の番号] = [正解, 解説] */
+    (CON.days || []).forEach(d => {
+      const KEYS = ANSW[d.key] || {};
+      (d.blocks || []).forEach(b => {
+        if (b.t !== 'q') return;
+        const key = (d.key === '日曜')
+          ? (b.drill ? 'r' + b.id : 'L' + String(b.id).replace('問', ''))
+          : (b.drill ? 'd' + b.id : b.id);
+        const uid = d.key + '/' + key;
+        const mine = st.ans[uid];
+        if (mine == null) return;
+        const e = KEYS[key];
+        const right = e ? e[0] : null;
+        if (right == null || String(mine) === String(right)) return;
+        n++;
+        const opts = b.opts || b.choices || [];
+        /* n3.html は 1から数えた番号で答えを持っている（1つ目＝1） */
+        const txtOf = v => { const k2 = Number(v) - 1; return opts[k2] != null ? opts[k2] : v; };
+        html += `<div class="item">
+          <div class="where">100日コース 第${w}週 ${esc(d.key)}　${esc(b.id || '')}</div>
+          <div class="q">${ruby(b.text || b.q || '')}</div>
+          <div class="line"><span class="mine">あなたの答え</span>　${ruby(txtOf(mine))}</div>
+          <div class="line"><span class="right">正解</span>　${ruby(txtOf(right))}</div>
+          ${e && e[1] ? `<div class="exp">${ruby(e[1])}</div>` : ''}
+          <a class="go" href="../n3.html">→ 第${w}週をもう一度やる</a>
+        </div>`;
+      });
+    });
+  });
+  return { title:'100日コース', n, html };
+}
+
+/* ---------- ⑤ 模試：問ごとの答えが残っているとき ---------- */
+async function secMoshi() {
+  const st = ls('jlpt-moshi-v1');
+  const nos = Object.keys(st).filter(k => /^m\d+$/.test(k) && st[k] && st[k].wrong && st[k].wrong.length);
+  if (!nos.length) {
+    const done = Object.keys(st).filter(k => /^m\d+$/.test(k));
+    if (!done.length) return { title:'模試', n:0, html:'' };
+    return { title:'模試', n:0,
+      html:`<p class="hint">受けた模試：${done.map(k => '第' + k.slice(1) + '回').join('・')}。
+            <b>この回は、問ごとの記録が残る前に受けたものです。</b>次に受けた分から、まちがえた問がここに出ます。</p>` };
+  }
+  let n = 0, html = '';
+  for (const k of nos) {
+    const no = k.slice(1);
+    st[k].wrong.forEach(w => {
+      n++;
+      html += `<div class="item">
+        <div class="where">模試 第${no}回　${esc(w.sec || '')}　${esc(String(w.id || '').split('/')[0])}</div>
+        <div class="q">${ruby(w.q || '')}</div>
+        ${w.mine ? `<div class="line"><span class="mine">あなたの答え</span>　${ruby(w.mine)}</div>` : ''}
+        ${w.right ? `<div class="line"><span class="right">正解</span>　${ruby(w.right)}</div>` : ''}
+        ${w.exp ? `<div class="exp">${ruby(w.exp)}</div>` : ''}
+        <a class="go" href="../moshi/index.html">→ 模試の画面へ</a>
+      </div>`;
+    });
+  }
+  return { title:'模試', n, html };
+}
+
+/* ---------- 組み立て ---------- */
+async function build() {
+  $('#secs').innerHTML = '<div class="loading">読み込み中…</div>';
+  const secs = [];
+  for (const f of [secKanji, secVocab, secGrammar, secDokkai, secChoukai, secN3, secMoshi]) {
+    try { secs.push(await f()); }
+    catch (e) { secs.push({ title:f.name, n:0, html:`<p class="hint">読み込めませんでした（${esc(e.message || e)}）</p>` }); }
+  }
+  const total = secs.reduce((n, s) => n + s.n, 0);
+  $('#hdStat').textContent = 'まちがえたところ ' + total;
+  $('#note').textContent = total
+    ? 'ひらいた区分から順に出します。'
+    : 'いまのところ、まちがえた記録はありません。';
+  $('#secs').innerHTML = secs.map(s => `
+    <details class="sec"${s.n ? ' open' : ''}>
+      <summary>${esc(s.title)}<span class="num${s.n ? '' : ' zero'}">${s.n ? s.n : '0'}</span></summary>
+      <div class="bd">${s.n || s.html ? s.html : '<p class="hint">まちがえたところは ありません。</p>'}</div>
+    </details>`).join('');
+}
+
+$('#reload').onclick = build;
+$('#printBtn').onclick = () => window.print();
+
+/* 合言葉を入れずに開けるかどうかの判定は、いちばん最後に行う。
+   先に行うと、まだ定義していない関数を build() が使ってしまう。 */
+try { if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock(); else $('#gatePw').focus(); }
+catch (e) { $('#gatePw').focus(); }
+</script>
+</body>
+</html>
