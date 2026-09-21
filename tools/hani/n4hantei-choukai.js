@@ -74,7 +74,7 @@ data.n4 = SET;
 src = src.replace(m[0], 'var DATA = ' + JSON.stringify(data) + ';\n');
 
 /* ② ボタン。無ければ 足す */
-const btn = '<button class="btn" data-set="n4" id="sn4">N4判定（2月）</button>';
+const btn = '<button class="btn" data-set="n4" id="sn4">N4到達度判定（2月・問55〜66）</button>';
 if (src.indexOf('data-set="n4"') < 0) {
   const anchor = '<button class="btn" data-set="2" id="s2">第2回（3月）</button>';
   if (src.indexOf(anchor) < 0) { console.error('ボタンの場所が 見つかりません'); process.exit(1); }
@@ -82,5 +82,5 @@ if (src.indexOf('data-set="n4"') < 0) {
 }
 
 fs.writeFileSync(PAGE, src);
-console.log('読み上げ画面に N4判定の聴解 ' + n + '問を 入れた（問'
+console.log('読み上げ画面に N4到達度判定の聴解 ' + n + '問を 入れた（問'
   + (BEFORE + 1) + '〜問' + (BEFORE + n) + '。紙の冊子と 同じ番号）');
