@@ -21,6 +21,7 @@
 | `reference/jlpt-format.md` | **JLPTの出題形式（N3・N2）**。公式スライドから起こした大問の一覧・読解の字数の目安・聴解の答え方の流れ・いまの教材との差。**問題を作る前にここを見る** |
 | `shindan/` | **診断テスト**（第1回＝第2週／第2回＝第16週）。`build.js`→`render.js` の順に走らせると `/tmp/shindan/out/` に問題冊子と手引きが出る |
 | `build-weeks.py` | plan.json から `kanji-weeks.json`・`bunpo/weeks.json`・`n2/weeks.json` を作り直し、**割り当てた語が本当にデータにあるかを点検する** |
+| `check-star.py` | **★の組み立て**（`bunpo/star.json`）を点検する。できあがる文を全部出すので、目で読んで確かめる |
 | `check-numbers.py` | **画面に書いてある数が、データの数と合っているかを点検する**。教材を足したら必ず通す |
 | `check-ui.mjs` | 全画面の絞り込み・タブを実ブラウザで動かして点検する |
 | `check-n2.py` | N2の期・問題・模試・レベル・週の負荷を点検する |
