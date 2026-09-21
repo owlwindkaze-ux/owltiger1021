@@ -138,6 +138,32 @@
   .opt.correct{background:var(--teal-pale);border-color:var(--teal)}
   .opt.correct .mark{color:var(--teal)}
   .opt.wrong{background:var(--rose-pale);border-color:var(--rose)}
+
+  /* ---- 概要理解「耳だけ」---- 本番の問題用紙には 質問も 選択肢も 印刷されない。
+     それを画面で再現する。番号だけ出し、文字は 答えたあと（または「文字を出す」）に出す。 */
+  .earnote{font-size:12.5px;color:var(--rose);border:1px dashed var(--rose);
+    padding:7px 10px;margin:2px 0 12px;line-height:1.65}
+  .earnote b{color:var(--rose)}
+  .earnote .id{display:block;color:var(--muted);font-size:12px;font-style:italic;margin-top:3px}
+  .q.ear .q-text,
+  .q.ear .opt .otext{display:none}
+  /* .q-top は align-items:flex-start なので、縦並び（携帯）では 中身の幅しか 広がらない。
+     ふだんは 選択肢の文が長いので 気づかないが、番号だけにすると 細くなる。ここで 伸ばす。 */
+  .q.ear .q-body{align-self:stretch;width:100%}
+  /* 番号だけのときは、本番の解答用紙と同じように 1〜4を 横に ならべる */
+  .q.ear .opts{grid-template-columns:repeat(4,1fr)}
+  .q.ear .opt{justify-content:center;font-size:17px;padding:13px}
+  .q.ear .opt .mark{font-size:19px}
+  .q.ear.opened .opts{grid-template-columns:1fr}
+  .q.ear.opened .q-text,
+  .q.ear.opened .opt .otext{display:inline}
+  .q.ear.opened .opt{justify-content:flex-start;font-size:14.5px;padding:10px 13px}
+  .q.ear.opened .opt .mark{font-size:inherit}
+  .showtext{margin-top:7px;font-family:inherit;font-size:11px;letter-spacing:.04em;
+    background:transparent;border:1px solid var(--line);color:var(--muted);
+    padding:4px 7px;cursor:pointer;line-height:1.4}
+  .showtext:hover{border-color:var(--ink);color:var(--ink)}
+  .q.ear.opened .showtext{display:none}
   .opt.wrong .mark{color:var(--rose)}
 
   .after{margin-top:14px;display:none}
@@ -825,6 +851,7 @@ const DATA = [
     "no": "PART 6",
     "level": "N3",
     "title": "概要理解 ― 何の 話ですか",
+    "ear": true,
     "task": "全体を 聞いて、「何を いちばん 伝えたいか」を えらんでください。細かい ことばは 覚えなくて だいじょうぶです。JLPT聴解の 問題3と 同じ形です。",
     "taskId": "Dengarkan keseluruhan, lalu pilih inti yang ingin disampaikan. Sama seperti soal 3 JLPT.",
     "items": [
@@ -1726,6 +1753,7 @@ const DATA = [
     "no": "PART 13",
     "level": "N2",
     "title": "概要理解 ― 話の ねらいは 何か（N2）",
+    "ear": true,
     "task": "全体を 聞いて、話す人が いちばん 伝えたい ことを えらびます。JLPT聴解の 問題3と 同じ形です。N2では、最後の 一文に 答えが ない ことも あります。話の 流れ 全体で 考えましょう。",
     "taskId": "Dengarkan keseluruhan, lalu pilih inti yang ingin disampaikan. Sama seperti soal 3 JLPT. Pada N2 jawabannya belum tentu ada di kalimat terakhir — pikirkan alur keseluruhan.",
     "items": [
@@ -2707,7 +2735,21 @@ DATA.forEach((part, pi) => {
   sec.innerHTML =
     '<div class="part-head"><span class="part-no">' + part.no + '</span>' +
     '<h2>' + part.title + '</h2></div>' +
-    '<p class="part-task">' + part.task + '<span class="id">' + part.taskId + '</span></p>';
+    '<p class="part-task">' + part.task + '<span class="id">' + part.taskId + '</span></p>' +
+    /* 概要理解だけ、本番の問題用紙には 質問も 選択肢も 印刷されない。
+       読み上げが使える端末のときだけ その形にする（使えない端末では 答えられなくなるため）。 */
+    (part.ear && canSpeak
+      ? '<p class="earnote"><b>本番と同じで、質問も 選択肢も 画面に 出ません。</b>' +
+        '「聞く」を押すと、話 → 質問 → 選択肢（一番〜四番）の 順に 流れます。' +
+        'メモを取りながら 聞いて、<b>番号で</b> えらんでください。' +
+        '聞き取れないときは「文字を出す」を押してください。' +
+        '<span class="id">Sama seperti ujian asli: pertanyaan dan pilihan tidak ditampilkan di layar. ' +
+        'Tekan「聞く」→ cerita → pertanyaan → pilihan (1–4). Boleh mencatat, lalu pilih nomornya. ' +
+        'Kalau tidak terdengar, tekan「文字を出す」.</span></p>'
+      : part.ear
+      ? '<p class="earnote">※ この端末は 読み上げが 使えないため、質問と 選択肢を 文字で 出しています。' +
+        '<span class="id">Perangkat ini tidak bisa membaca suara, jadi teks ditampilkan.</span></p>'
+      : '');
 
   part.items.forEach((it, qi) => {
     const src = it.sameAudioAs != null ? part.items[it.sameAudioAs] : it;
@@ -2716,13 +2758,19 @@ DATA.forEach((part, pi) => {
 
     const optsHtml = it.opts.map((o, oi) =>
       '<li><button type="button" class="opt" data-oi="' + oi + '">' +
-      '<span class="mark">' + (oi+1) + '</span><span>' + o + '</span></button></li>').join('');
+      '<span class="mark">' + (oi+1) + '</span><span class="otext">' + o + '</span></button></li>').join('');
+
+    /* 概要理解は 本番の問題用紙に 質問も 選択肢も 印刷されない。
+       読み上げが使える端末のときだけ、その形にする（使えない端末では答えられないため）。 */
+    const ear = !!part.ear && canSpeak;
+    if(ear) q.classList.add('ear');
 
     q.innerHTML =
       '<div class="q-top">' +
         '<div class="listen">' +
           '<button type="button" class="play">聞く<small>Dengar</small></button>' +
           '<div class="count">聞いた回数 0<i>／ 0×</i></div>' +
+          (ear ? '<button type="button" class="showtext">文字を出す<br>Lihat teks</button>' : '') +
         '</div>' +
         '<div class="q-body">' +
           '<span class="q-num">問 ' + (qi+1) + '</span>' +
@@ -2741,9 +2789,22 @@ DATA.forEach((part, pi) => {
     const playBtn = q.querySelector('.play');
     const countEl = q.querySelector('.count');
     let n = 0;
+    /* 概要理解で 読ませる 原稿。話のあと、質問、そして 選択肢を 一番から 読む。
+       読み上げは「。」で 区切って 一文ずつ 流すので、番号を 独立した 文にすると 間が できる。
+       画面用の 読みやすさのための 空白は、読み上げでは じゃまになるので 取る。 */
+    function earScript(){
+      /* すでに 句点で 終わっている 文に もう一つ 足さない（「。。」に なる） */
+      const sp = s => {
+        const t = String(s).replace(/[ 　]/g, '');
+        return /[。？！]$/.test(t) ? t : t + '。';
+      };
+      const no = ['一番', '二番', '三番', '四番'];
+      return sp(src.script) + sp(it.q) +
+             it.opts.map((o, oi) => (no[oi] || (oi + 1) + '番') + '。' + sp(o)).join('');
+    }
     playBtn.addEventListener('click', () => {
       n++; countEl.innerHTML = '聞いた回数 ' + n + '<i>／ ' + n + '×</i>';
-      speak(src.script, playBtn);
+      speak(ear ? earScript() : src.script, playBtn);
       /* 聞いている間、その問題と選択肢が画面に入るように動かす。
          「聞く」を押したあと、下の選択肢を自分でさがさなくてよくする。 */
       [...document.querySelectorAll('.q.playing')].forEach(x => x.classList.remove('playing'));
@@ -2763,7 +2824,12 @@ DATA.forEach((part, pi) => {
       verdict.textContent = ok ? '正解' : '不正解';
       verdict.className = 'verdict ' + (ok ? 'ok' : 'ng');
       after.classList.add('on');
+      /* 答えたあとは、質問と選択肢の 文字を 出す。何を聞かれていたかを 目で確かめられる */
+      q.classList.add('opened');
     }
+    /* 聞き取れないまま 進めなくなるのを 防ぐ 逃げ道。押すと その問題だけ 文字が 出る */
+    const showBtn = q.querySelector('.showtext');
+    if(showBtn) showBtn.addEventListener('click', () => q.classList.add('opened'));
     q.querySelectorAll('.opt').forEach(btn => {
       btn.addEventListener('click', () => {
         if(state[pi][qi] !== null) return;
