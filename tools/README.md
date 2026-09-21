@@ -18,6 +18,7 @@
 | `hani/ruby.js` | 範囲表・テスト用のふりがな辞書 |
 | `howto/` | 実習生向けの使い方説明書（`howto/README.md` を見てください） |
 | `hani/n4hantei*.js` | **N4到達度判定テスト**（第1週・66問）。`-data.js` が問題、`n4hantei.js` が冊子、`-choukai.js` が読み上げ画面への注入、`-check.py` が範囲の点検 |
+| `reference/jlpt-format.md` | **JLPTの出題形式（N3・N2）**。公式スライドから起こした大問の一覧・読解の字数の目安・聴解の答え方の流れ・いまの教材との差。**問題を作る前にここを見る** |
 | `shindan/` | **診断テスト**（第1回＝第2週／第2回＝第16週）。`build.js`→`render.js` の順に走らせると `/tmp/shindan/out/` に問題冊子と手引きが出る |
 | `build-weeks.py` | plan.json から `kanji-weeks.json`・`bunpo/weeks.json`・`n2/weeks.json` を作り直し、**割り当てた語が本当にデータにあるかを点検する** |
 | `check-numbers.py` | **画面に書いてある数が、データの数と合っているかを点検する**。教材を足したら必ず通す |
