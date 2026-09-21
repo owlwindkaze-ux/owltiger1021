@@ -34,7 +34,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "taman ~; kebun ~"
+   "meaning_id": "taman ~; kebun ~",
+   "gokei": true
   },
   {
    "word": "〜おしまい",
@@ -68,7 +69,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "di bawah ~"
+   "meaning_id": "di bawah ~",
+   "gokei": true
   },
   {
    "word": "〜化",
@@ -80,7 +82,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "proses menjadi ~; -isasi"
+   "meaning_id": "proses menjadi ~; -isasi",
+   "gokei": true
   },
   {
    "word": "〜科",
@@ -92,7 +95,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "jurusan ~; bagian ~ (di rumah sakit)"
+   "meaning_id": "jurusan ~; bagian ~ (di rumah sakit)",
+   "gokei": true
   },
   {
    "word": "〜歌",
@@ -104,7 +108,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "lagu tentang ~"
+   "meaning_id": "lagu tentang ~",
+   "gokei": true
   },
   {
    "word": "〜刊",
@@ -152,7 +157,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "gedung ~; balai ~"
+   "meaning_id": "gedung ~; balai ~",
+   "gokei": true
   },
   {
    "word": "〜感",
@@ -164,7 +170,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "rasa ~; kesan ~"
+   "meaning_id": "rasa ~; kesan ~",
+   "gokei": true
   },
   {
    "word": "〜画",
@@ -176,7 +183,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "lukisan ~; gambar ~"
+   "meaning_id": "lukisan ~; gambar ~",
+   "gokei": true
   },
   {
    "word": "〜外",
@@ -188,7 +196,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "di luar ~"
+   "meaning_id": "di luar ~",
+   "gokei": true
   },
   {
    "word": "〜難い",
@@ -212,7 +221,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "masa ~; periode ~"
+   "meaning_id": "masa ~; periode ~",
+   "gokei": true
   },
   {
    "word": "〜器",
@@ -224,7 +234,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "alat ~"
+   "meaning_id": "alat ~",
+   "gokei": true
   },
   {
    "word": "〜機",
@@ -236,7 +247,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "mesin ~"
+   "meaning_id": "mesin ~",
+   "gokei": true
   },
   {
    "word": "〜教",
@@ -248,7 +260,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "agama ~"
+   "meaning_id": "agama ~",
+   "gokei": true
   },
   {
    "word": "〜きる",
@@ -282,7 +295,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "baris ke-~"
+   "meaning_id": "baris ke-~",
+   "gokei": true
   },
   {
    "word": "〜業",
@@ -294,7 +308,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "usaha ~; industri ~"
+   "meaning_id": "usaha ~; industri ~",
+   "gokei": true
   },
   {
    "word": "〜口",
@@ -306,7 +321,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "pintu ~; lubang ~"
+   "meaning_id": "pintu ~; lubang ~",
+   "gokei": true
   },
   {
    "word": "〜家",
@@ -318,7 +334,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "keluarga ~"
+   "meaning_id": "keluarga ~",
+   "gokei": true
   },
   {
    "word": "〜形",
@@ -330,7 +347,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "bentuk ~"
+   "meaning_id": "bentuk ~",
+   "gokei": true
   },
   {
    "word": "〜系",
@@ -342,7 +360,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "golongan ~; keturunan ~"
+   "meaning_id": "golongan ~; keturunan ~",
+   "gokei": true
   },
   {
    "word": "〜圏",
@@ -354,7 +373,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "kawasan ~; lingkup ~"
+   "meaning_id": "kawasan ~; lingkup ~",
+   "gokei": true
   },
   {
    "word": "〜校",
@@ -378,7 +398,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "pelabuhan ~"
+   "meaning_id": "pelabuhan ~",
+   "gokei": true
   },
   {
    "word": "〜国",
@@ -390,7 +411,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "negara ~"
+   "meaning_id": "negara ~",
+   "gokei": true
   },
   {
    "word": "〜号",
@@ -448,7 +470,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "buatan ~; hasil dari ~"
+   "meaning_id": "buatan ~; hasil dari ~",
+   "gokei": true
   },
   {
    "word": "〜史",
@@ -460,7 +483,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "sejarah ~"
+   "meaning_id": "sejarah ~",
+   "gokei": true
   },
   {
    "word": "〜紙",
@@ -472,7 +496,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "surat kabar ~; kertas ~"
+   "meaning_id": "surat kabar ~; kertas ~",
+   "gokei": true
   },
   {
    "word": "〜式",
@@ -484,7 +509,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "gaya ~; cara ~"
+   "meaning_id": "gaya ~; cara ~",
+   "gokei": true
   },
   {
    "word": "〜室",
@@ -496,7 +522,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ ruangan (satuan)"
+   "meaning_id": "~ ruangan (satuan)",
+   "gokei": true
   },
   {
    "word": "〜車",
@@ -520,7 +547,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "orang yang ~"
+   "meaning_id": "orang yang ~",
+   "gokei": true
   },
   {
    "word": "〜社",
@@ -532,7 +560,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ perusahaan (satuan)"
+   "meaning_id": "~ perusahaan (satuan)",
+   "gokei": true
   },
   {
    "word": "〜手",
@@ -544,7 +573,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "pemain ~; orang yang melakukan ~"
+   "meaning_id": "pemain ~; orang yang melakukan ~",
+   "gokei": true
   },
   {
    "word": "〜酒",
@@ -556,7 +586,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "minuman keras jenis ~"
+   "meaning_id": "minuman keras jenis ~",
+   "gokei": true
   },
   {
    "word": "〜集",
@@ -568,7 +599,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "kumpulan ~"
+   "meaning_id": "kumpulan ~",
+   "gokei": true
   },
   {
    "word": "〜所",
@@ -580,7 +612,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "tempat ~"
+   "meaning_id": "tempat ~",
+   "gokei": true
   },
   {
    "word": "〜省",
@@ -592,7 +625,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "Kementerian ~"
+   "meaning_id": "Kementerian ~",
+   "gokei": true
   },
   {
    "word": "〜商",
@@ -604,7 +638,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "pedagang ~"
+   "meaning_id": "pedagang ~",
+   "gokei": true
   },
   {
    "word": "〜勝",
@@ -640,7 +675,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "Kuil ~"
+   "meaning_id": "Kuil ~",
+   "gokei": true
   },
   {
    "word": "〜時間目",
@@ -666,7 +702,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "anak perempuan ke-~"
+   "meaning_id": "anak perempuan ke-~",
+   "gokei": true
   },
   {
    "word": "〜条",
@@ -690,7 +727,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "tempat ~; lapangan ~"
+   "meaning_id": "tempat ~; lapangan ~",
+   "gokei": true
   },
   {
    "word": "〜畳",
@@ -726,7 +764,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "sudah selesai ~"
+   "meaning_id": "sudah selesai ~",
+   "gokei": true
   },
   {
    "word": "〜席",
@@ -762,7 +801,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ pertandingan (satuan)"
+   "meaning_id": "~ pertandingan (satuan)",
+   "gokei": true
   },
   {
    "word": "〜前",
@@ -774,7 +814,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "sebelum ~"
+   "meaning_id": "sebelum ~",
+   "gokei": true
   },
   {
    "word": "〜沿い",
@@ -786,7 +827,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "sepanjang ~"
+   "meaning_id": "sepanjang ~",
+   "gokei": true
   },
   {
    "word": "〜艘",
@@ -846,7 +888,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "Badan ~; Agensi ~"
+   "meaning_id": "Badan ~; Agensi ~",
+   "gokei": true
   },
   {
    "word": "〜兆",
@@ -870,7 +913,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "kepala ~; pemimpin ~"
+   "meaning_id": "kepala ~; pemimpin ~",
+   "gokei": true
   },
   {
    "word": "〜帳",
@@ -882,7 +926,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "buku catatan ~"
+   "meaning_id": "buku catatan ~",
+   "gokei": true
   },
   {
    "word": "〜丁目",
@@ -919,7 +964,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "disertai ~; termasuk ~"
+   "meaning_id": "disertai ~; termasuk ~",
+   "gokei": true
   },
   {
    "word": "〜続く",
@@ -1049,7 +1095,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "jalan ~; jalur ~"
+   "meaning_id": "jalan ~; jalur ~",
+   "gokei": true
   },
   {
    "word": "〜内",
@@ -1061,7 +1108,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "di dalam ~"
+   "meaning_id": "di dalam ~",
+   "gokei": true
   },
   {
    "word": "〜年生",
@@ -1098,7 +1146,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ butir (peluru); berangkat dari ~"
+   "meaning_id": "~ butir (peluru); berangkat dari ~",
+   "gokei": true
   },
   {
    "word": "〜番目",
@@ -1123,7 +1172,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "biaya ~"
+   "meaning_id": "biaya ~",
+   "gokei": true
   },
   {
    "word": "〜病",
@@ -1135,7 +1185,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "penyakit ~"
+   "meaning_id": "penyakit ~",
+   "gokei": true
   },
   {
    "word": "〜風",
@@ -1147,7 +1198,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "bergaya ~"
+   "meaning_id": "bergaya ~",
+   "gokei": true
   },
   {
    "word": "〜部",
@@ -1159,7 +1211,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "bagian ~; klub ~"
+   "meaning_id": "bagian ~; klub ~",
+   "gokei": true
   },
   {
    "word": "〜振り",
@@ -1195,7 +1248,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "dialek ~"
+   "meaning_id": "dialek ~",
+   "gokei": true
   },
   {
    "word": "〜歩",
@@ -1249,7 +1303,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "ditujukan untuk ~"
+   "meaning_id": "ditujukan untuk ~",
+   "gokei": true
   },
   {
    "word": "〜名",
@@ -1295,7 +1350,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ malam (satuan)"
+   "meaning_id": "~ malam (satuan)",
+   "gokei": true
   },
   {
    "word": "〜流",
@@ -1307,7 +1363,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "aliran ~; gaya ~"
+   "meaning_id": "aliran ~; gaya ~",
+   "gokei": true
   },
   {
    "word": "〜料",
@@ -1319,7 +1376,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "biaya ~; ongkos ~"
+   "meaning_id": "biaya ~; ongkos ~",
+   "gokei": true
   },
   {
    "word": "〜領",
@@ -1331,7 +1389,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "wilayah kekuasaan ~"
+   "meaning_id": "wilayah kekuasaan ~",
+   "gokei": true
   },
   {
    "word": "〜力",
@@ -1343,7 +1402,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "daya ~; kekuatan ~"
+   "meaning_id": "daya ~; kekuatan ~",
+   "gokei": true
   },
   {
    "word": "〜論",
@@ -1355,7 +1415,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "teori ~"
+   "meaning_id": "teori ~",
+   "gokei": true
   },
   {
    "word": "〜羽",
@@ -1379,7 +1440,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ berikutnya"
+   "meaning_id": "~ berikutnya",
+   "gokei": true
   },
   {
    "word": "幾〜",
@@ -1391,7 +1453,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "beberapa ~"
+   "meaning_id": "beberapa ~",
+   "gokei": true
   },
   {
    "word": "上〜",
@@ -1403,7 +1466,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ bagian atas"
+   "meaning_id": "~ bagian atas",
+   "gokei": true
   },
   {
    "word": "御〜",
@@ -1415,7 +1479,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ (bentuk hormat)"
+   "meaning_id": "~ (bentuk hormat)",
+   "gokei": true
   },
   {
    "word": "各〜",
@@ -1427,7 +1492,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "masing-masing ~"
+   "meaning_id": "masing-masing ~",
+   "gokei": true
   },
   {
    "word": "外〜",
@@ -1439,7 +1505,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ luar negeri; ~ asing"
+   "meaning_id": "~ luar negeri; ~ asing",
+   "gokei": true
   },
   {
    "word": "共産〜",
@@ -1452,7 +1519,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ komunis"
+   "meaning_id": "~ komunis",
+   "gokei": true
   },
   {
    "word": "空〜",
@@ -1464,7 +1532,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ kosong"
+   "meaning_id": "~ kosong",
+   "gokei": true
   },
   {
    "word": "現〜",
@@ -1476,7 +1545,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ yang sekarang"
+   "meaning_id": "~ yang sekarang",
+   "gokei": true
   },
   {
    "word": "小〜",
@@ -1488,7 +1558,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ kecil"
+   "meaning_id": "~ kecil",
+   "gokei": true
   },
   {
    "word": "高〜",
@@ -1500,7 +1571,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ tinggi"
+   "meaning_id": "~ tinggi",
+   "gokei": true
   },
   {
    "word": "今〜",
@@ -1512,7 +1584,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ ini; ~ sekarang"
+   "meaning_id": "~ ini; ~ sekarang",
+   "gokei": true
   },
   {
    "word": "再〜",
@@ -1524,7 +1597,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ ulang; ~ kembali"
+   "meaning_id": "~ ulang; ~ kembali",
+   "gokei": true
   },
   {
    "word": "最〜",
@@ -1536,7 +1610,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "paling ~"
+   "meaning_id": "paling ~",
+   "gokei": true
   },
   {
    "word": "室〜",
@@ -1548,7 +1623,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ dalam ruangan"
+   "meaning_id": "~ dalam ruangan",
+   "gokei": true
   },
   {
    "word": "初〜",
@@ -1560,7 +1636,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ pertama"
+   "meaning_id": "~ pertama",
+   "gokei": true
   },
   {
    "word": "諸〜",
@@ -1572,7 +1649,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "berbagai ~"
+   "meaning_id": "berbagai ~",
+   "gokei": true
   },
   {
    "word": "省〜",
@@ -1584,7 +1662,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "hemat ~"
+   "meaning_id": "hemat ~",
+   "gokei": true
   },
   {
    "word": "重〜",
@@ -1596,7 +1675,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ berat"
+   "meaning_id": "~ berat",
+   "gokei": true
   },
   {
    "word": "女〜",
@@ -1608,7 +1688,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ oleh perempuan"
+   "meaning_id": "~ oleh perempuan",
+   "gokei": true
   },
   {
    "word": "前〜",
@@ -1620,7 +1701,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ sebelumnya; mantan ~"
+   "meaning_id": "~ sebelumnya; mantan ~",
+   "gokei": true
   },
   {
    "word": "総〜",
@@ -1632,7 +1714,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ keseluruhan"
+   "meaning_id": "~ keseluruhan",
+   "gokei": true
   },
   {
    "word": "短〜",
@@ -1644,7 +1727,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ pendek"
+   "meaning_id": "~ pendek",
+   "gokei": true
   },
   {
    "word": "第〜",
@@ -1656,7 +1740,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "ke-~"
+   "meaning_id": "ke-~",
+   "gokei": true
   },
   {
    "word": "長〜",
@@ -1668,7 +1753,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ panjang"
+   "meaning_id": "~ panjang",
+   "gokei": true
   },
   {
    "word": "低〜",
@@ -1680,7 +1766,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ rendah"
+   "meaning_id": "~ rendah",
+   "gokei": true
   },
   {
    "word": "同〜",
@@ -1692,7 +1779,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ yang sama"
+   "meaning_id": "~ yang sama",
+   "gokei": true
   },
   {
    "word": "反〜",
@@ -1704,7 +1792,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "anti-~"
+   "meaning_id": "anti-~",
+   "gokei": true
   },
   {
    "word": "非〜",
@@ -1716,7 +1805,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "non-~; tidak ~"
+   "meaning_id": "non-~; tidak ~",
+   "gokei": true
   },
   {
    "word": "一〜",
@@ -1728,7 +1818,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "satu ~"
+   "meaning_id": "satu ~",
+   "gokei": true
   },
   {
    "word": "副〜",
@@ -1740,7 +1831,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "wakil ~"
+   "meaning_id": "wakil ~",
+   "gokei": true
   },
   {
    "word": "古〜",
@@ -1752,7 +1844,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ lama; ~ bekas"
+   "meaning_id": "~ lama; ~ bekas",
+   "gokei": true
   },
   {
    "word": "ほんの〜",
@@ -1762,7 +1855,8 @@
    "kanji": [],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "hanya ~; sekadar ~"
+   "meaning_id": "hanya ~; sekadar ~",
+   "gokei": true
   },
   {
    "word": "防〜",
@@ -1774,7 +1868,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "pencegahan ~"
+   "meaning_id": "pencegahan ~",
+   "gokei": true
   },
   {
    "word": "毎〜",
@@ -1786,7 +1881,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "setiap ~"
+   "meaning_id": "setiap ~",
+   "gokei": true
   },
   {
    "word": "未〜",
@@ -1798,7 +1894,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "belum ~"
+   "meaning_id": "belum ~",
+   "gokei": true
   },
   {
    "word": "民主〜",
@@ -1811,7 +1908,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ demokratis"
+   "meaning_id": "~ demokratis",
+   "gokei": true
   },
   {
    "word": "名〜",
@@ -1823,7 +1921,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ terkenal"
+   "meaning_id": "~ terkenal",
+   "gokei": true
   },
   {
    "word": "翌〜",
@@ -1835,7 +1934,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ berikutnya"
+   "meaning_id": "~ berikutnya",
+   "gokei": true
   },
   {
    "word": "両〜",
@@ -1847,7 +1947,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "kedua ~"
+   "meaning_id": "kedua ~",
+   "gokei": true
   },
   {
    "word": "和〜",
@@ -1859,7 +1960,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ gaya Jepang"
+   "meaning_id": "~ gaya Jepang",
+   "gokei": true
   },
   {
    "word": "我〜",
@@ -1871,7 +1973,8 @@
    ],
    "category": "語形成",
    "sub": "接頭語・接尾語",
-   "meaning_id": "~ kami; ~ kita"
+   "meaning_id": "~ kami; ~ kita",
+   "gokei": true
   },
   {
    "word": "あいまい",
