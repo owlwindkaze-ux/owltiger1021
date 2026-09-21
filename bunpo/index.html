@@ -130,9 +130,17 @@ select.sel{padding:.55rem .6rem;border:1.5px solid var(--line);border-radius:10p
 #qTypes .chip[data-t="choice"]{color:var(--blue);border-color:#bfdbfe}
 #qTypes .chip[data-t="match"]{color:var(--amber);border-color:#fde68a}
 #qTypes .chip[data-t="order"]{color:var(--purple);border-color:#ddd6fe}
+#qTypes .chip[data-t="star"]{color:#c2410c;border-color:#fed7aa}
 #qTypes .chip[data-t="choice"].on{background:var(--blue);border-color:var(--blue);color:#fff}
 #qTypes .chip[data-t="match"].on{background:var(--amber);border-color:var(--amber);color:#fff}
 #qTypes .chip[data-t="order"].on{background:var(--purple);border-color:var(--purple);color:#fff}
+#qTypes .chip[data-t="star"].on{background:#c2410c;border-color:#c2410c;color:#fff}
+.qtype.star{background:#fff7ed;color:#c2410c}
+.starline{font-size:1.02rem;line-height:2.6;margin:.4rem 0 .2rem;word-break:keep-all}
+.starline .bl,.starline .st{display:inline-block;min-width:2.6em;height:1.4em;
+  vertical-align:-.35em;margin:0 .12em}
+.starline .bl{border-bottom:1.5px solid #94a3b8}
+.starline .st{border-bottom:2.5px solid #c2410c;color:#c2410c;font-weight:800;text-align:center}
 .qtext{font-size:1.2rem;font-weight:700;line-height:1.75;margin-bottom:1rem}
 .qtext .bl{color:var(--red);font-weight:800}
 .opts{display:grid;gap:.5rem}
@@ -266,6 +274,7 @@ footer a{color:var(--green)}
           <button class="chip on" data-t="choice">Isian ／ 穴埋め</button>
           <button class="chip on" data-t="match">Arti ／ 意味</button>
           <button class="chip on" data-t="order">Susun ／ 並べ替え</button>
+          <button class="chip on" data-t="star">★ ／ 文の組み立て</button>
         </div>
       </div>
       <div class="fld"><span>Jumlah ／ 問題数</span>
@@ -783,9 +792,25 @@ function buildQuestions() {
     (g.quiz || []).forEach(q => {
       if (q.type === 'choice' && types.includes('choice')) qs.push({ ...q, gid: g.id });
       if (q.type === 'order' && types.includes('order')) qs.push({ ...q, gid: g.id });
+      /* ★の組み立て（JLPTの大問「文の文法2」）。
+         並べ替えの部品が ちょうど4つのものは、そのまま ★の問題にできる。 */
+      if (q.type === 'order' && types.includes('star') && (q.segments || []).length === 4)
+        qs.push({ type: 'star', gid: g.id, head: '', tail: '',
+                  parts: q.segments.slice(), star: qi4(g.id) });
     });
     if (types.includes('match') && pooled.length >= 4) qs.push({ type: 'match', gid: g.id });
   });
+  /* 頭と尾のある ★の問題（手書き）。本番の形にいちばん近い */
+  if (types.includes('star')) {
+    /* 文型の名前から idを引く。引けたら、その文型の「覚えた／要復習」に記録される */
+    const byPat = {};
+    DATA.forEach(g => { byPat[g.pattern] = g.id; });
+    STARS.forEach(it => {
+      if (lv !== 'all' && it.lv !== lv) return;
+      qs.push({ type: 'star', gid: byPat[it.pat] || null, head: it.head, tail: it.tail,
+                parts: it.parts.slice(), star: it.star, pat: it.pat, why: it.why });
+    });
+  }
   return shuffle(qs);
 }
 function startQuiz(list) {
@@ -824,6 +849,7 @@ function showQ() {
   const q = quiz[qi], g = BYID[q.gid];
   if (q.type === 'choice') renderChoice(q, g);
   else if (q.type === 'match') renderMatch(q, g);
+  else if (q.type === 'star') renderStar(q, g);
   else renderOrder(q, g);
 }
 function optsHTML(choices) {
@@ -843,6 +869,35 @@ function bindOpts(correct, explain) {
     settle(right, explain);
   });
 }
+/* ---------- ★の組み立て（JLPTの大問「文の文法2」） ----------
+   4つの部品を 正しい順に 並べたとき、★の位置に 来るものを 答える。
+   公式の答え方どおり、並べ替えそのものは させず 番号で 答えさせる。 */
+let STARS = [];
+fetch('star.json', { cache: 'no-cache' }).then(r => r.json())
+  .then(j => { STARS = j.items || []; }).catch(() => { STARS = []; });
+
+/* 部品が4つの並べ替えを ★の問題にするとき、★の位置を 文型のidから決める。
+   毎回同じ位置に なるが、4つに ちらばるので かたよらない。 */
+function qi4(id) {
+  let h = 0;
+  for (let i = 0; i < String(id).length; i++) h = (h * 31 + String(id).charCodeAt(i)) >>> 0;
+  return h % 4;
+}
+
+function renderStar(q, g) {
+  const order = shuffle(q.parts.map((c, i) => ({ c, i })));
+  const correct = order.findIndex(o => o.i === q.star);
+  const line = q.parts.map((_, i) =>
+    i === q.star ? '<span class="st">★</span>' : '<span class="bl"></span>').join('');
+  const full = q.head + q.parts.join('') + q.tail;
+  const pat = q.pat || (g ? g.pattern : '');
+  $('#qCard').innerHTML = `<span class="qtype star">★ ／ 文の組み立て</span>
+    <div class="starline">${esc(q.head)}${line}${esc(q.tail)}</div>
+    <p class="hint">4つを 正しい順に ならべたとき、<b>★</b>に 入るものは どれですか。</p>
+    ${optsHTML(order.map(o => o.c))}<div id="jd"></div>`;
+  bindOpts(correct, `${esc(full)}${pat ? '<br>' + esc(pat) : ''}${q.why ? '<br>' + esc(q.why) : ''}`);
+}
+
 function renderChoice(q, g) {
   const order = shuffle(q.choices.map((c, i) => ({ c, i })));
   const correct = order.findIndex(o => o.i === q.answer);
@@ -893,7 +948,9 @@ $('#qCheck').onclick = () => {
 function settle(right, explain) {
   const q = quiz[qi];
   right ? okN++ : (ngN++, wrongQs.push(q));
-  setMark(q.gid, right ? (progress[q.gid] === 'review' ? 'review' : 'known') : 'review');
+  /* ★の問題は 文型のidを引けないことがある。そのときは 記録しない
+     （progress に 空のキーが できて、覚えた数が ずれてしまうため） */
+  if (q.gid) setMark(q.gid, right ? (progress[q.gid] === 'review' ? 'review' : 'known') : 'review');
   $('#jd').innerHTML = `<div class="judge ${right ? 'right' : 'wrong'}">
     <b>${right ? '✓ Benar ／ 正解' : '✗ Salah ／ 不正解'}</b>${explain}</div>`;
   $('#qOk').textContent = okN; $('#qNg').textContent = ngN;
