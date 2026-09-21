@@ -412,6 +412,7 @@ footer a{color:var(--blue)}
           <option value="context">問題3 文脈規定 ／ Pilih kata yang tepat</option>
           <option value="para">問題4 言い換え類義 ／ Kata yang searti</option>
           <option value="usage">問題5 用法 ／ Pemakaian yang benar</option>
+          <option value="gokei">問題6 語形成（N2）／ Pembentukan kata</option>
           <option value="kanjiread">漢字の読み（1字・熟語）／ Baca kanji</option>
         </select>
         <select class="sel" id="qzLv">
@@ -1659,6 +1660,33 @@ function makeQuestion(type, pool, kpool) {
           <span style="font-size:.9rem;color:var(--muted)">（${w.reading}）</span>`,
       choices: shuffle([e.s, ...wrong]), answer: e.s, key: w.word, note: NOTE(w) };
   }
+  if (type === 'gokei') {                       /* 問題6 語形成（N2の大問③） */
+    /* gokei:true は 派生語・複合語を作る接辞だけ に付けてある。
+       助数詞（三枚・一杯…）は N2の大問③では 問われないので 出さない。 */
+    if (!w.gokei || !e) return null;
+    const isSuf = /^[〜～]/.test(w.word);
+    const affix = w.word.replace(/[〜～]/g, '');
+    if (!affix || !e.sur.includes(affix) || !onceOnly(e)) return null;
+    /* 文中の形から、接辞のところだけを（　）にする。例：高血圧 →（　）血圧 */
+    const rest = isSuf ? e.sur.slice(0, e.sur.length - affix.length) : e.sur.slice(affix.length);
+    if (!rest) return null;                     /* 残りが無い語は 問題にならない */
+    const blank = isSuf ? rest + '（　）' : '（　）' + rest;
+    /* まぎらわしい選択肢は、同じ側（前／後ろ）に付く 同じ長さの接辞から取る。
+       ただし、入れたときに 別の本当の言葉に なってしまうものは 外す。
+       「高血圧」の（　）に「低」を入れると「低血圧」も正しくなってしまうため。 */
+    const made = a2 => isSuf ? rest + a2 : a2 + rest;
+    const cand = [...new Set(pool.filter(x => x.gokei &&
+        x.word !== w.word && /^[〜～]/.test(x.word) === isSuf)
+      .map(x => x.word.replace(/[〜～]/g, '')))]
+      .filter(a2 => a2 && a2.length === affix.length && a2 !== affix
+                 && !VBYW[made(a2)] && !SENT[made(a2)]);
+    const ch = pick(cand, 3);
+    if (ch.length < 3) return null;
+    return { kind: '問題6 　（　）に入るものは？ ／ Pembentukan kata',
+      q: sentHTML(e, blank, false),
+      choices: shuffle([affix, ...ch]), answer: affix, key: w.word,
+      note: `${e.sur}（${e.r}）　${w.word}＝${vMean(w)}` };
+  }
   return null;
 }
 function buildQuiz() {
@@ -1666,7 +1694,11 @@ function buildQuiz() {
   const pool = quizPool(lv);
   const kpool = DATA.filter(k => hasLv(k, lv));
   if (pool.length < 8) { alert('この範囲は語が少なすぎます。レベルを変えてください。'); return; }
-  const types = type === 'mix' ? ['reading', 'orth', 'context', 'para', 'usage'] : [type];
+  /* 語形成は N2だけの 大問。その範囲に 語形成の語が あるときだけ 総合に 混ぜる */
+  const hasGokei = pool.filter(x => x.gokei && SENT[x.word]).length >= 8;
+  const types = type === 'mix'
+    ? ['reading', 'orth', 'context', 'para', 'usage'].concat(hasGokei ? ['gokei'] : [])
+    : [type];
   const list = []; let guard = 0;
   while (list.length < n && guard++ < n * 40) {
     const t = types[list.length % types.length];
