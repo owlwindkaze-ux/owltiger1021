@@ -7,7 +7,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-09-21i';
+  var PAGE_VER = '2026-09-21j';
   try {
     if (sessionStorage.getItem('vchk-moshi')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -59,6 +59,19 @@ p.lead{color:var(--sub);font-size:13px;margin:4px 0}
 .opt .n{flex:0 0 22px;height:22px;border-radius:50%;background:#eef2ff;color:var(--indigo);
         font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
 .opt.sel{border-color:var(--indigo);background:#eef2ff}
+/* 概要理解「耳だけ」。番号だけ出し、文字は「文字を出す」を押したときだけ出す */
+.earnote{font-size:12.5px;line-height:1.7;color:var(--red);border:1px dashed var(--red);
+         border-radius:8px;padding:8px 10px;margin:6px 0 10px}
+.q.ear .qt,.q.ear .opt .otext{display:none}
+.q.ear .opts{grid-template-columns:repeat(4,1fr)}
+.q.ear .opt{justify-content:center;padding:13px 0;font-size:16px}
+.q.ear.opened .qt,.q.ear.opened .opt .otext{display:block}
+.q.ear.opened .opts{grid-template-columns:1fr}
+.q.ear.opened .opt{justify-content:flex-start;padding:9px 11px;font-size:14px}
+.showtext{margin-top:8px;background:#fff;border:1px solid var(--line);border-radius:8px;
+          padding:5px 9px;font-size:11.5px;color:var(--sub);cursor:pointer;font-family:inherit}
+.showtext:hover{border-color:var(--indigo);color:var(--indigo)}
+.q.ear.opened .showtext{display:none}
 .opt.right{border-color:var(--teal);background:#eafaf2}
 .opt.wrong{border-color:var(--red);background:#fdeeec}
 .fb{display:none;margin-top:8px;border-radius:8px;padding:8px 10px;font-size:13px}
@@ -207,15 +220,27 @@ const BUNPO = ['問題7', '問題8', '問題9'];
 const DOKKAI = ['問題10', '問題11', '問題12', '問題13', '問題14'];
 const CHOU = ['聴解1', '聴解2', '聴解3', '聴解4', '聴解5'];
 
+/* 概要理解で 読み上げる 原稿。話 → 質問 → 一番〜四番。
+   画面の 読みやすさのための 空白は 取り、すでに 句点で 終わる 文には 足さない。 */
+function earSay(it) {
+  const sp = s => {
+    const t = String(s).replace(/[ 　]/g, '').replace(/\n/g, '。');
+    return /[。？！]$/.test(t) ? t : t + '。';
+  };
+  const no = ['一番', '二番', '三番', '四番'];
+  return sp(it.script) + sp(it.q) +
+         it.opts.map((o, i) => (no[i] || (i + 1) + '番') + '。' + sp(o)).join('');
+}
 function optsHTML(id, choices) {
   return '<ul class="opts">' + choices.map((c, i) =>
     '<li><button type="button" class="opt" data-id="' + id + '" data-i="' + i + '">' +
-    '<span class="n">' + (i + 1) + '</span><span>' + ruby(c) + '</span></button></li>').join('') + '</ul>';
+    '<span class="n">' + (i + 1) + '</span><span class="otext">' + ruby(c) + '</span></button></li>').join('') + '</ul>';
 }
-function qBlock(id, no, text, choices, extra) {
-  return '<div class="q" data-qid="' + id + '">' +
+function qBlock(id, no, text, choices, extra, ear) {
+  return '<div class="q' + (ear ? ' ear' : '') + '" data-qid="' + id + '">' +
     '<span class="qno">問' + no + '</span>' + (extra || '') +
     '<div class="qt">' + ruby(text) + '</div>' + optsHTML(id, choices) +
+    (ear ? '<button type="button" class="showtext">文字を出す ／ Lihat teks</button>' : '') +
     '<div class="fb"></div></div>';
 }
 
@@ -255,10 +280,18 @@ function sectionHTML(key, startNo) {
     return { html: h, n: n };
   }
   if (CHOU.indexOf(key) >= 0) {
+    /* 問題3「概要理解」は、本番の問題用紙に 質問も 選択肢も 印刷されない。
+       話のあとに 質問と 選択肢を 読み上げ、画面には 番号だけ 出す。 */
+    const ear = key === '聴解3' && 'speechSynthesis' in window;
+    if (ear) h += '<p class="earnote">本番と同じで、<b>質問と選択肢は画面に出ません</b>。' +
+                  '「聞く」を押すと、話 → 質問 → 選択肢（一番〜四番）の順に流れます。' +
+                  'メモを取りながら聞いて、番号でえらんでください。' +
+                  '聞き取れないときは「文字を出す」を押してください。</p>';
     s.items.forEach((it, i) => {
-      const listen = '<div><button type="button" class="play" data-say="' + esc(it.script) + '">▶ 聞く</button>' +
+      const say = ear ? earSay(it) : it.script;
+      const listen = '<div><button type="button" class="play" data-say="' + esc(say) + '">▶ 聞く</button>' +
                      '<span class="cnt">聞いた回数 0</span></div>';
-      h += qBlock(key + '/' + i, n++, it.q, it.opts, listen);
+      h += qBlock(key + '/' + i, n++, it.q, it.opts, listen, ear);
     });
     return { html: h, n: n };
   }
@@ -278,6 +311,9 @@ function bindOpts(root) {
     b.classList.add('sel');
   });
   root.querySelectorAll('.play').forEach(b => b.onclick = () => speak(b.dataset.say, b));
+  /* 概要理解で 聞き取れないまま 進めなくなるのを 防ぐ 逃げ道 */
+  root.querySelectorAll('.showtext').forEach(b =>
+    b.onclick = () => b.closest('.q').classList.add('opened'));
 }
 
 function part1() {
