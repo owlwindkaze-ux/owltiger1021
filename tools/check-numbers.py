@@ -65,6 +65,7 @@ print('  手書き %d字' % TCHARS)
 # (ファイル, 探す形, あるべき数, 何の数か)
 CHECKS = [
     ('index.html', r'const GTOTAL = (\d+)',        GTOTAL, '文型の合計'),
+    ('index.html', r'文の形。(\d+)文型',             GTOTAL, '文型の合計（説明文）'),
     ('index.html', r'DTOTAL = (\d+)',              DB,     '読解の本数'),
     ('index.html', r'CTOTAL = (\d+)',              CTOTAL, '聴解の問数'),
     ('index.html', r'VTOTAL = (\d+)',              VTOTAL, '語彙の控え'),
