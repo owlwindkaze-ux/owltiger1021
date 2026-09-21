@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-09-21b';
+  var PAGE_VER = '2026-09-21c';
   var KEY = 'reloaded-for-shinjin';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -205,11 +205,17 @@ footer{text-align:center;font-size:.75rem;color:var(--muted);padding:1rem 0 2rem
 
   <div class="card staff">
     <h2>職員用<span class="pill">実習生は使いません</span><small>Untuk staf</small></h2>
-    <p class="desc">診断テストの聴解を流すページです。問題冊子と手引きは、印刷したものを使ってください。</p>
+    <p class="desc">テストの聴解を流すページと、印刷して使う紙です。問題冊子は印刷したものを配ってください。</p>
     <div class="items">
       <a class="item" href="../shindan/"><span class="em">🎧</span>
-        <span class="tx"><span class="n">診断テスト　聴解の再生</span>
-        <span class="r">第1回（12月）・第2回（3月）／音のテストつき</span></span><span class="ar">→</span></a>
+        <span class="tx"><span class="n">テストの聴解　再生</span>
+        <span class="r">診断テスト 第1回・第2回／<b>N4判定（2月・問55〜66）</b>／音のテストつき</span></span><span class="ar">→</span></a>
+      <a class="item" href="../N4到達度判定テスト_職員用.pdf"><span class="em">🗝️</span>
+        <span class="tx"><span class="n">N4到達度判定テスト　職員用（PDF）</span>
+        <span class="r">第12週に実施。実施要領・判定の目安・記録表・正解と解説・聴解の原稿</span></span><span class="ar">→</span></a>
+      <a class="item" href="../N4到達度判定テスト_問題.pdf"><span class="em">📝</span>
+        <span class="tx"><span class="n">N4到達度判定テスト　問題（PDF）</span>
+        <span class="r">66問・60分。解答用紙つき。人数分 印刷して配る</span></span><span class="ar">→</span></a>
       <a class="item" href="../新人研修プログラム.pdf"><span class="em">📋</span>
         <span class="tx"><span class="n">新人研修プログラム（PDF）</span>
         <span class="r">30週の予定表・面談シート・記録表・つまずいたときの手当て</span></span><span class="ar">→</span></a>
