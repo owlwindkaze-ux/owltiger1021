@@ -74,7 +74,7 @@ data.n4 = SET;
 src = src.replace(m[0], 'var DATA = ' + JSON.stringify(data) + ';\n');
 
 /* ② ボタン。無ければ 足す */
-const btn = '<button class="btn" data-set="n4" id="sn4">N4到達度判定（2月・問55〜66）</button>';
+const btn = '<button class="btn" data-set="n4" id="sn4">N4到達度判定（12月・問55〜66）</button>';
 if (src.indexOf('data-set="n4"') < 0) {
   const anchor = '<button class="btn" data-set="2" id="s2">第2回（3月）</button>';
   if (src.indexOf(anchor) < 0) { console.error('ボタンの場所が 見つかりません'); process.exit(1); }
