@@ -1,0 +1,328 @@
+const fs = require('fs');
+const sets = JSON.parse(fs.readFileSync('/tmp/shindan/out/sets.json', 'utf8'));
+
+/* 再生に必要な分だけを取り出す */
+const DATA = {};
+sets.forEach(s => {
+  DATA[s.no] = { when: s.when, groups: s.listen.map(g => ({
+    group: g.group,
+    items: g.items.map(it => ({ no: it.no, answer: it.answer, why: it.why, steps: it.steps }))
+  })) };
+});
+
+const html = `<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta name="robots" content="noindex, nofollow">
+<title>診断テスト 聴解の再生｜職員用</title>
+<style>
+:root{--ink:#12212e;--muted:#5b6875;--line:#d5dee7;--bg:#f4f7fa;--blue:#12459c;--green:#0e7a52;--red:#c0392b}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,"Noto Sans JP",system-ui,sans-serif;
+ background:var(--bg);color:var(--ink);line-height:1.7}
+button,select{font-family:inherit;font-size:inherit;color:inherit;cursor:pointer}
+header{background:#12212e;color:#fff;padding:1rem}
+header .in{max-width:900px;margin:0 auto}
+header h1{font-size:1.15rem}
+header p{font-size:.82rem;opacity:.8;margin-top:.2rem}
+.wrap{max-width:900px;margin:0 auto;padding:1rem}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1rem;margin-bottom:1rem}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.btn{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:.55rem 1rem;font-weight:700}
+.btn.pri{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.stop{background:var(--red);border-color:var(--red);color:#fff}
+.btn.on{background:var(--green);border-color:var(--green);color:#fff}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.lb{font-size:.78rem;font-weight:800;letter-spacing:.05em;color:var(--muted);margin-bottom:.4rem}
+.warn{border:2px solid var(--red);background:#fdf4f3;border-radius:10px;padding:.7rem .9rem;margin-bottom:1rem;font-size:.9rem}
+.warn b{color:var(--red)}
+.now{background:#eaf1f8;border-radius:10px;padding:.7rem .9rem;font-weight:800;text-align:center;font-size:1.05rem}
+.qs{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.5rem;margin-top:.6rem}
+.grp{font-size:.85rem;font-weight:800;color:var(--green);margin:.9rem 0 .3rem}
+.sc{display:none;margin-top:.6rem;border-top:1px dashed var(--line);padding-top:.6rem;font-size:.88rem}
+.sc.on{display:block}
+.sc .ln{margin:.15rem 0}
+.sc .sp{display:inline-block;min-width:3.2em;font-weight:800;color:var(--blue)}
+.sc .qq{color:var(--green);font-weight:700}
+.sc .an{background:#f2fbf7;border-left:4px solid var(--green);padding:.3rem .6rem;margin:.3rem 0}
+.gate{max-width:340px;margin:12vh auto;background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.4rem;text-align:center}
+.gate input{width:100%;padding:.6rem;border:1.5px solid var(--line);border-radius:10px;margin:.7rem 0;text-align:center;font-size:1.1rem}
+.err{color:var(--red);font-size:.85rem;min-height:1.2em}
+.hint{font-size:.82rem;color:var(--muted)}
+a{color:var(--blue)}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <h2 style="font-size:1.05rem">職員用ページ</h2>
+  <p class="hint">合言葉を 入れて ください</p>
+  <input type="password" id="gatePw" placeholder="••••••••" autocomplete="off">
+  <div class="err" id="gateErr"></div>
+  <button class="btn pri" id="gateGo" style="width:100%">入る</button>
+</div>
+
+<div id="app-root" style="display:none">
+<header><div class="in">
+  <h1>診断テスト　第4部 聴解の再生</h1>
+  <p>職員用。実施の前に「音のテスト」を必ず押してください。</p>
+</div></header>
+
+<div class="wrap">
+  <div class="warn" id="inapp" style="display:none">
+    <b>LINEやメールの中で開いています。</b>このままでは音が出ません。
+    画面のすみの「…」から「ブラウザで開く」を押して、開き直してください。
+  </div>
+  <div class="warn" id="novoice" style="display:none">
+    <b>この端末に日本語の声が見つかりませんでした。</b>
+    「音のテスト」で音が出ないときは、手引きのスクリプトを職員が読み上げてください。
+  </div>
+
+  <div class="card">
+    <div class="lb">どちらを 再生しますか</div>
+    <div class="row">
+      <button class="btn on" data-set="1" id="s1">第1回（12月）</button>
+      <button class="btn" data-set="2" id="s2">第2回（3月）</button>
+    </div>
+    <div class="lb" style="margin-top:1rem">話す速さ</div>
+    <div class="row">
+      <button class="btn" data-rate="0.9">すこし ゆっくり</button>
+      <button class="btn on" data-rate="1">ふつう（本番と同じ）</button>
+    </div>
+    <div class="lb" style="margin-top:1rem">声</div>
+    <div class="row">
+      <select id="voices" style="flex:1;min-width:12rem;padding:.5rem;border:1.5px solid var(--line);border-radius:10px;background:#fff"></select>
+    </div>
+    <p class="hint" style="margin-top:.35rem">端末に入っている日本語の声から選べます。
+      聞き取りやすいものを選んでください。選んだ声は次に開いたときも覚えています。</p>
+
+    <div class="row" style="margin-top:1rem">
+      <button class="btn" id="test">🔊 音のテスト</button>
+      <span class="hint" id="vinfo"></span>
+    </div>
+    <p class="hint" style="margin-top:.4rem">
+      <b>試験を始める前に1回押してください。</b>
+      「音の テストです。聞こえますか。」と1文だけ読みます。<br>
+      ① 音が出るか確かめる　② 受ける人の席で聞いて音量を合わせる　
+      ③ iPhone・iPadは画面を1回さわるまで音が鳴らないので、その1回目にする<br>
+      何度押してもかまいません。押さずに再生すると、機種によっては<b>問1が無音</b>になることがあります。</p>
+  </div>
+
+  <div class="card">
+    <div class="now" id="now">準備できました</div>
+    <div class="row" style="margin-top:.8rem">
+      <button class="btn pri" id="playAll">▶ はじめから 通して再生</button>
+      <button class="btn stop" id="stop" disabled>■ 止める</button>
+      <button class="btn" id="toggleSc">スクリプトを 見る</button>
+    </div>
+    <p class="hint" style="margin-top:.6rem">通して再生を押したら、<b>最後まで止めないで</b>ください。
+      1問だけ流し直したいときは、下の「問1」などを押します。</p>
+  </div>
+
+  <div class="card" id="list"></div>
+</div>
+</div>
+
+<script>
+/* ---------- 本体 ---------- */
+var DATA = ${JSON.stringify(DATA)};
+var SET='1', RATE=1, jaVoice=null, running=false, stopFlag=false;
+var synth=window.speechSynthesis;
+var $=function(s){return document.querySelector(s)};
+var $$=function(s){return [].slice.call(document.querySelectorAll(s))};
+var esc=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')};
+
+function inApp(){ return /Line\\/|FBAN|FBAV|Instagram|; wv\\)|GSA\\/|Twitter|MicroMessenger/i.test(navigator.userAgent); }
+
+/* 声の質は端末によってちがう。よく聞き取れるものを先に出す */
+var GOOD=['google 日本語','google japanese','kyoko','o-ren','otoya','nanami','ayumi','haruka','ichiro','sayaka','microsoft'];
+function vScore(v){
+  var n=(v.name||'').toLowerCase();
+  for(var i=0;i<GOOD.length;i++) if(n.indexOf(GOOD[i])>=0) return GOOD.length-i;
+  return 0;
+}
+var VKEY='jlpt-shindan-voice';       /* 選んだ声を覚えておく */
+var jaList=[];
+function pickVoice(){
+  var vs=synth.getVoices()||[];
+  jaList=vs.filter(function(v){return /^ja/i.test((v.lang||'').replace('_','-'))});
+  jaList.sort(function(a,b){ return vScore(b)-vScore(a) || (a.name||'').localeCompare(b.name||''); });
+  var sel=$('#voices');
+  sel.innerHTML='';
+  if(!jaList.length){
+    sel.innerHTML='<option>（この端末の 標準の 声）</option>';
+    sel.disabled=true; jaVoice=null;
+  }else{
+    sel.disabled=false;
+    var saved=null; try{ saved=localStorage.getItem(VKEY); }catch(e){}
+    var pick=0;
+    jaList.forEach(function(v,i){
+      var o=document.createElement('option');
+      o.value=i; o.textContent=v.name;
+      sel.appendChild(o);
+      if(saved && v.name===saved) pick=i;
+    });
+    sel.value=String(pick);
+    jaVoice=jaList[pick];
+  }
+  $('#vinfo').textContent='日本語の声：'+jaList.length+'つ（端末全体では '+vs.length+'）'
+    + (jaVoice ? '　使う声：'+jaVoice.name : '');
+  $('#novoice').style.display = jaList.length ? 'none' : 'block';
+}
+
+/* 長い文は句点で切って読ませる（途中で止まる端末があるため） */
+function chunks(t){
+  var out=[], cur='';
+  String(t).split(/(?<=[。、！？])/).forEach(function(p){
+    if((cur+p).length>60){ if(cur) out.push(cur); cur=p; } else cur+=p;
+  });
+  if(cur) out.push(cur);
+  return out.length?out:[String(t)];
+}
+function say(text){
+  return new Promise(function(res){
+    var parts=chunks(text), i=0;
+    (function next(){
+      if(stopFlag || i>=parts.length) return res();
+      var u=new SpeechSynthesisUtterance(parts[i++]);
+      u.lang='ja-JP'; u.rate=RATE; u.pitch=1;
+      /* 端末によっては voice の代入で例外が出る。ここで止まると無音になるので必ず受け止める */
+      try{ if(jaVoice) u.voice=jaVoice; }catch(e){}
+      u.onend=next; u.onerror=next;
+      synth.speak(u);
+    })();
+  });
+}
+function wait(ms){ return new Promise(function(r){
+  var t0=Date.now();
+  (function tick(){ if(stopFlag||Date.now()-t0>=ms) return r(); setTimeout(tick,120); })();
+}); }
+
+function itemsOf(){
+  var out=[];
+  DATA[SET].groups.forEach(function(g){ g.items.forEach(function(it){ out.push({g:g.group,it:it}); }); });
+  return out;
+}
+function markNow(no){
+  $$('#list .qs .btn').forEach(function(b){
+    var on = b.dataset.no === no;
+    b.classList.toggle('on', on);
+    if(on){ try{ b.scrollIntoView({behavior:'smooth',block:'center'}); }catch(e){} }
+  });
+}
+async function playItem(x, showNow){
+  if(showNow){ $('#now').textContent=x.g+'　'+x.it.no; markNow(x.it.no); }
+  for(var i=0;i<x.it.steps.length;i++){
+    if(stopFlag) return;
+    var st=x.it.steps[i];
+    if(st.k==='pause') await wait(st.s*1000);
+    else await say(st.v);
+  }
+}
+/* one=true なら その1問だけ、false なら 最後まで通して流す。
+   「問1」を押したときも1問だけで止まるように、番号ではなく引数で分ける。 */
+async function playFrom(idx, one){
+  if(running) return;
+  running=true; stopFlag=false;
+  $('#stop').disabled=false; $('#playAll').disabled=true;
+  var list=itemsOf();
+  for(var i=idx;i<list.length;i++){
+    if(stopFlag) break;
+    await playItem(list[i], true);
+    if(one) break;
+  }
+  synth.cancel();
+  $$('#list .qs .btn').forEach(function(b){ b.classList.remove('on'); });
+  $('#now').textContent = stopFlag ? '止めました' : '終わりました';
+  running=false; stopFlag=false;
+  $('#stop').disabled=true; $('#playAll').disabled=false;
+}
+
+function render(){
+  var h='';
+  DATA[SET].groups.forEach(function(g){
+    h+='<div class="grp">'+esc(g.group)+'</div><div class="qs">';
+    g.items.forEach(function(it){
+      h+='<button class="btn" data-no="'+esc(it.no)+'">'+esc(it.no)+'</button>';
+    });
+    h+='</div>';
+  });
+  h+='<div class="sc" id="sc">';
+  DATA[SET].groups.forEach(function(g){
+    h+='<div class="grp">'+esc(g.group)+'</div>';
+    g.items.forEach(function(it){
+      h+='<div class="an"><b>'+esc(it.no)+'</b>　正解：'+esc(it.answer)+'<br><span class="hint">'+esc(it.why)+'</span></div>';
+      it.steps.forEach(function(st){
+        if(st.k==='line') h+='<div class="ln"><span class="sp">'+esc(st.sp)+'</span>'+esc(st.v)+'</div>';
+        else if(st.k==='q') h+='<div class="ln"><span class="sp">質問</span><span class="qq">'+esc(st.v)+'</span></div>';
+        else h+='<div class="ln"><span class="sp">間</span>'+st.s+'秒'+(st.a?'　※答えを書く時間':'')+'</div>';
+      });
+    });
+  });
+  h+='</div>';
+  $('#list').innerHTML=h;
+  $$('#list .qs .btn').forEach(function(b){
+    b.onclick=function(){
+      var list=itemsOf();
+      for(var i=0;i<list.length;i++) if(list[i].it.no===b.dataset.no){ playFrom(i, true); return; }
+    };
+  });
+}
+
+function init(){
+  if(inApp()) $('#inapp').style.display='block';
+  pickVoice();
+  if(synth.onvoiceschanged!==undefined) synth.onvoiceschanged=pickVoice;
+  $$('[data-set]').forEach(function(b){ b.onclick=function(){
+    if(running) return;
+    $$('[data-set]').forEach(function(x){x.classList.remove('on')}); b.classList.add('on');
+    SET=b.dataset.set; $('#now').textContent='第'+SET+'回　準備できました';
+    render(); $('#toggleSc').textContent='スクリプトを 見る';
+  };});
+  $$('[data-rate]').forEach(function(b){ b.onclick=function(){
+    $$('[data-rate]').forEach(function(x){x.classList.remove('on')}); b.classList.add('on');
+    RATE=Number(b.dataset.rate);
+  };});
+  $('#voices').onchange=function(e){
+    jaVoice = jaList[Number(e.target.value)] || null;
+    try{ if(jaVoice) localStorage.setItem(VKEY, jaVoice.name); }catch(err){}
+    $('#vinfo').textContent='日本語の声：'+jaList.length+'つ（端末全体では '+(synth.getVoices()||[]).length+'）'
+      + (jaVoice ? '　使う声：'+jaVoice.name : '');
+    stopFlag=false; synth.cancel(); say('この声で 読みます。');   /* 選んだらすぐ聞ける */
+  };
+  $('#test').onclick=function(){ stopFlag=false; synth.cancel(); say('音の テストです。聞こえますか。'); };
+  $('#playAll').onclick=function(){ playFrom(0, false); };
+  $('#stop').onclick=function(){ stopFlag=true; synth.cancel(); };
+  $('#toggleSc').onclick=function(){
+    var sc=$('#sc'); sc.classList.toggle('on');
+    $('#toggleSc').textContent = sc.classList.contains('on') ? 'スクリプトを かくす' : 'スクリプトを 見る';
+  };
+  render();
+}
+window.addEventListener('beforeunload',function(){ try{synth.cancel();}catch(e){} });
+
+/* ---------- 合言葉 ---------- */
+(function(){
+  var KEY='jlpt-kanji-gate-v1';
+  var HASH='ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
+  var gate=document.getElementById('gate'), root=document.getElementById('app-root');
+  function unlock(){ gate.style.display='none'; root.style.display='block'; init(); }
+  function sha(t){ return crypto.subtle.digest('SHA-256',new TextEncoder().encode(t))
+    .then(function(b){ return [].map.call(new Uint8Array(b),function(x){return x.toString(16).padStart(2,'0');}).join(''); }); }
+  function go(){ sha(document.getElementById('gatePw').value.trim()).then(function(h){
+    if(h===HASH){ try{localStorage.setItem(KEY,HASH);}catch(e){} unlock(); }
+    else document.getElementById('gateErr').textContent='合言葉が ちがいます'; }); }
+  document.getElementById('gateGo').onclick=go;
+  document.getElementById('gatePw').addEventListener('keydown',function(e){ if(e.key==='Enter') go(); });
+  var saved=null; try{ saved=localStorage.getItem(KEY); }catch(e){}
+  if(saved===HASH) unlock();   /* ここで例外を握りつぶすと、不具合が黙って隠れる */
+})();
+</script>
+</body>
+</html>`;
+
+fs.writeFileSync('/tmp/shindan/out/shindan.html', html);
+console.log('聴解再生ページ 出力', Math.round(html.length / 1024) + 'KB');
