@@ -7,6 +7,24 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="介護の技能実習生向け 日本語学習システムの入口。漢字・言葉、文型、読解、聴解、100日コース、新人コース、N2コース、手書き検索を選べます。">
 <title>Belajar Bahasa Jepang Kaigo ｜ 介護の日本語</title>
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<script>
+/* 版を合わせる。ちがっていたら1度だけ読み込み直す。
+   ここが 長いあいだ 入っていなかった。入口メニューは いちばん よく開く画面なのに、
+   古いまま 表示され続けていた（文言を直しても 変わらない、という形で出た）。 */
+(function () {
+  var PAGE_VER = '2026-09-22i';
+  try {
+    if (sessionStorage.getItem('vchk-top')) return;
+    fetch('version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || !j.version || j.version === PAGE_VER) return;
+        sessionStorage.setItem('vchk-top', '1');
+        location.replace(location.pathname + '?v=' + encodeURIComponent(j.version));
+      }).catch(function () {});
+  } catch (e) {}
+})();
+</script>
 <style>
 :root{
   --blue:#2563eb; --blue-d:#1d4ed8;
@@ -431,7 +449,12 @@ showProgress();
 /* ---- 「最新にする」：キャッシュを消して読み込み直す ---- */
 document.getElementById('refreshBtn').onclick = async () => {
   try { if (window.caches) for (const n of await caches.keys()) await caches.delete(n); } catch (e) {}
-  location.reload(true);
+  try { sessionStorage.removeItem('vchk-top'); } catch (e) {}
+  /* location.reload(true) は 今のブラウザでは 真偽値が 無視され、
+     ふつうの 読み直しに なる（＝古いまま のことが ある）。
+     URLの うしろに 時刻を 付けると、別のURLとして 取りに行くので 確実。
+     学習記録は localStorage なので 消えない。 */
+  location.replace(location.pathname + '?v=' + Date.now());
 };
 </script>
 </body>
