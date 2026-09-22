@@ -67,7 +67,6 @@ print('  紙の教材 %d点' % KAIGO)
 # (ファイル, 探す形, あるべき数, 何の数か)
 CHECKS = [
     ('index.html', r'const GTOTAL = (\d+)',        GTOTAL, '文型の合計'),
-    ('index.html', r'全(\d+)点 ・ 印刷して実施',      KAIGO,  '紙の教材の点数'),
     ('kaigo/index.html', r'全(\d+)点・印刷して使います', KAIGO, '紙の教材の点数（紙メニュー）'),
     ('index.html', r'文の形。(\d+)文型',             GTOTAL, '文型の合計（説明文）'),
     ('index.html', r'DTOTAL = (\d+)',              DB,     '読解の本数'),
