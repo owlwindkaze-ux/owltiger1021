@@ -13,7 +13,7 @@
    version.json は毎回サーバーに取りに行くので、そこに書いてある版と
    このHTMLの版がちがえば、1度だけ読み込み直す。 */
 (function(){
-  var PAGE_VER = '2026-09-22a';
+  var PAGE_VER = '2026-09-22b';
   var KEY = 'reloaded-for-n3';
   try {
     fetch('version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
