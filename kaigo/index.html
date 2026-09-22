@@ -9,7 +9,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-09-22f';
+  var PAGE_VER = '2026-09-22g';
   try {
     if (sessionStorage.getItem('vchk-kaigo')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -59,6 +59,16 @@ header p{font-size:.82rem;opacity:.85;margin-top:.25rem}
   padding:0 .35rem;margin-left:.35rem;vertical-align:.1em}
 .badge.st{background:#fdf4f3;color:var(--red);border:1px solid #f3c9c4}
 .badge.jt{background:#eaf1f8;color:var(--blue);border:1px solid #c5d8ef}
+.fix{border:1px solid #bfe3d3;border-radius:10px;margin:.7rem 0;overflow:hidden}
+.fx-h{background:#f2fbf7;color:#0e5c3f;font-weight:800;font-size:.95rem;padding:.55rem .8rem;
+  border-bottom:1px solid #bfe3d3}
+.fx-b{padding:.6rem .8rem;font-size:.85rem;line-height:1.8}
+.fx-q,.fx-w,.fx-d{margin:.3rem 0}
+.fx-q b:first-child,.fx-w b:first-child,.fx-d b:first-child{
+  display:inline-block;min-width:5.6em;color:var(--muted);font-size:.78rem;
+  letter-spacing:.04em;vertical-align:.05em}
+.fx-d{border-top:1px dashed #bfe3d3;padding-top:.45rem;margin-top:.5rem}
+.fx-d b:first-child{color:var(--green)}
 h2{font-size:1rem;margin-bottom:.4rem}
 .lead{font-size:.87rem;color:var(--muted)}
 .gate{max-width:340px;margin:12vh auto;background:#fff;border:1px solid var(--line);
@@ -181,22 +191,89 @@ a{color:var(--blue)}
         このシステムの合言葉では入れません</span></span><span class="ar">↗</span></a>
 
   <div class="card" style="margin-top:1.4rem">
-    <h2>画面の教材との つなぎ方</h2>
+    <h2>紙で落ちたところに、画面の教材を当てる</h2>
     <p class="lead">
-      紙で落ちたところに、画面の教材を当てると早く直ります。
+      <b>教材を増やすより、どこで落ちたかを見て当てるほうが早く伸びます。</b>
+      採点したあと、下の5つに当てはまらないか見てください。
     </p>
-    <div class="note" style="border-left-color:var(--green);background:#f2fbf7;color:#0e5c3f">
-      ・漢字の読みで落ちる　→　<a href="../kanji.html">漢字・語彙</a>のフラッシュカード<br>
-      ・声かけ（問3）だけ低い　→　日本語ではなく接遇の課題。<a href="../bunpo/index.html#list">文型</a>の「〜ように」「〜ていただく」<br>
-      ・書き取りの数字を落とす　→　<a href="../choukai/">聴解</a>の PART 1（申し送り）を毎日1問<br>
-      ・記述で「今の様子」が抜ける　→　08 記述特化ワーク 第1回に戻る<br>
-      ・「どの語を使えばいいか分からない」　→　<a href="../bunpo/index.html#list">文型</a>のレベル「記録」（33項目）
+
+    <div class="fix">
+      <div class="fx-h">① 漢字の<b>読み</b>で落ちる</div>
+      <div class="fx-b">
+        <div class="fx-q"><b>どの問題</b>　02 章別ミニテストの<b>問1</b>（読み方をひらがなで書く・5問）／
+          03 N4補習版の<b>問題1</b>／04 書き方テスト</div>
+        <div class="fx-w"><b>なぜ</b>　読みは「覚えているかどうか」だけなので、
+          <b>くり返し見るのが いちばん早い</b>です。</div>
+        <div class="fx-d"><b>やること</b>　
+          <a href="../kanji.html#card">漢字・言葉 → 🃏 フラッシュカード</a>。
+          上の「レベル」を <b>N4</b> か <b>N3</b> にして、落とした章の語を回します。</div>
+      </div>
+    </div>
+
+    <div class="fix">
+      <div class="fx-h">② <b>声かけ</b>だけ 低い</div>
+      <div class="fx-b">
+        <div class="fx-q"><b>どの問題</b>　02 の<b>問3</b>（声かけ・5点）／03 の<b>問題5</b>（会話・声かけ）。
+          <b>ほかの問題は取れているのに、ここだけ低い</b>ときです。</div>
+        <div class="fx-w"><b>なぜ</b>　語彙や文法が足りないのでは ありません。
+          <b>「先に予告する」「許可をもらう」「尊敬語を使う」という型を知らない</b>のです。
+          急に車いすを動かす、「おむつ替えますよー」と言ってしまう、という形で出ます。
+          <b>教材を増やしても伸びません。</b>OJTで型を教えてください。</div>
+        <div class="fx-d"><b>やること</b>　
+          <a href="../bunpo/index.html#list">文型 → 文型一覧</a>の検索窓に
+          <b>ように</b>／<b>ていただく</b> と入れる。
+          「〜ないように」（理由を言う）と「〜ていただく」（相手にしてもらう言い方）が出ます。</div>
+      </div>
+    </div>
+
+    <div class="fix">
+      <div class="fx-h">③ 書き取りの<b>数字</b>を落とす</div>
+      <div class="fx-b">
+        <div class="fx-q"><b>どの問題</b>　09 聴解テスト 紙版の<b>問題4</b>（書き取り・3問）。
+          「体温は 36度8分です」のような文を そのまま書く問題で、<b>数字だけ</b>まちがえるとき。</div>
+        <div class="fx-w"><b>なぜ急ぐか</b>　<b>バイタルの数字の聞きちがいは 事故に直結します。</b>
+          語彙より先に直すところです。</div>
+        <div class="fx-d"><b>やること</b>　
+          <a href="../choukai/#part1">聴解 → PART 1（申し送りを聞く）</a>を<b>毎日1問</b>。
+          申し送りは数字だらけなので、これが いちばん効きます。</div>
+      </div>
+    </div>
+
+    <div class="fix">
+      <div class="fx-h">④ 記述で<b>「今の様子」</b>が抜ける</div>
+      <div class="fx-b">
+        <div class="fx-q"><b>どの問題</b>　08 記述特化ワーク／03 の<b>問題7</b>（報告文）。
+          報告には5つの部分があります ──
+          ①報告の切り出し ②いつ・どこで ③だれが・どうなったか ④自分がしたこと
+          <b>⑤今の様子</b>。</div>
+        <div class="fx-w"><b>なぜ</b>　<b>⑤だけが抜ける</b>のが よくある形です。
+          「高橋さんがむせました。背中をさすりました」で終わると、
+          <b>先輩が「それで、今はどうなの？」と聞き返さなければならない</b>報告になります。
+          現場では役に立ちません。</div>
+        <div class="fx-d"><b>やること</b>　画面ではなく紙です。
+          <a href="08_記述特化ワーク_全5回.pdf">08 記述特化ワーク</a>の
+          <b>第1回（報告の型をおぼえる）</b>に戻ります。</div>
+      </div>
+    </div>
+
+    <div class="fix">
+      <div class="fx-h">⑤「<b>どの語を使えばいいか分からない</b>」と言う</div>
+      <div class="fx-b">
+        <div class="fx-q"><b>どんな状態</b>　語彙も文法も分かっているのに、
+          <b>記録用紙を前にすると手が止まる</b>。話せるのに書けない人です。</div>
+        <div class="fx-w"><b>なぜ</b>　記録には<b>教科書に出てこない専用の言い方</b>があるからです。
+          「発赤<b>あり</b>／熱<b>なし</b>」「むせ込みが<b>見られた</b>」「良眠された<b>とのこと</b>」など。
+          話すときの「発赤があります」「むせていました」とは ちがいます。</div>
+        <div class="fx-d"><b>やること</b>　
+          <a href="../bunpo/index.html#list">文型 → 文型一覧</a>で、
+          上のレベルの札から <b>記録</b> を押す（<b>33項目</b>）。</div>
+      </div>
     </div>
   </div>
 
 </div>
 <footer>
-  介護の日本語 紙の教材 ／ 版 <span id="ver">2026-09-22f</span>
+  介護の日本語 紙の教材 ／ 版 <span id="ver">2026-09-22g</span>
   底本：『介護の日本語』『介護の日本語 指導者用手引き』（公益社団法人日本介護福祉士会）
 </footer>
 </div>
