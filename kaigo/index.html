@@ -9,7 +9,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-09-22d';
+  var PAGE_VER = '2026-09-22e';
   try {
     if (sessionStorage.getItem('vchk-kaigo')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -173,6 +173,13 @@ a{color:var(--blue)}
       <span class="n">GitHubアップロード手順書<span class="badge jt">参考</span></span>
       <span class="r">手で公開するときの手順。<b>いまは Claude Code が公開まで行います</b></span></span><span class="ar">PDF →</span></a>
 
+  <div class="grp">参考（外部サイト）</div>
+  <a class="item" href="https://aft.kaigo-nihongo.jp/rpv/" target="_blank" rel="noopener noreferrer">
+    <span class="no">🌐</span><span class="tx">
+      <span class="n">にほんごをまなぼう<span class="badge jt">別のログイン</span></span>
+      <span class="r">日本介護福祉士会のオンライン教材。<b>この12点と同じ底本</b>で、音声もこちらで聞けます。
+        このシステムの合言葉では入れません</span></span><span class="ar">↗</span></a>
+
   <div class="card" style="margin-top:1.4rem">
     <h2>画面の教材との つなぎ方</h2>
     <p class="lead">
@@ -189,7 +196,7 @@ a{color:var(--blue)}
 
 </div>
 <footer>
-  介護の日本語 紙の教材 ／ 版 <span id="ver">2026-09-22d</span>
+  介護の日本語 紙の教材 ／ 版 <span id="ver">2026-09-22e</span>
   底本：『介護の日本語』『介護の日本語 指導者用手引き』（公益社団法人日本介護福祉士会）
 </footer>
 </div>
