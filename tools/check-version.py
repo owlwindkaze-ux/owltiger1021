@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 """版（バージョン）が 全部の ファイルで そろっているかを 点検する。
 
+  見ないもの：`tools/kaigo/build.py` の VER。これは **紙を作った日**で、
+  サイトの版とは 意味が ちがう。そろえようとすると、中身が 変わっていない
+  PDF 12本を 作り直すことに なり、履歴（.git）が むだに ふくらむ。
+
     python3 tools/check-version.py
 
 なぜ作ったか
@@ -31,7 +35,6 @@ SPOTS = [
     ('dokkai/index.html', r"const VERSION = '([^']+)'"),
     ('kanji.html', r"const VERSION = '([^']+)'"),
     ('bunpo/grammar.json', r'"app_version": "([^"]+)"'),
-    ('tools/kaigo/build.py', r"VER = '([^']+)'"),
 ]
 
 bad = []
