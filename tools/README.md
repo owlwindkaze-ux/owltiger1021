@@ -22,6 +22,8 @@
 | `shindan/` | **診断テスト**（第1回＝第2週／第2回＝第16週）。`build.js`→`render.js` の順に走らせると `/tmp/shindan/out/` に問題冊子と手引きが出る |
 | `build-weeks.py` | plan.json から `kanji-weeks.json`・`bunpo/weeks.json`・`n2/weeks.json` を作り直し、**割り当てた語が本当にデータにあるかを点検する** |
 | `check-star.py` | **★の組み立て**（`bunpo/star.json`）を点検する。できあがる文を全部出すので、目で読んで確かめる |
+| `kaigo/docx2md.py` | **Word（.docx）を Markdown に変える**。見出し・表・箇条書き・太字・行内改行だけを扱う |
+| `kaigo/build.py` | **紙の教材（介護の日本語・全12点）の PDF を作り直す**。`tools/kaigo/md/*.md` が中身の正。Word は元の控え |
 | `check-bunshou.py` | **文章の文法**（`bunpo/bunshou.json`）を点検する。空欄と設問の対応・番号の順・選択肢・正解のかたより・本文の長さを見る |
 | `check-numbers.py` | **画面に書いてある数が、データの数と合っているかを点検する**。教材を足したら必ず通す |
 | `check-ui.mjs` | 全画面の絞り込み・タブを実ブラウザで動かして点検する |
@@ -43,6 +45,19 @@
 **注意**：`alloc.js` を走らせ直すと、**週の割り当てが最初から計算し直されます**。
 数語を直しただけのときは、すでに通っている学習者の予定が動いてしまうので、
 `plan.json` の中のその語だけを直して `build-weeks.py` を通すほうが安全です。
+
+## 紙の教材（`kaigo/`）を直したときの順番
+
+    # 中身を直すときは tools/kaigo/md/*.md を直す（Word は元の控え）
+    python3 tools/kaigo/build.py            # md → PDF を作り直す
+    python3 tools/check-numbers.py          # 画面の「全12点」と ファイル数を突き合わせる
+
+Word を新しくもらったときだけ、フォルダを渡して md から作り直します。
+
+    python3 tools/kaigo/build.py /path/to/Word版
+
+**注意**：`md` を直したあとに Word から作り直すと、直した分が消えます。
+Word を渡すのは、**新しい教材が増えたとき**だけにしてください。
 
 ## 道具が出した結果の扱い
 

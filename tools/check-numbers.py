@@ -60,11 +60,15 @@ print('  読解 %d本・%d問' % (DB, DQ))
 print('  聴解 %d問（うちJLPT形式 %d問）' % (CTOTAL, CJLPT))
 print('  100日コース %d問' % NQ)
 print('  手書き %d字' % TCHARS)
+KAIGO = len(glob.glob(R + 'kaigo/*.pdf'))
+print('  紙の教材 %d点' % KAIGO)
 
 # ---------- 画面に書いてある数と突き合わせる ----------
 # (ファイル, 探す形, あるべき数, 何の数か)
 CHECKS = [
     ('index.html', r'const GTOTAL = (\d+)',        GTOTAL, '文型の合計'),
+    ('index.html', r'全(\d+)点 ・ 印刷して実施',      KAIGO,  '紙の教材の点数'),
+    ('kaigo/index.html', r'全(\d+)点・印刷して使います', KAIGO, '紙の教材の点数（紙メニュー）'),
     ('index.html', r'文の形。(\d+)文型',             GTOTAL, '文型の合計（説明文）'),
     ('index.html', r'DTOTAL = (\d+)',              DB,     '読解の本数'),
     ('index.html', r'CTOTAL = (\d+)',              CTOTAL, '聴解の問数'),
