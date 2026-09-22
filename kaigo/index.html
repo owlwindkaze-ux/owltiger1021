@@ -9,7 +9,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-09-22g';
+  var PAGE_VER = '2026-09-22h';
   try {
     if (sessionStorage.getItem('vchk-kaigo')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -187,8 +187,10 @@ a{color:var(--blue)}
   <a class="item" href="https://aft.kaigo-nihongo.jp/rpv/" target="_blank" rel="noopener noreferrer">
     <span class="no">🌐</span><span class="tx">
       <span class="n">にほんごをまなぼう<span class="badge jt">別のログイン</span></span>
-      <span class="r">日本介護福祉士会のオンライン教材。<b>この12点と同じ底本</b>で、音声もこちらで聞けます。
-        このシステムの合言葉では入れません</span></span><span class="ar">↗</span></a>
+      <span class="r">日本介護福祉士会のオンライン教材。<b>この12点と同じ底本</b>で、音声もこちらで聞けます。<br>
+        <b>このシステムの合言葉では入れません。</b>自分でログインして、
+        「<b>日本語を学ぶ</b>」「<b>日本の介護を学ぶ</b>」のタグを開いてみてください。
+        わからなければ担当者に。</span></span><span class="ar">↗</span></a>
 
   <div class="card" style="margin-top:1.4rem">
     <h2>紙で落ちたところに、画面の教材を当てる</h2>
@@ -273,7 +275,7 @@ a{color:var(--blue)}
 
 </div>
 <footer>
-  介護の日本語 紙の教材 ／ 版 <span id="ver">2026-09-22g</span>
+  介護の日本語 紙の教材 ／ 版 <span id="ver">2026-09-22h</span>
   底本：『介護の日本語』『介護の日本語 指導者用手引き』（公益社団法人日本介護福祉士会）
 </footer>
 </div>
