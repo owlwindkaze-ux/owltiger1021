@@ -18,6 +18,7 @@
   --ora:#c2410c; --ora-d:#9a3412;
   --ind:#4338ca; --ind-d:#332e91;
   --red:#dc2626;
+  --slate:#475569; --slate-d:#334155;
   --bg:#f1f5f9; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
   --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
   --sh-l:0 12px 28px -6px rgba(15,23,42,.18);
@@ -58,6 +59,10 @@ main{flex:1;max-width:760px;width:100%;margin:0 auto;padding:1.4rem 1rem 2rem}
 .card-p .icon{color:var(--red)}
 .card-p a.item:hover,.card-p a.item:focus{background:#fef2f2;border-color:var(--red)}
 .card-p .item .ar{color:var(--red)}
+.card-x{border-top:6px solid var(--slate)}
+.card-x .icon{color:var(--slate)}
+.card-x a.item:hover,.card-x a.item:focus{background:#f1f5f9;border-color:var(--slate)}
+.card-x .item .ar{color:var(--slate-d)}
 .card-t{border-top:6px solid var(--tel)}
 .card-t .icon{color:var(--tel)}
 .card-t a.item:hover,.card-t a.item:focus{background:#f0fdfa;border-color:var(--tel)}
@@ -306,6 +311,23 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
           <span class="tx"><span class="n">紙の教材 一覧</span><span class="r">Untuk staf ／ 12点のPDF・実施時間と配点つき</span></span><span class="ar">→</span></a>
         <a class="item" href="kaigo/00_教材一覧とまとめ.pdf"><span class="em">📚</span>
           <span class="tx"><span class="n">教材一覧とまとめ</span><span class="r">最初に読む ／ 年間の回し方・採点の方針</span></span><span class="ar">→</span></a>
+      </div>
+    </section>
+
+    <section class="card card-x">
+      <div class="head">
+        <div class="icon">参考</div>
+        <div>
+          <div class="ttl">Referensi<small>参考資料（外部サイト）</small></div>
+        </div>
+      </div>
+      <div class="pg">このシステムの外にある、使える教材です</div>
+      <p class="desc"><b>べつのログインが必要です。</b>
+        このシステムの合言葉では入れません。IDと合言葉は<b>会社の担当者</b>にお聞きください。</p>
+      <div class="sub-menu">
+        <a class="item" href="https://aft.kaigo-nihongo.jp/rpv/" target="_blank" rel="noopener noreferrer">
+          <span class="em">🌐</span>
+          <span class="tx"><span class="n">にほんごをまなぼう</span><span class="r">Situs luar ／ 日本介護福祉士会。音声つきの教材です</span></span><span class="ar">↗</span></a>
       </div>
     </section>
 
