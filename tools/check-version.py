@@ -24,6 +24,7 @@ WANT = json.load(io.open(R + 'version.json', encoding='utf-8'))['version']
 
 # (ファイル, 探す形)
 SPOTS = [
+    ('index.html', r"var PAGE_VER = '([^']+)'"),
     ('fukushu/index.html', r"var PAGE_VER = '([^']+)'"),
     ('moshi/index.html', r"var PAGE_VER = '([^']+)'"),
     ('n2/index.html', r"var PAGE_VER = '([^']+)'"),
