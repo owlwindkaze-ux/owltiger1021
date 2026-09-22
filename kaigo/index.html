@@ -9,7 +9,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-09-22b';
+  var PAGE_VER = '2026-09-22c';
   try {
     if (sessionStorage.getItem('vchk-kaigo')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -125,11 +125,11 @@ a{color:var(--blue)}
   <a class="item" href="02_章別ミニテスト_全8章.pdf">
     <span class="no">02</span><span class="tx">
       <span class="n">章別ミニテスト 全8章<span class="badge st">巻末に解答</span></span>
-      <span class="r">各10分・20点 ／ 週1回、朝礼後に1章ずつ。8週で1周</span></span><span class="ar">PDF →</span></a>
+      <span class="r">各10分・20点 ／ 週1回、朝礼後に1章ずつ。<b>全8章・8週で1周</b></span></span><span class="ar">PDF →</span></a>
   <a class="item" href="03_N4補習版_全5回.pdf">
     <span class="no">03</span><span class="tx">
       <span class="n">N4補習版 全5回<span class="badge st">巻末に解答</span></span>
-      <span class="r">各40分・100点 ／ N3実力テストで60点に届かない人の補習</span></span><span class="ar">PDF →</span></a>
+      <span class="r">各40分・100点 ／ <b>全5回</b>。N3実力テストで60点に届かない人の補習</span></span><span class="ar">PDF →</span></a>
   <a class="item" href="04_書き方テスト_全5回.pdf">
     <span class="no">04</span><span class="tx">
       <span class="n">書き方テスト 全5回<span class="badge st">巻末に解答</span></span>
@@ -189,7 +189,7 @@ a{color:var(--blue)}
 
 </div>
 <footer>
-  介護の日本語 紙の教材 ／ 版 <span id="ver">2026-09-22b</span>
+  介護の日本語 紙の教材 ／ 版 <span id="ver">2026-09-22c</span>
   底本：『介護の日本語』『介護の日本語 指導者用手引き』（公益社団法人日本介護福祉士会）
 </footer>
 </div>
