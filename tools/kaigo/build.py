@@ -19,7 +19,7 @@ import io, os, re, subprocess, sys, glob
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 MD = os.path.join(ROOT, 'tools', 'kaigo', 'md')
 OUT = os.path.join(ROOT, 'kaigo')
-VER = '2026-09-22c'
+VER = '2026-09-22d'
 MD2HTML = '/tmp/pdf/md2html.py'
 MKPDF = '/tmp/pdf/mkpdf.mjs'
 
