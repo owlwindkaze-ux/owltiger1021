@@ -22,10 +22,12 @@
 | `shindan/` | **診断テスト**（第1回＝第2週／第2回＝第16週）。`build.js`→`render.js` の順に走らせると `/tmp/shindan/out/` に問題冊子と手引きが出る |
 | `build-weeks.py` | plan.json から `kanji-weeks.json`・`bunpo/weeks.json`・`n2/weeks.json` を作り直し、**割り当てた語が本当にデータにあるかを点検する** |
 | `check-star.py` | **★の組み立て**（`bunpo/star.json`）を点検する。できあがる文を全部出すので、目で読んで確かめる |
+| `kaigo/check-tests.py` | **回ごとに問題と解答がある紙の教材**（02・03・04・05・08）を点検する。回の数・解答の有無・選択肢が4つか・設問と解答の数・正解のかたより・理由を問う設問の有無を見る |
 | `kaigo/docx2md.py` | **Word（.docx）を Markdown に変える**。見出し・表・箇条書き・太字・行内改行だけを扱う |
 | `kaigo/answers-to-back.py` | **解答を巻末へまとめ直す**。回の途中にあった解答を巻末に移し、「ここから下は職員用です」の区切りを入れる。1字も消えていないかを文字の数で確かめる。**一度かけたら もう かけなくてよい**（かけ直しても何も動かない） |
 | `kaigo/build.py` | **紙の教材（介護の日本語・全12点）の PDF を作り直す**。`tools/kaigo/md/*.md` が中身の正。Word は元の控え |
 | `check-bunshou.py` | **文章の文法**（`bunpo/bunshou.json`）を点検する。空欄と設問の対応・番号の順・選択肢・正解のかたより・本文の長さを見る |
+| `check-version.py` | **版が全ファイルでそろっているかを点検する**。版を上げたら必ず通す（ここを外して2度 事故を出した） |
 | `check-numbers.py` | **画面に書いてある数が、データの数と合っているかを点検する**。教材を足したら必ず通す |
 | `check-ui.mjs` | 全画面の絞り込み・タブを実ブラウザで動かして点検する |
 | `check-n2.py` | N2の期・問題・模試・レベル・週の負荷を点検する |
@@ -43,6 +45,14 @@
     python3 tools/check-numbers.py        # 画面の数とデータの数を突き合わせる
     node tools/check-ui.mjs               # 実ブラウザで点検（先にサーバを立てる）
 
+## 版を上げたときの順番
+
+    # version.json と、各ページの PAGE_VER / VERSION / app_version をそろえる
+    python3 tools/check-version.py        # そろっているかを 機械で 確かめる
+
+**一括置換で そろえたつもりが 空振りする**ことがあります（実際に 3ファイル 外しました）。
+必ず この道具を 通してください。
+
 **注意**：`alloc.js` を走らせ直すと、**週の割り当てが最初から計算し直されます**。
 数語を直しただけのときは、すでに通っている学習者の予定が動いてしまうので、
 `plan.json` の中のその語だけを直して `build-weeks.py` を通すほうが安全です。
@@ -50,8 +60,14 @@
 ## 紙の教材（`kaigo/`）を直したときの順番
 
     # 中身を直すときは tools/kaigo/md/*.md を直す（Word は元の控え）
+    python3 tools/kaigo/check-tests.py      # 問題と解答が 合っているかを 点検する
     python3 tools/kaigo/build.py            # md → PDF を作り直す
     python3 tools/check-numbers.py          # 画面の「全12点」と ファイル数を突き合わせる
+    python3 tools/check-version.py          # 版が そろっているかを 点検する
+
+**問題を足したら、`check-tests.py` が通っても 必ず目で読むこと。**
+「正解が2つある」（例：「ボタンを（　）」に「かける」と「とめる」の両方）は
+機械では見つかりません。書き足したとき 4件 出しました。
 
 Word を新しくもらったときだけ、フォルダを渡して md から作り直します。
 
