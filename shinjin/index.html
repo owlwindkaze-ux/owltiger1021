@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-09-22e';
+  var PAGE_VER = '2026-09-22f';
   var KEY = 'reloaded-for-shinjin';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -124,7 +124,6 @@ ul.chk li.dly.fin .t{text-decoration:line-through;opacity:.55}
 .restbox[open]>summary::before{content:"▼ "}
 .restbox>summary i{font-weight:400;font-style:italic}
 
-.staff{border:1px dashed var(--muted);background:#f8fafc}
 .staff h2{color:var(--muted)}
 .pill{display:inline-block;font-size:.68rem;font-weight:800;background:#e2e8f0;color:var(--muted);
   border-radius:999px;padding:.05rem .5rem;margin-left:.35rem;vertical-align:.1em}
@@ -203,28 +202,12 @@ footer{text-align:center;font-size:.75rem;color:var(--muted);padding:1rem 0 2rem
     <div class="steps" id="steps"></div>
   </div>
 
-  <div class="card staff">
-    <h2>職員用<span class="pill">実習生は使いません</span><small>Untuk staf</small></h2>
-    <p class="desc">テストの聴解を流すページと、印刷して使う紙です。問題冊子は印刷したものを配ってください。</p>
+  <div class="card">
+    <h2>印刷して 使うもの<small>Untuk dicetak</small></h2>
     <div class="items">
-      <a class="item" href="../shindan/"><span class="em">🎧</span>
-        <span class="tx"><span class="n">テストの聴解　再生</span>
-        <span class="r">診断テスト 第1回・第2回／<b>N4到達度判定（12月・問55〜66）</b>／音のテストつき</span></span><span class="ar">→</span></a>
-      <a class="item" href="../N4到達度判定テスト_職員用.pdf"><span class="em">🗝️</span>
-        <span class="tx"><span class="n">N4到達度判定テスト　職員用（PDF）</span>
-        <span class="r">第12週に実施。実施要領・判定の目安・記録表・正解と解説・聴解の原稿</span></span><span class="ar">→</span></a>
-      <a class="item" href="../N4到達度判定テスト_問題.pdf"><span class="em">📝</span>
-        <span class="tx"><span class="n">N4到達度判定テスト　問題（PDF）</span>
-        <span class="r">66問・60分。解答用紙つき。人数分 印刷して配る</span></span><span class="ar">→</span></a>
-      <a class="item" href="../新人研修プログラム.pdf"><span class="em">📋</span>
-        <span class="tx"><span class="n">新人研修プログラム（PDF）</span>
-        <span class="r">30週の予定表・面談シート・記録表・つまずいたときの手当て</span></span><span class="ar">→</span></a>
       <a class="item" href="../週ごとの学習範囲表.pdf"><span class="em">📖</span>
         <span class="tx"><span class="n">週ごとの学習範囲表（PDF）</span>
         <span class="r">30週分。今週どの漢字・語彙・文型をやるかの一覧</span></span><span class="ar">→</span></a>
-      <a class="item" href="../月次確認テスト.pdf"><span class="em">📝</span>
-        <span class="tx"><span class="n">月次確認テスト（PDF）</span>
-        <span class="r">4回分の問題・正解・聴解スクリプト・記録表</span></span><span class="ar">→</span></a>
     </div>
   </div>
 
