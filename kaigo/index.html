@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta name="robots" content="noindex, nofollow">
+<title>介護の日本語（紙の教材）｜職員用</title>
+<script>
+/* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
+(function () {
+  var PAGE_VER = '2026-09-22a';
+  try {
+    if (sessionStorage.getItem('vchk-kaigo')) return;
+    fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || !j.version || j.version === PAGE_VER) return;
+        sessionStorage.setItem('vchk-kaigo', '1');
+        location.replace(location.pathname + '?v=' + encodeURIComponent(j.version));
+      }).catch(function () {});
+  } catch (e) {}
+})();
+</script>
+<style>
+:root{--ink:#12212e;--muted:#5b6875;--line:#d5dee7;--bg:#f4f7fa;--blue:#12459c;
+      --green:#0e7a52;--red:#c0392b;--amber:#b45309}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,"Noto Sans JP",system-ui,sans-serif;
+ background:var(--bg);color:var(--ink);line-height:1.75}
+button{font-family:inherit;font-size:inherit;color:inherit;cursor:pointer}
+header{background:#12212e;color:#fff;padding:1rem}
+header .in{max-width:860px;margin:0 auto}
+header .nav{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem}
+header a.back{color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.45);
+  border-radius:8px;padding:.2rem .6rem;font-size:.78rem}
+header h1{font-size:1.15rem}
+header p{font-size:.82rem;opacity:.85;margin-top:.25rem}
+.wrap{max-width:860px;margin:0 auto;padding:1rem 1rem 3rem}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1rem;margin-bottom:1rem}
+.warn{border:2px solid var(--red);background:#fdf4f3;border-radius:10px;
+  padding:.75rem .9rem;margin-bottom:1rem;font-size:.88rem}
+.warn b{color:var(--red)}
+.note{border-left:4px solid var(--amber);background:#fffbeb;border-radius:0 8px 8px 0;
+  padding:.6rem .8rem;margin:.6rem 0 0;font-size:.85rem;color:#78350f}
+.grp{font-size:.78rem;font-weight:800;letter-spacing:.06em;color:var(--green);
+  margin:1.4rem 0 .5rem;padding-left:.1rem}
+.grp:first-of-type{margin-top:.4rem}
+.item{display:flex;gap:.8rem;align-items:flex-start;text-decoration:none;color:inherit;
+  border:1px solid var(--line);border-radius:10px;padding:.7rem .85rem;margin-bottom:.5rem;
+  background:#fff}
+.item:hover{border-color:var(--blue);background:#f7faff}
+.item .no{flex:0 0 2.1rem;height:2.1rem;border-radius:8px;background:#eaf1f8;color:var(--blue);
+  font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.item .tx{flex:1 1 auto;min-width:0}
+.item .n{display:block;font-weight:700;font-size:.97rem}
+.item .r{display:block;font-size:.8rem;color:var(--muted);margin-top:.1rem}
+.item .ar{flex:0 0 auto;color:var(--muted);font-size:.9rem;align-self:center}
+.badge{display:inline-block;font-size:.7rem;font-weight:800;border-radius:5px;
+  padding:0 .35rem;margin-left:.35rem;vertical-align:.1em}
+.badge.st{background:#fdf4f3;color:var(--red);border:1px solid #f3c9c4}
+.badge.jt{background:#eaf1f8;color:var(--blue);border:1px solid #c5d8ef}
+h2{font-size:1rem;margin-bottom:.4rem}
+.lead{font-size:.87rem;color:var(--muted)}
+.gate{max-width:340px;margin:12vh auto;background:#fff;border:1px solid var(--line);
+  border-radius:12px;padding:1.4rem;text-align:center}
+.gate input{width:100%;padding:.6rem;border:1.5px solid var(--line);border-radius:10px;
+  margin:.7rem 0;text-align:center;font-size:1.1rem}
+.btn{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:.55rem 1rem;font-weight:700}
+.btn.pri{background:var(--blue);border-color:var(--blue);color:#fff}
+.err{color:var(--red);font-size:.85rem;min-height:1.2em}
+.hint{font-size:.82rem;color:var(--muted)}
+footer{max-width:860px;margin:0 auto;padding:0 1rem 2rem;font-size:.8rem;color:var(--muted)}
+a{color:var(--blue)}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <h2>職員用ページ</h2>
+  <p class="hint">合言葉を 入れて ください</p>
+  <input type="password" id="gatePw" placeholder="••••••••" autocomplete="current-password">
+  <div class="err" id="gateErr"></div>
+  <button class="btn pri" id="gateGo" style="width:100%">入る</button>
+</div>
+
+<div id="app-root" style="display:none">
+<header><div class="in">
+  <div class="nav"><a class="back" href="../index.html">☰ メニュー</a></div>
+  <h1>介護の日本語　紙の教材</h1>
+  <p>底本：『介護の日本語』『介護の日本語 指導者用手引き』（公益社団法人日本介護福祉士会）／
+     全12点・印刷して使います</p>
+</div></header>
+
+<div class="wrap">
+
+  <div class="warn">
+    <b>どのファイルにも「解答」が入っています。</b>
+    実習生に渡すときは、<b>解答の前まで</b>を印刷してください。そのまま渡すと答えが見えます。<br>
+    「09 聴解テスト 紙版」は、<b>読み上げ用スクリプトを配らないでください</b>（配ると問題が成り立ちません）。
+  </div>
+
+  <div class="card">
+    <h2>これは何ですか</h2>
+    <p class="lead">
+      画面で自習する教材（漢字・語彙／文型／読解／聴解）とは別に、<b>紙で実施して職員が採点する</b>教材です。
+      声かけ・記述・ロールプレイのように、<b>画面では測れない力</b>を見るために作ってあります。<br>
+      まずはこのままPDFで置いています。<b>順に画面（オンライン）の問題に作り替えていく予定</b>です。
+    </p>
+    <p class="note">
+      <b>はじめに「00 教材一覧とまとめ」を読んでください。</b>
+      12点の並べ方・年間の回し方・採点の方針（安全と尊厳は日本語の点数と分ける、など）が
+      1本にまとまっています。
+    </p>
+  </div>
+
+  <div class="grp">実習生向け ── 知っているかを測る</div>
+  <a class="item" href="01_N3実力テスト_第1回.pdf">
+    <span class="no">01</span><span class="tx">
+      <span class="n">N3実力テスト 第1回<span class="badge st">解答入り</span></span>
+      <span class="r">50分・100点 ／ 総合力の把握。3か月に1回</span></span><span class="ar">PDF →</span></a>
+  <a class="item" href="02_章別ミニテスト_全8章.pdf">
+    <span class="no">02</span><span class="tx">
+      <span class="n">章別ミニテスト 全8章<span class="badge st">解答入り</span></span>
+      <span class="r">各10分・20点 ／ 週1回、朝礼後に1章ずつ。8週で1周</span></span><span class="ar">PDF →</span></a>
+  <a class="item" href="03_N4補習版_全5回.pdf">
+    <span class="no">03</span><span class="tx">
+      <span class="n">N4補習版 全5回<span class="badge st">解答入り</span></span>
+      <span class="r">各40分・100点 ／ N3実力テストで60点に届かない人の補習</span></span><span class="ar">PDF →</span></a>
+  <a class="item" href="04_書き方テスト_全5回.pdf">
+    <span class="no">04</span><span class="tx">
+      <span class="n">書き方テスト 全5回<span class="badge st">解答入り</span></span>
+      <span class="r">各10分・20点 ／ 記録を書くための漢字・カタカナ（40語）</span></span><span class="ar">PDF →</span></a>
+
+  <div class="grp">実習生向け ── 使えるかを測る</div>
+  <a class="item" href="05_コロケーション演習_全3回.pdf">
+    <span class="no">05</span><span class="tx">
+      <span class="n">コロケーション演習 全3回<span class="badge st">解答入り</span></span>
+      <span class="r">各15分・30点 ／ 名詞＋助詞＋動詞を、組で使えるか</span></span><span class="ar">PDF →</span></a>
+  <a class="item" href="06_根拠づけ演習.pdf">
+    <span class="no">06</span><span class="tx">
+      <span class="n">根拠づけ演習<span class="badge st">解答入り</span></span>
+      <span class="r">25分・40点 ／「〜ように」で理由が言えるか</span></span><span class="ar">PDF →</span></a>
+  <a class="item" href="07_ロールプレイ課題集_全12場面.pdf">
+    <span class="no">07</span><span class="tx">
+      <span class="n">ロールプレイ課題集 全12場面<span class="badge jt">実技</span></span>
+      <span class="r">各10〜15分・24点 ／ 評価シート付き。<b>月1回でも必ず実施</b></span></span><span class="ar">PDF →</span></a>
+  <a class="item" href="08_記述特化ワーク_全5回.pdf">
+    <span class="no">08</span><span class="tx">
+      <span class="n">記述特化ワーク 全5回<span class="badge st">解答入り</span></span>
+      <span class="r">各20〜25分 ／ 報告・記録が書けるか</span></span><span class="ar">PDF →</span></a>
+  <a class="item" href="09_聴解テスト_紙版.pdf">
+    <span class="no">09</span><span class="tx">
+      <span class="n">聴解テスト 紙版<span class="badge st">スクリプト入り</span></span>
+      <span class="r">25分・40点 ／ 職員が読み上げて実施。<b>スクリプトは配らない</b></span></span><span class="ar">PDF →</span></a>
+
+  <div class="grp">職員向け ── 受け入れ側を整える</div>
+  <a class="item" href="10_職員研修_伝わる日本語で指示する.pdf">
+    <span class="no">10</span><span class="tx">
+      <span class="n">職員研修「伝わる日本語で指示する」<span class="badge jt">職員用</span></span>
+      <span class="r">20問・60分 ／ 年1回。新人職員が入ったときは追加で実施</span></span><span class="ar">PDF →</span></a>
+
+  <div class="grp">まとめ・参考</div>
+  <a class="item" href="00_教材一覧とまとめ.pdf">
+    <span class="no">00</span><span class="tx">
+      <span class="n">教材一覧とまとめ<span class="badge jt">最初に読む</span></span>
+      <span class="r">12点の全体像・年間の回し方・採点の方針・問題を足すときの注意</span></span><span class="ar">PDF →</span></a>
+  <a class="item" href="11_GitHubアップロード手順書.pdf">
+    <span class="no">11</span><span class="tx">
+      <span class="n">GitHubアップロード手順書<span class="badge jt">参考</span></span>
+      <span class="r">手で公開するときの手順。<b>いまは Claude Code が公開まで行います</b></span></span><span class="ar">PDF →</span></a>
+
+  <div class="card" style="margin-top:1.4rem">
+    <h2>画面の教材との つなぎ方</h2>
+    <p class="lead">
+      紙で落ちたところに、画面の教材を当てると早く直ります。
+    </p>
+    <div class="note" style="border-left-color:var(--green);background:#f2fbf7;color:#0e5c3f">
+      ・漢字の読みで落ちる　→　<a href="../kanji.html">漢字・語彙</a>のフラッシュカード<br>
+      ・声かけ（問3）だけ低い　→　日本語ではなく接遇の課題。<a href="../bunpo/index.html#list">文型</a>の「〜ように」「〜ていただく」<br>
+      ・書き取りの数字を落とす　→　<a href="../choukai/">聴解</a>の PART 1（申し送り）を毎日1問<br>
+      ・記述で「今の様子」が抜ける　→　08 記述特化ワーク 第1回に戻る<br>
+      ・「どの語を使えばいいか分からない」　→　<a href="../bunpo/index.html#list">文型</a>のレベル「記録」（33項目）
+    </div>
+  </div>
+
+</div>
+<footer>
+  介護の日本語 紙の教材 ／ 版 <span id="ver">2026-09-22a</span>
+  底本：『介護の日本語』『介護の日本語 指導者用手引き』（公益社団法人日本介護福祉士会）
+</footer>
+</div>
+
+<script>
+"use strict";
+var GATEKEY = 'jlpt-kanji-gate-v1';
+var HASH = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
+function $(s) { return document.querySelector(s); }
+function sha256(s) {
+  return crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)).then(function (b) {
+    return Array.from(new Uint8Array(b)).map(function (x) {
+      return x.toString(16).padStart(2, '0');
+    }).join('');
+  });
+}
+function open_() {
+  $('#gate').style.display = 'none';
+  $('#app-root').style.display = 'block';
+}
+$('#gateGo').addEventListener('click', function () {
+  sha256($('#gatePw').value.trim()).then(function (h) {
+    if (h === HASH) {
+      try { localStorage.setItem(GATEKEY, h); } catch (e) {}
+      open_();
+    } else {
+      $('#gateErr').textContent = 'ちがいます。会社の担当者にお聞きください。';
+    }
+  });
+});
+$('#gatePw').addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') $('#gateGo').click();
+});
+try {
+  if (localStorage.getItem(GATEKEY) === HASH) open_();
+} catch (e) {}
+/* 版は version.json を正とする（書き忘れで画面と食い違うのを防ぐ） */
+fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
+  .then(function (j) { if (j && j.version) $('#ver').textContent = j.version; })
+  .catch(function () {});
+</script>
+</body>
+</html>
