@@ -19,7 +19,7 @@ import io, os, re, subprocess, sys, glob
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 MD = os.path.join(ROOT, 'tools', 'kaigo', 'md')
 OUT = os.path.join(ROOT, 'kaigo')
-VER = '2026-09-22a'
+VER = '2026-09-22b'
 MD2HTML = '/tmp/pdf/md2html.py'
 MKPDF = '/tmp/pdf/mkpdf.mjs'
 
@@ -50,6 +50,14 @@ def main():
         pdf = os.path.join(OUT, base + '.pdf')
         foot = '介護の日本語 ／ %s ／ %s' % (t, VER)
         subprocess.check_call([sys.executable, MD2HTML, m, html, t, foot])
+        # 「ここから下は 職員用です」は 必ず 次のページから 始める。
+        # ここが ページの 途中だと、実習生に渡す分を 印刷するとき 切れ目が 分からない。
+        h = io.open(html, encoding='utf-8').read()
+        h2 = h.replace('<h1>ここから下は 職員用です</h1>',
+                       '<h1 style="page-break-before:always;border-top:3px double #b91c1c;'
+                       'color:#b91c1c;padding-top:10px">ここから下は 職員用です</h1>')
+        if h2 != h:
+            io.open(html, 'w', encoding='utf-8').write(h2)
         subprocess.check_call(['node', MKPDF, html, pdf, foot],
                               env=dict(os.environ, NODE_PATH='/tmp/node_modules'))
     print('\n%d 件を %s に作りました。' % (len(mds), OUT))
