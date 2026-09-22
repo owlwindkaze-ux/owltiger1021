@@ -25,6 +25,7 @@ SPOTS = [
     ('n2/index.html', r"var PAGE_VER = '([^']+)'"),
     ('shinjin/index.html', r"var PAGE_VER = '([^']+)'"),
     ('kaigo/index.html', r"var PAGE_VER = '([^']+)'"),
+    ('staff/index.html', r"var PAGE_VER = '([^']+)'"),
     ('n3.html', r"var PAGE_VER = '([^']+)'"),
     ('bunpo/index.html', r"const VERSION = '([^']+)'"),
     ('dokkai/index.html', r"const VERSION = '([^']+)'"),
@@ -45,7 +46,7 @@ for f, pat in SPOTS:
         bad.append('%s：%s（version.json は %s）' % (f, got or '見つからない', WANT))
 
 # 画面に 版を 書いてある所（footer など）も 見る
-for f in ['kaigo/index.html']:
+for f in ['kaigo/index.html', 'staff/index.html']:
     s = io.open(R + f, encoding='utf-8').read()
     for m in re.finditer(r'>(\d{4}-\d{2}-\d{2}[a-z]?)<', s):
         if m.group(1) != WANT:

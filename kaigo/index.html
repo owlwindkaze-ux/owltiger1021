@@ -9,7 +9,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-09-22e';
+  var PAGE_VER = '2026-09-22f';
   try {
     if (sessionStorage.getItem('vchk-kaigo')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -85,7 +85,7 @@ a{color:var(--blue)}
 
 <div id="app-root" style="display:none">
 <header><div class="in">
-  <div class="nav"><a class="back" href="../index.html">☰ メニュー</a></div>
+  <div class="nav"><a class="back" href="../staff/">☰ 職員用</a></div>
   <h1>介護の日本語　紙の教材</h1>
   <p>底本：『介護の日本語』『介護の日本語 指導者用手引き』（公益社団法人日本介護福祉士会）／
      全12点・印刷して使います</p>
@@ -196,7 +196,7 @@ a{color:var(--blue)}
 
 </div>
 <footer>
-  介護の日本語 紙の教材 ／ 版 <span id="ver">2026-09-22e</span>
+  介護の日本語 紙の教材 ／ 版 <span id="ver">2026-09-22f</span>
   底本：『介護の日本語』『介護の日本語 指導者用手引き』（公益社団法人日本介護福祉士会）
 </footer>
 </div>
