@@ -1,6 +1,6 @@
 {
  "name": "JLPT N5–N3 熟語＋現場用語",
- "count": 6272,
+ "count": 6309,
  "levels": [
   "N5",
   "N4",
@@ -69165,6 +69165,426 @@
    "level": "N2",
    "kanji": [],
    "meaning_id": "gaun terusan"
+  },
+  {
+   "word": "事務",
+   "reading": "じむ",
+   "meaning": "office work, administration",
+   "level": "N3",
+   "kanji": [
+    "事",
+    "務"
+   ],
+   "meaning_id": "pekerjaan kantor, administrasi"
+  },
+  {
+   "word": "京都",
+   "reading": "きょうと",
+   "meaning": "Kyoto",
+   "level": "N3",
+   "kanji": [
+    "京",
+    "都"
+   ],
+   "meaning_id": "Kyoto (nama kota)"
+  },
+  {
+   "word": "仏像",
+   "reading": "ぶつぞう",
+   "meaning": "Buddhist statue",
+   "level": "N3",
+   "kanji": [
+    "仏",
+    "像"
+   ],
+   "meaning_id": "patung Buddha"
+  },
+  {
+   "word": "冊数",
+   "reading": "さっすう",
+   "meaning": "number of volumes/books",
+   "level": "N3",
+   "kanji": [
+    "冊",
+    "数"
+   ],
+   "meaning_id": "jumlah buku"
+  },
+  {
+   "word": "冷凍庫",
+   "reading": "れいとうこ",
+   "meaning": "freezer",
+   "level": "N3",
+   "kanji": [
+    "冷",
+    "凍",
+    "庫"
+   ],
+   "meaning_id": "freezer, lemari pembeku"
+  },
+  {
+   "word": "半額",
+   "reading": "はんがく",
+   "meaning": "half price",
+   "level": "N3",
+   "kanji": [
+    "半",
+    "額"
+   ],
+   "meaning_id": "setengah harga"
+  },
+  {
+   "word": "右側",
+   "reading": "みぎがわ",
+   "meaning": "right side",
+   "level": "N3",
+   "kanji": [
+    "右",
+    "側"
+   ],
+   "meaning_id": "sisi kanan"
+  },
+  {
+   "word": "各国",
+   "reading": "かっこく",
+   "meaning": "each country, various countries",
+   "level": "N3",
+   "kanji": [
+    "各",
+    "国"
+   ],
+   "meaning_id": "setiap negara"
+  },
+  {
+   "word": "学費",
+   "reading": "がくひ",
+   "meaning": "school expenses, tuition",
+   "level": "N3",
+   "kanji": [
+    "学",
+    "費"
+   ],
+   "meaning_id": "biaya sekolah"
+  },
+  {
+   "word": "守備",
+   "reading": "しゅび",
+   "meaning": "defense (sports)",
+   "level": "N3",
+   "kanji": [
+    "守",
+    "備"
+   ],
+   "meaning_id": "pertahanan (olahraga)"
+  },
+  {
+   "word": "富士山",
+   "reading": "ふじさん",
+   "meaning": "Mt. Fuji",
+   "level": "N3",
+   "kanji": [
+    "富",
+    "士",
+    "山"
+   ],
+   "meaning_id": "Gunung Fuji"
+  },
+  {
+   "word": "左側",
+   "reading": "ひだりがわ",
+   "meaning": "left side",
+   "level": "N3",
+   "kanji": [
+    "左",
+    "側"
+   ],
+   "meaning_id": "sisi kiri"
+  },
+  {
+   "word": "忘年会",
+   "reading": "ぼうねんかい",
+   "meaning": "year-end party",
+   "level": "N3",
+   "kanji": [
+    "忘",
+    "年",
+    "会"
+   ],
+   "meaning_id": "pesta akhir tahun"
+  },
+  {
+   "word": "投手",
+   "reading": "とうしゅ",
+   "meaning": "pitcher (baseball)",
+   "level": "N3",
+   "kanji": [
+    "投",
+    "手"
+   ],
+   "meaning_id": "pelempar (bisbol)"
+  },
+  {
+   "word": "掃除機",
+   "reading": "そうじき",
+   "meaning": "vacuum cleaner",
+   "level": "N3",
+   "kanji": [
+    "掃",
+    "除",
+    "機"
+   ],
+   "meaning_id": "penyedot debu"
+  },
+  {
+   "word": "文化祭",
+   "reading": "ぶんかさい",
+   "meaning": "school cultural festival",
+   "level": "N3",
+   "kanji": [
+    "文",
+    "化",
+    "祭"
+   ],
+   "meaning_id": "festival budaya sekolah"
+  },
+  {
+   "word": "昨年",
+   "reading": "さくねん",
+   "meaning": "last year",
+   "level": "N3",
+   "kanji": [
+    "昨",
+    "年"
+   ],
+   "meaning_id": "tahun lalu"
+  },
+  {
+   "word": "横断歩道",
+   "reading": "おうだんほどう",
+   "meaning": "pedestrian crossing",
+   "level": "N3",
+   "kanji": [
+    "横",
+    "断",
+    "歩",
+    "道"
+   ],
+   "meaning_id": "penyeberangan pejalan kaki"
+  },
+  {
+   "word": "歩道橋",
+   "reading": "ほどうきょう",
+   "meaning": "pedestrian bridge",
+   "level": "N3",
+   "kanji": [
+    "歩",
+    "道",
+    "橋"
+   ],
+   "meaning_id": "jembatan penyeberangan"
+  },
+  {
+   "word": "求人",
+   "reading": "きゅうじん",
+   "meaning": "job offer, job vacancy",
+   "level": "N3",
+   "kanji": [
+    "求",
+    "人"
+   ],
+   "meaning_id": "lowongan kerja"
+  },
+  {
+   "word": "洗濯機",
+   "reading": "せんたくき",
+   "meaning": "washing machine",
+   "level": "N3",
+   "kanji": [
+    "洗",
+    "濯",
+    "機"
+   ],
+   "meaning_id": "mesin cuci"
+  },
+  {
+   "word": "特技",
+   "reading": "とくぎ",
+   "meaning": "special skill",
+   "level": "N3",
+   "kanji": [
+    "特",
+    "技"
+   ],
+   "meaning_id": "keahlian khusus"
+  },
+  {
+   "word": "用件",
+   "reading": "ようけん",
+   "meaning": "business, matter to discuss",
+   "level": "N3",
+   "kanji": [
+    "用",
+    "件"
+   ],
+   "meaning_id": "keperluan, urusan"
+  },
+  {
+   "word": "米国",
+   "reading": "べいこく",
+   "meaning": "the United States",
+   "level": "N3",
+   "kanji": [
+    "米",
+    "国"
+   ],
+   "meaning_id": "Amerika Serikat"
+  },
+  {
+   "word": "緑茶",
+   "reading": "りょくちゃ",
+   "meaning": "green tea",
+   "level": "N3",
+   "kanji": [
+    "緑",
+    "茶"
+   ],
+   "meaning_id": "teh hijau"
+  },
+  {
+   "word": "美容院",
+   "reading": "びよういん",
+   "meaning": "beauty salon",
+   "level": "N3",
+   "kanji": [
+    "美",
+    "容",
+    "院"
+   ],
+   "meaning_id": "salon kecantikan"
+  },
+  {
+   "word": "美術",
+   "reading": "びじゅつ",
+   "meaning": "fine arts",
+   "level": "N3",
+   "kanji": [
+    "美",
+    "術"
+   ],
+   "meaning_id": "seni rupa"
+  },
+  {
+   "word": "翌年",
+   "reading": "よくねん",
+   "meaning": "the following year",
+   "level": "N3",
+   "kanji": [
+    "翌",
+    "年"
+   ],
+   "meaning_id": "tahun berikutnya"
+  },
+  {
+   "word": "耳鼻科",
+   "reading": "じびか",
+   "meaning": "ENT (ear, nose and throat) department",
+   "level": "N3",
+   "kanji": [
+    "耳",
+    "鼻",
+    "科"
+   ],
+   "meaning_id": "THT (telinga, hidung, tenggorokan)"
+  },
+  {
+   "word": "自動販売機",
+   "reading": "じどうはんばいき",
+   "meaning": "vending machine",
+   "level": "N3",
+   "kanji": [
+    "自",
+    "動",
+    "販",
+    "売",
+    "機"
+   ],
+   "meaning_id": "mesin penjual otomatis"
+  },
+  {
+   "word": "船長",
+   "reading": "せんちょう",
+   "meaning": "ship's captain",
+   "level": "N3",
+   "kanji": [
+    "船",
+    "長"
+   ],
+   "meaning_id": "kapten kapal"
+  },
+  {
+   "word": "週末",
+   "reading": "しゅうまつ",
+   "meaning": "weekend",
+   "level": "N3",
+   "kanji": [
+    "週",
+    "末"
+   ],
+   "meaning_id": "akhir pekan"
+  },
+  {
+   "word": "震度",
+   "reading": "しんど",
+   "meaning": "seismic intensity",
+   "level": "N3",
+   "kanji": [
+    "震",
+    "度"
+   ],
+   "meaning_id": "skala getaran gempa"
+  },
+  {
+   "word": "願書",
+   "reading": "がんしょ",
+   "meaning": "application form",
+   "level": "N3",
+   "kanji": [
+    "願",
+    "書"
+   ],
+   "meaning_id": "formulir pendaftaran"
+  },
+  {
+   "word": "駐輪場",
+   "reading": "ちゅうりんじょう",
+   "meaning": "bicycle parking",
+   "level": "N3",
+   "kanji": [
+    "駐",
+    "輪",
+    "場"
+   ],
+   "meaning_id": "tempat parkir sepeda"
+  },
+  {
+   "word": "丸い",
+   "reading": "まるい",
+   "meaning": "round",
+   "level": "N3",
+   "kanji": [
+    "丸"
+   ],
+   "meaning_id": "bulat"
+  },
+  {
+   "word": "柱",
+   "reading": "はしら",
+   "meaning": "pillar, post",
+   "level": "N3",
+   "kanji": [
+    "柱"
+   ],
+   "meaning_id": "tiang"
   }
  ],
  "subcategories": [
