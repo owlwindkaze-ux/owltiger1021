@@ -13,7 +13,7 @@
    ここが 長いあいだ 入っていなかった。入口メニューは いちばん よく開く画面なのに、
    古いまま 表示され続けていた（文言を直しても 変わらない、という形で出た）。 */
 (function () {
-  var PAGE_VER = '2026-09-22i';
+  var PAGE_VER = '2026-09-23a';
   try {
     if (sessionStorage.getItem('vchk-top')) return;
     fetch('version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -398,7 +398,7 @@ let VERSION = '2026-09-18c';
 /* 字数・語数は目次から取る。N2を足していくと数が増えるので、
    ここに書き込んでおくと古い数のままになってしまう。
    目次が読めなかったときのために、いまの数を控えにしておく。 */
-let KTOTAL = 1066, VTOTAL = 6272;
+let KTOTAL = 1066, VTOTAL = 6309;
 const GTOTAL = 461, DTOTAL = 80, CTOTAL = 143;
 Promise.all([
   fetch('kanji.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => null),
