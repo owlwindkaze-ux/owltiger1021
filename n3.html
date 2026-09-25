@@ -13,7 +13,7 @@
    version.json は毎回サーバーに取りに行くので、そこに書いてある版と
    このHTMLの版がちがえば、1度だけ読み込み直す。 */
 (function(){
-  var PAGE_VER = '2026-09-23a';
+  var PAGE_VER = '2026-09-25a';
   var KEY = 'reloaded-for-n3';
   try {
     fetch('version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -178,7 +178,7 @@
 
 <header>
   <div class="wrap">
-    <div class="navrow"><a class="navbtn" href="index.html">☰ メニュー</a></div>
+    <div class="navrow"><a class="navbtn" href="index.html">☰ メニュー</a><a class="navbtn" href="moshi/?lv=n3">📝 N3模試（140分）</a></div>
     <p class="eyebrow">JLPT N3 合格100日学習</p>
     <h1 id="h1">タブレット学習</h1>
     <p class="sub">試験日まで <b id="days">—</b> 日　／　解答はこの端末に保存されます</p>

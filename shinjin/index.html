@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-09-23a';
+  var PAGE_VER = '2026-09-25a';
   var KEY = 'reloaded-for-shinjin';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -200,6 +200,18 @@ footer{text-align:center;font-size:.75rem;color:var(--muted);padding:1rem 0 2rem
     <p class="desc">オレンジ色が今月です。先の月を見て不安になる必要はありません。
       <b>その月のことだけ</b>やれば間に合います。</p>
     <div class="steps" id="steps"></div>
+  </div>
+
+  <div class="card">
+    <h2>本番の かたちで ためす<small>Simulasi ujian</small></h2>
+    <p class="desc"><b>N3模試（140分）。</b>本番と同じ順・同じ時間で 通して 解きます。
+      区分ごとに 点が 出ます（どれか1つでも 19点未満だと 不合格です）。<br>
+      <b>第28週と 第29週に 1回ずつ</b>やってください。ふだんの 練習とは 別です。</p>
+    <div class="items">
+      <a class="item" href="../moshi/?lv=n3"><span class="em">📝</span>
+        <span class="tx"><span class="n">N3模試（2回分）</span>
+        <span class="r">文字・語彙30分 ／ 文法・読解70分 ／ 聴解40分</span></span><span class="ar">→</span></a>
+    </div>
   </div>
 
   <div class="card">
