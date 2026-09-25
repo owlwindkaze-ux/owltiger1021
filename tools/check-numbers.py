@@ -85,7 +85,8 @@ CHECKS = [
                                        (VC['N4'], GC['N4']), '新人コース 第2期のねらい'),
     ('shinjin/index.html', r"n:'(\d+)字を4週で一周'", KC['N5'], '新人コース N5漢字'),
     ('shinjin/index.html', r"n:'(\d+)字を8週で'",    KC['N4'], '新人コース N4漢字'),
-    ('shinjin/index.html', r"n:'(\d+)字を18週で'",   KC['N3'], '新人コース N3漢字'),
+    ('shinjin/index.html', r"n:'(\d+)字を16週で（第28週まで）'",   KC['N3'], '新人コース N3漢字'),
+    ('shinjin/index.html', r"n:'(\d+)項目を16週で（第28週まで）'", GC['N3'], '新人コース N3文型'),
 ]
 
 bad = []
@@ -103,6 +104,43 @@ for f, pat, want, what in CHECKS:
     if not ok:
         bad.append('%s：%s が 画面 %s ／ データ %s'
                    % (f, what, '・'.join(map(str, got)), '・'.join(map(str, wants))))
+
+# ---- 新人コースの週割りの形 ----
+# N3の新しい分は 第13〜28週だけ。第29・30週は 模試の弱点直しと直前確認なので、
+# 新しい漢字・語彙・文型を置かない（2.6-z14）。画面の文がここに依っている。
+print('\n■ 週割りの形（新人コース）')
+kw = json.load(io.open(R + 'kanji-weeks.json', encoding='utf-8'))['courses']['shinjin']
+gw = json.load(io.open(R + 'bunpo/weeks.json', encoding='utf-8'))['courses']['shinjin']
+for what, box in [('漢字', kw['kanji']), ('語彙', kw['vocab']), ('文型', gw['weeks'])]:
+    empty = [w for w in range(13, 29) if not box.get(str(w))]
+    extra = [w for w in (29, 30) if box.get(str(w))]
+    tot = sum(len(box.get(str(w), [])) for w in range(1, 31))
+    ok = not empty and not extra
+    print('  %-4s 第13〜28週すべてに分がある：%s ／ 第29・30週は空：%s ／ 合計 %d'
+          % (what, 'はい' if not empty else '第' + str(empty) + '週が空',
+             'はい' if not extra else '第' + str(extra) + '週に分がある', tot))
+    if not ok:
+        bad.append('週割り %s：第13〜28週の空 %s ／ 第29・30週の残り %s' % (what, empty, extra))
+
+# ---- 使用説明書に書いた「範囲表の合計」 ----
+# ここは配り方を変えると必ずずれる。実際に 1,862語・267項目のまま古くなっていた。
+print('\n■ 使用説明書の 範囲表の合計')
+man = io.open(R + 'MANUAL.md', encoding='utf-8').read()
+tot = {'漢字': sum(len(v) for v in kw['kanji'].values()),
+       '語彙': sum(len(v) for v in kw['vocab'].values()),
+       '文型': sum(len(v) for v in gw['weeks'].values())}
+m = re.search(r'漢字([\d,]+)字・語彙([\d,]+)語・文型([\d,]+)項目', man)
+if not m:
+    bad.append('使用説明書：範囲表の合計が 見つからない（書き方が変わった？）')
+    print('  見つからない')
+else:
+    got = [int(x.replace(',', '')) for x in m.groups()]
+    for (what, want), g in zip(tot.items(), got):
+        ok = want == g
+        print('  %-4s 説明書 %d ／ データ %d  %s' % (what, g, want, 'OK' if ok else '←ちがう'))
+        if not ok:
+            bad.append('使用説明書 範囲表の%s：説明書 %d ／ データ %d' % (what, g, want))
+
 
 print('\n' + '=' * 62)
 print('合っていないところ:', len(bad))
