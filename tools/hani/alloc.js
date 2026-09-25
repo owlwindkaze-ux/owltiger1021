@@ -21,7 +21,9 @@ const kanjiPlan = {};                  /* 週 → 漢字の配列 */
   i = 0;
   split(n4.length, 8).forEach((n,w) => { kanjiPlan[w+5] = n4.slice(i, i+n); i += n; });
   i = 0;
-  split(n3.length, 18).forEach((n,w) => { kanjiPlan[w+13] = n3.slice(i, i+n); i += n; });
+  /* N3は第13〜28週の16週で配る。第29・30週は模試の弱点直しと直前確認にあてるので、
+     新しい漢字・語彙・文型を置かない（2.6-z14）。 */
+  split(n3.length, 16).forEach((n,w) => { kanjiPlan[w+13] = n3.slice(i, i+n); i += n; });
 })();
 
 /* ---- 語彙：A案（その週の漢字を使う語を同じ週に置く） ---- */
@@ -32,7 +34,7 @@ const vocabPlan = {};
   /* 第1〜4週：N5語彙から週50語。第5〜12週：N4語彙662語を全部 */
   /* ---- N3語彙のえらび方 ----
      N3の語彙は2,078語あるが、全部を18週で配ると平日1日24語になり、
-     漢字21字・文型8項目と合わせて続かない。そこで1,000語に絞る。
+     漢字23字・文型9項目と合わせて続かない。そこで1,000語に絞る。
      絞り方は「読めるかどうか」を軸にした：
        ① この30週で習う漢字（N5+N4+N3の613字）だけでできている語に限る（1,171語）。
           習わない漢字を含む語は、読めないので覚えようがない。
@@ -62,7 +64,7 @@ const vocabPlan = {};
   const pools = [
     { weeks:[1,2,3,4],           per:50, list: vw.filter(w => w.level==='N5') },
     { weeks:[5,6,7,8,9,10,11,12], per:null, list: vw.filter(w => w.level==='N4') },
-    { weeks:[13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30], per:null, list: N3W }
+    { weeks:[13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28], per:null, list: N3W }
   ];
   pools.forEach(pool => {
     const used = new Set();
@@ -112,7 +114,7 @@ const gramPlan = {};
   let i = 0;
   split(gN4.length, 8).forEach((n,w) => { gramPlan[w+5] = gN4.slice(i, i+n); i += n; });
   i = 0;
-  split(gN3.length, 18).forEach((n,w) => { gramPlan[w+13] = gN3.slice(i, i+n); i += n; });
+  split(gN3.length, 16).forEach((n,w) => { gramPlan[w+13] = gN3.slice(i, i+n); i += n; });
 })();
 
 /* ---- 点検 ---- */
@@ -128,7 +130,7 @@ console.log('重複など:', bad.length ? bad.slice(0,5) : 'なし');
 console.log('---- 週ごとの数 ----');
 for (let w=1; w<=30; w++){
   const k=(kanjiPlan[w]||[]).length, v=(vocabPlan[w]||[]).length, g=(gramPlan[w]||[]).length;
-  if(w<=13 || w===20 || w===30) console.log(' 第'+String(w).padStart(2)+'週  漢字'+String(k).padStart(3)+'  語彙'+String(v).padStart(3)+'  文型'+String(g).padStart(3));
+  if(w<=13 || w===20 || w>=28) console.log(' 第'+String(w).padStart(2)+'週  漢字'+String(k).padStart(3)+'  語彙'+String(v).padStart(3)+'  文型'+String(g).padStart(3));
 }
 /* 連動がどれくらい効いたか */
 let hit=0, tot=0;
@@ -138,9 +140,9 @@ for (let w=5; w<=12; w++){
 }
 console.log('第5〜12週：その週の漢字を使う語が', hit, '/', tot, '語（'+Math.round(hit/tot*100)+'%）');
 let h2=0, t2=0;
-for (let w=13; w<=30; w++){
+for (let w=13; w<=28; w++){
   const thisWeek = new Set((kanjiPlan[w]||[]).map(k=>k.character));
   (vocabPlan[w]||[]).forEach(v => { t2++; if(charsOf(v).some(c=>thisWeek.has(c))) h2++; });
 }
-console.log('第13〜30週：その週の漢字を使う語が', h2, '/', t2, '語（'+Math.round(h2/t2*100)+'%）');
+console.log('第13〜28週：その週の漢字を使う語が', h2, '/', t2, '語（'+Math.round(h2/t2*100)+'%）');
 fs.writeFileSync('/tmp/hani/plan.json', JSON.stringify({kanjiPlan, vocabPlan, gramPlan}));
