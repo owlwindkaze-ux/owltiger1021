@@ -10,6 +10,29 @@ const { withRuby } = require(__dirname + '/../hani/ruby.js');
 const R = s => withRuby(esc(s));
 const PHASE = w => w<=4 ? 'ならし（N5）' : w<=12 ? 'N4を仕上げる' : w<=16 ? 'N3へ切りかえる' : '100日コース 第'+(w-16)+'週';
 
+/* ここから下の数は、必ず数えて出す。手で書くと直し忘れて古くなる（実際に
+   「467語（47%）」のまま古くなっていた）。 */
+const kd_ = JSON.parse(fs.readFileSync(__dirname+'/../../kanji-data.json','utf8')).kanji;
+const vw_ = JSON.parse(fs.readFileSync(__dirname+'/../../vocab-data.json','utf8')).words;
+const isK_ = c => /[一-鿿]/.test(c);
+const chars_ = w => [...(w.word||'')].filter(isK_);
+const N3ALL = vw_.filter(w => w.level==='N3').length;
+const LEARNED = new Set(kd_.filter(k=>['N5','N4','N3'].includes(k.level)).map(k=>k.character));
+const READABLE = vw_.filter(w => w.level==='N3' && chars_(w).every(c=>LEARNED.has(c))).length;
+function linkRate(a, b){
+  let hit=0, tot=0;
+  for (let w=a; w<=b; w++){
+    const tw = new Set((P.kanjiPlan[w]||[]).map(k=>k.character));
+    (P.vocabPlan[w]||[]).forEach(v => { tot++; if (chars_(v).some(c=>tw.has(c))) hit++; });
+  }
+  return { hit, tot, pc: Math.round(hit/tot*100) };
+}
+const L_N4 = linkRate(5,12), L_N3 = linkRate(13,28);
+const sum_ = (box, a, b) => { let n=0; for (let w=a; w<=b; w++) n += (box[w]||[]).length; return n; };
+const N3K = sum_(P.kanjiPlan,13,28), N3V = sum_(P.vocabPlan,13,28), N3G = sum_(P.gramPlan,13,28);
+const N3TAKE = L_N3.tot;
+const cm = n => n.toLocaleString('en-US');
+
 const css = `
 body{margin:0;font-family:"IPAPGothic","IPAGothic","WenQuanYi Zen Hei",sans-serif;color:#1b2733;font-size:9.5pt;line-height:1.6}
 .pg{page-break-before:always}.pg:first-child{page-break-before:auto}
@@ -85,14 +108,16 @@ N4語彙662語のうち、<b>その週の漢字と結びつけられたのは147
 これはN4語彙の性質上どうにもなりません（「郵便局」の「郵」はN3漢字）。
 アプリはふりがなを出すので、読めなくても進められます。</div>
 
-<div class="tip"><b>N3語彙を1,000語に絞った理由</b><br>
-手もとのN3語彙は<b>2,078語</b>あります。第13〜30週の18週で全部を配ると平日1日24語になり、
-漢字4字・文型2項目と合わせると1日1時間半をこえます。続きません。そこで<b>1,000語に絞りました</b>。<br>
-① <b>この30週で習う漢字（613字）だけでできている語</b>に限りました（1,171語）。
+<div class="tip"><b>N3語彙を${cm(N3TAKE)}語に絞った理由</b><br>
+手もとのN3語彙は<b>${cm(N3ALL)}語</b>あります。第13〜28週の16週で全部を配ると平日1日27語になり、
+漢字5字・文型2項目と合わせると1日1時間半をこえます。続きません。そこで<b>${cm(N3TAKE)}語に絞りました</b>。<br>
+① <b>この30週で習う漢字（${LEARNED.size}字）だけでできている語</b>に限りました（${cm(READABLE)}語）。
 習わない漢字を含む語は読めないので、覚えようがありません。<br>
-② そのうち<b>介護・現場の語、分野名のついた語、基本語、カタカナ語は必ず残しました</b>（256語）。<br>
+② そのうち<b>介護・現場の語、分野名のついた語、基本語、カタカナ語は必ず残しました</b>。<br>
 ③ 残りは<b>使う回数の多い漢字でできている語から</b>順に、1,000語になるまで取りました。<br>
-結果、第13〜30週では<b>その週の漢字を使う語が467語（47%）</b>になり、N4期の22%より結びつきが強くなっています。</div>
+結果、第13〜28週では<b>その週の漢字を使う語が${cm(L_N3.hit)}語（${L_N3.pc}%）</b>になり、N4期の${L_N4.pc}%より結びつきが強くなっています。<br>
+<b>第29・30週には新しい分を置いていません。</b>直前の2週は模試の弱点直しと直前確認にあてるためで、
+そのぶん第13〜28週が1週あたり漢字2〜3字・語彙7〜8語ふえています。</div>
 
 <h2>全体の数<span>この表に載っている分</span></h2>
 ${overview}
@@ -128,26 +153,46 @@ const WNOTE = {
    + '<b>19点未満の区分を記録して</b>第25〜27週で埋めます。</div>',
   28:'<div class="box"><b>この週に N3模試 第2回（140分）</b><br>'
    + '第1回と同じ形です。第1回と並べて、区分ごとの伸びを見ます。</div>',
-  29:'<div class="tip"><b>⚠ 画面では、この週は「新しいことをしない週」です</b><br>'
-   + '第29週は<b>模試で19点に届かなかった区分だけ</b>をやる週にしてあります。'
-   + 'このページに載っている漢字・語彙・文型は、<b>第28週までに前倒しで終わらせてください。</b></div>',
-  30:'<div class="tip"><b>⚠ 画面では、この週は「直前の確認だけ」です</b><br>'
-   + '月〜木は一度見た問題を30分だけ。<b>前の日（7月3日）は勉強させません。</b>'
-   + 'このページに載っている分も、<b>第28週までに前倒しで終わらせてください。</b></div>'
+  29:'<div class="box"><b>第29週　弱い区分だけ</b><br>'
+   + '<b>模試 第2回で19点に届かなかった区分だけ</b>をやります（1日40分＋まちがえ直し20分）。'
+   + '土曜は、その区分だけを本番の時間で通します。<br>'
+   + '<b>新しい漢字・語彙・文型は、第28週で終わっています。</b>'
+   + '職員は、新しい教材を出さないでください。</div>',
+  30:'<div class="box"><b>第30週　直前の確認だけ</b><br>'
+   + '月〜木は、一度見た問題を思い出すだけ（30分）。'
+   + '持ち物（受験票・写真つきの身分証・えんぴつHB・消しゴム・時計）と、'
+   + '会場までの行き方と時間を確かめます。<br>'
+   + '<b>前の日（7月3日・土）は勉強させません。</b>ねむいと聴解が聞こえません。</div>'
 };
-/* 第13〜30週：N3（1週で1ページ。語彙が入ったので2週まとめると入らない） */
-for (let w=13; w<=30; w++){
+/* 第13〜28週：N3（1週で1ページ。語彙が入ったので2週まとめると入らない）
+   第29・30週は 新しい分を置かない（模試の弱点直しと直前確認）ので、表を出さない。 */
+for (let w=13; w<=28; w++){
   pages.push(`<div class="pg">
-  <h2>${R('第'+w+'週　'+PHASE(w))}<span>${md(mon(w))}（月）〜${md(sun(w))}（日）　${R(w<=16 ? '1日50分' : '1日60分')}</span></h2>
+  <h2>${R('第'+w+'週　'+PHASE(w))}<span>${md(mon(w))}（月）〜${md(sun(w))}（日）　${R(w<=16 ? '1日55分' : '1日65分')}</span></h2>
   ${WNOTE[w] || ''}
-  <h3>漢字　<b>${(P.kanjiPlan[w]||[]).length}字</b>${R('（平日1日4字）')}</h3>
+  <h3>漢字　<b>${(P.kanjiPlan[w]||[]).length}字</b>${R('（平日1日5字）')}</h3>
   ${kanjiHtml(P.kanjiPlan[w]||[])}
-  <h3>${R('語彙')}　<b>${(P.vocabPlan[w]||[]).length}語</b>${R('（平日1日11語）')}</h3>
+  <h3>${R('語彙')}　<b>${(P.vocabPlan[w]||[]).length}語</b>${R('（平日1日13語）')}</h3>
   ${vocabHtml(P.vocabPlan[w]||[])}
   <h3>${R('文型')}　<b>${(P.gramPlan[w]||[]).length}${R('項目')}</b>${R('（平日1日2項目）')}</h3>
   ${gramHtml(P.gramPlan[w]||[])}
   </div>`);
 }
+/* 第29・30週：新しい分は無い。やることだけを1ページに書く */
+pages.push(`<div class="pg">
+<h2>${R('第29週・第30週　直前の2週')}<span>${md(mon(29))}（月）〜${md(sun(30))}（日）</span></h2>
+<p class="lead"><b>この2週は、新しいことをしません。</b>
+新しい漢字・語彙・文型は<b>第28週で終わり</b>です（第13〜28週で漢字${N3K}字・語彙${cm(N3V)}語・文型${N3G}項目を配りました）。
+直前に新しいことを覚えようとすると、覚えかけのものが全部あいまいになります。</p>
+${WNOTE[29]}
+${WNOTE[30]}
+<div class="tip"><b>職員の方へ</b><br>
+第29週にやることは、<b>第28週の模試 第2回の結果で決まります。</b>
+区分ごとに60点に直して、<b>19点未満の区分だけ</b>を出してください。
+N3は合計90点以上でも、1区分でも19点未満だと不合格です。<br>
+第28週までに範囲が終わっていない場合は、<b>終わっていない分を追いかけるのではなく、
+一度やった分の見直しを選んでください。</b>半分覚えた語を増やすより、覚えた語を確実にするほうが点になります。</div>
+</div>`);
 
 fs.writeFileSync('/tmp/hani/hani.html',
   `<!doctype html><html lang="ja"><head><meta charset="utf-8"><title>週ごとの学習範囲表</title>
