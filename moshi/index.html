@@ -7,7 +7,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-09-23a';
+  var PAGE_VER = '2026-09-25a';
   try {
     if (sessionStorage.getItem('vchk-moshi')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -119,10 +119,10 @@ ruby rt{font-size:.5em;color:var(--indigo)}
 
 <div id="app" style="display:none">
 <header>
-  <h1>N2模試</h1>
+  <h1 id="hdTitle">N2模試</h1>
   <span class="timer" id="timer" hidden>--:--</span>
   <span class="sp"></span>
-  <a class="menu" href="../n2/index.html">← N2ロードマップ</a>
+  <a class="menu" id="backLink" href="../n2/index.html">← N2ロードマップ</a>
 </header>
 <main id="main"></main>
 </div>
@@ -187,21 +187,24 @@ function speak(text, btn) {
 /* ========== 画面 ========== */
 function home() {
   stopTimer();
+  const bl = $('#backLink');
+  if (bl) { bl.href = CFG.back; bl.textContent = '← ' + CFG.backName; }
+  const ht = $('#hdTitle'); if (ht) ht.textContent = LV.toUpperCase() + '模試';
+  document.title = LV.toUpperCase() + '模試 ／ Simulasi Ujian ' + LV.toUpperCase();
   const done = n => {
-    const d = store['m' + n];
+    const d = store[CFG.key + n];
     return d ? '　<b style="color:var(--teal)">受けた（' + d.total + '点／180点）</b>' : '';
   };
   $('#main').innerHTML =
-    '<div class="card"><h2>N2模試（本番と同じ155分）</h2>' +
-    '<p class="lead">言語知識（文字・語彙・文法）＋読解 105分 ／ 聴解 50分。3回分あります。</p>' +
-    '<div class="warn">本番は約106問ですが、この模試は<b>103問</b>です。読解は、まだ読んでいない文章だけを使うため、1回18問（本番21問）にしてあります。形式と順番は本番どおりです。</div>' +
+    '<div class="card"><h2>' + CFG.title + '</h2>' +
+    '<p class="lead">' + CFG.lead + '</p>' +
+    '<div class="warn">' + CFG.note + '</div>' +
     '<div class="pick">' +
-      [1, 2, 3].map(n => '<button class="btn main" data-no="' + n + '">第' + n + '回を 受ける</button>').join('') +
+      CFG.sets.map(n => '<button class="btn main" data-no="' + n + '">第' + n + '回を 受ける</button>').join('') +
     '</div>' +
-    [1, 2, 3].map(n => '<p class="lead">第' + n + '回' + done(n) + '</p>').join('') +
+    CFG.sets.map(n => '<p class="lead">第' + n + '回' + done(n) + '</p>').join('') +
     '<details><summary>この模試の中身 ／ Isi simulasi</summary>' +
-    '<p class="lead">文字・語彙32問（漢字読み5・表記5・語形成5・文脈規定7・言い換え類義5・用法5）／' +
-    '文法22問（文法形式12・文の組み立て5・文章の文法5）／読解18問／聴解31問。</p>' +
+    '<p class="lead">' + CFG.inner + '</p>' +
     '<p class="lead">点数は、区分ごとに60点へ直して出します。合格の目安は、合計90点以上で、どの区分も19点以上です。</p>' +
     '</details></div>';
   $('#main').querySelectorAll('[data-no]').forEach(b =>
@@ -210,7 +213,7 @@ function home() {
 
 function load(no) {
   $('#main').innerHTML = '<div class="card">読み込んでいます…</div>';
-  fetch('moshi-' + no + '.json', { cache: 'no-cache' }).then(r => r.json()).then(j => {
+  fetch(CFG.file(no), { cache: 'no-cache' }).then(r => r.json()).then(j => {
     PAPER = j; ANS = {}; REV = false; part1();
   }).catch(() => { $('#main').innerHTML = '<div class="card">読み込めませんでした。</div>'; });
 }
@@ -219,6 +222,50 @@ const MOJI = ['問題1', '問題2', '問題3', '問題4', '問題5', '問題6'];
 const BUNPO = ['問題7', '問題8', '問題9'];
 const DOKKAI = ['問題10', '問題11', '問題12', '問題13', '問題14'];
 const CHOU = ['聴解1', '聴解2', '聴解3', '聴解4', '聴解5'];
+
+/* どのレベルの模試を出すかは URL で決める。 moshi/ … N2 ／ moshi/?lv=n3 … N3
+   engine（この画面）は 1つのまま、問題だけ 入れかえる。 */
+const LV = (new URLSearchParams(location.search).get('lv') || 'n2').toLowerCase();
+const PAPERS = {
+  n2: { file: n => 'moshi-' + n + '.json', sets: [1, 2, 3], key: 'm',
+        title: 'N2模試（本番と同じ155分）',
+        lead: '言語知識（文字・語彙・文法）＋読解 105分 ／ 聴解 50分。3回分あります。',
+        note: '本番は約106問ですが、この模試は<b>103問</b>です。読解は、まだ読んでいない文章だけを使うため、'
+            + '1回18問（本番21問）にしてあります。形式と順番は本番どおりです。',
+        inner: '文字・語彙32問（漢字読み5・表記5・語形成5・文脈規定7・言い換え類義5・用法5）／'
+             + '文法22問（文法形式12・文の組み立て5・文章の文法5）／読解18問／聴解31問。',
+        back: '../n2/index.html', backName: 'N2ロードマップ' },
+  n3: { file: n => 'n3-' + n + '.json', sets: [1, 2], key: 'n3m',
+        title: 'N3模試（本番と同じ140分）',
+        lead: '文字・語彙 30分 ／ 文法・読解 70分 ／ 聴解 40分。<b>区分が3つに分かれています（本番と同じ）</b>。2回分あります。',
+        note: '<b>本文は模試だけの書き下ろしです。</b>読解の教材や100日コースで読んだ文章は使っていません。'
+            + '一度読んだ文章だと、点が出ても実力が分からないためです。',
+        inner: '文字・語彙35問（漢字読み8・表記6・文脈規定11・言い換え類義5・用法5）／'
+             + '文法23問（文法形式13・文の組み立て5・文章の文法5）／読解16問／聴解28問。',
+        back: '../n3.html', backName: '100日コース' },
+};
+const CFG = PAPERS[LV] || PAPERS.n2;
+
+/* 区分（何分ずつ、どの大問か）。JSON に parts があれば それを使う。
+   無ければ N2のこれまでどおり（105分＋50分）。 */
+function partsOf() {
+  if (PAPER && PAPER.parts) return PAPER.parts;
+  return [
+    { name: '言語知識・読解', minutes: 105, sections: MOJI.concat(BUNPO, DOKKAI),
+      next: '聴解へ進む（50分）',
+      lead: '105分です。最後まで答えてから「聴解へ進む」を押してください。途中で答えは出ません（本番と同じ）。' },
+    { name: '聴解', minutes: 50, sections: CHOU,
+      lead: '50分です。本番は一度しか流れません。まずは1回で答えてみてください。' },
+  ];
+}
+/** その大問が どの区分（言語知識／読解／聴解）の点に なるか */
+function groupOf(key) {
+  const s = (PAPER.sections || {})[key] || {};
+  if (s.group) return s.group;
+  if (CHOU.indexOf(key) >= 0) return '聴解';
+  if (DOKKAI.indexOf(key) >= 0) return '読解';
+  return '言語知識';
+}
 
 /* 概要理解で 読み上げる 原稿。話 → 質問 → 一番〜四番。
    画面の 読みやすさのための 空白は 取り、すでに 句点で 終わる 文には 足さない。 */
@@ -246,7 +293,7 @@ function qBlock(id, no, text, choices, extra, ear) {
 
 function sectionHTML(key, startNo) {
   const s = PAPER.sections[key];
-  let h = '<h3>' + key.replace('聴解', '聴解 問題') + '　' + esc(s.name) + '</h3>' +
+  let h = '<h3>' + (s.label || key.replace('聴解', '聴解 問題')) + '　' + esc(s.name) + '</h3>' +
           '<p class="lead">' + ruby(s.inst) + '</p>';
   let n = startNo;
   if (s.passage) {
@@ -316,32 +363,23 @@ function bindOpts(root) {
     b.onclick = () => b.closest('.q').classList.add('opened'));
 }
 
-function part1() {
-  let h = '<div class="card"><h2>' + esc(PAPER.title) + '　言語知識・読解</h2>' +
-          '<p class="lead">105分です。最後まで答えてから「聴解へ進む」を押してください。' +
-          '途中で答えは出ません（本番と同じ）。</p></div><div class="card">';
+/** 区分を1つ出す。N2は2つ、N3は3つ。最後の区分の あとが 答え合わせ。 */
+function runPart(i) {
+  const ps = partsOf(), p = ps[i], last = i === ps.length - 1;
+  let h = '<div class="card"><h2>' + esc(PAPER.title) + '　' + esc(p.name) + '</h2>' +
+          '<p class="lead">' + (p.lead || (p.minutes + '分です。')) + '</p>' +
+          '<p class="lead">（' + (i + 1) + ' / ' + ps.length + '）</p></div><div class="card">';
   let n = 1;
-  MOJI.concat(BUNPO, DOKKAI).forEach(k => { const r = sectionHTML(k, n); h += r.html; n = r.n; });
-  h += '</div><div class="card"><button class="btn main" id="toChou" style="width:100%">聴解へ進む（50分）</button></div>';
+  p.sections.forEach(k => { const r = sectionHTML(k, n); h += r.html; n = r.n; });
+  h += '</div><div class="card"><button class="btn main" id="nextPart" style="width:100%">' +
+       (last ? '答え合わせ' : esc(p.next || 'つぎへ')) + '</button></div>';
   $('#main').innerHTML = h;
   bindOpts($('#main'));
-  $('#toChou').onclick = part2;
-  startTimer(105);
+  $('#nextPart').onclick = last ? finish : () => runPart(i + 1);
+  startTimer(p.minutes);
   window.scrollTo(0, 0);
 }
-
-function part2() {
-  let h = '<div class="card"><h2>' + esc(PAPER.title) + '　聴解</h2>' +
-          '<p class="lead">50分です。本番は一度しか流れません。まずは1回で答えてみてください。</p></div><div class="card">';
-  let n = 1;
-  CHOU.forEach(k => { const r = sectionHTML(k, n); h += r.html; n = r.n; });
-  h += '</div><div class="card"><button class="btn main" id="fin" style="width:100%">答え合わせ</button></div>';
-  $('#main').innerHTML = h;
-  bindOpts($('#main'));
-  $('#fin').onclick = finish;
-  startTimer(50);
-  window.scrollTo(0, 0);
-}
+function part1() { runPart(0); }
 
 function correctOf(id) {
   const [key, a, b] = id.split('/');
@@ -362,18 +400,14 @@ function explainOf(id) {
 function finish() {
   stopTimer(); REV = true;
   const all = [];
-  ['問題1','問題2','問題3','問題4','問題5','問題6','問題7','問題8','問題9',
-   '問題10','問題11','問題12','問題13','問題14','聴解1','聴解2','聴解3','聴解4','聴解5'].forEach(key => {
+  /* 大問の並びは JSON の order を 正とする。ここに 番号を 直接書いていたので、
+     N3（大問の名前が ちがう）を 足したときに 数え落とすところだった。 */
+  (PAPER.order || partsOf().reduce((a, p) => a.concat(p.sections), [])).forEach(key => {
     const s = PAPER.sections[key];
     if (s.read) s.read.forEach((r, ri) => r.qi.forEach(qi => all.push(key + '/' + ri + '/' + qi)));
     else s.items.forEach((_, i) => all.push(key + '/' + i));
   });
-  const grp = id => {
-    const k = id.split('/')[0];
-    if (CHOU.indexOf(k) >= 0) return '聴解';
-    if (DOKKAI.indexOf(k) >= 0) return '読解';
-    return '言語知識';
-  };
+  const grp = id => groupOf(id.split('/')[0]);
   const got = { 言語知識: 0, 読解: 0, 聴解: 0 }, tot = { 言語知識: 0, 読解: 0, 聴解: 0 };
   all.forEach(id => {
     const g = grp(id); tot[g]++;
@@ -399,7 +433,8 @@ function finish() {
              mine: (ANS[id] != null && ch[ANS[id]] != null) ? ch[ANS[id]] : '',
              right: ch[c] != null ? ch[c] : '', exp: ex.ja || '' };
   });
-  store['m' + PAPER.no] = { total: total, at: new Date().toISOString().slice(0, 10),
+  /* N2とN3で 記録の キーを 分ける。同じ 'm1' に 書くと 上書きし合う */
+  store[CFG.key + PAPER.no] = { total: total, at: new Date().toISOString().slice(0, 10),
                             got: got, tot: tot, wrong: wrongSave };
   save();
 
