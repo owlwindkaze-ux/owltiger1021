@@ -661,7 +661,7 @@ document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key =
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-09-25c';   // 更新日（版）
+const VERSION = '2026-09-25d';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -978,7 +978,17 @@ function weekState(kind) {
   if (n > total) return { msg: '新人コースの' + total + '週は 終わりました。「すべて」で つかってください' };
   const list = (WK[kind] || {})[String(n)];
   const name = kind === 'kanji' ? '漢字' : '語彙';
-  if (!list || !list.length) return { msg: '第' + n + '週は ' + name + 'の 予定が ありません' };
+  if (!list || !list.length) {
+    /* 新しい分を置いていない週。以降の週にも無ければ「もう新しいことはしない期間」。
+       第29・30週（模試の弱点直しと直前確認）がこれにあたる。 */
+    const all = WK[kind] || {};
+    let more = false;
+    for (let x = n + 1; x <= total; x++) if ((all[String(x)] || []).length) { more = true; break; }
+    if (!more) return { msg: (WK.name ? '【' + WK.name + '】' : '') +
+      '第' + n + '週は 新しい ' + name + 'を やりません。模試で よわかった ところと' +
+      '「まちがえたところ」を 見て ください ／ Minggu ' + n + '：tidak ada materi baru' };
+    return { msg: '第' + n + '週は ' + name + 'の 予定が ありません' };
+  }
   const cn = WK.name ? '【' + WK.name + '】' : '';
   return { list: list, msg: cn + '第' + n + '週の ' + name + ' ' + list.length +
     (kind === 'kanji' ? '字' : '語') + 'だけを 出しています（レベルの ボタンは 効きません）' +
