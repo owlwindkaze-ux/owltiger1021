@@ -44,7 +44,16 @@ JA_KEYS = {'q', 'text', 'choices', 'opts', 'script', 'show', 'sentence',
            'explain', 'exp', 'inst', 'label', 'intro',
            'headers', 'rows', 'why', 'head', 'tail', 'parts'}
 # 日本語の 文に あっても よい 英字
-OK = re.compile(r'^(N[1-5]|JLPT|OJT|PDF|URL|LINE|ID|A|B|C|D|[IVX]+)$', re.I)
+# SpO2（血中酸素）・SCAN（眠りSCANという機器の名前）は、記録で ふつうに使う。
+OK = re.compile(r'^(N[1-5]|JLPT|OJT|PDF|URL|LINE|ID|A|B|C|D|[IVX]+'
+                r'|SpO|SPO|SCAN|BMI|ADL|QOL|CT|MRI|PT|OT|ST|kg|cm|ml|mg'
+                r'|KT|BT|BP|HR|RR|SAT)$', re.I)   # 看護記録の略号（KT＝体温 など）
+
+# sentences.json は「語 → 例文」の形で、**キーが語そのもの**。
+# そのため JA_KEYS に当たらず、**まるごと点検から外れていた**。
+# 例文は全部 日本語で書く欄なので、この中の文字列は すべて見る。
+# （実際に「場所の認識が difficult になる」を素通りさせた）
+ALL_JA_FILES = {'sentences.json'}
 
 def walk(o, key, hit):
     if isinstance(o, str):
@@ -76,7 +85,7 @@ for p in sorted(set(files)):
         # はじめ「日本語が 入って いる 文だけ」を 見て いたので、
         # 選択肢が **まるごと 英語**（例：closed）の ときに 素通りした。
         # 実習生が 読む 欄なら、まるごと 英語でも おかしい。条件を 外す。
-        if k in JA_KEYS:
+        if k in JA_KEYS or rel in ALL_JA_FILES:
             for w in re.findall(r'\b[A-Za-z]{2,}\b', t):
                 if OK.match(w): continue
                 bad.append('%s：日本語の 欄「%s」に 英単語「%s」 … %s' % (rel, k, w, t[:46]))
