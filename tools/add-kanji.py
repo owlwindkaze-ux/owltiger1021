@@ -53,6 +53,56 @@ KA = ('https://raw.githubusercontent.com/kanjialive/kanji-data-media/master/'
 VG = 'https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/%05x.svg'
 
 # インドネシア語の意味。英語の意味と 1つずつ 対にして 手で書いたもの。
+LEVEL = 'N3'                       # --level= で変える
+
+# ---- 部首 ----
+# Kanji alive は **約1,235字しか入っていません**。医療の字（痰・膿・咳・嗽…）は
+# 1字も無く、67字のうち47字が落ちました。そこで **KanjiVG の kvg:radical="general"**
+# から部首の字を取り、その字を「いま使っている書き方」に直します。
+#
+# **直さないと「部首でしぼる」が ばらけます。** 既にある1,073字は、いとへんを
+# private use の '\ue715' で持っているなど、独特の書き方をしています。
+# KanjiVG は '糸' を返すので、そのまま入れると 別のかたまりになってしまいます。
+# 下の表は、**既にある1,073字が実際に使っている値**に合わせたものです。
+RAD = {
+    '月': ('\ue758', 'にくづき', 'meat, flesh'),
+    '扌': ('⺘', 'てへん', 'hand'),
+    '氵': ('⺡', 'さんずい', 'water'),
+    '疒': ('⽧', 'やまいだれ', 'sickness'),
+    '口': ('\ue723', 'くちへん', 'mouth'),
+    '糸': ('\ue715', 'いとへん', 'thread'),
+    '頁': ('⾴', 'おおがい', 'head, page'),
+    '言': ('\ue704', 'ごんべん', 'words, to speak, say'),
+    '刂': ('⺉', 'りっとう', 'knife, sword'),
+    '⻖': ('⻖', 'こざとへん', 'hill, mound'),
+    '⻌': ('⻌', 'しんにょう', 'road, walk, to advance'),
+    '艹': ('⺾', 'くさかんむり', 'grass'),
+    '心': ('⼼', 'こころ', 'heart, mind, spirit'),
+    '木': ('\ue720', 'きへん', 'tree, wood'),
+    '竹': ('⺮', 'たけかんむり', 'bamboo'),
+    '隹': ('⾫', 'ふるとり', 'small bird'),
+    '米': ('\ue722', 'こめへん', 'rice'),
+    '忄': ('⺖', 'りっしんべん', 'heart, mind, spirit'),
+    '彡': ('⼺', 'さんづくり', 'hair-style, light rays'),
+    '足': ('⻊', 'あしへん', 'foot, leg'),
+    '禾': ('⽲', 'のぎへん', 'grain'),
+    '衣': ('⾐', 'ころも', 'clothing'),
+    '女': ('\ue732', 'おんなへん', 'woman'),
+    '白': ('⽩', 'しろ', 'white'),
+    '臣': ('⾂', 'しん', 'retainer, minister'),
+    '冖': ('⼍', 'わかんむり', 'cover, crown'),
+    '田': ('⽥', 'た', 'rice paddy'),
+    '亻': ('⺅', 'にんべん', 'person'),
+    '貝': ('\ue716', 'かいへん', 'shell, property, wealth'),
+    '尸': ('⼫', 'しかばね', 'corpse, awning'),
+    '火': ('⽕', 'ひ', 'fire'),
+    '灬': ('⺣', 'れっか', 'fire'),
+    '干': ('⼲', 'かん', 'to dry, shield'),
+    '亀': ('亀', 'かめ', 'turtle'),
+}
+# KanjiVG に kvg:radical="general" の印が無い字。手で入れる。
+RAD_BY_EYE = {'応': '心', '災': '火', '甲': '田', '為': '灬', '幹': '干'}
+
 MEAN_ID = {
     '暑': ['panas (udara)', 'terik', 'panasnya musim panas'],
     '授': ['memberikan', 'mengajar', 'menganugerahkan'],
@@ -61,6 +111,74 @@ MEAN_ID = {
     '無': ['tidak ada', 'nihil', 'tanpa'],
     '価': ['nilai', 'harga'],
     '独': ['sendiri', 'seorang diri', 'dengan sendirinya'],
+    # ---- 記録・申し送りの漢字（2026-09-26c）----
+    # 英語の意味と対にして手で書いたもの。元データにインドネシア語は入っていない。
+    '痰': ['dahak', 'riak'],
+    '診': ['memeriksa (medis)', 'mendiagnosis'],
+    '態': ['keadaan', 'sikap', 'bentuk'],
+    '検': ['memeriksa', 'pemeriksaan'],
+    '膿': ['nanah', 'bernanah'],
+    '応': ['menanggapi', 'merespons', 'sesuai'],
+    '肢': ['anggota badan (tangan dan kaki)'],
+    '咳': ['batuk'],
+    '摂': ['mengambil (asupan)', 'mengonsumsi'],
+    '第': ['nomor ke-', 'urutan'],
+    '納': ['menyerahkan', 'menyimpan', 'membayar'],
+    '振': ['mengayunkan', 'menggoyang', 'getaran'],
+    '嗽': ['berkumur'],
+    '離': ['terpisah', 'melepaskan', 'menjauh'],
+    '剥': ['mengelupas', 'terkelupas'],
+    '粘': ['lengket', 'kental'],
+    '搬': ['mengangkut', 'memindahkan'],
+    '顎': ['rahang', 'dagu'],
+    '抗': ['melawan', 'anti-'],
+    '慢': ['lamban', 'kronis', 'sombong'],
+    '濁': ['keruh', 'bunyi bersuara (dakuon)'],
+    '影': ['bayangan', 'pengaruh'],
+    '撮': ['memotret', 'mengambil gambar'],
+    '趾': ['jari kaki'],
+    '腸': ['usus'],
+    '肪': ['lemak'],
+    '陰': ['bayang-bayang', 'negatif', 'tersembunyi'],
+    '痕': ['bekas', 'jejak'],
+    '創': ['luka', 'menciptakan'],
+    '稠': ['kental', 'pekat'],
+    '裂': ['robek', 'terbelah'],
+    '痒': ['gatal'],
+    '掻': ['menggaruk'],
+    '緊': ['tegang', 'mendesak', 'darurat'],
+    '避': ['menghindar', 'mengungsi'],
+    '災': ['bencana', 'musibah'],
+    '滑': ['licin', 'tergelincir', 'lancar'],
+    '証': ['bukti', 'sertifikat'],
+    '腎': ['ginjal'],
+    '漏': ['bocor', 'merembes'],
+    '嫌': ['tidak suka', 'benci', 'suasana hati'],
+    '迫': ['mendesak', 'mendekat'],
+    '甲': ['punggung (tangan/kaki)', 'nilai A', 'cangkang'],
+    '肛': ['anus', 'dubur'],
+    '癒': ['sembuh', 'menyembuhkan'],
+    '頻': ['sering', 'berulang kali'],
+    '隆': ['menonjol', 'tinggi'],
+    '膨': ['menggembung', 'membengkak'],
+    '為': ['untuk', 'melakukan', 'demi'],
+    '的': ['sasaran', '-nya (akhiran sifat)'],
+    '荘': ['vila', 'wisma', 'khidmat'],
+    '臥': ['berbaring', 'telentang'],
+    '潮': ['pasang surut', 'air laut'],
+    '冗': ['berlebihan', 'tidak perlu'],
+    '拒': ['menolak', 'menampik'],
+    '異': ['berbeda', 'aneh', 'lain'],
+    '亀': ['kura-kura', 'penyu'],
+    '継': ['melanjutkan', 'mewarisi'],
+    '促': ['mendorong', 'mendesak'],
+    '頸': ['leher'],
+    '貼': ['menempel', 'menempelkan'],
+    '幹': ['batang pohon', 'bagian utama'],
+    '喀': ['membatukkan keluar', 'mengeluarkan dahak'],
+    '渣': ['ampas', 'residu'],
+    '菌': ['bakteri', 'kuman', 'jamur'],
+    '屈': ['menekuk', 'membungkuk'],
 }
 
 
@@ -73,6 +191,19 @@ def get(url, name):
     return io.open(p, 'rb').read()
 
 
+def radical_of(ch, svg):
+    """KanjiVG の kvg:radical="general" から 部首の字を取り、いまの書き方に直す"""
+    m = (re.search(r'<g[^>]*kvg:element="([^"]+)"[^>]*kvg:radical="general"', svg)
+         or re.search(r'kvg:radical="general"[^>]*kvg:element="([^"]+)"', svg))
+    el = m.group(1) if m else RAD_BY_EYE.get(ch)
+    if not el:
+        return None, '部首の印が KanjiVG に無い（RAD_BY_EYE に足すこと）'
+    if el not in RAD:
+        return None, '部首「%s」が RAD の表に無い（足すこと）' % el
+    c, n, mn = RAD[el]
+    return {'character': c, 'name': n, 'meaning': mn}, None
+
+
 def strokes_of(ch):
     """KanjiVG から 書き順の path を 取り出す。
 
@@ -83,12 +214,19 @@ def strokes_of(ch):
     m = re.search(r'viewBox="([^"]+)"', svg)
     vb = m.group(1) if m else None
     ds = re.findall(r'<path[^>]*\sd="([^"]+)"', svg)
-    return vb, ds
+    return vb, ds, svg
 
 
 def main():
+    global LEVEL
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
     write = '--write' in sys.argv
+    # --level=記録 のように レベルの札を指定する（既定は N3）
+    for a in sys.argv[1:]:
+        if a.startswith('--level='):
+            LEVEL = a.split('=', 1)[1]
+    # --probe は MEAN_ID を見ずに、元データと書き順が取れるかだけ を見る
+    probe = '--probe' in sys.argv
     if not args:
         print(__doc__)
         return 1
@@ -112,7 +250,7 @@ def main():
         if not s:
             bad.append((ch, '元データに無い'))
             continue
-        vb, ds = strokes_of(ch)
+        vb, ds, svg = strokes_of(ch)
         if vb != ks['viewBox']:
             bad.append((ch, 'viewBox が ちがう（%s）' % vb))
             continue
@@ -123,18 +261,24 @@ def main():
             bad.append((ch, '画数が 合わない（元 %s／書き順 %d）'
                         % (s['strokes'], len(ds))))
             continue
+        # 部首は まず Kanji alive、無ければ KanjiVG から
         r = ka.get(ch)
-        if not r or not r.get('rad_name_ja'):
-            bad.append((ch, '部首が 取れない（部首でしぼる欄から 落ちる）'))
-            continue
-        if ch not in MEAN_ID:
+        if r and r.get('rad_name_ja'):
+            radical = {'character': r['radical'], 'name': r['rad_name_ja'],
+                       'meaning': r['rad_meaning']}
+        else:
+            radical, why = radical_of(ch, svg)
+            if not radical:
+                bad.append((ch, why))
+                continue
+        if not probe and ch not in MEAN_ID:
             bad.append((ch, 'インドネシア語の意味が 書いていない'
                             '（tools/add-kanji.py の MEAN_ID に足すこと）'))
             continue
         # 元データの並びを、いまの kanji-data.json の形に そろえる
         ent = {
             'character': ch,
-            'level': 'N3',                 # 総まとめ N3 の巻末リストの字
+            'level': LEVEL,
             'strokes': s.get('strokes'),
             'grade': s.get('grade'),
             'freq': s.get('freq'),
@@ -144,18 +288,19 @@ def main():
             # 部首の字は、元データのまま入れる。private use の字（いとへんなど）も
             # 既にある1,066字が同じものを持っているので、そろえないと
             # 「部首でしぼる」で 別のかたまりに なってしまう。
-            'radical': {'character': r['radical'],
-                        'name': r['rad_name_ja'],
-                        'meaning': r['rad_meaning']},
+            'radical': radical,
             'examples': [],                # 用例は下で語彙データから入れる
-            'meanings_id': MEAN_ID[ch],
+            'meanings_id': MEAN_ID.get(ch, []),
         }
         add.append((ent, ds))
 
     # 用例は、**すでにこのシステムにある語**から入れる。
     # 外から用例を持ってくると、押しても開かない語が出る（2.6-z11 と同じ失敗）。
     vw = json.load(io.open(R + 'vocab-data.json', encoding='utf-8'))['words']
-    LV = {'N5': 0, 'N4': 1, 'N3': 2}
+    # **どのレベルの語からでも 用例を取る。** 最初は N5/N4/N3 だけにしていたが、
+    # 記録の漢字（痰・膿・肢…）は 記録レベルの語にしか出てこないので、
+    # **66字のうち33字が用例0**になった。やさしいレベルを先に、短い語を先に出す。
+    LV = {'N5': 0, 'N4': 1, 'N3': 2, '介護': 3, '現場': 4, '記録': 5, 'N2': 6}
     for ent, _ in add:
         c = ent['character']
         cand = [w for w in vw if c in w['word'] and w['level'] in LV]
@@ -191,6 +336,9 @@ def main():
         print('\n  ⚠ 用例が0の字: ' + '　'.join(noex)
               + '　→ 語彙データに その字を使う語が無い。先に語を足すこと')
 
+    if probe:
+        print('\n（--probe：MEAN_ID は見ていません。書きこみません）')
+        return 0
     if not write:
         print('\n--write を付けると 書きこみます（いまは 何も 変えていません）')
         return 1 if bad else 0
