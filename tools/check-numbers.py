@@ -151,6 +151,28 @@ for what, box in [('漢字', kw['kanji']), ('語彙', kw['vocab']), ('文型', g
     if not ok:
         bad.append('週割り %s：第13〜28週の空 %s ／ 第29・30週の残り %s' % (what, empty, extra))
 
+# ---- 例文の形 ----
+# 例文は **JLPT形式の練習問題を作るのに使う**（語のところを空欄にする）。
+# そのため「その語が 例文の中に ちょうど1回 出る」必要がある。
+# 出てこない（活用形で書いた）と、**その語は問題に出なくなる**。エラーは出ない。
+# 実際に「申し出る／治す／楽しむ／回す」を 活用形のまま書いて 4件出した。
+# 活用形で書くときは ["文", "文中の形", "その読み"] の形にする。
+print('\n■ 例文の形（語が 例文に ちょうど1回 出るか）')
+SENT = L('sentences.json')['sentences']
+ng = []
+for w in L('vocab-data.json')['words']:
+    v = SENT.get(w['word'])
+    if v is None:
+        continue
+    s_, sur = (v, w['word']) if isinstance(v, str) else (v[0], v[1])
+    if s_.count(sur) != 1:
+        ng.append('%s（%d回）：%s' % (w['word'], s_.count(sur), s_))
+print('  例文のある語 %d ／ 形がおかしい %d' % (len(SENT), len(ng)))
+for x in ng[:10]:
+    print('    ', x)
+if ng:
+    bad.append('例文の形：%d語で 語が 例文に ちょうど1回 出ていない' % len(ng))
+
 # ---- 使用説明書に書いた「範囲表の合計」 ----
 # ここは配り方を変えると必ずずれる。実際に 1,862語・267項目のまま古くなっていた。
 print('\n■ 使用説明書の 範囲表の合計')
