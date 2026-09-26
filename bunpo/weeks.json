@@ -224,10 +224,10 @@
      "n3-darake",
      "n3-doori",
      "n3-mama-ni",
-     "n3-ka-no-you-da"
+     "n3-ka-no-you-da",
+     "n3-furi-wo-suru"
     ],
     "20": [
-     "n3-furi-wo-suru",
      "n3-tsutsu-aru",
      "n3-ippou-da",
      "n3-tate",
@@ -235,95 +235,98 @@
      "n3-ta-kiri",
      "n3-ni-taishite",
      "n3-ni-kanshite",
-     "n3-ni-totte"
+     "n3-ni-totte",
+     "n3-ni-okeru",
+     "n3-to-shite"
     ],
     "21": [
-     "n3-ni-okeru",
-     "n3-to-shite",
      "n3-no-moto-de",
      "n3-ni-motozuite",
      "n3-wo-moto-ni",
      "n3-ni-oujite",
      "n3-ni-sotte",
      "n3-ni-shitagatte",
-     "n3-ni-tsurete"
-    ],
-    "22": [
+     "n3-ni-tsurete",
      "n3-ni-tomonatte",
      "n3-wo-tsuujite",
-     "n3-wo-megutte",
+     "n3-wo-megutte"
+    ],
+    "22": [
      "n3-wo-kikkake-ni",
      "n3-wo-chuushin-ni",
      "n3-wo-towazu",
      "n3-mo-kamawazu",
      "n3-wa-tomokaku",
-     "n3-nominarazu"
-    ],
-    "23": [
+     "n3-nominarazu",
      "n3-bakari-de-naku",
      "n3-wa-mochiron",
-     "n3-ni-kuwaete",
+     "n3-ni-kuwaete"
+    ],
+    "23": [
      "n3-ue-ni",
      "n3-bakari-ni",
      "n3-dokoroka",
      "n3-dokoro-dewa-nai",
      "n3-sae",
-     "n3-sae-ba"
-    ],
-    "24": [
+     "n3-sae-ba",
      "n3-sonkeigo-verbs",
      "n3-kenjougo-verbs",
-     "n3-o-ni-naru",
+     "n3-o-ni-naru"
+    ],
+    "24": [
      "n3-o-suru",
      "n3-o-kudasaru",
      "n3-de-gozaimasu",
      "n3-you-nimo-nai",
      "n3-gozonji",
-     "n3-itadaku-request"
-    ],
-    "25": [
+     "n3-itadaku-request",
      "n3-kekkou-desu",
      "n3-you-ni-itashimasu",
-     "n3-osoreirimasu",
+     "n3-osoreirimasu"
+    ],
+    "25": [
      "n3-sashitsukaenakereba",
      "n3-itadaku-vs-kudasaru",
      "n3-mairu",
      "n3-totan-ni",
      "n3-ka-naika-no-uchi-ni",
-     "n3-te-hajimete"
-    ],
-    "26": [
+     "n3-te-hajimete",
      "n3-tekara-denaito",
      "n3-nuki-de",
-     "n3-tabi-ni",
+     "n3-tabi-ni"
+    ],
+    "26": [
      "n3-ni-tsuke",
      "n3-shidai-da",
      "n3-shidai-desu",
      "n3-kara-niwa",
      "n3-ijou-wa",
-     "n3-to-shitara"
-    ],
-    "27": [
+     "n3-to-shitara",
      "n3-kara-suru-to",
      "n3-nara-dewa",
-     "n3-atte-no",
+     "n3-atte-no"
+    ],
+    "27": [
      "n3-to-itta",
      "n3-to-ittemo",
      "n3-to-iu-mono-da",
      "n3-to-iu-mono-dewa-nai",
      "n3-to-iu-yori",
-     "n3-to-ieba"
-    ],
-    "28": [
+     "n3-to-ieba",
      "n3-nante",
      "n3-kurai-nara",
-     "n3-gurai-da",
+     "n3-gurai-da"
+    ],
+    "28": [
      "n3-koto-ka",
      "n3-koto-ni-wa",
      "n3-koto-naku",
      "n3-you-dewa-naika",
      "n3-mai",
-     "n3-temade"
+     "n3-temade",
+     "n3-naosu",
+     "n3-ome-ni-kakaru",
+     "n3-o-go-moushiageru"
     ]
    }
   },
@@ -359,10 +362,10 @@
      "n3-ba-hodo",
      "n3-gimi",
      "n3-gachi",
-     "n3-ppoi"
+     "n3-ppoi",
+     "n3-ge"
     ],
     "3": [
-     "n3-ge",
      "n3-doori",
      "n3-mama-ni",
      "n3-furi-wo-suru",
@@ -373,11 +376,11 @@
      "n3-ni-shitagatte",
      "n3-ni-tsurete",
      "n3-wo-chuushin-ni",
-     "n3-bakari-de-naku"
+     "n3-bakari-de-naku",
+     "n3-wa-mochiron",
+     "n3-ni-kuwaete"
     ],
     "4": [
-     "n3-wa-mochiron",
-     "n3-ni-kuwaete",
      "n3-ue-ni",
      "n3-sonkeigo-verbs",
      "n3-kenjougo-verbs",
@@ -387,12 +390,12 @@
      "n3-de-gozaimasu",
      "n3-gozonji",
      "n3-itadaku-request",
-     "n3-kekkou-desu"
-    ],
-    "5": [
+     "n3-kekkou-desu",
      "n3-you-ni-itashimasu",
      "n3-osoreirimasu",
-     "n3-sashitsukaenakereba",
+     "n3-sashitsukaenakereba"
+    ],
+    "5": [
      "n3-itadaku-vs-kudasaru",
      "n3-mairu",
      "n3-tabi-ni",
@@ -401,7 +404,10 @@
      "n3-to-iu-yori",
      "n3-to-ieba",
      "n3-nante",
-     "n3-gurai-da"
+     "n3-gurai-da",
+     "n3-naosu",
+     "n3-ome-ni-kakaru",
+     "n3-o-go-moushiageru"
     ],
     "6": [
      "n3-ni-hokanaranai",
