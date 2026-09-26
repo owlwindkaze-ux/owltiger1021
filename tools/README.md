@@ -32,6 +32,8 @@
 | `moshi-n3/n3-1.py` | **N3模試 第1回**を作る。問題は この中に 書いてある。走らせると `moshi/n3-1.json` ができる |
 | `moshi-n3/check.py` | **N3模試を点検する**。大問と問数が本番の形か・選択肢の数・正解のかたより・本文の長さ・**教材と同じ本文を使っていないか** |
 | `n3-last2.py` | **100日コースの第13・14週に N3模試と直前確認を入れる**。「公休」の日を1つずつ足し、第14週の日曜のうしろに直前確認を足す。**もとの教材は1問も消さない**（1,226問のまま）。一度かけたら もうかけなくてよい |
+| `add-kanji.py` | **漢字データに 字を足す**。読み・意味・画数は KANJIDIC2、部首は Kanji alive、書き順は KanjiVG から取り、用例は このシステムの語彙データから入れる。`kanji-strokes.json` にも 同時に入れる（忘れると その字だけ書き順が出ない） |
+| `pdf/md2html.py`・`pdf/mkpdf.mjs` | **Markdown → HTML → A4のPDF**。以前 `/tmp` にしか無く、消えて作り直せなくなったので リポジトリに入れた |
 | `check-bunshou.py` | **文章の文法**（`bunpo/bunshou.json`）を点検する。空欄と設問の対応・番号の順・選択肢・正解のかたより・本文の長さを見る |
 | `check-staff-split.py` | **職員用のものが実習生の画面からたどれないかを点検する**。入口メニューからリンクをたどって、答え入りのPDFや職員用ページに行き着かないかを見る。**画面にリンクを足したら必ず通す** |
 | `check-script.py` | **まぎれては いけない文字**を点検する（韓国語・キリル・デーバナーガリーなど、実習生が読む欄の英単語）。**問題を書いたら必ず通す** |
@@ -41,6 +43,31 @@
 | `check-ui.mjs` | 全画面の絞り込み・タブを実ブラウザで動かして点検する |
 | `check-n2.py` | N2の期・問題・模試・レベル・週の負荷を点検する |
 | `balance-answers.py` | 正解の番号のかたよりを直す（選択肢の並べかえだけ。文と正解は変えない） |
+
+## 漢字を 足すとき
+
+    python3 tools/add-kanji.py 暑 授 結           # 何をするかだけ出る
+    python3 tools/add-kanji.py --write 暑 授 結    # 書きこむ
+    python3 tools/split-data.py
+    node tools/hani/alloc.js && node tools/n2plan/alloc.js
+    python3 tools/build-weeks.py
+    python3 tools/check-numbers.py                # 画面の数が ずれるので必ず
+
+**インドネシア語の意味だけは 元データに無い**ので、`add-kanji.py` の `MEAN_ID` に
+手で書きます。書かないと その字だけ 実習生の画面が英語になります。
+
+**`kanji-strokes.json` を忘れないこと。**忘れても エラーは出ず、
+その字だけ 書き順が出ないだけなので 気づけません（道具が両方に入れます）。
+
+## PDFを 作り直すとき
+
+    npm install --no-save --prefix /tmp playwright     # 無ければ
+    python3 tools/pdf/md2html.py SPEC.md /tmp/out/spec.html "仕様書"
+    NODE_PATH=/tmp/node_modules node tools/pdf/mkpdf.mjs \
+        /tmp/out/spec.html /home/user/owltiger1021/仕様書.pdf "owltiger1021 仕様書"
+
+**パスは絶対パスで渡します**（`file://` で開くため）。
+この道具は以前 `/tmp` にしか無く、**そこが消えてPDFを作り直せなくなりました。**
 
 ## 語彙・文型を直したときの順番
 
