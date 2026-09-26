@@ -13,7 +13,7 @@
    ここが 長いあいだ 入っていなかった。入口メニューは いちばん よく開く画面なのに、
    古いまま 表示され続けていた（文言を直しても 変わらない、という形で出た）。 */
 (function () {
-  var PAGE_VER = '2026-09-26c';
+  var PAGE_VER = '2026-09-26d';
   try {
     if (sessionStorage.getItem('vchk-top')) return;
     fetch('version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
