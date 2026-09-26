@@ -44,10 +44,10 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 
 | レベル | 字数 | 備考 |
 |---|---|---|
-| N5 | 79字 | 入門 |
-| N4 | 166字 | 初級 |
-| N3 | 367字 | 中級 |
-| **合計** | **612字** | N3までの累計 |
+| N5 | 102字 | 入門 |
+| N4 | 144字 | 初級 |
+| N3 | 374字 | 中級 |
+| **合計** | **620字** | N3までの累計（ほかに N2 320字・介護 133字。総数1,073字） |
 
 各漢字に：音読み・訓読み／意味（インドネシア語・英語）／画数・学年・使用頻度順位／部首／用例 平均約4語（ふりがな・意味・JLPTレベル付き）／**KanjiVG による実際の筆順データ**
 
@@ -69,9 +69,9 @@ Catatan belajar hanya disimpan di perangkat Anda, tidak dikirim ke server.
 | `tegaki.html` | 手書き漢字検索（読めない字を書いて調べる） |
 | `tegaki-data.json` | 手書き検索のデータ（漢字6,412字・部首287） |
 | `n3.html` | N3合格100日コース（試験日から逆算した週ごとの学習） |
-| `kanji-data.json` | 漢字1,066字の**まとめ役**（読み・意味・用例・部首など）。**編集するのはこのファイル** |
+| `kanji-data.json` | 漢字1,073字の**まとめ役**（読み・意味・用例・部首など）。**編集するのはこのファイル** |
 | `kanji.json` ＋ `kanji-n5/n4/n3/kaigo.json` | 上をレベルごとに分けたもの。画面はこちらを読む（`tools/split-data.py` が作ります） |
-| `kanji-strokes.json` | 書き順データ（KanjiVG のパス、1,066字ぶん） |
+| `kanji-strokes.json` | 書き順データ（KanjiVG のパス、1,073字ぶん） |
 | `vocab-data.json` | 語彙6,272語の**まとめ役**（JLPT語彙＋介護・看護201語＋現場125語）。**編集するのはこのファイル** |
 | `vocab.json` ＋ `vocab-n5/n4/n3/kaigo/genba/kiroku.json` | 上をレベルごとに分けたもの。画面はこちらを読む |
 | `tools/split-data.py` | まとめ役のファイルを、レベルごとに分け直すスクリプト |
