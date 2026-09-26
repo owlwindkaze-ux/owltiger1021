@@ -5,9 +5,10 @@
   "N4",
   "N3",
   "N2",
-  "介護"
+  "介護",
+  "記録"
  ],
- "count": 1073,
+ "count": 1139,
  "sources": [
   {
    "name": "KANJIDIC2 / kanji-data",
@@ -81,15 +82,21 @@
    "extra_count": {
     "N2": 46
    }
+  },
+  {
+   "file": "kanji-kiroku.json",
+   "level": "記録",
+   "count": 66
   }
  ],
- "total": 1073,
+ "total": 1139,
  "level_totals": {
   "N5": 102,
   "N4": 144,
   "N3": 374,
   "N2": 367,
-  "介護": 133
+  "介護": 133,
+  "記録": 66
  },
  "app_version": "2026-09-14b",
  "note": "レベルごとのファイルに分けてあり、使うレベルから順に読み込みます。 中身を直すときは kanji-data.json を直して tools/split-data.py を走らせてください。"

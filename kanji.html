@@ -231,6 +231,7 @@ footer a{color:var(--blue)}
         <button class="chip" data-lv="N3">N3</button>
         <button class="chip" data-lv="N2">N2</button>
         <button class="chip" data-lv="介護">介護 / Kaigo</button>
+        <button class="chip" data-lv="記録">記録 / Rekaman</button>
       </div>
       <select class="sel" id="sort">
         <option value="level">Urut: level (mudah dulu) ／ レベル順</option>
@@ -475,6 +476,7 @@ footer a{color:var(--blue)}
         <button class="chip" data-lv="N3">N3</button>
         <button class="chip" data-lv="N2">N2</button>
         <button class="chip" data-lv="介護">介護 / Kaigo</button>
+        <button class="chip" data-lv="記録">記録 / Rekaman</button>
       </div>
       <select class="sel" id="sSort">
         <option value="level">Urut: level ／ レベル順</option>
@@ -520,7 +522,7 @@ footer a{color:var(--blue)}
     contoh kata・radikal：<a href="https://github.com/kanjialive/kanji-data-media" target="_blank" rel="noopener">Kanji alive</a>（University of Chicago, CC BY 4.0）／
     urutan coretan：<a href="http://kanjivg.tagaini.net" target="_blank" rel="noopener">KanjiVG</a>（Ulrich Apel, CC BY-SA 3.0）／
     level kosakata：<a href="https://github.com/jamsinclair/open-anki-jlpt-decks" target="_blank" rel="noopener">open-anki-jlpt-decks</a>（tanos.co.uk, CC BY 4.0）<br>
-    ※ JLPTは2010年以降、公式の漢字リストを公表していません。本ツールのレベル区分は上記データセットの分類（累計620字）に基づきます。ただし、体の部位や毎日使う基本の字23字（手・目・口・足・耳・飲・買・売・立・多・少・安・新・古・空・会・社・田・町・道・週・曜・早）は、はじめに学ぶほうがよいと判断し、本ツールでN5に移しています。現在の内訳は N5 102字・N4 144字・N3 374字・N2 367字・介護 133字 です（N2と介護で重なる47字は、どちらで絞っても出ます。字の実体は1,073字）。<br>
+    ※ JLPTは2010年以降、公式の漢字リストを公表していません。本ツールのレベル区分は上記データセットの分類（累計620字）に基づきます。ただし、体の部位や毎日使う基本の字23字（手・目・口・足・耳・飲・買・売・立・多・少・安・新・古・空・会・社・田・町・道・週・曜・早）は、はじめに学ぶほうがよいと判断し、本ツールでN5に移しています。現在の内訳は N5 102字・N4 144字・N3 374字・N2 367字・介護 133字・記録 66字 です（N2と介護で重なる47字は、どちらで絞っても出ます。字の実体は1,139字）。<b>「記録」は 申し送りと記録で出る字</b>で、JLPTには出ません。<br>
     ※ Terjemahan Bahasa Indonesia dibuat dengan bantuan AI dari arti bahasa Inggris ／ インドネシア語訳は英語原文からAIで作成しています。<br>
     ※ Catatan belajar hanya tersimpan di perangkat Anda ／ 学習記録は端末内にのみ保存されます。<br>
     &copy; 2026 西風梟風 — Program aplikasi ini dan terjemahan Bahasa Indonesianya dibuat sendiri; dilarang menyalin tanpa izin.
@@ -661,7 +663,7 @@ document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key =
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-09-26b';   // 更新日（版）
+const VERSION = '2026-09-26c';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -751,7 +753,7 @@ function loadVocab() { return ensureAllVocab(); }
 
 /** 見出しの件数は目次から出す。データを全部読まなくても本当の合計が出せる */
 function headStat() {
-  const parts = ['N5', 'N4', 'N3', 'N2', '介護'].filter(lv => KCOUNT[lv])
+  const parts = ['N5', 'N4', 'N3', 'N2', '介護', '記録'].filter(lv => KCOUNT[lv])
     .map(lv => `${lv} ${KCOUNT[lv]}`).join('・');
   $('#hdStat').textContent = VTOTAL
     ? `${KTOTAL} kanji ・ ${VTOTAL} kosakata`
@@ -926,11 +928,14 @@ function filterKanji(q, lv, mk) {
   return hit;
 }
 function sortKanji(arr, mode) {
-  const a = [...arr], o = { N5: 0, N4: 1, N3: 2, '介護': 3 }, f = x => x.freq || 9999;
+  /* レベル順の並び。**N2 が抜けていて**、N2どうしの比較が NaN になっていた
+     （並びが決まらない）。記録を足すときに気づいたので、全レベルを入れた。 */
+  const a = [...arr], o = { N5: 0, N4: 1, N3: 2, N2: 3, '介護': 4, '記録': 5 },
+        ov = x => (o[x.level] === undefined ? 9 : o[x.level]), f = x => x.freq || 9999;
   if (mode === 'stroke-asc') a.sort((x, y) => x.strokes - y.strokes || f(x) - f(y));
   else if (mode === 'stroke-desc') a.sort((x, y) => y.strokes - x.strokes || f(x) - f(y));
   else if (mode === 'freq') a.sort((x, y) => f(x) - f(y));
-  else a.sort((x, y) => o[x.level] - o[y.level] || f(x) - f(y));
+  else a.sort((x, y) => ov(x) - ov(y) || f(x) - f(y));
   a.sort((x, y) => (y._s || 0) - (x._s || 0));             // よく当たった順を優先
   return a;
 }
@@ -1533,8 +1538,8 @@ function buildSyn() {
 }
 
 /* ---------- 漢字1字の読み：熟語の中で出すための補助 ---------- */
-const LVRANK = { 'N5': 1, 'N4': 2, 'N3': 3, '介護': 4 };
-const kRank = ch => LVRANK[(BYCH[ch] || {}).level] || 5;   // 未収録＝いちばん上とみなす
+const LVRANK = { 'N5': 1, 'N4': 2, 'N3': 3, '介護': 4, '記録': 5, 'N2': 6 };
+const kRank = ch => LVRANK[(BYCH[ch] || {}).level] || 9;   // 未収録＝いちばん後ろ
 const rdList = k => [...new Set((k.on || []).concat(k.kun || [])
   .map(r => r.split('.')[0].replace(/-/g, '')).filter(Boolean))];
 /** 2字熟語のなかで、その漢字が読む部分を切り出す（確実に分かるときだけ返す） */
@@ -1811,7 +1816,7 @@ function refreshStats() {
   };
   $('#progWrap').innerHTML =
     '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted)">KANJI ／ 漢字</div>' +
-    ['N5', 'N4', 'N3', 'N2', '介護'].filter(lv => DATA.some(k => hasLv(k, lv)))
+    ['N5', 'N4', 'N3', 'N2', '介護', '記録'].filter(lv => DATA.some(k => hasLv(k, lv)))
       .map(lv => bar(lv, DATA.filter(k => hasLv(k, lv)), progress, x => x.character)).join('') +
     (VOCAB.length ? '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted);margin-top:.5rem">KOSAKATA ／ 語彙</div>' +
       ['N5', 'N4', 'N3', 'N2', '介護', '記録', '現場', '施設', '追加'].filter(lv => VOCAB.some(w => w.level === lv)).map(lv => bar(lv, VOCAB.filter(w => w.level === lv), vprogress, x => x.word)).join('') : '');
