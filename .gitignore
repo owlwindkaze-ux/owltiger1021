@@ -1,0 +1,5 @@
+
+# 市販の本のリストは リポジトリに入れない（公開リポジトリのため）。
+# ドライブから落として /tmp/ref に置いて使う（tools/reference/check-ref.py）。
+tools/reference/soumatome-*
+tools/reference/nihongonomori-*
