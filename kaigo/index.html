@@ -9,7 +9,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-09-26b';
+  var PAGE_VER = '2026-09-26c';
   try {
     if (sessionStorage.getItem('vchk-kaigo')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -275,7 +275,7 @@ a{color:var(--blue)}
 
 </div>
 <footer>
-  介護の日本語 紙の教材 ／ 版 <span id="ver">2026-09-26b</span>
+  介護の日本語 紙の教材 ／ 版 <span id="ver">2026-09-26c</span>
   底本：『介護の日本語』『介護の日本語 指導者用手引き』（公益社団法人日本介護福祉士会）
 </footer>
 </div>
