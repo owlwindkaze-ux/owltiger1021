@@ -13,7 +13,7 @@
    ここが 長いあいだ 入っていなかった。入口メニューは いちばん よく開く画面なのに、
    古いまま 表示され続けていた（文言を直しても 変わらない、という形で出た）。 */
 (function () {
-  var PAGE_VER = '2026-09-26b';
+  var PAGE_VER = '2026-09-26c';
   try {
     if (sessionStorage.getItem('vchk-top')) return;
     fetch('version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -190,7 +190,7 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
       </div>
       <div class="pg" id="pgK">　</div>
       <div class="bar"><i id="barK" style="width:0"></i></div>
-      <p class="desc" id="descK">漢字1,073字と言葉6,311語。書き順・カード・JLPT形式の練習問題。</p>
+      <p class="desc" id="descK">漢字1,139字と言葉6,320語。書き順・カード・JLPT形式の練習問題。</p>
       <div class="sub-menu">
         <a class="item" href="kanji.html#list"><span class="em">📖</span>
           <span class="tx"><span class="n">漢字一覧</span><span class="r">Kanji ／ 読み・意味・部首を見る</span></span><span class="ar">→</span></a>
@@ -398,7 +398,7 @@ let VERSION = '2026-09-18c';
 /* 字数・語数は目次から取る。N2を足していくと数が増えるので、
    ここに書き込んでおくと古い数のままになってしまう。
    目次が読めなかったときのために、いまの数を控えにしておく。 */
-let KTOTAL = 1073, VTOTAL = 6311;
+let KTOTAL = 1139, VTOTAL = 6320;
 const GTOTAL = 461, DTOTAL = 80, CTOTAL = 143;
 Promise.all([
   fetch('kanji.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => null),
