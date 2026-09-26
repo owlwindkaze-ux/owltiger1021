@@ -13,7 +13,7 @@
    ここが 長いあいだ 入っていなかった。入口メニューは いちばん よく開く画面なのに、
    古いまま 表示され続けていた（文言を直しても 変わらない、という形で出た）。 */
 (function () {
-  var PAGE_VER = '2026-09-26d';
+  var PAGE_VER = '2026-09-26e';
   try {
     if (sessionStorage.getItem('vchk-top')) return;
     fetch('version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -216,7 +216,7 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
       </div>
       <div class="pg" id="pgG">　</div>
       <div class="bar"><i id="barG" style="width:0"></i></div>
-      <p class="desc">「〜てもいいです」など話すときの文の形。461文型・現場の例文つき。</p>
+      <p class="desc">「〜てもいいです」など話すときの文の形。464文型・現場の例文つき。</p>
       <div class="sub-menu">
         <a class="item" href="bunpo/index.html#list"><span class="em">📘</span>
           <span class="tx"><span class="n">文型一覧</span><span class="r">Daftar pola ／ 意味・作り方・例文</span></span><span class="ar">→</span></a>
@@ -399,7 +399,7 @@ let VERSION = '2026-09-18c';
    ここに書き込んでおくと古い数のままになってしまう。
    目次が読めなかったときのために、いまの数を控えにしておく。 */
 let KTOTAL = 1139, VTOTAL = 6320;
-const GTOTAL = 461, DTOTAL = 80, CTOTAL = 143;
+const GTOTAL = 464, DTOTAL = 80, CTOTAL = 143;
 Promise.all([
   fetch('kanji.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => null),
   fetch('vocab.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => null)
