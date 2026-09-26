@@ -4,11 +4,12 @@
 
 置いてあるリスト（`tools/reference/`）
 
-  soumatome-n3-kanji.csv          『日本語総まとめ N3』巻末の漢字リスト
-                                  （画数／漢字／熟語・言葉。1,292件）
-  nihongonomori-n3-300.txt        『日本語の森』N3重要語彙300（284語）
   drive-n3kanji-600kanzen.txt     ドライブ「N3漢字600字 完全版」（実体150字）
   drive-n3kanji-hinshutsu600.txt  ドライブ「N3頻出漢字600字 詳細リスト」（実体477字）
+
+  ※ 上の2つは このシステムの持ち主が AI に作らせたものなので 置いてあります。
+    **市販の本のリスト（日本語総まとめ・日本語の森）は 置きません。**
+    使うときは ドライブから落として `/tmp/ref/` に置いてください。
 
 **「600字」などの数は あてになりません。**中で同じ行が何度も繰り返されていたり、
 N3を超える字（胃・腸・肺・臓・腐・奪）が混ざっていたりします。
@@ -28,12 +29,18 @@ N3を超える字（胃・腸・肺・臓・腐・奪）が混ざっていたり
 """
 import io
 import json
+import os
 import re
 import sys
 import unicodedata
 
 R = '/home/user/owltiger1021/'
-REF = R + 'tools/reference/soumatome-n3-kanji.csv'
+# **市販の本のリストは リポジトリに置きません。**
+# このリポジトリは公開なので、本の巻末リストをそのまま入れると
+# 出版社の著作物を publish することになります（一度やってしまい、消しました）。
+# リストは Google ドライブから取り、**この端末の中だけ**に置いて使います。
+REFDIR = os.environ.get('OWLREF', '/tmp/ref')
+REF = os.path.join(REFDIR, 'soumatome-n3-kanji.csv')
 
 # リストの書き方をそろえる。
 #   〇〇化・～冊・1対2 … 語形を示す記号。外して見る
@@ -95,6 +102,12 @@ def skeleton(w):
 
 
 def load_ref():
+    if not os.path.exists(REF):
+        print('× リストがありません: %s' % REF)
+        print('  Google ドライブ ＞ 日本語の勉強 ＞ 11_語彙・漢字 の')
+        print('  「漢字　日本語総まとめ　巻末リスト」を CSV で落として ここに置いてください。')
+        print('  （置き場所は OWLREF で変えられます）')
+        raise SystemExit(1)
     ls = [l.rstrip('\n') for l in io.open(REF, encoding='utf-8') if l.strip()]
     cur, rows = None, []
     for l in ls[1:]:                                      # 1行目は見出し
