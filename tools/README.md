@@ -15,6 +15,7 @@
 | `n2plan/alloc.js` | N2コースの週割りを計算する → `/tmp/n2plan/plan.json` |
 | `n2plan/gen.js` | N2の `週ごとの学習範囲表` の HTML を作る |
 | `n2plan/howto.js` | `N2の勉強のしかた` の HTML を作る |
+| `n2plan/paper.py` | **紙の月別パック（ドライブのN2教材4冊・14単元）を週に割り当てる**。単元は システムの文型順に 並べ替え、前提の文型を習い終わった次の週以降に置く。`n2/weeks.json` の `paper` を作り直す（SPEC 2.6-z27） |
 | `hani/ruby.js` | 範囲表・テスト用のふりがな辞書 |
 | `howto/` | 実習生向けの使い方説明書（`howto/README.md` を見てください） |
 | `hani/n4hantei*.js` | **N4到達度判定テスト**（第1週・66問）。`-data.js` が問題、`n4hantei.js` が冊子、`-choukai.js` が読み上げ画面への注入、`-check.py` が範囲の点検 |

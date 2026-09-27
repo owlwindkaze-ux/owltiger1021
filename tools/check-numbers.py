@@ -192,6 +192,31 @@ else:
         if not ok:
             bad.append('使用説明書 範囲表の%s：説明書 %d ／ データ %d' % (what, g, want))
 
+# ---- 文型の目次（bunpo/grammar.json）の数 ----
+# level_totals と total は 画面の分母に そのまま使われる。項目を足したのに
+# ここを直さないと、学習状況が いつまでも 古い分母で出る。
+# 実際に total が 461（本当は 464）・N4 が 117（本当は 121）のまま 残っていた。
+print('\n■ 文型の目次（bunpo/grammar.json）の数')
+gi = L('bunpo/grammar.json')
+real, perlv = 0, {}
+for f in gi['files']:
+    for it in L('bunpo/' + f['file'])['grammar']:
+        real += 1
+        for lv in {it['level']} | set(it.get('also') or []):
+            perlv[lv] = perlv.get(lv, 0) + 1
+    if f['count'] != len(L('bunpo/' + f['file'])['grammar']):
+        bad.append('文型 %s：目次 %d ／ データ %d'
+                   % (f['file'], f['count'], len(L('bunpo/' + f['file'])['grammar'])))
+print('  total       目次 %d ／ データ %d  %s'
+      % (gi['total'], real, 'OK' if gi['total'] == real else '←ちがう'))
+if gi['total'] != real:
+    bad.append('文型 total：目次 %d ／ データ %d' % (gi['total'], real))
+for lv, n in sorted(perlv.items()):
+    g = gi['level_totals'].get(lv)
+    print('  %-4s        目次 %s ／ データ %d  %s' % (lv, g, n, 'OK' if g == n else '←ちがう'))
+    if g != n:
+        bad.append('文型 level_totals %s：目次 %s ／ データ %d' % (lv, g, n))
+
 
 print('\n' + '=' * 62)
 print('合っていないところ:', len(bad))

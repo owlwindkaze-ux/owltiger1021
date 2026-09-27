@@ -86,6 +86,7 @@ ${ID('Ada tiga tab di atas. Yang dilihat sehari-hari hanya yang paling kiri.')}<
 <tr><td><b>${R('今週 やること')}</b></td><td>${R('その週の 分。<b>月〜金の マス</b>が ある行は、平日 1日ずつ おします。')}${ID('Baris dengan kotak Sen–Jum dikerjakan tiap hari kerja.')}</td></tr>
 <tr><td>${R('今週 ひらくもの')}</td><td>${R('おすと、<b>その週の 分だけ</b>が ひらきます。')}${ID('Saat ditekan, yang terbuka hanya bagian minggu itu.')}</td></tr>
 <tr><td>${R('今週の 一覧')}</td><td>${R('たたんで あります。おすと、その週の 漢字・語彙・文型が ぜんぶ 見られます。')}${ID('Dilipat. Tekan untuk melihat seluruh kanji, kosakata, dan pola minggu itu.')}</td></tr>
+<tr><td><b>${R('紙の パック')}</b></td><td>${R('紙の 冊子を やる週だけ 出ます。<b>冊子の 名前（9月後半・10月…）は やる順番では ありません。</b>この画面が 出した 単元だけを やります。')}${ID('Muncul hanya pada minggu yang memakai buku cetak. Nama buku bukan urutan; kerjakan unit yang ditampilkan layar ini saja.')}</td></tr>
 </table>
 
 <div class="tip">
