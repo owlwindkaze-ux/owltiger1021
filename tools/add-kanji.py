@@ -87,6 +87,7 @@ RAD = {
     '足': ('⻊', 'あしへん', 'foot, leg'),
     '禾': ('⽲', 'のぎへん', 'grain'),
     '衣': ('⾐', 'ころも', 'clothing'),
+    '衤': ('⻂', 'ころもへん', 'clothing'),
     '女': ('\ue732', 'おんなへん', 'woman'),
     '白': ('⽩', 'しろ', 'white'),
     '臣': ('⾂', 'しん', 'retainer, minister'),
@@ -101,7 +102,10 @@ RAD = {
     '亀': ('亀', 'かめ', 'turtle'),
 }
 # KanjiVG に kvg:radical="general" の印が無い字。手で入れる。
-RAD_BY_EYE = {'応': '心', '災': '火', '甲': '田', '為': '灬', '幹': '干'}
+# 値は RAD の見出し。**部首の位置がちがうときは、組（字・名・意味）で直接書く。**
+# 例：唇 は 口 が **下** にあるので「くち」。「くちへん」（味・呼・吸）とは別。
+RAD_BY_EYE = {'応': '心', '災': '火', '甲': '田', '為': '灬', '幹': '干',
+              '唇': ('⼝', 'くち', 'mouth')}
 
 MEAN_ID = {
     '暑': ['panas (udara)', 'terik', 'panasnya musim panas'],
@@ -111,6 +115,12 @@ MEAN_ID = {
     '無': ['tidak ada', 'nihil', 'tanpa'],
     '価': ['nilai', 'harga'],
     '独': ['sendiri', 'seorang diri', 'dengan sendirinya'],
+    # ---- 声かけの漢字（2026-09-27）----
+    '尻': ['pantat', 'bokong'],
+    '舌': ['lidah'],
+    '唇': ['bibir'],
+    '袖': ['lengan baju'],
+    '締': ['mengencangkan', 'mengikat', 'menutup'],
     # ---- 記録・申し送りの漢字（2026-09-26c）----
     # 英語の意味と対にして手で書いたもの。元データにインドネシア語は入っていない。
     '痰': ['dahak', 'riak'],
@@ -196,6 +206,8 @@ def radical_of(ch, svg):
     m = (re.search(r'<g[^>]*kvg:element="([^"]+)"[^>]*kvg:radical="general"', svg)
          or re.search(r'kvg:radical="general"[^>]*kvg:element="([^"]+)"', svg))
     el = m.group(1) if m else RAD_BY_EYE.get(ch)
+    if isinstance(el, tuple):                     # 位置がちがうので 直接書いた分
+        return {'character': el[0], 'name': el[1], 'meaning': el[2]}, None
     if not el:
         return None, '部首の印が KanjiVG に無い（RAD_BY_EYE に足すこと）'
     if el not in RAD:
