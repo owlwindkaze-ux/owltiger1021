@@ -419,10 +419,10 @@
      "n3-nai-koto-niwa",
      "n3-zu-niwa-irarenai",
      "n3-nai-dewa-irarenai",
-     "n3-tewa-irarenai"
+     "n3-tewa-irarenai",
+     "n3-mono-dewa-nai"
     ],
     "7": [
-     "n3-mono-dewa-nai",
      "n3-mono-ga-aru",
      "n3-mono-nara",
      "n3-nimo-kakawarazu",
@@ -431,11 +431,11 @@
      "n3-towa-ie",
      "n3-nagara-mo",
      "n3-tsutsu-mo",
-     "n3-to-shitemo"
+     "n3-to-shitemo",
+     "n3-ni-shitemo",
+     "n3-ni-shitewa"
     ],
     "8": [
-     "n3-ni-shitemo",
-     "n3-ni-shitewa",
      "n3-ni-shiro-ni-shiro",
      "n3-de-are",
      "n3-you-to-mo",
@@ -443,11 +443,11 @@
      "n3-yue-ni",
      "n3-mono-dakara",
      "n3-dakara-koso",
-     "n3-koto-kara"
+     "n3-koto-kara",
+     "n3-amari-ni",
+     "n3-ageku-ni"
     ],
     "9": [
-     "n3-amari-ni",
-     "n3-ageku-ni",
      "n3-sue-ni",
      "n3-wari-niwa",
      "n3-dake-atte",
@@ -455,11 +455,11 @@
      "n3-hodo-wa-nai",
      "n3-nari-ni",
      "n3-mamire",
-     "n3-darake"
+     "n3-darake",
+     "n3-ka-no-you-da",
+     "n3-tsutsu-aru"
     ],
     "10": [
-     "n3-ka-no-you-da",
-     "n3-tsutsu-aru",
      "n3-ippou-da",
      "n3-tate",
      "n3-ta-kiri",
@@ -467,11 +467,11 @@
      "n3-ni-okeru",
      "n3-no-moto-de",
      "n3-ni-motozuite",
-     "n3-wo-moto-ni"
+     "n3-wo-moto-ni",
+     "n3-ni-oujite",
+     "n3-ni-sotte"
     ],
     "11": [
-     "n3-ni-oujite",
-     "n3-ni-sotte",
      "n3-ni-tomonatte",
      "n3-wo-tsuujite",
      "n3-wo-megutte",
@@ -479,11 +479,11 @@
      "n3-wo-towazu",
      "n3-mo-kamawazu",
      "n3-wa-tomokaku",
-     "n3-nominarazu"
+     "n3-nominarazu",
+     "n3-bakari-ni",
+     "n3-dokoroka"
     ],
     "12": [
-     "n3-bakari-ni",
-     "n3-dokoroka",
      "n3-dokoro-dewa-nai",
      "n3-sae",
      "n3-sae-ba",
@@ -491,11 +491,11 @@
      "n3-totan-ni",
      "n3-ka-naika-no-uchi-ni",
      "n3-te-hajimete",
-     "n3-tekara-denaito"
+     "n3-tekara-denaito",
+     "n3-nuki-de",
+     "n3-ni-tsuke"
     ],
     "13": [
-     "n3-nuki-de",
-     "n3-ni-tsuke",
      "n3-shidai-da",
      "n3-shidai-desu",
      "n3-kara-niwa",
@@ -503,11 +503,11 @@
      "n3-kara-suru-to",
      "n3-nara-dewa",
      "n3-atte-no",
-     "n3-to-itta"
+     "n3-to-itta",
+     "n3-to-iu-mono-da",
+     "n3-to-iu-mono-dewa-nai"
     ],
     "14": [
-     "n3-to-iu-mono-da",
-     "n3-to-iu-mono-dewa-nai",
      "n3-kurai-nara",
      "n3-koto-ka",
      "n3-koto-ni-wa",
@@ -515,22 +515,23 @@
      "n3-you-dewa-naika",
      "n3-mai",
      "n3-temade",
-     "n2-sai-ni"
+     "n2-sai-ni",
+     "n2-ni-saishite",
+     "n2-ni-sakidatte"
     ],
     "15": [
-     "n2-ni-saishite",
-     "n2-ni-sakidatte",
      "n2-ka-to-omou-to",
      "n2-ue-de",
      "n2-ippou-de",
      "n2-ni-hanshite",
+     "n2-hanmen",
      "n2-nai-uchi-ni",
      "n2-saichuu-ni",
      "n2-tsuide-ni",
-     "n2-te-irai"
+     "n2-te-irai",
+     "n2-tekara-to-iu-mono"
     ],
     "16": [
-     "n2-tekara-to-iu-mono",
      "n2-tokoro-ni",
      "n2-tokoro-datta",
      "n2-ni-atatte",
@@ -539,16 +540,17 @@
      "n2-shidai-ni",
      "n2-te-tamaranai",
      "n2-te-naranai",
-     "n2-te-shikata-ga-nai"
+     "n2-te-shikata-ga-nai",
+     "n2-zu-ni-sumu"
     ],
     "17": [
-     "n2-zu-ni-sumu",
      "n2-shika-nai",
      "n2-hoka-nai",
      "n2-igai",
      "n2-ni-kagiri",
      "n2-ni-kagirazu",
      "n2-nomi",
+     "n2-ni-watatte",
      "n2-ni-suginai",
      "n2-ni-kimatteiru",
      "n2-towa-kagiranai"
