@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-09-27c';
+  var PAGE_VER = '2026-09-27d';
   var KEY = 'reloaded-for-n2';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -217,6 +217,10 @@ button.act.ghost{background:#fff;color:var(--acc)}
       <div class="wkprog" id="wkProg"></div>
       <ul class="chk" id="wkList"></ul>
       <p class="wknote" id="wkNote"></p>
+    </div>
+    <div class="card" id="wkPaper" style="display:none">
+      <h2 class="sec" style="margin-top:0">紙のパック<span class="s2">Buku latihan cetak</span></h2>
+      <div id="wkPaperBody"></div>
     </div>
     <div class="card">
       <h2 class="sec" style="margin-top:0">今週ひらくもの<span class="s2">Dipakai minggu ini</span></h2>
@@ -426,6 +430,13 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
                        n: mi || '覚えた／要復習の印を必ず押す'});
     if (c.g) out.push({k:'g', lv:lv, dw:5, t:'文型 '+lv+'　平日 1日'+Math.round(c.g/5)+'項目（週'+c.g+'項目）',
                        n: mi || '例文3つを声に出して読む'});
+    /* 紙の月別パック。ドライブの4冊は 月のラベルどおりには 使わない。
+       文型を習い終わった順に 並べ替えて、この画面が その週の単元を名指しする。 */
+    var pp = W.paper && W.paper.weeks[String(w)];
+    if (pp && pp.unit) out.push({k:'', t:'📄 紙のパック 第'+pp.unit+'単元「'+pp.title+'」（'+pp.pack+'の冊子）',
+                                 n:'A〜Fの6日で 20問。' + W.paper.unitdays});
+    if (pp && pp.check) out.push({k:'', t:'📄 紙のパック 月末確認（'+pp.check+'の冊子）初見10問',
+                                 n:'解答25分＋聴解5分。辞書も 前の問題も 見ない'});
     (W.task[String(w)] || []).forEach(function(t){
       /* 行のあたまで 決める。「模試で解いた文章の二周目」は 読解の行、
          「区分ごとの点（…読解…）を記録する」は どこへも つながない。 */
@@ -451,6 +462,33 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
     w:{em:'📕', href:'../fukushu/',        n:'まちがえたところ', r:'Yang masih salah'}
   };
 
+  /* 紙のパックの箱。その週に単元があるときだけ出す。
+     二重運用をやめるため、**この画面が本線**で、紙は演習だと はっきり書く。 */
+  function paperBox(w){
+    var box = document.getElementById('wkPaper'), P = W.paper;
+    if (!box) return;
+    var p = P && P.weeks[String(w)];
+    if (!p){ box.style.display = 'none'; return; }
+    box.style.display = '';
+    var h = '';
+    if (p.unit){
+      h += '<p style="margin:0 0 .5rem;font-weight:700">第'+p.unit+'単元「'+p.title+'」</p>'
+         + '<p class="hint2" style="margin:.2rem 0">ねらい：'+p.aim+'</p>'
+         + '<p class="hint2" style="margin:.2rem 0">'+P.unitdays+'</p>'
+         + '<ul style="margin:.5rem 0 0;padding-left:1.1rem;line-height:1.75">'
+         + P.how.map(function(x){ return '<li>'+x+'</li>'; }).join('') + '</ul>';
+    } else {
+      h += '<p style="margin:0 0 .5rem;font-weight:700">月末確認（初見10問）</p>'
+         + '<p class="hint2" style="margin:.2rem 0">'+p.check+'の冊子の いちばん後ろにあります。'
+         + '解答25分＋聴解5分。終わったら 根拠を言って もう一度。</p>';
+    }
+    h += '<p class="hint2" style="margin:.6rem 0 0">冊子の置き場所：'+P.folder+'</p>'
+       + '<p class="hint2" style="margin:.2rem 0 0;color:#4338ca;font-weight:700">'
+       + '冊子の「9月後半・10月…」という名前は、やる順番では ありません。'
+       + 'この画面が 出した単元だけを やってください。</p>';
+    document.getElementById('wkPaperBody').innerHTML = h;
+  }
+
   function render(){
     var w = weekNo(), box = document.getElementById('wkTtl');
     if (!box) return;
@@ -469,6 +507,7 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
     document.getElementById('wkTtl').textContent = '第'+w+'週　第'+ph.no+'期　'+ph.name;
     document.getElementById('wkSub').textContent = md(mo)+'（月）〜 '+md(su)+'（日）';
     document.getElementById('wkNote').textContent = 'この期のねらい：' + ph.aim;
+    paperBox(w);
 
     var KEY = KEYP + w, done = {};
     try { done = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){}

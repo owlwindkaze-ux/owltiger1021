@@ -1,6 +1,6 @@
 {
  "level": "N2",
- "count": 81,
+ "count": 83,
  "grammar": [
   {
    "id": "n2-sai-ni",
@@ -529,6 +529,81 @@
      "answer": "指示に反して、一人で立ち上がられた。",
      "hint_id": "「名詞＋に反して」を先に置き、反対の結果を続ける。",
      "hint_en": "Put 「noun＋に反して」 first, then the contrary result."
+    }
+   ]
+  },
+  {
+   "id": "n2-hanmen",
+   "pattern": "〜反面",
+   "level": "N2",
+   "category": "逆接・対比",
+   "form": "動詞・形容詞の普通の形／名詞＋である ＋ 反面",
+   "meaning_id": "di sisi lain ~; sebaliknya ~",
+   "meaning_en": "on the other hand ~; while ~",
+   "note_id": "Menyebut dua sifat yang berlawanan pada satu hal yang sama. Berbeda dari「一方で」, dua sisi itu harus berlawanan. Sering dipakai saat menimbang kelebihan dan kekurangan.",
+   "note_en": "States two opposing sides of one and the same thing. Unlike 「一方で」, the two sides must be in contrast. Often used when weighing a benefit against a drawback.",
+   "note_ja": "同じ一つのものに、反対の面が二つあると言う。「一方で」は並べるだけでもよいが、「反面」は反対でなければならない。よい点と困る点を一緒に言うときに使う。",
+   "examples": [
+    {
+     "ja": "この車いすは軽い反面、段差に弱い。",
+     "reading": "このくるまいすはかるいはんめん、だんさによわい。",
+     "id": "Kursi roda ini ringan, tetapi di sisi lain lemah terhadap perbedaan ketinggian.",
+     "en": "This wheelchair is light, but on the other hand it handles steps poorly.",
+     "scene": "移動"
+    },
+    {
+     "ja": "この方法は早い反面、間違いが増えやすい。",
+     "reading": "このほうほうははやいはんめん、まちがいがふえやすい。",
+     "id": "Cara ini cepat, tetapi di sisi lain kesalahan mudah bertambah.",
+     "en": "This method is fast, but on the other hand mistakes increase easily.",
+     "scene": "申し送り"
+    },
+    {
+     "ja": "口数が少ない反面、痛みははっきり教えてくださる。",
+     "reading": "くちかずがすくないはんめん、いたみははっきりおしえてくださる。",
+     "id": "Beliau sedikit bicara, tetapi di sisi lain jelas memberitahukan rasa nyerinya.",
+     "en": "He speaks little, but on the other hand he tells us clearly when he is in pain.",
+     "scene": "観察"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "この車いすは軽い＿＿＿、段差に弱い。",
+     "choices": [
+      "反面",
+      "ために",
+      "とおり",
+      "ばかり"
+     ],
+     "answer": 0,
+     "explain_id": "Satu benda dengan dua sisi berlawanan →「反面」.",
+     "explain_en": "One thing with two opposing sides →「反面」."
+    },
+    {
+     "type": "choice",
+     "q": "「〜反面」が使えるのはどれですか。",
+     "choices": [
+      "雨が降った反面、道がぬれた。",
+      "この薬はよく効く反面、眠くなる。",
+      "朝ごはんを食べた反面、出かけた。",
+      "名前を書いた反面、出した。"
+     ],
+     "answer": 1,
+     "explain_id": "Dua sisi harus berlawanan. Sebab-akibat atau urutan waktu tidak bisa.",
+     "explain_en": "The two sides must be opposed. Cause-and-effect or sequence does not work."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "この方法は",
+      "早い反面、",
+      "間違いが",
+      "増えやすい。"
+     ],
+     "answer": "この方法は早い反面、間違いが増えやすい。",
+     "hint_id": "Sisi baik dahulu, lalu「反面」, lalu sisi yang menyulitkan.",
+     "hint_en": "Good side first, then 「反面」, then the drawback."
     }
    ]
   },
@@ -2109,6 +2184,81 @@
      "answer": "記入は黒のボールペンのみでお願いします。",
      "hint_id": "「名詞＋のみ」を作り、そのあとに依頼を続ける。",
      "hint_en": "Form 「noun＋のみ」, then the request."
+    }
+   ]
+  },
+  {
+   "id": "n2-ni-watatte",
+   "pattern": "〜にわたって／〜にわたる",
+   "level": "N2",
+   "category": "限定・範囲",
+   "form": "名詞（期間・回数・広さ）＋にわたって／にわたる＋名詞",
+   "meaning_id": "selama ~; sepanjang ~; meliputi ~",
+   "meaning_en": "over ~; throughout ~; spanning ~",
+   "note_id": "Menyatakan luasnya rentang waktu, jumlah, atau wilayah. Yang di depannya panjang atau luas; tidak dipakai untuk waktu yang singkat. Bentuk「にわたる」dipakai sebelum kata benda.",
+   "note_en": "States the extent of a span of time, a number of times, or an area. What precedes it is long or wide; it is not used for a short span. The 「にわたる」 form is used before a noun.",
+   "note_ja": "時間・回数・広さの「はば」が大きいと言う。前に来るのは長いもの・広いもので、短いものには使わない。名詞が続くときは「にわたる」になる。",
+   "examples": [
+    {
+     "ja": "三日にわたって、熱が続いておられる。",
+     "reading": "みっかにわたって、ねつがつづいておられる。",
+     "id": "Selama tiga hari, demamnya terus berlanjut.",
+     "en": "Over three days, the fever has continued.",
+     "scene": "観察"
+    },
+    {
+     "ja": "二回にわたって、ご家族に説明した。",
+     "reading": "にかいにわたって、ごかぞくにせつめいした。",
+     "id": "Dalam dua kali kesempatan, kami menjelaskan kepada keluarga.",
+     "en": "On two separate occasions, we explained to the family.",
+     "scene": "家族対応"
+    },
+    {
+     "ja": "背中の広い範囲にわたる赤みが見られた。",
+     "reading": "せなかのひろいはんいにわたるあかみがみられた。",
+     "id": "Terlihat kemerahan yang meliputi area luas di punggung.",
+     "en": "Redness spanning a wide area of the back was observed.",
+     "scene": "皮膚"
+    }
+   ],
+   "quiz": [
+    {
+     "type": "choice",
+     "q": "三日＿＿＿、熱が続いておられる。",
+     "choices": [
+      "にわたって",
+      "のうちに",
+      "だらけで",
+      "につけ"
+     ],
+     "answer": 0,
+     "explain_id": "Rentang waktu yang panjang →「にわたって」.",
+     "explain_en": "A long span of time →「にわたって」."
+    },
+    {
+     "type": "choice",
+     "q": "名詞が続くときの形はどれですか。",
+     "choices": [
+      "にわたるの",
+      "にわたって",
+      "にわたる",
+      "にわたりの"
+     ],
+     "answer": 2,
+     "explain_id": "Sebelum kata benda:「広い範囲にわたる赤み」.",
+     "explain_en": "Before a noun: 「広い範囲にわたる赤み」."
+    },
+    {
+     "type": "order",
+     "segments": [
+      "二回に",
+      "わたって、",
+      "ご家族に",
+      "説明した。"
+     ],
+     "answer": "二回にわたって、ご家族に説明した。",
+     "hint_id": "Jumlah kali dahulu, lalu「にわたって」.",
+     "hint_en": "The number of times first, then 「にわたって」."
     }
    ]
   },
