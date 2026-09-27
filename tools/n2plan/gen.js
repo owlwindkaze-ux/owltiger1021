@@ -7,6 +7,9 @@ const sun = w => new Date(mon(w).getTime() + 6*86400000);
 const md = d => (d.getMonth()+1)+'/'+d.getDate();
 const esc = s => String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const { withRuby } = require(__dirname + '/../hani/ruby.js');
+/* 紙の月別パックの割り当て（n2/weeks.json の paper・もとは paper.py）。
+   この表に載せないと、紙とシステムがまた別々の予定になる。 */
+const PAPER = JSON.parse(fs.readFileSync('/home/user/owltiger1021/n2/weeks.json','utf8')).paper;
 const R = s => withRuby(esc(s));
 const phaseOf = w => PH.find(p => w >= p.from && w <= p.to);
 const phName = w => { const p = phaseOf(w); return '第'+p.no+'期　'+p.name; };
@@ -104,6 +107,12 @@ for (let w=1; w<=66; w++){
     h += `<h3>${R('文型')}　<b>${p.gram.length}${R('項目')}</b>${R('（平日1日'+per+'項目）')}</h3>${gramHtml(p.gram)}`;
   }
   if (p.task.length) h += `<h3>${R('そのほか、この週にすること')}</h3>${taskHtml(p.task)}`;
+  const pp = PAPER.weeks[String(w)];
+  if (pp) h += `<h3>${R('紙の パック')}</h3><div class="box">`
+    + (pp.unit
+       ? `<b>${R('第'+pp.unit+'単元「'+pp.title+'」（'+pp.pack+'の冊子）')}</b><br>${R('ねらい：'+pp.aim)}<br>${R(PAPER.unitdays)}<br>`
+       : `<b>${R('月末確認（'+pp.check+'の冊子）初見10問')}</b><br>${R('解答25分＋聴解5分。辞書も 前の問題も 見ません。')}<br>`)
+    + `${R('冊子の名前（9月後半・10月…）は やる順番では ありません。この表が 出した単元だけを やります。')}</div>`;
   pages.push(h + '</div>');
 }
 fs.writeFileSync('/tmp/n2plan/n2hani.html',
