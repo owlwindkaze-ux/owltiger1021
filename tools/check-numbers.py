@@ -218,6 +218,35 @@ for lv, n in sorted(perlv.items()):
         bad.append('文型 level_totals %s：目次 %s ／ データ %d' % (lv, g, n))
 
 
+# ---- 学習区分の表と データが そろっているか ----
+# 表（tools/学習区分.csv）を直したあと --apply を忘れると、
+# **表と画面が食い違ったまま**になる。ここで必ず気づけるようにする。
+print('\n■ 学習区分（tools/学習区分.csv とデータ）')
+import importlib.util
+sp = importlib.util.spec_from_file_location('vs', R + 'tools/vocab-study.py')
+vs = importlib.util.module_from_spec(sp)
+sp.loader.exec_module(vs)
+fld, wrd = vs.load_csv()
+vw = L('vocab-data.json')['words']
+ng = 0
+cnt = {k: 0 for k in vs.LABEL}
+for x in vw:
+    if x['level'] not in vs.LEVELS:
+        want = None
+    else:
+        want = wrd.get(x['word']) or fld.get(x.get('sub')) or vs.DEFAULT
+        cnt[want] += 1
+    got = x.get('study') or (vs.DEFAULT if want else None)
+    if want != got:
+        ng += 1
+        if ng <= 5:
+            print('   %s：表は「%s」／データは「%s」' % (x['word'], want, got))
+print('  覚える %d ／ 意味が分かる %d ／ 参考 %d　食い違い %d'
+      % (cnt['覚える'], cnt['意味が分かる'], cnt['参考'], ng))
+if ng:
+    bad.append('学習区分：表とデータが %d語 食い違う（python3 tools/vocab-study.py --apply）' % ng)
+
+
 print('\n' + '=' * 62)
 print('合っていないところ:', len(bad))
 for b in bad: print('  -', b)
