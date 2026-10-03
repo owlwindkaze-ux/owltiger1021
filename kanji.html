@@ -68,6 +68,7 @@ select.sel{padding:.55rem .6rem;border:1.5px solid var(--line);border-radius:10p
 .t.on-{background:var(--blue-l);color:var(--blue)}
 .t.kun{background:var(--amber-l);color:var(--amber)}
 .t.lv{background:#f1f5f9;color:var(--muted)}
+.t.st{background:#ede9fe;color:#5b21b6;font-weight:700}
 .mean{font-size:.82rem;color:var(--muted);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .st{font-size:.72rem;color:var(--muted);margin-top:.3rem}
 .mark{position:absolute;top:.4rem;right:.4rem;font-size:.66rem;font-weight:800;border-radius:999px;
@@ -294,6 +295,12 @@ footer a{color:var(--blue)}
         <option value="カタカナ語">カタカナ語 ／ Kata serapan</option>
         <option value="語形成">語形成（〜化・高〜） ／ Imbuhan (N2)</option>
       </select>
+      <select class="sel" id="vStudy">
+        <option value="all">区分すべて ／ Semua kelompok</option>
+        <option value="覚える">覚える ／ Hafalkan</option>
+        <option value="意味が分かる">意味が分かる ／ Cukup paham</option>
+        <option value="参考">参考 ／ Rujukan</option>
+      </select>
       <select class="sel" id="vSub"><option value="all">小分類すべて ／ Semua sub-bidang</option></select>
       <select class="sel" id="vForm">
         <option value="all">形すべて ／ Semua bentuk</option>
@@ -358,7 +365,7 @@ footer a{color:var(--blue)}
         <select class="sel" id="fcLv">
           <option value="all">Semua level</option><option value="N5">N5</option>
           <option value="N4">N4</option><option value="N3">N3</option><option value="N2">N2</option>
-          <option value="介護">介護 / Kaigo</option><option value="現場">現場 / Kerja</option>
+          <option value="介護">介護 / Kaigo</option><option value="記録">記録 / Rekaman</option><option value="現場">現場 / Kerja</option>
         </select>
         <select class="sel" id="fcPick">
           <option value="all">Semua kanji ／ 全部</option>
@@ -663,7 +670,7 @@ document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key =
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-09-27d';   // 更新日（版）
+const VERSION = '2026-10-03a';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -1034,7 +1041,7 @@ function setupWeekBtns() {
        解かないと、前に押した絞りが残っていて 今週の分が出てこないことがある。 */
     set => {
       vWkOn = true; vWkSet = set; vLimit = 120;
-      ['#vCat', '#vSub', '#vForm'].forEach(id => { const e = $(id); if (e) e.value = 'all'; });
+      ['#vCat', '#vSub', '#vForm', '#vStudy'].forEach(id => { const e = $(id); if (e) e.value = 'all'; });
       renderVocab();
     },
     () => { vWkOff(); vLimit = 120; renderVocab(); });
@@ -1119,6 +1126,7 @@ function filterVocab() {
   const q = normQ($('#vq').value), cat = $('#vCat').value, sub = $('#vSub').value;
   const fm = $('#vForm') ? $('#vForm').value : 'all';
   const mk = $('#vMark') ? $('#vMark').value : 'all';
+  const st = $('#vStudy') ? $('#vStudy').value : 'all';
   return VOCAB.filter(w => {
     if (vWkOn && vWkSet) { if (!vWkSet.has(w.word)) return false; }
     else if (vLv !== 'all' && w.level !== vLv) return false;
@@ -1128,6 +1136,9 @@ function filterVocab() {
     if (mk === 'notrans' && (w.meaning_id || '').trim()) return false;
     if (cat !== 'all' && w.category !== cat) return false;
     if (sub !== 'all' && w.sub !== sub) return false;
+    /* 学習区分（覚える／意味が分かる／参考）。study が無い語は「覚える」。
+       区分は tools/学習区分.csv で決める（SPEC 2.6-z29） */
+    if (st !== 'all' && (w.study || '覚える') !== st) return false;
     if (fm !== 'all' && wordForm(w.word, w.category) !== fm) return false;
     if (!q) { w._s = 0; return true; }
     const s = scoreVocab(w, q);
@@ -1165,7 +1176,7 @@ function renderVocab() {
 }
 const vCardHTML = w => `<button class="kcard ${vprogress[w.word] ? 'is-' + vprogress[w.word] : ''}" data-word="${w.word}" style="flex-direction:column;align-items:flex-start;gap:.2rem">
   ${vprogress[w.word] ? `<span class="mark ${vprogress[w.word]}">${MARKLABEL[vprogress[w.word]]}</span>` : ''}
-  <div class="tags"><span class="t lv">${w.level}</span>${w.category ? `<span class="t kun">${w.category}</span>` : ''}${w.sub ? `<span class="t on-">${w.sub}</span>` : ''}</div>
+  <div class="tags"><span class="t lv">${w.level}</span>${w.study ? `<span class="t st">${w.study}</span>` : ''}${w.category ? `<span class="t kun">${w.category}</span>` : ''}${w.sub ? `<span class="t on-">${w.sub}</span>` : ''}</div>
   <div class="vw" style="font-size:1.25rem;font-weight:700;line-height:1.3">${w.word}</div>
   <div style="font-size:.8rem;color:var(--blue)">${w.reading}</div>
   <div class="mean">${vMean(w)}</div></button>`;
@@ -1347,6 +1358,8 @@ function buildDeck() {
   let arr = (fcIsVocab() ? VOCAB : DATA).filter(x => {
     const key = fcIsVocab() ? x.word : x.character;
     if (!hasLv(x, lv)) return false;
+    /* 「参考」は 出てきたら引けばよい語。カードには出さない（SPEC 2.6-z29） */
+    if (fcIsVocab() && x.study === '参考') return false;
     if (pick === 'unseen' && P[key]) return false;
     if (pick === 'review' && P[key] !== 'review') return false;
     return true;
@@ -1571,7 +1584,9 @@ function readDistractors(ans, kpool, ch, n = 3) {
 
 /** 出題対象の語（レベル指定つき） */
 function quizPool(lv) {
-  return VOCAB.filter(w => (lv === 'all' || w.level === lv) && w.word && w.reading && (w.meaning_id || w.meaning));
+  /* 「参考」は 練習問題に出さない（SPEC 2.6-z29） */
+  return VOCAB.filter(w => (lv === 'all' || w.level === lv) && w.study !== '参考' &&
+    w.word && w.reading && (w.meaning_id || w.meaning));
 }
 /** 誤答（似た語）を選ぶ：同じレベル・同じくらいの長さ・読みが違うもの */
 function distractors(pool, correct, key, n = 3) {
@@ -1805,6 +1820,17 @@ $('#qzChoices').addEventListener('click', e => {
 
 /* ---------- stats ---------- */
 let revLimitK = 200, revLimitV = 200;   // 要復習一覧の表示件数（ボタンで増える）
+/* 学習状況の下に出す ひとこと。分母から外した語があることを隠さない */
+function studyNote() {
+  const n = VOCAB.filter(w => w.study === '意味が分かる').length;
+  const r = VOCAB.filter(w => w.study === '参考').length;
+  if (!n && !r) return '';
+  return '<div style="width:100%;font-size:.72rem;color:var(--muted);margin-top:.4rem;line-height:1.7">'
+    + 'この数には、<b>意味が分かる ' + n + '語</b>（読めればよい語）と'
+    + '<b>参考 ' + r + '語</b>（出てきたら引く語）は 入っていません。'
+    + '<br>語彙の画面の「区分すべて」から えらぶと 見られます。</div>';
+}
+
 function refreshStats() {
   if (!DATA.length) return;
   const bar = (label, all, P, key) => {
@@ -1819,7 +1845,11 @@ function refreshStats() {
     ['N5', 'N4', 'N3', 'N2', '介護', '記録'].filter(lv => DATA.some(k => hasLv(k, lv)))
       .map(lv => bar(lv, DATA.filter(k => hasLv(k, lv)), progress, x => x.character)).join('') +
     (VOCAB.length ? '<div style="width:100%;font-size:.75rem;font-weight:800;color:var(--muted);margin-top:.5rem">KOSAKATA ／ 語彙</div>' +
-      ['N5', 'N4', 'N3', 'N2', '介護', '記録', '現場', '施設', '追加'].filter(lv => VOCAB.some(w => w.level === lv)).map(lv => bar(lv, VOCAB.filter(w => w.level === lv), vprogress, x => x.word)).join('') : '');
+      ['N5', 'N4', 'N3', 'N2', '介護', '記録', '現場', '施設', '追加'].filter(lv => VOCAB.some(w => w.level === lv))
+        /* 分母は「覚える」の語だけ。「意味が分かる」「参考」は読めればよい語なので、
+           覚えた割合に混ぜない（SPEC 2.6-z29） */
+        .map(lv => bar(lv, VOCAB.filter(w => w.level === lv && (w.study || '覚える') === '覚える'), vprogress, x => x.word)).join('') +
+      studyNote() : '');
   /* 要復習の一覧：漢字も熟語も全部出す。多いときは少しずつ表示して画面を軽く保つ */
   const rev = DATA.filter(k => progress[k.character] === 'review');
   const vrev = VOCAB.filter(w => vprogress[w.word] === 'review');
@@ -1932,6 +1962,7 @@ $('#vq').oninput = () => { vLimit = 120; renderVocab(); };
 $('#vMark').onchange = () => { vLimit = 120; renderVocab(); };
 $('#vCat').onchange = () => { $('#vSub').value = 'all'; vLimit = 120; renderVocab(); };
 $('#vSub').onchange = () => { vLimit = 120; renderVocab(); };
+$('#vStudy').onchange = () => { vLimit = 120; renderVocab(); };
 $('#vForm').onchange = () => { vLimit = 120; renderVocab(); };
 $$('#vLvChips .chip').forEach(c => c.onclick = async () => {
   vWkOff();
