@@ -41,6 +41,43 @@ SKIP_FILES = re.compile(r'(^|/)(vocab|kanji|tegaki|reading|listening|grammar|'
                         r'moshi|weeks|.*-data)[^/]*\.json$')
 
 bad = []
+# ---- 実在の施設名・病院名が まぎれていないか ----
+# 施設の実際の申し送り記録から 例文を起こしたため、**実在の病院名が3本
+# 入ったまま公開されていた**（2026-10-07 に見つけて直した）。
+# 固有名詞を 禁止語として ここに書くと それ自体が公開になるので、
+# **「出てよい形」を並べ、それ以外を出す**やり方にする。
+NAME = re.compile(r'[一-龥ァ-ヶー]{2,8}(病院|医院|クリニック|診療所|荘|苑|ホーム|'
+                  r'の家|園|センター)')
+NAME_OK = {
+    # 一般名詞として ふつうに出てくる形
+    '動物園', '公園', '保育園', '幼稚園', '遊園', '花園', '学園',
+    '特別養護老人ホーム', '老人ホーム', '有料老人ホーム', 'グループホーム',
+    'ケアホーム', '駅のホーム', 'ホームヘルパー', 'ホーム',
+    '総合病院', '大学病院', '国立病院', '市立病院', '県立病院', '救急病院',
+    '近くの病院', 'この病院', 'その病院', '町の病院', '歯科医院', '医院',
+    'かかりつけの病院', '紹介先の病院', '搬送先の病院',
+    '地域包括支援センター', '支援センター', '地域のセンター', 'センター',
+    'デイサービスセンター', '保健センター', '診療所', 'クリニック',
+    # 「〜の家」は ふつうの言い方で出てくる（先生の家・部屋の家具 など）
+    '先生の家', '部屋の家', '自分の家', '本人の家', 'うちの家',
+}
+
+
+def name_hits(text):
+    """固有の施設名らしいものを返す。前後の文字で切れた形は見ない"""
+    out = []
+    for m in NAME.finditer(text):
+        g = m.group(0)
+        if g in NAME_OK:
+            continue
+        # 末尾の語（病院・荘 など）だけで成り立つ一般名は見逃す
+        if any(g.endswith(ok) and (ok in NAME_OK) for ok in NAME_OK):
+            continue
+        out.append(g)
+    return out
+
+
+
 n = 0
 for dirpath, dirs, files in os.walk(R):
     dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
@@ -56,6 +93,10 @@ for dirpath, dirs, files in os.walk(R):
         except Exception:
             continue
         n += 1
+        if rel in ('sentences.json',) or rel.startswith('dokkai/') or rel.startswith('choukai/'):
+            for g in name_hits(s):
+                bad.append('%s　実在の施設名かもしれません → %s'
+                           '（一般名なら tools/check-secrets.py の NAME_OK に足す）' % (rel, g))
         for pat, why in RULES:
             for m in pat.finditer(s):
                 hit = m.group(0)
