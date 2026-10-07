@@ -14,6 +14,9 @@
   --green:#059669; --green-l:#ecfdf5;
   --red:#dc2626;
   --bg:#f1f5f9; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
+  /* 読み（ひらがな・カタカナ）の色。細く薄いと小さい画面でにじむので、
+     ふつうの青より一段濃くする（2026-10-07b・C案）。濃さを変えるならここ1か所 */
+  --read:#1d4ed8;
   --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
   --sh-l:0 10px 25px -5px rgba(15,23,42,.15);
   --kfont:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP",serif;
@@ -65,10 +68,18 @@ select.sel{padding:.55rem .6rem;border:1.5px solid var(--line);border-radius:10p
 .kcard .body{flex:1;min-width:0}
 .tags{display:flex;flex-wrap:wrap;gap:.22rem;margin-bottom:.28rem}
 .t{font-size:.69rem;padding:.08rem .42rem;border-radius:5px;font-weight:700}
+/* 読みの札だけ 少し大きく（C案）。
+   `.t.on-` は 語彙カードの「小分類」の札にも使っているので、
+   読みの札には `yt` を付けて、そこだけを大きくする */
+.t.yt{font-size:.8rem;letter-spacing:.02em;color:var(--read)}
+.t.yt.kun{color:var(--amber)}
 .t.on-{background:var(--blue-l);color:var(--blue)}
 .t.kun{background:var(--amber-l);color:var(--amber)}
 .t.lv{background:#f1f5f9;color:var(--muted)}
 .t.st{background:#ede9fe;color:#5b21b6;font-weight:700}
+/* 読み（ひらがな・カタカナ）。太く・濃く・少し大きく（C案）。
+   漢字・意味・札の見た目は変えていない */
+.yomi{color:var(--read);font-weight:700;letter-spacing:.02em}
 .mean{font-size:.82rem;color:var(--muted);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .st{font-size:.72rem;color:var(--muted);margin-top:.3rem}
 .mark{position:absolute;top:.4rem;right:.4rem;font-size:.66rem;font-weight:800;border-radius:999px;
@@ -118,7 +129,7 @@ svg text{font-size:7px;fill:var(--red);font-family:system-ui,sans-serif;font-wei
 .ex{list-style:none;display:grid;gap:.4rem}
 .ex li{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:.45rem .65rem}
 .ex .w{font-size:1.05rem;font-weight:700}
-.ex .r{font-size:.78rem;color:var(--blue);margin-left:.35rem}
+.ex .r{font-size:.92rem;color:var(--read);font-weight:700;letter-spacing:.02em;margin-left:.35rem}
 .ex .m{font-size:.8rem;color:var(--muted)}
 .ex .en{font-size:.72rem;color:#94a3b8}
 .ex .jl{font-size:.64rem;background:var(--green-l);color:var(--green);border-radius:4px;padding:.03rem .32rem;font-weight:800;margin-left:.35rem}
@@ -548,7 +559,7 @@ footer a{color:var(--blue)}
     <div style="flex:1;min-width:0">
       <div class="tags" id="vmTags"></div>
       <div id="vmWord" style="font-size:2rem;font-weight:700;line-height:1.25"></div>
-      <div id="vmRead" style="font-size:1rem;color:var(--blue)"></div>
+      <div id="vmRead" class="yomi" style="font-size:1.2rem"></div>
     </div>
     <button class="btn" id="vmBack" style="display:none;padding:.3rem .6rem;font-size:.78rem;margin-right:.3rem;white-space:nowrap">← 戻る</button>
     <button class="x" id="vmX">×</button>
@@ -677,7 +688,7 @@ document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key =
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-10-07a';   // 更新日（版）
+const VERSION = '2026-10-07b';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -1093,8 +1104,8 @@ const cardHTML = k => `<button class="kcard ${progress[k.character] ? 'is-' + pr
   <div class="ch">${k.character}</div>
   <div class="body">
     <div class="tags"><span class="t lv">${k.level}</span>
-      ${k.on.slice(0, 2).map(r => `<span class="t on-">${r}</span>`).join('')}
-      ${k.kun.slice(0, 2).map(r => `<span class="t kun">${r}</span>`).join('')}</div>
+      ${k.on.slice(0, 2).map(r => `<span class="t on- yt">${r}</span>`).join('')}
+      ${k.kun.slice(0, 2).map(r => `<span class="t kun yt">${r}</span>`).join('')}</div>
     <div class="mean">${meanOf(k).slice(0, 3).join(', ')}</div>
     <div class="st">${k.strokes} coretan／画</div>
   </div></button>`;
@@ -1185,7 +1196,7 @@ const vCardHTML = w => `<button class="kcard ${vprogress[w.word] ? 'is-' + vprog
   ${vprogress[w.word] ? `<span class="mark ${vprogress[w.word]}">${MARKLABEL[vprogress[w.word]]}</span>` : ''}
   <div class="tags"><span class="t lv">${w.level}</span>${w.study ? `<span class="t st">${w.study}</span>` : ''}${w.category ? `<span class="t kun">${w.category}</span>` : ''}${w.sub ? `<span class="t on-">${w.sub}</span>` : ''}</div>
   <div class="vw" style="font-size:1.25rem;font-weight:700;line-height:1.3">${w.word}</div>
-  <div style="font-size:.8rem;color:var(--blue)">${w.reading}</div>
+  <div class="yomi" style="font-size:.95rem">${w.reading}</div>
   <div class="mean">${vMean(w)}</div></button>`;
 
 const STATE_TXT = { known: '✓ Sudah hafal ／ 覚えた', review: '↻ Perlu diulang ／ 要復習', none: 'Belum ditandai ／ まだ記録なし' };
@@ -1310,8 +1321,8 @@ async function openModal(ch, isBack) {
     (k.freq ? `<span class="t lv">#${k.freq}</span>` : '');
   $('#mMean').textContent = meanOf(k).join(', ');
   $('#mMeanEn').textContent = (LANG === 'id' && k.meanings_id) ? 'EN: ' + k.meanings.join(', ') : '';
-  $('#mOn').innerHTML = k.on.length ? k.on.map(r => `<span class="t on-">${r}</span>`).join(' ') : '—';
-  $('#mKun').innerHTML = k.kun.length ? k.kun.map(r => `<span class="t kun">${r}</span>`).join(' ') : '—';
+  $('#mOn').innerHTML = k.on.length ? k.on.map(r => `<span class="t on- yt">${r}</span>`).join(' ') : '—';
+  $('#mKun').innerHTML = k.kun.length ? k.kun.map(r => `<span class="t kun yt">${r}</span>`).join(' ') : '—';
   /* 用例（辞書の例）と熟語データを1つにまとめて重複を除く。
      **押しても開かない語は 出さない。**
      辞書の例には、このコースの語彙に入っていない語が混ざっている。
@@ -1432,12 +1443,12 @@ function flip() {
     let h;
     if (mode === 'm2k' || mode === 'r2k')
       h = `<div style="font-size:2.4rem;font-weight:700;line-height:1.25">${k.word}</div>
-           <div style="color:var(--blue)">${k.reading}</div>
+           <div class="yomi" style="font-size:1.15rem">${k.reading}</div>
            <div style="color:var(--muted);font-size:.9rem">${vMean(k)}</div>`;
     else if (mode === 'k2m')
-      h = `<div style="font-size:1.15rem">${vMean(k)}</div><div style="color:var(--blue)">${k.reading}</div>`;
+      h = `<div style="font-size:1.15rem">${vMean(k)}</div><div class="yomi" style="font-size:1.15rem">${k.reading}</div>`;
     else
-      h = `<div style="font-size:1.6rem;color:var(--blue)">${k.reading}</div>
+      h = `<div class="yomi" style="font-size:1.75rem">${k.reading}</div>
            <div style="color:var(--muted);font-size:.95rem">${vMean(k)}</div>`;
     $('#fcQ').style.display = 'none';
     $('#fcA').innerHTML = h + `<div style="margin-top:.5rem">${kj}</div>
@@ -1451,7 +1462,7 @@ function flip() {
      さらに、ランク付きの例が 1つも無い漢字が 234字 ある（円・川・田・側 など）。
      語彙データ（コースの語）を 先に 使い、足りなければ ランク付きの例で 補う。 */
   const ex = wordsShownFor(k.character).slice(0, 2).map(e =>
-    `<div style="font-size:.83rem;color:var(--muted)">${e.word}（${e.reading}）— ${exMean(e)}</div>`).join('');
+    `<div style="font-size:.83rem;color:var(--muted)">${e.word}（<span class="yomi">${e.reading}</span>）— ${exMean(e)}</div>`).join('');
   let html;
   if (mode === 'k2r') html = `<div style="margin-bottom:.35rem">${k.on.map(r => `<span class="t on-">${r}</span>`).join(' ')} ${k.kun.map(r => `<span class="t kun">${r}</span>`).join(' ')}</div>
     <div style="color:var(--muted);font-size:.9rem">${meanOf(k).slice(0, 3).join(', ')}</div>${ex}`;
@@ -1693,7 +1704,7 @@ function makeQuestion(type, pool, kpool) {
       .filter(x => x !== ans && !(VBYW[x] && VBYW[x].reading === rd)).slice(0, 3);
     if (ch.length < 3) return null;
     return { kind: '問題2 　＿＿の言葉を漢字で書くと？ ／ Penulisan kanji yang benar',
-      q: ee ? sentHTML(ee, rd) : `<span style="color:var(--blue)">${w.reading}</span>
+      q: ee ? sentHTML(ee, rd) : `<span class="yomi">${w.reading}</span>
              <br><span style="font-size:.9rem;color:var(--muted)">${vMean(w)}</span>`,
       choices: shuffle([ans, ...ch]), answer: ans, key: w.word, note: NOTE(w) };
   }
@@ -1734,7 +1745,7 @@ function makeQuestion(type, pool, kpool) {
     if (wrong.length < 3) return null;
     return { kind: '問題5 　使い方が正しい文は？ ／ Kalimat yang pemakaiannya benar',
       q: `<span style="font-family:var(--kfont);font-size:1.8rem">${w.word}</span>
-          <span style="font-size:.9rem;color:var(--muted)">（${w.reading}）</span>`,
+          <span style="font-size:.95rem" class="yomi">（${w.reading}）</span>`,
       choices: shuffle([e.s, ...wrong]), answer: e.s, key: w.word, note: NOTE(w) };
   }
   if (type === 'gokei') {                       /* 問題6 語形成（N2の大問③） */
@@ -1890,7 +1901,7 @@ function refreshStats() {
     (vrev.length ? `<div class="lb" style="grid-column:1/-1;margin-top:.6rem">語彙 ${vrev.length}語</div>` +
       vShow.map(w => `<button class="kcard is-review" data-w="${h(w.word)}">
         <div class="ch" style="font-size:1.15rem;line-height:1.5">${h(w.word)}</div>
-        <div class="rd">${h(w.reading)}</div>
+        <div class="rd yomi" style="font-size:.95rem">${h(w.reading)}</div>
         <div class="mean">${h(vMean(w))}</div></button>`).join('') +
       moreBtn('revMoreV', vShow.length, vrev.length, '語') : '') ||
     '<p style="color:var(--muted);font-size:.85rem">— まだありません ／ Belum ada</p>';
