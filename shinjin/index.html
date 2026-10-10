@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-10-10b';
+  var PAGE_VER = '2026-10-10c';
   var KEY = 'reloaded-for-shinjin';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -66,6 +66,7 @@ header .sub{font-size:.82rem;opacity:.92;margin-top:.2rem}
 .now .wnote{font-size:.83rem;color:var(--muted);margin-top:.6rem;border-top:1px dashed #e4c9b4;padding-top:.5rem}
 ul.chk{list-style:none;margin:0;padding:0}
 ul.chk li{margin:.3rem 0}
+.wpre{margin:.5rem 0 .2rem;padding:.55rem .7rem;border-radius:10px;background:#fff7ed;border:1.5px solid #fdba74;color:#9a3412;font-size:.85rem;line-height:1.7}
 ul.chk label{display:flex;gap:.55rem;align-items:flex-start;cursor:pointer;
   background:#fff;border:1px solid #e8d3c2;border-radius:10px;padding:.5rem .6rem}
 ul.chk input{margin-top:.28rem;width:1.05rem;height:1.05rem;flex:none;accent-color:var(--ora)}
@@ -86,8 +87,10 @@ ul.chk li.dly.fin .t{text-decoration:line-through;opacity:.55}
 .days label.on{background:var(--ora);border-color:var(--ora);color:#fff}
 .days label.td{box-shadow:0 0 0 2px var(--ora-d)}
 .wprog{font-size:.83rem;font-weight:800;color:var(--ora-d);margin:.5rem 0 .1rem}
-.staffnote{border:1px dashed var(--muted);background:#f8fafc;border-radius:10px;
-  padding:.6rem .8rem;font-size:.85rem;color:var(--muted);margin-top:.6rem}
+/* span のままだと 上下の余白が効かず、ねらいの文に **重なって** 出ていた。
+   メモが長くなって はっきり見えるようになったので block にした（2026-10-10c） */
+.staffnote{display:block;border:1px dashed var(--muted);background:#f8fafc;border-radius:10px;
+  padding:.6rem .8rem;font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.7}
 .staffnote b{color:var(--ink)}
 
 .steps{display:grid;gap:.5rem}
@@ -164,6 +167,7 @@ footer{text-align:center;font-size:.75rem;color:var(--muted);padding:1rem 0 2rem
     <div class="lb">MINGGU INI ／ 今週やること</div>
     <div class="ttl" id="weekTtl">　</div>
     <div class="wsub" id="weekSub"></div>
+    <div class="wpre" id="weekPre" style="display:none"></div>
     <div class="wprog" id="weekProg"></div>
     <ul class="chk" id="weekList"></ul>
     <p class="wnote" id="weekNote"></p>
@@ -448,6 +452,14 @@ function renderWeek(today){
   document.getElementById('weekTtl').textContent =
     (w ? ('第' + w + '週　') : '（はじまる前）') + ph.name;
   var ov = (w && WEEK_TASK[w]) ? WEEK_TASK[w] : null;
+  /* はじまる前は「第1週のぶんを先に見せている」とはっきり書く。
+     書かないと、きょうやるものだと まちがえる */
+  var pre = document.getElementById('weekPre');
+  if (pre) {
+    pre.style.display = w ? 'none' : '';
+    pre.innerHTML = '<b>まだ はじまっていません。</b>下に出ているのは <b>第1週（' +
+      md(mondayOf(1)) + '〜）のぶん</b>です。初日に <b>N4到達度判定テスト</b>を行います。';
+  }
   document.getElementById('weekSub').textContent =
     md(m) + '（月）〜 ' + md(su) + '（日）　／　' + (ov ? ov.min : ph.min) +
     (ov ? '　／　' + ov.sub
@@ -460,7 +472,13 @@ function renderWeek(today){
 
   /* 第29・30週は 日課を差しかえる（新しいことをせず、弱いところと直前確認だけ） */
   var tasks = ov ? ov.task.slice() : ph.task.slice();
-  if (w && TEST_WEEK[w]) tasks.push({ k:'', t:TEST_WEEK[w].t, n:TEST_WEEK[w].n, test:true });
+  /* テストと職員メモは、ほかの行と同じく **第1週のぶんを前もって出す**。
+     はじまる前（w=0）は ph も日づけも第1週に落としているのに、
+     ここだけ w が 0 で falsy のため **テストだけ消えていた**。
+     いちばん先に見せたい「第1週のN4到達度判定テスト」が、
+     12月7日まで 画面に出ない状態だった（2026-10-10c）。 */
+  var tw = w || 1;
+  if (TEST_WEEK[tw]) tasks.push({ k:'', t:TEST_WEEK[tw].t, n:TEST_WEEK[tw].n, test:true });
 
   /* 今日が月曜から何日目か。週の外（まだ始まっていない等）なら -1 */
   var DN = ['月','火','水','木','金','土','日'];
@@ -525,8 +543,8 @@ function renderWeek(today){
   });
 
   var note = 'この週の ねらい：' + (ov && ov.aim ? ov.aim : ph.aim);
-  if (w && STAFF_WEEK[w]) {
-    note += '<span class="staffnote"><b>職員：</b>' + STAFF_WEEK[w] + '</span>';
+  if (STAFF_WEEK[tw]) {
+    note += '<span class="staffnote"><b>職員：</b>' + STAFF_WEEK[tw] + '</span>';
   }
   document.getElementById('weekNote').innerHTML = note;
   if (box) box.style.display = '';
