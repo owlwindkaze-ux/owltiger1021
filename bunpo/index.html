@@ -101,7 +101,7 @@ select.sel{padding:.55rem .6rem;border:1.5px solid var(--line);border-radius:10p
 .ex li{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.55rem .7rem;border-left:4px solid var(--green)}
 .ex .sc{font-size:.66rem;font-weight:800;background:var(--green-l);color:var(--green);border-radius:4px;padding:.05rem .4rem;display:inline-block;margin-bottom:.25rem}
 .ex .ja{font-size:1.02rem;font-weight:700;line-height:1.5}
-/* 読み（ふりがな）は 太く・濃く・少し大きく（kanji.html と同じC案・2026-10-10b） */
+/* 読み（ふりがな）は 太く・濃く・少し大きく（kanji.html と同じC案・2026-10-10c） */
 .ex .rd{font-size:.88rem;color:#1d4ed8;font-weight:700;letter-spacing:.02em;margin-top:.1rem}
 .ex .tr{font-size:.84rem;color:var(--muted);margin-top:.2rem}
 
@@ -415,7 +415,7 @@ const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-grammar-progress-v1', LANGKEY = 'jlpt-kanji-lang';
 /* 版（更新日）。grammar.json の "app_version" と必ず同じ値にすること。
    ずれていると、アプリが「古いHTMLを表示している」と判断して自動で読み込み直します。 */
-const VERSION = '2026-10-10b';
+const VERSION = '2026-10-10c';
 
 let DATA = [], BYID = {}, LEVELS = [], CATS = [];
 /* レベルごとの読み込み用。IDXFILES=目次、LOADED=読み込みずみのレベル、
