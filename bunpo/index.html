@@ -101,7 +101,7 @@ select.sel{padding:.55rem .6rem;border:1.5px solid var(--line);border-radius:10p
 .ex li{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.55rem .7rem;border-left:4px solid var(--green)}
 .ex .sc{font-size:.66rem;font-weight:800;background:var(--green-l);color:var(--green);border-radius:4px;padding:.05rem .4rem;display:inline-block;margin-bottom:.25rem}
 .ex .ja{font-size:1.02rem;font-weight:700;line-height:1.5}
-/* 読み（ふりがな）は 太く・濃く・少し大きく（kanji.html と同じC案・2026-10-10d） */
+/* 読み（ふりがな）は 太く・濃く・少し大きく（kanji.html と同じC案・2026-10-10e） */
 .ex .rd{font-size:.88rem;color:#1d4ed8;font-weight:700;letter-spacing:.02em;margin-top:.1rem}
 .ex .tr{font-size:.84rem;color:var(--muted);margin-top:.2rem}
 
@@ -415,7 +415,7 @@ const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-grammar-progress-v1', LANGKEY = 'jlpt-kanji-lang';
 /* 版（更新日）。grammar.json の "app_version" と必ず同じ値にすること。
    ずれていると、アプリが「古いHTMLを表示している」と判断して自動で読み込み直します。 */
-const VERSION = '2026-10-10d';
+const VERSION = '2026-10-10e';
 
 let DATA = [], BYID = {}, LEVELS = [], CATS = [];
 /* レベルごとの読み込み用。IDXFILES=目次、LOADED=読み込みずみのレベル、
@@ -542,14 +542,15 @@ function autoWeek() {
   let f = null;
   try { f = localStorage.getItem(WKAUTO); localStorage.removeItem(WKAUTO); } catch (e) {}
   if (f !== '1') return;
+  /* 自動で開いたことを 伝える（新しい分が無い週は「要復習」に寄せるため） */
   const b = $('#wkBtn');
-  if (b) b.click();
+  if (b) { const e = new MouseEvent('click'); e.__auto = true; b.dispatchEvent(e); }
 }
 
 function setupWeekBtn() {
   const btn = $('#wkBtn'), msg = $('#wkMsg');
   btn.hidden = false;
-  btn.onclick = async () => {
+  btn.onclick = async (ev) => {
     if (wkOn) {                          /* もう一度押したら もとに戻す */
       wkOn = false; wkIds = null;
       btn.classList.remove('on'); msg.hidden = true; renderList(); return;
@@ -558,7 +559,19 @@ function setupWeekBtn() {
     await withBusy(async () => { await loadWeeks(); await ensureAll(); });
     const st = weekState();
     msg.textContent = st.msg; msg.hidden = false;
-    if (!st.ids) { renderList(); return; }   /* 出す分が無いときは 押されていない扱い */
+    if (!st.ids) {
+      /* その週に新しい分が無いとき。断り書きは出ていたが、下には全部が
+         そのまま並んでいた。第29・30週は「新しい教材は開かない」週なのに
+         153項目が出ていた（2026-10-10e・30週の下見で見つけた）。
+         導線から自動で開いたときは「要復習」に寄せる。
+         自分でボタンを押したときは じゃまをしない。 */
+      if (ev && ev.__auto) {
+        const sel = $('#stSel');
+        if (sel) { sel.value = 'review'; sel.dispatchEvent(new Event('change')); }
+        msg.textContent = st.msg + '　→　「要復習」だけを 出しました';
+      }
+      renderList(); return;                  /* 出す分が無いときは 押されていない扱い */
+    }
     wkOn = true; wkIds = new Set(st.ids); btn.classList.add('on');
     renderList();
   };
