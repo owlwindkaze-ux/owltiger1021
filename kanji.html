@@ -15,7 +15,7 @@
   --red:#dc2626;
   --bg:#f1f5f9; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
   /* 読み（ひらがな・カタカナ）の色。細く薄いと小さい画面でにじむので、
-     ふつうの青より一段濃くする（2026-10-10c・C案）。濃さを変えるならここ1か所 */
+     ふつうの青より一段濃くする（2026-10-10d・C案）。濃さを変えるならここ1か所 */
   --read:#1d4ed8;
   --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
   --sh-l:0 10px 25px -5px rgba(15,23,42,.15);
@@ -527,7 +527,9 @@ footer a{color:var(--blue)}
     <p class="hint" style="white-space:normal;margin-top:.6rem">
       <b>CSV</b>＝Excelで開ける一覧表です（漢字・語彙の一つずつの状態）。<br>
       <b>バックアップ</b>＝漢字・語彙・文型・読解の記録をまとめて保存するファイルです。
-      機種変更のときは、新しい端末で「読み込む」を押してこのファイルを選んでください。
+      機種変更のときは、新しい端末で「読み込む」を押してこのファイルを選んでください。<br>
+      <b>スマホでは「共有」の画面が出ます。そこで「ドライブに保存」を選べます。</b>
+      Di HP akan muncul menu berbagi — pilih “Simpan ke Drive”.
     </div>
   </section>
 
@@ -688,7 +690,7 @@ document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key =
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-10-10c';   // 更新日（版）
+const VERSION = '2026-10-10d';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -2082,10 +2084,27 @@ $('#resetBtn').onclick = () => { if (confirm('Hapus semua catatan belajar? ／ �
 const PKEYS = ['jlpt-kanji-progress-v1', 'jlpt-kanji-progress-v1-vocab',
                'jlpt-grammar-progress-v1', 'jlpt-dokkai-progress-v1',
                'jlpt-choukai-progress-v1'];
+/** ファイルを渡す。スマホでは「共有」画面を出して、そこから
+    **Google ドライブに直接保存**できるようにする（2026-10-10d）。
+    使うのはブラウザの標準機能だけ。外部のライブラリもAPIの鍵も要らない。
+    共有に対応していない端末（古いブラウザ・パソコン）は、
+    いままでどおりダウンロードに落とす。 */
 const dl = (name, text, type) => {
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([text], { type }));
-  a.download = name; a.click(); URL.revokeObjectURL(a.href);
+  const blob = new Blob([text], { type });
+  const down = () => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  };
+  let f = null;
+  try { f = new File([blob], name, { type }); } catch (e) {}
+  if (f && navigator.canShare && navigator.canShare({ files: [f] })) {
+    navigator.share({ files: [f], title: name })
+      /* 「キャンセル」を押しただけのときは 何も出さない。
+         それ以外の失敗（共有できない等）は ダウンロードに落とす。 */
+      .catch(err => { if (!err || err.name !== 'AbortError') down(); });
+  } else down();
 };
 /** ① Excelで開ける一覧表 */
 $('#expCsv').onclick = () => {
