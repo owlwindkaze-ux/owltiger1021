@@ -15,7 +15,7 @@
   --red:#dc2626;
   --bg:#f1f5f9; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
   /* 読み（ひらがな・カタカナ）の色。細く薄いと小さい画面でにじむので、
-     ふつうの青より一段濃くする（2026-10-10d・C案）。濃さを変えるならここ1か所 */
+     ふつうの青より一段濃くする（2026-10-10e・C案）。濃さを変えるならここ1か所 */
   --read:#1d4ed8;
   --sh:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.1);
   --sh-l:0 10px 25px -5px rgba(15,23,42,.15);
@@ -690,7 +690,7 @@ document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key =
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-10-10d';   // 更新日（版）
+const VERSION = '2026-10-10e';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -1031,13 +1031,26 @@ function makeWeekBtn(btnId, msgId, kind, on, off) {
   const btn = $('#' + btnId), msg = $('#' + msgId);
   if (!btn) return;
   btn.hidden = false;
-  btn.onclick = async () => {
+  btn.onclick = async (ev) => {
     if (btn.classList.contains('on')) { off(); return; }
     await loadWeeks();
     await (kind === 'kanji' ? ensureAllKanji() : ensureAllVocab());   /* 週はレベルをまたぐ */
     const st = weekState(kind);
     msg.textContent = st.msg; msg.hidden = false;
-    if (!st.list) return;                 /* 出す分が無いときは 押されていない扱い */
+    if (!st.list) {
+      /* その週に新しい分が無いとき。**断り書きは出していたが、下には
+         全部（漢字1,144字・語彙6,659語）が そのまま並んでいた。**
+         第29・30週は「新しい教材は開かない」週なのに、画面は真逆だった
+         （2026-10-10e・30週の下見で見つけた）。
+         自動で開いたとき（新人コース・N2コースの導線）は「要復習」に寄せる。
+         自分でボタンを押したときは、何も変えない（じゃまをしない）。 */
+      if (ev && ev.__auto) {
+        const sel = $(kind === 'kanji' ? '#mark' : '#vMark');
+        if (sel) { sel.value = 'review'; sel.dispatchEvent(new Event('change')); }
+        msg.textContent = st.msg + '　→　「要復習」だけを 出しました';
+      }
+      return;                             /* 出す分が無いときは 押されていない扱い */
+    }
     btn.classList.add('on');
     on(new Set(st.list));
   };
@@ -1087,9 +1100,10 @@ function autoWeek() {
   let f = null;
   try { f = localStorage.getItem(WKAUTO); localStorage.removeItem(WKAUTO); } catch (e) {}
   if (f !== '1') return;
-  const b = $('#wkBtn'), vb = $('#vWkBtn');
-  if (b) b.click();
-  if (vb) vb.click();
+  /* 自動で開いたことを 伝える（新しい分が無い週は「要復習」に寄せるため） */
+  const auto = el => { if (!el) return; const e = new MouseEvent('click'); e.__auto = true; el.dispatchEvent(e); };
+  auto($('#wkBtn'));
+  auto($('#vWkBtn'));
 }
 
 function renderList() {
@@ -2085,7 +2099,7 @@ const PKEYS = ['jlpt-kanji-progress-v1', 'jlpt-kanji-progress-v1-vocab',
                'jlpt-grammar-progress-v1', 'jlpt-dokkai-progress-v1',
                'jlpt-choukai-progress-v1'];
 /** ファイルを渡す。スマホでは「共有」画面を出して、そこから
-    **Google ドライブに直接保存**できるようにする（2026-10-10d）。
+    **Google ドライブに直接保存**できるようにする（2026-10-10e）。
     使うのはブラウザの標準機能だけ。外部のライブラリもAPIの鍵も要らない。
     共有に対応していない端末（古いブラウザ・パソコン）は、
     いままでどおりダウンロードに落とす。 */

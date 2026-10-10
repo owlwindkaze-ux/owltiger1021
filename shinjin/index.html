@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-10-10d';
+  var PAGE_VER = '2026-10-10e';
   var KEY = 'reloaded-for-shinjin';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -66,6 +66,12 @@ header .sub{font-size:.82rem;opacity:.92;margin-top:.2rem}
 .now .wnote{font-size:.83rem;color:var(--muted);margin-top:.6rem;border-top:1px dashed #e4c9b4;padding-top:.5rem}
 ul.chk{list-style:none;margin:0;padding:0}
 ul.chk li{margin:.3rem 0}
+.wnav{display:flex;align-items:center;gap:.5rem;margin:.5rem 0 .2rem}
+.wnav .wnum{font-size:.8rem;color:var(--muted);font-weight:700;flex:1;text-align:center}
+.wbtn{border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:.3rem .6rem;
+  font-size:.82rem;font-weight:700;color:var(--ink);font-family:inherit;cursor:pointer}
+.wbtn:disabled{opacity:.35}
+.wpre .wbtn{margin-left:.4rem;border-color:#fdba74;color:#9a3412}
 .wpre{margin:.5rem 0 .2rem;padding:.55rem .7rem;border-radius:10px;background:#fff7ed;border:1.5px solid #fdba74;color:#9a3412;font-size:.85rem;line-height:1.7}
 ul.chk label{display:flex;gap:.55rem;align-items:flex-start;cursor:pointer;
   background:#fff;border:1px solid #e8d3c2;border-radius:10px;padding:.5rem .6rem}
@@ -88,7 +94,7 @@ ul.chk li.dly.fin .t{text-decoration:line-through;opacity:.55}
 .days label.td{box-shadow:0 0 0 2px var(--ora-d)}
 .wprog{font-size:.83rem;font-weight:800;color:var(--ora-d);margin:.5rem 0 .1rem}
 /* span のままだと 上下の余白が効かず、ねらいの文に **重なって** 出ていた。
-   メモが長くなって はっきり見えるようになったので block にした（2026-10-10d） */
+   メモが長くなって はっきり見えるようになったので block にした（2026-10-10e） */
 .staffnote{display:block;border:1px dashed var(--muted);background:#f8fafc;border-radius:10px;
   padding:.6rem .8rem;font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.7}
 .staffnote b{color:var(--ink)}
@@ -167,6 +173,7 @@ footer{text-align:center;font-size:.75rem;color:var(--muted);padding:1rem 0 2rem
     <div class="lb">MINGGU INI ／ 今週やること</div>
     <div class="ttl" id="weekTtl">　</div>
     <div class="wsub" id="weekSub"></div>
+    <div class="wnav" id="weekNav"></div>
     <div class="wpre" id="weekPre" style="display:none"></div>
     <div class="wprog" id="weekProg"></div>
     <ul class="chk" id="weekList"></ul>
@@ -353,8 +360,12 @@ var PLAN = [
     todo:['毎日15分、漢字・語彙の N5→N4 を見直す',
           '聴解を「ゆっくり」で週3問だけ聞く',
           '仕事で聞こえた言葉を、その日のうちにメモする'],
-    /* 最初の月は、思い出すところから。N5でならしてからN4に上がる */
-    use:[{k:'k',lv:'N5'},{k:'k',lv:'N4'},{k:'g',lv:'N5'},{k:'g',lv:'N4'},{k:'c'}] },
+    /* 最初の月は、思い出すところから。N5でならしてからN4に上がる。
+       **文型は1月から**（週の予定も第5週からで、この月の「やること」にも
+       文型は書いていない）。ここに文型を並べていたので、押すと
+       N5の76項目が全部出ていた（2026-10-10e・30週の下見で見つけた）。
+       たたんだ「今月使わないもの」からは いつでも開ける。 */
+    use:[{k:'k',lv:'N5'},{k:'k',lv:'N4'},{k:'c'}] },
   { start:'2027-01-01', mo:'1月', ro:'Jan', t:'N4の穴をうめる',
     r:'診断テストで低かった部分から',
     g:'N4の語彙648語・文型121項目をひととおり',
@@ -443,8 +454,17 @@ function phaseOf(w){
 function mondayOf(w){ return new Date(W1.getTime() + (w - 1) * 7 * 86400000); }
 function md(d){ return (d.getMonth() + 1) + '/' + d.getDate(); }
 
+/* 下見で見ている週。null なら きょうの週（2026-10-10e）。
+   100日コースには週のボタンがあるのに、新人コースとN2には無く、
+   **きょうの週しか見られなかった**。職員が先の週を下見できず、
+   作ったものを通して確かめることが できなかった。
+   ページを読み直すと きょうの週に戻る（実習生が迷子にならないように）。 */
+var viewW = null;
+var TODAY = null;
+
 function renderWeek(today){
-  var w = weekNo(today);
+  var realW = weekNo(today);
+  var w = viewW !== null ? viewW : realW;
   var ph = phaseOf(w || 1);
   var box = document.getElementById('weekBox');
   var m = mondayOf(w || 1), su = new Date(m.getTime() + 6 * 86400000);
@@ -452,13 +472,35 @@ function renderWeek(today){
   document.getElementById('weekTtl').textContent =
     (w ? ('第' + w + '週　') : '（はじまる前）') + ph.name;
   var ov = (w && WEEK_TASK[w]) ? WEEK_TASK[w] : null;
-  /* はじまる前は「第1週のぶんを先に見せている」とはっきり書く。
+  /* はじまる前・下見のときは、はっきり書く。
      書かないと、きょうやるものだと まちがえる */
   var pre = document.getElementById('weekPre');
   if (pre) {
-    pre.style.display = w ? 'none' : '';
-    pre.innerHTML = '<b>まだ はじまっていません。</b>下に出ているのは <b>第1週（' +
-      md(mondayOf(1)) + '〜）のぶん</b>です。初日に <b>N4到達度判定テスト</b>を行います。';
+    if (viewW !== null && viewW !== realW) {
+      pre.style.display = '';
+      pre.innerHTML = '<b>下見です。</b>いま進んでいるのは ' +
+        (realW ? '<b>第' + realW + '週</b>' : '<b>開始前</b>') +
+        'です。<button type="button" id="weekNow" class="wbtn">今週にもどる</button>';
+    } else if (!realW) {
+      pre.style.display = '';
+      pre.innerHTML = '<b>まだ はじまっていません。</b>下に出ているのは <b>第1週（' +
+        md(mondayOf(1)) + '〜）のぶん</b>です。初日に <b>N4到達度判定テスト</b>を行います。';
+    } else pre.style.display = 'none';
+  }
+  /* 前の週・次の週 */
+  var nav = document.getElementById('weekNav');
+  if (nav) {
+    var cur = w || 1;
+    nav.innerHTML =
+      '<button type="button" class="wbtn" id="weekPrev"' + (cur <= 1 ? ' disabled' : '') + '>◀ 前の週</button>' +
+      '<span class="wnum">第' + cur + '週 ／ 全30週</span>' +
+      '<button type="button" class="wbtn" id="weekNext"' + (cur >= 30 ? ' disabled' : '') + '>次の週 ▶</button>';
+    var go = function (n) { viewW = Math.min(30, Math.max(1, n)); renderWeek(TODAY); };
+    var pv = document.getElementById('weekPrev'), nx = document.getElementById('weekNext');
+    if (pv) pv.onclick = function () { go(cur - 1); };
+    if (nx) nx.onclick = function () { go(cur + 1); };
+    var nw = document.getElementById('weekNow');
+    if (nw) nw.onclick = function () { viewW = null; renderWeek(TODAY); };
   }
   document.getElementById('weekSub').textContent =
     md(m) + '（月）〜 ' + md(su) + '（日）　／　' + (ov ? ov.min : ph.min) +
@@ -476,7 +518,7 @@ function renderWeek(today){
      はじまる前（w=0）は ph も日づけも第1週に落としているのに、
      ここだけ w が 0 で falsy のため **テストだけ消えていた**。
      いちばん先に見せたい「第1週のN4到達度判定テスト」が、
-     12月7日まで 画面に出ない状態だった（2026-10-10d）。 */
+     12月7日まで 画面に出ない状態だった（2026-10-10e）。 */
   var tw = w || 1;
   if (TEST_WEEK[tw]) tasks.push({ k:'', t:TEST_WEEK[tw].t, n:TEST_WEEK[tw].n, test:true });
 
@@ -552,6 +594,7 @@ function renderWeek(today){
 
 function init(){
   var today = new Date(); today.setHours(0,0,0,0);
+  TODAY = today;
   renderWeek(today);
 
   /* 残り日数 */
@@ -593,12 +636,26 @@ function init(){
     use.length ? use.map(function(u){ return itemHtml(u.k, u.lv, true); }).join('')
                : ORDER.map(function(k){ return itemHtml(k, null, true); }).join('');
 
-  /* 今月使わないものは、たたんで下に置く */
+  /* 今月使わないものは、たたんで下に置く。
+     **レベルを付けずに置いていたので、押すと全レベルが出ていた**
+     （文型なら466項目）。その月に使わないだけで、開けば何か出る所なので、
+     いちばん近い月のレベルを付けておく（2026-10-10e・30週の下見で見つけた）。 */
   var rest = ORDER.filter(function(k){
     return !use.some(function(u){ return u.k === k; });
   });
+  function nearLv(k){
+    for (var d = 0; d < PLAN.length; d++) {
+      for (var sgn = 0; sgn < 2; sgn++) {
+        var j = i + (sgn ? -d : d);
+        if (j < 0 || j >= PLAN.length) continue;
+        var u = (PLAN[j].use || []).filter(function(x){ return x.k === k && x.lv; });
+        if (u.length) return u[0].lv;
+      }
+    }
+    return null;
+  }
   document.getElementById('rest').innerHTML =
-    rest.map(function(k){ return itemHtml(k, null, false); }).join('');
+    rest.map(function(k){ return itemHtml(k, nearLv(k), false); }).join('');
   document.getElementById('restBox').style.display = rest.length ? '' : 'none';
 
   /* レベル指定つきのボタンは、押したときに開く側のレベルをそろえてから移る */
