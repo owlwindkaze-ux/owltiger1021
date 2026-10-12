@@ -60,8 +60,16 @@ print('  読解 %d本・%d問' % (DB, DQ))
 print('  聴解 %d問（うちJLPT形式 %d問）' % (CTOTAL, CJLPT))
 print('  100日コース %d問' % NQ)
 print('  手書き %d字' % TCHARS)
-KAIGO = len(glob.glob(R + 'kaigo/*.pdf'))
-print('  紙の教材 %d点' % KAIGO)
+# 紙の教材は12点。2026-10-12 に 答え入りの8点を ドライブへ移したので、
+# **リポジトリのファイル数だけでは数えられない**。移した分を足して数える
+# （教材が12点あることは変わらない。置き場所が分かれただけ）。
+import importlib.util as _ilu
+_sp = _ilu.spec_from_file_location('ao', R + 'tools/check-answers-out.py')
+_ao = _ilu.module_from_spec(_sp); _sp.loader.exec_module(_ao)
+KAIGO_HERE = len(glob.glob(R + 'kaigo/*.pdf'))
+KAIGO_DRIVE = len([f for f in _ao.OUT if f.startswith('kaigo/')])
+KAIGO = KAIGO_HERE + KAIGO_DRIVE
+print('  紙の教材 %d点（この場所 %d点 ＋ ドライブ %d点）' % (KAIGO, KAIGO_HERE, KAIGO_DRIVE))
 
 # ---------- 画面に書いてある数と突き合わせる ----------
 # (ファイル, 探す形, あるべき数, 何の数か)

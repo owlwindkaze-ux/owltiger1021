@@ -9,7 +9,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-10-10e';
+  var PAGE_VER = '2026-10-12a';
   try {
     if (sessionStorage.getItem('vchk-staff')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -100,34 +100,35 @@ a{color:var(--blue)}
   </div>
 
   <div class="grp">テストを 流す・配る</div>
+<div class="warn" style="margin:.8rem 0;padding:.7rem .9rem;border:2px solid #fdba74;background:#fff7ed;border-radius:12px;font-size:.88rem;line-height:1.8;color:#9a3412"><b>答えの入ったものは、この場所には置いていません。</b><br>このサイトは公開の場所にあり、PDFは合言葉の外側にあるため、住所を知っていれば誰でも開けてしまいます。答え・採点・聴解の原稿が入ったものは <b>Google ドライブの職員用フォルダ</b>に移しました（2026-10-12）。<br>下の 🔒 が付いたものを押すと、そのフォルダが開きます。<b>Googleにログインしている職員だけが見られます。</b></div>
   <a class="item" href="../shindan/">
     <span class="no">🎧</span><span class="tx">
       <span class="n">テストの聴解 再生<span class="badge ans">読み上げ</span></span>
       <span class="r">診断テスト（第1回・第2回）と N4到達度判定テストの聴解。
         実施の前に「音のテスト」を必ず押す</span></span><span class="ar">→</span></a>
-  <a class="item" href="../N4到達度判定テスト_問題.pdf">
+  <a class="item" href="https://drive.google.com/drive/folders/1cLqnY-hRg-7FG76LGqwBD_9Dh3kEvXEY" target="_blank" rel="noopener">
     <span class="no">📝</span><span class="tx">
-      <span class="n">N4到達度判定テスト（問題）</span>
+      <span class="n">N4到達度判定テスト（問題）</span><span class="badge" style="background:#fff7ed;color:#9a3412;border:1px solid #fdba74;border-radius:5px;padding:.05rem .35rem;font-size:.7rem;font-weight:800;margin-left:.3rem">🔒 ドライブ</span>
       <span class="r">66問・60分 ／ <b>第1週（12月・入職直後）</b>に実施。印刷して配る</span></span><span class="ar">PDF →</span></a>
-  <a class="item" href="../N4到達度判定テスト_職員用.pdf">
+  <a class="item" href="https://drive.google.com/drive/folders/1cLqnY-hRg-7FG76LGqwBD_9Dh3kEvXEY" target="_blank" rel="noopener">
     <span class="no">🗝️</span><span class="tx">
-      <span class="n">N4到達度判定テスト（職員用）<span class="badge ans">正解入り</span></span>
+      <span class="n">N4到達度判定テスト（職員用）<span class="badge ans">正解入り</span><span class="badge" style="background:#fff7ed;color:#9a3412;border:1px solid #fdba74;border-radius:5px;padding:.05rem .35rem;font-size:.7rem;font-weight:800;margin-left:.3rem">🔒 ドライブ</span></span>
       <span class="r">実施要領・判定の目安・記録表・正解と解説・聴解の原稿（9ページ）</span></span><span class="ar">PDF →</span></a>
-  <a class="item" href="../月次確認テスト.pdf">
+  <a class="item" href="https://drive.google.com/drive/folders/1cLqnY-hRg-7FG76LGqwBD_9Dh3kEvXEY" target="_blank" rel="noopener">
     <span class="no">📅</span><span class="tx">
-      <span class="n">月次確認テスト（4回分）<span class="badge ans">正解入り</span></span>
+      <span class="n">月次確認テスト（4回分）<span class="badge ans">正解入り</span><span class="badge" style="background:#fff7ed;color:#9a3412;border:1px solid #fdba74;border-radius:5px;padding:.05rem .35rem;font-size:.7rem;font-weight:800;margin-left:.3rem">🔒 ドライブ</span></span>
       <span class="r">第4・8・12・20週 ／ 各20問15分。正解・聴解スクリプト・記録表つき</span></span><span class="ar">PDF →</span></a>
-  <a class="item" href="../診断テスト_第1回_問題.pdf">
+  <a class="item" href="https://drive.google.com/drive/folders/1cLqnY-hRg-7FG76LGqwBD_9Dh3kEvXEY" target="_blank" rel="noopener">
     <span class="no">①</span><span class="tx">
-      <span class="n">診断テスト 第1回（問題）</span>
+      <span class="n">診断テスト 第1回（問題）</span><span class="badge" style="background:#fff7ed;color:#9a3412;border:1px solid #fdba74;border-radius:5px;padding:.05rem .35rem;font-size:.7rem;font-weight:800;margin-left:.3rem">🔒 ドライブ</span>
       <span class="r">第2週に実施 ／ 筆記50分＋聴解15分＋口頭5分</span></span><span class="ar">PDF →</span></a>
-  <a class="item" href="../診断テスト_第2回_問題.pdf">
+  <a class="item" href="https://drive.google.com/drive/folders/1cLqnY-hRg-7FG76LGqwBD_9Dh3kEvXEY" target="_blank" rel="noopener">
     <span class="no">②</span><span class="tx">
-      <span class="n">診断テスト 第2回（問題）</span>
+      <span class="n">診断テスト 第2回（問題）</span><span class="badge" style="background:#fff7ed;color:#9a3412;border:1px solid #fdba74;border-radius:5px;padding:.05rem .35rem;font-size:.7rem;font-weight:800;margin-left:.3rem">🔒 ドライブ</span>
       <span class="r">第16週に実施</span></span><span class="ar">PDF →</span></a>
-  <a class="item" href="../診断テスト_実施と採点.pdf">
+  <a class="item" href="https://drive.google.com/drive/folders/1cLqnY-hRg-7FG76LGqwBD_9Dh3kEvXEY" target="_blank" rel="noopener">
     <span class="no">🗝️</span><span class="tx">
-      <span class="n">診断テスト 実施と採点<span class="badge ans">正解入り</span></span>
+      <span class="n">診断テスト 実施と採点<span class="badge ans">正解入り</span><span class="badge" style="background:#fff7ed;color:#9a3412;border:1px solid #fdba74;border-radius:5px;padding:.05rem .35rem;font-size:.7rem;font-weight:800;margin-left:.3rem">🔒 ドライブ</span></span>
       <span class="r">進め方・採点・判定・口頭シート・聴解スクリプト・正解</span></span><span class="ar">PDF →</span></a>
 
   <div class="grp">紙の教材（介護の日本語・全12点）</div>
@@ -171,7 +172,7 @@ a{color:var(--blue)}
 
 </div>
 <footer>
-  職員用 ／ 版 <span id="ver">2026-10-10e</span>
+  職員用 ／ 版 <span id="ver">2026-10-12a</span>
 </footer>
 </div>
 
