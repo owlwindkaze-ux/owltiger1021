@@ -9,7 +9,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-10-10e';
+  var PAGE_VER = '2026-10-12a';
   try {
     if (sessionStorage.getItem('vchk-kaigo')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -98,7 +98,7 @@ a{color:var(--blue)}
   <div class="nav"><a class="back" href="../staff/">☰ 職員用</a></div>
   <h1>介護の日本語　紙の教材</h1>
   <p>底本：『介護の日本語』『介護の日本語 指導者用手引き』（公益社団法人日本介護福祉士会）／
-     全12点・印刷して使います</p>
+     全12点・印刷して使います（<b>うち8点は 答えが入っているので ドライブ</b>）</p>
 </div></header>
 
 <div class="wrap">
@@ -128,43 +128,44 @@ a{color:var(--blue)}
   </div>
 
   <div class="grp">実習生向け ── 知っているかを測る</div>
-  <a class="item" href="01_N3実力テスト_第1回.pdf">
+<div class="warn" style="margin:.8rem 0;padding:.7rem .9rem;border:2px solid #fdba74;background:#fff7ed;border-radius:12px;font-size:.88rem;line-height:1.8;color:#9a3412"><b>答えの入ったものは、この場所には置いていません。</b><br>このサイトは公開の場所にあり、PDFは合言葉の外側にあるため、住所を知っていれば誰でも開けてしまいます。答え・採点・聴解の原稿が入ったものは <b>Google ドライブの職員用フォルダ</b>に移しました（2026-10-12）。<br>下の 🔒 が付いたものを押すと、そのフォルダが開きます。<b>Googleにログインしている職員だけが見られます。</b></div>
+  <a class="item" href="https://drive.google.com/drive/folders/1cLqnY-hRg-7FG76LGqwBD_9Dh3kEvXEY" target="_blank" rel="noopener">
     <span class="no">01</span><span class="tx">
-      <span class="n">N3実力テスト 第1回<span class="badge st">巻末に解答</span></span>
+      <span class="n">N3実力テスト 第1回<span class="badge st">巻末に解答</span><span class="badge" style="background:#fff7ed;color:#9a3412;border:1px solid #fdba74;border-radius:5px;padding:.05rem .35rem;font-size:.7rem;font-weight:800;margin-left:.3rem">🔒 ドライブ</span></span>
       <span class="r">50分・100点 ／ 総合力の把握。3か月に1回</span></span><span class="ar">PDF →</span></a>
-  <a class="item" href="02_章別ミニテスト_全8章.pdf">
+  <a class="item" href="https://drive.google.com/drive/folders/1cLqnY-hRg-7FG76LGqwBD_9Dh3kEvXEY" target="_blank" rel="noopener">
     <span class="no">02</span><span class="tx">
-      <span class="n">章別ミニテスト 全8章<span class="badge st">巻末に解答</span></span>
+      <span class="n">章別ミニテスト 全8章<span class="badge st">巻末に解答</span><span class="badge" style="background:#fff7ed;color:#9a3412;border:1px solid #fdba74;border-radius:5px;padding:.05rem .35rem;font-size:.7rem;font-weight:800;margin-left:.3rem">🔒 ドライブ</span></span>
       <span class="r">各10分・20点 ／ 週1回、朝礼後に1章ずつ。<b>全8章・8週で1周</b></span></span><span class="ar">PDF →</span></a>
-  <a class="item" href="03_N4補習版_全5回.pdf">
+  <a class="item" href="https://drive.google.com/drive/folders/1cLqnY-hRg-7FG76LGqwBD_9Dh3kEvXEY" target="_blank" rel="noopener">
     <span class="no">03</span><span class="tx">
-      <span class="n">N4補習版 全5回<span class="badge st">巻末に解答</span></span>
+      <span class="n">N4補習版 全5回<span class="badge st">巻末に解答</span><span class="badge" style="background:#fff7ed;color:#9a3412;border:1px solid #fdba74;border-radius:5px;padding:.05rem .35rem;font-size:.7rem;font-weight:800;margin-left:.3rem">🔒 ドライブ</span></span>
       <span class="r">各40分・100点 ／ <b>全5回</b>。N3実力テストで60点に届かない人の補習</span></span><span class="ar">PDF →</span></a>
-  <a class="item" href="04_書き方テスト_全5回.pdf">
+  <a class="item" href="https://drive.google.com/drive/folders/1cLqnY-hRg-7FG76LGqwBD_9Dh3kEvXEY" target="_blank" rel="noopener">
     <span class="no">04</span><span class="tx">
-      <span class="n">書き方テスト 全5回<span class="badge st">巻末に解答</span></span>
+      <span class="n">書き方テスト 全5回<span class="badge st">巻末に解答</span><span class="badge" style="background:#fff7ed;color:#9a3412;border:1px solid #fdba74;border-radius:5px;padding:.05rem .35rem;font-size:.7rem;font-weight:800;margin-left:.3rem">🔒 ドライブ</span></span>
       <span class="r">各10分・20点 ／ 記録を書くための漢字・カタカナ（40語）</span></span><span class="ar">PDF →</span></a>
 
   <div class="grp">実習生向け ── 使えるかを測る</div>
-  <a class="item" href="05_コロケーション演習_全3回.pdf">
+  <a class="item" href="https://drive.google.com/drive/folders/1cLqnY-hRg-7FG76LGqwBD_9Dh3kEvXEY" target="_blank" rel="noopener">
     <span class="no">05</span><span class="tx">
-      <span class="n">コロケーション演習 全3回<span class="badge st">巻末に解答</span></span>
+      <span class="n">コロケーション演習 全3回<span class="badge st">巻末に解答</span><span class="badge" style="background:#fff7ed;color:#9a3412;border:1px solid #fdba74;border-radius:5px;padding:.05rem .35rem;font-size:.7rem;font-weight:800;margin-left:.3rem">🔒 ドライブ</span></span>
       <span class="r">各15分・30点 ／ 名詞＋助詞＋動詞を、組で使えるか</span></span><span class="ar">PDF →</span></a>
-  <a class="item" href="06_根拠づけ演習.pdf">
+  <a class="item" href="https://drive.google.com/drive/folders/1cLqnY-hRg-7FG76LGqwBD_9Dh3kEvXEY" target="_blank" rel="noopener">
     <span class="no">06</span><span class="tx">
-      <span class="n">根拠づけ演習<span class="badge st">巻末に解答</span></span>
+      <span class="n">根拠づけ演習<span class="badge st">巻末に解答</span><span class="badge" style="background:#fff7ed;color:#9a3412;border:1px solid #fdba74;border-radius:5px;padding:.05rem .35rem;font-size:.7rem;font-weight:800;margin-left:.3rem">🔒 ドライブ</span></span>
       <span class="r">25分・40点 ／「〜ように」で理由が言えるか</span></span><span class="ar">PDF →</span></a>
   <a class="item" href="07_ロールプレイ課題集_全12場面.pdf">
     <span class="no">07</span><span class="tx">
       <span class="n">ロールプレイ課題集 全12場面<span class="badge jt">実技</span></span>
       <span class="r">各10〜15分・24点 ／ 評価シート付き。<b>月1回でも必ず実施</b></span></span><span class="ar">PDF →</span></a>
-  <a class="item" href="08_記述特化ワーク_全5回.pdf">
+  <a class="item" href="https://drive.google.com/drive/folders/1cLqnY-hRg-7FG76LGqwBD_9Dh3kEvXEY" target="_blank" rel="noopener">
     <span class="no">08</span><span class="tx">
-      <span class="n">記述特化ワーク 全5回<span class="badge st">巻末に解答</span></span>
+      <span class="n">記述特化ワーク 全5回<span class="badge st">巻末に解答</span><span class="badge" style="background:#fff7ed;color:#9a3412;border:1px solid #fdba74;border-radius:5px;padding:.05rem .35rem;font-size:.7rem;font-weight:800;margin-left:.3rem">🔒 ドライブ</span></span>
       <span class="r">各20〜25分 ／ 報告・記録が書けるか</span></span><span class="ar">PDF →</span></a>
-  <a class="item" href="09_聴解テスト_紙版.pdf">
+  <a class="item" href="https://drive.google.com/drive/folders/1cLqnY-hRg-7FG76LGqwBD_9Dh3kEvXEY" target="_blank" rel="noopener">
     <span class="no">09</span><span class="tx">
-      <span class="n">聴解テスト 紙版<span class="badge st">巻末にスクリプト</span></span>
+      <span class="n">聴解テスト 紙版<span class="badge st">巻末にスクリプト</span><span class="badge" style="background:#fff7ed;color:#9a3412;border:1px solid #fdba74;border-radius:5px;padding:.05rem .35rem;font-size:.7rem;font-weight:800;margin-left:.3rem">🔒 ドライブ</span></span>
       <span class="r">25分・40点 ／ 職員が読み上げて実施。スクリプトは巻末</span></span><span class="ar">PDF →</span></a>
 
   <div class="grp">職員向け ── 受け入れ側を整える</div>
@@ -253,7 +254,7 @@ a{color:var(--blue)}
           <b>先輩が「それで、今はどうなの？」と聞き返さなければならない</b>報告になります。
           現場では役に立ちません。</div>
         <div class="fx-d"><b>やること</b>　画面ではなく紙です。
-          <a href="08_記述特化ワーク_全5回.pdf">08 記述特化ワーク</a>の
+          <a href="https://drive.google.com/drive/folders/1cLqnY-hRg-7FG76LGqwBD_9Dh3kEvXEY" target="_blank" rel="noopener">08 記述特化ワーク</a>の
           <b>第1回（報告の型をおぼえる）</b>に戻ります。</div>
       </div>
     </div>
@@ -275,7 +276,7 @@ a{color:var(--blue)}
 
 </div>
 <footer>
-  介護の日本語 紙の教材 ／ 版 <span id="ver">2026-10-10e</span>
+  介護の日本語 紙の教材 ／ 版 <span id="ver">2026-10-12a</span>
   底本：『介護の日本語』『介護の日本語 指導者用手引き』（公益社団法人日本介護福祉士会）
 </footer>
 </div>
