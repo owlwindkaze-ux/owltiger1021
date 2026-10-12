@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-10-10e';
+  var PAGE_VER = '2026-10-12a';
   var KEY = 'reloaded-for-shinjin';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -94,7 +94,7 @@ ul.chk li.dly.fin .t{text-decoration:line-through;opacity:.55}
 .days label.td{box-shadow:0 0 0 2px var(--ora-d)}
 .wprog{font-size:.83rem;font-weight:800;color:var(--ora-d);margin:.5rem 0 .1rem}
 /* span のままだと 上下の余白が効かず、ねらいの文に **重なって** 出ていた。
-   メモが長くなって はっきり見えるようになったので block にした（2026-10-10e） */
+   メモが長くなって はっきり見えるようになったので block にした（2026-10-12a） */
 .staffnote{display:block;border:1px dashed var(--muted);background:#f8fafc;border-radius:10px;
   padding:.6rem .8rem;font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.7}
 .staffnote b{color:var(--ink)}
@@ -363,7 +363,7 @@ var PLAN = [
     /* 最初の月は、思い出すところから。N5でならしてからN4に上がる。
        **文型は1月から**（週の予定も第5週からで、この月の「やること」にも
        文型は書いていない）。ここに文型を並べていたので、押すと
-       N5の76項目が全部出ていた（2026-10-10e・30週の下見で見つけた）。
+       N5の76項目が全部出ていた（2026-10-12a・30週の下見で見つけた）。
        たたんだ「今月使わないもの」からは いつでも開ける。 */
     use:[{k:'k',lv:'N5'},{k:'k',lv:'N4'},{k:'c'}] },
   { start:'2027-01-01', mo:'1月', ro:'Jan', t:'N4の穴をうめる',
@@ -454,7 +454,7 @@ function phaseOf(w){
 function mondayOf(w){ return new Date(W1.getTime() + (w - 1) * 7 * 86400000); }
 function md(d){ return (d.getMonth() + 1) + '/' + d.getDate(); }
 
-/* 下見で見ている週。null なら きょうの週（2026-10-10e）。
+/* 下見で見ている週。null なら きょうの週（2026-10-12a）。
    100日コースには週のボタンがあるのに、新人コースとN2には無く、
    **きょうの週しか見られなかった**。職員が先の週を下見できず、
    作ったものを通して確かめることが できなかった。
@@ -518,7 +518,7 @@ function renderWeek(today){
      はじまる前（w=0）は ph も日づけも第1週に落としているのに、
      ここだけ w が 0 で falsy のため **テストだけ消えていた**。
      いちばん先に見せたい「第1週のN4到達度判定テスト」が、
-     12月7日まで 画面に出ない状態だった（2026-10-10e）。 */
+     12月7日まで 画面に出ない状態だった（2026-10-12a）。 */
   var tw = w || 1;
   if (TEST_WEEK[tw]) tasks.push({ k:'', t:TEST_WEEK[tw].t, n:TEST_WEEK[tw].n, test:true });
 
@@ -639,7 +639,7 @@ function init(){
   /* 今月使わないものは、たたんで下に置く。
      **レベルを付けずに置いていたので、押すと全レベルが出ていた**
      （文型なら466項目）。その月に使わないだけで、開けば何か出る所なので、
-     いちばん近い月のレベルを付けておく（2026-10-10e・30週の下見で見つけた）。 */
+     いちばん近い月のレベルを付けておく（2026-10-12a・30週の下見で見つけた）。 */
   var rest = ORDER.filter(function(k){
     return !use.some(function(u){ return u.k === k; });
   });
