@@ -23,7 +23,10 @@ import io, os, re, sys
 
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/'
 # 公開されるもの＝サイトに置く HTML・JSON と、PDFのもとになる Markdown
-TARGETS = ['.html', '.md', '.json', '.js']
+# **.txt と .csv を見ていなかった。**そのせいで 他社の商談の文字起こしが
+# 何か月も main に置かれたまま 気づけなかった（2026-10-12c）。
+# 置き場所を間違えるのは、たいてい 教材ではない形のファイルである。
+TARGETS = ['.html', '.md', '.json', '.js', '.txt', '.csv']
 SKIP_DIRS = {'.git', 'node_modules'}
 # 合言葉のハッシュは 公開してよい（これだけは 見のがす）
 ALLOW = {'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c'}
@@ -78,6 +81,40 @@ def name_hits(text):
 
 
 
+# ---- 仕事の記録・個人名が まぎれていないか ----
+# 2026-10-12、**他社との商談の文字起こし**（実在の社名・役職者4人の実名）と、
+# そこから作ったメール・議題の3本が **main に置いたまま公開されていた**。
+# 日本語学習とも勤怠システとも関係のない、道具を試したときの実物だった。
+# 置き場所を間違えたものは、**ファイル名で止める**のがいちばん確実。
+WORKFILES = {
+    'meeting-transcript.txt',          # 商談の文字起こし
+    'followup-email.txt',              # そこから作ったお礼メール
+    'next-actions.txt',
+    'next-agenda.txt',
+}
+# **言葉だけで探すと 読解の教材に当たる。**
+# n3.html には「先方」「見積書」が27か所あるが、これはN3の読解の本文で、
+# 消してはいけないもの。そこで**次の3つが そろったときだけ**鳴らす。
+#   ① 拡張子が .txt（教材は .json と .html。.txt に教材は無い）
+#   ② 「商談」か「面談」が出る
+#   ③ 役職つきの名前（〜部長・〜課長 など）が出る
+# 文字起こしは この3つが必ずそろい、教材は そろわない。
+WORK_MEET = re.compile(r'(商談|面談|打ち合わせ)')
+WORK_NAME = re.compile(r'[一-龥]{2,4}(部長|課長|社長|専務|常務|係長|主任)')
+
+
+def work_hits(rel, text):
+    out = []
+    if os.path.basename(rel) in WORKFILES:
+        out.append('仕事の記録そのもの（%s）' % os.path.basename(rel))
+    if rel.endswith('.txt') and WORK_MEET.search(text):
+        nm = sorted({m.group(0) for m in WORK_NAME.finditer(text)})
+        if nm:
+            out.append('商談・面談の記録かもしれません（%s）' % '・'.join(nm[:4]))
+    return out
+
+
+
 n = 0
 for dirpath, dirs, files in os.walk(R):
     dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
@@ -93,6 +130,8 @@ for dirpath, dirs, files in os.walk(R):
         except Exception:
             continue
         n += 1
+        for g in work_hits(rel, s):
+            bad.append('%s　%s（公開の場所に置かない）' % (rel, g))
         if rel in ('sentences.json',) or rel.startswith('dokkai/') or rel.startswith('choukai/'):
             for g in name_hits(s):
                 bad.append('%s　実在の施設名かもしれません → %s'
