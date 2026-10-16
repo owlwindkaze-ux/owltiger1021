@@ -690,7 +690,7 @@ document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key =
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-10-12d';   // 更新日（版）
+const VERSION = '2026-10-16a';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -998,16 +998,22 @@ async function loadWeeks() {
   return WK;
 }
 /** 今日が第何週か、と画面に出す一言を返す。kind は 'kanji' か 'vocab' */
+/* コースの画面で「◀ 前の週」を見ている最中に来たときは、
+   その**下見している週**を出す。入っていなければ 今日の週。
+   これが無いと、第4週を下見して「今週ひらくもの」を押しても
+   **今週（第5週）の分が出てしまう**（2026-10-16 に気づいた）。 */
+let WKVIEW = null;
 function weekState(kind) {
   const p = String(WK.start || '').split('-');
   if (p.length !== 3) return { msg: '週の予定が 読めませんでした ／ Data minggu tidak terbaca' };
   const m1 = new Date(+p[0], +p[1] - 1, +p[2]);
   const t = new Date(); t.setHours(0, 0, 0, 0);
   const d = Math.floor((t - m1) / 86400000), total = WK.total || 30;
-  if (d < 0) return { msg: '新人コースは ' + (m1.getMonth() + 1) + '月' + m1.getDate() +
+  const CN = WK.name || 'コース';
+  if (WKVIEW === null && d < 0) return { msg: CN + 'は ' + (m1.getMonth() + 1) + '月' + m1.getDate() +
     '日 からです。それまでは「すべて」で つかってください' };
-  const n = Math.floor(d / 7) + 1;
-  if (n > total) return { msg: '新人コースの' + total + '週は 終わりました。「すべて」で つかってください' };
+  const n = WKVIEW !== null ? WKVIEW : Math.floor(d / 7) + 1;
+  if (n > total) return { msg: CN + 'の' + total + '週は 終わりました。「すべて」で つかってください' };
   const list = (WK[kind] || {})[String(n)];
   const name = kind === 'kanji' ? '漢字' : '語彙';
   if (!list || !list.length) {
@@ -1021,7 +1027,7 @@ function weekState(kind) {
       '「まちがえたところ」を 見て ください ／ Minggu ' + n + '：tidak ada materi baru' };
     return { msg: '第' + n + '週は ' + name + 'の 予定が ありません' };
   }
-  const cn = WK.name ? '【' + WK.name + '】' : '';
+  const cn = (WK.name ? '【' + WK.name + '】' : '') + (WKVIEW !== null ? '〈下見〉' : '');
   return { list: list, msg: cn + '第' + n + '週の ' + name + ' ' + list.length +
     (kind === 'kanji' ? '字' : '語') + 'だけを 出しています（レベルの ボタンは 効きません）' +
     '／ Minggu ' + n + '：' + list.length };
@@ -1099,7 +1105,10 @@ const WKAUTO = 'jlpt-week-open';
 function autoWeek() {
   let f = null;
   try { f = localStorage.getItem(WKAUTO); localStorage.removeItem(WKAUTO); } catch (e) {}
-  if (f !== '1') return;
+  /* '1' ＝ 今日の週。'w12' ＝ 第12週を下見している。 */
+  const v = /^w(\d+)$/.exec(f || '');
+  if (v) WKVIEW = +v[1];
+  else if (f !== '1') return;
   /* 自動で開いたことを 伝える（新しい分が無い週は「要復習」に寄せるため） */
   const auto = el => { if (!el) return; const e = new MouseEvent('click'); e.__auto = true; el.dispatchEvent(e); };
   auto($('#wkBtn'));

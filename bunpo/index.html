@@ -415,7 +415,7 @@ const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-grammar-progress-v1', LANGKEY = 'jlpt-kanji-lang';
 /* 版（更新日）。grammar.json の "app_version" と必ず同じ値にすること。
    ずれていると、アプリが「古いHTMLを表示している」と判断して自動で読み込み直します。 */
-const VERSION = '2026-10-12d';
+const VERSION = '2026-10-16a';
 
 let DATA = [], BYID = {}, LEVELS = [], CATS = [];
 /* レベルごとの読み込み用。IDXFILES=目次、LOADED=読み込みずみのレベル、
@@ -499,6 +499,11 @@ async function loadWeeks() {
   else WK = j || { start: null, weeks: {} };
   return WK;
 }
+/* コースの画面で「◀ 前の週」を見ている最中に来たときは、
+   その**下見している週**を出す。入っていなければ 今日の週。
+   これが無いと、前の週を下見して「今週ひらくもの」を押しても
+   **今週の分が出てしまう**（2026-10-16 に気づいた）。 */
+let WKVIEW = null;
 /** 今日が第何週か、と画面に出す一言を返す */
 function weekState() {
   const p = String(WK.start || '').split('-');
@@ -506,10 +511,11 @@ function weekState() {
   const m1 = new Date(+p[0], +p[1] - 1, +p[2]);
   const t = new Date(); t.setHours(0, 0, 0, 0);
   const d = Math.floor((t - m1) / 86400000), total = WK.total || 30;
-  if (d < 0) return { msg: '新人コースは ' + (m1.getMonth() + 1) + '月' + m1.getDate() +
+  const CN = WK.name || 'コース';
+  if (WKVIEW === null && d < 0) return { msg: CN + 'は ' + (m1.getMonth() + 1) + '月' + m1.getDate() +
     '日 からです。それまでは「すべて」で つかってください' };
-  const n = Math.floor(d / 7) + 1;
-  if (n > total) return { msg: '新人コースの' + total + '週は 終わりました。「すべて」で つかってください' };
+  const n = WKVIEW !== null ? WKVIEW : Math.floor(d / 7) + 1;
+  if (n > total) return { msg: CN + 'の' + total + '週は 終わりました。「すべて」で つかってください' };
   const ids = WK.weeks[String(n)];
   /* 「この時期は漢字・語彙が中心」と決めつけない。コースによって理由がちがう。 */
   if (!ids || !ids.length) {
@@ -522,7 +528,7 @@ function weekState() {
     return { msg: cn0 +
       '第' + n + '週は、新しい 文型の 予定が ありません ／ Minggu ' + n + ': tidak ada pola baru' };
   }
-  const cn = WK.name ? '【' + WK.name + '】' : '';
+  const cn = (WK.name ? '【' + WK.name + '】' : '') + (WKVIEW !== null ? '〈下見〉' : '');
   return { ids: ids, msg: cn + '第' + n + '週の 文型 ' + ids.length + '項目だけを 出しています' +
     '（レベルの ボタンは 効きません）／ Minggu ' + n + '：' + ids.length + ' pola' };
 }
@@ -541,7 +547,10 @@ const WKAUTO = 'jlpt-week-open';
 function autoWeek() {
   let f = null;
   try { f = localStorage.getItem(WKAUTO); localStorage.removeItem(WKAUTO); } catch (e) {}
-  if (f !== '1') return;
+  /* '1' ＝ 今日の週。'w12' ＝ 第12週を下見している。 */
+  const v = /^w(\d+)$/.exec(f || '');
+  if (v) WKVIEW = +v[1];
+  else if (f !== '1') return;
   /* 自動で開いたことを 伝える（新しい分が無い週は「要復習」に寄せるため） */
   const b = $('#wkBtn');
   if (b) { const e = new MouseEvent('click'); e.__auto = true; b.dispatchEvent(e); }

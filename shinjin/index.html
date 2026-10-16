@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-10-12d';
+  var PAGE_VER = '2026-10-16a';
   var KEY = 'reloaded-for-shinjin';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -462,6 +462,18 @@ function md(d){ return (d.getMonth() + 1) + '/' + d.getDate(); }
 var viewW = null;
 var TODAY = null;
 
+/** 「今週ひらくもの」に渡す印。'1' ＝ きょうの週、'w12' ＝ 第12週を下見中。
+
+    **この関数が要る理由**：押したときの処理は init() の中にあって、
+    renderWeek() の中の realW・w は そこからは見えない。
+    見えないまま書いて、try/catch が ReferenceError を飲みこみ、
+    **印が1つも渡らなくなっていた**（2026-10-16・実機で見つけた）。 */
+function openWeekFlag(){
+  if (!TODAY) return '1';
+  var rw = weekNo(TODAY);
+  return (viewW !== null && viewW !== rw) ? ('w' + viewW) : '1';
+}
+
 function renderWeek(today){
   var realW = weekNo(today);
   var w = viewW !== null ? viewW : realW;
@@ -665,8 +677,11 @@ function init(){
     a.addEventListener('click', function(){
       try {
         localStorage.setItem('jlpt-course', 'shinjin');
-        /* 漢字・語彙・文型は「今週の分だけ」を入れた状態で開く */
-        if (/kanji\.html|bunpo/.test(a.getAttribute('href'))) localStorage.setItem('jlpt-week-open', '1');
+        /* 漢字・語彙・文型は「今週の分だけ」を入れた状態で開く。
+           **下見中は その週の番号を渡す。**渡さないと、第4週を下見して
+           押しても 今週（第5週）の分が出てしまう（2026-10-16）。 */
+        if (/kanji\.html|bunpo/.test(a.getAttribute('href')))
+          localStorage.setItem('jlpt-week-open', openWeekFlag());
         if (a.dataset.lvkey) localStorage.setItem(a.dataset.lvkey, a.dataset.lv);
       } catch(e) {}
     });
