@@ -252,6 +252,67 @@ for (const [url, name, wait] of [
   await c.close();
 }
 
+/* ───────── コースの週めくりと、その週の受けわたし ─────────
+   「◀ 前の週」で下見した週が、**漢字の画面にちゃんと渡るか**を見る。
+   渡らないと、第4週を下見して「今週ひらくもの」を押しても
+   今週の分が出てしまう。実際そうなっていた（2026-10-16）。
+   しかも押したときの処理は try/catch の中にあり、
+   **まちがえても画面には何も出ない**。だから機械で見張る。 */
+for (const [url, name, nav, prev, now, link, total, time] of [
+  ['/shinjin/index.html', '新人コース', '#weekNav', '#weekPrev', '#weekNow',
+   '#today a[href*="kanji.html"], #rest a[href*="kanji.html"]', 30, '2027-01-06T09:00:00+09:00'],
+  ['/n2/index.html', 'N2コース', '#wkNav', '#wkPrev', '#wkNow',
+   '#wkApps a[data-open="week"]', 66, null],
+]) {
+  say('\n【' + name + '：週めくり】');
+  const { c, p, errs } = await newPage(b, url, { wait: 3000, time });
+  const navTxt = async () => (await p.$eval(nav, e => e.innerText.replace(/\s+/g, ' ').trim()));
+  const weekOf = s => { const m = /第(\d+)週/.exec(s); return m ? +m[1] : null; };
+  if (!(await p.$(nav))) { bad(name + '：前の週・次の週のボタンが無い'); await c.close(); continue; }
+  const w0 = weekOf(await navTxt());
+  if (!w0) { bad(name + '：いま第何週かが出ていない'); await c.close(); continue; }
+  say('   いま 第' + w0 + '週 ／ 全' + total + '週');
+  if (!new RegExp('全' + total + '週').test(await navTxt()))
+    bad(name + '：全' + total + '週と出ていない');
+  /* 2つ戻る → 下見の帯が出る */
+  await p.click(prev); await p.waitForTimeout(500);
+  await p.click(prev); await p.waitForTimeout(700);
+  const w2 = weekOf(await navTxt());
+  if (w2 !== w0 - 2) bad(name + '：2回もどったのに 第' + w2 + '週（第' + (w0 - 2) + '週のはず）');
+  const pre = await p.evaluate(() => {
+    const e = document.querySelector('#weekPre, #wkPre');
+    return e && e.style.display !== 'none' ? e.innerText.replace(/\s+/g, ' ') : '';
+  });
+  if (!/下見/.test(pre)) bad(name + '：下見だと画面に書いていない（きょうの分とまちがえる）');
+  /* その週が漢字の画面に渡るか */
+  if (await p.$(link)) {
+    await p.click(link);
+    await p.waitForLoadState('load'); await p.waitForTimeout(3500);
+    const msg = await p.evaluate(() => {
+      const m = document.getElementById('wkMsg'); return m && !m.hidden ? m.innerText : '';
+    });
+    say('   漢字の帯 ' + (msg.slice(0, 56) || '(出ていない)'));
+    if (!msg) bad(name + '：下見した週を開いても「今週の分だけ」が効いていない');
+    else if (weekOf(msg) !== w2)
+      bad(name + '：下見は第' + w2 + '週なのに、漢字の画面は第' + weekOf(msg) + '週を出している');
+    const cnt = +((await p.evaluate(() => document.getElementById('cnt')?.textContent || '')).replace(/\D/g, '') || 0);
+    if (cnt > 300) bad(name + '：下見した週なのに ' + cnt + '字 出ている（絞れていない）');
+  } else bad(name + '：漢字をひらくボタンが見つからない');
+  /* 戻る → 今週に戻り、帯が消える */
+  await p.goBack(); await p.waitForTimeout(2500);
+  if (await p.$(now)) {
+    await p.click(now); await p.waitForTimeout(600);
+    if (weekOf(await navTxt()) !== w0) bad(name + '：「今週にもどる」で今週に戻らない');
+    const still = await p.evaluate(() => {
+      const e = document.querySelector('#weekPre, #wkPre');
+      return !!(e && e.style.display !== 'none');
+    });
+    if (still) bad(name + '：今週に戻ったのに 下見の帯が残っている');
+  }
+  if (errs.length) bad(name + '：JSのエラー ' + errs[0]);
+  await c.close();
+}
+
 await b.close();
 say('\n' + '='.repeat(60));
 say('おかしいところ ' + ng.length + '件');

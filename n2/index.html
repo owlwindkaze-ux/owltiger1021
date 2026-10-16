@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-10-12d';
+  var PAGE_VER = '2026-10-16a';
   var KEY = 'reloaded-for-n2';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -30,6 +30,15 @@
 .wklb{font-size:.72rem;font-weight:800;letter-spacing:.08em;color:#332e91}
 .wkttl{font-size:1.15rem;font-weight:800;margin:.15rem 0 .3rem}
 .wksub{font-size:.82rem;color:#332e91;font-weight:700;margin-bottom:.4rem}
+/* 前の週・次の週（新人コースと同じ作り・同じ言い方にそろえてある） */
+.wnav{display:flex;align-items:center;gap:.5rem;margin:.5rem 0 .2rem}
+.wnav .wnum{font-size:.8rem;color:#332e91;font-weight:700;flex:1;text-align:center}
+.wbtn{border:1.5px solid #c7c9e8;background:#fff;border-radius:9px;padding:.3rem .6rem;
+  font-size:.82rem;font-weight:700;color:var(--ink);font-family:inherit;cursor:pointer}
+.wbtn:disabled{opacity:.35}
+.wpre .wbtn{margin-left:.4rem;border-color:#fdba74;color:#9a3412}
+.wpre{margin:.5rem 0 .2rem;padding:.55rem .7rem;border-radius:10px;background:#fff7ed;
+  border:1.5px solid #fdba74;color:#9a3412;font-size:.85rem;line-height:1.7}
 .wkprog{font-size:.85rem;font-weight:800;color:#332e91;margin:.4rem 0 .2rem}
 .wknote{font-size:.83rem;color:#55606c;margin-top:.6rem;border-top:1px dashed #c7c9e8;padding-top:.5rem}
 ul.chk{list-style:none;margin:0;padding:0}
@@ -214,6 +223,8 @@ button.act.ghost{background:#fff;color:var(--acc)}
       <div class="wklb">MINGGU INI ／ 今週やること</div>
       <div class="wkttl" id="wkTtl">　</div>
       <div class="wksub" id="wkSub"></div>
+      <div class="wnav" id="wkNav"></div>
+      <div class="wpre" id="wkPre" style="display:none"></div>
       <div class="wkprog" id="wkProg"></div>
       <ul class="chk" id="wkList"></ul>
       <p class="wknote" id="wkNote"></p>
@@ -489,20 +500,54 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
     document.getElementById('wkPaperBody').innerHTML = h;
   }
 
+  /* いま下見している週。null なら「今日の週」。
+     新人コースと同じ作り・同じ言い方にそろえてある。 */
+  var viewW = null;
+
+  /** ◀ 前の週 ／ 次の週 ▶ と、下見中の帯を出す */
+  function drawNav(cur, realW){
+    var nav = document.getElementById('wkNav'), pre = document.getElementById('wkPre');
+    if (nav){
+      nav.innerHTML =
+        '<button type="button" class="wbtn" id="wkPrev"'+(cur<=1?' disabled':'')+'>◀ 前の週</button>'
+      + '<span class="wnum">第'+cur+'週 ／ 全'+W.total+'週</span>'
+      + '<button type="button" class="wbtn" id="wkNext"'+(cur>=W.total?' disabled':'')+'>次の週 ▶</button>';
+      var go = function(n){ viewW = Math.min(W.total, Math.max(1, n)); render(); };
+      var pv = document.getElementById('wkPrev'), nx = document.getElementById('wkNext');
+      if (pv) pv.onclick = function(){ go(cur-1); };
+      if (nx) nx.onclick = function(){ go(cur+1); };
+    }
+    /* 下見だと はっきり書く。書かないと「きょうやるもの」と まちがえる */
+    if (pre){
+      if (viewW !== null && viewW !== realW){
+        pre.style.display = '';
+        pre.innerHTML = '<b>下見です。</b>いま進んでいるのは '
+          + (realW > 0 ? '<b>第'+realW+'週</b>' : (realW === 0 ? '<b>開始前</b>' : '<b>終了後</b>'))
+          + 'です。<button type="button" id="wkNow" class="wbtn">今週にもどる</button>';
+        var nw = document.getElementById('wkNow');
+        if (nw) nw.onclick = function(){ viewW = null; render(); };
+      } else pre.style.display = 'none';
+    }
+  }
+
   function render(){
-    var w = weekNo(), box = document.getElementById('wkTtl');
+    var realW = weekNo(), box = document.getElementById('wkTtl');
     if (!box) return;
+    var w = viewW !== null ? viewW : realW;
     if (w === 0){
       var m1 = mondayOf(W.start, 1);
       document.getElementById('wkTtl').textContent = '（まだ始まっていません）';
       document.getElementById('wkSub').textContent = (m1.getMonth()+1)+'月'+m1.getDate()+'日（月）から始まります';
+      drawNav(1, realW);
       return;
     }
     if (w === -1){
       document.getElementById('wkTtl').textContent = '（全'+W.total+'週が終わりました）';
       document.getElementById('wkSub').textContent = 'おつかれさまでした';
+      drawNav(W.total, realW);
       return;
     }
+    drawNav(w, realW);
     var ph = phaseOf(w), mo = mondayOf(W.start, w), su = new Date(mo.getTime()+6*86400000);
     document.getElementById('wkTtl').textContent = '第'+w+'週　第'+ph.no+'期　'+ph.name;
     document.getElementById('wkSub').textContent = md(mo)+'（月）〜 '+md(su)+'（日）';
@@ -594,8 +639,12 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
       a.addEventListener('click', function(){
         try {
           localStorage.setItem(COURSEKEY, 'n2');
-          /* 漢字・語彙・文型は「今週の分だけ」を入れた状態で開く */
-          if (a.dataset.open === 'week')   localStorage.setItem('jlpt-week-open', '1');
+          /* 漢字・語彙・文型は「今週の分だけ」を入れた状態で開く。
+             **下見中は その週の番号を渡す。**渡さないと、第4週を下見して
+             押しても 今週の分が出てしまう（2026-10-16）。 */
+          if (a.dataset.open === 'week')
+            localStorage.setItem('jlpt-week-open',
+              (viewW !== null && viewW !== realW) ? ('w' + w) : '1');
           if (a.dataset.open === 'review') localStorage.setItem('jlpt-review-open', '1');
           if (a.dataset.lvkey) localStorage.setItem(a.dataset.lvkey, a.dataset.lv);
         } catch(e){}
