@@ -7,6 +7,7 @@
    "total": 30,
    "weeks": {
     "5": [
+     "n4-futsuukei",
      "n4-tara",
      "n4-to-jouken",
      "n4-ba",
@@ -21,10 +22,10 @@
      "n4-te-kuremasu",
      "n4-te-moraimasu",
      "n4-te-itadakemasenka",
-     "n4-te-okimasu",
-     "n4-te-arimasu"
+     "n4-te-okimasu"
     ],
     "6": [
+     "n4-te-arimasu",
      "n4-te-shimaimasu",
      "n4-te-mimasu",
      "n4-yasui-nikui",
