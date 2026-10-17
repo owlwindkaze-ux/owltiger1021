@@ -1,7 +1,7 @@
 {
  "name": "JLPT N5–N2 文型データ（介護版）— 目次",
  "version": "2026-09-15c",
- "app_version": "2026-10-16a",
+ "app_version": "2026-10-17a",
  "languages": [
   "ja",
   "id",
@@ -24,7 +24,7 @@
   {
    "file": "grammar-n4.json",
    "level": "N4",
-   "count": 121
+   "count": 122
   },
   {
    "file": "grammar-n3.json",
@@ -76,10 +76,10 @@
  ],
  "level_totals": {
   "N5": 76,
-  "N4": 121,
+  "N4": 122,
   "N3": 153,
   "N2": 172,
   "記録": 33
  },
- "total": 466
+ "total": 467
 }
