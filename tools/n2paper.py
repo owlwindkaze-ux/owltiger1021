@@ -144,16 +144,17 @@ def split_choices(ln):
 
 def unit_blocks(text, want):
     """第N単元 の かたまりを 取り出す。want が None なら 全部。"""
-    ms = list(re.finditer(r'^# \*\*第(\d+)単元　(.+?)\*\*$', text, re.M))
+    # 月末確認（冊子の最後の初見10問）も 同じ形で組む。単元番号は 0 であつかう。
+    ms = list(re.finditer(r'^# \*\*(?:第(\d+)単元　(.+?)|(.*?月末確認.*?))\*\*$', text, re.M))
     if not ms:
         raise SystemExit('× 「# **第N単元　…**」の見出しが 見つかりません。')
     out = []
     for i, m in enumerate(ms):
-        n = int(m.group(1))
+        n = int(m.group(1)) if m.group(1) else 0
         if want is not None and n != want:
             continue
         end = ms[i + 1].start() if i + 1 < len(ms) else len(text)
-        out.append((n, m.group(2), text[m.end():end]))
+        out.append((n, m.group(2) or m.group(3), text[m.end():end]))
     if not out:
         raise SystemExit('× 第%s単元が 見つかりません（あるのは %s）'
                          % (want, '・'.join(m.group(1) for m in ms)))
@@ -166,8 +167,9 @@ def build(num, title, body):
     # **1単元＝1かたまり。**冊子にまとめたとき、ここで改ページする
     A('<section class="unit">')
     goal = re.search(r'^学習目標：(.+)$', body, re.M)
-    A('<h1>第%d単元　%s<small>%s</small></h1>'
-      % (num, esc(title), esc(goal.group(1)) if goal else ''))
+    A('<h1>%s<small>%s</small></h1>'
+      % (('第%d単元　%s' % (num, esc(title))) if num else esc(title),
+         esc(goal.group(1)) if goal else ''))
     A(HEAD)
 
     lines = body.split('\n')
@@ -257,7 +259,7 @@ def main():
     parts, names = [], []
     for num, title, body in blocks:
         parts.append(build(num, title, body))
-        names.append('第%d単元「%s」' % (num, title))
+        names.append(('第%d単元「%s」' % (num, title)) if num else title)
     html = wrap(parts, '／'.join(names))
     io.open(a[1], 'w', encoding='utf-8').write(html)
     nq = html.count('class="qn"')
@@ -265,9 +267,12 @@ def main():
     for n in names:
         print('  ' + n)
     print('  問 %d（%d単元）' % (nq, len(blocks)))
-    if nq < 10 * len(blocks):
-        raise SystemExit('× 問題が 少なすぎます（%d問／%d単元）。'
-                         'ドキュメントの作りが 変わった可能性があります。' % (nq, len(blocks)))
+    want_q = sum(10 if n == 0 else 20 for n, _, _ in blocks)
+    if nq != want_q:
+        raise SystemExit('× 問題の数が 合いません（%d問・%d問のはず）。'
+                         '写し落としか、ドキュメントの作りが 変わった可能性があります。'
+                         % (nq, want_q))
+    print('  問の数：%d（ちょうど）' % nq)
     return 0
 
 
