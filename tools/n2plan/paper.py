@@ -54,7 +54,13 @@ U = collections.OrderedDict([
  (14, ('12月', '年末総合', 'わけではない、からこそ、にしても',
        ['n3-wake-dewa-nai', 'n3-dakara-koso', 'n3-ni-shitemo'])),
 ])
-PACKS = ['9月後半', '10月', '11月', '12月']
+# 冊子の名前。**月の名前はやめた**（2026-10-18）。
+# 4か月分として作った冊子を、文型の順に並べ替えて**7か月かけて**配るので、
+# 月の名前と実際に使う月が合うのは 14単元のうち **1つだけ**だった。
+# 「1月なのに9月の冊子」という矛盾が起きる。Driveの名前も合わせて変えた。
+# **名前は単元の範囲から作る。**手で書くと、単元を足したときにずれる。
+def pack_name(units):
+    return '第%d〜%d単元' % (min(units), max(units))
 FIRST, STEP = 8, 2          # 第8週から 2週に1単元（1単元＝A〜Fの6学習日・約4時間）
 CHECK_FROM = 36             # 月末確認4回は 模試期（第40週〜）の直前に置く
 
@@ -71,6 +77,13 @@ def main():
     for u, (_, _, _, ids) in U.items():
         need[u] = max([week_of.get(i, 0) for i in ids])
 
+    # もとの4冊が どの単元を持っているかを 単元表から集め、冊子名を作り直す
+    books = collections.OrderedDict()
+    for u, (pk, _, _, _) in U.items():
+        books.setdefault(pk, []).append(u)
+    PACKS = [pack_name(v) for v in books.values()]
+    PACK_OF = {u: pack_name(v) for v in books.values() for u in v}
+
     # 前提の早い順に並べ、習い終わった **次の週以降** に 2週おきで置く
     order = sorted(U, key=lambda u: (need[u], u))
     weeks, w = collections.OrderedDict(), FIRST
@@ -78,7 +91,7 @@ def main():
         w = max(w, need[u] + 1)
         pack, ttl, aim, _ = U[u]
         weeks[str(w)] = collections.OrderedDict(
-            [('unit', u), ('pack', pack), ('title', ttl), ('aim', aim)])
+            [('unit', u), ('pack', PACK_OF[u]), ('title', ttl), ('aim', aim)])
         w += STEP
     last = max(int(x) for x in weeks)
     assert last < CHECK_FROM, '単元が月末確認の週まで はみ出した（第%d週）' % last
@@ -90,9 +103,9 @@ def main():
     assert CHECK_FROM + len(PACKS) - 1 < j['phases'][3]['from'], '月末確認が模試期に かかった'
     j['paper'] = collections.OrderedDict([
      ('note', '紙の月別パックの割り当て。単元の順番は システムの文型順に 並べ替えてある。'
-              '紙の「9月後半・10月…」は ファイルの名前で、予定ではない。'
+              '冊子は4冊。名前は 中に入っている単元の範囲（第1〜2単元 など）。'
               'もとは tools/n2plan/paper.py。'),
-     ('folder', 'Google ドライブ ＞ 日本語の勉強 ＞ N2学習教材_2026年9月-12月'),
+     ('folder', 'Google ドライブ ＞ 日本語の勉強 ＞ N2学習教材_全14単元'),
      ('unitdays', 'A〜Fの6学習日（勤務日4日＋公休2日）・合わせて約4時間'),
      ('how', ['A〔40分〕問1〜8　　B〔40分〕問9〜13　　C〔40分〕問16〜19',
               'D〔40分〕問14〜15　　E〔公休90分〕問20と読み直し　　F〔公休45分〕前の単元の直し',
