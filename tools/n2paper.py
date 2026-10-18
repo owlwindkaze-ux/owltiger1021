@@ -38,7 +38,13 @@ h2{font-size:12.5pt;color:#332e91;margin:8mm 0 4mm;padding:2mm 3mm;
 .head{border:1px solid #c7c9e8;background:#fbfcfd;padding:3mm 4mm;margin:0 0 5mm;
  font-size:10pt;line-height:1.9}
 .head b{color:#332e91}
-.head .ln{display:block;margin-top:2mm}
+.head .ln{display:block;margin-top:3mm}
+.head ruby rt{font-size:.5em;font-weight:400;color:#6b7686;line-height:1}
+.id{display:block;color:#2b4a63;font-size:9pt;font-style:italic;
+ line-height:1.65;margin-top:.8mm}
+/* **単元ごとに改ページ。**1冊にまとめても 単元の切れ目が はっきりする */
+.unit{break-before:page;page-break-before:always}
+.unit:first-of-type{break-before:auto;page-break-before:auto}
 .q{break-inside:avoid;page-break-inside:avoid;margin:0 0 7mm;
  border-bottom:1px dashed #d7dbe8;padding-bottom:4mm}
 .q:last-child{border-bottom:0}
@@ -67,16 +73,37 @@ footer{margin-top:7mm;border-top:1px solid #dfe4ee;padding-top:2mm;
 '''
 
 # **学習者に要る案内だけ。**残りは職員用なので 指導者用の紙へ。
+# **ふりがなと インドネシア語を 全行に付ける**（2026-10-18）。
+# 持ち主から「**最初の説明は実習生が読めますか**」。
+# 読めない語があった ── 聴解・即時応答・台本。
+# 問題文には ふりがなを付けない。**漢字読みの問題が 答えになってしまう**ため。
+R_ = lambda k, y: '<ruby>%s<rt>%s</rt></ruby>' % (k, y)
 HEAD = '''<div class="head">
-<b>なまえ（Nama）</b>　＿＿＿＿＿＿＿＿＿＿＿＿＿＿
-<b>はじめた日</b>　＿＿＿＿年＿＿月＿＿日
-<span class="ln">① <b>さいしょは 辞書と 答えを 見ないで 解きます。</b>
-解き直すときは 使ってかまいません。<br>
-<i>Kerjakan dahulu tanpa kamus atau kunci jawaban.</i></span>
-<span class="ln">② 答えは <b>1〜4から一つ</b>。聴解の「即時応答」だけ <b>1〜3から一つ</b>。</span>
-<span class="ln">③ <b>★</b>の問題は、四つを全部つかって文を作り、
-<b>★の場所に入る番号</b>を書きます。</span>
-<span class="ln">④ 聴解は <b>1回だけ</b>聞いて答えます。答えてから 台本を見ます。</span>
+<b>なまえ（Nama）</b>　＿＿＿＿＿＿＿＿＿＿＿＿＿＿　
+<b>はじめた日（Tanggal mulai）</b>　＿＿＿＿年＿＿月＿＿日
+<span class="ln">① <b>さいしょは <ruby>辞書<rt>じしょ</rt></ruby>と
+<ruby>答<rt>こた</rt></ruby>えを <ruby>見<rt>み</rt></ruby>ないで
+<ruby>解<rt>と</rt></ruby>きます。</b>
+<ruby>解<rt>と</rt></ruby>き<ruby>直<rt>なお</rt></ruby>すときは
+<ruby>使<rt>つか</rt></ruby>ってかまいません。
+<i class="id">Kerjakan dahulu tanpa kamus dan kunci jawaban.
+Saat meninjau ulang, boleh dipakai.</i></span>
+<span class="ln">② <ruby>答<rt>こた</rt></ruby>えは <b>1〜4から<ruby>一<rt>ひと</rt></ruby>つ</b>。
+<ruby>聴解<rt>ちょうかい</rt></ruby>（<ruby>聞<rt>き</rt></ruby>く<ruby>問題<rt>もんだい</rt></ruby>）の
+「<ruby>即時応答<rt>そくじおうとう</rt></ruby>」だけ <b>1〜3から<ruby>一<rt>ひと</rt></ruby>つ</b>。
+<i class="id">Pilih satu dari 1–4. Khusus soal respons singkat (menyimak), pilih dari 1–3.</i></span>
+<span class="ln">③ <b>★</b>の<ruby>問題<rt>もんだい</rt></ruby>は、
+<ruby>四<rt>よっ</rt></ruby>つを<ruby>全部<rt>ぜんぶ</rt></ruby>つかって
+<ruby>文<rt>ぶん</rt></ruby>を<ruby>作<rt>つく</rt></ruby>り、
+<b>★の<ruby>場所<rt>ばしょ</rt></ruby>に<ruby>入<rt>はい</rt></ruby>る<ruby>番号<rt>ばんごう</rt></ruby></b>を
+<ruby>書<rt>か</rt></ruby>きます。
+<i class="id">Untuk soal ★, susun semua empat bagian menjadi kalimat,
+lalu tulis nomor bagian yang ada di posisi ★.</i></span>
+<span class="ln">④ <ruby>聴解<rt>ちょうかい</rt></ruby>は <b>1<ruby>回<rt>かい</rt></ruby>だけ</b>
+<ruby>聞<rt>き</rt></ruby>いて<ruby>答<rt>こた</rt></ruby>えます。
+<ruby>答<rt>こた</rt></ruby>えてから <ruby>台本<rt>だいほん</rt></ruby>（<ruby>文<rt>ぶん</rt></ruby>）を
+<ruby>見<rt>み</rt></ruby>ます。
+<i class="id">Dengarkan satu kali lalu jawab. Naskahnya dilihat setelah menjawab.</i></span>
 </div>'''
 
 
@@ -116,24 +143,28 @@ def split_choices(ln):
 
 
 def unit_blocks(text, want):
-    """第N単元 の かたまりを 取り出す"""
+    """第N単元 の かたまりを 取り出す。want が None なら 全部。"""
     ms = list(re.finditer(r'^# \*\*第(\d+)単元　(.+?)\*\*$', text, re.M))
     if not ms:
         raise SystemExit('× 「# **第N単元　…**」の見出しが 見つかりません。')
+    out = []
     for i, m in enumerate(ms):
-        if int(m.group(1)) != want:
+        n = int(m.group(1))
+        if want is not None and n != want:
             continue
         end = ms[i + 1].start() if i + 1 < len(ms) else len(text)
-        return int(m.group(1)), m.group(2), text[m.end():end]
-    raise SystemExit('× 第%d単元が 見つかりません（あるのは %s）'
-                     % (want, '・'.join(m.group(1) for m in ms)))
+        out.append((n, m.group(2), text[m.end():end]))
+    if not out:
+        raise SystemExit('× 第%s単元が 見つかりません（あるのは %s）'
+                         % (want, '・'.join(m.group(1) for m in ms)))
+    return out
 
 
 def build(num, title, body):
     o = []
     A = o.append
-    A('<!doctype html><html lang="ja"><head><meta charset="utf-8">')
-    A('<title>第%d単元</title><style>%s</style></head><body>' % (num, CSS))
+    # **1単元＝1かたまり。**冊子にまとめたとき、ここで改ページする
+    A('<section class="unit">')
     goal = re.search(r'^学習目標：(.+)$', body, re.M)
     A('<h1>第%d単元　%s<small>%s</small></h1>'
       % (num, esc(title), esc(goal.group(1)) if goal else ''))
@@ -203,26 +234,40 @@ def build(num, title, body):
     A('<footer>この紙は ドキュメントの中身を 並べ直したものです。'
       '問題・選択肢の 文は 変えていません。'
       '（職員向けの進め方・聴解の実施方法は 指導者用の紙にあります）</footer>')
-    A('</body></html>')
+    A('</section>')
     return '\n'.join(o)
+
+
+def wrap(parts, title):
+    return ('<!doctype html><html lang="ja"><head><meta charset="utf-8">'
+            '<title>%s</title><style>%s</style></head><body>%s</body></html>'
+            % (esc(title), CSS, '\n'.join(parts)))
 
 
 def main():
     a = [x for x in sys.argv[1:] if not x.startswith('--')]
     if len(a) < 2:
         raise SystemExit(__doc__)
-    want = 1
+    want = None
     if '--unit' in sys.argv:
-        want = int(sys.argv[sys.argv.index('--unit') + 1])
+        v = sys.argv[sys.argv.index('--unit') + 1]
+        want = None if v == 'all' else int(v)
     text = io.open(a[0], encoding='utf-8').read()
-    num, title, body = unit_blocks(text, want)
-    html = build(num, title, body)
+    blocks = unit_blocks(text, want)
+    parts, names = [], []
+    for num, title, body in blocks:
+        parts.append(build(num, title, body))
+        names.append('第%d単元「%s」' % (num, title))
+    html = wrap(parts, '／'.join(names))
     io.open(a[1], 'w', encoding='utf-8').write(html)
     nq = html.count('class="qn"')
-    print('書きました: %s（第%d単元「%s」・問%d）' % (a[1], num, title, nq))
-    if nq < 10:
-        raise SystemExit('× 問題が %d問しか 取れていません。'
-                         'ドキュメントの作りが 変わった可能性があります。' % nq)
+    print('書きました: %s' % a[1])
+    for n in names:
+        print('  ' + n)
+    print('  問 %d（%d単元）' % (nq, len(blocks)))
+    if nq < 10 * len(blocks):
+        raise SystemExit('× 問題が 少なすぎます（%d問／%d単元）。'
+                         'ドキュメントの作りが 変わった可能性があります。' % (nq, len(blocks)))
     return 0
 
 
