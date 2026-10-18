@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-10-18c';
+  var PAGE_VER = '2026-10-18d';
   var KEY = 'reloaded-for-n2';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -452,9 +452,11 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
         var q = W.paper && W.paper.weeks[String(z)];
         if (q && q.unit) { nx = {w:z, u:q.unit, t:q.title}; break; }
       }
-      out.push({k:'', t:'📄 紙のパックは 今週 ありません',
-                n: nx ? ('つぎは <b>第'+nx.w+'週</b>の <b>第'+nx.u+'単元</b>「'+nx.t+'」です')
-                      : '紙の単元は すべて 終わりました'});
+      /* **紙が ぜんぶ 終わったあとは、この行を 出さない。**
+         1週に1単元にしたので 第25週で終わる。そのあと40週ちかく
+         「ありません」が出続けるのは じゃまなだけ（2026-10-18）。 */
+      if (nx) out.push({k:'', t:'📄 紙のパックは 今週 ありません',
+                n: 'つぎは <b>第'+nx.w+'週</b>の <b>第'+nx.u+'単元</b>「'+nx.t+'」です'});
     }
     if (pp && pp.unit) out.push({k:'', t:'📄 紙のパック 第'+pp.unit+'単元「'+pp.title+'」（'+pp.pack+'の冊子）',
                                  /* unitdays に すでに「A〜Fの6学習日」が入っている。

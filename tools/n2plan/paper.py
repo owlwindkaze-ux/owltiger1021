@@ -61,8 +61,82 @@ U = collections.OrderedDict([
 # **名前は単元の範囲から作る。**手で書くと、単元を足したときにずれる。
 def pack_name(units):
     return '第%d〜%d単元' % (min(units), max(units))
-FIRST, STEP = 8, 2          # 第8週から 2週に1単元（1単元＝A〜Fの6学習日・約4時間）
+# **第8週から 1週に1単元。**冊子は「1か月4単元」として作られており、
+# 1単元＝A〜Fの6学習日（勤務日4日＋公休2日）＝ちょうど1週間。
+# 以前は2週に1単元に薄く延ばしていたが、冊子の月と使う月が
+# **+1〜+4か月ずれて**いき、持ち主の判断で冊子どおりに戻した（2026-10-18）。
+FIRST, STEP = 8, 1
 CHECK_FROM = 36             # 月末確認4回は 模試期（第40週〜）の直前に置く
+
+
+SHEET_CSS = """
+@page { size: A4; margin: 13mm 14mm 13mm; }
+body{font-family:"IPAPGothic","IPAGothic","Noto Sans CJK JP",sans-serif;
+ color:#16212b;font-size:10pt;line-height:1.6;margin:0}
+h1{font-size:16pt;color:#332e91;border-bottom:2.5px solid #4338ca;padding-bottom:3px;
+ margin:0 0 1.5mm}
+.sub{color:#4a5b6b;font-size:9.5pt;margin:0 0 3mm}
+table{border-collapse:collapse;width:100%;font-size:10.5pt}
+th,td{border:1px solid #c7c9e8;padding:1.1mm 3mm;text-align:left}
+th{background:#eef2ff;color:#332e91;font-size:10pt}
+td.d{white-space:nowrap;font-variant-numeric:tabular-nums}
+tr.ck td{background:#fbfbfd;color:#4a5b6b;font-size:10pt}
+tr.bk td{background:#f3f4fb;font-weight:700;color:#332e91;font-size:10pt}
+.note{border-left:4px solid #4338ca;background:#eef2ff;padding:2mm 3mm;margin:3mm 0 0;
+ font-size:9pt;line-height:1.7}
+footer{margin-top:3mm;border-top:1px solid #dfe4ee;padding-top:1.5mm;
+ font-size:8pt;color:#6b7686}
+"""
+
+
+def sheet(weeks, start, total):
+    """**単元名と、始まる日だけ**の1枚。冊子と一緒に置く。
+
+    持ち主から「単元名と、その単元名が始まる日がわかればいいのでは」。
+    週番号も冊子の月も、使う人には要らない。**名前と日付だけ。**
+    """
+    import datetime
+    y, m, d = map(int, start.split('-'))
+    S = datetime.date(y, m, d)
+    W = '月火水木金土日'
+    o = ['<!doctype html><html lang="ja"><head><meta charset="utf-8">',
+         '<title>N2 紙のパック 予定表</title><style>%s</style></head><body>' % SHEET_CSS,
+         '<h1>N2 紙のパック　いつ どれを やるか</h1>',
+         '<p class="sub">その日の <b>月曜から</b> はじめます。1単元＝A〜Fの6学習日'
+         '（勤務日4日＋公休2日）＝約4時間。</p>',
+         '<table><tr><th style="width:30%">はじまる日</th>'
+         '<th>やるもの</th></tr>']
+    cur = None
+    for k in sorted(weeks, key=int):
+        v = weeks[k]
+        dt = S + datetime.timedelta(days=(int(k) - 1) * 7)
+        day = '%d年%d月%d日（%s）' % (dt.year, dt.month, dt.day, W[dt.weekday()])
+        bk = v.get('pack') or v.get('check')
+        if bk != cur:
+            o.append('<tr class="bk"><td colspan="2">%sの冊子</td></tr>' % bk)
+            cur = bk
+        if 'unit' in v:
+            o.append('<tr><td class="d">%s</td><td><b>第%d単元</b>　%s</td></tr>'
+                     % (day, v['unit'], v['title']))
+        else:
+            o.append('<tr class="ck"><td class="d">%s</td>'
+                     '<td>月末確認　初見10問（解答25分＋聴解5分）</td></tr>' % day)
+    o.append('</table>')
+    late = [v for v in weeks.values() if v.get('late')]
+    if late:
+        o.append('<div class="note"><b>※ つぎの単元は、システムでまだ習っていない'
+                 '文型が出ます。</b>その場は<b>解説を読むだけでかまいません</b>。'
+                 '先に覚えようとしないでください。<br>'
+                 + '／'.join('第%d単元' % v['unit'] for v in late) + '</div>')
+    last = max(int(k) for k in weeks)
+    end = S + datetime.timedelta(days=(last - 1) * 7 + 6)
+    o.append('<div class="note"><b>紙のパックは %d年%d月%d日で終わります。</b>'
+             'そのあとは 画面（システム）だけで進みます。</div>'
+             % (end.year, end.month, end.day))
+    o.append('<footer>この表は n2/weeks.json から tools/n2plan/paper.py が'
+             '作っています。週の割り当てを変えると この表も変わります。</footer>')
+    o.append('</body></html>')
+    return '\n'.join(o)
 
 
 def main():
@@ -91,9 +165,10 @@ def main():
             late.append((u, w, need[u]))     # 文型をまだ習っていない単元
             # 画面にも出す。黙っていると「習っていないのに出た」と戸惑う
             weeks[str(w)]['late'] = need[u]
-        if u in LAST_OF:                      # 冊子の最後 → 次の週に月末確認
-            weeks[str(w + 1)] = collections.OrderedDict([('check', LAST_OF[u])])
         w += STEP
+        if u in LAST_OF:                      # 冊子の最後 → その次の週に月末確認
+            weeks[str(w)] = collections.OrderedDict([('check', LAST_OF[u])])
+            w += 1
     last = max(int(x) for x in weeks)
 
     P = R + 'n2/weeks.json'
@@ -129,6 +204,11 @@ def main():
             print('  第%-2s週  月末確認（%s）' % (w2, p2['check']))
     print()
     print('文型が追いついていない単元: %d／%d' % (len(late), len(U)))
+    import sys
+    if '--sheet' in sys.argv:
+        q = sys.argv[sys.argv.index('--sheet') + 1]
+        io.open(q, 'w', encoding='utf-8').write(sheet(weeks, j['start'], j['total']))
+        print('予定表を書きました: %s' % q)
     return 0
 
 
