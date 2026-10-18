@@ -71,57 +71,64 @@ def main():
     for w, ids in gw.items():
         for i in ids:
             week_of[i] = int(w)
+    # その単元が前提にする文型を、システムが習い終わる週（注意書きに使う）
+    need = {u: max([week_of.get(i, 0) for i in ids]) for u, (_, _, _, ids) in U.items()}
 
-    # その単元が前提にする文型を、システムが習い終わる週
-    need = {}
-    for u, (_, _, _, ids) in U.items():
-        need[u] = max([week_of.get(i, 0) for i in ids])
-
-    # もとの4冊が どの単元を持っているかを 単元表から集め、冊子名を作り直す
+    # 冊子ごとの単元（冊子の中の並び順のまま）
     books = collections.OrderedDict()
     for u, (pk, _, _, _) in U.items():
         books.setdefault(pk, []).append(u)
-    PACKS = [pack_name(v) for v in books.values()]
-    PACK_OF = {u: pack_name(v) for v in books.values() for u in v}
+    PACK_OF = {u: pk for pk, us in books.items() for u in us}
+    LAST_OF = {us[-1]: pk for pk, us in books.items()}   # 冊子の最後の単元
 
-    # 前提の早い順に並べ、習い終わった **次の週以降** に 2週おきで置く
-    order = sorted(U, key=lambda u: (need[u], u))
-    weeks, w = collections.OrderedDict(), FIRST
-    for u in order:
-        w = max(w, need[u] + 1)
-        pack, ttl, aim, _ = U[u]
+    # **冊子の順（第1→14単元）どおりに置く。**偶数週に単元、空いた奇数週に月末確認。
+    weeks = collections.OrderedDict()
+    w, late = FIRST, []
+    for u in sorted(U):
         weeks[str(w)] = collections.OrderedDict(
-            [('unit', u), ('pack', PACK_OF[u]), ('title', ttl), ('aim', aim)])
+            [('unit', u), ('pack', PACK_OF[u]), ('title', U[u][1]), ('aim', U[u][2])])
+        if need[u] > w:
+            late.append((u, w, need[u]))     # 文型をまだ習っていない単元
+            # 画面にも出す。黙っていると「習っていないのに出た」と戸惑う
+            weeks[str(w)]['late'] = need[u]
+        if u in LAST_OF:                      # 冊子の最後 → 次の週に月末確認
+            weeks[str(w + 1)] = collections.OrderedDict([('check', LAST_OF[u])])
         w += STEP
     last = max(int(x) for x in weeks)
-    assert last < CHECK_FROM, '単元が月末確認の週まで はみ出した（第%d週）' % last
-    for i, pack in enumerate(PACKS):
-        weeks[str(CHECK_FROM + i)] = collections.OrderedDict([('check', pack)])
 
     P = R + 'n2/weeks.json'
     j = json.load(io.open(P, encoding='utf-8'), object_pairs_hook=collections.OrderedDict)
-    assert CHECK_FROM + len(PACKS) - 1 < j['phases'][3]['from'], '月末確認が模試期に かかった'
+    assert last < j['phases'][3]['from'], '紙が模試期に かかった（第%d週）' % last
     j['paper'] = collections.OrderedDict([
-     ('note', '紙の月別パックの割り当て。単元の順番は システムの文型順に 並べ替えてある。'
-              '冊子は4冊。名前は 中に入っている単元の範囲（第1〜2単元 など）。'
-              'もとは tools/n2plan/paper.py。'),
+     ('note', '紙のパックの割り当て。**冊子の順（第1→14単元）どおり**に、第%d週から%d週に1単元。'
+              '月末確認は その冊子の最後の単元の 次の週。'
+              '冊子は月ごとのまとまりとして作られており、'
+              '**9〜11月は短い文章、12月に主張理解の長文**という難しさの階段がある。'
+              '以前は文型を習い終わった順に並べ替えていたが、'
+              '**12月用の長文が2番目に来る**など階段が崩れたのでやめた（2026-10-18）。'
+              'もとは tools/n2plan/paper.py。' % (FIRST, STEP)),
      ('folder', 'Google ドライブ ＞ 日本語の勉強 ＞ N2学習教材_全14単元'),
      ('unitdays', 'A〜Fの6学習日（勤務日4日＋公休2日）・合わせて約4時間'),
      ('how', ['A〔40分〕問1〜8　　B〔40分〕問9〜13　　C〔40分〕問16〜19',
               'D〔40分〕問14〜15　　E〔公休90分〕問20と読み直し　　F〔公休45分〕前の単元の直し',
               '聴解は音声がない。指導者が台本を読む。台本は 解いたあとに見る',
-              '習っていない文型が出てきたら、解説を読むだけにする。先に覚えようとしない']),
+              'システムでまだ習っていない文型が出てくることがある。'
+              '**その場は解説を読むだけでよい。**先に覚えようとしない']),
      ('weeks', weeks),
     ])
     io.open(P, 'w', encoding='utf-8').write(json.dumps(j, ensure_ascii=False, indent=1) + '\n')
 
-    print('紙のパックの割り当て（システムの文型順）')
-    for w2, p in weeks.items():
-        if 'unit' in p:
-            print('  第%-2s週  第%2d単元「%s」（%sの冊子）　前提の文型は第%d週まで'
-                  % (w2, p['unit'], p['title'], p['pack'], need[p['unit']]))
+    print('紙のパックの割り当て（冊子の順）')
+    for w2, p2 in weeks.items():
+        if 'unit' in p2:
+            mark = '' if need[p2['unit']] <= int(w2) else \
+                   '　← 文型は第%d週に習う（解説を読むだけでよい）' % need[p2['unit']]
+            print('  第%-2s週  第%2d単元「%s」（%s）%s'
+                  % (w2, p2['unit'], p2['title'], p2['pack'], mark))
         else:
-            print('  第%-2s週  月末確認（%sの冊子）' % (w2, p['check']))
+            print('  第%-2s週  月末確認（%s）' % (w2, p2['check']))
+    print()
+    print('文型が追いついていない単元: %d／%d' % (len(late), len(U)))
     return 0
 
 
