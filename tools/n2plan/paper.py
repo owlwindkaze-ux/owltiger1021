@@ -75,15 +75,15 @@ body{font-family:"IPAPGothic","IPAGothic","Noto Sans CJK JP",sans-serif;
  color:#16212b;font-size:10pt;line-height:1.6;margin:0}
 h1{font-size:16pt;color:#332e91;border-bottom:2.5px solid #4338ca;padding-bottom:3px;
  margin:0 0 1.5mm}
-.sub{color:#4a5b6b;font-size:9.5pt;margin:0 0 3mm}
+.sub{color:#4a5b6b;font-size:9pt;margin:0 0 2.5mm;line-height:1.6}
 table{border-collapse:collapse;width:100%;font-size:10.5pt}
-th,td{border:1px solid #c7c9e8;padding:1.1mm 3mm;text-align:left}
+th,td{border:1px solid #c7c9e8;padding:0.9mm 3mm;text-align:left}
 th{background:#eef2ff;color:#332e91;font-size:10pt}
 td.d{white-space:nowrap;font-variant-numeric:tabular-nums}
 tr.ck td{background:#fbfbfd;color:#4a5b6b;font-size:10pt}
 tr.bk td{background:#f3f4fb;font-weight:700;color:#332e91;font-size:10pt}
-.note{border-left:4px solid #4338ca;background:#eef2ff;padding:2mm 3mm;margin:3mm 0 0;
- font-size:9pt;line-height:1.7}
+.note{border-left:4px solid #4338ca;background:#eef2ff;padding:1.6mm 3mm;margin:2.2mm 0 0;
+ font-size:8.5pt;line-height:1.6}
 footer{margin-top:3mm;border-top:1px solid #dfe4ee;padding-top:1.5mm;
  font-size:8pt;color:#6b7686}
 """
@@ -145,8 +145,15 @@ def sheet(weeks, start, total):
                  + '／'.join('第%d単元' % v['unit'] for v in late) + '</div>')
     last = max(int(k) for k in weeks)
     end = S + datetime.timedelta(days=(last - 1) * 7 + 6)
-    o.append('<div class="note"><b>紙のパックは %d年%d月%d日で終わります。</b>'
-             'そのあとは 画面（システム）だけで進みます。</div>'
+    # **「画面だけで進みます」とは書かない。**
+    # 持ち主から「**ではなぜ今も画面で進めないんですか**」。
+    # そのとおりで、紙がしていて画面ができないことが5つある
+    # （週20問のまとまり／手で書く／職員が読み上げる聴解／点が残る／指導者確認）。
+    # **足りるようになるのではなく、紙が尽きるだけ。**そう書く（2026-10-18e）。
+    o.append('<div class="note"><b>紙は %d/%d/%d で尽きます（4冊ぶん）。</b>'
+             '本番は2027年12月なので <b>そのあと約9か月 紙がありません</b>。'
+             '画面は代わりになりません（<b>20問のまとまり</b>と'
+             '<b>点の記録</b>がないため）。</div>'
              % (end.year, end.month, end.day))
     o.append('<footer>この表は n2/weeks.json から tools/n2plan/paper.py が'
              '作っています。週の割り当てを変えると この表も変わります。</footer>')
