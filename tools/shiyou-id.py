@@ -147,6 +147,30 @@ def marks():
     return out
 
 
+# 公開している住所。QRもこの住所で作ってある。
+URL = 'https://owlwindkaze-ux.github.io/owltiger1021/'
+
+
+def qr():
+    """`tools/qr.svg` を そのまま 貼る。
+
+    **QRの中身は目で見て確かめられない。**だから
+    「どの住所で作ったか」をSVGに書いておき、ここで突き合わせる。
+    ちがっていれば止める。住所を変えたのにQRが前のまま、が いちばん困る。
+    """
+    f = R + 'tools/qr.svg'
+    if not os.path.exists(f):
+        raise SystemExit('× tools/qr.svg が ありません。'
+                         'python3 tools/qr.py を先に走らせてください。')
+    svg = io.open(f, encoding='utf-8').read()
+    i = svg.find('<!-- url: ')
+    made = svg[i + 10:svg.index(' -->', i)] if i >= 0 else None
+    if made != URL:
+        raise SystemExit('× QRの住所が ちがいます。\n  QR : %s\n  本文: %s\n'
+                         '  python3 tools/qr.py を走らせ直してください。' % (made, URL))
+    return svg[svg.index('<svg'):]
+
+
 def menu():
     """入口メニューから、見出しとボタンを 日本語・インドネシア語の両方で読む。"""
     s = io.open(R + 'index.html', encoding='utf-8').read()
@@ -259,6 +283,13 @@ CSS = r'''
 body{font-family:"IPAPGothic","IPAGothic","Noto Sans CJK JP",sans-serif;
  color:#1b2733;font-size:10.5pt;line-height:2.0;margin:0}
 ruby rt{font-size:.5em;font-weight:400;color:#55606c;line-height:1}
+/* **見出しを ページの最後に 1行だけ残さない。**
+   日本語の見出しとインドネシア語の副題が ページをまたいで割れていた
+   （2026-10-18・4か所）。break-* と page-break-* の両方を書く。 */
+h1,h2,h3{break-inside:avoid;page-break-inside:avoid;
+ break-after:avoid;page-break-after:avoid}
+.grp{break-inside:avoid;page-break-inside:avoid}
+p{orphans:2;widows:2}
 h1{font-size:19pt;color:#9a3412;border-bottom:3px solid #9a3412;
  padding-bottom:5px;margin:0 0 2mm}
 h1 .id{display:block;font-size:11pt;color:#9a3412;font-weight:400;margin-top:1mm}
@@ -278,6 +309,12 @@ th{background:#eef4f9;font-weight:700;font-size:9pt}
 td .id{margin:0;font-size:8.8pt}
 .btn{display:inline-block;border:1px solid #c9d4de;border-radius:3px;
  padding:0 1.5mm;margin:0 1mm .8mm 0;font-size:9pt;background:#f7f9fb}
+.qrbox{display:flex;gap:5mm;align-items:center;border:1px solid #c9d4de;
+ border-radius:3px;padding:3mm 4mm;margin:0 0 4mm;background:#fbfcfd;
+ page-break-inside:avoid}
+.qrbox .qr{flex:none;line-height:0}
+.qrbox svg{width:30mm;height:30mm;display:block}
+.qrbox p{margin:0 0 1mm}
 .note{border-left:4px solid #c2410c;background:#fff7ed;padding:2.5mm 3mm;
  margin:0 0 4mm;page-break-inside:avoid}
 .note .ja{margin-bottom:1mm}
@@ -310,7 +347,7 @@ def build():
     A('<table><tr><th>' + ruby('日本語《にほんご》') + '</th><th>Bahasa Indonesia</th></tr>')
     for a, b in (
         ('① スマホで この 住所《じゅうしょ》を ひらきます<br>'
-         '<code>owlwindkaze-ux.github.io/owltiger1021</code>',
+         '<code>' + URL.replace('https://', '') + '</code>',
          'Buka alamat ini di HP Anda'),
         ('② 合言葉《あいことば》を 入《い》れます。<b>1回《かい》だけ</b>です。'
          '職員《しょくいん》に 聞《き》いて ください',
@@ -320,6 +357,15 @@ def build():
     ):
         A('<tr><td>%s</td><td class="id">%s</td></tr>' % (ruby(a), b))
     A('</table>')
+    A('<div class="qrbox"><div class="qr">' + qr() + '</div><div>')
+    A('<p class="ja">' + ruby(
+        '<b>カメラで よみとると、すぐ ひらけます。</b><br>'
+        'スマホの カメラを QRに むけて ください。') + '</p>')
+    A('<p class="id"><b>Pindai dengan kamera, langsung terbuka.</b><br>'
+      'Arahkan kamera HP Anda ke kode QR ini.</p>')
+    A('<p class="ja" style="font-size:8.5pt;color:#55606c">'
+      + '<code>' + URL + '</code></p>')
+    A('</div></div>')
     P('<b>登録《とうろく》は いりません。アプリを 入《い》れなくて いいです。</b>'
       'ホーム画面《がめん》に 追加《ついか》すると、つぎから すぐ ひらけます。',
       '<b>Tidak perlu mendaftar. Tidak perlu memasang aplikasi.</b> '
@@ -346,6 +392,9 @@ def build():
       + '<span class="id">Isi menu</span></h2>')
     for ja, idn, btns in g:
         d = GROUP[ja]
+        # **見出し・説明・ボタンを 1つの箱に入れる。**
+        # 箱ごと次のページへ送られるので、見出しだけが 取り残されない。
+        A('<div class="grp">')
         A('<h3>%s<span class="id">%s</span></h3>'
           % (ruby(mr(ja)), idn))
         A('<div class="pair"><p class="ja">%s</p><p class="id">%s</p></div>'
@@ -354,6 +403,7 @@ def build():
             A('<p class="ja">' + ''.join(
                 '<span class="btn">%s<br><span style="font-size:7.5pt;color:#55606c">%s</span>'
                 '</span>' % (ruby(mr(b[0])), b[1]) for b in btns) + '</p>')
+        A('</div>')
 
     # ── 4 ──────────────────────────────
     A('<h2>' + ruby('4　いちばん 大事《だいじ》な こと')
