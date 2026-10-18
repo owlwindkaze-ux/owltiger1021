@@ -7,7 +7,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-10-18d';
+  var PAGE_VER = '2026-10-18f';
   try {
     if (sessionStorage.getItem('vchk-moshi')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -189,8 +189,11 @@ function home() {
   stopTimer();
   const bl = $('#backLink');
   if (bl) { bl.href = CFG.back; bl.textContent = '← ' + CFG.backName; }
-  const ht = $('#hdTitle'); if (ht) ht.textContent = LV.toUpperCase() + '模試';
-  document.title = LV.toUpperCase() + '模試 ／ Simulasi Ujian ' + LV.toUpperCase();
+  /* 見出しは CFG から取る。LVから作ると「N2U模試」のような
+     意味の分からない名前になる（2026-10-18f）。 */
+  const hdName = CFG.head || CFG.title;
+  const ht = $('#hdTitle'); if (ht) ht.textContent = hdName;
+  document.title = hdName + ' ／ ' + (CFG.titleId || 'Simulasi Ujian');
   const done = n => {
     const d = store[CFG.key + n];
     return d ? '　<b style="color:var(--teal)">受けた（' + d.total + '点／180点）</b>' : '';
@@ -235,6 +238,21 @@ const PAPERS = {
         inner: '文字・語彙32問（漢字読み5・表記5・語形成5・文脈規定7・言い換え類義5・用法5）／'
              + '文法22問（文法形式12・文の組み立て5・文章の文法5）／読解18問／聴解31問。',
         back: '../n2/index.html', backName: 'N2ロードマップ' },
+  /* **N2の紙のパックを 画面でもできるようにした**（2026-10-18f）。
+     持ち主から「9月分から画面に入れ込んだらどうですか」。
+     engine は そのまま。問題だけ 入れかえる。
+     冊子の構成（問1〜8 文字語彙・文法／問9〜13／問14〜15／問16〜20 聴解）は
+     **JLPTの形式そのもの**なので、この画面の 問題1〜14・聴解1〜5 に ぴたりと入る。 */
+  n2u: { file: n => 'n2u-' + n + '.json', sets: [1], key: 'u',
+         head: 'N2 紙のパック', titleId: 'Buku latihan N2',
+         title: 'N2 紙のパック（画面版）',
+         lead: '紙の冊子と<b>同じ20問</b>です。言語知識10問＋読解5問＋聴解5問、約55分。',
+         note: '紙で解いても、画面で解いても かまいません。'
+             + '<b>画面でやると 点が残ります</b>（紙は記録欄に 自分で書きます）。'
+             + '聴解は 端末の 読み上げです。<b>職員が読み上げる 紙のほうが 本番に近い</b>ので、'
+             + 'できるときは 紙で 受けてください。',
+         inner: '文字・語彙6問／文法4問／読解5問／聴解5問。',
+         back: '../n2/index.html', backName: 'N2ロードマップ' },
   n3: { file: n => 'n3-' + n + '.json', sets: [1, 2], key: 'n3m',
         title: 'N3模試（本番と同じ140分）',
         lead: '文字・語彙 30分 ／ 文法・読解 70分 ／ 聴解 40分。<b>区分が3つに分かれています（本番と同じ）</b>。2回分あります。',

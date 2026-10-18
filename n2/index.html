@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-10-18d';
+  var PAGE_VER = '2026-10-18f';
   var KEY = 'reloaded-for-n2';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -466,6 +466,9 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
                                  n:'<b>冊子の 第1単元から 順に やります。</b>'
                                    + '今週は <b>第'+pp.unit+'単元だけ</b>。'
                                    + '20問を ' + W.paper.unitdays
+                                   + '<br>📱 <a href="../moshi/?lv=n2u" data-course="n2">'
+                                   + '<b>画面でも できます</b></a>'
+                                   + '（紙と 同じ20問。画面なら <b>点が 残ります</b>）'
                                    + (pp.late ? '<br><b>まだ習っていない文型が 出ます。</b>'
                                        + 'システムで習うのは 第'+pp.late+'週です。'
                                        + '<b>いまは 解説を読むだけで かまいません。</b>' : '')});
