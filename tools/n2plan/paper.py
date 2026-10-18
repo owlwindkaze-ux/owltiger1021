@@ -93,34 +93,49 @@ def sheet(weeks, start, total):
     """**単元名と、始まる日だけ**の1枚。冊子と一緒に置く。
 
     持ち主から「単元名と、その単元名が始まる日がわかればいいのでは」。
-    週番号も冊子の月も、使う人には要らない。**名前と日付だけ。**
+    週番号は 使う人には要らない。**名前と日付だけ。**
+
+    **並べ方は「使う月」ごと**（2026-10-18d → e で直した）。
+    はじめは冊子ごとに並べていたが、持ち主から
+    「**予定表になぜ11月がないんですか**」。
+    11月の行はあったが、見出しが「**11月の冊子**」で、
+    **その冊子を使うのは12月〜1月**。見出しの月と中身の月が合っていないので、
+    「11月に何をやるか」が一目で引けなかった。
+    **暦の順に並べ、冊子は列に回す。**
     """
     import datetime
     y, m, d = map(int, start.split('-'))
     S = datetime.date(y, m, d)
     W = '月火水木金土日'
+    rows = []
+    for k in sorted(weeks, key=int):
+        v = weeks[k]
+        dt = S + datetime.timedelta(days=(int(k) - 1) * 7)
+        rows.append((dt, v))
     o = ['<!doctype html><html lang="ja"><head><meta charset="utf-8">',
          '<title>N2 紙のパック 予定表</title><style>%s</style></head><body>' % SHEET_CSS,
          '<h1>N2 紙のパック　いつ どれを やるか</h1>',
          '<p class="sub">その日の <b>月曜から</b> はじめます。1単元＝A〜Fの6学習日'
-         '（勤務日4日＋公休2日）＝約4時間。</p>',
-         '<table><tr><th style="width:30%">はじまる日</th>'
-         '<th>やるもの</th></tr>']
+         '（勤務日4日＋公休2日）＝約4時間。'
+         '<b>冊子の名前（9月後半・10月…）は、使う月ではありません。</b>'
+         '中に入っている単元の まとまりの名前です。</p>',
+         '<table><tr><th style="width:17%">日</th><th>やるもの</th>'
+         '<th style="width:21%">どの冊子か</th></tr>']
     cur = None
-    for k in sorted(weeks, key=int):
-        v = weeks[k]
-        dt = S + datetime.timedelta(days=(int(k) - 1) * 7)
-        day = '%d年%d月%d日（%s）' % (dt.year, dt.month, dt.day, W[dt.weekday()])
+    for dt, v in rows:
+        ym = (dt.year, dt.month)
+        if ym != cur:
+            o.append('<tr class="bk"><td colspan="3">%d年%d月</td></tr>' % ym)
+            cur = ym
+        day = '%d/%d（%s）' % (dt.month, dt.day, W[dt.weekday()])
         bk = v.get('pack') or v.get('check')
-        if bk != cur:
-            o.append('<tr class="bk"><td colspan="2">%sの冊子</td></tr>' % bk)
-            cur = bk
         if 'unit' in v:
-            o.append('<tr><td class="d">%s</td><td><b>第%d単元</b>　%s</td></tr>'
-                     % (day, v['unit'], v['title']))
+            o.append('<tr><td class="d">%s</td><td><b>第%d単元</b>　%s</td>'
+                     '<td>%sの冊子</td></tr>' % (day, v['unit'], v['title'], bk))
         else:
             o.append('<tr class="ck"><td class="d">%s</td>'
-                     '<td>月末確認　初見10問（解答25分＋聴解5分）</td></tr>' % day)
+                     '<td>月末確認　初見10問（解答25分＋聴解5分）</td>'
+                     '<td>%sの冊子</td></tr>' % (day, bk))
     o.append('</table>')
     late = [v for v in weeks.values() if v.get('late')]
     if late:
