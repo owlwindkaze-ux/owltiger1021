@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-10-25a';
+  var PAGE_VER = '2026-10-25b';
   var KEY = 'reloaded-for-shinjin';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -67,6 +67,10 @@ header .sub{font-size:.82rem;opacity:.92;margin-top:.2rem}
 ul.chk{list-style:none;margin:0;padding:0}
 ul.chk li{margin:.3rem 0}
 .wnav{display:flex;align-items:center;gap:.5rem;margin:.5rem 0 .2rem}
+.wtest-box{margin:.5rem 0 .2rem}
+a.wtest{display:block;text-align:center;background:var(--ora);color:#fff;
+  text-decoration:none;font-weight:800;border-radius:10px;padding:.6rem;font-size:.95rem}
+.wtnote{display:block;text-align:center;font-size:.78rem;color:var(--muted);margin-top:.25rem}
 .wnav .wnum{font-size:.8rem;color:var(--muted);font-weight:700;flex:1;text-align:center}
 .wbtn{border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:.3rem .6rem;
   font-size:.82rem;font-weight:700;color:var(--ink);font-family:inherit;cursor:pointer}
@@ -174,6 +178,7 @@ footer{text-align:center;font-size:.75rem;color:var(--muted);padding:1rem 0 2rem
     <div class="ttl" id="weekTtl">　</div>
     <div class="wsub" id="weekSub"></div>
     <div class="wnav" id="weekNav"></div>
+    <div class="wtest-box" id="weekTest"></div>
     <div class="wpre" id="weekPre" style="display:none"></div>
     <div class="wprog" id="weekProg"></div>
     <ul class="chk" id="weekList"></ul>
@@ -529,6 +534,15 @@ function renderWeek(today){
       pre.innerHTML = '<b>まだ はじまっていません。</b>下に出ているのは <b>第1週（' +
         md(mondayOf(1)) + '〜）のぶん</b>です。初日に <b>N4到達度判定テスト</b>を行います。';
     } else pre.style.display = 'none';
+  }
+  /* **その週のテスト**への入口（2026-10-25b）。
+     100日コースのように「その場で解ける問題」が欲しい、という求めに応えたもの。 */
+  var wt = document.getElementById('weekTest');
+  if (wt) {
+    var tw2 = w || 1;
+    wt.innerHTML = '<a class="wtest" href="../moshi/?lv=sjw&set=' + tw2 + '">'
+      + '📝 第' + tw2 + '週のテスト（20問・約26分）</a>'
+      + '<span class="wtnote">その週に習った分だけから出ます。<b>点が残ります</b></span>';
   }
   /* 前の週・次の週 */
   var nav = document.getElementById('weekNav');

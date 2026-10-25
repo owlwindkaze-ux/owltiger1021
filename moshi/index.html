@@ -7,7 +7,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-10-25a';
+  var PAGE_VER = '2026-10-25b';
   try {
     if (sessionStorage.getItem('vchk-moshi')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -186,6 +186,10 @@ function speak(text, btn) {
 
 /* ========== 画面 ========== */
 function home() {
+  /* **?set=5 で その回に直行する。**週テストは28週あるので、
+     ボタンを28個ならべると 探せない（2026-10-25b）。 */
+  var only = +(Q.get('set') || 0);
+  if (only && CFG.sets.indexOf(only) >= 0) { Q.delete('set'); load(only); return; }
   stopTimer();
   const bl = $('#backLink');
   if (bl) { bl.href = CFG.back; bl.textContent = '← ' + CFG.backName; }
@@ -203,9 +207,9 @@ function home() {
     '<p class="lead">' + CFG.lead + '</p>' +
     '<div class="warn">' + CFG.note + '</div>' +
     '<div class="pick">' +
-      CFG.sets.map(n => '<button class="btn main" data-no="' + n + '">第' + n + '回を 受ける</button>').join('') +
+      CFG.sets.map(n => '<button class="btn main" data-no="' + n + '">第' + n + U + 'を 受ける</button>').join('') +
     '</div>' +
-    CFG.sets.map(n => '<p class="lead">第' + n + '回' + done(n) + '</p>').join('') +
+    CFG.sets.map(n => '<p class="lead">第' + n + U + done(n) + '</p>').join('') +
     '<details><summary>この模試の中身 ／ Isi simulasi</summary>' +
     '<p class="lead">' + CFG.inner + '</p>' +
     '<p class="lead">点数は、区分ごとに60点へ直して出します。合格の目安は、合計90点以上で、どの区分も19点以上です。</p>' +
@@ -228,7 +232,9 @@ const CHOU = ['聴解1', '聴解2', '聴解3', '聴解4', '聴解5'];
 
 /* どのレベルの模試を出すかは URL で決める。 moshi/ … N2 ／ moshi/?lv=n3 … N3
    engine（この画面）は 1つのまま、問題だけ 入れかえる。 */
-const LV = (new URLSearchParams(location.search).get('lv') || 'n2').toLowerCase();
+const Q = new URLSearchParams(location.search);
+const LV = (Q.get('lv') || 'n2').toLowerCase();
+
 const PAPERS = {
   n2: { file: n => 'moshi-' + n + '.json', sets: [1, 2, 3], key: 'm',
         title: 'N2模試（本番と同じ155分）',
@@ -253,6 +259,25 @@ const PAPERS = {
              + 'できるときは 紙で 受けてください。',
          inner: '文字・語彙6問／文法4問／読解5問／聴解5問。',
          back: '../n2/index.html', backName: 'N2ロードマップ' },
+  /* **週テスト**（2026-10-25b）。持ち主から「新人コースやN2コースにも
+     100日コースのような問題が作れないのか」→「(A) 組み立てる。漢字・語彙も入れる」。
+     **新しい問題は1つも書いていない。**その週に習う分から集めただけ。
+     sets は tools/weektest.mjs が作ったファイルに合わせて足していく。 */
+  sjw: { file: n => 'w-shinjin-' + n + '.json', sets: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28], key: 'sjw',
+         head: '新人コース 週テスト', titleId: 'Tes mingguan',
+         unit: '週', title: '新人コース 週テスト（20問・約26分）',
+         lead: '<b>その週に習った分だけ</b>から出ます。言語知識12問＋読解4問＋聴解4問。',
+         note: '毎週の終わりに受けてください。<b>点が残ります</b>ので、'
+             + '先月とくらべられます。まちがえた分は「まちがえたところ」に たまります。',
+         inner: '漢字・語彙4問／文型8問／読解4問／聴解4問。',
+         back: '../shinjin/index.html', backName: '新人コース' },
+  n2w: { file: n => 'w-n2-' + n + '.json', sets: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22], key: 'n2w',
+         head: 'N2コース 週テスト', titleId: 'Tes mingguan',
+         unit: '週', title: 'N2コース 週テスト（20問・約26分）',
+         lead: '<b>その週に習った分だけ</b>から出ます。言語知識12問＋読解4問＋聴解4問。',
+         note: '毎週の終わりに受けてください。<b>点が残ります</b>。',
+         inner: '漢字・語彙4問／文型8問／読解4問／聴解4問。',
+         back: '../n2/index.html', backName: 'N2ロードマップ' },
   n3: { file: n => 'n3-' + n + '.json', sets: [1, 2], key: 'n3m',
         title: 'N3模試（本番と同じ140分）',
         lead: '文字・語彙 30分 ／ 文法・読解 70分 ／ 聴解 40分。<b>区分が3つに分かれています（本番と同じ）</b>。2回分あります。',
@@ -263,6 +288,8 @@ const PAPERS = {
         back: '../n3.html', backName: '100日コース' },
 };
 const CFG = PAPERS[LV] || PAPERS.n2;
+/* 週テストは「第5週」、模試は「第1回」。CFG の unit で呼び分ける */
+const U = CFG.unit || '回';
 
 /* 区分（何分ずつ、どの大問か）。JSON に parts があれば それを使う。
    無ければ N2のこれまでどおり（105分＋50分）。 */

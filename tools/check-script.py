@@ -55,9 +55,36 @@ OK = re.compile(r'^(N[1-5]|JLPT|OJT|PDF|URL|LINE|ID|A|B|C|D|[IVX]+'
 # （実際に「場所の認識が difficult になる」を素通りさせた）
 ALL_JA_FILES = {'sentences.json'}
 
+# **週テスト（moshi/w-*.json）は、作った紙ではなく 画面から組み立てたもの。**
+# 漢字・語彙の問題は `kanji.html` が作っており、
+#   問題2（表記）   … 読みの下に **インドネシア語の意味**を出す
+#   問題3（文脈規定）… **インドネシア語の意味そのもの**が問題文
+# という作りなので、`q` や `choices` に 尼語が入るのが **正しい**。
+# ここを日本語だけとして見ると 177件 鳴る（2026-10-25b）。
+# ただし **聴解の台本（script・show）は日本語だけ**なので、そこは見る。
+# もとの語彙データ（vocab-data.json）は この検査の対象に入っており、
+# 紛れこみは そちらで捕まる。
+GEN_SKIP_KEYS = {'q', 'choices', 'explain'}
+
+
+def is_gen(rel):
+    return rel.startswith('moshi/w-')
+
+# **タグの中は 見ない。**週テストの漢字・語彙の問題は、画面が作るので
+# `<u style="text-underline-offset:5px">` のような 印が そのまま入っている。
+# `style` `underline` を 英単語として 拾ってしまい、2,900件 鳴った（2026-10-25b）。
+# **見えない文字は 実習生が読まない。**見える文字だけを 点検する。
+TAG = re.compile(r'<[^>]+>')
+ENT = re.compile(r'&[a-z]+;|&#\d+;')
+
+
+def visible(t):
+    return ENT.sub(' ', TAG.sub(' ', t))
+
+
 def walk(o, key, hit):
     if isinstance(o, str):
-        hit.append((key, o))
+        hit.append((key, visible(o)))
     elif isinstance(o, dict):
         for k, v in o.items(): walk(v, k, hit)
     elif isinstance(o, list):
@@ -85,6 +112,8 @@ for p in sorted(set(files)):
         # はじめ「日本語が 入って いる 文だけ」を 見て いたので、
         # 選択肢が **まるごと 英語**（例：closed）の ときに 素通りした。
         # 実習生が 読む 欄なら、まるごと 英語でも おかしい。条件を 外す。
+        if is_gen(rel) and k in GEN_SKIP_KEYS:
+            continue
         if k in JA_KEYS or rel in ALL_JA_FILES:
             for w in re.findall(r'\b[A-Za-z]{2,}\b', t):
                 if OK.match(w): continue
