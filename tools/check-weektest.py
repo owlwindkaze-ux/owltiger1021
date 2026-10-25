@@ -59,6 +59,21 @@ for course, key, name in CO:
                     bad('%s %s 答えの番号が範囲の外（%r／選択肢%d）' % (nm, kk, a, len(ch)))
                 if kk.startswith('聴解') and not (x.get('script') or '').strip():
                     bad('%s %s 聴解に台本がありません' % (nm, kk))
+                # 画面は問題文をそのまま文字として出す（タグは読めない）
+                for fld in ('q', 'explain', 'explain_id', 'script', 'show'):
+                    if re.search(r'<[a-zA-Z/]', str(x.get(fld) or '')):
+                        bad('%s %s %s にタグが混ざっています' % (nm, kk, fld))
+                for c in (ch or []):
+                    if re.search(r'<[a-zA-Z/]', str(c)):
+                        bad('%s %s 選択肢にタグが混ざっています' % (nm, kk))
+                # 漢字・語彙の問（inst がこの形）は 日本語と尼語の両方が要る
+                if sec.get('inst') == 'つぎの問いに答えなさい。':
+                    if not str(x.get('explain') or '').strip():
+                        bad('%s %s 解説（日本語）がありません' % (nm, kk))
+                    if not str(x.get('explain_id') or '').strip():
+                        bad('%s %s 解説（インドネシア語）がありません' % (nm, kk))
+                    if str(x.get('explain') or '').rstrip()[-1:] in ('＝', '：'):
+                        bad('%s %s 解説が「＝」で切れています' % (nm, kk))
         if n < 12:
             bad('%s 問が %d しかありません（12問以上）' % (nm, n))
         if d.get('counts', {}).get('合計') != n:

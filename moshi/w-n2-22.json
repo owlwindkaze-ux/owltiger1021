@@ -72,7 +72,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">目指す</u> の読み方は？",
+     "q": "＿目指す＿ の読み方は？",
      "choices": [
       "めざず",
       "めざっす",
@@ -80,7 +80,8 @@
       "めざす"
      ],
      "answer": 3,
-     "explain": "目指す（めざす）＝"
+     "explain": "目指す（めざす）",
+     "explain_id": "menargetkan; menuju"
     }
    ]
   },
@@ -90,7 +91,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">みんよう</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">lagu rakyat</span>",
+     "q": "みんよう ／　lagu rakyat",
      "choices": [
       "眠謡",
       "漸く",
@@ -98,7 +99,8 @@
       "無地"
      ],
      "answer": 2,
-     "explain": "民謡（みんよう）＝"
+     "explain": "民謡（みんよう）",
+     "explain_id": "lagu rakyat"
     }
    ]
   },
@@ -108,7 +110,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">luar biasa; mengerikan</span>",
+     "q": "luar biasa; mengerikan",
      "choices": [
       "物凄い",
       "店屋",
@@ -116,7 +118,8 @@
       "目立つ"
      ],
      "answer": 0,
-     "explain": "物凄い（ものすごい）＝"
+     "explain": "物凄い（ものすごい）",
+     "explain_id": "luar biasa; mengerikan"
     }
    ]
   },
@@ -126,7 +129,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:3rem\">塔</span>",
+     "q": "塔",
      "choices": [
       "どう",
       "とう",
@@ -134,7 +137,8 @@
       "ふな"
      ],
      "answer": 1,
-     "explain": "塔（とう）："
+     "explain": "塔（とう）",
+     "explain_id": "menara, pagoda"
     }
    ]
   },
