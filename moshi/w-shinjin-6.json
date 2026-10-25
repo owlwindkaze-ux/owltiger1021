@@ -78,7 +78,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">不便</u> の読み方は？",
+     "q": "＿不便＿ の読み方は？",
      "choices": [
       "ぶべん",
       "ふべん",
@@ -86,7 +86,8 @@
       "ふべ"
      ],
      "answer": 1,
-     "explain": "不便（ふべん）＝"
+     "explain": "不便（ふべん）",
+     "explain_id": "tidak praktis, merepotkan"
     }
    ]
   },
@@ -96,15 +97,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">くらべる</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">membandingkan</span>",
+     "q": "くらべる ／　membandingkan",
      "choices": [
       "比べる",
       "秘べる",
-      "悲べる",
-      "否べる"
+      "彼べる",
+      "非べる"
      ],
      "answer": 0,
-     "explain": "比べる（くらべる）＝"
+     "explain": "比べる（くらべる）",
+     "explain_id": "membandingkan"
     }
    ]
   },
@@ -114,7 +116,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">permukaan, bagian depan, luar</span>",
+     "q": "permukaan, bagian depan, luar",
      "choices": [
       "表",
       "盗む",
@@ -122,7 +124,8 @@
       "用"
      ],
      "answer": 0,
-     "explain": "表（おもて）＝"
+     "explain": "表（おもて）",
+     "explain_id": "permukaan, bagian depan, luar"
     }
    ]
   },
@@ -132,15 +135,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">強</u>気</span>",
+     "q": "＿強＿盗《とう》",
      "choices": [
-      "づよ",
+      "こう",
       "だい",
-      "つよう",
-      "つよ"
+      "ごうう",
+      "ごう"
      ],
      "answer": 3,
-     "explain": "強気（つよき）＝"
+     "explain": "強盗（ごうとう）",
+     "explain_id": "perampokan　／　強：kuat"
     }
    ]
   },

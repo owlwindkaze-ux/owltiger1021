@@ -74,7 +74,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">生産</u> の読み方は？",
+     "q": "＿生産＿ の読み方は？",
      "choices": [
       "せいさんずる",
       "せいさんする",
@@ -82,7 +82,8 @@
       "せいっさんする"
      ],
      "answer": 1,
-     "explain": "生産（せいさんする）＝"
+     "explain": "生産（せいさんする）",
+     "explain_id": "produksi, memproduksi"
     }
    ]
   },
@@ -92,7 +93,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">よやく</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">pemesanan, reservasi</span>",
+     "q": "よやく ／　pemesanan, reservasi",
      "choices": [
       "予約",
       "争約",
@@ -100,7 +101,8 @@
       "予役"
      ],
      "answer": 0,
-     "explain": "予約（よやく）＝"
+     "explain": "予約（よやく）",
+     "explain_id": "pemesanan, reservasi"
     }
    ]
   },
@@ -110,7 +112,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">kakek</span>",
+     "q": "kakek",
      "choices": [
       "為",
       "電灯",
@@ -118,7 +120,8 @@
       "打つ"
      ],
      "answer": 2,
-     "explain": "祖父（そふ）＝"
+     "explain": "祖父（そふ）",
+     "explain_id": "kakek"
     }
    ]
   },
@@ -128,7 +131,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">医</u>院</span>",
+     "q": "＿医＿者",
      "choices": [
       "え",
       "し",
@@ -136,7 +139,8 @@
       "こ"
      ],
      "answer": 2,
-     "explain": "医院（いいん）＝"
+     "explain": "医者（いしゃ）",
+     "explain_id": "dokter　／　医：kedokteran, dokter"
     }
    ]
   },

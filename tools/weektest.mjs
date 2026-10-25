@@ -140,12 +140,27 @@ async function kvQs(page, kw, w, want, seed) {
       const key = q.kind + '/' + q.key;
       if (seen.has(key)) continue;
       seen.add(key);
+      /* **HTMLを、模試の画面が分かる書き方に直す。**
+         模試の engine は 問題文を **逃がす（エスケープする）**ので、
+         `<span class="yomi">…</span>` を そのまま入れると
+         **タグが画面にそのまま出る**（2026-10-25c・持ち主が見つけた）。
+         engine が分かるのは `漢字《かんじ》` だけ。
+         下線は 本番の模試と同じく 全角の ＿ ではさむ。 */
+      var plain = function (h) {
+        return String(h)
+          .replace(/<ruby>([^<]*)<rt[^>]*>([^<]*)<\/rt><\/ruby>/g, '$1《$2》')
+          .replace(/<u[^>]*>([^<]*)<\/u>/g, '＿$1＿')
+          .replace(/<br\s*\/?>/g, '　／　')
+          .replace(/<[^>]+>/g, '')
+          .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
+          .replace(/[ \t]+/g, ' ').replace(/\s*\n\s*/g, ' ').trim();
+      };
       /* note は「語（よみ）＝ 意味（尼語）」の形。**＝ や ： の右は 尼語**なので
          日本語の欄に残さず、`explain_id` へ回す。 */
       var note = q.note || '', ja = note, id = '';
       var cut = note.search(/[＝：]/);
-      if (cut >= 0) { ja = note.slice(0, cut + 1).trim(); id = note.slice(cut + 1).trim(); }
-      out.push({ kind: q.kind, q: q.q, choices: q.choices,
+      if (cut >= 0) { ja = note.slice(0, cut).trim(); id = note.slice(cut + 1).trim(); }
+      out.push({ kind: q.kind, q: plain(q.q), choices: q.choices.map(plain),
                  answer: q.choices.indexOf(q.answer), explain: ja, explain_id: id });
     }
     return out.filter(x => x.answer >= 0);
@@ -161,7 +176,10 @@ function build(course, w, lv, kv, gr, rd, ch) {
   kv.forEach((q, i) => add('問題' + (i + 1), '問題' + (i + 1),
     q.kind.split('／')[0].replace(/^問題\d+\s*/, '').trim() || '漢字・語彙',
     'つぎの問いに答えなさい。',
-    { items: [{ q: q.q, choices: q.choices, answer: q.answer, explain: q.explain }] }));
+    /* `explain_id`（尼語）を 落とさない。ここで項目を 組み直すので、
+       `kvQs` が 付けた 欄を 一つでも 書き忘れると 画面から 消える（2026-10-25c）。 */
+    { items: [{ q: q.q, choices: q.choices, answer: q.answer,
+                explain: q.explain, explain_id: q.explain_id || '' }] }));
   gr.forEach((q, i) => add('問題' + (kv.length + i + 1), '問題' + (kv.length + i + 1),
     '文法形式の判断', 'つぎの文の（　）に入れるのに最もよいものを、一つえらびなさい。',
     { group: '言語知識', items: [q] }));

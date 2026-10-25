@@ -72,7 +72,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">cara memakai ~</span>",
+     "q": "cara memakai ~",
      "choices": [
       "重〜",
       "〜紙",
@@ -80,7 +80,8 @@
       "〜畳"
      ],
      "answer": 2,
-     "explain": "〜遣い（〜づかい）＝"
+     "explain": "〜遣い（〜づかい）",
+     "explain_id": "cara memakai ~"
     }
    ]
   },
@@ -90,7 +91,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">貿</u>易</span>",
+     "q": "＿貿＿易",
      "choices": [
       "ぼう",
       "ほう",
@@ -98,7 +99,8 @@
       "ぼうう"
      ],
      "answer": 0,
-     "explain": "貿易（ぼうえき）＝"
+     "explain": "貿易（ぼうえき）",
+     "explain_id": "perdagangan　／　貿：perdagangan (luar negeri)"
     }
    ]
   },
@@ -108,7 +110,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">将棋</u> の読み方は？",
+     "q": "＿将棋＿ の読み方は？",
      "choices": [
       "しようぎ",
       "しょうき",
@@ -116,7 +118,8 @@
       "しょううぎ"
      ],
      "answer": 2,
-     "explain": "将棋（しょうぎ）＝"
+     "explain": "将棋（しょうぎ）",
+     "explain_id": "shogi (catur Jepang)"
     }
    ]
   },
@@ -126,7 +129,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">~ berikutnya</span>",
+     "q": "~ berikutnya",
      "choices": [
       "明くる〜",
       "〜通り",
@@ -134,7 +137,8 @@
       "〜年生"
      ],
      "answer": 0,
-     "explain": "明くる〜（あくる〜）＝"
+     "explain": "明くる〜（あくる〜）",
+     "explain_id": "~ berikutnya"
     }
    ]
   },

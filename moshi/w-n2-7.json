@@ -72,15 +72,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">えらい</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">hebat; terhormat</span>",
+     "q": "えらい ／　hebat; terhormat",
      "choices": [
-      "傾い",
-      "係い",
+      "仲い",
+      "傷い",
       "偉い",
-      "仏い"
+      "偶い"
      ],
      "answer": 2,
-     "explain": "偉い（えらい）＝"
+     "explain": "偉い（えらい）",
+     "explain_id": "hebat; terhormat"
     }
    ]
   },
@@ -90,7 +91,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">daerah beriklim dingin</span>",
+     "q": "daerah beriklim dingin",
      "choices": [
       "係わる",
       "過失",
@@ -98,7 +99,8 @@
       "直線"
      ],
      "answer": 2,
-     "explain": "寒帯（かんたい）＝"
+     "explain": "寒帯（かんたい）",
+     "explain_id": "daerah beriklim dingin"
     }
    ]
   },
@@ -108,7 +110,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">担</u>ぐ</span>",
+     "q": "＿担＿ぐ",
      "choices": [
       "かっつ",
       "かつ",
@@ -116,7 +118,8 @@
       "かづ"
      ],
      "answer": 1,
-     "explain": "担ぐ（かつぐ）＝"
+     "explain": "担ぐ（かつぐ）",
+     "explain_id": "memikul di bahu　／　担：memikul, menanggung, memegang tugas"
     }
    ]
   },
@@ -126,7 +129,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">加熱</u> の読み方は？",
+     "q": "＿加熱＿ の読み方は？",
      "choices": [
       "かねつ",
       "かねづ",
@@ -134,7 +137,8 @@
       "がねつ"
      ],
      "answer": 0,
-     "explain": "加熱（かねつ）＝"
+     "explain": "加熱（かねつ）",
+     "explain_id": "pemanasan"
     }
    ]
   },

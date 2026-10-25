@@ -76,7 +76,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">彼</u> の読み方は？",
+     "q": "＿彼＿ の読み方は？",
      "choices": [
       "かれ",
       "がれ",
@@ -84,7 +84,8 @@
       "きょういく"
      ],
      "answer": 0,
-     "explain": "彼（かれ）＝"
+     "explain": "彼（かれ）",
+     "explain_id": "dia (laki-laki), pacar"
     }
    ]
   },
@@ -94,7 +95,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">どろぼう</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">pencuri, maling</span>",
+     "q": "どろぼう ／　pencuri, maling",
      "choices": [
       "泥棒",
       "減棒",
@@ -102,7 +103,8 @@
       "泥板"
      ],
      "answer": 0,
-     "explain": "泥棒（どろぼう）＝"
+     "explain": "泥棒（どろぼう）",
+     "explain_id": "pencuri, maling"
     }
    ]
   },
@@ -112,7 +114,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">berhenti, menghentikan</span>",
+     "q": "berhenti, menghentikan",
      "choices": [
       "止める",
       "もらう",
@@ -120,7 +122,8 @@
       "熱心"
      ],
      "answer": 0,
-     "explain": "止める（やめる）＝"
+     "explain": "止める（やめる）",
+     "explain_id": "berhenti, menghentikan"
     }
    ]
   },
@@ -130,15 +133,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">使</u>う</span>",
+     "q": "＿使＿用",
      "choices": [
-      "つか",
-      "つが",
-      "つっか",
-      "づか"
+      "し",
+      "え",
+      "わ",
+      "ち"
      ],
      "answer": 0,
-     "explain": "使う（つかう）＝"
+     "explain": "使用（しよう）",
+     "explain_id": "penggunaan, pemakaian　／　使：menggunakan, utusan, mengutus"
     }
    ]
   },
