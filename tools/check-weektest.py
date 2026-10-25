@@ -19,6 +19,8 @@ import os
 import re
 import sys
 
+JA = re.compile(r'[\u3041-\u309f\u30a1-\u30fe\u4e00-\u9fff\u3005]')
+
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/'
 ng = []
 bad = ng.append
@@ -66,14 +68,31 @@ for course, key, name in CO:
                 for c in (ch or []):
                     if re.search(r'<[a-zA-Z/]', str(c)):
                         bad('%s %s 選択肢にタグが混ざっています' % (nm, kk))
-                # 漢字・語彙の問（inst がこの形）は 日本語と尼語の両方が要る
-                if sec.get('inst') == 'つぎの問いに答えなさい。':
+                # **問に日本語があるか。**練習問題の画面は 聞いていることを
+                # 見出しに出し、問には 手がかりだけを置く。それを そのまま
+                # 持ってくると「perbedaan; ketidaksesuaian」のように
+                # **尼語の手がかりだけ**の問になる（2026-10-25d）。
+                qt = str(x.get('q') or '')
+                if not qt.strip():
+                    bad('%s %s 問が空です' % (nm, kk))
+                elif not JA.search(qt):
+                    bad('%s %s 問に日本語がありません（%s）' % (nm, kk, qt[:30]))
+                # 漢字・語彙の問（explain_id を持つ）は 日本語と尼語の両方が要る
+                if 'explain_id' in x and not kk.startswith('聴解'):
                     if not str(x.get('explain') or '').strip():
                         bad('%s %s 解説（日本語）がありません' % (nm, kk))
                     if not str(x.get('explain_id') or '').strip():
                         bad('%s %s 解説（インドネシア語）がありません' % (nm, kk))
                     if str(x.get('explain') or '').rstrip()[-1:] in ('＝', '：'):
                         bad('%s %s 解説が「＝」で切れています' % (nm, kk))
+        # 大問の指示が「つぎの問いに答えなさい。」のままなら、
+        # 何を聞かれているのか どこにも書いていない（2026-10-25d）
+        for k in d['order']:
+            inst = d['sections'][k].get('inst', '')
+            if inst.strip() == 'つぎの問いに答えなさい。':
+                bad('%s %s 大問の指示が汎用のままです（何を聞くのか書いていない）' % (nm, k))
+            if not JA.search(inst):
+                bad('%s %s 大問の指示に日本語がありません' % (nm, k))
         if n < 12:
             bad('%s 問が %d しかありません（12問以上）' % (nm, n))
         if d.get('counts', {}).get('合計') != n:

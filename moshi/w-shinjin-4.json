@@ -75,7 +75,8 @@
   "問題1": {
    "label": "問題1",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿天気＿ の読み方は？",
@@ -94,7 +95,8 @@
   "問題2": {
    "label": "問題2",
    "name": "＿＿の言葉を漢字で書くと？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの言葉を漢字で書くと、どれですか。",
+   "inst_id": "Penulisan kanji yang benar",
    "items": [
     {
      "q": "たべる ／　makan",
@@ -113,10 +115,11 @@
   "問題3": {
    "label": "問題3",
    "name": "意味に合う言葉は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの意味の言葉は、どれですか。",
+   "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "putih",
+     "q": "「putih」の意味の言葉は、どれですか。",
      "choices": [
       "自動車",
       "キロ",
@@ -132,7 +135,8 @@
   "問題4": {
    "label": "問題4",
    "name": "漢字の読み（熟語の中で）",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの漢字の読み方は、どれですか。",
+   "inst_id": "Baca kanji bergaris",
    "items": [
     {
      "q": "水＿曜＿",
@@ -151,7 +155,8 @@
   "問題5": {
    "label": "問題5",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿面白い＿ の読み方は？",
@@ -170,7 +175,8 @@
   "問題6": {
    "label": "問題6",
    "name": "＿＿の言葉を漢字で書くと？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの言葉を漢字で書くと、どれですか。",
+   "inst_id": "Penulisan kanji yang benar",
    "items": [
     {
      "q": "なつやすみ ／　libur musim panas",
@@ -189,10 +195,11 @@
   "問題7": {
    "label": "問題7",
    "name": "意味に合う言葉は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの意味の言葉は、どれですか。",
+   "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "hujan",
+     "q": "「hujan」の意味の言葉は、どれですか。",
      "choices": [
       "買う",
       "白い",
@@ -208,7 +215,8 @@
   "問題8": {
    "label": "問題8",
    "name": "漢字の読み（熟語の中で）",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの漢字の読み方は、どれですか。",
+   "inst_id": "Baca kanji bergaris",
    "items": [
     {
      "q": "＿毎＿朝《あさ》",
@@ -227,7 +235,8 @@
   "問題9": {
    "label": "問題9",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿友達＿ の読み方は？",
@@ -246,7 +255,8 @@
   "問題10": {
    "label": "問題10",
    "name": "＿＿の言葉を漢字で書くと？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの言葉を漢字で書くと、どれですか。",
+   "inst_id": "Penulisan kanji yang benar",
    "items": [
     {
      "q": "はやい ／　awal, pagi-pagi",
@@ -265,7 +275,8 @@
   "問題11": {
    "label": "問題11",
    "name": "漢字の読み",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの漢字の読み方は、どれですか。",
+   "inst_id": "Baca kanji ini",
    "items": [
     {
      "q": "母",
@@ -284,7 +295,8 @@
   "問題12": {
    "label": "問題12",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿自動車＿ の読み方は？",
