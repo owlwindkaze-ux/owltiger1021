@@ -71,7 +71,8 @@
   "問題1": {
    "label": "問題1",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿立つ＿ の読み方は？",
@@ -90,7 +91,8 @@
   "問題2": {
    "label": "問題2",
    "name": "＿＿の言葉を漢字で書くと？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの言葉を漢字で書くと、どれですか。",
+   "inst_id": "Penulisan kanji yang benar",
    "items": [
     {
      "q": "いりぐち ／　pintu masuk",
@@ -109,10 +111,11 @@
   "問題3": {
    "label": "問題3",
    "name": "意味に合う言葉は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの意味の言葉は、どれですか。",
+   "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "tinggi, mahal",
+     "q": "「tinggi, mahal」の意味の言葉は、どれですか。",
      "choices": [
       "うち",
       "高い",
@@ -128,7 +131,8 @@
   "問題4": {
    "label": "問題4",
    "name": "漢字の読み",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの漢字の読み方は、どれですか。",
+   "inst_id": "Baca kanji ini",
    "items": [
     {
      "q": "下",
@@ -147,7 +151,8 @@
   "問題5": {
    "label": "問題5",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿切手＿ の読み方は？",
@@ -166,7 +171,8 @@
   "問題6": {
    "label": "問題6",
    "name": "＿＿の言葉を漢字で書くと？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの言葉を漢字で書くと、どれですか。",
+   "inst_id": "Penulisan kanji yang benar",
    "items": [
     {
      "q": "くつした ／　kaus kaki",
@@ -185,10 +191,11 @@
   "問題7": {
    "label": "問題7",
    "name": "意味に合う言葉は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの意味の言葉は、どれですか。",
+   "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "berapa (jumlah), berapa umur",
+     "q": "「berapa (jumlah), berapa umur」の意味の言葉は、どれですか。",
      "choices": [
       "いくつ",
       "小さい",
@@ -204,7 +211,8 @@
   "問題8": {
    "label": "問題8",
    "name": "漢字の読み",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの漢字の読み方は、どれですか。",
+   "inst_id": "Baca kanji ini",
    "items": [
     {
      "q": "目",
@@ -223,7 +231,8 @@
   "問題9": {
    "label": "問題9",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿小さい＿ の読み方は？",
@@ -242,10 +251,11 @@
   "問題10": {
    "label": "問題10",
    "name": "意味に合う言葉は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの意味の言葉は、どれですか。",
+   "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "kaus kaki",
+     "q": "「kaus kaki」の意味の言葉は、どれですか。",
      "choices": [
       "多分",
       "女の子",
@@ -261,7 +271,8 @@
   "問題11": {
    "label": "問題11",
    "name": "漢字の読み",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの漢字の読み方は、どれですか。",
+   "inst_id": "Baca kanji ini",
    "items": [
     {
      "q": "六",
@@ -280,7 +291,8 @@
   "問題12": {
    "label": "問題12",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿靴下＿ の読み方は？",
