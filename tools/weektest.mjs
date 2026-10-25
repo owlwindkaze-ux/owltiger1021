@@ -160,7 +160,35 @@ async function kvQs(page, kw, w, want, seed) {
       var note = q.note || '', ja = note, id = '';
       var cut = note.search(/[＝：]/);
       if (cut >= 0) { ja = note.slice(0, cut).trim(); id = note.slice(cut + 1).trim(); }
-      out.push({ kind: q.kind, q: plain(q.q), choices: q.choices.map(plain),
+      /* **問題文そのものを 付ける。**
+         練習問題の画面では、聞いていること（「読み方は？」）は `kind` に入っていて、
+         画面が 見出しとして 上に出す。`q` は 手がかり（語・文）だけ。
+         それを そのまま 模試の形に 移したので、問が
+           問3　perbedaan; ketidaksesuaian
+         のように **尼語の手がかりだけ**になり、**何を聞かれているのか 書いていなかった**
+         （2026-10-25d・持ち主が見つけた）。
+         大問の見出しに 書いてあっても、実習生は 一問ずつ 読む。
+         だから **一問ごとに 日本語で 聞くことを 書く**。 */
+      var ASK = {
+        'kanjiread': 'つぎの漢字の読み方は、どれですか。',
+        'reading': '＿＿の言葉の読み方は、どれですか。',
+        'orth': 'つぎの言葉を漢字で書くと、どれですか。',
+        'context-blank': '（　　　）に入る言葉は、どれですか。',
+        'context-mean': 'つぎの意味の言葉は、どれですか。',
+        'para': 'だいたい同じ意味の言葉は、どれですか。',
+        'usage': 'つぎの言葉の使い方が正しい文は、どれですか。',
+        'gokei': '（　）に入るものは、どれですか。'
+      };
+      var ak = t;
+      if (t === 'context') ak = q.kind.indexOf('（　）に入る') >= 0 ? 'context-blank' : 'context-mean';
+      /* 尼語の言い方は `kind` の「／」の右に 入っている。そのまま 使う。 */
+      var idPart = (q.kind.split('／')[1] || '').trim();
+      var body = plain(q.q);
+      /* 「意味に合う言葉」の問は 手がかりが **尼語の意味だけ**なので、
+         問だけ見ると 尼語しか 書いていない。日本語の枠で くるむ。 */
+      if (ak === 'context-mean') body = '「' + body + '」の意味の言葉は、どれですか。';
+      out.push({ kind: q.kind, ask: ASK[ak] || 'つぎの問いに答えなさい。', askId: idPart,
+                 q: body, choices: q.choices.map(plain),
                  answer: q.choices.indexOf(q.answer), explain: ja, explain_id: id });
     }
     return out.filter(x => x.answer >= 0);
@@ -170,16 +198,23 @@ async function kvQs(page, kw, w, want, seed) {
 /* ── 1週ぶんを組み立てる ─────────────────────────────── */
 function build(course, w, lv, kv, gr, rd, ch) {
   const S = {}, order = [];
-  const add = (key, label, name, inst, body) => {
-    S[key] = { label, name, inst, ...body }; order.push(key);
+  const add = (key, label, name, inst, body, instId) => {
+    S[key] = { label, name, inst, ...(instId ? { inst_id: instId } : {}), ...body };
+    order.push(key);
   };
+  /* **何を聞かれているのかを、問の すぐ上に 日本語で 書く。**
+     前は どの大問も「つぎの問いに答えなさい。」だけで、問の中身は
+     手がかり（語・尼語の意味）だけだった。だから
+       問3　perbedaan; ketidaksesuaian
+     のように **聞かれていることが どこにも 書いていなかった**
+     （2026-10-25d・持ち主が見つけた）。 */
   kv.forEach((q, i) => add('問題' + (i + 1), '問題' + (i + 1),
     q.kind.split('／')[0].replace(/^問題\d+\s*/, '').trim() || '漢字・語彙',
-    'つぎの問いに答えなさい。',
+    q.ask,
     /* `explain_id`（尼語）を 落とさない。ここで項目を 組み直すので、
        `kvQs` が 付けた 欄を 一つでも 書き忘れると 画面から 消える（2026-10-25c）。 */
     { items: [{ q: q.q, choices: q.choices, answer: q.answer,
-                explain: q.explain, explain_id: q.explain_id || '' }] }));
+                explain: q.explain, explain_id: q.explain_id || '' }] }, q.askId));
   gr.forEach((q, i) => add('問題' + (kv.length + i + 1), '問題' + (kv.length + i + 1),
     '文法形式の判断', 'つぎの文の（　）に入れるのに最もよいものを、一つえらびなさい。',
     { group: '言語知識', items: [q] }));

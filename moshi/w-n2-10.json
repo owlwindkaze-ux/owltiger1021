@@ -69,10 +69,11 @@
   "問題1": {
    "label": "問題1",
    "name": "意味に合う言葉は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの意味の言葉は、どれですか。",
+   "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "cara memakai ~",
+     "q": "「cara memakai ~」の意味の言葉は、どれですか。",
      "choices": [
       "重〜",
       "〜紙",
@@ -88,7 +89,8 @@
   "問題2": {
    "label": "問題2",
    "name": "漢字の読み（熟語の中で）",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの漢字の読み方は、どれですか。",
+   "inst_id": "Baca kanji bergaris",
    "items": [
     {
      "q": "＿貿＿易",
@@ -107,7 +109,8 @@
   "問題3": {
    "label": "問題3",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿将棋＿ の読み方は？",
@@ -126,10 +129,11 @@
   "問題4": {
    "label": "問題4",
    "name": "意味に合う言葉は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの意味の言葉は、どれですか。",
+   "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "~ berikutnya",
+     "q": "「~ berikutnya」の意味の言葉は、どれですか。",
      "choices": [
       "明くる〜",
       "〜通り",

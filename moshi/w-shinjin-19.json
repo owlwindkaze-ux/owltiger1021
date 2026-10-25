@@ -69,7 +69,8 @@
   "問題1": {
    "label": "問題1",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿乗せる＿ の読み方は？",
@@ -88,10 +89,11 @@
   "問題2": {
    "label": "問題2",
    "name": "意味に合う言葉は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの意味の言葉は、どれですか。",
+   "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "perdagangan, bisnis",
+     "q": "「perdagangan, bisnis」の意味の言葉は、どれですか。",
      "choices": [
       "期限",
       "例外",
@@ -107,7 +109,8 @@
   "問題3": {
    "label": "問題3",
    "name": "漢字の読み",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの漢字の読み方は、どれですか。",
+   "inst_id": "Baca kanji ini",
    "items": [
     {
      "q": "葉",
@@ -126,7 +129,8 @@
   "問題4": {
    "label": "問題4",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿住宅＿ の読み方は？",

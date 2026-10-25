@@ -71,7 +71,8 @@
   "問題1": {
    "label": "問題1",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿敬う＿ の読み方は？",
@@ -90,10 +91,11 @@
   "問題2": {
    "label": "問題2",
    "name": "意味に合う言葉は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの意味の言葉は、どれですか。",
+   "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "garis besar cerita",
+     "q": "「garis besar cerita」の意味の言葉は、どれですか。",
      "choices": [
       "一〜",
       "粗筋",
@@ -109,10 +111,11 @@
   "問題3": {
    "label": "問題3",
    "name": "漢字の読み（熟語の中で）",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの漢字の読み方は、どれですか。",
+   "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿停＿止",
+     "q": "＿停＿電",
      "choices": [
       "せん",
       "でい",
@@ -120,15 +123,16 @@
       "てい"
      ],
      "answer": 3,
-     "explain": "停止（ていし）",
-     "explain_id": "berhenti　／　停：berhenti, menghentikan, ditangguhkan"
+     "explain": "停電（ていでん）",
+     "explain_id": "pemadaman listrik　／　停：berhenti, menghentikan, ditangguhkan"
     }
    ]
   },
   "問題4": {
    "label": "問題4",
    "name": "＿＿の言葉を漢字で書くと？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの言葉を漢字で書くと、どれですか。",
+   "inst_id": "Penulisan kanji yang benar",
    "items": [
     {
      "q": "いど ／　garis lintang",

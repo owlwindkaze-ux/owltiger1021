@@ -69,7 +69,8 @@
   "問題1": {
    "label": "問題1",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿吹雪＿ の読み方は？",
@@ -88,7 +89,8 @@
   "問題2": {
    "label": "問題2",
    "name": "＿＿の言葉を漢字で書くと？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの言葉を漢字で書くと、どれですか。",
+   "inst_id": "Penulisan kanji yang benar",
    "items": [
     {
      "q": "せともの ／　barang keramik",
@@ -107,10 +109,11 @@
   "問題3": {
    "label": "問題3",
    "name": "意味に合う言葉は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの意味の言葉は、どれですか。",
+   "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "pecahan; serpihan",
+     "q": "「pecahan; serpihan」の意味の言葉は、どれですか。",
      "choices": [
       "流域",
       "群れ",
@@ -126,7 +129,8 @@
   "問題4": {
    "label": "問題4",
    "name": "漢字の読み",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの漢字の読み方は、どれですか。",
+   "inst_id": "Baca kanji ini",
    "items": [
     {
      "q": "戸",
