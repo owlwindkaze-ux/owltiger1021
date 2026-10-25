@@ -74,7 +74,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">egois, mau menang sendiri, keras kepala</span>",
+     "q": "egois, mau menang sendiri, keras kepala",
      "choices": [
       "ラケット",
       "ワイン",
@@ -82,7 +82,8 @@
       "出会い"
      ],
      "answer": 2,
-     "explain": "わがまま（わがまま）＝"
+     "explain": "わがまま（わがまま）",
+     "explain_id": "egois, mau menang sendiri, keras kepala"
     }
    ]
   },
@@ -92,15 +93,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">負</u>う</span>",
+     "q": "＿負＿け",
      "choices": [
-      "おう",
-      "お",
       "ず",
-      "み"
+      "ま",
+      "み",
+      "の"
      ],
      "answer": 1,
-     "explain": "負う（おう）＝"
+     "explain": "負け（まけ）",
+     "explain_id": "kekalahan　／　負：menanggung, kalah, mengalahkan"
     }
    ]
   },
@@ -110,7 +112,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">大人しい</u> の読み方は？",
+     "q": "＿大人しい＿ の読み方は？",
      "choices": [
       "おとうなしい",
       "おとなしい",
@@ -118,7 +120,8 @@
       "おとなじい"
      ],
      "answer": 1,
-     "explain": "大人しい（おとなしい）＝"
+     "explain": "大人しい（おとなしい）",
+     "explain_id": "penurut, pendiam"
     }
    ]
   },
@@ -128,7 +131,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">dengan sengaja</span>",
+     "q": "dengan sengaja",
      "choices": [
       "守備",
       "センター",
@@ -136,7 +139,8 @@
       "わざと"
      ],
      "answer": 3,
-     "explain": "わざと（わざと）＝"
+     "explain": "わざと（わざと）",
+     "explain_id": "dengan sengaja"
     }
    ]
   },

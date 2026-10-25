@@ -74,7 +74,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">友人</u> の読み方は？",
+     "q": "＿友人＿ の読み方は？",
      "choices": [
       "ゆうじん",
       "ゆうじ",
@@ -82,7 +82,8 @@
       "ゆじん"
      ],
      "answer": 0,
-     "explain": "友人（ゆうじん）＝"
+     "explain": "友人（ゆうじん）",
+     "explain_id": "teman (formal)"
     }
    ]
   },
@@ -92,7 +93,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">tiba-tiba</span>",
+     "q": "tiba-tiba",
      "choices": [
       "何でも",
       "悪口",
@@ -100,7 +101,8 @@
       "急に"
      ],
      "answer": 3,
-     "explain": "急に（きゅうに）＝"
+     "explain": "急に（きゅうに）",
+     "explain_id": "tiba-tiba"
     }
    ]
   },
@@ -110,7 +112,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:3rem\">皆</span>",
+     "q": "皆",
      "choices": [
       "みな",
       "くつ",
@@ -118,7 +120,8 @@
       "せわ"
      ],
      "answer": 0,
-     "explain": "皆（みな）："
+     "explain": "皆（みな）",
+     "explain_id": "semua, segalanya"
     }
    ]
   },
@@ -128,15 +131,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">うつる</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">terpantul, tercermin</span>",
+     "q": "うつる ／　terpantul, tercermin",
      "choices": [
       "永る",
       "映る",
       "晩る",
-      "泳る"
+      "影る"
      ],
      "answer": 1,
-     "explain": "映る（うつる）＝"
+     "explain": "映る（うつる）",
+     "explain_id": "terpantul, tercermin"
     }
    ]
   },

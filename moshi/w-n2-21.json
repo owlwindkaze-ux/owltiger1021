@@ -72,7 +72,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">膨らます</u> の読み方は？",
+     "q": "＿膨らます＿ の読み方は？",
      "choices": [
       "ふぐらます",
       "ふくらます",
@@ -80,7 +80,8 @@
       "ふくらまず"
      ],
      "answer": 1,
-     "explain": "膨らます（ふくらます）＝"
+     "explain": "膨らます（ふくらます）",
+     "explain_id": "mengembangkan; meniup (balon)"
     }
    ]
   },
@@ -90,15 +91,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">ほうめん</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">arah; bidang</span>",
+     "q": "ほうめん ／　arah; bidang",
      "choices": [
       "方面",
-      "法面",
       "包面",
-      "飽面"
+      "豊面",
+      "宝面"
      ],
      "answer": 0,
-     "explain": "方面（ほうめん）＝"
+     "explain": "方面（ほうめん）",
+     "explain_id": "arah; bidang"
     }
    ]
   },
@@ -108,7 +110,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">penyok; cekung</span>",
+     "q": "penyok; cekung",
      "choices": [
       "凹む",
       "便箋",
@@ -116,7 +118,8 @@
       "朗らか"
      ],
      "answer": 0,
-     "explain": "凹む（へこむ）＝"
+     "explain": "凹む（へこむ）",
+     "explain_id": "penyok; cekung"
     }
    ]
   },
@@ -126,7 +129,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:3rem\">姓</span>",
+     "q": "姓",
      "choices": [
       "ぜい",
       "ゆす",
@@ -134,7 +137,8 @@
       "せい"
      ],
      "answer": 3,
-     "explain": "姓（せい）："
+     "explain": "姓（せい）",
+     "explain_id": "nama keluarga, marga"
     }
    ]
   },

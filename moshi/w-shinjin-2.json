@@ -74,7 +74,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">立つ</u> の読み方は？",
+     "q": "＿立つ＿ の読み方は？",
      "choices": [
       "たつ",
       "たづ",
@@ -82,7 +82,8 @@
       "たっつ"
      ],
      "answer": 0,
-     "explain": "立つ（たつ）＝"
+     "explain": "立つ（たつ）",
+     "explain_id": "berdiri"
     }
    ]
   },
@@ -92,7 +93,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">いりぐち</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">pintu masuk</span>",
+     "q": "いりぐち ／　pintu masuk",
      "choices": [
       "入向",
       "入商",
@@ -100,7 +101,8 @@
       "入口"
      ],
      "answer": 3,
-     "explain": "入口（いりぐち）＝"
+     "explain": "入口（いりぐち）",
+     "explain_id": "pintu masuk"
     }
    ]
   },
@@ -110,7 +112,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">tinggi, mahal</span>",
+     "q": "tinggi, mahal",
      "choices": [
       "うち",
       "高い",
@@ -118,7 +120,8 @@
       "立つ"
      ],
      "answer": 1,
-     "explain": "高い（たかい）＝"
+     "explain": "高い（たかい）",
+     "explain_id": "tinggi, mahal"
     }
    ]
   },
@@ -128,7 +131,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:3rem\">下</span>",
+     "q": "下",
      "choices": [
       "じた",
       "しった",
@@ -136,7 +139,8 @@
       "しだ"
      ],
      "answer": 2,
-     "explain": "下（した）："
+     "explain": "下（した）",
+     "explain_id": "bawah, turun, memberi"
     }
    ]
   },
@@ -146,7 +150,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">切手</u> の読み方は？",
+     "q": "＿切手＿ の読み方は？",
      "choices": [
       "きって",
       "きて",
@@ -154,7 +158,8 @@
       "ぎって"
      ],
      "answer": 0,
-     "explain": "切手（きって）＝"
+     "explain": "切手（きって）",
+     "explain_id": "perangko"
     }
    ]
   },
@@ -164,7 +169,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">くつした</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">kaus kaki</span>",
+     "q": "くつした ／　kaus kaki",
      "choices": [
       "夏下",
       "花下",
@@ -172,7 +177,8 @@
       "靴下"
      ],
      "answer": 3,
-     "explain": "靴下（くつした）＝"
+     "explain": "靴下（くつした）",
+     "explain_id": "kaus kaki"
     }
    ]
   },
@@ -182,7 +188,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">berapa (jumlah), berapa umur</span>",
+     "q": "berapa (jumlah), berapa umur",
      "choices": [
       "いくつ",
       "小さい",
@@ -190,7 +196,8 @@
       "今年"
      ],
      "answer": 0,
-     "explain": "いくつ（いくつ）＝"
+     "explain": "いくつ（いくつ）",
+     "explain_id": "berapa (jumlah), berapa umur"
     }
    ]
   },
@@ -200,7 +207,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:3rem\">目</span>",
+     "q": "目",
      "choices": [
       "け",
       "め",
@@ -208,7 +215,8 @@
       "こ"
      ],
      "answer": 1,
-     "explain": "目（め）："
+     "explain": "目（め）",
+     "explain_id": "mata, butir/pos, kelas"
     }
    ]
   },
@@ -218,7 +226,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">小さい</u> の読み方は？",
+     "q": "＿小さい＿ の読み方は？",
      "choices": [
       "ちいざい",
       "ちいっさい",
@@ -226,7 +234,8 @@
       "ちいさい"
      ],
      "answer": 3,
-     "explain": "小さい（ちいさい）＝"
+     "explain": "小さい（ちいさい）",
+     "explain_id": "kecil"
     }
    ]
   },
@@ -236,7 +245,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">kaus kaki</span>",
+     "q": "kaus kaki",
      "choices": [
       "多分",
       "女の子",
@@ -244,7 +253,8 @@
       "靴下"
      ],
      "answer": 3,
-     "explain": "靴下（くつした）＝"
+     "explain": "靴下（くつした）",
+     "explain_id": "kaus kaki"
     }
    ]
   },
@@ -254,7 +264,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:3rem\">六</span>",
+     "q": "六",
      "choices": [
       "ろうく",
       "ろぐ",
@@ -262,7 +272,8 @@
       "ろく"
      ],
      "answer": 3,
-     "explain": "六（ろく）："
+     "explain": "六（ろく）",
+     "explain_id": "enam"
     }
    ]
   },
@@ -272,7 +283,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">靴下</u> の読み方は？",
+     "q": "＿靴下＿ の読み方は？",
      "choices": [
       "くつっした",
       "ぐつした",
@@ -280,7 +291,8 @@
       "くつした"
      ],
      "answer": 3,
-     "explain": "靴下（くつした）＝"
+     "explain": "靴下（くつした）",
+     "explain_id": "kaus kaki"
     }
    ]
   },

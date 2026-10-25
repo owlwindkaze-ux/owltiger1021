@@ -78,7 +78,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">天気</u> の読み方は？",
+     "q": "＿天気＿ の読み方は？",
      "choices": [
       "てんき",
       "でんき",
@@ -86,7 +86,8 @@
       "てき"
      ],
      "answer": 0,
-     "explain": "天気（てんき）＝"
+     "explain": "天気（てんき）",
+     "explain_id": "cuaca"
     }
    ]
   },
@@ -96,7 +97,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">たべる</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">makan</span>",
+     "q": "たべる ／　makan",
      "choices": [
       "食べる",
       "色べる",
@@ -104,7 +105,8 @@
       "養べる"
      ],
      "answer": 0,
-     "explain": "食べる（たべる）＝"
+     "explain": "食べる（たべる）",
+     "explain_id": "makan"
     }
    ]
   },
@@ -114,7 +116,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">putih</span>",
+     "q": "putih",
      "choices": [
       "自動車",
       "キロ",
@@ -122,7 +124,8 @@
       "白い"
      ],
      "answer": 3,
-     "explain": "白い（しろい）＝"
+     "explain": "白い（しろい）",
+     "explain_id": "putih"
     }
    ]
   },
@@ -132,7 +135,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">曜</u>日</span>",
+     "q": "水＿曜＿",
      "choices": [
       "ばん",
       "よう",
@@ -140,7 +143,8 @@
       "ようう"
      ],
      "answer": 1,
-     "explain": "曜日（ようび）＝"
+     "explain": "水曜（すいよう）",
+     "explain_id": "hari Rabu　／　曜：hari dalam seminggu, hari kerja"
     }
    ]
   },
@@ -150,7 +154,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">面白い</u> の読み方は？",
+     "q": "＿面白い＿ の読み方は？",
      "choices": [
       "おもじろい",
       "おもっしろい",
@@ -158,7 +162,8 @@
       "おもしろい"
      ],
      "answer": 3,
-     "explain": "面白い（おもしろい）＝"
+     "explain": "面白い（おもしろい）",
+     "explain_id": "menarik, lucu"
     }
    ]
   },
@@ -168,15 +173,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">なつやすみ</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">libur musim panas</span>",
+     "q": "なつやすみ ／　libur musim panas",
      "choices": [
       "菓休み",
       "夏休み",
-      "夏似み",
+      "夏倒み",
       "夏臼み"
      ],
      "answer": 1,
-     "explain": "夏休み（なつやすみ）＝"
+     "explain": "夏休み（なつやすみ）",
+     "explain_id": "libur musim panas"
     }
    ]
   },
@@ -186,7 +192,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">hujan</span>",
+     "q": "hujan",
      "choices": [
       "買う",
       "白い",
@@ -194,7 +200,8 @@
       "雨"
      ],
      "answer": 3,
-     "explain": "雨（あめ）＝"
+     "explain": "雨（あめ）",
+     "explain_id": "hujan"
     }
    ]
   },
@@ -204,7 +211,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">毎</u><ruby>朝<rt style=\"font-size:.34em;font-weight:400\">あさ</rt></ruby></span>",
+     "q": "＿毎＿朝《あさ》",
      "choices": [
       "まい",
       "よう",
@@ -212,7 +219,8 @@
       "しろ"
      ],
      "answer": 0,
-     "explain": "毎朝（まいあさ）＝"
+     "explain": "毎朝（まいあさ）",
+     "explain_id": "setiap pagi　／　毎：setiap"
     }
    ]
   },
@@ -222,7 +230,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">友達</u> の読み方は？",
+     "q": "＿友達＿ の読み方は？",
      "choices": [
       "とうもだち",
       "ともだち",
@@ -230,7 +238,8 @@
       "どもだち"
      ],
      "answer": 1,
-     "explain": "友達（ともだち）＝"
+     "explain": "友達（ともだち）",
+     "explain_id": "teman"
     }
    ]
   },
@@ -240,15 +249,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">はやい</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">awal, pagi-pagi</span>",
+     "q": "はやい ／　awal, pagi-pagi",
      "choices": [
-      "窓い",
+      "相い",
       "掃い",
       "早い",
       "日い"
      ],
      "answer": 2,
-     "explain": "早い（はやい）＝"
+     "explain": "早い（はやい）",
+     "explain_id": "awal, pagi-pagi"
     }
    ]
   },
@@ -258,7 +268,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:3rem\">母</span>",
+     "q": "母",
      "choices": [
       "はぱ",
       "ばは",
@@ -266,7 +276,8 @@
       "ぱは"
      ],
      "answer": 2,
-     "explain": "母（はは）："
+     "explain": "母（はは）",
+     "explain_id": "ibu"
     }
    ]
   },
@@ -276,7 +287,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">自動車</u> の読み方は？",
+     "q": "＿自動車＿ の読み方は？",
      "choices": [
       "じとうしゃ",
       "じどうし",
@@ -284,7 +295,8 @@
       "じどしゃ"
      ],
      "answer": 2,
-     "explain": "自動車（じどうしゃ）＝"
+     "explain": "自動車（じどうしゃ）",
+     "explain_id": "mobil, kendaraan bermotor"
     }
    ]
   },

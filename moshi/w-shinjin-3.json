@@ -76,7 +76,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">男</u> の読み方は？",
+     "q": "＿男＿ の読み方は？",
      "choices": [
       "おとこ",
       "おとうこ",
@@ -84,7 +84,8 @@
       "おっとこ"
      ],
      "answer": 0,
-     "explain": "男（おとこ）＝"
+     "explain": "男（おとこ）",
+     "explain_id": "laki-laki"
     }
    ]
   },
@@ -94,7 +95,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">せんせい</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">guru, dosen</span>",
+     "q": "せんせい ／　guru, dosen",
      "choices": [
       "先静",
       "先生",
@@ -102,7 +103,8 @@
       "兆生"
      ],
      "answer": 1,
-     "explain": "先生（せんせい）＝"
+     "explain": "先生（せんせい）",
+     "explain_id": "guru, dosen"
     }
    ]
   },
@@ -112,7 +114,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">sedikit</span>",
+     "q": "sedikit",
      "choices": [
       "少ない",
       "カップ",
@@ -120,7 +122,8 @@
       "カレー"
      ],
      "answer": 0,
-     "explain": "少ない（すくない）＝"
+     "explain": "少ない（すくない）",
+     "explain_id": "sedikit"
     }
    ]
   },
@@ -130,15 +133,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">道</u> とだいたい同じ意味の言葉は？",
+     "q": "＿道＿ とだいたい同じ意味の言葉は？",
      "choices": [
-      "通り",
+      "道路",
       "千",
       "売る",
       "～語"
      ],
      "answer": 0,
-     "explain": "道＝"
+     "explain": "道",
+     "explain_id": "道路（jalan）"
     }
    ]
   },
@@ -148,7 +152,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:3rem\">西</span>",
+     "q": "西",
      "choices": [
       "せん",
       "にっし",
@@ -156,7 +160,8 @@
       "にじ"
      ],
      "answer": 2,
-     "explain": "西（にし）："
+     "explain": "西（にし）",
+     "explain_id": "barat, Spanyol"
     }
    ]
   },
@@ -166,7 +171,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">道</u> の読み方は？",
+     "q": "＿道＿ の読み方は？",
      "choices": [
       "みち",
       "きく",
@@ -174,7 +179,8 @@
       "みっち"
      ],
      "answer": 0,
-     "explain": "道（みち）＝"
+     "explain": "道（みち）",
+     "explain_id": "jalan"
     }
    ]
   },
@@ -184,7 +190,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">sedikit</span>",
+     "q": "sedikit",
      "choices": [
       "水",
       "かかる",
@@ -192,7 +198,8 @@
       "少し"
      ],
      "answer": 3,
-     "explain": "少し（すこし）＝"
+     "explain": "少し（すこし）",
+     "explain_id": "sedikit"
     }
    ]
   },
@@ -202,7 +209,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><ruby>独<rt style=\"font-size:.34em;font-weight:400\">どく</rt></ruby><u style=\"text-underline-offset:5px\">語</u></span>",
+     "q": "独《どく》＿語＿",
      "choices": [
       "き",
       "す",
@@ -210,7 +217,8 @@
       "ご"
      ],
      "answer": 3,
-     "explain": "独語（どくご）＝"
+     "explain": "独語（どくご）",
+     "explain_id": "berbicara sendiri　／　語：bahasa, kata, bercerita"
     }
    ]
   },
@@ -220,7 +228,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">口</u> の読み方は？",
+     "q": "＿口＿ の読み方は？",
      "choices": [
       "ぐち",
       "くっち",
@@ -228,7 +236,8 @@
       "くぢ"
      ],
      "answer": 2,
-     "explain": "口（くち）＝"
+     "explain": "口（くち）",
+     "explain_id": "mulut; lowongan kerja"
     }
    ]
   },
@@ -238,7 +247,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">なまえ</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">nama</span>",
+     "q": "なまえ ／　nama",
      "choices": [
       "号前",
       "名前",
@@ -246,7 +255,8 @@
       "器前"
      ],
      "answer": 1,
-     "explain": "名前（なまえ）＝"
+     "explain": "名前（なまえ）",
+     "explain_id": "nama"
     }
    ]
   },
@@ -256,7 +266,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">telepon</span>",
+     "q": "telepon",
      "choices": [
       "電話",
       "千",
@@ -264,7 +274,8 @@
       "平仮名"
      ],
      "answer": 0,
-     "explain": "電話（でんわ）＝"
+     "explain": "電話（でんわ）",
+     "explain_id": "telepon"
     }
    ]
   },
@@ -274,7 +285,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:3rem\">口</span>",
+     "q": "口",
      "choices": [
       "くち",
       "くっち",
@@ -282,7 +293,8 @@
       "くぢ"
      ],
      "answer": 0,
-     "explain": "口（くち）："
+     "explain": "口（くち）",
+     "explain_id": "mulut"
     }
    ]
   },

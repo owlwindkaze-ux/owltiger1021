@@ -74,7 +74,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">地</u> の読み方は？",
+     "q": "＿地＿ の読み方は？",
      "choices": [
       "じさつ",
       "こうそく",
@@ -82,7 +82,8 @@
       "とざん"
      ],
      "answer": 2,
-     "explain": "地（ち）＝"
+     "explain": "地（ち）",
+     "explain_id": "tanah, bumi"
     }
    ]
   },
@@ -92,15 +93,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">いまにも</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">hampir saja, sebentar lagi</span>",
+     "q": "いまにも ／　hampir saja, sebentar lagi",
      "choices": [
       "今にも",
       "根にも",
-      "困にも",
+      "婚にも",
       "会にも"
      ],
      "answer": 0,
-     "explain": "今にも（いまにも）＝"
+     "explain": "今にも（いまにも）",
+     "explain_id": "hampir saja, sebentar lagi"
     }
    ]
   },
@@ -110,7 +112,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">kecepatan</span>",
+     "q": "kecepatan",
      "choices": [
       "速度",
       "高速",
@@ -118,7 +120,8 @@
       "容易"
      ],
      "answer": 0,
-     "explain": "速度（そくど）＝"
+     "explain": "速度（そくど）",
+     "explain_id": "kecepatan"
     }
    ]
   },
@@ -128,7 +131,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">たびたび</u> とだいたい同じ意味の言葉は？",
+     "q": "＿たびたび＿ とだいたい同じ意味の言葉は？",
      "choices": [
       "しばしば",
       "ですから",
@@ -136,7 +139,8 @@
       "ちょうだい"
      ],
      "answer": 0,
-     "explain": "たびたび＝"
+     "explain": "たびたび",
+     "explain_id": "しばしば（sering, berulang kali）"
     }
    ]
   },

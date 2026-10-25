@@ -72,7 +72,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">濁る</u> の読み方は？",
+     "q": "＿濁る＿ の読み方は？",
      "choices": [
       "にごうる",
       "にこる",
@@ -80,7 +80,8 @@
       "とかす"
      ],
      "answer": 2,
-     "explain": "濁る（にごる）＝"
+     "explain": "濁る（にごる）",
+     "explain_id": "menjadi keruh"
     }
    ]
   },
@@ -90,7 +91,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">meruncing; menjadi tajam</span>",
+     "q": "meruncing; menjadi tajam",
      "choices": [
       "手入れ",
       "干す",
@@ -98,7 +99,8 @@
       "尖る"
      ],
      "answer": 3,
-     "explain": "尖る（とがる）＝"
+     "explain": "尖る（とがる）",
+     "explain_id": "meruncing; menjadi tajam"
     }
    ]
   },
@@ -108,7 +110,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">塗</u>布</span>",
+     "q": "＿塗＿布",
      "choices": [
       "と",
       "とう",
@@ -116,7 +118,8 @@
       "き"
      ],
      "answer": 0,
-     "explain": "塗布（とふ）＝"
+     "explain": "塗布（とふ）",
+     "explain_id": "mengoleskan　／　塗：mengoleskan, mengecat, melumuri"
     }
    ]
   },
@@ -126,7 +129,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">吊す</u> の読み方は？",
+     "q": "＿吊す＿ の読み方は？",
      "choices": [
       "つるず",
       "つるっす",
@@ -134,7 +137,8 @@
       "つるす"
      ],
      "answer": 3,
-     "explain": "吊す（つるす）＝"
+     "explain": "吊す（つるす）",
+     "explain_id": "menggantungkan"
     }
    ]
   },

@@ -72,7 +72,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">料金</u> の読み方は？",
+     "q": "＿料金＿ の読み方は？",
      "choices": [
       "りょきん",
       "りょうぎん",
@@ -80,7 +80,8 @@
       "りょうきん"
      ],
      "answer": 3,
-     "explain": "料金（りょうきん）＝"
+     "explain": "料金（りょうきん）",
+     "explain_id": "biaya, tarif"
     }
    ]
   },
@@ -90,15 +91,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">げんご</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">bahasa</span>",
+     "q": "げんご ／　bahasa",
      "choices": [
       "言話",
-      "言調",
+      "言証",
       "限語",
       "言語"
      ],
      "answer": 3,
-     "explain": "言語（げんご）＝"
+     "explain": "言語（げんご）",
+     "explain_id": "bahasa"
     }
    ]
   },
@@ -108,7 +110,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">diajari, belajar dari</span>",
+     "q": "diajari, belajar dari",
      "choices": [
       "プラン",
       "少年",
@@ -116,7 +118,8 @@
       "不足"
      ],
      "answer": 2,
-     "explain": "教わる（おそわる）＝"
+     "explain": "教わる（おそわる）",
+     "explain_id": "diajari, belajar dari"
     }
    ]
   },
@@ -126,7 +129,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:3rem\">列</span>",
+     "q": "列",
      "choices": [
       "さけ",
       "れつ",
@@ -134,7 +137,8 @@
       "れっつ"
      ],
      "answer": 1,
-     "explain": "列（れつ）："
+     "explain": "列（れつ）",
+     "explain_id": "baris, deret, peringkat"
     }
    ]
   },

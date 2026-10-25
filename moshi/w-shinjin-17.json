@@ -78,7 +78,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">結局</u> の読み方は？",
+     "q": "＿結局＿ の読み方は？",
      "choices": [
       "けっきく",
       "けっきょうく",
@@ -86,7 +86,8 @@
       "けっきょく"
      ],
      "answer": 3,
-     "explain": "結局（けっきょく）＝"
+     "explain": "結局（けっきょく）",
+     "explain_id": "akhirnya, pada akhirnya"
     }
    ]
   },
@@ -96,15 +97,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">けっか</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">hasil, akibat</span>",
+     "q": "けっか ／　hasil, akibat",
      "choices": [
-      "絵果",
+      "給果",
       "結果",
       "締果",
       "純果"
      ],
      "answer": 1,
-     "explain": "結果（けっか）＝"
+     "explain": "結果（けっか）",
+     "explain_id": "hasil, akibat"
     }
    ]
   },
@@ -114,7 +116,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">cakap, kompeten</span>",
+     "q": "cakap, kompeten",
      "choices": [
       "きつい",
       "争う",
@@ -122,7 +124,8 @@
       "確実"
      ],
      "answer": 2,
-     "explain": "有能（ゆうのう）＝"
+     "explain": "有能（ゆうのう）",
+     "explain_id": "cakap, kompeten"
     }
    ]
   },
@@ -132,15 +135,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\">戦<u style=\"text-underline-offset:5px\">争</u></span>",
+     "q": "＿争＿う",
      "choices": [
-      "ぞう",
-      "そう",
-      "こう",
-      "そうう"
+      "あらそう",
+      "あらぞ",
+      "あらそ",
+      "あらっそ"
      ],
-     "answer": 1,
-     "explain": "戦争（せんそう）＝"
+     "answer": 2,
+     "explain": "争う（あらそう）",
+     "explain_id": "bertengkar, berselisih　／　争：bertengkar, berselisih, berdebat"
     }
    ]
   },

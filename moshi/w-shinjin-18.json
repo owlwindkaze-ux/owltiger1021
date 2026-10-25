@@ -74,7 +74,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">断る</u> の読み方は？",
+     "q": "＿断る＿ の読み方は？",
      "choices": [
       "こっとわる",
       "こどわる",
@@ -82,7 +82,8 @@
       "ごとわる"
      ],
      "answer": 2,
-     "explain": "断る（ことわる）＝"
+     "explain": "断る（ことわる）",
+     "explain_id": "menolak"
     }
    ]
   },
@@ -92,15 +93,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">なん</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">kesulitan, kesukaran</span>",
+     "q": "なん ／　kesulitan, kesukaran",
      "choices": [
       "難",
-      "離",
+      "雑",
       "集",
       "雇"
      ],
      "answer": 0,
-     "explain": "難（なん）＝"
+     "explain": "難（なん）",
+     "explain_id": "kesulitan, kesukaran"
     }
    ]
   },
@@ -110,7 +112,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">selamat siang, halo</span>",
+     "q": "selamat siang, halo",
      "choices": [
       "こんにちは",
       "ごめんなさい",
@@ -118,7 +120,8 @@
       "すれ違う"
      ],
      "answer": 0,
-     "explain": "こんにちは（こんにちは）＝"
+     "explain": "こんにちは（こんにちは）",
+     "explain_id": "selamat siang, halo"
     }
    ]
   },
@@ -128,7 +131,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">収</u><ruby>穫<rt style=\"font-size:.34em;font-weight:400\">かく</rt></ruby></span>",
+     "q": "＿収＿入",
      "choices": [
       "じゅう",
       "しゆう",
@@ -136,7 +139,8 @@
       "しゅう"
      ],
      "answer": 3,
-     "explain": "収穫（しゅうかく）＝"
+     "explain": "収入（しゅうにゅう）",
+     "explain_id": "penghasilan　／　収：mengumpulkan, memperoleh, pendapatan"
     }
    ]
   },

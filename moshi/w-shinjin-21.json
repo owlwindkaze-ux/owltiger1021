@@ -72,7 +72,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">常識</u> の読み方は？",
+     "q": "＿常識＿ の読み方は？",
      "choices": [
       "じょうしき",
       "じょうしぎ",
@@ -80,7 +80,8 @@
       "じうしき"
      ],
      "answer": 0,
-     "explain": "常識（じょうしき）＝"
+     "explain": "常識（じょうしき）",
+     "explain_id": "akal sehat, pengetahuan umum"
     }
    ]
   },
@@ -90,7 +91,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">きじ</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">kain, adonan</span>",
+     "q": "きじ ／　kain, adonan",
      "choices": [
       "生地",
       "政地",
@@ -98,7 +99,8 @@
       "生城"
      ],
      "answer": 0,
-     "explain": "生地（きじ）＝"
+     "explain": "生地（きじ）",
+     "explain_id": "kain, adonan"
     }
    ]
   },
@@ -108,7 +110,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">sofa</span>",
+     "q": "sofa",
      "choices": [
       "ダイヤ",
       "ソファー",
@@ -116,7 +118,8 @@
       "そのまま"
      ],
      "answer": 1,
-     "explain": "ソファー（ソファー）＝"
+     "explain": "ソファー（ソファー）",
+     "explain_id": "sofa"
     }
    ]
   },
@@ -126,7 +129,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">申</u>告</span>",
+     "q": "＿申＿請《せい》",
      "choices": [
       "こう",
       "しん",
@@ -134,7 +137,8 @@
       "てい"
      ],
      "answer": 1,
-     "explain": "申告（しんこく）＝"
+     "explain": "申請（しんせい）",
+     "explain_id": "permohonan　／　申：melapor, berbicara dengan rendah hati, berkenan"
     }
    ]
   },

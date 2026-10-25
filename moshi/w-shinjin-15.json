@@ -72,7 +72,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">要点</u> の読み方は？",
+     "q": "＿要点＿ の読み方は？",
      "choices": [
       "ようて",
       "ようでん",
@@ -80,7 +80,8 @@
       "よてん"
      ],
      "answer": 2,
-     "explain": "要点（ようてん）＝"
+     "explain": "要点（ようてん）",
+     "explain_id": "inti, pokok"
     }
    ]
   },
@@ -90,7 +91,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">informasi</span>",
+     "q": "informasi",
      "choices": [
       "情報",
       "向かい",
@@ -98,7 +99,8 @@
       "解ける"
      ],
      "answer": 0,
-     "explain": "情報（じょうほう）＝"
+     "explain": "情報（じょうほう）",
+     "explain_id": "informasi"
     }
    ]
   },
@@ -108,33 +110,35 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">得</u>る</span>",
+     "q": "＿得＿意",
      "choices": [
-      "し",
-      "え",
-      "か",
-      "そ"
+      "とく",
+      "とぐ",
+      "どく",
+      "とっく"
      ],
-     "answer": 1,
-     "explain": "得る（える）＝"
+     "answer": 0,
+     "explain": "得意（とくい）",
+     "explain_id": "mahir, jago, bangga　／　得：memperoleh, mendapat, untung"
     }
    ]
   },
   "問題4": {
    "label": "問題4",
-   "name": "＿＿の言葉の読み方は？",
+   "name": "意味に合う言葉は？",
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">向く</u> の読み方は？",
+     "q": "sebenarnya, kenyataannya",
      "choices": [
-      "むく",
-      "むっく",
-      "むぐ",
-      "さす"
+      "見解",
+      "向かい",
+      "指す",
+      "実際"
      ],
-     "answer": 0,
-     "explain": "向く（むく）＝"
+     "answer": 3,
+     "explain": "実際（じっさい）",
+     "explain_id": "sebenarnya, kenyataannya"
     }
    ]
   },

@@ -72,7 +72,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">逃がす</u> の読み方は？",
+     "q": "＿逃がす＿ の読み方は？",
      "choices": [
       "にかす",
       "にがす",
@@ -80,7 +80,8 @@
       "にがず"
      ],
      "answer": 1,
-     "explain": "逃がす（にがす）＝"
+     "explain": "逃がす（にがす）",
+     "explain_id": "melepaskan; membiarkan lolos"
     }
    ]
   },
@@ -90,15 +91,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">ごくろうさま</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">terima kasih atas kerja kerasnya</span>",
+     "q": "ごくろうさま ／　terima kasih atas kerja kerasnya",
      "choices": [
-      "ご若労様",
+      "ご葉労様",
       "ご苦労様",
-      "ご茶労様",
-      "ご苦労陽"
+      "ご英労様",
+      "ご苦労容"
      ],
      "answer": 1,
-     "explain": "ご苦労様（ごくろうさま）＝"
+     "explain": "ご苦労様（ごくろうさま）",
+     "explain_id": "terima kasih atas kerja kerasnya"
     }
    ]
   },
@@ -108,7 +110,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">perbedaan; ketidaksesuaian</span>",
+     "q": "perbedaan; ketidaksesuaian",
      "choices": [
       "日課",
       "単数",
@@ -116,7 +118,8 @@
       "兵隊"
      ],
      "answer": 2,
-     "explain": "相違（そうい）＝"
+     "explain": "相違（そうい）",
+     "explain_id": "perbedaan; ketidaksesuaian"
     }
    ]
   },
@@ -126,7 +129,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:3rem\">谷</span>",
+     "q": "谷",
      "choices": [
       "たに",
       "だに",
@@ -134,7 +137,8 @@
       "いわ"
      ],
      "answer": 0,
-     "explain": "谷（たに）："
+     "explain": "谷（たに）",
+     "explain_id": "lembah, jurang"
     }
    ]
   },

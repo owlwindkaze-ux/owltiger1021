@@ -74,7 +74,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">草履</u> の読み方は？",
+     "q": "＿草履＿ の読み方は？",
      "choices": [
       "ぞううり",
       "そうり",
@@ -82,7 +82,8 @@
       "ぞり"
      ],
      "answer": 2,
-     "explain": "草履（ぞうり）＝"
+     "explain": "草履（ぞうり）",
+     "explain_id": "zori (sandal Jepang)"
     }
    ]
   },
@@ -92,7 +93,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">ちかう</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">bersumpah; berjanji</span>",
+     "q": "ちかう ／　bersumpah; berjanji",
      "choices": [
       "調節",
       "速力",
@@ -100,7 +101,8 @@
       "大して"
      ],
      "answer": 2,
-     "explain": "誓う（ちかう）＝"
+     "explain": "誓う（ちかう）",
+     "explain_id": "bersumpah; berjanji"
     }
    ]
   },
@@ -110,7 +112,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">nama tempat</span>",
+     "q": "nama tempat",
      "choices": [
       "綱",
       "地名",
@@ -118,7 +120,8 @@
       "冷凍"
      ],
      "answer": 1,
-     "explain": "地名（ちめい）＝"
+     "explain": "地名（ちめい）",
+     "explain_id": "nama tempat"
     }
    ]
   },
@@ -128,7 +131,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\">宿<u style=\"text-underline-offset:5px\">泊</u></span>",
+     "q": "宿＿泊＿",
      "choices": [
       "ばく",
       "ぱく",
@@ -136,7 +139,8 @@
       "はく"
      ],
      "answer": 3,
-     "explain": "宿泊（しゅくはく）＝"
+     "explain": "宿泊（しゅくはく）",
+     "explain_id": "penginapan　／　泊：menginap, bermalam"
     }
    ]
   },

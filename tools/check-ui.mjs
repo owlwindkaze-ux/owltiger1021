@@ -252,6 +252,28 @@ for (const [url, name, wait] of [
   await c.close();
 }
 
+/* ───────── 週テストに直行したときの 見出しと戻り先 ─────────
+   `?set=` で その回に直行する分岐を、見出しを入れる行より**前**に置くと、
+   HTMLの初期値「N2模試・N2ロードマップ」が そのまま残る。
+   新人コースの週テストに N2の名前が出ていた（2026-10-25c）。 */
+say('\n【週テストに直行したときの見出し】');
+for (const [lv, set, head, back] of [
+  ['sjw', 5, '新人コース', '新人コース'],
+  ['n2w', 3, 'N2コース', 'N2ロードマップ'],
+]) {
+  const { c, p, errs } = await newPage(b, '/moshi/?lv=' + lv + '&set=' + set, { wait: 2500 });
+  const h = await p.evaluate(() => document.getElementById('hdTitle')?.textContent || '');
+  const bk = await p.evaluate(() => document.getElementById('backLink')?.textContent || '');
+  say('   ' + lv + '　見出し「' + h + '」　戻り「' + bk + '」');
+  if (!h.includes(head)) bad('?set= 直行：' + lv + ' の見出しが「' + h + '」（' + head + 'のはず）');
+  if (!bk.includes(back)) bad('?set= 直行：' + lv + ' の戻り先が「' + bk + '」（' + back + 'のはず）');
+  /* 問題文に 生のタグが 見えていないか（持ち主が見つけたもの） */
+  const t = await p.evaluate(() => document.body.innerText);
+  if (/<[a-zA-Z/]/.test(t)) bad('?set= 直行：' + lv + ' の画面に生のタグが見えている');
+  if (errs.length) bad('?set= 直行：' + lv + '　JSのエラー ' + errs[0]);
+  await c.close();
+}
+
 /* ───────── コースの週めくりと、その週の受けわたし ─────────
    「◀ 前の週」で下見した週が、**漢字の画面にちゃんと渡るか**を見る。
    渡らないと、第4週を下見して「今週ひらくもの」を押しても
