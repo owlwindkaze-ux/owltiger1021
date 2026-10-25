@@ -9,7 +9,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-10-18f';
+  var PAGE_VER = '2026-10-25a';
   try {
     if (sessionStorage.getItem('vchk-staff')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -172,7 +172,7 @@ a{color:var(--blue)}
 
 </div>
 <footer>
-  職員用 ／ 版 <span id="ver">2026-10-18f</span>
+  職員用 ／ 版 <span id="ver">2026-10-25a</span>
 </footer>
 </div>
 
@@ -213,5 +213,6 @@ fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.jso
   .then(function (j) { if (j && j.version) $('#ver').textContent = j.version; })
   .catch(function () {});
 </script>
+<script src="../back.js" defer></script>
 </body>
 </html>

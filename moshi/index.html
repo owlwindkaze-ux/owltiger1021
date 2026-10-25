@@ -7,7 +7,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-10-18f';
+  var PAGE_VER = '2026-10-25a';
   try {
     if (sessionStorage.getItem('vchk-moshi')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -512,5 +512,6 @@ $('#gatePw').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock
 /* 合言葉が保存ずみの端末は そのまま開く。かならず一番下に置くこと。 */
 try { if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock(); } catch (e) {}
 </script>
+<script src="../back.js" defer></script>
 </body>
 </html>
