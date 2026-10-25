@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-10-25a';
+  var PAGE_VER = '2026-10-25b';
   var KEY = 'reloaded-for-n2';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -443,6 +443,12 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
                        n: mi || '例文3つを声に出して読む'});
     /* 紙の月別パック。ドライブの4冊は 月のラベルどおりには 使わない。
        文型を習い終わった順に 並べ替えて、この画面が その週の単元を名指しする。 */
+    /* **その週のテスト**への入口（2026-10-25b）。
+       100日コースのように「その場で解ける問題」が欲しい、という求めに応えたもの。 */
+    out.push({k:'', t:'📝 第'+w+'週のテスト（約26分）',
+              n:'その週に習った分だけから出ます。<b>点が残ります</b>。'
+                + '<br>📱 <a href="../moshi/?lv=n2w&set='+w+'" data-course="n2">'
+                + '<b>テストをひらく</b></a>'});
     var pp = W.paper && W.paper.weeks[String(w)];
     /* **紙が無い週も 黙って消さない。**2週に1単元なので、無い週がある。
        出さないと「出し忘れ」か「もともと無い」かが 分からない（2026-10-18）。 */
