@@ -10,7 +10,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-10-18f';
+  var PAGE_VER = '2026-10-25a';
   var KEY = 'reloaded-for-fukushu';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -490,5 +490,6 @@ $('#printBtn').onclick = () => window.print();
 try { if (localStorage.getItem(GATEKEY) === PASS_SHA256) unlock(); else $('#gatePw').focus(); }
 catch (e) { $('#gatePw').focus(); }
 </script>
+<script src="../back.js" defer></script>
 </body>
 </html>
