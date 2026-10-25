@@ -69,7 +69,8 @@
   "問題1": {
    "label": "問題1",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿濁る＿ の読み方は？",
@@ -88,10 +89,11 @@
   "問題2": {
    "label": "問題2",
    "name": "意味に合う言葉は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの意味の言葉は、どれですか。",
+   "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "meruncing; menjadi tajam",
+     "q": "「meruncing; menjadi tajam」の意味の言葉は、どれですか。",
      "choices": [
       "手入れ",
       "干す",
@@ -107,7 +109,8 @@
   "問題3": {
    "label": "問題3",
    "name": "漢字の読み（熟語の中で）",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの漢字の読み方は、どれですか。",
+   "inst_id": "Baca kanji bergaris",
    "items": [
     {
      "q": "＿塗＿布",
@@ -126,7 +129,8 @@
   "問題4": {
    "label": "問題4",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿吊す＿ の読み方は？",

@@ -75,7 +75,8 @@
   "問題1": {
    "label": "問題1",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿農村＿ の読み方は？",
@@ -94,10 +95,11 @@
   "問題2": {
    "label": "問題2",
    "name": "意味に合う言葉は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの意味の言葉は、どれですか。",
+   "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "masing-masing ~",
+     "q": "「masing-masing ~」の意味の言葉は、どれですか。",
      "choices": [
       "各〜",
       "暴れる",
@@ -113,38 +115,40 @@
   "問題3": {
    "label": "問題3",
    "name": "漢字の読み（熟語の中で）",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの漢字の読み方は、どれですか。",
+   "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿団＿地",
+     "q": "布＿団＿",
      "choices": [
-      "だん",
-      "たん",
-      "むら",
-      "ゆだ"
+      "どん",
+      "とん",
+      "とうん",
+      "そう"
      ],
-     "answer": 0,
-     "explain": "団地（だんち）",
-     "explain_id": "kompleks perumahan　／　団：kelompok, rombongan, perkumpulan"
+     "answer": 1,
+     "explain": "布団（ふとん）",
+     "explain_id": "futon, kasur lipat　／　団：kelompok, rombongan, perkumpulan"
     }
    ]
   },
   "問題4": {
    "label": "問題4",
    "name": "意味に合う言葉は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの意味の言葉は、どれですか。",
+   "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "perombakan; modifikasi",
+     "q": "「berulang kali」の意味の言葉は、どれですか。",
      "choices": [
-      "改造",
-      "〜感",
+      "〜頭",
+      "再三",
       "〜もち",
-      "低〜"
+      "〜感"
      ],
-     "answer": 0,
-     "explain": "改造（かいぞう）",
-     "explain_id": "perombakan; modifikasi"
+     "answer": 1,
+     "explain": "再三（さいさん）",
+     "explain_id": "berulang kali"
     }
    ]
   },

@@ -69,14 +69,15 @@
   "問題1": {
    "label": "問題1",
    "name": "＿＿の言葉を漢字で書くと？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの言葉を漢字で書くと、どれですか。",
+   "inst_id": "Penulisan kanji yang benar",
    "items": [
     {
      "q": "おもわず ／　tanpa sadar, spontan",
      "choices": [
       "脂わず",
       "伺わず",
-      "使わず",
+      "肢わず",
       "思わず"
      ],
      "answer": 3,
@@ -88,10 +89,11 @@
   "問題2": {
    "label": "問題2",
    "name": "意味に合う言葉は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの意味の言葉は、どれですか。",
+   "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "bertemu tiba-tiba, tidak sengaja",
+     "q": "「bertemu tiba-tiba, tidak sengaja」の意味の言葉は、どれですか。",
      "choices": [
       "ハンサム",
       "ばったり",
@@ -107,7 +109,8 @@
   "問題3": {
    "label": "問題3",
    "name": "漢字の読み（熟語の中で）",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "つぎの漢字の読み方は、どれですか。",
+   "inst_id": "Baca kanji bergaris",
    "items": [
     {
      "q": "＿遅＿れ",
@@ -126,7 +129,8 @@
   "問題4": {
    "label": "問題4",
    "name": "＿＿の言葉の読み方は？",
-   "inst": "つぎの問いに答えなさい。",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
      "q": "＿不正＿ の読み方は？",
