@@ -74,7 +74,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">敬う</u> の読み方は？",
+     "q": "＿敬う＿ の読み方は？",
      "choices": [
       "うえき",
       "うやま",
@@ -82,7 +82,8 @@
       "たんしょ"
      ],
      "answer": 2,
-     "explain": "敬う（うやまう）＝"
+     "explain": "敬う（うやまう）",
+     "explain_id": "menghormati"
     }
    ]
   },
@@ -92,7 +93,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">garis besar cerita</span>",
+     "q": "garis besar cerita",
      "choices": [
       "一〜",
       "粗筋",
@@ -100,7 +101,8 @@
       "固まる"
      ],
      "answer": 1,
-     "explain": "粗筋（あらすじ）＝"
+     "explain": "粗筋（あらすじ）",
+     "explain_id": "garis besar cerita"
     }
    ]
   },
@@ -110,7 +112,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">停</u>止</span>",
+     "q": "＿停＿止",
      "choices": [
       "せん",
       "でい",
@@ -118,7 +120,8 @@
       "てい"
      ],
      "answer": 3,
-     "explain": "停止（ていし）＝"
+     "explain": "停止（ていし）",
+     "explain_id": "berhenti　／　停：berhenti, menghentikan, ditangguhkan"
     }
    ]
   },
@@ -128,15 +131,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">いど</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">garis lintang</span>",
+     "q": "いど ／　garis lintang",
      "choices": [
       "緯度",
       "緯努",
       "緯店",
-      "緯底"
+      "緯庫"
      ],
      "answer": 0,
-     "explain": "緯度（いど）＝"
+     "explain": "緯度（いど）",
+     "explain_id": "garis lintang"
     }
    ]
   },

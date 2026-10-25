@@ -72,7 +72,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">乗せる</u> の読み方は？",
+     "q": "＿乗せる＿ の読み方は？",
      "choices": [
       "のせる",
       "のっせる",
@@ -80,7 +80,8 @@
       "のうせる"
      ],
      "answer": 0,
-     "explain": "乗せる（のせる）＝"
+     "explain": "乗せる（のせる）",
+     "explain_id": "menaikkan (ke kendaraan), meletakkan di atas"
     }
    ]
   },
@@ -90,7 +91,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">perdagangan, bisnis</span>",
+     "q": "perdagangan, bisnis",
      "choices": [
       "期限",
       "例外",
@@ -98,7 +99,8 @@
       "育つ"
      ],
      "answer": 2,
-     "explain": "商売（しょうばい）＝"
+     "explain": "商売（しょうばい）",
+     "explain_id": "perdagangan, bisnis"
     }
    ]
   },
@@ -108,7 +110,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:3rem\">葉</span>",
+     "q": "葉",
      "choices": [
       "さ",
       "は",
@@ -116,7 +118,8 @@
       "お"
      ],
      "answer": 1,
-     "explain": "葉（は）："
+     "explain": "葉（は）",
+     "explain_id": "daun, lembaran, permukaan datar"
     }
    ]
   },
@@ -126,7 +129,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">住宅</u> の読み方は？",
+     "q": "＿住宅＿ の読み方は？",
      "choices": [
       "じゅうだく",
       "じゅうたく",
@@ -134,7 +137,8 @@
       "じゅうたぐ"
      ],
      "answer": 1,
-     "explain": "住宅（じゅうたく）＝"
+     "explain": "住宅（じゅうたく）",
+     "explain_id": "perumahan"
     }
    ]
   },

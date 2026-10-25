@@ -72,7 +72,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">おもわず</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">tanpa sadar, spontan</span>",
+     "q": "おもわず ／　tanpa sadar, spontan",
      "choices": [
       "脂わず",
       "伺わず",
@@ -80,7 +80,8 @@
       "思わず"
      ],
      "answer": 3,
-     "explain": "思わず（おもわず）＝"
+     "explain": "思わず（おもわず）",
+     "explain_id": "tanpa sadar, spontan"
     }
    ]
   },
@@ -90,7 +91,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">bertemu tiba-tiba, tidak sengaja</span>",
+     "q": "bertemu tiba-tiba, tidak sengaja",
      "choices": [
       "ハンサム",
       "ばったり",
@@ -98,7 +99,8 @@
       "加わる"
      ],
      "answer": 1,
-     "explain": "ばったり（ばったり）＝"
+     "explain": "ばったり（ばったり）",
+     "explain_id": "bertemu tiba-tiba, tidak sengaja"
     }
    ]
   },
@@ -108,15 +110,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">遅</u>番</span>",
+     "q": "＿遅＿れ",
      "choices": [
-      "おそう",
-      "おうそ",
-      "おっそ",
-      "おそ"
+      "おうく",
+      "おぐ",
+      "おく",
+      "おっく"
      ],
-     "answer": 3,
-     "explain": "遅番（おそばん）＝"
+     "answer": 2,
+     "explain": "遅れ（おくれ）",
+     "explain_id": "keterlambatan　／　遅：lambat, terlambat, kemudian"
     }
    ]
   },
@@ -126,15 +129,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">進める</u> の読み方は？",
+     "q": "＿不正＿ の読み方は？",
      "choices": [
-      "すっすめる",
-      "すすめる",
-      "すずめる",
-      "ずすめる"
+      "ふっせい",
+      "ふせい",
+      "ぷせい",
+      "ぶせい"
      ],
      "answer": 1,
-     "explain": "進める（すすめる）＝"
+     "explain": "不正（ふせい）",
+     "explain_id": "ketidakadilan, kecurangan"
     }
    ]
   },

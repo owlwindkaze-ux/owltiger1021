@@ -74,7 +74,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">制度</u> の読み方は？",
+     "q": "＿制度＿ の読み方は？",
      "choices": [
       "せいどう",
       "ぜいど",
@@ -82,7 +82,8 @@
       "せいど"
      ],
      "answer": 3,
-     "explain": "制度（せいど）＝"
+     "explain": "制度（せいど）",
+     "explain_id": "sistem, lembaga"
     }
    ]
   },
@@ -92,15 +93,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">ジェットき</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">pesawat jet</span>",
+     "q": "ジェットき ／　pesawat jet",
      "choices": [
       "ジェット祈",
       "ジェット機",
-      "ジェット記",
+      "ジェット期",
       "ジェット起"
      ],
      "answer": 1,
-     "explain": "ジェット機（ジェットき）＝"
+     "explain": "ジェット機（ジェットき）",
+     "explain_id": "pesawat jet"
     }
    ]
   },
@@ -110,7 +112,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">kota besar</span>",
+     "q": "kota besar",
      "choices": [
       "変化",
       "主要",
@@ -118,7 +120,8 @@
       "平和"
      ],
      "answer": 2,
-     "explain": "都会（とかい）＝"
+     "explain": "都会（とかい）",
+     "explain_id": "kota besar"
     }
    ]
   },
@@ -128,15 +131,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">要</u>点</span>",
+     "q": "＿要＿る",
      "choices": [
-      "ようう",
-      "とう",
-      "よう",
-      "まさ"
+      "か",
+      "い",
+      "き",
+      "ば"
      ],
-     "answer": 2,
-     "explain": "要点（ようてん）＝"
+     "answer": 1,
+     "explain": "要る（いる）",
+     "explain_id": "perlu, membutuhkan　／　要：penting, meringkas, memerlukan"
     }
    ]
   },

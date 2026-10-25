@@ -72,7 +72,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">腰掛ける</u> の読み方は？",
+     "q": "＿腰掛ける＿ の読み方は？",
      "choices": [
       "こしっかける",
       "こしかける",
@@ -80,7 +80,8 @@
       "ごしかける"
      ],
      "answer": 1,
-     "explain": "腰掛ける（こしかける）＝"
+     "explain": "腰掛ける（こしかける）",
+     "explain_id": "duduk"
     }
    ]
   },
@@ -90,15 +91,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">じゃくてん</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">kelemahan</span>",
+     "q": "じゃくてん ／　kelemahan",
      "choices": [
       "弱点",
       "引点",
-      "弱照",
-      "弱無"
+      "弱無",
+      "弱熱"
      ],
      "answer": 0,
-     "explain": "弱点（じゃくてん）＝"
+     "explain": "弱点（じゃくてん）",
+     "explain_id": "kelemahan"
     }
    ]
   },
@@ -108,7 +110,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">mengirimkan; menyerahkan</span>",
+     "q": "mengirimkan; menyerahkan",
      "choices": [
       "もやす",
       "作者",
@@ -116,7 +118,8 @@
       "よこす"
      ],
      "answer": 3,
-     "explain": "よこす（よこす）＝"
+     "explain": "よこす（よこす）",
+     "explain_id": "mengirimkan; menyerahkan"
     }
    ]
   },
@@ -126,7 +129,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">国王</u> とだいたい同じ意味の言葉は？",
+     "q": "＿国王＿ とだいたい同じ意味の言葉は？",
      "choices": [
       "照らす",
       "鉱物",
@@ -134,7 +137,8 @@
       "堪える"
      ],
      "answer": 2,
-     "explain": "国王＝"
+     "explain": "国王",
+     "explain_id": "王（raja）"
     }
    ]
   },

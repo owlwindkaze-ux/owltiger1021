@@ -72,7 +72,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">atlet, pemain terpilih</span>",
+     "q": "atlet, pemain terpilih",
      "choices": [
       "現代",
       "全国",
@@ -80,7 +80,8 @@
       "連れ"
      ],
      "answer": 2,
-     "explain": "選手（せんしゅ）＝"
+     "explain": "選手（せんしゅ）",
+     "explain_id": "atlet, pemain terpilih"
     }
    ]
   },
@@ -90,7 +91,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">議</u>会</span>",
+     "q": "＿議＿長",
      "choices": [
       "づ",
       "あ",
@@ -98,7 +99,8 @@
       "た"
      ],
      "answer": 2,
-     "explain": "議会（ぎかい）＝"
+     "explain": "議長（ぎちょう）",
+     "explain_id": "ketua sidang, ketua rapat　／　議：berdiskusi, badan legislatif, musyawarah"
     }
    ]
   },
@@ -108,7 +110,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">出合い</u> の読み方は？",
+     "q": "＿出合い＿ の読み方は？",
      "choices": [
       "げんだい",
       "であい",
@@ -116,7 +118,8 @@
       "しかも"
      ],
      "answer": 1,
-     "explain": "出合い（であい）＝"
+     "explain": "出合い（であい）",
+     "explain_id": "pertemuan"
     }
    ]
   },
@@ -126,7 +129,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">buah, biji</span>",
+     "q": "buah, biji",
      "choices": [
       "米国",
       "対",
@@ -134,7 +137,8 @@
       "実"
      ],
      "answer": 3,
-     "explain": "実（み）＝"
+     "explain": "実（み）",
+     "explain_id": "buah, biji"
     }
    ]
   },

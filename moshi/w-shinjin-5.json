@@ -74,7 +74,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">場合</u> の読み方は？",
+     "q": "＿場合＿ の読み方は？",
      "choices": [
       "はあい",
       "ばあい",
@@ -82,7 +82,8 @@
       "てんいん"
      ],
      "answer": 1,
-     "explain": "場合（ばあい）＝"
+     "explain": "場合（ばあい）",
+     "explain_id": "keadaan, kasus, situasi"
     }
    ]
   },
@@ -92,7 +93,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">きこえる</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">terdengar</span>",
+     "q": "きこえる ／　terdengar",
      "choices": [
       "聞こえる",
       "分こえる",
@@ -100,7 +101,8 @@
       "閉こえる"
      ],
      "answer": 0,
-     "explain": "聞こえる（きこえる）＝"
+     "explain": "聞こえる（きこえる）",
+     "explain_id": "terdengar"
     }
    ]
   },
@@ -110,7 +112,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">jika, kalau</span>",
+     "q": "jika, kalau",
      "choices": [
       "～会",
       "もし",
@@ -118,7 +120,8 @@
       "小学校"
      ],
      "answer": 1,
-     "explain": "もし（もし）＝"
+     "explain": "もし（もし）",
+     "explain_id": "jika, kalau"
     }
    ]
   },
@@ -128,7 +131,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">自</u>立</span>",
+     "q": "＿自＿立",
      "choices": [
       "じ",
       "つ",
@@ -136,7 +139,8 @@
       "が"
      ],
      "answer": 0,
-     "explain": "自立（じりつ）＝"
+     "explain": "自立（じりつ）",
+     "explain_id": "mandiri　／　自：diri sendiri"
     }
    ]
   },

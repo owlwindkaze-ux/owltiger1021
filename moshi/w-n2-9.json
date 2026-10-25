@@ -72,7 +72,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">吹雪</u> の読み方は？",
+     "q": "＿吹雪＿ の読み方は？",
      "choices": [
       "ふぶっき",
       "ふぶき",
@@ -80,7 +80,8 @@
       "ふふき"
      ],
      "answer": 1,
-     "explain": "吹雪（ふぶき）＝"
+     "explain": "吹雪（ふぶき）",
+     "explain_id": "badai salju"
     }
    ]
   },
@@ -90,15 +91,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">せともの</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">barang keramik</span>",
+     "q": "せともの ／　barang keramik",
      "choices": [
-      "瀬故物",
+      "瀬湖物",
       "瀬戸物",
-      "瀬個物",
+      "瀬雇物",
       "瀬戸特"
      ],
      "answer": 1,
-     "explain": "瀬戸物（せともの）＝"
+     "explain": "瀬戸物（せともの）",
+     "explain_id": "barang keramik"
     }
    ]
   },
@@ -108,7 +110,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">pecahan; serpihan</span>",
+     "q": "pecahan; serpihan",
      "choices": [
       "流域",
       "群れ",
@@ -116,7 +118,8 @@
       "果して"
      ],
      "answer": 2,
-     "explain": "破片（はへん）＝"
+     "explain": "破片（はへん）",
+     "explain_id": "pecahan; serpihan"
     }
    ]
   },
@@ -126,7 +129,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:3rem\">戸</span>",
+     "q": "戸",
      "choices": [
       "あ",
       "とう",
@@ -134,7 +137,8 @@
       "と"
      ],
      "answer": 3,
-     "explain": "戸（と）："
+     "explain": "戸（と）",
+     "explain_id": "pintu, rumah tangga (satuan)"
     }
    ]
   },

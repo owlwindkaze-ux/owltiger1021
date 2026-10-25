@@ -76,7 +76,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">解答</u> の読み方は？",
+     "q": "＿解答＿ の読み方は？",
      "choices": [
       "かいと",
       "かいとう",
@@ -84,7 +84,8 @@
       "がいとう"
      ],
      "answer": 1,
-     "explain": "解答（かいとう）＝"
+     "explain": "解答（かいとう）",
+     "explain_id": "jawaban (soal)"
     }
    ]
   },
@@ -94,15 +95,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">うれゆき</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">laju penjualan; permintaan</span>",
+     "q": "うれゆき ／　laju penjualan; permintaan",
      "choices": [
       "倍れ行き",
       "売れ行き",
-      "売れ黄き",
-      "売れ腔き"
+      "売れ更き",
+      "売れ黄き"
      ],
      "answer": 1,
-     "explain": "売れ行き（うれゆき）＝"
+     "explain": "売れ行き（うれゆき）",
+     "explain_id": "laju penjualan; permintaan"
     }
    ]
   },
@@ -112,7 +114,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">menyobek kecil-kecil; memetik</span>",
+     "q": "menyobek kecil-kecil; memetik",
      "choices": [
       "回答",
       "売行き",
@@ -120,7 +122,8 @@
       "会館"
      ],
      "answer": 2,
-     "explain": "ちぎる（ちぎる）＝"
+     "explain": "ちぎる（ちぎる）",
+     "explain_id": "menyobek kecil-kecil; memetik"
     }
    ]
   },
@@ -130,7 +133,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">厚</u>い</span>",
+     "q": "＿厚＿い",
      "choices": [
       "あづ",
       "おさ",
@@ -138,7 +141,8 @@
       "あっつ"
      ],
      "answer": 2,
-     "explain": "厚い（あつい）＝"
+     "explain": "厚い（あつい）",
+     "explain_id": "tebal, baik hati　／　厚：tebal, ramah; murah hati, kental"
     }
    ]
   },

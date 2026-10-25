@@ -74,7 +74,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">堅; 硬; 固い</u> の読み方は？",
+     "q": "＿堅; 硬; 固い＿ の読み方は？",
      "choices": [
       "かったい",
       "かたい",
@@ -82,7 +82,8 @@
       "かだい"
      ],
      "answer": 1,
-     "explain": "堅; 硬; 固い（かたい）＝"
+     "explain": "堅; 硬; 固い（かたい）",
+     "explain_id": "keras, kokoh"
     }
    ]
   },
@@ -92,15 +93,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">おく</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">seratus juta</span>",
+     "q": "おく ／　seratus juta",
      "choices": [
       "億",
-      "倒",
-      "価",
-      "任"
+      "候",
+      "偉",
+      "側"
      ],
      "answer": 0,
-     "explain": "億（おく）＝"
+     "explain": "億（おく）",
+     "explain_id": "seratus juta"
     }
    ]
   },
@@ -110,7 +112,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">berlanjut, berlangsung terus</span>",
+     "q": "berlanjut, berlangsung terus",
      "choices": [
       "続く",
       "負ける",
@@ -118,7 +120,8 @@
       "島"
      ],
      "answer": 0,
-     "explain": "続く（つづく）＝"
+     "explain": "続く（つづく）",
+     "explain_id": "berlanjut, berlangsung terus"
     }
    ]
   },
@@ -128,7 +131,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:3rem\">駅</span>",
+     "q": "駅",
      "choices": [
       "えぎ",
       "えっき",
@@ -136,7 +139,8 @@
       "よう"
      ],
      "answer": 2,
-     "explain": "駅（えき）："
+     "explain": "駅（えき）",
+     "explain_id": "stasiun"
     }
    ]
   },

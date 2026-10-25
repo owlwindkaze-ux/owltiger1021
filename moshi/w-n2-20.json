@@ -74,7 +74,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<u style=\"text-underline-offset:5px\">花嫁</u> の読み方は？",
+     "q": "＿花嫁＿ の読み方は？",
      "choices": [
       "ばなよめ",
       "はなよめ",
@@ -82,7 +82,8 @@
       "ぱなよめ"
      ],
      "answer": 1,
-     "explain": "花嫁（はなよめ）＝"
+     "explain": "花嫁（はなよめ）",
+     "explain_id": "pengantin perempuan"
     }
    ]
   },
@@ -92,15 +93,16 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span class=\"yomi\">ひょうし</span>\n             <br><span style=\"font-size:.9rem;color:var(--muted)\">sampul buku</span>",
+     "q": "ひょうし ／　sampul buku",
      "choices": [
-      "表経",
+      "表継",
       "表紙",
-      "表師",
-      "表肢"
+      "表祉",
+      "表詞"
      ],
      "answer": 1,
-     "explain": "表紙（ひょうし）＝"
+     "explain": "表紙（ひょうし）",
+     "explain_id": "sampul buku"
     }
    ]
   },
@@ -110,7 +112,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-size:1.1rem\">menunjukkan (kemampuan)</span>",
+     "q": "menunjukkan (kemampuan)",
      "choices": [
       "捩る",
       "日日",
@@ -118,7 +120,8 @@
       "標本"
      ],
      "answer": 2,
-     "explain": "発揮（はっき）＝"
+     "explain": "発揮（はっき）",
+     "explain_id": "menunjukkan (kemampuan)"
     }
    ]
   },
@@ -128,7 +131,7 @@
    "inst": "つぎの問いに答えなさい。",
    "items": [
     {
-     "q": "<span style=\"font-family:var(--kfont);font-size:2.6rem;line-height:1.9\"><u style=\"text-underline-offset:5px\">拾</u>う</span>",
+     "q": "＿拾＿う",
      "choices": [
       "びろ",
       "ひろう",
@@ -136,7 +139,8 @@
       "ひろ"
      ],
      "answer": 3,
-     "explain": "拾う（ひろう）＝"
+     "explain": "拾う（ひろう）",
+     "explain_id": "memungut, menemukan　／　拾：memungut, menemukan"
     }
    ]
   },
