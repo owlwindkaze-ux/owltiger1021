@@ -16,8 +16,8 @@
  * **乱数は固定する。**作り直すたびに問題が変わると、前に取った点と
  * くらべられなくなるため。週ごとに決まった種を使う。
  *
- *   NODE_PATH=/tmp/node_modules node tools/weektest.mjs shinjin 5
- *   NODE_PATH=/tmp/node_modules node tools/weektest.mjs shinjin all
+ *   node tools/weektest.mjs shinjin 5
+ *   node tools/weektest.mjs shinjin all
  *
  * 先に `python3 -m http.server 8777` を リポジトリの中で 立てておくこと。
  */
@@ -25,13 +25,44 @@ import { createRequire } from 'module';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const require = createRequire('/tmp/node_modules/');
-const { chromium } = require('playwright');
+/* **playwright と chromium の置き場所は、入れ直すと変わる。**
+   番号つきの道（/opt/pw-browsers/chromium-1194/…）を 書き込んでいたので、
+   入れ替わった日に **道具が丸ごと動かなくなった**（2026-10-30）。
+   だから **決め打ちにせず、その場で探す**。見つからなければ
+   playwright に まかせる（`executablePath` を 渡さない）。
+   どうしても 指したいときは PW= と CHROME= で 渡せる。 */
+const require = createRequire(import.meta.url);
 const fs = require('fs');
+function findPlaywright() {
+  const tries = [process.env.PW, 'playwright',
+                 '/opt/node-tools/node_modules/playwright',
+                 '/tmp/node_modules/playwright'].filter(Boolean);
+  for (const t of tries) { try { return require(t); } catch (e) { /* つぎ */ } }
+  throw new Error('playwright が 見つかりません。PW=… で 渡してください');
+}
+function findChrome() {
+  if (process.env.CHROME) return process.env.CHROME;
+  const roots = ['/opt/pw-browsers'];
+  const out = [];
+  for (const r of roots) {
+    let names = [];
+    try { names = fs.readdirSync(r); } catch (e) { continue; }
+    for (const n of names) {
+      if (!n.startsWith('chromium')) continue;
+      for (const d of ['chrome-linux', 'chrome-linux64']) {
+        const f = r + '/' + n + '/' + d + '/chrome';
+        if (fs.existsSync(f)) out.push(f);
+      }
+    }
+  }
+  out.sort();                      // 番号が大きい＝新しいものを 使う
+  return out.length ? out[out.length - 1] : null;   // 無ければ playwright にまかせる
+}
+const { chromium } = findPlaywright();
 
 const R = path.dirname(path.dirname(fileURLToPath(import.meta.url))) + '/';
 const BASE = process.env.BASE || 'http://localhost:8777';
-const CHROME = process.env.CHROME || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+const CHROME = findChrome();
 const HASH = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
 
 const J = p => JSON.parse(fs.readFileSync(R + p, 'utf8'));
@@ -262,7 +293,7 @@ async function main() {
         .filter(hasAny).sort((a, b) => a - b)
     : [Number(arg)];
 
-  const b = await chromium.launch({ executablePath: CHROME });
+  const b = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
   const ctx = await b.newContext({ viewport: { width: 400, height: 900 } });
   await ctx.addInitScript(h => { try { localStorage.setItem('jlpt-kanji-gate-v1', h); } catch (e) {} }, HASH);
   const page = await ctx.newPage();

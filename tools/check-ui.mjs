@@ -1,7 +1,7 @@
 /* 全画面の絞り込み・札・タブを、実ブラウザで一つずつ動かして点検する。
  *
  *   python3 -m http.server 8899 &        （リポジトリの中で）
- *   NODE_PATH=/tmp/node_modules node tools/check-ui.mjs
+ *   node tools/check-ui.mjs
  *
  * 見つけたいのは、フラッシュカードで出たのと同じ形のまちがい。
  *   ・選び直したのに 表示が 変わらない（絞りが 効いていない）
@@ -10,13 +10,42 @@
  */
 /* playwright の置き場所。この環境では /tmp/node_modules に入れてある。
    別の場所なら PW=/path/to/playwright/index.js で渡す。 */
-const PW = process.env.PW || '/tmp/node_modules/playwright/index.js';
-const pw = await import(PW);
-const { chromium, devices } = pw.default || pw;
+/* **playwright と chromium の置き場所は、入れ直すと変わる。**
+   番号つきの道（/opt/pw-browsers/chromium-1194/…）を 書き込んでいたので、
+   入れ替わった日に **道具が丸ごと動かなくなった**（2026-10-30）。
+   だから **決め打ちにせず、その場で探す**。見つからなければ
+   playwright に まかせる（`executablePath` を 渡さない）。
+   どうしても 指したいときは PW= と CHROME= で 渡せる。 */
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const fs = require('fs');
+function findPlaywright() {
+  const tries = [process.env.PW, 'playwright',
+                 '/opt/node-tools/node_modules/playwright',
+                 '/tmp/node_modules/playwright'].filter(Boolean);
+  for (const t of tries) { try { return require(t); } catch (e) { /* つぎ */ } }
+  throw new Error('playwright が 見つかりません。PW=… で 渡してください');
+}
+function findChrome() {
+  if (process.env.CHROME) return process.env.CHROME;
+  const out = [];
+  let names = [];
+  try { names = fs.readdirSync('/opt/pw-browsers'); } catch (e) { names = []; }
+  for (const n of names) {
+    if (!n.startsWith('chromium')) continue;
+    for (const d of ['chrome-linux', 'chrome-linux64']) {
+      const f = '/opt/pw-browsers/' + n + '/' + d + '/chrome';
+      if (fs.existsSync(f)) out.push(f);
+    }
+  }
+  out.sort();
+  return out.length ? out[out.length - 1] : null;
+}
+const { chromium, devices } = findPlaywright();
 
 const BASE = process.env.BASE || 'http://localhost:8899';
 const HASH = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
-const CHROME = process.env.CHROME || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+const CHROME = findChrome();
 
 const ng = [];
 const say = (...a) => console.log(...a);
@@ -93,7 +122,7 @@ async function checkChips(p, chipSel, countSel, listSel, label) {
     .forEach(v => say('      （同じ表示になる組：' + v.join(' / ') + '）'));
 }
 
-const b = await chromium.launch({ executablePath: CHROME });
+const b = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 
 /* ───────── 入口 ───────── */
 {
