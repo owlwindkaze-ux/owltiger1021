@@ -101,10 +101,10 @@
     {
      "q": "けっか ／　hasil, akibat",
      "choices": [
-      "給果",
+      "絵果",
       "結果",
-      "締果",
-      "純果"
+      "継果",
+      "紅果"
      ],
      "answer": 1,
      "explain": "結果（けっか）",
@@ -139,16 +139,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿争＿う",
+     "q": "戦＿争＿",
      "choices": [
-      "あらそう",
-      "あらぞ",
-      "あらそ",
-      "あらっそ"
+      "ぞう",
+      "そう",
+      "こう",
+      "そうう"
      ],
-     "answer": 2,
-     "explain": "争う（あらそう）",
-     "explain_id": "bertengkar, berselisih　／　争：bertengkar, berselisih, berdebat"
+     "answer": 1,
+     "explain": "戦争（せんそう）",
+     "explain_id": "perang　／　争：bertengkar, berselisih, berdebat"
     }
    ]
   },

@@ -26,6 +26,24 @@ vidx = L('vocab.json')
 VTOTAL = sum(f['count'] for f in vidx['files'])
 VC = {f['level']: f['count'] for f in vidx['files']}
 
+# 週に割り当てられている文型を レベルごとに数える（コースが教える数）
+def _sched():
+    import glob as _g
+    lv = {}
+    for f in _g.glob(R + 'bunpo/grammar-*.json'):
+        for g in json.load(io.open(f, encoding='utf-8'))['grammar']:
+            lv[g['id']] = g['level']
+    W = json.load(io.open(R + 'bunpo/weeks.json', encoding='utf-8'))['courses']
+    out = {}
+    for c in W:
+        ids = set()
+        for _w, v in W[c]['weeks'].items():
+            ids.update(v)
+        out[c] = collections.Counter(lv.get(i, '?') for i in ids)
+    return out
+
+
+SCHED = _sched()
 GC = collections.Counter()
 for f in glob.glob(R + 'bunpo/grammar-*.json'):
     for g in L(os.path.relpath(f, R))['grammar']:
@@ -126,7 +144,11 @@ CHECKS = [
     ('kanji.html', r'重なる([\d,]+)字は、どちらで絞っても出ます。字の実体は([\d,]+)字',
                                        (sum(1 for x in kan if x.get('also')), KTOTAL),
                                        '漢字画面 重なりの数'),
-    ('shinjin/index.html', r"n:'(\d+)項目を16週で（第28週まで）'", GC['N3'], '新人コース N3文型'),
+    # **「コースが教える数」は、データの総数ではなく 週に割り当てた数。**
+    # N3の文型は 244項目あるが、新人コースが教えるのは 割り当てた 153項目。
+    # データの総数と比べていたので、項目を足した日に 鳴った（2026-10-30）。
+    ('shinjin/index.html', r"n:'(\d+)項目を16週で（第28週まで）'", SCHED['shinjin']['N3'],
+                                       '新人コース N3文型'),
 ]
 
 bad = []
