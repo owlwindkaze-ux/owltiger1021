@@ -7,7 +7,7 @@
 <script>
 /* 版を合わせる。ちがっていたら1度だけ読み込み直す。 */
 (function () {
-  var PAGE_VER = '2026-10-25d';
+  var PAGE_VER = '2026-10-30b';
   try {
     if (sessionStorage.getItem('vchk-moshi')) return;
     fetch('../version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -187,10 +187,10 @@ function speak(text, btn) {
 /* ========== 画面 ========== */
 function home() {
   /* **?set=5 で その回に直行する。**週テストは28週あるので、
-     ボタンを28個ならべると 探せない（2026-10-25d）。 */
+     ボタンを28個ならべると 探せない（2026-10-30b）。 */
   /* 見出しと戻り先は **?set= で直行するときも** 要る。
      下の `return` より後ろに置いていたので、HTMLの初期値
-     「N2模試・N2ロードマップ」が 新人コースにも出ていた（2026-10-25d）。 */
+     「N2模試・N2ロードマップ」が 新人コースにも出ていた（2026-10-30b）。 */
   const bl = $('#backLink');
   if (bl) { bl.href = CFG.back; bl.textContent = '← ' + CFG.backName; }
   /* 見出しは CFG から取る。LVから作ると「N2U模試」のような
@@ -199,7 +199,7 @@ function home() {
   const ht = $('#hdTitle'); if (ht) ht.textContent = hdName;
   document.title = hdName + ' ／ ' + (CFG.titleId || 'Simulasi Ujian');
   /* **?set=5 で その回に直行する。**週テストは28週あるので、
-     ボタンを28個ならべると 探せない（2026-10-25d）。 */
+     ボタンを28個ならべると 探せない（2026-10-30b）。 */
   var only = +(Q.get('set') || 0);
   if (only && CFG.sets.indexOf(only) >= 0) { Q.delete('set'); load(only); return; }
   stopTimer();
@@ -264,7 +264,7 @@ const PAPERS = {
              + 'できるときは 紙で 受けてください。',
          inner: '文字・語彙6問／文法4問／読解5問／聴解5問。',
          back: '../n2/index.html', backName: 'N2ロードマップ' },
-  /* **週テスト**（2026-10-25d）。持ち主から「新人コースやN2コースにも
+  /* **週テスト**（2026-10-30b）。持ち主から「新人コースやN2コースにも
      100日コースのような問題が作れないのか」→「(A) 組み立てる。漢字・語彙も入れる」。
      **新しい問題は1つも書いていない。**その週に習う分から集めただけ。
      sets は tools/weektest.mjs が作ったファイルに合わせて足していく。 */
@@ -346,7 +346,7 @@ function sectionHTML(key, startNo) {
   let h = '<h3>' + (s.label || key.replace('聴解', '聴解 問題')) + '　' + esc(s.name) + '</h3>' +
           '<p class="lead">' + ruby(s.inst) +
           /* 尼語の言い方は **別の欄**（`inst_id`）に入れる。日本語の欄に混ぜると
-             「日本語の欄に日本語以外が無いか」の検査が 鳴ってしまう（2026-10-25d）。 */
+             「日本語の欄に日本語以外が無いか」の検査が 鳴ってしまう（2026-10-30b）。 */
           (s.inst_id ? '<br><span style="font-size:.9rem;color:var(--muted)">' +
                        esc(s.inst_id) + '</span>' : '') + '</p>';
   let n = startNo;

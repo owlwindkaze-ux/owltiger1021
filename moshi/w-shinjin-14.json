@@ -97,10 +97,10 @@
     {
      "q": "ジェットき ／　pesawat jet",
      "choices": [
-      "ジェット祈",
+      "ジェット肌",
       "ジェット機",
-      "ジェット期",
-      "ジェット亀"
+      "ジェット記",
+      "ジェット起"
      ],
      "answer": 1,
      "explain": "ジェット機（ジェットき）",
@@ -135,16 +135,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿要＿る",
+     "q": "＿要＿領《りょう》",
      "choices": [
-      "か",
-      "い",
-      "き",
-      "ば"
+      "ようう",
+      "とう",
+      "よう",
+      "まさ"
      ],
-     "answer": 1,
-     "explain": "要る（いる）",
-     "explain_id": "perlu, membutuhkan　／　要：penting, meringkas, memerlukan"
+     "answer": 2,
+     "explain": "要領（ようりょう）",
+     "explain_id": "inti; cara yang efisien　／　要：penting, meringkas, memerlukan"
     }
    ]
   },

@@ -135,16 +135,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿有＿る",
+     "q": "＿有＿名",
      "choices": [
-      "よ",
-      "あ",
-      "や",
-      "ど"
+      "はこ",
+      "しん",
+      "とく",
+      "ゆう"
      ],
-     "answer": 1,
-     "explain": "有る（ある）",
-     "explain_id": "ada, mempunyai　／　有：memiliki, ada, terjadi"
+     "answer": 3,
+     "explain": "有名（ゆうめい）",
+     "explain_id": "terkenal　／　有：memiliki, ada, terjadi"
     }
    ]
   },

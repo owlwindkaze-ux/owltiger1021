@@ -219,7 +219,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿見＿物《ぶつ》",
+     "q": "＿見＿学",
      "choices": [
       "あと",
       "けん",
@@ -227,8 +227,8 @@
       "さん"
      ],
      "answer": 1,
-     "explain": "見物（けんぶつ）",
-     "explain_id": "melihat-lihat, wisata　／　見：melihat, harapan, kemungkinan"
+     "explain": "見学（けんがく）",
+     "explain_id": "kunjungan belajar; observasi　／　見：melihat, harapan, kemungkinan"
     }
    ]
   },
