@@ -15,6 +15,7 @@ JLPT N3・N4には「泥棒・戦争・自殺・殺す・殴る・爆発・犯�
 """
 import io
 import json
+import re
 import os
 import sys
 
@@ -77,6 +78,59 @@ walk(VD)
 gone = [w for w in OK if w not in words]
 if gone:
     bad('語彙データから消えています %s（JLPTの正規の語なので残す）' % '・'.join(gone))
+
+# ── 尼語の訳で、**一語だけだと別の意味になる**もの ──────────────
+# 「mantan」は `mantan presiden`（前大統領）のように **名詞の前に付ける**形なら
+# 正しいが、**一語だけ**だと ふだんの話し言葉では「元恋人」を指す。
+# 「旧＝lama, mantan」と書いてあり、持ち主が見つけた（2026-10-30）。
+# だから「mantan」は **必ず `~` といっしょ**でなければいけない。
+PREFIX_ONLY = {
+    'mantan': '一語だけだと「元恋人」の意味になる。`mantan ~` の形で使う',
+}
+print()
+print('■ 一語だけだと別の意味になる尼語')
+seen_pref = []
+
+
+def scan(path):
+    d = json.load(io.open(R + path, encoding='utf-8'))
+
+    def go(o):
+        if isinstance(o, dict):
+            mid = o.get('meaning_id')
+            if isinstance(mid, str):
+                for w, why in PREFIX_ONLY.items():
+                    if not re.search(r'\b%s\b' % w, mid):
+                        continue
+                    # **訳の中のどこかに `~` があること。**「前に付ける語だ」と
+                    # 分かる書き方になっていれば よい。無ければ 一語で立っている。
+                    if '~' in mid or '〜' in mid:
+                        seen_pref.append((o.get('word') or o.get('character'), mid))
+                    else:
+                        bad('%s の「%s」で %s が一語で使われています（%s）\n'
+                            '        いま: %s'
+                            % (path, o.get('word') or o.get('character') or '?',
+                               w, why, mid))
+
+    def walk2(o):
+        if isinstance(o, dict):
+            go(o)
+            for v in o.values():
+                walk2(v)
+        elif isinstance(o, list):
+            for v in o:
+                walk2(v)
+    walk2(d)
+
+
+for p in ('vocab-data.json', 'vocab-n2.json', 'vocab-n3.json', 'vocab-n4.json',
+          'vocab-n5.json', 'vocab-kaigo.json', 'vocab-genba.json', 'vocab-kiroku.json',
+          'kanji-data.json', 'kanji-n2.json', 'kanji-n3.json', 'kanji-n4.json',
+          'kanji-n5.json', 'kanji-kaigo.json', 'kanji-kiroku.json'):
+    if os.path.exists(R + p):
+        scan(p)
+for w, m in sorted(set(seen_pref)):
+    print('   ○ %s　%s' % (w, m))
 
 print()
 print('=' * 54)
