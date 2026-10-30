@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-10-30a';
+  var PAGE_VER = '2026-10-30b';
   var KEY = 'reloaded-for-shinjin';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -535,7 +535,7 @@ function renderWeek(today){
         md(mondayOf(1)) + '〜）のぶん</b>です。初日に <b>N4到達度判定テスト</b>を行います。';
     } else pre.style.display = 'none';
   }
-  /* **その週のテスト**への入口（2026-10-30a）。
+  /* **その週のテスト**への入口（2026-10-30b）。
      100日コースのように「その場で解ける問題」が欲しい、という求めに応えたもの。 */
   var wt = document.getElementById('weekTest');
   if (wt) {

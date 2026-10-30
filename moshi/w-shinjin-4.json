@@ -183,7 +183,7 @@
      "choices": [
       "菓休み",
       "夏休み",
-      "夏倒み",
+      "夏似み",
       "夏臼み"
      ],
      "answer": 1,
@@ -219,7 +219,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿毎＿朝《あさ》",
+     "q": "＿毎＿週",
      "choices": [
       "まい",
       "よう",
@@ -227,8 +227,8 @@
       "しろ"
      ],
      "answer": 0,
-     "explain": "毎朝（まいあさ）",
-     "explain_id": "setiap pagi　／　毎：setiap"
+     "explain": "毎週（まいしゅう）",
+     "explain_id": "setiap minggu　／　毎：setiap"
     }
    ]
   },
@@ -261,8 +261,8 @@
     {
      "q": "はやい ／　awal, pagi-pagi",
      "choices": [
-      "相い",
-      "掃い",
+      "窓い",
+      "瘡い",
       "早い",
       "日い"
      ],

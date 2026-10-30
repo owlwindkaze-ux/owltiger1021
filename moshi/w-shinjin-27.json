@@ -133,16 +133,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿怒＿り",
+     "q": "＿怒＿る",
      "choices": [
-      "いっか",
-      "えい",
-      "いが",
-      "いか"
+      "おこ",
+      "おっこ",
+      "おこう",
+      "おうこ"
      ],
-     "answer": 3,
-     "explain": "怒り（いかり）",
-     "explain_id": "kemarahan　／　怒：marah, tersinggung"
+     "answer": 0,
+     "explain": "怒る（おこる）",
+     "explain_id": "marah　／　怒：marah, tersinggung"
     }
    ]
   },
