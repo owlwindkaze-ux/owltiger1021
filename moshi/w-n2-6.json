@@ -119,16 +119,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "布＿団＿",
+     "q": "＿団＿地",
      "choices": [
-      "どん",
-      "とん",
-      "とうん",
-      "そう"
+      "だん",
+      "たん",
+      "むら",
+      "ゆだ"
      ],
-     "answer": 1,
-     "explain": "布団（ふとん）",
-     "explain_id": "futon, kasur lipat　／　団：kelompok, rombongan, perkumpulan"
+     "answer": 0,
+     "explain": "団地（だんち）",
+     "explain_id": "kompleks perumahan　／　団：kelompok, rombongan, perkumpulan"
     }
    ]
   },
@@ -139,16 +139,16 @@
    "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "「berulang kali」の意味の言葉は、どれですか。",
+     "q": "「perombakan; modifikasi」の意味の言葉は、どれですか。",
      "choices": [
-      "〜頭",
-      "再三",
+      "改造",
+      "〜感",
       "〜もち",
-      "〜感"
+      "低〜"
      ],
-     "answer": 1,
-     "explain": "再三（さいさん）",
-     "explain_id": "berulang kali"
+     "answer": 0,
+     "explain": "改造（かいぞう）",
+     "explain_id": "perombakan; modifikasi"
     }
    ]
   },

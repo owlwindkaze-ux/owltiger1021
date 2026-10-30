@@ -93,7 +93,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿議＿長",
+     "q": "＿議＿会",
      "choices": [
       "づ",
       "あ",
@@ -101,8 +101,8 @@
       "た"
      ],
      "answer": 2,
-     "explain": "議長（ぎちょう）",
-     "explain_id": "ketua sidang, ketua rapat　／　議：berdiskusi, badan legislatif, musyawarah"
+     "explain": "議会（ぎかい）",
+     "explain_id": "dewan legislatif, parlemen　／　議：berdiskusi, badan legislatif, musyawarah"
     }
    ]
   },

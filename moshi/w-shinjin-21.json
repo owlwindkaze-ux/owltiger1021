@@ -133,16 +133,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿申＿す",
+     "q": "＿申＿請《せい》",
      "choices": [
       "こう",
-      "もう",
-      "もうう",
+      "しん",
+      "じん",
       "てい"
      ],
      "answer": 1,
-     "explain": "申す（もうす）",
-     "explain_id": "berkata (bentuk merendah dari 言う)　／　申：melapor, berbicara dengan rendah hati, berkenan"
+     "explain": "申請（しんせい）",
+     "explain_id": "permohonan　／　申：melapor, berbicara dengan rendah hati, berkenan"
     }
    ]
   },

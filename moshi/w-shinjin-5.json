@@ -135,7 +135,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "各《かく》＿自＿",
+     "q": "＿自＿信《しん》",
      "choices": [
       "じ",
       "つ",
@@ -143,8 +143,8 @@
       "が"
      ],
      "answer": 0,
-     "explain": "各自（かくじ）",
-     "explain_id": "masing-masing orang　／　自：diri sendiri"
+     "explain": "自信（じしん）",
+     "explain_id": "percaya diri　／　自：diri sendiri"
     }
    ]
   },
