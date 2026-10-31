@@ -98,9 +98,9 @@
      "q": "かんしん ／　kagum",
      "choices": [
       "感心",
-      "感念",
-      "乾心",
-      "息心"
+      "感恐",
+      "甘心",
+      "忘心"
      ],
      "answer": 0,
      "explain": "感心（かんしん）",
@@ -135,7 +135,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿感＿激《げき》",
+     "q": "＿感＿想",
      "choices": [
       "もと",
       "がん",
@@ -143,8 +143,8 @@
       "つぎ"
      ],
      "answer": 2,
-     "explain": "感激（かんげき）",
-     "explain_id": "terharu; sangat terkesan　／　感：merasakan, indera, emosi"
+     "explain": "感想（かんそう）",
+     "explain_id": "kesan, pendapat　／　感：merasakan, indera, emosi"
     }
    ]
   },

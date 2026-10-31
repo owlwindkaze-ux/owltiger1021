@@ -228,6 +228,8 @@ footer a{color:var(--blue)}
 <nav class="tabs"><div class="tabs-in">
   <button class="tab on" data-tab="list">Kanji<span class="sub">漢字一覧</span></button>
   <button class="tab" data-tab="vocab">Kosakata<span class="sub">語彙</span></button>
+  <button class="tab" data-tab="jita">Transitif<span class="sub">自動詞・他動詞</span></button>
+  <button class="tab" data-tab="keigo">Sopan<span class="sub">敬語</span></button>
   <button class="tab" data-tab="card">Kartu<span class="sub">フラッシュカード</span></button>
   <button class="tab" data-tab="quiz">Latihan<span class="sub">練習問題</span></button>
   <button class="tab" data-tab="stroke">Urutan Coretan<span class="sub">書き順</span></button>
@@ -513,6 +515,25 @@ footer a{color:var(--blue)}
   </section>
 
   <!-- ===== Progres / 学習状況 ===== -->
+  <section class="panel" id="p-jita">
+    <p class="hint" style="white-space:normal" id="jitaHint"></p>
+    <div class="row" style="margin:.6rem 0">
+      <input type="search" id="jitaQ" placeholder="さがす ／ Cari（漢字・読み・意味）"
+        style="flex:1;min-width:11rem;padding:.5rem .7rem;border:1px solid var(--line);border-radius:8px">
+      <select id="jitaLv"><option value="all">Semua ／ すべて</option></select>
+    </div>
+    <div id="jitaCnt" class="hint"></div>
+    <div id="jitaList"></div>
+  </section>
+  <section class="panel" id="p-keigo">
+    <p class="hint" style="white-space:normal" id="keigoHint"></p>
+    <div id="keigoNg" style="margin:.6rem 0"></div>
+    <div id="keigoList"></div>
+    <div class="sec" style="margin-top:1rem">
+      <div class="lb">BAHASA SOPAN BIASA ／ 丁寧語（だれにでも使う言い方）</div>
+      <div id="keigoTei"></div>
+    </div>
+  </section>
   <section class="panel" id="p-stats">
     <div class="prog-wrap" id="progWrap"></div>
     <div class="sec">
@@ -696,7 +717,7 @@ document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key =
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-10-31b';   // 更新日（版）
+const VERSION = '2026-10-31c';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -2006,6 +2027,97 @@ function refreshStats() {
   if ($('#revMoreV')) $('#revMoreV').onclick = () => { revLimitV += 200; refreshStats(); };
 }
 
+/* ---------- 自動詞・他動詞 ／ 敬語 ---------- */
+/* 持ち主から「漢字・語彙のメニューに、別に『自動詞・他動詞』と
+   『尊敬語・謙譲語・丁寧語』を加えたらどうでしょうか」（2026-10-31）。
+   介護の記録と声かけで いちばん まちがえるところ。
+   **語・読み・意味・例文は 語彙データと例文データから作ってある**ので、
+   ここで持つのは 「どれとどれが対か」「どの語がどの段か」だけ。 */
+let JITA = null, KEIGO = null;
+
+/** その語をタップしたら、語彙の説明をひらく（語彙にある語だけ） */
+const vlink = (w, inner) => VBYW[w]
+  ? '<button type="button" class="vgo" data-w="' + h(w) + '" style="all:unset;cursor:pointer">' +
+    inner + '</button>'
+  : inner;
+
+function cellHTML(c, label, color) {
+  if (!c) return '<div style="color:var(--muted)">—</div>';
+  const mean = (LANG === 'id' && c.meaning_id) ? c.meaning_id : (c.meaning || '');
+  const sent = h(c.sentence).split(h(c.sur)).join(
+    '<b style="color:' + color + '">' + h(c.sur) + '</b>');
+  return '<div>' +
+    '<div style="font-size:.72rem;color:' + color + ';font-weight:700">' + label + '</div>' +
+    vlink(c.word, '<div style="font-size:1.1rem;font-weight:700">' + h(c.word) + '</div>' +
+      '<div style="font-size:.85rem;color:var(--blue)">' + h(c.reading) + '</div>') +
+    '<div style="font-size:.84rem;color:var(--muted);line-height:1.5">' + h(mean) + '</div>' +
+    '<div style="font-size:.9rem;line-height:1.8;margin-top:.3rem">' + sent + '</div>' +
+    '</div>';
+}
+
+function loadJita() {
+  if (JITA) { renderJita(); return; }
+  Promise.all([ensureAllVocab(), fetch('jita.json', { cache: 'no-cache' }).then(r => r.json())])
+    .then(([, j]) => {
+      JITA = j;
+      $('#jitaHint').innerHTML = '<b>' + h(j.hint_ja) + '</b><br>' + h(j.hint_id);
+      const lv = [...new Set(j.pairs.map(p => p.vi.level))].sort(
+        (a, b) => (LVORD[a] || 9) - (LVORD[b] || 9));
+      $('#jitaLv').innerHTML = '<option value="all">Semua ／ すべて</option>' +
+        lv.map(x => '<option value="' + x + '">' + x + '</option>').join('');
+      renderJita();
+    }).catch(() => { $('#jitaList').innerHTML = '<p class="hint">読み込めませんでした</p>'; });
+}
+function renderJita() {
+  if (!JITA) return;
+  const q = ($('#jitaQ').value || '').trim().toLowerCase();
+  const lv = $('#jitaLv').value;
+  const rows = JITA.pairs.filter(p => {
+    if (lv !== 'all' && p.vi.level !== lv && p.vt.level !== lv) return false;
+    if (!q) return true;
+    return [p.vi, p.vt].some(c => (c.word + c.reading + c.meaning + c.meaning_id +
+      c.sentence).toLowerCase().includes(q));
+  });
+  $('#jitaCnt').textContent = rows.length + ' pasang ／ ' + rows.length + '組';
+  $('#jitaList').innerHTML = rows.map(p =>
+    '<div class="kcard" style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;' +
+    'align-items:start;text-align:left;width:100%;margin-bottom:.6rem;cursor:default">' +
+    cellHTML(p.vi, '自動詞 ／ 〜が', 'var(--teal)') +
+    cellHTML(p.vt, '他動詞 ／ 〜を', 'var(--amber)') + '</div>').join('') ||
+    '<p class="hint">Tidak ada hasil ／ 該当なし</p>';
+}
+
+function loadKeigo() {
+  if (KEIGO) { renderKeigo(); return; }
+  Promise.all([ensureAllVocab(), fetch('keigo.json', { cache: 'no-cache' }).then(r => r.json())])
+    .then(([, j]) => { KEIGO = j; renderKeigo(); })
+    .catch(() => { $('#keigoList').innerHTML = '<p class="hint">読み込めませんでした</p>'; });
+}
+function renderKeigo() {
+  const j = KEIGO; if (!j) return;
+  $('#keigoHint').innerHTML = '<b>' + h(j.hint_ja) + '</b><br>' + h(j.hint_id);
+  $('#keigoNg').innerHTML = '<div style="padding:.55rem .7rem;border-left:3px solid var(--red);' +
+    'background:#fef2f2;border-radius:0 8px 8px 0;font-size:.9rem;line-height:1.9">' +
+    j.ng_ja.map(h).join('<br>') + '</div>';
+  $('#keigoList').innerHTML = j.rows.map(r =>
+    '<div class="kcard" style="display:block;text-align:left;width:100%;margin-bottom:.6rem;' +
+    'cursor:default">' +
+    '<div style="font-size:.78rem;color:var(--muted);margin-bottom:.4rem">' + h(r.scene) + '</div>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.7rem;align-items:start">' +
+    cellHTML(r.plain, 'ふつう', 'var(--muted)') +
+    cellHTML(r.sonkei, '尊敬語 ／ 相手', 'var(--teal)') +
+    cellHTML(r.kenjou, '謙譲語 ／ 自分', 'var(--amber)') +
+    '</div></div>').join('');
+  $('#keigoTei').innerHTML = j.teinei.map(t =>
+    '<div style="margin-bottom:.45rem"><b>' + h(t.form) + '</b>　' +
+    '<span style="font-size:.9rem;color:var(--muted)">' + h(t.note_ja) + '</span></div>').join('');
+}
+/* 語をタップしたら 語彙の説明をひらく */
+document.addEventListener('click', e => {
+  const b = e.target.closest && e.target.closest('.vgo');
+  if (b) openVocab(b.dataset.w);
+});
+
 /* ---------- events ---------- */
 /** タブを開く（入口メニューからは kanji.html#quiz のように直接呼べる） */
 function openTab(name, scroll = true) {
@@ -2017,6 +2129,8 @@ function openTab(name, scroll = true) {
   if (name === 'stroke') ensureAllKanji().then(renderStroke);
   if (name === 'vocab') ensureVocabLevel(vLv).then(renderVocab);
   if (name === 'quiz') { ensureAllVocab(); loadSentences(); }
+  if (name === 'jita') loadJita();
+  if (name === 'keigo') loadKeigo();
   if (name === 'stats') ensureAllKanji().then(ensureAllVocab).then(refreshStats);
   if (scroll) window.scrollTo({ top: 0 });
 }
@@ -2024,7 +2138,7 @@ $$('.tab').forEach(t => t.onclick = () => {
   openTab(t.dataset.tab);
   history.replaceState(null, '', '#' + t.dataset.tab);   // 戻る/共有できるようにURLへ反映
 });
-const TABS = ['list', 'vocab', 'card', 'quiz', 'stroke', 'stats'];
+const TABS = ['list', 'vocab', 'jita', 'keigo', 'card', 'quiz', 'stroke', 'stats'];
 function openFromHash() {
   const h = (location.hash || '').replace('#', '');
   if (TABS.includes(h)) openTab(h, false);
@@ -2093,6 +2207,8 @@ $('#nwExport').onclick = () => {
 refreshMyCount();
 
 $('#vq').oninput = () => { vLimit = 120; renderVocab(); };
+$('#jitaQ').oninput = renderJita;
+$('#jitaLv').onchange = renderJita;
 $('#vMark').onchange = () => { vLimit = 120; renderVocab(); };
 $('#vCat').onchange = () => { $('#vSub').value = 'all'; vLimit = 120; renderVocab(); };
 $('#vSub').onchange = () => { vLimit = 120; renderVocab(); };

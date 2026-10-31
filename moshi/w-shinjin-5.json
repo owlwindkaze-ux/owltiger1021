@@ -98,9 +98,9 @@
      "q": "きこえる ／　terdengar",
      "choices": [
       "聞こえる",
-      "分こえる",
-      "問こえる",
-      "閉こえる"
+      "文こえる",
+      "開こえる",
+      "関こえる"
      ],
      "answer": 0,
      "explain": "聞こえる（きこえる）",
@@ -135,7 +135,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿自＿己《こ》",
+     "q": "＿自＿由《ゆう》",
      "choices": [
       "じ",
       "つ",
@@ -143,8 +143,8 @@
       "が"
      ],
      "answer": 0,
-     "explain": "自己（じこ）",
-     "explain_id": "diri sendiri　／　自：diri sendiri"
+     "explain": "自由（じゆう）",
+     "explain_id": "kebebasan　／　自：diri sendiri"
     }
    ]
   },

@@ -81,8 +81,8 @@
      "choices": [
       "かれ",
       "がれ",
-      "いたす",
-      "きょういく"
+      "さいきん",
+      "きぬ"
      ],
      "answer": 0,
      "explain": "彼（かれ）",
@@ -97,16 +97,16 @@
    "inst_id": "Penulisan kanji yang benar",
    "items": [
     {
-     "q": "どろぼう ／　pencuri, maling",
+     "q": "いたす ／　melakukan (bentuk sangat merendah dari suru)",
      "choices": [
-      "泥棒",
-      "減棒",
-      "溶棒",
-      "泥板"
+      "致す",
+      "～軒",
+      "小説",
+      "嘘"
      ],
      "answer": 0,
-     "explain": "泥棒（どろぼう）",
-     "explain_id": "pencuri, maling"
+     "explain": "致す（いたす）",
+     "explain_id": "melakukan (bentuk sangat merendah dari suru)"
     }
    ]
   },
@@ -117,36 +117,36 @@
    "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "「berhenti, menghentikan」の意味の言葉は、どれですか。",
+     "q": "「menerima」の意味の言葉は、どれですか。",
      "choices": [
-      "止める",
-      "もらう",
-      "考える",
-      "熱心"
+      "文化",
+      "別れる",
+      "見物",
+      "もらう"
      ],
-     "answer": 0,
-     "explain": "止める（やめる）",
-     "explain_id": "berhenti, menghentikan"
+     "answer": 3,
+     "explain": "もらう（もらう）",
+     "explain_id": "menerima"
     }
    ]
   },
   "問題4": {
    "label": "問題4",
-   "name": "漢字の読み（熟語の中で）",
-   "inst": "つぎの漢字の読み方は、どれですか。",
-   "inst_id": "Baca kanji bergaris",
+   "name": "意味がいちばん近い言葉は？",
+   "inst": "だいたい同じ意味の言葉は、どれですか。",
+   "inst_id": "Kata yang paling dekat artinya",
    "items": [
     {
-     "q": "＿使＿う",
+     "q": "＿起こす＿ とだいたい同じ意味の言葉は？",
      "choices": [
-      "つか",
-      "つが",
-      "つっか",
-      "づか"
+      "複雑",
+      "落ちる",
+      "覚ます",
+      "文化"
      ],
-     "answer": 0,
-     "explain": "使う（つかう）",
-     "explain_id": "memakai, menggunakan　／　使：menggunakan, utusan, mengutus"
+     "answer": 2,
+     "explain": "起こす",
+     "explain_id": "覚ます（membangunkan）"
     }
    ]
   },
