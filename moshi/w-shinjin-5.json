@@ -135,16 +135,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿自＿信《しん》",
+     "q": "＿自＿ら",
      "choices": [
-      "じ",
-      "つ",
-      "ば",
-      "が"
+      "みすか",
+      "みずか",
+      "みずが",
+      "みずっか"
      ],
-     "answer": 0,
-     "explain": "自信（じしん）",
-     "explain_id": "percaya diri　／　自：diri sendiri"
+     "answer": 1,
+     "explain": "自ら（みずから）",
+     "explain_id": "sendiri; secara pribadi　／　自：diri sendiri"
     }
    ]
   },

@@ -132,6 +132,39 @@ for p in ('vocab-data.json', 'vocab-n2.json', 'vocab-n3.json', 'vocab-n4.json',
 for w, m in sorted(set(seen_pref)):
     print('   ○ %s　%s' % (w, m))
 
+# ── 「〜」が付く語に 例文と熟語があるか ───────────────────────
+# 「〜位」「〜羽」のような 接辞・助数詞は、**そのままでは文に入らない**。
+# `sentences.json` では [例文, 文中の形（熟語）, その読み] の3つ組で持つ。
+# 熟語が無いと 練習問題で 伏せる所が 無く、問題が作れない。
+# 57語が 空のままで、コースの週に 出ていた（持ち主が見つけた・2026-10-31）。
+print()
+print('■ 「〜」が付く語の 例文と熟語')
+VW = json.load(io.open(R + 'vocab-data.json', encoding='utf-8'))['words']
+SS = json.load(io.open(R + 'sentences.json', encoding='utf-8'))['sentences']
+tilde = [w for w in VW if '〜' in w['word'] or '～' in w['word']]
+nosent = [w['word'] for w in tilde if w['word'] not in SS]
+notrio, badonce = [], []
+for w in tilde:
+    v = SS.get(w['word'])
+    if v is None:
+        continue
+    if not isinstance(v, list) or len(v) != 3:
+        notrio.append(w['word'])          # 熟語と読みが要る
+        continue
+    if v[0].count(v[1]) != 1:
+        badonce.append(w['word'])         # 文中に1回だけでないと 伏せられない
+print('   %d語／例文なし %d／3つ組でない %d／文中に1回でない %d'
+      % (len(tilde), len(nosent), len(notrio), len(badonce)))
+if nosent:
+    bad('「〜」が付く語 %d語に例文がありません（%s…）'
+        % (len(nosent), '・'.join(nosent[:6])))
+if notrio:
+    bad('「〜」が付く語 %d語が [例文, 熟語, 読み] の3つ組ではありません（%s…）'
+        % (len(notrio), '・'.join(notrio[:6])))
+if badonce:
+    bad('「〜」が付く語 %d語で、熟語が例文の中に1回だけ出ていません（%s…）'
+        % (len(badonce), '・'.join(badonce[:6])))
+
 print()
 print('=' * 54)
 print('おかしいところ: %d件' % len(ng))
