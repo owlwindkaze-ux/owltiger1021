@@ -95,16 +95,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿負＿う",
+     "q": "＿負＿け",
      "choices": [
-      "おう",
-      "お",
       "ず",
-      "み"
+      "ま",
+      "み",
+      "の"
      ],
      "answer": 1,
-     "explain": "負う（おう）",
-     "explain_id": "menanggung, memikul　／　負：menanggung, kalah, mengalahkan"
+     "explain": "負け（まけ）",
+     "explain_id": "kekalahan　／　負：menanggung, kalah, mengalahkan"
     }
    ]
   },

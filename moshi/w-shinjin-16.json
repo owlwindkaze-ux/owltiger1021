@@ -99,7 +99,7 @@
      "choices": [
       "感心",
       "感念",
-      "簡心",
+      "乾心",
       "息心"
      ],
      "answer": 0,
@@ -135,7 +135,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿感＿心",
+     "q": "＿感＿激《げき》",
      "choices": [
       "もと",
       "がん",
@@ -143,8 +143,8 @@
       "つぎ"
      ],
      "answer": 2,
-     "explain": "感心（かんしん）",
-     "explain_id": "kagum　／　感：merasakan, indera, emosi"
+     "explain": "感激（かんげき）",
+     "explain_id": "terharu; sangat terkesan　／　感：merasakan, indera, emosi"
     }
    ]
   },

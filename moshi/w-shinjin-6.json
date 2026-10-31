@@ -102,7 +102,7 @@
      "q": "くらべる ／　membandingkan",
      "choices": [
       "比べる",
-      "被べる",
+      "秘べる",
       "彼べる",
       "非べる"
      ],
@@ -139,16 +139,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿強＿引《いん》",
+     "q": "＿強＿力",
      "choices": [
-      "こう",
-      "だい",
-      "ごうう",
-      "ごう"
+      "ぎょう",
+      "きょうう",
+      "きょう",
+      "きよう"
      ],
-     "answer": 3,
-     "explain": "強引（ごういん）",
-     "explain_id": "memaksa; sewenang-wenang　／　強：kuat"
+     "answer": 2,
+     "explain": "強力（きょうりょく）",
+     "explain_id": "kuat, ampuh　／　強：kuat"
     }
    ]
   },

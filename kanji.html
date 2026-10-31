@@ -75,6 +75,8 @@ select.sel{padding:.55rem .6rem;border:1.5px solid var(--line);border-radius:10p
 .t.yt.kun{color:var(--amber)}
 .t.on-{background:var(--blue-l);color:var(--blue)}
 .t.kun{background:var(--amber-l);color:var(--amber)}
+/* いま見ている語で実際に読む読み。ほかの読みと見分けがつくようにする */
+.t.use{outline:2px solid currentColor;font-weight:700}
 .t.lv{background:#f1f5f9;color:var(--muted)}
 .t.st{background:#ede9fe;color:#5b21b6;font-weight:700}
 /* 読み（ひらがな・カタカナ）。太く・濃く・少し大きく（C案）。
@@ -580,6 +582,10 @@ footer a{color:var(--blue)}
       <div id="vmSent" style="font-size:1rem;line-height:1.9;padding:.55rem .7rem;
         background:var(--blue-l);border-radius:8px"></div>
     </div>
+    <div class="sec" id="vmAltSec" style="display:none">
+      <div class="lb">BACAAN LAIN ／ もう一つの読み</div>
+      <div id="vmAlt"></div>
+    </div>
     <div class="sec">
       <div class="lb">KANJI PENYUSUN ／ 使われている漢字（タップで書き順）</div>
       <div class="grid" id="vmKanji" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))"></div>
@@ -690,7 +696,7 @@ document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key =
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-10-31a';   // 更新日（版）
+const VERSION = '2026-10-31b';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -1124,16 +1130,51 @@ function renderList() {
   if ($('#moreBtn')) $('#moreBtn').onclick = () => { listLimit += 120; renderList(); };
 }
 const MARKLABEL = { known: '✓ 覚えた', review: '↻ 要復習' };
-const cardHTML = k => `<button class="kcard ${progress[k.character] ? 'is-' + progress[k.character] : ''}" data-ch="${k.character}">
+/** その語で実際に読む読みを返す。
+    漢字の読みは多い（「開」は6つ）ので、札には先頭2つしか出していなかった。
+    「開く（あく）」を開くと 札には「かい・ひら.く・ひら.き」と出て、
+    **いま見ている読み「あ.く」が どこにも無い**（持ち主が見つけた・2026-10-31）。
+    語×漢字 9,290組のうち 397組が そうなっていた。 */
+function readsUsed(k, reading) {
+  /* `map(cardHTML)` は 第2引数に **番号**を渡してくる。文字列のときだけ見る
+     （これで `renderList()` が落ち、起動が途中で止まっていた・2026-10-31）。 */
+  if (typeof reading !== 'string' || !reading) return [];
+  const all = (k.on || []).concat(k.kun || []);
+  const out = [];
+  /* 読みが複数のときは「　」でつないで渡ってくる（「あく　ひらく」）。
+     **読みごとに**見る。まとめて見ると 長いほうだけが残り、
+     いま見ている「あく」が 落ちる（2026-10-31）。 */
+  for (const one of reading.split(/[　\s]+/).filter(Boolean)) {
+    const hit = all.filter(r => rdClean(r) && one.includes(rdClean(r)));
+    if (!hit.length) continue;
+    /* いちばん長く当たったものだけ。「あ」が「あける」に当たるような
+       広すぎる一致を 前に出さないため。 */
+    const max = Math.max(...hit.map(r => rdClean(r).length));
+    hit.filter(r => rdClean(r).length === max)
+       .forEach(r => { if (out.indexOf(r) < 0) out.push(r); });
+  }
+  return out;
+}
+const cardHTML = (k, want) => {
+  const used = readsUsed(k, want);
+  const rest = (k.on || []).concat(k.kun || []).filter(r => used.indexOf(r) < 0);
+  /* 語の中から開いたときは **使う読みを先頭に**。そうでなければ これまでどおり音2つ・訓2つ */
+  const show = used.length
+    ? used.concat(rest.slice(0, Math.max(0, 4 - used.length)))
+    : (k.on || []).slice(0, 2).concat((k.kun || []).slice(0, 2));
+  const more = (k.on || []).concat(k.kun || []).length - show.length;
+  const tag = r => `<span class="t ${(k.on || []).indexOf(r) >= 0 ? 'on-' : 'kun'} yt${
+    used.indexOf(r) >= 0 ? ' use' : ''}">${r}</span>`;
+  return `<button class="kcard ${progress[k.character] ? 'is-' + progress[k.character] : ''}" data-ch="${k.character}">
   ${progress[k.character] ? `<span class="mark ${progress[k.character]}">${MARKLABEL[progress[k.character]]}</span>` : ''}
   <div class="ch">${k.character}</div>
   <div class="body">
     <div class="tags"><span class="t lv">${k.level}</span>
-      ${k.on.slice(0, 2).map(r => `<span class="t on- yt">${r}</span>`).join('')}
-      ${k.kun.slice(0, 2).map(r => `<span class="t kun yt">${r}</span>`).join('')}</div>
+      ${show.map(tag).join('')}${more > 0 ? `<span class="t on-">＋${more}</span>` : ''}</div>
     <div class="mean">${meanOf(k).slice(0, 3).join(', ')}</div>
     <div class="st">${k.strokes} coretan／画</div>
   </div></button>`;
+};
 
 /* ---------- 語彙タブ ---------- */
 let vLimit = 120, vLv = 'all';
@@ -1254,7 +1295,11 @@ function openVocab(word) {
   /* 例文。練習問題でしか使っていなかったが、言葉の説明としていちばん役に立つ。
      見出し語の部分を太字にして、どこがその言葉かを示す（SPEC 2.6-z30）。 */
   showSentence(w);
-  const cards = (w.kanji || []).map(c => BYCH[c] ? cardHTML(BYCH[c])
+  showAlt(w);
+  /* 札に出す読みは、**いま見ている読みと もう一つの読みの両方**。
+     どちらも その語で実際に読む読みだから。 */
+  const wants = [w.reading].concat((w.alt || []).map(a => a.reading)).join('　');
+  const cards = (w.kanji || []).map(c => BYCH[c] ? cardHTML(BYCH[c], wants)
     : `<div class="kcard" style="opacity:.55"><div class="ch">${c}</div><div class="body"><div class="mean">（未収録 / belum ada）</div></div></div>`);
   $('#vmKanji').innerHTML = cards.join('') || '<p class="hint">—</p>';
   paintState($('#vmState'), vprogress[word], $('#vmOk'), $('#vmNg'), $('#vmClr'));
@@ -1276,6 +1321,32 @@ function showSentence(w) {
   };
   if (Object.keys(SENT).length) put();
   else loadSentences().then(put);          /* まだ読んでいなければ読んでから */
+}
+/** 同じ表記で **読みが2つ**ある語の、もう一つの読み（意味も例文もちがう）。
+    「開く」は あく（terbuka）と ひらく（催す）で 別の言葉に近い。
+    語彙データは 表記を鍵にしているので 2つ持てず、片方しか出ていなかった
+    （持ち主が見つけた・2026-10-31）。 */
+function showAlt(w) {
+  const sec = $('#vmAltSec'), box = $('#vmAlt');
+  if (!sec || !box) return;
+  const alts = w.alt || [];
+  if (!alts.length) { sec.style.display = 'none'; return; }
+  sec.style.display = '';
+  box.innerHTML = alts.map(a => {
+    const mean = (LANG === 'id' && a.meaning_id) ? a.meaning_id : (a.meaning || '');
+    const en = (LANG === 'id' && a.meaning_id && a.meaning) ? 'EN: ' + a.meaning : '';
+    const sent = a.sentence
+      ? '<div style="font-size:1rem;line-height:1.9;margin-top:.45rem;padding:.55rem .7rem;' +
+        'background:var(--blue-l);border-radius:8px">' +
+        h(a.sentence).split(h(a.sur || w.word)).join(
+          '<b style="color:var(--blue)">' + h(a.sur || w.word) + '</b>') + '</div>'
+      : '';
+    return '<div style="margin-bottom:.5rem">' +
+      '<div style="font-size:1.15rem;font-weight:700;color:var(--blue)">' + h(a.reading) + '</div>' +
+      '<div style="margin-top:.2rem">' + h(mean) + '</div>' +
+      (en ? '<div style="font-size:.85rem;color:var(--muted)">' + h(en) + '</div>' : '') +
+      sent + '</div>';
+  }).join('');
 }
 const closeVocabModal = (clearNav = true) => {
   $('#vov').classList.remove('on');

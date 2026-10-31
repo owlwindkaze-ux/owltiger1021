@@ -135,7 +135,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "回＿収＿",
+     "q": "＿収＿入",
      "choices": [
       "じゅう",
       "しゆう",
@@ -143,8 +143,8 @@
       "しゅう"
      ],
      "answer": 3,
-     "explain": "回収（かいしゅう）",
-     "explain_id": "mengeluarkan; mengumpulkan　／　収：mengumpulkan, memperoleh, pendapatan"
+     "explain": "収入（しゅうにゅう）",
+     "explain_id": "penghasilan　／　収：mengumpulkan, memperoleh, pendapatan"
     }
    ]
   },

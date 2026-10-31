@@ -165,6 +165,37 @@ if badonce:
     bad('「〜」が付く語 %d語で、熟語が例文の中に1回だけ出ていません（%s…）'
         % (len(badonce), '・'.join(badonce[:6])))
 
+# ── もう一つの読み（alt）────────────────────────────────
+# 「開く」は あく と ひらく で 意味も例文も ちがう。語彙データは 表記を鍵に
+# しているので 2つ持てず、`alt` に入れる（持ち主が見つけた・2026-10-31）。
+print()
+print('■ もう一つの読み（alt）')
+import glob as _g
+ALTOK = 0
+for f in sorted(_g.glob(R + 'vocab-*.json')):
+    if f.endswith('/vocab.json'):
+        continue
+    try:
+        d = json.load(io.open(f, encoding='utf-8'))
+    except Exception:
+        continue
+    for w in d.get('words', []):
+        for a in (w.get('alt') or []):
+            ALTOK += 1
+            nm = os.path.basename(f) + ' ' + w['word']
+            if a.get('reading') == w.get('reading'):
+                bad('%s：altの読みが 見出しの読みと同じです' % nm)
+            for k in ('reading', 'meaning_id', 'sentence', 'sur', 'sread'):
+                if not str(a.get(k) or '').strip():
+                    bad('%s：altに「%s」がありません' % (nm, k))
+            se, su = str(a.get('sentence') or ''), str(a.get('sur') or '')
+            if su and se.count(su) != 1:
+                bad('%s：altの例文に「%s」が %d回（1回でないと伏せられない）'
+                    % (nm, su, se.count(su)))
+            if not re.match(r'^[ぁ-ゖー]+$', str(a.get('sread') or 'x')):
+                bad('%s：altの読み（文中）がひらがなだけではありません' % nm)
+print('   %d件' % ALTOK)
+
 print()
 print('=' * 54)
 print('おかしいところ: %d件' % len(ng))

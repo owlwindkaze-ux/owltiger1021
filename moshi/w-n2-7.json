@@ -75,10 +75,10 @@
     {
      "q": "えらい ／　hebat; terhormat",
      "choices": [
-      "仲い",
       "傷い",
+      "係い",
       "偉い",
-      "偶い"
+      "停い"
      ],
      "answer": 2,
      "explain": "偉い（えらい）",
@@ -113,16 +113,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿担＿ぐ",
+     "q": "＿担＿当",
      "choices": [
-      "かっつ",
-      "かつ",
-      "がつ",
-      "かづ"
+      "どう",
+      "だん",
+      "けい",
+      "たん"
      ],
-     "answer": 1,
-     "explain": "担ぐ（かつぐ）",
-     "explain_id": "memikul di bahu　／　担：memikul, menanggung, memegang tugas"
+     "answer": 3,
+     "explain": "担当（たんとう）",
+     "explain_id": "penanggung jawab, bertugas　／　担：memikul, menanggung, memegang tugas"
     }
    ]
   },
@@ -133,16 +133,16 @@
    "inst_id": "Cara baca kata bergaris",
    "items": [
     {
-     "q": "＿加熱＿ の読み方は？",
+     "q": "＿過失＿ の読み方は？",
      "choices": [
-      "かねつ",
-      "かねづ",
-      "かねっつ",
-      "がねつ"
+      "かしづ",
+      "かしつ",
+      "かっしつ",
+      "がしつ"
      ],
-     "answer": 0,
-     "explain": "加熱（かねつ）",
-     "explain_id": "pemanasan"
+     "answer": 1,
+     "explain": "過失（かしつ）",
+     "explain_id": "kelalaian; kesalahan"
     }
    ]
   },
