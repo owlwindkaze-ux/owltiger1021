@@ -135,16 +135,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿有＿利《り》",
+     "q": "＿有＿る",
      "choices": [
-      "はこ",
-      "しん",
-      "とく",
-      "ゆう"
+      "よ",
+      "あ",
+      "や",
+      "ど"
      ],
-     "answer": 3,
-     "explain": "有利（ゆうり）",
-     "explain_id": "menguntungkan　／　有：memiliki, ada, terjadi"
+     "answer": 1,
+     "explain": "有る（ある）",
+     "explain_id": "ada, mempunyai　／　有：memiliki, ada, terjadi"
     }
    ]
   },
