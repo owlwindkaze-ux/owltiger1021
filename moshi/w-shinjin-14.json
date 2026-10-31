@@ -100,7 +100,7 @@
       "ジェット祈",
       "ジェット機",
       "ジェット期",
-      "ジェット器"
+      "ジェット起"
      ],
      "answer": 1,
      "explain": "ジェット機（ジェットき）",
@@ -135,16 +135,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿要＿点",
+     "q": "＿要＿る",
      "choices": [
-      "ようう",
-      "とう",
-      "よう",
-      "まさ"
+      "か",
+      "い",
+      "き",
+      "ば"
      ],
-     "answer": 2,
-     "explain": "要点（ようてん）",
-     "explain_id": "inti, pokok　／　要：penting, meringkas, memerlukan"
+     "answer": 1,
+     "explain": "要る（いる）",
+     "explain_id": "perlu, membutuhkan　／　要：penting, meringkas, memerlukan"
     }
    ]
   },

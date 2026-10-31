@@ -125,6 +125,14 @@ for need, what in (('data-tab="jita"', '自動詞・他動詞のタブ'),
     if need not in HTML:
         bad('kanji.html に %s がありません（%s）' % (what, need))
 
+# ── 入口メニューから たどれるか ───────────────────────
+# タブを足しただけでは、**入口の一覧に出ない**。
+# 持ち主から「どこに出来てますか？」と聞かれて 気づいた（2026-10-31）。
+TOP = io.open(R + 'index.html', encoding='utf-8').read()
+for need, what in (('kanji.html#jita', '自動詞・他動詞'), ('kanji.html#keigo', '敬語')):
+    if need not in TOP:
+        bad('index.html（入口メニュー）に %s への入口がありません（%s）' % (what, need))
+
 print()
 print('=' * 54)
 print('おかしいところ: %d件' % len(ng))

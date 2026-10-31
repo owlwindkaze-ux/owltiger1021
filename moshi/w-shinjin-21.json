@@ -96,7 +96,7 @@
      "q": "きじ ／　kain, adonan",
      "choices": [
       "生地",
-      "正地",
+      "整地",
       "勢地",
       "生均"
      ],
@@ -133,7 +133,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿申＿請《せい》",
+     "q": "＿申＿告",
      "choices": [
       "こう",
       "しん",
@@ -141,8 +141,8 @@
       "てい"
      ],
      "answer": 1,
-     "explain": "申請（しんせい）",
-     "explain_id": "permohonan　／　申：melapor, berbicara dengan rendah hati, berkenan"
+     "explain": "申告（しんこく）",
+     "explain_id": "pelaporan, deklarasi　／　申：melapor, berbicara dengan rendah hati, berkenan"
     }
    ]
   },

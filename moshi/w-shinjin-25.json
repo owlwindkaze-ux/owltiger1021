@@ -77,7 +77,7 @@
      "choices": [
       "糸わず",
       "詞わず",
-      "士わず",
+      "使わず",
       "思わず"
      ],
      "answer": 3,
@@ -113,7 +113,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿遅＿い",
+     "q": "＿遅＿番",
      "choices": [
       "おそう",
       "おうそ",
@@ -121,8 +121,8 @@
       "おそ"
      ],
      "answer": 3,
-     "explain": "遅い（おそい）",
-     "explain_id": "lambat, terlambat　／　遅：lambat, terlambat, kemudian"
+     "explain": "遅番（おそばん）",
+     "explain_id": "shift sore (masuk lebih siang)　／　遅：lambat, terlambat, kemudian"
     }
    ]
   },

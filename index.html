@@ -13,7 +13,7 @@
    ここが 長いあいだ 入っていなかった。入口メニューは いちばん よく開く画面なのに、
    古いまま 表示され続けていた（文言を直しても 変わらない、という形で出た）。 */
 (function () {
-  var PAGE_VER = '2026-10-31c';
+  var PAGE_VER = '2026-10-31d';
   try {
     if (sessionStorage.getItem('vchk-top')) return;
     fetch('version.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
@@ -196,6 +196,10 @@ footer button{border:1.5px solid var(--line);background:#fff;border-radius:999px
           <span class="tx"><span class="n">漢字一覧</span><span class="r">Kanji ／ 読み・意味・部首を見る</span></span><span class="ar">→</span></a>
         <a class="item" href="kanji.html#vocab"><span class="em">📝</span>
           <span class="tx"><span class="n">語彙（ことば）</span><span class="r">Kosakata ／ 分野・形でしぼる</span></span><span class="ar">→</span></a>
+        <a class="item" href="kanji.html#jita"><span class="em">🔁</span>
+          <span class="tx"><span class="n">自動詞・他動詞</span><span class="r">Transitif ／ 「〜が開く」と「〜を開ける」</span></span><span class="ar">→</span></a>
+        <a class="item" href="kanji.html#keigo"><span class="em">🙇</span>
+          <span class="tx"><span class="n">敬語</span><span class="r">Sopan ／ 尊敬語・謙譲語・丁寧語</span></span><span class="ar">→</span></a>
         <a class="item" href="kanji.html#card"><span class="em">🃏</span>
           <span class="tx"><span class="n">フラッシュカード</span><span class="r">Kartu ／ めくって覚える</span></span><span class="ar">→</span></a>
         <a class="item" href="kanji.html#quiz"><span class="em">✏️</span>

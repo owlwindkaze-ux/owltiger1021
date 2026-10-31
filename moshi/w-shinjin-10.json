@@ -99,7 +99,7 @@
      "choices": [
       "予約",
       "争約",
-      "予縮",
+      "予紙",
       "予訳"
      ],
      "answer": 0,
@@ -135,7 +135,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿医＿院",
+     "q": "＿医＿者",
      "choices": [
       "え",
       "し",
@@ -143,8 +143,8 @@
       "こ"
      ],
      "answer": 2,
-     "explain": "医院（いいん）",
-     "explain_id": "klinik, praktik dokter　／　医：kedokteran, dokter"
+     "explain": "医者（いしゃ）",
+     "explain_id": "dokter　／　医：kedokteran, dokter"
     }
    ]
   },
