@@ -135,7 +135,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿有＿名",
+     "q": "＿有＿利《り》",
      "choices": [
       "はこ",
       "しん",
@@ -143,8 +143,8 @@
       "ゆう"
      ],
      "answer": 3,
-     "explain": "有名（ゆうめい）",
-     "explain_id": "terkenal　／　有：memiliki, ada, terjadi"
+     "explain": "有利（ゆうり）",
+     "explain_id": "menguntungkan　／　有：memiliki, ada, terjadi"
     }
    ]
   },

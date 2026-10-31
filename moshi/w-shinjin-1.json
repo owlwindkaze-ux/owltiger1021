@@ -219,16 +219,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿見＿学",
+     "q": "＿見＿事《ごと》",
      "choices": [
-      "あと",
-      "けん",
-      "げん",
-      "さん"
+      "む",
+      "に",
+      "み",
+      "か"
      ],
-     "answer": 1,
-     "explain": "見学（けんがく）",
-     "explain_id": "kunjungan belajar; observasi　／　見：melihat, harapan, kemungkinan"
+     "answer": 2,
+     "explain": "見事（みごと）",
+     "explain_id": "hebat, mengagumkan　／　見：melihat, harapan, kemungkinan"
     }
    ]
   },
@@ -239,16 +239,16 @@
    "inst_id": "Cara baca kata bergaris",
    "items": [
     {
-     "q": "＿後＿ の読み方は？",
+     "q": "＿明日＿ の読み方は？",
      "choices": [
-      "あど",
-      "あと",
-      "あとう",
-      "あっと"
+      "あした",
+      "あじた",
+      "あっした",
+      "あしだ"
      ],
-     "answer": 1,
-     "explain": "後（あと）",
-     "explain_id": "setelah, nanti, sisanya"
+     "answer": 0,
+     "explain": "明日（あした）",
+     "explain_id": "besok"
     }
    ]
   },
@@ -259,16 +259,16 @@
    "inst_id": "Penulisan kanji yang benar",
    "items": [
     {
-     "q": "きょう ／　hari ini",
+     "q": "きんようび ／　hari Jumat",
      "choices": [
-      "今更",
-      "今昔",
-      "今日",
-      "今暑"
+      "金曜日",
+      "金曜普",
+      "金用日",
+      "金曜書"
      ],
-     "answer": 2,
-     "explain": "今日（きょう）",
-     "explain_id": "hari ini"
+     "answer": 0,
+     "explain": "金曜日（きんようび）",
+     "explain_id": "hari Jumat"
     }
    ]
   },
@@ -279,16 +279,16 @@
    "inst_id": "Kata yang sesuai artinya",
    "items": [
     {
-     "q": "「tahun lalu」の意味の言葉は、どれですか。",
+     "q": "「bersama」の意味の言葉は、どれですか。",
      "choices": [
-      "明後日",
-      "午後",
+      "一緒",
+      "行く",
       "去年",
-      "会う"
+      "～月"
      ],
-     "answer": 2,
-     "explain": "去年（きょねん）",
-     "explain_id": "tahun lalu"
+     "answer": 0,
+     "explain": "一緒（いっしょ）",
+     "explain_id": "bersama"
     }
    ]
   },
@@ -299,16 +299,16 @@
    "inst_id": "Baca kanji ini",
    "items": [
     {
-     "q": "日",
+     "q": "中",
      "choices": [
-      "き",
-      "ひ",
-      "う",
-      "と"
+      "ゆき",
+      "なが",
+      "なっか",
+      "なか"
      ],
-     "answer": 1,
-     "explain": "日（ひ）",
-     "explain_id": "hari, matahari, Jepang"
+     "answer": 3,
+     "explain": "中（なか）",
+     "explain_id": "tengah, di dalam, rata-rata"
     }
    ]
   },

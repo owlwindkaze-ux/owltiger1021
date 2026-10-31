@@ -102,9 +102,9 @@
      "q": "くらべる ／　membandingkan",
      "choices": [
       "比べる",
-      "避べる",
-      "悲べる",
-      "否べる"
+      "被べる",
+      "彼べる",
+      "非べる"
      ],
      "answer": 0,
      "explain": "比べる（くらべる）",
@@ -139,7 +139,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿強＿盗《とう》",
+     "q": "＿強＿引《いん》",
      "choices": [
       "こう",
       "だい",
@@ -147,8 +147,8 @@
       "ごう"
      ],
      "answer": 3,
-     "explain": "強盗（ごうとう）",
-     "explain_id": "perampokan　／　強：kuat"
+     "explain": "強引（ごういん）",
+     "explain_id": "memaksa; sewenang-wenang　／　強：kuat"
     }
    ]
   },

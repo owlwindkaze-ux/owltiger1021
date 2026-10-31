@@ -217,7 +217,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "独《どく》＿語＿",
+     "q": "＿語＿句《く》",
      "choices": [
       "き",
       "す",
@@ -225,8 +225,8 @@
       "ご"
      ],
      "answer": 3,
-     "explain": "独語（どくご）",
-     "explain_id": "berbicara sendiri　／　語：bahasa, kata, bercerita"
+     "explain": "語句（ごく）",
+     "explain_id": "kata dan frasa　／　語：bahasa, kata, bercerita"
     }
    ]
   },
@@ -261,8 +261,8 @@
      "choices": [
       "号前",
       "名前",
-      "名創",
-      "器前"
+      "名刷",
+      "周前"
      ],
      "answer": 1,
      "explain": "名前（なまえ）",
