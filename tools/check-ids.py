@@ -88,6 +88,30 @@ for c in sorted(KW):
         if miss:
             bad('%s：データに無い%sが %d個 割り当てられています' % (c, name, miss))
 
+# ── 目次の数と、ほんとうのファイルの中身が 合っているか ───────────
+# 画面は 目次（`vocab.json`・`kanji.json`・`bunpo/grammar.json`）の数を
+# **分母**として出す。語を足して 目次を直し忘れると、画面の数だけが 古いまま。
+# どの検査も「目次 対 ほんとうの中身」を 見ていなかった。
+# 語を8語足した日に 気づかず通ってしまった（2026-10-31）。
+print('■ 目次の数と中身')
+for idx, key in (('vocab.json', 'words'), ('kanji.json', 'kanji'),
+                 ('bunpo/grammar.json', 'grammar')):
+    d = json.load(io.open(R + idx, encoding='utf-8'))
+    tot = 0
+    for f in d.get('files', []):
+        name = f['file'] if isinstance(f, dict) else f
+        sub = os.path.dirname(idx)
+        path = R + (sub + '/' if sub else '') + name
+        n = len(json.load(io.open(path, encoding='utf-8'))[key])
+        tot += n
+        if isinstance(f, dict) and f.get('count') is not None and f['count'] != n:
+            bad('%s：%s の数が 目次 %d ／ 中身 %d' % (idx, name, f['count'], n))
+    if d.get('total') is not None and d['total'] != tot:
+        bad('%s：total が 目次 %d ／ 中身 %d' % (idx, d['total'], tot))
+    if d.get('count') is not None and d['count'] != tot:
+        bad('%s：count が 目次 %d ／ 中身 %d' % (idx, d['count'], tot))
+    print('   %-20s %d' % (idx, tot))
+
 print()
 print('=' * 54)
 print('おかしいところ: %d件' % len(ng))

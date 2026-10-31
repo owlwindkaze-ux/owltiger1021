@@ -1,6 +1,6 @@
 {
  "name": "JLPT N5–N3 熟語＋現場用語",
- "count": 6659,
+ "count": 6667,
  "levels": [
   "N5",
   "N4",
@@ -85,22 +85,22 @@
   {
    "file": "vocab-n5.json",
    "level": "N5",
-   "count": 702
+   "count": 704
   },
   {
    "file": "vocab-n4.json",
    "level": "N4",
-   "count": 648
+   "count": 650
   },
   {
    "file": "vocab-n3.json",
    "level": "N3",
-   "count": 2126
+   "count": 2128
   },
   {
    "file": "vocab-n2.json",
    "level": "N2",
-   "count": 1735
+   "count": 1737
   },
   {
    "file": "vocab-kaigo.json",
@@ -118,7 +118,7 @@
    "count": 757
   }
  ],
- "total": 6659,
+ "total": 6667,
  "level_totals": {
   "N5": 702,
   "N4": 648,

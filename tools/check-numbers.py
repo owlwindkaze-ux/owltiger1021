@@ -44,6 +44,31 @@ def _sched():
 
 
 SCHED = _sched()
+
+# 語彙も同じ。コースが教えるのは **週に割り当てた語**であって、データの総数ではない
+def _schedv():
+    import glob as _g
+    lv = {}
+    for f in _g.glob(R + 'vocab-*.json'):
+        if f.endswith('/vocab.json'):
+            continue
+        try:
+            d = json.load(io.open(f, encoding='utf-8'))
+        except Exception:
+            continue
+        for w in d.get('words', []):
+            lv.setdefault(w['word'], w['level'])
+    KW = json.load(io.open(R + 'kanji-weeks.json', encoding='utf-8'))['courses']
+    out = {}
+    for c in KW:
+        ids = set()
+        for _w, xs in KW[c].get('vocab', {}).items():
+            ids.update(xs)
+        out[c] = collections.Counter(lv.get(i, '?') for i in ids)
+    return out
+
+
+SCHEDV = _schedv()
 GC = collections.Counter()
 for f in glob.glob(R + 'bunpo/grammar-*.json'):
     for g in L(os.path.relpath(f, R))['grammar']:
@@ -115,9 +140,9 @@ CHECKS = [
     ('index.html', r'第1〜14週・([\d,]+)問',        NQ,     '100日コースの問数'),
     ('index.html', r'収録 ([\d,]+)字',              TCHARS, '手書きの字数'),
     ('shinjin/index.html', r"n:'(\d+)項目を8週で'",  GC['N4'], '新人コース N4文型'),
-    ('shinjin/index.html', r"n:'(\d+)語を8週で'",    VC['N4'], '新人コース N4語彙'),
+    ('shinjin/index.html', r"n:'(\d+)語を8週で'",    SCHEDV['shinjin']['N4'], '新人コース N4語彙'),
     ('shinjin/index.html', r'N4の語彙(\d+)語・文型(\d+)項目',
-                                       (VC['N4'], GC['N4']), '新人コース 第2期のねらい'),
+                                       (SCHEDV['shinjin']['N4'], SCHED['shinjin']['N4']), '新人コース 第2期のねらい'),
     ('shinjin/index.html', r"n:'(\d+)字を4週で一周'", KC['N5'], '新人コース N5漢字'),
     ('shinjin/index.html', r"n:'(\d+)字を8週で'",    KC['N4'], '新人コース N4漢字'),
     ('shinjin/index.html', r"n:'(\d+)字を16週で（第28週まで）'",   KC['N3'], '新人コース N3漢字'),

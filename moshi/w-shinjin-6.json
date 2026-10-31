@@ -102,9 +102,9 @@
      "q": "くらべる ／　membandingkan",
      "choices": [
       "比べる",
-      "秘べる",
-      "彼べる",
-      "非べる"
+      "避べる",
+      "否べる",
+      "秘べる"
      ],
      "answer": 0,
      "explain": "比べる（くらべる）",
@@ -122,9 +122,9 @@
      "q": "「permukaan, bagian depan, luar」の意味の言葉は、どれですか。",
      "choices": [
       "表",
+      "鳴る",
       "盗む",
-      "世界",
-      "用"
+      "利用"
      ],
      "answer": 0,
      "explain": "表（おもて）",
@@ -134,21 +134,21 @@
   },
   "問題4": {
    "label": "問題4",
-   "name": "漢字の読み（熟語の中で）",
-   "inst": "つぎの漢字の読み方は、どれですか。",
-   "inst_id": "Baca kanji bergaris",
+   "name": "意味がいちばん近い言葉は？",
+   "inst": "だいたい同じ意味の言葉は、どれですか。",
+   "inst_id": "Kata yang paling dekat artinya",
    "items": [
     {
-     "q": "＿強＿力",
+     "q": "＿支度＿ とだいたい同じ意味の言葉は？",
      "choices": [
-      "ぎょう",
-      "きょうう",
-      "きょう",
-      "きよう"
+      "運転手",
+      "下げる",
+      "用意",
+      "この間"
      ],
      "answer": 2,
-     "explain": "強力（きょうりょく）",
-     "explain_id": "kuat, ampuh　／　強：kuat"
+     "explain": "支度",
+     "explain_id": "用意（persiapan）"
     }
    ]
   },
