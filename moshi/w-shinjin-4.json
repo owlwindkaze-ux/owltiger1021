@@ -103,7 +103,7 @@
      "choices": [
       "食べる",
       "色べる",
-      "拭べる",
+      "植べる",
       "養べる"
      ],
      "answer": 0,
@@ -139,7 +139,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿曜＿日",
+     "q": "水＿曜＿",
      "choices": [
       "ばん",
       "よう",
@@ -147,8 +147,8 @@
       "ようう"
      ],
      "answer": 1,
-     "explain": "曜日（ようび）",
-     "explain_id": "hari dalam seminggu　／　曜：hari dalam seminggu, hari kerja"
+     "explain": "水曜（すいよう）",
+     "explain_id": "hari Rabu　／　曜：hari dalam seminggu, hari kerja"
     }
    ]
   },
@@ -181,10 +181,10 @@
     {
      "q": "なつやすみ ／　libur musim panas",
      "choices": [
-      "荷休み",
+      "菓休み",
       "夏休み",
       "夏倒み",
-      "夏久み"
+      "夏臼み"
      ],
      "answer": 1,
      "explain": "夏休み（なつやすみ）",
@@ -262,7 +262,7 @@
      "q": "はやい ／　awal, pagi-pagi",
      "choices": [
       "相い",
-      "捜い",
+      "掃い",
       "早い",
       "日い"
      ],
