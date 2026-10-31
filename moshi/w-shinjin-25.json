@@ -75,8 +75,8 @@
     {
      "q": "おもわず ／　tanpa sadar, spontan",
      "choices": [
-      "伺わず",
-      "施わず",
+      "刺わず",
+      "糸わず",
       "使わず",
       "思わず"
      ],
@@ -113,16 +113,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿遅＿れ",
+     "q": "＿遅＿い",
      "choices": [
-      "おうく",
-      "おぐ",
-      "おく",
-      "おっく"
+      "おそう",
+      "おうそ",
+      "おっそ",
+      "おそ"
      ],
-     "answer": 2,
-     "explain": "遅れ（おくれ）",
-     "explain_id": "keterlambatan　／　遅：lambat, terlambat, kemudian"
+     "answer": 3,
+     "explain": "遅い（おそい）",
+     "explain_id": "lambat, terlambat　／　遅：lambat, terlambat, kemudian"
     }
    ]
   },
@@ -133,16 +133,16 @@
    "inst_id": "Cara baca kata bergaris",
    "items": [
     {
-     "q": "＿不正＿ の読み方は？",
+     "q": "＿進める＿ の読み方は？",
      "choices": [
-      "ふっせい",
-      "ふせい",
-      "ぷせい",
-      "ぶせい"
+      "すっすめる",
+      "すすめる",
+      "すずめる",
+      "ずすめる"
      ],
      "answer": 1,
-     "explain": "不正（ふせい）",
-     "explain_id": "ketidakadilan, kecurangan"
+     "explain": "進める（すすめる）",
+     "explain_id": "memajukan, melanjutkan"
     }
    ]
   },

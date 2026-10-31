@@ -100,9 +100,9 @@
      "q": "どろぼう ／　pencuri, maling",
      "choices": [
       "泥棒",
-      "油棒",
-      "涼棒",
-      "泥柱"
+      "汚棒",
+      "液棒",
+      "泥板"
      ],
      "answer": 0,
      "explain": "泥棒（どろぼう）",
@@ -137,16 +137,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿使＿用",
+     "q": "＿使＿う",
      "choices": [
-      "し",
-      "え",
-      "わ",
-      "ち"
+      "つか",
+      "つが",
+      "つっか",
+      "づか"
      ],
      "answer": 0,
-     "explain": "使用（しよう）",
-     "explain_id": "penggunaan, pemakaian　／　使：menggunakan, utusan, mengutus"
+     "explain": "使う（つかう）",
+     "explain_id": "memakai, menggunakan　／　使：menggunakan, utusan, mengutus"
     }
    ]
   },

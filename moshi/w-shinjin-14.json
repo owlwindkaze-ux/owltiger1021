@@ -97,9 +97,9 @@
     {
      "q": "ジェットき ／　pesawat jet",
      "choices": [
-      "ジェット肌",
+      "ジェット希",
       "ジェット機",
-      "ジェット記",
+      "ジェット期",
       "ジェット起"
      ],
      "answer": 1,
@@ -135,7 +135,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿要＿領《りょう》",
+     "q": "＿要＿点",
      "choices": [
       "ようう",
       "とう",
@@ -143,8 +143,8 @@
       "まさ"
      ],
      "answer": 2,
-     "explain": "要領（ようりょう）",
-     "explain_id": "inti; cara yang efisien　／　要：penting, meringkas, memerlukan"
+     "explain": "要点（ようてん）",
+     "explain_id": "inti, pokok　／　要：penting, meringkas, memerlukan"
     }
    ]
   },

@@ -115,7 +115,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿停＿車",
+     "q": "＿停＿電",
      "choices": [
       "せん",
       "でい",
@@ -123,8 +123,8 @@
       "てい"
      ],
      "answer": 3,
-     "explain": "停車（ていしゃ）",
-     "explain_id": "berhenti (kendaraan)　／　停：berhenti, menghentikan, ditangguhkan"
+     "explain": "停電（ていでん）",
+     "explain_id": "pemadaman listrik　／　停：berhenti, menghentikan, ditangguhkan"
     }
    ]
   },
@@ -140,7 +140,7 @@
       "緯度",
       "緯努",
       "緯店",
-      "緯底"
+      "緯庫"
      ],
      "answer": 0,
      "explain": "緯度（いど）",

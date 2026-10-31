@@ -113,36 +113,36 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿得＿意",
+     "q": "＿得＿る",
      "choices": [
-      "とく",
-      "とぐ",
-      "どく",
-      "とっく"
+      "し",
+      "え",
+      "か",
+      "そ"
      ],
-     "answer": 0,
-     "explain": "得意（とくい）",
-     "explain_id": "mahir, jago, bangga　／　得：memperoleh, mendapat, untung"
+     "answer": 1,
+     "explain": "得る（える）",
+     "explain_id": "memperoleh, mendapatkan　／　得：memperoleh, mendapat, untung"
     }
    ]
   },
   "問題4": {
    "label": "問題4",
-   "name": "意味に合う言葉は？",
-   "inst": "つぎの意味の言葉は、どれですか。",
-   "inst_id": "Kata yang sesuai artinya",
+   "name": "＿＿の言葉の読み方は？",
+   "inst": "＿＿の言葉の読み方は、どれですか。",
+   "inst_id": "Cara baca kata bergaris",
    "items": [
     {
-     "q": "「sebenarnya, kenyataannya」の意味の言葉は、どれですか。",
+     "q": "＿向く＿ の読み方は？",
      "choices": [
-      "見解",
-      "向かい",
-      "指す",
-      "実際"
+      "むく",
+      "むっく",
+      "むぐ",
+      "さす"
      ],
-     "answer": 3,
-     "explain": "実際（じっさい）",
-     "explain_id": "sebenarnya, kenyataannya"
+     "answer": 0,
+     "explain": "向く（むく）",
+     "explain_id": "menghadap"
     }
    ]
   },
