@@ -135,7 +135,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿医＿者",
+     "q": "＿医＿院",
      "choices": [
       "え",
       "し",
@@ -143,8 +143,8 @@
       "こ"
      ],
      "answer": 2,
-     "explain": "医者（いしゃ）",
-     "explain_id": "dokter　／　医：kedokteran, dokter"
+     "explain": "医院（いいん）",
+     "explain_id": "klinik, praktik dokter　／　医：kedokteran, dokter"
     }
    ]
   },

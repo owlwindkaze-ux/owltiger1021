@@ -98,9 +98,9 @@
      "q": "かんしん ／　kagum",
      "choices": [
       "感心",
-      "感恐",
-      "汗心",
-      "忘心"
+      "感念",
+      "簡心",
+      "息心"
      ],
      "answer": 0,
      "explain": "感心（かんしん）",
@@ -135,7 +135,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "実＿感＿",
+     "q": "＿感＿心",
      "choices": [
       "もと",
       "がん",
@@ -143,8 +143,8 @@
       "つぎ"
      ],
      "answer": 2,
-     "explain": "実感（じっかん）",
-     "explain_id": "rasa nyata; benar-benar merasakan　／　感：merasakan, indera, emosi"
+     "explain": "感心（かんしん）",
+     "explain_id": "kagum　／　感：merasakan, indera, emosi"
     }
    ]
   },

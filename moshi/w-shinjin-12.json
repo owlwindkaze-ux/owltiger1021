@@ -81,10 +81,10 @@
     {
      "q": "ほど ／　tingkat, kadar",
      "choices": [
-      "積",
       "科",
+      "稠",
       "程",
-      "移"
+      "秘"
      ],
      "answer": 2,
      "explain": "程（ほど）",
