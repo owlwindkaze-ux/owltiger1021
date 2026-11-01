@@ -98,9 +98,9 @@
      "q": "なん ／　kesulitan, kesukaran",
      "choices": [
       "難",
-      "雇",
-      "集",
-      "隻"
+      "雑",
+      "離",
+      "雇"
      ],
      "answer": 0,
      "explain": "難（なん）",
@@ -135,7 +135,7 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿収＿穫《かく》",
+     "q": "＿収＿入",
      "choices": [
       "じゅう",
       "しゆう",
@@ -143,8 +143,8 @@
       "しゅう"
      ],
      "answer": 3,
-     "explain": "収穫（しゅうかく）",
-     "explain_id": "panen　／　収：mengumpulkan, memperoleh, pendapatan"
+     "explain": "収入（しゅうにゅう）",
+     "explain_id": "penghasilan　／　収：mengumpulkan, memperoleh, pendapatan"
     }
    ]
   },

@@ -37,8 +37,12 @@ S = json.load(io.open(R + 'sentences.json', encoding='utf-8'))['sentences']
 VER = json.load(io.open(R + 'version.json', encoding='utf-8'))['version']
 
 
-def cell(c, where):
-    """語・読み・例文が もとのデータと 合っているか"""
+def cell(c, where, same_sent=True):
+    """語・読み・例文が もとのデータと 合っているか。
+
+    敬語の表だけは `same_sent=False`。**例文を 行ごとに持つ**ので
+    （同じ語が いくつもの行に出るため）、語の例文とは ちがってよい。
+    """
     if c is None:
         return
     w = V.get(c['word'])
@@ -55,7 +59,9 @@ def cell(c, where):
     if c['sur'] not in c['sentence']:
         bad('%s：「%s」の例文に文中の形「%s」がありません'
             % (where, c['word'], c['sur']))
-    # 例文は 例文データか alt のどちらかと 同じはず
+    # 例文は 例文データか alt のどちらかと 同じはず（自他の表だけ）
+    if not same_sent:
+        return
     s = S.get(c['word'])
     ok = []
     if s is not None:
@@ -74,7 +80,7 @@ if J.get('app_version') != VER:
         % (J.get('app_version'), VER))
 if J.get('count') != len(J['pairs']):
     bad('jita.json の count %s と 実際 %d が合いません' % (J.get('count'), len(J['pairs'])))
-seen = set()
+seen, SEENJ = set(), {}
 for pr in J['pairs']:
     vi, vt = pr['vi'], pr['vt']
     w = '自他 %s／%s' % (vi['word'], vt['word'])
@@ -86,8 +92,16 @@ for pr in J['pairs']:
     seen.add(key)
     if vi.get('kind') != '自動詞' or vt.get('kind') != '他動詞':
         bad('%s：kind が 自動詞／他動詞 になっていません' % w)
-    cell(vi, w)
-    cell(vt, w)
+    cell(vi, w, same_sent=False)
+    cell(vt, w, same_sent=False)
+    # **同じ例文を 二度出さない。**同じ語が ふたつの対に出ると
+    # （起こす は 起きる／起こす と 起こる／起こす）、語の例文を使うと
+    # 同じ文が二度ならび、片方は 意味が合わない（2026-11-01）
+    for c in (vi, vt):
+        if c['sentence'] in SEENJ:
+            bad('自他：同じ例文が二度出ています（%s と %s）\n        %s'
+                % (SEENJ[c['sentence']], c['word'], c['sentence']))
+        SEENJ[c['sentence']] = c['word']
 
 # ── 敬語 ────────────────────────────────────────
 K = json.load(io.open(R + 'keigo.json', encoding='utf-8'))
@@ -99,6 +113,7 @@ if K.get('count') != len(K['rows']):
     bad('keigo.json の count %s と 実際 %d が合いません' % (K.get('count'), len(K['rows'])))
 if not K.get('ng_ja'):
     bad('keigo.json に まちがえやすい例（ng_ja）がありません')
+SEEN = {}
 for r in K['rows']:
     w = '敬語 ' + (r['plain']['word'] if r['plain'] else '?')
     if not r['plain']:
@@ -108,9 +123,19 @@ for r in K['rows']:
     if r['sonkei'] and r['kenjou'] and r['sonkei']['word'] == r['kenjou']['word']:
         bad('%s：尊敬語と謙譲語が同じ語です' % w)
     for c in (r['plain'], r['sonkei'], r['kenjou']):
-        cell(c, w)
+        cell(c, w, same_sent=False)
     if not str(r.get('scene') or '').strip():
         bad('%s：場面のひとことがありません' % w)
+    for c in (r['plain'], r['sonkei'], r['kenjou']):
+        if not c:
+            continue
+        # **同じ例文を 二度出さない。**「いらっしゃる」は 行く・来る・いる の
+        # 3行に出るので、語の例文を使うと 同じ文が3回ならび、しかも
+        # その行の場面に 合わない（持ち主が見つけた・2026-11-01）。
+        if c['sentence'] in SEEN:
+            bad('敬語：同じ例文が二度出ています（%s と %s）\n        %s'
+                % (SEEN[c['sentence']], r['scene'], c['sentence']))
+        SEEN[c['sentence']] = r['scene']
 
 # ── 画面につながっているか ──────────────────────────
 HTML = io.open(R + 'kanji.html', encoding='utf-8').read()

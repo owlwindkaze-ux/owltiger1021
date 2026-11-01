@@ -135,16 +135,16 @@
    "inst_id": "Baca kanji bergaris",
    "items": [
     {
-     "q": "＿有＿る",
+     "q": "＿有＿機《き》",
      "choices": [
-      "よ",
-      "あ",
-      "や",
-      "ど"
+      "はこ",
+      "しん",
+      "とく",
+      "ゆう"
      ],
-     "answer": 1,
-     "explain": "有る（ある）",
-     "explain_id": "ada, mempunyai　／　有：memiliki, ada, terjadi"
+     "answer": 3,
+     "explain": "有機（ゆうき）",
+     "explain_id": "organik　／　有：memiliki, ada, terjadi"
     }
    ]
   },

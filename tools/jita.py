@@ -76,6 +76,15 @@ PAIRS = [
 # （`alt` に入っている読みだけを 指定できる。勝手な読みは 書けない）
 READ = {'止める': 'とめる'}
 
+# **同じ語が ふたつの対に出るとき**、語の例文は 片方にしか 合わない。
+# 「起こす」は 起きる／起こす（人を起こす）と 起こる／起こす（事故を起こす）の
+# 両方に出る。語の例文を そのまま使うと **同じ文が二度ならび、片方は 意味が合わない**
+# （敬語の表で 持ち主が見つけたのと 同じ形・2026-11-01）。
+# ここだけ その対のための例文を 書く。鍵は （自動詞, 他動詞, どちら側か）。
+SENT = {
+    ('起こる', '起こす', 'vt'): ('不注意が事故を起こすことがあります。', '起こす'),
+}
+
 
 def main():
     V = {}
@@ -88,13 +97,21 @@ def main():
             V.setdefault(w['word'], w)
     S = json.load(io.open(R + 'sentences.json', encoding='utf-8'))['sentences']
 
-    def one(word, kind):
+    def one(word, kind, key=None):
         w = V.get(word)
         if not w:
             print('× 「%s」が語彙にありません' % word); sys.exit(1)
         rd = READ.get(word, w['reading'])
         if rd != w['reading'] and rd not in [a.get('reading') for a in (w.get('alt') or [])]:
             print('× 「%s」の読み「%s」が 語彙にも alt にもありません' % (word, rd)); sys.exit(1)
+        ov = SENT.get(key)
+        if ov:
+            sent, sur = ov
+            if sent.count(sur) != 1:
+                print('× 「%s」の例文に「%s」が %d回' % (word, sur, sent.count(sur))); sys.exit(1)
+            return {'word': word, 'reading': rd, 'level': w['level'], 'kind': kind,
+                    'meaning_id': w.get('meaning_id') or '', 'meaning': w.get('meaning') or '',
+                    'sentence': sent, 'sur': sur}
         # 読みを `alt` のほうに合わせたときは、**例文も alt のもの**を使う。
         # 「止める」の見出しは やめる で、例文も「たばこを止める。」。
         # 自他の対で要るのは とめる の文（2026-10-31）。
@@ -119,7 +136,17 @@ def main():
         if (a, b) in seen:
             print('× 対が二度出ています: %s／%s' % (a, b)); sys.exit(1)
         seen.add((a, b))
-        rows.append({'vi': one(a, '自動詞'), 'vt': one(b, '他動詞')})
+        rows.append({'vi': one(a, '自動詞', (a, b, 'vi')),
+                     'vt': one(b, '他動詞', (a, b, 'vt'))})
+
+    seen_s = {}
+    for r in rows:
+        for k in ('vi', 'vt'):
+            t = r[k]['sentence']
+            if t in seen_s:
+                print('× 同じ例文が二度出ています（%s と %s）: %s'
+                      % (seen_s[t], r[k]['word'], t)); sys.exit(1)
+            seen_s[t] = r[k]['word']
 
     out = {
         'name': '自動詞・他動詞の対（介護版）',
