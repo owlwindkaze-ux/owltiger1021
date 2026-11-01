@@ -52,6 +52,8 @@ h2{font-size:12.5pt;color:#332e91;margin:8mm 0 4mm;padding:2mm 3mm;
  padding:.4mm 2.2mm;border-radius:2px;margin-right:2mm}
 .qt{font-size:9.5pt;color:#4a5b6b}
 .qb{margin:2.5mm 0 3mm;line-height:2.0}
+/* 大問や月末確認の はじめにある 説明。問の中ではなく、見出しの すぐ下に出す */
+.lead{margin:2mm 0 4mm;line-height:1.9;color:#2b3b4a;font-size:10.5pt}
 .psg{background:#f7f8fa;border:1px solid #dfe4ee;padding:3mm 4mm;margin:0 0 3.5mm;
  line-height:2.05;font-size:10.5pt;break-inside:avoid;page-break-inside:avoid}
 ol.ch{list-style:none;margin:0 0 3.5mm;padding:0}
@@ -175,11 +177,19 @@ def build(num, title, body):
     lines = body.split('\n')
     i, inq, pend = 0, False, []
 
-    def flush():
-        """ためておいた 問題の中身を 出す"""
+    def flush(lead=False):
+        """ためておいた 中身を 出す。
+
+        `lead=True` は **問の外**の文（大問や月末確認の はじめの説明）。
+        前は これも 次の問の中に 入れてしまい、
+        「確認1　漢字読み」の **下**に「解答25分＋…」が出ていた（2026-11-01）。
+        """
         if not pend:
             return
-        A('<div class="qb">' + '</div><div class="qb">'.join(pend) + '</div>')
+        if lead:
+            A('<p class="lead">' + '<br>'.join(pend) + '</p>')
+        else:
+            A('<div class="qb">' + '</div><div class="qb">'.join(pend) + '</div>')
         pend.clear()
 
     while i < len(lines):
@@ -189,6 +199,7 @@ def build(num, title, body):
             continue
         m = re.match(r'^## \*\*(.+?)\*\*$', ln)
         if m:
+            flush(lead=not inq)
             if inq:
                 A('</div>')
                 inq = False
@@ -205,6 +216,7 @@ def build(num, title, body):
             continue
         m = re.match(r'^\*\*(問\d+|確認\d+)　(.+?)\*\*$', ln)
         if m:
+            flush(lead=not inq)
             if inq:
                 A('</div>')
             A('<div class="q"><span class="qn">%s</span>'

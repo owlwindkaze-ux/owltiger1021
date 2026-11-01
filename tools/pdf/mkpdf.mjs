@@ -5,7 +5,7 @@
 // PDFを作り直せなくなりました**（2026-09-26）。作った道具は必ず
 // リポジトリに入れること。
 //
-//   NODE_PATH=/tmp/node_modules node tools/pdf/mkpdf.mjs <abs.html> <abs.pdf> "<右下に出す文字>"
+//   node tools/pdf/mkpdf.mjs <abs.html> <abs.pdf> "<右下に出す文字>"
 //
 // 必要なもの： playwright（/tmp/node_modules でよい）と /opt/pw-browsers の Chromium
 import fs from 'fs';
@@ -36,9 +36,24 @@ if (!path.isAbsolute(src) || !path.isAbsolute(dst)) {
   process.exit(1);
 }
 
-const EXE = ['/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
-             '/opt/pw-browsers/chromium/chrome-linux/chrome']
-  .find(p => fs.existsSync(p));
+/* **Chromiumの置き場所は 入れ直すと変わる。**番号（chromium-1194）を書き込むと、
+   入れ替わった日に 動かなくなる。その場で探し、無ければ playwright にまかせる
+   （2026-11-01。weektest.mjs・check-ui.mjs と同じ直し）。 */
+const EXE = (() => {
+  if (process.env.CHROME) return process.env.CHROME;
+  const out = [];
+  let names = [];
+  try { names = fs.readdirSync('/opt/pw-browsers'); } catch (e) { names = []; }
+  for (const n of names) {
+    if (!n.startsWith('chromium')) continue;
+    for (const d of ['chrome-linux', 'chrome-linux64']) {
+      const f = '/opt/pw-browsers/' + n + '/' + d + '/chrome';
+      if (fs.existsSync(f)) out.push(f);
+    }
+  }
+  out.sort();
+  return out.length ? out[out.length - 1] : null;
+})();
 
 const b = await chromium.launch(EXE ? { executablePath: EXE } : {});
 const p = await b.newPage();
