@@ -232,6 +232,29 @@ def build(num, title, body):
                 A('<li><span class="n">%s</span>%s</li>' % (n, rich(t)))
             A('</ol>')
             continue
+        # **選択肢が 1行ずつ 分かれている形**（長い選択肢のとき 元の文書がこうなる）。
+        # 前は 丸数字の一覧にならず、ふつうの段落として ばらばらに出ていた
+        # （25組／4冊・2026-11-01）。1と2,3,4が続いていれば 一覧にする。
+        m2 = re.match(r'^1　(.+)$', ln.strip())
+        if m2:
+            got, j = [('1', m2.group(1))], i
+            while j < len(lines) and len(got) < 4:
+                x = lines[j].strip()
+                j += 1
+                if not x:
+                    continue
+                mm = re.match(r'^([2-4])　(.+)$', x)
+                if not mm or int(mm.group(1)) != len(got) + 1:
+                    break
+                got.append((mm.group(1), mm.group(2)))
+            if len(got) == 4:
+                flush()
+                A('<ol class="ch">')
+                for n, t in got:
+                    A('<li><span class="n">%s</span>%s</li>' % (n, rich(t)))
+                A('</ol>')
+                i = j
+                continue
         if ln.startswith('答え：') or ln.startswith('解答：'):
             flush()
             A('<p class="ans">答え<span class="box"></span>'
