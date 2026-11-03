@@ -83,7 +83,12 @@ def gather():
     d['pdf_kaigo'] = sorted(os.path.basename(p) for p in glob.glob(R + 'kaigo/*.pdf'))
     d['checks'] = sorted(os.path.basename(p) for p in
                          glob.glob(R + 'tools/check-*.py') + glob.glob(R + 'tools/check-*.mjs'))
-    d['moshi'] = len(glob.glob(R + 'moshi/*.json'))
+    # **`moshi/` の中は 模試だけではない。**週テスト（w-*）と N2の単元（n2u-*）も
+    # 同じ場所にある。全部を数えて「模試69回」と出していた（2026-11-03）。
+    d['moshi'] = (len(glob.glob(R + 'moshi/moshi-*.json'))
+                  + len(glob.glob(R + 'moshi/n3-*.json')))
+    d['weektest'] = len(glob.glob(R + 'moshi/w-*.json'))
+    d['n2unit'] = len(glob.glob(R + 'moshi/n2u-*.json'))
 
     # ドライブへ出した答え入りの数
     sp = __import__('importlib.util', fromlist=['util'])
