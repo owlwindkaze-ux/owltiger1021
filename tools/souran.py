@@ -72,6 +72,8 @@ TREE = [
     ('n2/index.html', 'n2/index.html', '⑨ N2コース（66週）', ''),
     ('shindan/index.html', 'shindan/index.html', '⑩ N2の診断テスト', ''),
     ('moshi/index.html', 'moshi/index.html', '⑪ 模試（本番と同じ時間）', ''),
+    ('  週テスト', None, '新人コース28週・N2コース22週。その週に習った分だけ20問', ''),
+    ('  N2の紙のパック（画面版）', None, '第1〜14単元。紙の冊子と同じ20問', ''),
     (None, None, None, None),
     ('staff/index.html', 'staff/index.html', '職員だけの入口（実習生の画面からは行けません）', ''),
     ('kaigo/index.html', 'kaigo/index.html', '紙の教材の入口', ''),
@@ -213,6 +215,21 @@ def tree():
     if listed - have:
         raise SystemExit('× 構成図にあるのに実物が無い画面: ' + '／'.join(sorted(listed - have))
                          + '\n  tools/souran.py の TREE から外してください。')
+    # **`moshi/` の中の 問題のまとまりも 数え落とさない。**
+    # 週テスト50本と N2の単元14が 増えたのに、総覧は「模試69回」としか
+    # 書いていなかった（持ち主が「最新にして」と言うまで気づかなかった・2026-11-03）。
+    # 種類が増えたら ここで止める。
+    import glob as _g
+    kinds = set()
+    for q in _g.glob(R + 'moshi/*.json'):
+        nm = os.path.basename(q)
+        kinds.add(re.sub(r'-?\d+\.json$', '', nm))
+    known = {'moshi', 'n3', 'w-shinjin', 'w-n2', 'n2u'}
+    if kinds - known:
+        raise SystemExit('× moshi/ に 知らない種類の問題があります: '
+                         + '／'.join(sorted(kinds - known))
+                         + '\n  tools/souran.py の known と 本文に足してください。')
+
     rows = []
     for i, (lab, f, note, cls) in enumerate(TREE):
         if lab is None:
@@ -500,10 +517,13 @@ def html(d):
       '<strong>①N2まで伸ばした</strong>（漢字・語彙・文型・読解・聴解のすべてにN2が入り、'
       '66週のコースと診断テストが付きました）。'
       '<strong>②「いつ何をやるか」を決め切った</strong>'
-      '（入職から7月のN3までの新人コース30週、試験100日前からの100日コース、模試%d回）。'
+      '（入職から7月のN3までの新人コース30週、試験100日前からの100日コース、'
+      '模試%d回、<strong>毎週の週テスト%d本</strong>、'
+      '<strong>N2の紙のパックの画面版%d単元</strong>）。'
       '<strong>③覚える語を選り分けた</strong>'
       '（現場の言葉%s語を「覚える／意味が分かる／参考」の3つに分けました）。</p>'
-      % (V2['date'], d['moshi'], n(sum(d['study'].values()))))
+      % (V2['date'], d['moshi'], d['weektest'], d['n2unit'],
+         n(sum(d['study'].values()))))
 
     A('<div class="sys">')
     cards = [
