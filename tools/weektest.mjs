@@ -80,8 +80,14 @@ const N = { kv: 4, gram: 8, read: 4, chou: 4 };
  * この週は **その週に習う分**が 無いので、**第1週からの 積み上げ**から出す。
  * **新しい問題は やはり1つも書かない。**選び方だけが ちがう。
  * 文型は **その週の紙の単元が ねらう文型を 先に**置く。
+ * 2026-11-03b：持ち主から「**N2コース第26〜66週（41週）に週テストを作ってください**」。
+ * **第23週から最後（第66週）まで**を 復習の週にした。第26週からは 紙の冊子も
+ * 終わっているので、ねらう文型が無い。**積み上げを 週ごとに ずらすだけ**になる。
  */
-const REVIEW = { shinjin: [], n2: [23, 24, 25] };
+const REVIEW = {
+  shinjin: [],
+  n2: Array.from({ length: 66 - 23 + 1 }, (_, i) => 23 + i),
+};
 
 /* そのコース・その週は どのレベルか（読解・聴解をえらぶのに使う） */
 function levelOf(course, w) {
@@ -279,7 +285,7 @@ async function kvQs(page, wk, wv, want, seed) {
 }
 
 /* ── 1週ぶんを組み立てる ─────────────────────────────── */
-function build(course, w, lv, kv, gr, rd, ch, review) {
+function build(course, w, lv, kv, gr, rd, ch, review, aimed) {
   const S = {}, order = [];
   const add = (key, label, name, inst, body, instId) => {
     S[key] = { label, name, inst, ...(instId ? { inst_id: instId } : {}), ...body };
@@ -315,9 +321,14 @@ function build(course, w, lv, kv, gr, rd, ch, review) {
   /* **太字は `<b>` で 書く。**模試の画面は `lead` を そのまま HTMLとして 出すので、
      `**…**` と書くと **星印が そのまま 画面に出る**。50本ぜんぶで そうなっていた
      （2026-11-03に 画面で 見つけた）。 */
+  /* **紙の冊子が 無い週に「紙の冊子の ねらう文型を 先に」と 書いてはいけない。**
+     冊子は 第25週で 終わるので、第26週からは ねらいが 無い。
+     書いたままにしていたら、第26〜66週の41本に **嘘が 乗っていた**
+     （2026-11-03bに 画面で 見つけた）。 */
   const LEAD = review
     ? '<b>第1週からの 積み上げ</b>から出ています。この週は 新しい教材が 無いためです。'
-      + '紙の冊子の ねらう文型を 先に 入れています。20分の目安です。'
+      + (aimed ? '紙の冊子の ねらう文型を 先に 入れています。' : '')
+      + '20分の目安です。'
     : '<b>その週に習った分だけ</b>から出ています。20分の目安です。';
   return {
     no: w, title: NAME + '　第' + w + '週のテスト' + (review ? '（復習）' : ''), level: lv,
@@ -384,7 +395,8 @@ async function main() {
     const kv = await kvQs(page, wk, wv, wantKv, w * 7919 + (course === 'n2' ? 101 : 1));
     const rd = readQs(lv, w, N.read);
     const ch = chouQs(lv, w, N.chou);
-    const paper = build(course, w, lv, kv, gr, rd, ch, review);
+    const paper = build(course, w, lv, kv, gr, rd, ch, review,
+                        review && aimPatterns(course, w).length > 0);
     const n = paper.counts.合計;
     const f = 'moshi/w-' + course + '-' + w + '.json';
     /* **すでにある週は、黙って 書きかえない。**
@@ -393,8 +405,13 @@ async function main() {
        中身ごと 変わった（2026-11-03）。実習生が すでに 受けた週の問題が
        変われば、前に取った点と くらべられない。
        作り直したいときだけ FORCE=1 を 付ける。 */
-    if (fs.existsSync(R + f) && !process.env.FORCE) {
-      console.log('第%s週 %s  そのまま（すでにあります。作り直すなら FORCE=1）',
+    /* **`all` では FORCE を 効かせない。**
+       `FORCE=1 … n2 all` を 打って、**過去の12週を また 書きかえてしまった**
+       （2026-11-03b・直したそのあとに 自分で やった）。
+       作り直すときは **週を 名指しする**こと（`FORCE=1 … n2 25`）。 */
+    const force = process.env.FORCE && arg !== 'all';
+    if (fs.existsSync(R + f) && !force) {
+      console.log('第%s週 %s  そのまま（すでにあります。作り直すなら 週を名指しして FORCE=1）',
         String(w).padStart(2), lv);
       continue;
     }
