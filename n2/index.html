@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-11-03a';
+  var PAGE_VER = '2026-11-03b';
   var KEY = 'reloaded-for-n2';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -432,7 +432,7 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
   /* その週にやること。漢字・語彙・文型は数から作り、そのほかは task から */
   /* 週テストが ある週の 上限。`moshi/w-n2-*.json` の数と 合わせる
      （`tools/check-weektest.py` が 見ている）。 */
-  var WTMAX = 25;
+  var WTMAX = 66;
   function tasksOf(w){
     var c = W.counts[String(w)] || {k:0,v:0,g:0}, out = [];
     /* 第0期はN3の見直し。第1期からがN2。札の名前も変える。 */
