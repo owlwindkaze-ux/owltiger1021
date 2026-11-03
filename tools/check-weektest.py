@@ -93,6 +93,13 @@ for course, key, name in CO:
                 bad('%s %s 大問の指示が汎用のままです（何を聞くのか書いていない）' % (nm, k))
             if not JA.search(inst):
                 bad('%s %s 大問の指示に日本語がありません' % (nm, k))
+        # **`lead` は そのまま HTMLとして 画面に出る。**`**…**` と書いても
+        # 太字にならず、**星印が そのまま 出る**（50本ぜんぶで そうなっていた・
+        # 2026-11-03に 画面で 見つけた）。太字は `<b>` で 書く。
+        for pt in d.get('parts', []):
+            if '**' in str(pt.get('lead') or ''):
+                bad('%s %s の lead に ** が入っています（画面に星印が出ます）'
+                    % (nm, pt.get('name')))
         if n < 12:
             bad('%s 問が %d しかありません（12問以上）' % (nm, n))
         if d.get('counts', {}).get('合計') != n:
@@ -113,6 +120,17 @@ for course, key, name in CO:
     miss = [w for w in want if w not in have]
     if miss:
         bad('%s：テストの無い週があります 第%s週' % (name, '・'.join(map(str, miss))))
+    # **コースの画面が「テストがある週」を どこで切っているか。**
+    # 教材が終わった週にも 入口を出していて、第26〜66週・第29〜30週が
+    # **開かないところ**へ つながっていた（2026-11-03）。画面の WTMAX と
+    # 実際のファイルの 最後の週が ずれたら 同じことが また起きる。
+    co = io.open(R + '%s/index.html' % course, encoding='utf-8').read()
+    m2 = re.search(r'\bWTMAX\s*=\s*(\d+)', co)
+    if not m2:
+        bad('%s/index.html に WTMAX がありません（テストの無い週にも入口が出ます）' % course)
+    elif have and int(m2.group(1)) != max(have):
+        bad('%s/index.html の WTMAX %s と テストの最後の週 第%d週 が合いません'
+            % (course, m2.group(1), max(have)))
     print('   週: 第%d〜%d週／教材のある週 %d／テスト %d' %
           (min(have), max(have), len(want), len(have)) if have else '   （無し）')
 
