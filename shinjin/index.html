@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-11-02a';
+  var PAGE_VER = '2026-11-03a';
   var KEY = 'reloaded-for-shinjin';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -537,12 +537,20 @@ function renderWeek(today){
   }
   /* **その週のテスト**への入口（2026-11-02a）。
      100日コースのように「その場で解ける問題」が欲しい、という求めに応えたもの。 */
+  /* **テストが ある週だけ 出す。**週テストは その週に習う分から 組み立てるので、
+     **教材が 終わったあとの週には 無い**（新人コースは第28週まで・全30週）。
+     それでも 入口を 出していたので、第29・30週は **開かないところ**へ
+     つながっていた（2026-11-03に 見つけた）。 */
+  var WTMAX = 28;
   var wt = document.getElementById('weekTest');
   if (wt) {
     var tw2 = w || 1;
-    wt.innerHTML = '<a class="wtest" href="../moshi/?lv=sjw&set=' + tw2 + '">'
-      + '📝 第' + tw2 + '週のテスト（20問・約26分）</a>'
-      + '<span class="wtnote">その週に習った分だけから出ます。<b>点が残ります</b></span>';
+    wt.innerHTML = tw2 <= WTMAX
+      ? '<a class="wtest" href="../moshi/?lv=sjw&set=' + tw2 + '">'
+        + '📝 第' + tw2 + '週のテスト（20問・約26分）</a>'
+        + '<span class="wtnote">その週に習った分だけから出ます。<b>点が残ります</b></span>'
+      : '<span class="wtnote">この週の テストは ありません（第' + WTMAX
+        + '週で 教材が 終わるためです）。前の週の テストを 受け直せます</span>';
   }
   /* 前の週・次の週 */
   var nav = document.getElementById('weekNav');

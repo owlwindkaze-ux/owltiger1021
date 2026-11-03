@@ -70,10 +70,37 @@ const J = p => JSON.parse(fs.readFileSync(R + p, 'utf8'));
 /* 1週あたりの問題の数。合計20問 */
 const N = { kv: 4, gram: 8, read: 4, chou: 4 };
 
+/* ── **復習の週** ───────────────────────────────────────
+ * N2コースは **新しい教材が 第22週で 終わる**（第2期からは 読解・聴解と
+ * 「要復習」の回しなおし）。ところが **紙の冊子は 第25週まで 続く**
+ * （第13単元＝第23週、第14単元＝第24週、12月の月末確認＝第25週）。
+ * そのため **紙の単元が ある週に 週テストが 無い**という すき間ができていた。
+ * 持ち主の問い「N2の2から14単元で週テストをだせますか」（2026-11-03）。
+ *
+ * この週は **その週に習う分**が 無いので、**第1週からの 積み上げ**から出す。
+ * **新しい問題は やはり1つも書かない。**選び方だけが ちがう。
+ * 文型は **その週の紙の単元が ねらう文型を 先に**置く。
+ */
+const REVIEW = { shinjin: [], n2: [23, 24, 25] };
+
 /* そのコース・その週は どのレベルか（読解・聴解をえらぶのに使う） */
 function levelOf(course, w) {
   if (course === 'shinjin') return w <= 4 ? 'N5' : w <= 12 ? 'N4' : 'N3';
   return w <= 20 ? 'N3' : 'N2';          /* N2コースは前半でN3を仕上げる */
+}
+
+/* 「〜」の有無・前後の空白だけの ちがいは 同じものとして 見る */
+const norm = s => String(s).replace(/[〜～\s]/g, '');
+
+/* その週の **紙の冊子の単元**が ねらう文型。`n2/weeks.json` の `aim` に
+   「つつある、にわたって、わけではない」のように 読点で ならべてある。
+   見出しの言葉（「根拠を本文から探す」など）は 文型表に 無いので 落ちる。 */
+function aimPatterns(course, w) {
+  if (course !== 'n2') return [];
+  let pw;
+  try { pw = J('n2/weeks.json').paper.weeks[String(w)]; } catch (e) { return []; }
+  if (!pw || !pw.aim) return [];
+  return pw.aim.split(/[、。]/).map(x => x.trim()).filter(Boolean);
 }
 
 /* ── 文型 ───────────────────────────────────────────── */
@@ -82,7 +109,33 @@ function gramQs(course, w, want) {
   const all = {};
   for (const f of idx.files)
     for (const g of J('bunpo/' + f.file).grammar) all[g.id] = g;
-  const ids = (J('bunpo/weeks.json').courses[course].weeks[String(w)] || []);
+  const wk = J('bunpo/weeks.json').courses[course].weeks;
+  let ids = (wk[String(w)] || []);
+  /* **復習の週**は その週ぶんが 無い。第1週からの 積み上げを使い、
+     **その週の紙の単元が ねらう文型を 先に**置く。
+     順番は 週ごとに ずらす（毎週 同じ10項目では 復習にならない）。 */
+  if (!ids.length && REVIEW[course].includes(w)) {
+    const cum = [];
+    for (let i = 1; i < w; i++) for (const id of (wk[String(i)] || [])) cum.push(id);
+    const uniq = [...new Set(cum)];
+    const head = [];
+    for (const p of aimPatterns(course, w)) {
+      /* 文型の名前は「〜にわたって／〜にわたる」のように **／で2つ**書いてある
+         ことがある。まるごと くらべると 当たらない（第23週で にわたって が
+         落ちた・2026-11-03）。／で 割って 片方ずつ くらべる。 */
+      /* **同じ名前の文型が N3とN2に 両方ある。**「〜にわたって」は
+         n3-026 と n2-ni-watatte の2つ。先に見つかったほうを 取ると、
+         そのコースが 習っていない側に 当たって 落ちる（2026-11-03）。
+         **習った側（積み上げの中にある側）を 選ぶ。** */
+      const cands = Object.values(all).filter(
+        x => String(x.pattern).split('／').some(y => norm(y) === norm(p)));
+      const g = cands.find(x => uniq.includes(x.id));
+      if (g) head.push(g.id);
+    }
+    const rest = uniq.filter(id => !head.includes(id));
+    const s = (w * 13) % (rest.length || 1);      /* 週ごとに ずらす */
+    ids = head.concat(rest.slice(s), rest.slice(0, s));
+  }
   const out = [];
   for (const id of ids) {
     const g = all[id];
@@ -146,8 +199,7 @@ function chouQs(lv, w, want) {
 }
 
 /* ── 漢字・語彙（画面の中の作り方を そのまま呼ぶ）──────────── */
-async function kvQs(page, kw, w, want, seed) {
-  const wk = kw.kanji[String(w)] || [], wv = kw.vocab[String(w)] || [];
+async function kvQs(page, wk, wv, want, seed) {
   if (!wv.length) return [];
   return await page.evaluate(async ([wk, wv, want, seed]) => {
     /* **乱数を固定する。**作り直しても同じ問題が出るように */
@@ -227,7 +279,7 @@ async function kvQs(page, kw, w, want, seed) {
 }
 
 /* ── 1週ぶんを組み立てる ─────────────────────────────── */
-function build(course, w, lv, kv, gr, rd, ch) {
+function build(course, w, lv, kv, gr, rd, ch, review) {
   const S = {}, order = [];
   const add = (key, label, name, inst, body, instId) => {
     S[key] = { label, name, inst, ...(instId ? { inst_id: instId } : {}), ...body };
@@ -258,8 +310,18 @@ function build(course, w, lv, kv, gr, rd, ch) {
     { group: '聴解', items: [it] }));
   const total = kv.length + gr.length + rd.reduce((a, r) => a + r.qi.length, 0) + ch.length;
   const NAME = course === 'shinjin' ? '新人コース' : 'N2コース';
+  /* **復習の週は そう書く。**「その週に習った分だけ」と 書いてあるのに
+     積み上げから 出ていたら、実習生は 見ていない語が 出たと 思う。 */
+  /* **太字は `<b>` で 書く。**模試の画面は `lead` を そのまま HTMLとして 出すので、
+     `**…**` と書くと **星印が そのまま 画面に出る**。50本ぜんぶで そうなっていた
+     （2026-11-03に 画面で 見つけた）。 */
+  const LEAD = review
+    ? '<b>第1週からの 積み上げ</b>から出ています。この週は 新しい教材が 無いためです。'
+      + '紙の冊子の ねらう文型を 先に 入れています。20分の目安です。'
+    : '<b>その週に習った分だけ</b>から出ています。20分の目安です。';
   return {
-    no: w, title: NAME + '　第' + w + '週のテスト', level: lv,
+    no: w, title: NAME + '　第' + w + '週のテスト' + (review ? '（復習）' : ''), level: lv,
+    ...(review ? { review: true } : {}),
     minutes: { '言語知識・読解': 20, '聴解': 6 },
     counts: { 言語知識: kv.length + gr.length,
               読解: rd.reduce((a, r) => a + r.qi.length, 0),
@@ -268,7 +330,7 @@ function build(course, w, lv, kv, gr, rd, ch) {
       { name: '言語知識・読解', minutes: 20,
         sections: order.filter(k => !k.startsWith('聴解')),
         next: '聴解へ進む（約6分）',
-        lead: '**その週に習った分だけ**から出ています。20分の目安です。' },
+        lead: LEAD },
       { name: '聴解', minutes: 6, sections: order.filter(k => k.startsWith('聴解')),
         lead: 'まず1回で答えてみてください。' },
     ],
@@ -289,8 +351,8 @@ async function main() {
   const hasAny = w => (gw[String(w)] || []).length ||
                       (kw.vocab[String(w)] || []).length;
   const weeks = arg === 'all'
-    ? [...new Set(Object.keys(gw).concat(Object.keys(kw.vocab)).map(Number))]
-        .filter(hasAny).sort((a, b) => a - b)
+    ? [...new Set(Object.keys(gw).concat(Object.keys(kw.vocab)).map(Number)
+        .filter(hasAny).concat(REVIEW[course]))].sort((a, b) => a - b)
     : [Number(arg)];
 
   const b = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
@@ -305,15 +367,37 @@ async function main() {
   let bad = 0;
   for (const w of weeks) {
     const lv = levelOf(course, w);
+    const review = !hasAny(w) && REVIEW[course].includes(w);
     const gr = gramQs(course, w, N.gram);
     /* 文型が無い週は、そのぶんを漢字・語彙で埋める */
     const wantKv = N.kv + (gr.length ? 0 : N.gram);
-    const kv = await kvQs(page, kw, w, wantKv, w * 7919 + (course === 'n2' ? 101 : 1));
+    /* **復習の週**は その週ぶんの漢字・語彙が 無いので、第1週からの 積み上げを渡す。 */
+    let wk = kw.kanji[String(w)] || [], wv = kw.vocab[String(w)] || [];
+    if (review) {
+      const ak = [], av = [];
+      for (let i = 1; i < w; i++) {
+        ak.push(...(kw.kanji[String(i)] || []));
+        av.push(...(kw.vocab[String(i)] || []));
+      }
+      wk = [...new Set(ak)]; wv = [...new Set(av)];
+    }
+    const kv = await kvQs(page, wk, wv, wantKv, w * 7919 + (course === 'n2' ? 101 : 1));
     const rd = readQs(lv, w, N.read);
     const ch = chouQs(lv, w, N.chou);
-    const paper = build(course, w, lv, kv, gr, rd, ch);
+    const paper = build(course, w, lv, kv, gr, rd, ch, review);
     const n = paper.counts.合計;
     const f = 'moshi/w-' + course + '-' + w + '.json';
+    /* **すでにある週は、黙って 書きかえない。**
+       種は固定しているが、**もとの語彙・漢字のデータが 増えたり 直ったりすると
+       選ばれる語が ずれる**。`all` を かけ直したら 第6〜21週の12本が
+       中身ごと 変わった（2026-11-03）。実習生が すでに 受けた週の問題が
+       変われば、前に取った点と くらべられない。
+       作り直したいときだけ FORCE=1 を 付ける。 */
+    if (fs.existsSync(R + f) && !process.env.FORCE) {
+      console.log('第%s週 %s  そのまま（すでにあります。作り直すなら FORCE=1）',
+        String(w).padStart(2), lv);
+      continue;
+    }
     fs.writeFileSync(R + f, JSON.stringify(paper, null, 1) + '\n');
     const ok = n >= 12;   /* 作れる問題の数は週によって違う */
     if (!ok) bad++;

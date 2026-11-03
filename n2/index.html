@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-11-02a';
+  var PAGE_VER = '2026-11-03a';
   var KEY = 'reloaded-for-n2';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -430,6 +430,9 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
     return W.phases[0];
   }
   /* その週にやること。漢字・語彙・文型は数から作り、そのほかは task から */
+  /* 週テストが ある週の 上限。`moshi/w-n2-*.json` の数と 合わせる
+     （`tools/check-weektest.py` が 見ている）。 */
+  var WTMAX = 25;
   function tasksOf(w){
     var c = W.counts[String(w)] || {k:0,v:0,g:0}, out = [];
     /* 第0期はN3の見直し。第1期からがN2。札の名前も変える。 */
@@ -445,10 +448,20 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
        文型を習い終わった順に 並べ替えて、この画面が その週の単元を名指しする。 */
     /* **その週のテスト**への入口（2026-11-02a）。
        100日コースのように「その場で解ける問題」が欲しい、という求めに応えたもの。 */
-    out.push({k:'', t:'📝 第'+w+'週のテスト（約26分）',
-              n:'その週に習った分だけから出ます。<b>点が残ります</b>。'
-                + '<br>📱 <a href="../moshi/?lv=n2w&set='+w+'" data-course="n2">'
-                + '<b>テストをひらく</b></a>'});
+    /* **テストが ある週だけ 出す。**新しい教材は 第22週で 終わり、
+       紙の冊子に 合わせて 第25週まで（第23〜25週は 積み上げからの 復習）。
+       それより あとの週にも 入口を 出していたので、第26〜66週は
+       **開かないところ**へ つながっていた（2026-11-03に 見つけた）。 */
+    if (w <= WTMAX) {
+      var rv = w >= 23;
+      out.push({k:'', t:'📝 第'+w+'週のテスト（約26分）'+(rv?'【復習】':''),
+                n:(rv ? '<b>第1週からの 積み上げ</b>から出ます（この週は 新しい教材が '
+                        + '無いためです）。紙の冊子の ねらう文型が 先に 出ます。'
+                      : 'その週に習った分だけから出ます。')
+                  + '<b>点が残ります</b>。'
+                  + '<br>📱 <a href="../moshi/?lv=n2w&set='+w+'" data-course="n2">'
+                  + '<b>テストをひらく</b></a>'});
+    }
     var pp = W.paper && W.paper.weeks[String(w)];
     /* **紙が無い週も 黙って消さない。**2週に1単元なので、無い週がある。
        出さないと「出し忘れ」か「もともと無い」かが 分からない（2026-10-18）。 */
