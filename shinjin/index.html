@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-11-03b';
+  var PAGE_VER = '2026-11-03c';
   var KEY = 'reloaded-for-shinjin';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -547,7 +547,7 @@ function renderWeek(today){
     var tw2 = w || 1;
     wt.innerHTML = tw2 <= WTMAX
       ? '<a class="wtest" href="../moshi/?lv=sjw&set=' + tw2 + '">'
-        + '📝 第' + tw2 + '週のテスト（20問・約26分）</a>'
+        + '📝 第' + tw2 + '週のテスト（22問・約29分）</a>'
         + '<span class="wtnote">その週に習った分だけから出ます。<b>点が残ります</b></span>'
       : '<span class="wtnote">この週の テストは ありません（第' + WTMAX
         + '週で 教材が 終わるためです）。前の週の テストを 受け直せます</span>';

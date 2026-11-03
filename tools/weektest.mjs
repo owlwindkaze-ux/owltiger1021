@@ -68,7 +68,7 @@ const HASH = 'ebec3cabb51c7aed2a0e3b893a08691fbadc9ad0eed58fe3c51ebe75d532a48c';
 const J = p => JSON.parse(fs.readFileSync(R + p, 'utf8'));
 
 /* 1週あたりの問題の数。合計20問 */
-const N = { kv: 4, gram: 8, read: 4, chou: 4 };
+const N = { kv: 4, gram: 8, star: 2, read: 4, chou: 4 };
 
 /* ── **復習の週** ───────────────────────────────────────
  * N2コースは **新しい教材が 第22週で 終わる**（第2期からは 読解・聴解と
@@ -163,6 +163,137 @@ function gramQs(course, w, want) {
     if (out.length >= want) break;
   }
   return out;
+}
+
+/* ── 文の組み立て（★・JLPTの大問「文の文法2」）───────────
+ * 持ち主から「**文型の並べ替え（★）を週テストに入れる**」（2026-11-03c）。
+ *
+ * もとは2つある。**どちらも 新しく書いたものではない。**
+ *   ① `bunpo/star.json` ── **手で書いた60問**。頭と尾があり、本番の形に いちばん近い。
+ *      文型の名前（`pat`）で その週の文型と ひもづく。
+ *   ② 文型データの `order` 型で **部品が ちょうど4つ**のもの（448項目）。
+ *      頭と尾は 無い。★の位置は 文型のidから決める（練習画面の `qi4()` と 同じ）。
+ * ①がある週は ①を 先に使う。足りない分を ②で埋める。
+ *
+ * **持ち主の注意：「答えの順番が、同一にならないように」。**
+ * 練習画面は 出すたびに 選択肢を まぜるが、**テストは 作ったときの順を
+ * ファイルに 焼き付ける**ので、何もしないと
+ *   ・正解が いつも同じ番号に 来る
+ *   ・残りの3つが 正しい順に 並んでいて、**答えが 読めてしまう**
+ * という こわれ方を する。だから
+ *   1. 4つを **idと週から決まる まぜ方**で まぜ（正しい順を 残さない）
+ *   2. そのうえで **正解を ねらった番号へ 持っていく**（週と問番で ずらす）
+ * の2段にする。番号は 1→2→3→4 と まわるので かたよらない。
+ * `check-weektest.py` が **ぜんぶの★の正解番号のばらつき**を 見張る。
+ */
+function lcg(seed) {
+  let s = seed >>> 0;
+  return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
+}
+/* 文型のidから ★の位置を 決める。練習画面の `qi4()` と 同じ式にしてある
+   （画面と テストで ★の位置が ちがうと、同じ問に 見えない）。 */
+function qi4(id) {
+  let h = 0;
+  const t = String(id);
+  for (let i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) >>> 0;
+  return h % 4;
+}
+function starQs(course, w, want) {
+  const idx = J('bunpo/grammar.json');
+  const all = {};
+  for (const f of idx.files)
+    for (const g of J('bunpo/' + f.file).grammar) all[g.id] = g;
+  const wk = J('bunpo/weeks.json').courses[course].weeks;
+  /* 復習の週は 積み上げから。文法の問と同じ 並べ方にする */
+  let ids = (wk[String(w)] || []);
+  if (!ids.length && REVIEW[course].includes(w)) {
+    const cum = [];
+    for (let i = 1; i < w; i++) for (const id of (wk[String(i)] || [])) cum.push(id);
+    const uniq = [...new Set(cum)];
+    const s = (w * 17) % (uniq.length || 1);   /* 文法の問（×13）と ずらす */
+    ids = uniq.slice(s).concat(uniq.slice(0, s));
+  }
+  /* ① 手書きの★を 文型の名前で ひく */
+  const byPat = {};
+  for (const it of (J('bunpo/star.json').items || []))
+    for (const y of String(it.pat).split('／')) (byPat[norm(y)] = byPat[norm(y)] || []).push(it);
+
+  /* **枠のある問を 先に 使う。**本番の「文の文法2」は 必ず 下線の前後に 文がある。
+     ところが 文型データの 並べ替え（部品4つ）は **文ぜんたいが 部品**なので、
+     枠が 無く、画面には 「＿＿ ＿＿ ★ ＿＿」 **だけ**が 出る。
+     それを 無条件に 使ったら **同じ見た目の問が 13本**できた（2026-11-03c）。
+     だから
+       ①手で書いた★（頭と尾がある・60問）
+       ②部品が5つの並べ替え（はじめの1つを 頭に回せる・38問）
+     の順に 取る。
+     **部品が4つの並べ替え（448問）は 使えない。**文ぜんたいが 部品なので
+     枠が 作れず、問が 「＿＿ ＿＿ ★ ＿＿」 だけに なる。
+     はじめは 1枚1問までなら よいと して 入れたが、**検査が
+     「問に日本語がありません」と 鳴った**（2026-10-25dで 足した検査）。
+     これは 正しい。**何を 読むのかが 書いていない問**は 出せない。 */
+  const raw = [];
+  for (const pass of [1, 2]) {
+    for (const id of ids) {
+      if (raw.length >= want) break;
+      const g = all[id];
+      if (!g) continue;
+      if (raw.some(x => x.gid === id)) continue;      /* 1文型につき1問まで */
+      if (pass === 1) {
+        let hit = null;
+        for (const y of String(g.pattern).split('／')) {
+          const c = byPat[norm(y)];
+          if (c && c.length) { hit = c[0]; break; }
+        }
+        if (hit) raw.push({ gid: id, pat: g.pattern, head: hit.head, tail: hit.tail,
+                            parts: hit.parts.slice(), star: hit.star, why: hit.why || '',
+                            src: '手書き' });
+      } else {
+        const q = (g.quiz || []).find(x => x.type === 'order' &&
+                                           (x.segments || []).length === 5);
+        if (q) raw.push({ gid: id, pat: g.pattern,
+                          head: q.segments[0], tail: '',
+                          parts: q.segments.slice(1), star: qi4(id),
+                          why: q.hint_ja || '', whyId: q.hint_id || '',
+                          full: q.answer || q.segments.join(''), src: '部品5つ' });
+      }
+    }
+  }
+  /* 選択肢の順を 焼き付ける。上に書いた2段がけ */
+  return raw.slice(0, want).map((it, k) => {
+    const rnd = lcg(hash32(it.gid) + w * 7919 + k * 131);
+    const ord = it.parts.map((c, i) => i);
+    for (let i = ord.length - 1; i > 0; i--) {            /* まぜる */
+      const j = Math.floor(rnd() * (i + 1));
+      [ord[i], ord[j]] = [ord[j], ord[i]];
+    }
+    const tgt = (w + k) % 4;                              /* 正解を ここへ */
+    const at = ord.indexOf(it.star);
+    [ord[at], ord[tgt]] = [ord[tgt], ord[at]];
+    /* 下線は 紙の冊子・N2単元と 同じ書き方にする（全角の空白で 1つずつ 区切る）。
+       `'　＿＿　'` を つなぐと 空白が 2つ 重なって 見た目が ずれた。 */
+    /* 尾が 句読点から はじまるときは、**うしろの 全角の空白を 入れない。**
+       「…　★　。」のように 句点の前が あいて 見えた（2026-11-03c・画面で見つけた）。 */
+    const line = '　' + it.parts.map((_, i) => (i === it.star ? '★' : '＿＿')).join('　')
+               + (/^[。、」）]/.test(it.tail) ? '' : '　');
+    const full = it.full || (it.head + it.parts.join('') + it.tail);
+    return {
+      q: it.head + line + it.tail,
+      choices: ord.map(i => it.parts[i]),
+      answer: tgt,
+      explain: '正しい順は「' + full + '」。【' + it.pat + '】'
+             + (it.why ? '　' + it.why : ''),
+      /* **空の `explain_id` を 置かない。**置くと「尼語の解説が 無い」と
+         検査が 鳴る（鳴って 当たり前で、欄だけ あって 中身が 無い）。
+         手で書いた★には 尼語の一言が 無いので、**欄ごと 出さない**。 */
+      ...(it.whyId ? { explain_id: it.whyId } : {}),
+    };
+  });
+}
+function hash32(t) {
+  let h = 0;
+  const s = String(t);
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+  return h;
 }
 
 /* ── 読解 ───────────────────────────────────────────── */
@@ -285,7 +416,7 @@ async function kvQs(page, wk, wv, want, seed) {
 }
 
 /* ── 1週ぶんを組み立てる ─────────────────────────────── */
-function build(course, w, lv, kv, gr, rd, ch, review, aimed) {
+function build(course, w, lv, kv, gr, rd, ch, review, aimed, st) {
   const S = {}, order = [];
   const add = (key, label, name, inst, body, instId) => {
     S[key] = { label, name, inst, ...(instId ? { inst_id: instId } : {}), ...body };
@@ -307,14 +438,23 @@ function build(course, w, lv, kv, gr, rd, ch, review, aimed) {
   gr.forEach((q, i) => add('問題' + (kv.length + i + 1), '問題' + (kv.length + i + 1),
     '文法形式の判断', 'つぎの文の（　）に入れるのに最もよいものを、一つえらびなさい。',
     { group: '言語知識', items: [q] }));
-  let n = kv.length + gr.length;
+  /* **文の組み立て（★）。**本番では 文法形式の判断の すぐ後ろに 来る大問。
+     ここに 入れるので、読解・聴解の 大問番号が 2つ うしろへ ずれる。
+     **問の中身は 1つも 変わらない。**番号だけが ずれる。 */
+  st.forEach((q, i) => add('問題' + (kv.length + gr.length + i + 1),
+    '問題' + (kv.length + gr.length + i + 1),
+    '文の組み立て',
+    'つぎの文の　★　に入る最もよいものを、一つえらびなさい。',
+    { group: '言語知識', items: [q] }));
+  let n = kv.length + gr.length + st.length;
   rd.forEach((r, i) => add('問題' + (++n), '問題' + n,
     '内容理解', 'つぎの文章を読んで、質問に答えなさい。',
     { group: '読解', read: [r] }));
   ch.forEach((it, i) => add('聴解' + (i + 1), '聴解 問題' + (i + 1),
     it.part || '聞いて答える', '話を聞いて、質問に答えなさい。',
     { group: '聴解', items: [it] }));
-  const total = kv.length + gr.length + rd.reduce((a, r) => a + r.qi.length, 0) + ch.length;
+  const total = kv.length + gr.length + st.length
+              + rd.reduce((a, r) => a + r.qi.length, 0) + ch.length;
   const NAME = course === 'shinjin' ? '新人コース' : 'N2コース';
   /* **復習の週は そう書く。**「その週に習った分だけ」と 書いてあるのに
      積み上げから 出ていたら、実習生は 見ていない語が 出たと 思う。 */
@@ -328,17 +468,17 @@ function build(course, w, lv, kv, gr, rd, ch, review, aimed) {
   const LEAD = review
     ? '<b>第1週からの 積み上げ</b>から出ています。この週は 新しい教材が 無いためです。'
       + (aimed ? '紙の冊子の ねらう文型を 先に 入れています。' : '')
-      + '20分の目安です。'
-    : '<b>その週に習った分だけ</b>から出ています。20分の目安です。';
+      + '23分の目安です。'
+    : '<b>その週に習った分だけ</b>から出ています。23分の目安です。';
   return {
     no: w, title: NAME + '　第' + w + '週のテスト' + (review ? '（復習）' : ''), level: lv,
     ...(review ? { review: true } : {}),
-    minutes: { '言語知識・読解': 20, '聴解': 6 },
-    counts: { 言語知識: kv.length + gr.length,
+    minutes: { '言語知識・読解': 23, '聴解': 6 },
+    counts: { 言語知識: kv.length + gr.length + st.length,
               読解: rd.reduce((a, r) => a + r.qi.length, 0),
               聴解: ch.length, 合計: total },
     parts: [
-      { name: '言語知識・読解', minutes: 20,
+      { name: '言語知識・読解', minutes: 23,
         sections: order.filter(k => !k.startsWith('聴解')),
         next: '聴解へ進む（約6分）',
         lead: LEAD },
@@ -349,11 +489,82 @@ function build(course, w, lv, kv, gr, rd, ch, review, aimed) {
   };
 }
 
+/* ── すでにある週に ★だけを 足す ────────────────────────
+ * **ほかの問は 1つも さわらない。**
+ * 作り直すと、もとの語彙・漢字のデータが 動いた分だけ 問が 変わってしまう
+ * （z74③・z75②）。★を 入れるために それを するわけには いかない。
+ * だから **ファイルを 読んで、★の大問を さしこみ、番号を ふり直すだけ**にする。
+ * 読解・聴解の 大問番号は 2つ うしろへ ずれるが、**中身は 変わらない。**
+ * 点の記録は 回ごと（`m1`…）で 大問番号では 引いていないので、ずれても こわれない。
+ */
+function addStar(course, w, force) {
+  const f = 'moshi/w-' + course + '-' + w + '.json';
+  if (!fs.existsSync(R + f)) return { skip: 'ファイルがありません' };
+  const d = JSON.parse(fs.readFileSync(R + f, 'utf8'));
+  const has = d.order.some(k => (d.sections[k] || {}).name === '文の組み立て');
+  if (has && !force) return { skip: 'もう入っています' };
+  /* いまの大問を 役わりごとに 分ける。`group` で 見分けられる */
+  const keys = d.order.filter(k => !k.startsWith('聴解'));
+  const chou = d.order.filter(k => k.startsWith('聴解'));
+  const kv = keys.filter(k => !(d.sections[k] || {}).group);
+  const gr = keys.filter(k => (d.sections[k] || {}).group === '言語知識' &&
+                              (d.sections[k] || {}).name === '文法形式の判断');
+  const rd = keys.filter(k => (d.sections[k] || {}).group === '読解');
+  const st = starQs(course, w, N.star);
+  /* **作れなくても ここで 止まらない。**止めると、前に入れた★が
+     ファイルに 残ったままになる。枠なしの★を 入れてしまった回を
+     取り消したとき、止めた4週に それが 残り、検査が 鳴った（2026-11-03c）。
+     **組み直して、古い★を 落とす**のが 正しい。 */
+  const S = {}, order = [];
+  let n = 0;
+  const put = (sec) => { const k = '問題' + (++n); S[k] = { ...sec, label: k }; order.push(k); };
+  for (const k of kv) put(d.sections[k]);
+  for (const k of gr) put(d.sections[k]);
+  for (const q of st) put({ name: '文の組み立て',
+    inst: 'つぎの文の　★　に入る最もよいものを、一つえらびなさい。',
+    group: '言語知識', items: [q] });
+  for (const k of rd) put(d.sections[k]);
+  for (const k of chou) { S[k] = d.sections[k]; order.push(k); }
+  const rdN = rd.reduce((a, k) => a + (d.sections[k].read || [])
+                  .reduce((b, r) => b + r.qi.length, 0), 0);
+  d.order = order;
+  d.sections = S;
+  d.counts = { 言語知識: kv.length + gr.length + st.length, 読解: rdN,
+               聴解: chou.length,
+               合計: kv.length + gr.length + st.length + rdN + chou.length };
+  d.minutes = { '言語知識・読解': 23, '聴解': 6 };
+  d.parts[0].minutes = 23;
+  d.parts[0].sections = order.filter(k => !k.startsWith('聴解'));
+  d.parts[0].lead = String(d.parts[0].lead).replace('20分の目安です。', '23分の目安です。');
+  d.parts[1].sections = chou;
+  fs.writeFileSync(R + f, JSON.stringify(d, null, 1) + '\n');
+  return { star: st.length, total: d.counts.合計 };
+}
+
 async function main() {
   const [course, arg] = process.argv.slice(2);
   if (!course || !arg) {
-    console.log('使い方: node tools/weektest.mjs <shinjin|n2> <週番号|all>');
+    console.log('使い方: node tools/weektest.mjs <shinjin|n2> <週番号|all|star>');
     process.exit(1);
+  }
+  /* ★だけを 足して 終わる（画面は 開かない） */
+  if (arg === 'star') {
+    const files = fs.readdirSync(R + 'moshi')
+      .filter(x => x.startsWith('w-' + course + '-') && x.endsWith('.json'))
+      .map(x => Number(x.match(/-(\d+)\.json$/)[1])).sort((a, b) => a - b);
+    let add = 0, skip = 0, none = 0;
+    for (const w of files) {
+      const r = addStar(course, w, !!process.env.FORCE);
+      if (r.skip) { skip++; console.log('第%s週  %s', String(w).padStart(2), r.skip); }
+      else {
+        add++;
+        if (!r.star) none++;
+        console.log('第%s週  ★%d問 ＝ %d問%s', String(w).padStart(2), r.star, r.total,
+          r.star ? '' : '  ← ★を作れる文型がありません');
+      }
+    }
+    console.log('組み直した %d週（うち★なし %d週）／そのまま %d週', add, none, skip);
+    return;
   }
   const kw = J('kanji-weeks.json').courses[course];
   const gw = J('bunpo/weeks.json').courses[course].weeks;
@@ -393,10 +604,21 @@ async function main() {
       wk = [...new Set(ak)]; wv = [...new Set(av)];
     }
     const kv = await kvQs(page, wk, wv, wantKv, w * 7919 + (course === 'n2' ? 101 : 1));
+    /* **語があるのに 問が 0なら、画面が こわれている。**
+       サーバが 落ちていれば `page.goto` が 投げて 止まるが、
+       **画面は 開くのに その中の JSが 死んでいる**ことが 実際にあった
+       （`renderList()` が 落ちて VOCAB=0 になった・2026-10-31）。
+       そのときは 漢字・語彙が 0問の テストが **黙って できてしまう**。 */
+    if (wv.length && !kv.length) {
+      console.log('!! 第%d週：語が %d語 あるのに 漢字・語彙の問が 0です。'
+                  + '画面（%s/kanji.html）が こわれていないか 見てください。', w, wv.length, BASE);
+      process.exit(1);
+    }
     const rd = readQs(lv, w, N.read);
     const ch = chouQs(lv, w, N.chou);
+    const st = starQs(course, w, N.star);
     const paper = build(course, w, lv, kv, gr, rd, ch, review,
-                        review && aimPatterns(course, w).length > 0);
+                        review && aimPatterns(course, w).length > 0, st);
     const n = paper.counts.合計;
     const f = 'moshi/w-' + course + '-' + w + '.json';
     /* **すでにある週は、黙って 書きかえない。**
@@ -418,8 +640,8 @@ async function main() {
     fs.writeFileSync(R + f, JSON.stringify(paper, null, 1) + '\n');
     const ok = n >= 12;   /* 作れる問題の数は週によって違う */
     if (!ok) bad++;
-    console.log('第%s週 %s  漢字語彙%d 文型%d 読解%d 聴解%d ＝ %d問  %s',
-      String(w).padStart(2), lv, kv.length, gr.length,
+    console.log('第%s週 %s  漢字語彙%d 文型%d ★%d 読解%d 聴解%d ＝ %d問  %s',
+      String(w).padStart(2), lv, kv.length, gr.length, st.length,
       rd.reduce((a, r) => a + r.qi.length, 0), ch.length, n, ok ? '' : '← 少ない');
   }
   await b.close();

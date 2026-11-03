@@ -72,7 +72,7 @@ TREE = [
     ('n2/index.html', 'n2/index.html', '⑨ N2コース（66週）', ''),
     ('shindan/index.html', 'shindan/index.html', '⑩ N2の診断テスト', ''),
     ('moshi/index.html', 'moshi/index.html', '⑪ 模試（本番と同じ時間）', ''),
-    ('  週テスト', None, '新人コース28週・N2コース66週。その週に習った分だけ20問（N2の第23週からは積み上げからの復習）', ''),
+    ('  週テスト', None, '新人コース28週・N2コース66週。その週に習った分だけ22問（文の組み立て★2問を含む。N2の第23週からは積み上げからの復習）', ''),
     ('  N2の紙のパック（画面版）', None, '第1〜14単元。紙の冊子と同じ20問', ''),
     (None, None, None, None),
     ('staff/index.html', 'staff/index.html', '職員だけの入口（実習生の画面からは行けません）', ''),

@@ -11,7 +11,7 @@
 <script>
 /* 古いHTMLが端末に残っていても最新にそろえる（他ページと同じしくみ） */
 (function(){
-  var PAGE_VER = '2026-11-03b';
+  var PAGE_VER = '2026-11-03c';
   var KEY = 'reloaded-for-n2';
   try {
     fetch('../version.json', { cache:'no-store' }).then(function(r){ return r.json(); })
@@ -454,7 +454,7 @@ document.querySelectorAll('#tabs .tab, nav.tabs button').forEach(function(btn){
        **開かないところ**へ つながっていた（2026-11-03に 見つけた）。 */
     if (w <= WTMAX) {
       var rv = w >= 23;
-      out.push({k:'', t:'📝 第'+w+'週のテスト（約26分）'+(rv?'【復習】':''),
+      out.push({k:'', t:'📝 第'+w+'週のテスト（約29分）'+(rv?'【復習】':''),
                 n:(rv ? '<b>第1週からの 積み上げ</b>から出ます（この週は 新しい教材が '
                         + '無いためです）。紙の冊子の ねらう文型が 先に 出ます。'
                       : 'その週に習った分だけから出ます。')
