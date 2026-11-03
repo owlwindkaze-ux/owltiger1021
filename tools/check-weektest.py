@@ -105,6 +105,55 @@ for course, key, name in CO:
         if d.get('counts', {}).get('合計') != n:
             bad('%s counts の合計 %s と実際 %d が合いません'
                 % (nm, d.get('counts', {}).get('合計'), n))
+    # ── 文の組み立て（★）────────────────────────────────
+    # 持ち主から「文型の並べ替え（★）を週テストに入れる」、あわせて
+    # **「答えの順番が、同一にならないように注意」**（2026-11-03c）。
+    # 練習画面は 出すたびに 選択肢を まぜるが、テストは **作ったときの順を
+    # ファイルに 焼き付ける**ので、何もしないと 正解が いつも同じ番号に 来る。
+    # だから **ぜんぶの★を 集めて、正解の番号の ばらつき**を 見る。
+    sdist = [0, 0, 0, 0]
+    sn = 0
+    for f in files:
+        nm = os.path.basename(f)
+        d = json.load(io.open(f, encoding='utf-8'))
+        st = [d['sections'][k] for k in d['order']
+              if (d['sections'].get(k) or {}).get('name') == '文の組み立て']
+        gr = [k for k in d['order']
+              if (d['sections'].get(k) or {}).get('name') == '文法形式の判断']
+        # 文型のある週には ★が 要る（文型が無い週＝新人コース第1〜4週は 無くてよい）
+        if gr and not st:
+            bad('%s 文型があるのに ★（文の組み立て）がありません' % nm)
+        if len(st) > 2:
+            bad('%s ★が %d問あります（2問まで）' % (nm, len(st)))
+        bare = 0
+        for sec in st:
+            it = (sec.get('items') or [{}])[0]
+            q = str(it.get('q') or '')
+            if '★' not in q:
+                bad('%s ★の問に ★がありません' % nm)
+            if q.count('＿＿') != 3:
+                bad('%s ★の問の下線が 3つではありません（%d）' % (nm, q.count('＿＿')))
+            ch = it.get('choices') or []
+            if len(ch) != 4 or len(set(ch)) != 4:
+                bad('%s ★の選択肢が 4つそろっていません' % nm)
+            if not str(it.get('explain') or '').startswith('正しい順は'):
+                bad('%s ★の解説に 正しい順がありません' % nm)
+            # 枠（下線の前後の文）が 無い問は 1枚に1問まで。
+            # 無条件に使って **同じ見た目の問が13本**できた（2026-11-03c）
+            if q.replace('　', '').replace('＿＿', '').replace('★', '') == '':
+                bare += 1
+            if isinstance(it.get('answer'), int) and 0 <= it['answer'] < 4:
+                sdist[it['answer']] += 1
+                sn += 1
+        if bare > 1:
+            bad('%s 枠のない★が %d問あります（1枚に1問まで）' % (nm, bare))
+    if sn >= 20:
+        lo = min(sdist) / sn
+        if lo < 0.15:
+            bad('%s：★の正解の番号が かたよっています %s（どれも15%%以上に）'
+                % (name, sdist))
+        print('   ★ %d問／正解の番号 %s' % (sn, sdist))
+
     # 画面の sets と合うか
     m = re.search(r"%s:\s*\{[^}]*?sets:\s*\[([^\]]*)\]" % key, idx, re.S)
     if not m:

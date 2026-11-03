@@ -237,6 +237,18 @@ if ng:
 # （2026-11-03）。案内文は **実習生にそのまま渡す文**なので、古いと直接困る。
 print('\n■ 使用説明書の 文型の表と 案内文')
 _man = io.open(R + 'MANUAL.md', encoding='utf-8').read()
+# **★の問の数も 見張る。**使用説明書に「462問（402＋60）」と 手で書いてあり、
+# N3文型を 91項目 足したあとも 直っていなかった（2026-11-03c）。
+# 画面（bunpo/index.html）が ★を 作る条件と 同じ数え方にする：
+#   並べ替えのうち **部品がちょうど4つ**のもの ＋ star.json の手書き
+_g4 = 0
+for _f in json.load(io.open(R + 'bunpo/grammar.json', encoding='utf-8'))['files']:
+    for _x in json.load(io.open(R + 'bunpo/' + _f['file'], encoding='utf-8'))['grammar']:
+        for _q in (_x.get('quiz') or []):
+            if _q.get('type') == 'order' and len(_q.get('segments') or []) == 4:
+                _g4 += 1
+_hand = len(json.load(io.open(R + 'bunpo/star.json', encoding='utf-8'))['items'])
+
 for pat, want, what in (
         # 「| **合計** |」は 使用説明書に3つある（語彙の形・語彙のレベル・文型）。
         # 広い書き方だと いちばん上に当たるので、**後ろの文字で見分ける**
@@ -244,7 +256,10 @@ for pat, want, what in (
         (r'\| \*\*合計\*\* \| \*\*([\d,]+)\*\* \| \|', VTOTAL, '語彙の形の表の合計'),
         (r'\| \*\*合計\*\* \| \*\*([\d,]+)\*\* \| \*\*[\d,]+（', VTOTAL, '語彙のレベルの表の合計'),
         (r'・漢字([\d,]+)字（Kanji', KTOTAL, '案内文の漢字'),
-        (r'・言葉([\d,]+)語＋介護', VTOTAL, '案内文の言葉')):
+        (r'・言葉([\d,]+)語＋介護', VTOTAL, '案内文の言葉'),
+        (r'\*\*([\d,]+)問\*\*あります（文型データの並べ替えから', _g4 + _hand, '★の問の合計'),
+        (r'文型データの並べ替えから([\d,]+)問', _g4, '★の並べ替えから作る数'),
+        (r'を手で書いた([\d,]+)問', _hand, '★の手書きの数')):
     m = re.search(pat, _man)
     if not m:
         bad.append('使用説明書：%s が 見つからない（書き方が変わった？）' % what)
