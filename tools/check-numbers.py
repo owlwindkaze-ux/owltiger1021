@@ -249,6 +249,36 @@ for _f in json.load(io.open(R + 'bunpo/grammar.json', encoding='utf-8'))['files'
                 _g4 += 1
 _hand = len(json.load(io.open(R + 'bunpo/star.json', encoding='utf-8'))['items'])
 
+# **「形」の表は 行ごとに 見る。**合計だけを 見張っていたので、
+# 合計は 合ったまま **7行 ぜんぶが ずれていた**（熟語 3,174→実際 3,147 など）。
+# 辻褄合わせの「そのほか 25」まで 書いてあった（2026-11-06）。
+# 画面の `wordForm()` と 同じ決め方で 数える。
+_KJ = '\u4e00-\u9fff'
+
+
+def _form(word, cat):
+    t = re.sub(r'[（(].*?[）)]', '', str(word or '').split(';')[0]).strip()
+    if re.search(r'[～〜]', t):
+        return '語形成（～回・高～）'
+    if cat == '声かけ' or re.search(r'[。！？]', t):
+        return '声かけの言葉'
+    if re.fullmatch('[' + _KJ + ']{2,}', t):
+        return '熟語（漢字2字以上）'
+    if re.fullmatch('[' + _KJ + ']', t):
+        return '漢字1字'
+    if re.search('[' + _KJ + ']', t):
+        return '動詞・形容詞（漢字＋かな）'
+    if re.search(r'[ァ-ヴ]', t):
+        return 'カタカナ語'
+    return 'かなの言葉'
+
+
+_vw = json.load(io.open(R + 'vocab-data.json', encoding='utf-8'))['words']
+_fc = {}
+for _w in _vw:
+    _k = _form(_w['word'], _w.get('category'))
+    _fc[_k] = _fc.get(_k, 0) + 1
+
 for pat, want, what in (
         # 「| **合計** |」は 使用説明書に3つある（語彙の形・語彙のレベル・文型）。
         # 広い書き方だと いちばん上に当たるので、**後ろの文字で見分ける**
@@ -259,7 +289,10 @@ for pat, want, what in (
         (r'・言葉([\d,]+)語＋介護', VTOTAL, '案内文の言葉'),
         (r'\*\*([\d,]+)問\*\*あります（文型データの並べ替えから', _g4 + _hand, '★の問の合計'),
         (r'文型データの並べ替えから([\d,]+)問', _g4, '★の並べ替えから作る数'),
-        (r'を手で書いた([\d,]+)問', _hand, '★の手書きの数')):
+        (r'を手で書いた([\d,]+)問', _hand, '★の手書きの数'),
+        (r'このタブには\*\*([\d,]+)語\*\*が入っています', VTOTAL, '語彙タブの案内文')) + tuple(
+        (r'\| \*\*' + re.escape(_k) + r'\*\* \| ([\d,]+) \|', _v, '形の表「%s」' % _k)
+        for _k, _v in sorted(_fc.items())):
     m = re.search(pat, _man)
     if not m:
         bad.append('使用説明書：%s が 見つからない（書き方が変わった？）' % what)
