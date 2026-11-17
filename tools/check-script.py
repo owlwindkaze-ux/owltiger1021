@@ -42,7 +42,11 @@ OTHER = re.compile(
 # そこまで 見ると、まぎれ込みでは ない ものを 拾って しまう。
 JA_KEYS = {'q', 'text', 'choices', 'opts', 'script', 'show', 'sentence',
            'explain', 'exp', 'inst', 'label', 'intro',
-           'headers', 'rows', 'why', 'head', 'tail', 'parts'}
+           'headers', 'rows', 'why', 'head', 'tail', 'parts',
+           # **やさしい日本語の説明（meaning_ja）と 注意（caution）も 日本語だけの欄。**
+           # ここが 抜けていたので、「青black（あおあざ）」という 打ちまちがいを
+           # 素通りさせた（2026-11-17）。欄が増えたら ここに足すこと。
+           'meaning_ja', 'caution'}
 # 日本語の 文に あっても よい 英字
 # SpO2（血中酸素）・SCAN（眠りSCANという機器の名前）は、記録で ふつうに使う。
 OK = re.compile(r'^(N[1-5]|JLPT|OJT|PDF|URL|LINE|ID|A|B|C|D|[IVX]+'

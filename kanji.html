@@ -717,7 +717,7 @@ document.getElementById('gatePw').addEventListener('keydown', e => { if (e.key =
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const STORE = 'jlpt-kanji-progress-v1', LANGKEY = 'jlpt-kanji-lang';
-const VERSION = '2026-11-06a';   // 更新日（版）
+const VERSION = '2026-11-17a';   // 更新日（版）
 
 let DATA = [], BYCH = {}, STROKES = null, strokePromise = null;
 let VOCAB = [], VBYW = {}, WORDS_OF = {};        // 熟語データと、漢字→熟語の索引
@@ -1311,8 +1311,15 @@ function openVocab(word) {
   $('#vmMeanJa').textContent = w.meaning_ja ? '日本語：' + w.meaning_ja : '';
   const cau = $('#vmCaution');
   cau.style.display = w.caution ? 'block' : 'none';
+  /* **インドネシア語の一文を 決め打ちにしない。**
+     前は どの注意にも「薬を自分で判断しない」という尼語を 足していた。
+     注意を 薬以外（窒息・けいれん・スリッパ・移乗…）にも 広げたので、
+     そのままでは **意味の通らない注意**になる（2026-11-17）。
+     語ごとの `caution_id` を 出し、無い語だけ これまでの薬の一文にする。 */
   if (w.caution) cau.innerHTML = '⚠️ ' + h(w.caution) +
-    '<br><span style="font-style:italic;color:var(--muted)">Petugas tidak boleh memutuskan sendiri penggunaan obat. Selalu konfirmasi ke perawat.</span>';
+    '<br><span style="font-style:italic;color:var(--muted)">' +
+    h(w.caution_id || 'Petugas tidak boleh memutuskan sendiri penggunaan obat. Selalu konfirmasi ke perawat.') +
+    '</span>';
   /* 例文。練習問題でしか使っていなかったが、言葉の説明としていちばん役に立つ。
      見出し語の部分を太字にして、どこがその言葉かを示す（SPEC 2.6-z30）。 */
   showSentence(w);
