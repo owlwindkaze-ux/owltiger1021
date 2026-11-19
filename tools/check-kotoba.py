@@ -165,6 +165,22 @@ if badonce:
     bad('「〜」が付く語 %d語で、熟語が例文の中に1回だけ出ていません（%s…）'
         % (len(badonce), '・'.join(badonce[:6])))
 
+# ── 画面に そのまま 出る欄に、markdownの `**` が 入っていないか ──────
+# 語彙カードは `meaning_ja`・`caution`・`caution_id` を **文字として** 出す。
+# `**つよく**` と 書いても 太字にならず、**星印が そのまま 画面に出る**。
+# 週テストの `lead` で 53本 やったのと 同じまちがいを、
+# 現場125語を書いた その日に **また4語 やった**（z74②・2026-11-19）。
+print()
+print('■ 画面に出る欄の ** ')
+VW2 = json.load(io.open(R + 'vocab-data.json', encoding='utf-8'))['words']
+star = [(w['word'], k) for w in VW2
+        for k in ('meaning_ja', 'caution', 'caution_id', 'meaning_id')
+        if isinstance(w.get(k), str) and '**' in w[k]]
+print('   ** が入っている欄 %d' % len(star))
+if star:
+    bad('画面にそのまま出る欄に ** が入っています（星印が出ます）：%s'
+        % '・'.join('%s の %s' % x for x in star[:6]))
+
 # ── もう一つの読み（alt）────────────────────────────────
 # 「開く」は あく と ひらく で 意味も例文も ちがう。語彙データは 表記を鍵に
 # しているので 2つ持てず、`alt` に入れる（持ち主が見つけた・2026-10-31）。
