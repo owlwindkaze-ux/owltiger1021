@@ -18,8 +18,18 @@
   ・合言葉の SHA-256（`jlpt-kanji-gate-v1` の値）。これは **公開してよい**。
     もとの合言葉は これからは 求められない。画面を隠すためだけに 置いてある。
   ・.git の中、ツールの中（ここは 公開されない／人が読む前提）
+
+CI=1 のとき（GitHub Actions）
+  **見つけた中身を 表示しない。**ファイル名と 行番号と 理由だけ 出す。
+  公開リポジトリの Actions のログは **誰でも読める**ので、
+  鍵や合言葉を 見つけて それを そのまま 表示したら、
+  守るための検査が **漏らす側に 回る**（2026-11-24a）。
+  手元で走らせるときは 今までどおり 中身も 出る。直す側は 見ないと 直せない。
 """
 import io, os, re, sys
+
+# Actions の ログは 公開される。見つけた中身は 出さない。
+CI = bool(os.environ.get('CI'))
 
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/'
 # 公開されるもの＝サイトに置く HTML・JSON と、PDFのもとになる Markdown
@@ -76,7 +86,7 @@ def name_hits(text):
         # 末尾の語（病院・荘 など）だけで成り立つ一般名は見逃す
         if any(g.endswith(ok) and (ok in NAME_OK) for ok in NAME_OK):
             continue
-        out.append(g)
+        out.append('施設名らしい文字列' if CI else g)
     return out
 
 
@@ -110,7 +120,8 @@ def work_hits(rel, text):
     if rel.endswith('.txt') and WORK_MEET.search(text):
         nm = sorted({m.group(0) for m in WORK_NAME.finditer(text)})
         if nm:
-            out.append('商談・面談の記録かもしれません（%s）' % '・'.join(nm[:4]))
+            out.append('商談・面談の記録かもしれません（%s）'
+                       % ('相手の名前 %d件' % len(nm) if CI else '・'.join(nm[:4])))
     return out
 
 
@@ -142,7 +153,10 @@ for dirpath, dirs, files in os.walk(R):
                 if any(a in hit for a in ALLOW):
                     continue
                 line = s[:m.start()].count('\n') + 1
-                bad.append('%s:%d　%s → %s' % (rel, line, why, hit[:60]))
+                # **CI では hit を 出さない。**鍵や合言葉 そのものである。
+                bad.append('%s:%d　%s → %s'
+                           % (rel, line, why,
+                              '（中身は 手元で 確かめる）' if CI else hit[:60]))
 
 print('■ 見たファイル %d個' % n)
 print()

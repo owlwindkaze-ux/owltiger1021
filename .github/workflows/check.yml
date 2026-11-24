@@ -1,0 +1,66 @@
+name: 検査
+
+# なぜ これが あるか
+#   2026-10-25、枝の上で「検査15本すべて0件」と 報告した。
+#   main へ マージしたあとには 走らせておらず、翌日 main は 落ちていた。
+#   「マージしたら もう一度 全部 走らせる」は 手順書
+#   （.claude/skills/owltiger-change/SKILL.md 第5節）に 書いたが、
+#   **手順書は 読まなければ 効かない。**ここで 機械に やらせる。
+#
+#   もう一つの ねらい。AIが「検査すべて0件でした」と 報告したとき、
+#   持ち主は それを 信じるしか なかった。
+#   ここが 走れば GitHub の画面に 緑か赤の印が 出る。
+#   **報告を 読むのではなく、印を 見ればよい。**
+#
+# ログは 公開される
+#   公開リポジトリなので、ここの ログは 誰でも 読める。
+#   そのため CI=1 を 立てて、check-secrets.py が
+#   見つけた中身（鍵・施設名・相手の名前）を 出さないようにしている。
+#   ファイル名と 行番号は 出るので、手元で 走らせれば 直せる。
+
+on:
+  push:
+    branches: ['**']
+  workflow_dispatch:   # 画面のボタンから 手で 走らせる用
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      CI: '1'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 道具の確認
+        run: |
+          python3 --version
+          node --version   # check-kotae.py と check-secrets.py が 使う
+
+      - name: Python の検査（全部）
+        run: |
+          n=0
+          ng=0
+          warui=''
+          for f in tools/check-*.py; do
+            n=$((n + 1))
+            echo "::group::$f"
+            if python3 "$f"; then
+              :
+            else
+              ng=1
+              warui="$warui $(basename "$f")"
+            fi
+            echo "::endgroup::"
+          done
+          echo "------------------------------------------------------"
+          if [ "$ng" = 1 ]; then
+            echo "::error::ひっかかった検査:$warui"
+            echo "手元で 走らせて 中身を 見てください:"
+            echo "  for f in tools/check-*.py; do python3 \$f || true; done"
+            exit 1
+          fi
+          echo "検査 ${n}本 すべて 0件"
+
+      # ブラウザの検査（tools/check-ui.mjs）は ここでは 走らせない。
+      # 15分 かかるうえ、Chromium を 入れる手間に 見合わない。
+      # 画面を 自分で 触ることは、これからも 人の 仕事である。
