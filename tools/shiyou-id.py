@@ -26,7 +26,9 @@
     （そのあと tools/pdf/mkpdf.mjs で PDF に）
 """
 import collections
+import glob
 import io
+import json
 import os
 import re
 import sys
@@ -147,6 +149,65 @@ def marks():
     return out
 
 
+def panel():
+    """**語彙の画面に 出ている とおりの ラベル**を kanji.html から読む。
+
+    実習生が 言葉を おしたとき 出る 箱の 中身。
+    「ARTI ／ 意味」の 下に「日本語：…」が 出て、
+    危ない言葉には「⚠️ …」の 赤い囲みが 付く。
+
+    **手で書いてはいけない。**z47 で「✓ おぼえた」と 書いて
+    実物が「✓ 覚えた」だった のと 同じ形になる（2026-11-25a）。
+    """
+    t = io.open(R + 'kanji.html', encoding='utf-8').read()
+    out = {}
+    for key, pat, what in (
+        ('lb',  r'<div class="lb">(ARTI[^<]*)</div>', '意味の 見出し'),
+        ('ja',  r"#vmMeanJa'\)\.textContent = w\.meaning_ja \? '([^']+)'",
+         'やさしい日本語の 行の 先頭'),
+        ('cau', r"cau\.innerHTML = '(\S+) ' \+", '注意の 印'),
+    ):
+        m = re.search(pat, t)
+        if not m:
+            raise SystemExit('× kanji.html から %s が 読めません。\n'
+                             '  語彙の画面の 作りが 変わった可能性があります。\n'
+                             '  tools/shiyou-id.py の panel() を 直してください。' % what)
+        out[key] = m.group(1)
+    return out
+
+
+def wtest():
+    """**週テストの 問数と 時間**を 画面から 読む。
+
+    新人コースの画面に 書いてある「22問・約29分」を そのまま 使う。
+    手で書くと、問数を 変えた日に 説明書だけ 古くなる。
+    """
+    t = io.open(R + 'shinjin/index.html', encoding='utf-8').read()
+    m = re.search(r"'📝 第' \+ tw2 \+ '週のテスト（([^）]*)）", t)
+    if not m:
+        raise SystemExit('× shinjin/index.html から 週テストの 問数が 読めません。\n'
+                         '  tools/shiyou-id.py の wtest() を 直してください。')
+    n = {'sj': len(glob.glob(R + 'moshi/w-shinjin-*.json')),
+         'n2': len(glob.glob(R + 'moshi/w-n2-*.json'))}
+    if not n['sj'] or not n['n2']:
+        raise SystemExit('× 週テストの ファイルが 見つかりません（新人%d・N2%d）。'
+                         % (n['sj'], n['n2']))
+    # インドネシア語の 文には 尼語で 書く。**数は 画面の 文字列から 取る。**
+    num = re.findall(r'\d+', m.group(1))
+    if len(num) != 2:
+        raise SystemExit('× 週テストの「%s」から 問数と 分が 読めません。\n'
+                         '  tools/shiyou-id.py の wtest() を 直してください。' % m.group(1))
+    return m.group(1), n, num
+
+
+def vcount():
+    """**語の数は データから 数える。**手で書いた数は いつか 必ず ずれる。"""
+    ws = json.load(io.open(R + 'vocab-data.json', encoding='utf-8'))['words']
+    return (len(ws),
+            sum(1 for w in ws if w.get('meaning_ja')),
+            sum(1 for w in ws if w.get('caution')))
+
+
 # 公開している住所。QRもこの住所で作ってある。
 URL = 'https://owlwindkaze-ux.github.io/owltiger1021/'
 
@@ -228,6 +289,8 @@ MENU_RUBY = {
  '書き順': '書《か》き順《じゅん》',
  '学習状況': '学習《がくしゅう》状況《じょうきょう》',
  '文型一覧': '文型《ぶんけい》一覧《いちらん》',
+ '自動詞・他動詞': '自動詞《じどうし》・他動詞《たどうし》',
+ '敬語': '敬語《けいご》',
  '文章一覧': '文章《ぶんしょう》一覧《いちらん》',
  '読む・答える': '読《よ》む・答《こた》える',
  '申し送りを聞く': '申《もう》し送《おく》りを 聞《き》く',
@@ -256,6 +319,36 @@ def mr(w):
 def ruby(t):
     """漢字《かんじ》 を <ruby> に変える。"""
     return RUBY.sub(r'<ruby>\1<rt>\2</rt></ruby>', t)
+
+
+# 画面から そのまま 読んだ 短い文字列（「22問・約29分」など）に 読みを 付ける表。
+# 本文は 手で 《》 を 書くが、**画面から 読んだ分は 書けない**ので ここで付ける。
+# **語の表を 先に 当てる。**1字ずつだと 「日本語」が に・ほん・ご に 割れて、
+# 熟語の 読みとして 正しくない 見え方に なる。
+MINI_WORD = {'日本語': 'にほんご', '意味': 'いみ'}
+MINI_RUBY = {
+ '問': 'もん', '約': 'やく', '分': 'ふん', '点': 'てん', '残': 'のこ',
+ '週': 'しゅう', '第': 'だい', '回': 'かい', '字': 'じ', '語': 'ご',
+}
+
+
+def mini(s):
+    """画面から読んだ 短い文字列に 読みを 付ける。知らない漢字なら 止まる。"""
+    for w in sorted(MINI_WORD, key=len, reverse=True):
+        s = s.replace(w, '%s《%s》' % (w, MINI_WORD[w]))
+    def one(m):
+        # すでに 読みの 付いた まとまりは そのまま 通す
+        if m.group(1):
+            return m.group(1)
+        ch = m.group(2)
+        if ch not in MINI_RUBY:
+            raise SystemExit(
+                '× 画面の文字「%s」の 読みが ありません（%s の中）。\n'
+                '  tools/shiyou-id.py の MINI_RUBY か MINI_WORD に 足してください。'
+                % (ch, s))
+        return '%s《%s》' % (ch, MINI_RUBY[ch])
+
+    return re.sub(r'([一-鿿々]+《[ぁ-んー]+》)|([一-鿿々])', one, s)
 
 
 def check_ruby(html, where):
@@ -439,7 +532,86 @@ def build():
     A('</div>')
 
     # ── 5 ──────────────────────────────
-    A('<h2>' + ruby('5　記録《きろく》は どこに ありますか')
+    # **ここが N4の人には いちばん 役に立つ。**言葉の意味を 自分で 調べられる。
+    # 画面の ラベルは panel() が 読む。手で書くと z47 と 同じ事故になる。
+    pn = panel()
+    tot, mj, cu = vcount()
+    A('<h2>' + ruby('5　ことばの 意味《いみ》が わからない とき')
+      + '<span class="id">Kalau tidak tahu arti sebuah kata</span></h2>')
+    P('<b>ことばを おして ください。</b>箱《はこ》が 出《で》ます。'
+      'その 中《なか》の「%s」の ところに、3つ あります。'
+      % mini(pn['lb']),
+      '<b>Tekan katanya.</b> Sebuah kotak akan muncul. '
+      'Di bagian "%s" ada 3 hal.' % ruby(mini(pn['lb'])))
+    A('<table><tr><th style="width:4%%">　</th><th>' + ruby('出《で》る もの')
+      + '</th><th>Yang muncul</th></tr>')
+    for i, (ja, idn) in enumerate((
+        ('インドネシア語《ご》の 意味《いみ》',
+         'Arti dalam bahasa Indonesia'),
+        ('「%s」… <b>やさしい 日本語《にほんご》の 説明《せつめい》</b>'
+         % mini(pn['ja']),
+         '<b>Penjelasan dalam bahasa Jepang yang mudah</b>'),
+        ('介護《かいご》の 例文《れいぶん》',
+         'Contoh kalimat dari tempat kerja kaigo'),
+    ), 1):
+        A('<tr><td><b>%d</b></td><td>%s</td><td class="id">%s</td></tr>'
+          % (i, ruby(ja), idn))
+    A('</table>')
+    P('<b>日本語《にほんご》の 説明《せつめい》も 読《よ》んで ください。</b>'
+      'インドネシア語《ご》だけ 覚《おぼ》えても、現場《げんば》で 使《つか》えません。'
+      'やさしい 日本語《にほんご》で 読《よ》むと、<b>同《おな》じ ことを 自分《じぶん》で'
+      ' 言《い》えるように なります。</b>'
+      '<br>いま <b>%s語《ご》</b>に 付《つ》いて います（ぜんぶで %s語《ご》）。'
+      % ('{:,}'.format(mj), '{:,}'.format(tot)),
+      '<b>Bacalah juga penjelasan bahasa Jepangnya.</b> '
+      'Kalau hanya hafal arti bahasa Indonesia, Anda tidak bisa memakainya '
+      'di tempat kerja. Dengan membaca bahasa Jepang yang mudah, '
+      '<b>Anda jadi bisa mengatakan hal yang sama dengan kata-kata sendiri.</b>'
+      '<br>Sekarang sudah ada di <b>%s kata</b> (dari total %s kata).'
+      % ('{:,}'.format(mj), '{:,}'.format(tot)))
+    A('<div class="note">')
+    A('<p class="ja">%s</p>' % ruby(
+        '<b>%s の 赤《あか》い 囲《かこ》みが 出《で》る ことばが %d語《ご》 あります。</b>'
+        'これは <b>安全《あんぜん》の 注意《ちゅうい》</b>です。'
+        '<b>自分《じぶん》で 決《き》めないで ください。'
+        '先輩《せんぱい》か 看護師《かんごし》に 聞《き》いて ください。</b>'
+        'インドネシア語《ご》でも 同《おな》じ ことが 書《か》いて あります。'
+        % (pn['cau'], cu)))
+    A('<p class="id"><b>Ada %d kata yang muncul dengan kotak merah %s.</b> '
+      'Itu adalah <b>peringatan keselamatan.</b> '
+      '<b>Jangan memutuskan sendiri. Tanyakan kepada senior atau perawat.</b> '
+      'Keterangan yang sama juga ditulis dalam bahasa Indonesia.</p>'
+      % (cu, pn['cau']))
+    A('</div>')
+
+    # ── 6 ──────────────────────────────
+    wt, wn, wnum = wtest()
+    A('<h2>' + ruby('6　週《しゅう》テスト')
+      + '<span class="id">Tes mingguan</span></h2>')
+    P('コースの 画面《がめん》に <b>「📝 第《だい》〇週《しゅう》のテスト（%s）」</b>'
+      ' が あります。<b>その 週《しゅう》に 習《なら》った 分《ぶん》だけ</b>から 出《で》ます。'
+      % mini(wt),
+      'Di layar kursus ada <b>"📝 Tes minggu ke-N"</b> '
+      '(%s soal, ±%s menit). '
+      'Soalnya <b>hanya dari bagian yang Anda pelajari minggu itu.</b>'
+      % (wnum[0], wnum[1]))
+    P('<b>点《てん》が 残《のこ》ります。</b>'
+      'ですから、<b>あとで もう一度《いちど》 同《おな》じ 週《しゅう》を 受《う》けると、'
+      '前《まえ》の 点《てん》と くらべられます。</b>'
+      '1週《しゅう》に 1回《かい》で じゅうぶんです。',
+      '<b>Nilainya tersimpan.</b> Jadi kalau nanti Anda mengulang minggu '
+      'yang sama, <b>nilainya bisa dibandingkan dengan nilai sebelumnya.</b> '
+      'Cukup satu kali seminggu.')
+    P('新人《しんじん》コースに %d週《しゅう》分《ぶん》、'
+      'N2コースに %d週《しゅう》分《ぶん》 あります。'
+      'テストの 無《な》い 週《しゅう》は、画面《がめん》が「ありません」と 教《おし》えます。'
+      % (wn['sj'], wn['n2']),
+      'Ada %d minggu di kursus Staf Baru dan %d minggu di kursus N2. '
+      'Kalau minggu itu tidak ada tesnya, layar akan memberi tahu Anda.'
+      % (wn['sj'], wn['n2']))
+
+    # ── 7 ──────────────────────────────
+    A('<h2>' + ruby('7　記録《きろく》は どこに ありますか')
       + '<span class="id">Di mana catatan belajar disimpan?</span></h2>')
     P('<b>あなたの スマホの 中《なか》だけ</b>です。'
       'どこにも 送《おく》られません。',
@@ -457,7 +629,7 @@ def build():
       'Di HP baru, tekan "📂 Pulihkan" dan catatannya akan kembali.')
 
     # ── 6 ──────────────────────────────
-    A('<h2>6　こまった とき<span class="id">Kalau ada masalah</span></h2>')
+    A('<h2>8　こまった とき<span class="id">Kalau ada masalah</span></h2>')
     A('<table><tr><th>こうなったら</th><th>こうして ください</th>'
       '<th>Yang harus dilakukan</th></tr>')
     for a, b, c in (
@@ -477,6 +649,14 @@ def build():
         ('記録《きろく》が 消《き》えた',
          'バックアップが あれば もどせます。なければ もどせません',
          'Kalau ada cadangan, bisa dikembalikan. Kalau tidak ada, tidak bisa'),
+        ('ことばの 意味《いみ》が わからない',
+         'その ことばを <b>おす</b>。「%s」が 出《で》ます（5を 見《み》て ください）'
+         % mini(pn['ja']),
+         '<b>Tekan</b> kata itu. "%s" akan muncul (lihat bagian 5)'
+         % ruby(mini(pn['ja']))),
+        ('仕事中《しごとちゅう》に 読《よ》めない 漢字《かんじ》が あった',
+         '<b>手書《てが》きで 調《しら》べる</b>。指《ゆび》で 書《か》くと 読《よ》みが 出《で》ます',
+         '<b>Tulis Tangan</b>. Tulis dengan jari, cara bacanya akan muncul'),
     ):
         A('<tr><td>%s</td><td>%s</td><td class="id">%s</td></tr>'
           % (ruby(a), ruby(b), c))
