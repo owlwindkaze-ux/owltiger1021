@@ -181,6 +181,36 @@ if star:
     bad('画面にそのまま出る欄に ** が入っています（星印が出ます）：%s'
         % '・'.join('%s の %s' % x for x in star[:6]))
 
+# ── ⚠️の注意に、インドネシア語が ついているか ───────────────────
+# `kanji.html` は `caution_id` が 無いとき **薬についての文を 既定で出す**。
+#   h(w.caution_id || 'Petugas tidak boleh memutuskan sendiri penggunaan obat...')
+# いまは その既定を使う95語の 日本語も 薬の文なので 合っている。
+# しかし **薬以外の注意を 足して caution_id を 書き忘れると**、
+# 日本語は「移乗は2人で」なのに 尼語だけ「薬を自分で判断しない」になる。
+# 実習生は 尼語の方を 読む。**安全の注意が すりかわる。**
+# 画面の既定の文と、それに対応する日本語を ここで 突き合わせる（2026-11-25a）。
+print()
+print('■ ⚠️の注意の 日尼の対')
+_kh = io.open(R + 'kanji.html', encoding='utf-8').read()
+_m = re.search(r"w\.caution_id \|\| '([^']+)'", _kh)
+if not _m:
+    bad('kanji.html から caution_id の既定の文が読めません（作りが変わった？）')
+else:
+    # この既定の 尼語に 対応する 日本語。これ以外の注意には caution_id が 要る。
+    DEF_JA = '職員が自分で判断して薬を使うことはできません。必ず看護師に確認します。'
+    cau = [w for w in VW2 if w.get('caution')]
+    noid = [w for w in cau if not w.get('caution_id')]
+    wrong = [w['word'] for w in noid if w['caution'] != DEF_JA]
+    print('   ⚠️つき %d語／尼語なし %d語（既定の文で合う分）' % (len(cau), len(noid)))
+    if wrong:
+        bad('⚠️の注意に インドネシア語が ありません。画面は「薬を自分で判断しない」と'
+            '出すので、日本語と ちがう注意になります（%d語：%s）'
+            % (len(wrong), '・'.join(wrong[:6])))
+    # 既定の文が 書きかえられたら、上の DEF_JA との 対が 崩れる
+    if 'obat' not in _m.group(1):
+        bad('kanji.html の caution_id の既定の文が 変わりました。'
+            'tools/check-kotoba.py の DEF_JA と 合っているか 確かめてください')
+
 # ── もう一つの読み（alt）────────────────────────────────
 # 「開く」は あく と ひらく で 意味も例文も ちがう。語彙データは 表記を鍵に
 # しているので 2つ持てず、`alt` に入れる（持ち主が見つけた・2026-10-31）。
