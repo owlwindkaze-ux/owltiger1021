@@ -47,6 +47,13 @@ def gather():
     d['sent'] = len(J('sentences.json')['sentences'])
     d['tegaki'] = len(J('tegaki-data.json').get('chars', []))
 
+    # やさしい日本語の説明（画面では「日本語：」の行）と、⚠️の安全の注意。
+    # **2026年11月にいちばん大きく増えたもの**なのに、どの資料にも
+    # 載っていなかった（総覧にも1行も無かった・2026-11-28a）。
+    # 語をおすと やさしい日本語で 意味が出るので、**N4の人が自分で調べられる。**
+    d['meanja'] = sum(1 for x in v if x.get('meaning_ja'))
+    d['caution'] = sum(1 for x in v if x.get('caution'))
+
     # 学習区分（覚える／意味が分かる／参考）
     st = collections.Counter()
     for x in v:
